@@ -38,6 +38,7 @@ imagnumber		({floatnumber}|{intpart})("j"|"J")
 %option c++
 %option noyywrap
 %%
+{octinteger}			{cout<<"oct";}
 {integer}				{cout<<"Integer";}
 {fraction}				{cout<<"Warning";}
 {floatnumber}			{cout<<"Float";}
