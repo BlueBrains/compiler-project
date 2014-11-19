@@ -371,6 +371,60 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.lineNum = lineNum;			
 				return FALSE;
 			}
+{octinteger}	{
+					int v = 1;int res=0;
+					 for(int n = (strlen(yytext)-1); n >1; n--) 
+					 {
+						res =res+ v*((int)yytext[n]-48);
+						v=v*8;
+					 }
+					 colNum += strlen(yytext);
+					yylval.r.colNum = colNum;
+					yylval.r.lineNum = lineNum;	
+					 yylval.r.intVal = res;
+					 return INTEGER_VALUE;
+				}
+{bininteger}	{
+					int v = 1;int res=0;
+					 for(int n = (strlen(yytext)-1); n >1; n--)
+					 {
+						res =res+ v*((int)yytext[n]-48);v=v*2;
+					 }
+					 colNum += strlen(yytext);
+					yylval.r.colNum = colNum;
+					yylval.r.lineNum = lineNum;	
+					 yylval.r.intVal = res;
+					 return INTEGER_VALUE;
+
+				}
+{hexinteger}	{
+					int v = 1;int res=0;int val;
+					 for(int n = (strlen(yytext)-1); n >1; n--)
+					 {
+						if((yytext[n]=='a')||(yytext[n]=='A')) 
+						{val=10;} 
+						else if((yytext[n]=='b')||(yytext[n]=='B'))
+						{val=11;}
+						else if((yytext[n]=='c')||(yytext[n]=='C'))
+						{val=12;}
+						else if((yytext[n]=='d')||(yytext[n]=='D'))
+						{val=13;} 
+						else if((yytext[n]=='e')||(yytext[n]=='E'))
+						{val=14;}
+						else if((yytext[n]=='f')||(yytext[n]=='F'))
+						{val=15;}
+						else 
+						{
+							val=(int)yytext[n]-48;
+						} 
+						res =res+ v*val;v=v*16;
+					} 
+					 colNum += strlen(yytext);
+					yylval.r.colNum = colNum;
+					yylval.r.lineNum = lineNum;	
+					 yylval.r.intVal = res;
+					 return INTEGER_VALUE;
+				}
 {Integer}	{
 				cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
