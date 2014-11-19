@@ -373,7 +373,7 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 			}
 {octinteger}	{
 					int v = 1;int res=0;
-					 for(int n = (strlen(yytext)-1); n >1; n--) 
+					 for(int n = (strlen(yytext)-1); n >1; n--)
 					 {
 						res =res+ v*((int)yytext[n]-48);
 						v=v*8;
