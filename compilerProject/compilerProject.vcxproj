@@ -79,9 +79,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
+    <None Include="..\yacc.output" />
+    <None Include="..\yacc.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc" />
+    <ClCompile Include="..\yacc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\yacc.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

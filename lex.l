@@ -1,8 +1,11 @@
 %{
+		#include "yacc.hpp"		
 		#include <iostream>
 		#include <istream>
 		#include <ostream>		
 		#include <FlexLexer.h>		
+		extern int lineNum=1;
+		extern int colNum=0;
 %}
 identifier		({letter}|"_")({letter}|{digit}|"_")*
 letter			{lowercase}|{uppercase}
@@ -10,6 +13,7 @@ lowercase		[a-z]
 uppercase		[A-Z]
 digit			[0-9]
 allChars		[0-9a-zA-Z\t\f\r\v !@#$%^&*()-=_+[\]{};':,./<>?]
+Single_line_comment		(\/\/)+[^\n]*	
 stringliteralpiece [{stringprefix}]?({shortstring}|{longstring})
 stringprefix	"u"|"U"|"r"|"ur"|"R"|"UR"|"Ur"|"uR"
 shortstring		"'"{shortstringitem1}*"'"|"\""{shortstringitem2}*"\""
@@ -35,20 +39,399 @@ intpart			{digit}+
 fraction		"."{digit}+
 exp				("e"|"E")("+"|"-"){digit}+
 imagnumber		({floatnumber}|{intpart})("j"|"J")
+Integer			[1-9][0-9]*|0		
+Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option c++
+%x multilinecomment
+%x String
 %option noyywrap
 %%
-{integer}				{cout<<"Integer";}
-{fraction}				{cout<<"Warning";}
-{floatnumber}			{cout<<"Float";}
-{imagnumber}			{cout<<"Imaginary";}
-{stringliteralpiece}	{cout<<"String";}
-[a-zA-Z_][0-9a-zA-Z_]*	{cout<<"\t it is varibale:"<<yytext<<"\n";}
-.						{cout<<"nothing";}
+"import"	{
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				colNum += strlen(yytext);
+				return IMPORT;
+			}
+"class"		{
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				colNum += strlen(yytext);
+				return CLASS;
+			}
+":"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return SEMI_COLUMN;
+			}
+"\n"		{
+				lineNum ++;
+				colNum = 1;
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return NEW_LINE;
+			}
+"("			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return OPEN_S;
+			}
+")"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return CLOSE_S;
+			}
+","			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return COMMA;
+			} 
+"."			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;								
+				return DOT;
+			}
+"begin"		{ 
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	BEGIN;
+			}
+"end"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	END;
+			}
+"def"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	DEF;
+			}
+"="			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	ASSIGN;
+			}
+"*"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	STAR;
+			}
+"else"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	ELSE;
+			}
+"if"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	IF;
+			}
+"elif"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	ELIF;
+			}
+"while"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	WHILE;
+			}
+"for"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	FOR;
+			}
+"in"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	IN;
+			}
+"try"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	TRY;
+			}
+"finally"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	FINALLY;
+			}
+"expect"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	EXPECT;
+			}
+"with"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	WITH;
+			}
+"as"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	AS;
+			}
+"assert"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	ASSERT
+			}
+"=="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	EQUAL;
+			}
+"del"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	DEL;
+			}
+"return"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	RETURN;
+			}
+"global"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	GLOBAL;
+			}
+"raise"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	RAISE;
+			}
+"private"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	PRIVATE;
+			}
+"public"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	PUBLIC;
+			}
+"protected"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	PROTECTED;
+			}
+"break"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return BREAK;
+			}
+"continue"	{	
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return CONTINUE;
+			}
+"["			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	OPEN_D;
+			}
+"]"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	CLOSE_D;
+			}
+"`"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	RE_COT;
+			}
+"yield"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	YIELD;
+			}
+"primary"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	PRIMARY;
+			}
+"||"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	OR;
+			}
+"&&"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	AND;
+			}
+"!"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	NOT
+			}
+"+"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	PLUS;
+			}
+"-"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	MINUS;
+			}
+"/"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	DIV;
+			}
+"%"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	MOD;
+			}
+"!="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	NOT_EQUAL;
+			}
+"<"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	LESS_THAN;
+			}
+"<="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	LESS_OR_EQUAL;
+			}
+">"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	MORE_THAN;
+			}
+">="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				return	MORE_OR_EQUAL;
+			}
+"true"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				return TRUE;
+			}
+"false"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				return FALSE;
+			}
+{Integer}	{
+				cout<<":Integer value (yytext) ="<<yytext<<"\n";
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;								
+				int i = atoi(yytext);
+				cout<<":Int value as int ="<<i;
+				yylval.r.intVal = i;
+				if(strlen(yytext) <= 4)
+					return INTEGER_VALUE;
+				else
+					return LONG_VALUE;
+			}
+{Float}		{
+				cout<<":Float value (yytext) ="<<yytext<<"\n";
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				float f = atof(yytext);
+				cout<<":Float value as float ="<<f;
+				yylval.r.floatVal = f;
+				return FLOAT_VALUE;							
+			}
+ \"       				{BEGIN String;}
+<String>[\\/\"]			{cout<<"str1="<<yytext<<"\n";}
+<String>[^\\]			{
+							cout<<"str2="<<yytext<<"\n";
+							if(str == 0){
+								str = new char[255];
+								index = 0;
+							}
+							str[index++] = yytext[0];
+							
+						}
+<String>\\\\["]			{cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
+<String>[^\\]\"			{
+							cout<<"str4="<<yytext<<"\n"; 
+							str[index++] = yytext[0];
+							str[index] = '\0';
+							cout<<"The Full String is = "<<str<<"\n";
+							yylval.r.str = str;
+							return STRING_VALUE;
+							str = 0;
+							BEGIN INITIAL;
+						}
+{Single_line_comment}	{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
+"/*"						 {colNum+=2;		BEGIN(multilinecomment);}
+<multilinecomment>"\n"		 {lineNum+=1;	BEGIN(multilinecomment);}
+<multilinecomment>"*"*[^"/"] {colNum+=strlen(yytext);	}
+<multilinecomment>[^"*"]*    {colNum+=strlen(yytext);	}
+<multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	 BEGIN(INITIAL);}
+\'[a-zA-z]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+{identifier}			{						
+							colNum += strlen(yytext);
+							yylval.r.colNum = colNum;
+							yylval.r.lineNum = lineNum;			
+							char [] x = new char[255];
+							x[0] = '\0';
+							strcpy(x, yytext);
+							yylval.r.str = x;
+							return ID;												
+						}
+.				{cout<<"nothing";}
 %%
-int main()
-{	
-	FlexLexer* lexer = new yyFlexLexer;
-	lexer->yylex();
-    return 0;
-}
