@@ -15,9 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\lex.l" />
     <None Include="..\yacc.y" />
     <None Include="..\yacc.output" />
+    <None Include="..\lex .l" />
+    <None Include="..\lex_.l" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
