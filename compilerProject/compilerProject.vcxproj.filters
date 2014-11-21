@@ -15,11 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\lex.l" />
+    <None Include="..\yacc.y" />
+    <None Include="..\yacc.output" />
+    <None Include="..\lex .l" />
+    <None Include="..\lex_.l" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\yacc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\yacc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

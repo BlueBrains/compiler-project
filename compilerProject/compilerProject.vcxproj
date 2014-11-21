@@ -41,6 +41,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(WindowsSdkDir)\lib;&lt;inherit from parent or project defaults&gt;</LibraryPath>
+    <IncludePath>$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath);$(WindowsSdkDir)\lib;</IncludePath>
+    <ReferencePath>$(VC_ReferencesPath_x86);$(WindowsSdkDir)\lib;</ReferencePath>
+    <LibraryWPath>$(WindowsSDK_MetadataPath);$(WindowsSdkDir)\lib;</LibraryWPath>
+    <SourcePath>$(VC_SourcePath);$(WindowsSdkDir)\lib;</SourcePath>
+    <ExcludePath>$(WindowsSdkDir)\lib;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -78,10 +84,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\lex.l" />
+    <None Include="..\lex .l" />
+    <None Include="..\lex_.l" />
+    <None Include="..\yacc.output" />
+    <None Include="..\yacc.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc" />
+    <ClCompile Include="..\yacc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\yacc.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
