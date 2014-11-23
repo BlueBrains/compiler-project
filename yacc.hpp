@@ -49,7 +49,7 @@
      IN = 275,
      TRY = 276,
      FINALLY = 277,
-     EXPECT = 278,
+     EXCEPT = 278,
      WITH = 279,
      AS = 280,
      ASSERT = 281,
@@ -91,13 +91,14 @@
      CONTINUE = 317,
      LONG_VALUE = 318,
      FLOAT_VALUE = 319,
-     stmt_7 = 320,
-     stmt_6 = 321,
-     stmt_5 = 322,
-     stmt_4 = 323,
-     stmt_3 = 324,
-     stmt_2 = 325,
-     stmt_1 = 326
+     stmt_8 = 320,
+     stmt_7 = 321,
+     stmt_6 = 322,
+     stmt_5 = 323,
+     stmt_4 = 324,
+     stmt_3 = 325,
+     stmt_2 = 326,
+     stmt_1 = 327
    };
 #endif
 /* Tokens.  */
@@ -121,7 +122,7 @@
 #define IN 275
 #define TRY 276
 #define FINALLY 277
-#define EXPECT 278
+#define EXCEPT 278
 #define WITH 279
 #define AS 280
 #define ASSERT 281
@@ -163,13 +164,14 @@
 #define CONTINUE 317
 #define LONG_VALUE 318
 #define FLOAT_VALUE 319
-#define stmt_7 320
-#define stmt_6 321
-#define stmt_5 322
-#define stmt_4 323
-#define stmt_3 324
-#define stmt_2 325
-#define stmt_1 326
+#define stmt_8 320
+#define stmt_7 321
+#define stmt_6 322
+#define stmt_5 323
+#define stmt_4 324
+#define stmt_3 325
+#define stmt_2 326
+#define stmt_1 327
 
 
 
@@ -182,12 +184,12 @@ typedef union YYSTYPE {
 		float floatVal;
 		char charVal;
 		char* strVal;
-		int myLineNo;
-		int myColno;
+		int lineNum;
+		int colNum;
 	}r;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 191 "yacc.hpp"
+#line 193 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

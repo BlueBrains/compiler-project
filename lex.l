@@ -12,19 +12,8 @@ letter			{lowercase}|{uppercase}
 lowercase		[a-z]
 uppercase		[A-Z]
 digit			[0-9]
-allChars		[0-9a-zA-Z\t\f\r\v !@#$%^&*()-=_+[\]{};':,./<>?]
 Single_line_comment		(\/\/)+[^\n]*	
-stringliteralpiece [{stringprefix}]?({shortstring}|{longstring})
-stringprefix	"u"|"U"|"r"|"ur"|"R"|"UR"|"Ur"|"uR"
-shortstring		"'"{shortstringitem1}*"'"|"\""{shortstringitem2}*"\""
-longstring		"'''"{longstringitem}*"'''"|"\"\"\""{longstringitem}*"\"\"\""
-shortstringitem1	{allChars}[^\'\n]*|escapeseq
-shortstringitem2	{allChars}[^\"\n]*|escapeseq
-longstringitem	{allChars}[^\\]|escapeseq
-escapeseq		[\\]{allChars}
 longinteger    {integer}("l"|"L")
-integer        {decimalinteger}|{octinteger}|{hexinteger}|{bininteger}
-decimalinteger {nonzerodigit}{digit}*|"0"
 octinteger		"0"("o"|"O"){octdigit}+|"0"{octdigit}+
 hexinteger		"0"("x"|"X"){hexdigit}+
 bininteger      "0"("b"|"B"){bindigit}+
@@ -38,9 +27,8 @@ expfloat		({intpart}|{pointfloat}){exp}
 intpart			{digit}+
 fraction		"."{digit}+
 exp				("e"|"E")("+"|"-"){digit}+
-imagnumber		({floatnumber}|{intpart})("j"|"J")
-Integer			[1-9][0-9]*|0		
-Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
+integer			[1-9][0-9]*|0		
+float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option c++
 %x multilinecomment
 %x String
@@ -173,7 +161,7 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.lineNum = lineNum;				
 				return	FINALLY;
 			}
-"expect"	{
+"except"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
@@ -373,34 +361,33 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 			}
 {octinteger}	{
 					int v = 1;int res=0;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						res =res+ v*((int)yytext[n]-48);
 						v=v*8;
-					 }
-					 colNum += strlen(yytext);
+					}
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
 {bininteger}	{
 					int v = 1;int res=0;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						res =res+ v*((int)yytext[n]-48);v=v*2;
-					 }
-					 colNum += strlen(yytext);
+					}
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
-
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
 {hexinteger}	{
 					int v = 1;int res=0;int val;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						if((yytext[n]=='a')||(yytext[n]=='A')) 
 						{val=10;} 
 						else if((yytext[n]=='b')||(yytext[n]=='B'))
@@ -419,13 +406,13 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 						} 
 						res =res+ v*val;v=v*16;
 					} 
-					 colNum += strlen(yytext);
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
-{Integer}	{
+{integer}	{
 				cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -438,7 +425,7 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				else
 					return LONG_VALUE;
 			}
-{Float}		{
+{float}		{
 				cout<<":Float value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
