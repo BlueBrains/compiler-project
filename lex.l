@@ -45,6 +45,7 @@ Float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %x multilinecomment
 %x String
 %option noyywrap
+
 %%
 "import"	{
 				yylval.r.colNum = colNum;

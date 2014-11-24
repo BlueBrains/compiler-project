@@ -17,6 +17,7 @@
   <ItemGroup>
     <None Include="..\lex.l" />
     <None Include="..\yacc.y" />
+    <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ErrorRevovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

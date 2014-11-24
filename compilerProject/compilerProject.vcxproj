@@ -85,6 +85,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
+    <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
   </ItemGroup>
@@ -93,6 +94,7 @@
     <ClCompile Include="..\yacc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ErrorRevovery.h" />
     <ClInclude Include="..\yacc.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

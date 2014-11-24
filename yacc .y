@@ -36,7 +36,7 @@
 
 %start program
 %token	IMPORT CLASS ID SEMI_COLUMN CLOSE_S COMMA DOT ID BEGIN END
-%token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY MULTI
+%token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY
 %token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL
 %token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD
 %token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL
@@ -218,9 +218,9 @@ try_stmt: 	TRY SEMI_COLUMN stmt except_stmt	{;}
 finally_stmt: 	//FINALLY SEMI_COLUMN stmt	{;}
 				FINALLY SEMI_COLUMN block_stmt	{;}
 ;
-except_stmt:// EXCEPT SEMI_COLUMN stmt	{;}
-			EXCEPT SEMI_COLUMN block_stmt	{;}
-			//EXCEPT SEMI_COLUMN expr stmt	{;}
+except_stmt: EXCEPT SEMI_COLUMN stmt	{;}
+			//|EXCEPT SEMI_COLUMN block_stmt	{;}
+			|EXCEPT SEMI_COLUMN expr stmt	{;}
 			//|EXCEPT SEMI_COLUMN expr COMMA target block_stmt	{;}
 ;
 with_stmt:	WITH expr SEMI_COLUMN 	{;}
@@ -328,24 +328,24 @@ call:	PRIMARY OPEN_D args_list CLOSE_D	{;}
 expr:	condition 	{;}
 		|literal	{;}
 		|expr op expr %prec stmt_1{;}
-		|long_id	%prec stmt_3{;}
-		//|expr expr %prec stmt_2 {err->errQ->enqueue($<r.myLineNo>2,$<r.myColNo>2-strlen($<r.myColNo>2),"Expected op ","");}
+		|long_id	{;}
+		|expr expr %prec stmt_2 {err->errQ->enqueue($<r.myLineNo>2,$<r.myColNo>2-strlen($<r.myColNo>2),"Expected op ","");}
 ;
-condition:expr EQUAL expr			{cout<<" : \n";}
+condition:  expr EQUAL expr			{cout<<" : \n";}
 		|expr NOT_EQUAL expr		{cout<<" : \n";}
 		|expr LESS_THAN expr		{cout<<" : \n";}
 		|expr LESS_OR_EQUAL expr	{cout<<" : \n";}
 		|expr MORE_THAN expr		{cout<<" : \n";}
 		|expr MORE_OR_EQUAL expr	{cout<<" : \n";}
 ;
-long_id: ID OPEN_S CLOSE_S				{cout<<" : \n";}
+long_id: ID				{cout<<" : \n";}
+		 |ID OPEN_S CLOSE_S				{cout<<" : \n";}
 		 |ID OPEN_S expr_list CLOSE_S	{cout<<" : \n";}
-		 |ID %prec stmt_1				{cout<<" : \n";}
+		 |ID OPEN_S expr	  CLOSE_S	{cout<<" : \n";}
+		 |long_id DOT ID	{cout<<" : \n";}
 		 |long_id DOT ID OPEN_S CLOSE_S				{cout<<" : \n";}
 		 |long_id DOT ID OPEN_S expr_list CLOSE_S	{cout<<" : \n";}
-		 |long_id DOT ID %prec stmt_2	{cout<<" : \n";}
-		 //|long_id DOT ID OPEN_S expr	  CLOSE_S	{cout<<" : \n";}
-		  //|ID OPEN_S expr	  CLOSE_S	{cout<<" : \n";}
+		 |long_id DOT ID OPEN_S expr	  CLOSE_S	{cout<<" : \n";}
 ;
 op: PLUS				{cout<<" : \n";}
 	|MINUS				{cout<<" : \n";}
@@ -353,8 +353,9 @@ op: PLUS				{cout<<" : \n";}
 	|MOD				{cout<<" : \n";}
 	|OR					{cout<<" : \n";}
 	|NOT				{cout<<" : \n";}
-	|MULTI				{cout<<" : \n";}
+	|STAR				{cout<<" : \n";}
 	|AND	{;}
+	|XOR {;}
 ;
 %%
 void yyerror(char *s) 
