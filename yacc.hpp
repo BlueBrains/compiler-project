@@ -36,7 +36,7 @@
      CLOSE_S = 262,
      COMMA = 263,
      DOT = 264,
-     BEGIN = 265,
+     _BEGIN = 265,
      END = 266,
      DEF = 267,
      ASSIGN = 268,
@@ -97,13 +97,14 @@
      FLOAT_VALUE = 323,
      FLOOR = 324,
      stmt_1_2 = 325,
-     stmt_7 = 326,
-     stmt_6 = 327,
-     stmt_5 = 328,
-     stmt_4 = 329,
-     stmt_3 = 330,
-     stmt_2 = 331,
-     stmt_1 = 332
+     stmt_8 = 326,
+     stmt_7 = 327,
+     stmt_6 = 328,
+     stmt_5 = 329,
+     stmt_4 = 330,
+     stmt_3 = 331,
+     stmt_2 = 332,
+     stmt_1 = 333
    };
 #endif
 /* Tokens.  */
@@ -114,7 +115,7 @@
 #define CLOSE_S 262
 #define COMMA 263
 #define DOT 264
-#define BEGIN 265
+#define _BEGIN 265
 #define END 266
 #define DEF 267
 #define ASSIGN 268
@@ -175,13 +176,14 @@
 #define FLOAT_VALUE 323
 #define FLOOR 324
 #define stmt_1_2 325
-#define stmt_7 326
-#define stmt_6 327
-#define stmt_5 328
-#define stmt_4 329
-#define stmt_3 330
-#define stmt_2 331
-#define stmt_1 332
+#define stmt_8 326
+#define stmt_7 327
+#define stmt_6 328
+#define stmt_5 329
+#define stmt_4 330
+#define stmt_3 331
+#define stmt_2 332
+#define stmt_1 333
 
 
 
@@ -194,12 +196,12 @@ typedef union YYSTYPE {
 		float floatVal;
 		char charVal;
 		char* strVal;
-		int myLineNo;
-		int myColno;
+		int lineNum;
+		int colNum;
 	}r;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 203 "yacc.hpp"
+#line 205 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

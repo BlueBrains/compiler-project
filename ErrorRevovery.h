@@ -21,10 +21,10 @@ public:
 		item->lineNo = lineNo;
 		item->txt = new char[255];
 		item->txt[0] = '\0';
-		strcat(item->txt, txt);
+		strcat_s(item->txt, 255, txt);
 		item->var = new char[255];
 		item->var[0] = '\0';
-		strcat(item->var, varName);
+		strcat_s(item->var, 255, varName);
 		if(front == 0){
 			front = tail = item;
 		}

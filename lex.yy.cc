@@ -24,6 +24,8 @@
 #include <unistd.h>
 #include <iostream>
 using namespace std;
+
+
 /* Use prototypes in function declarations. */
 #define YY_USE_PROTOS
 
@@ -327,7 +329,7 @@ static yyconst short int yy_base[207] =
        58,   79,  250,   45,  257,  240,    0,    0,  311,  110,
         0,  294,  293,  266,  311,  311,  288,  113,  311,  279,
       311,  117,  124,  106,  130,    0,  135,  311,  311,  311,
-        0,  241,  251,  252,  255,  241,  104,  112,  250,  237,
+        0,  241,  251,  252,  255,  241,  104,  112,  250,  250,
       240,  237,  233,  234,    0,  232,    0,  113,  245,  237,
       226,  103,  235,  224,  237,  311,    0,  311,  148,  311,
 
@@ -335,7 +337,7 @@ static yyconst short int yy_base[207] =
       229,  236,  218,  216,    0,    0,  228,  228,    0,  227,
       213,  229,    0,  227,  213,  123,  208,  214,  207,  204,
       218,    0,  210,  213,  208,  311,  238,  311,  201,  203,
-      205,  197,  205,    0,    0,  210,  207,  199,  209,  184,
+      205,  197,  205,    0,    0,  197,  207,  199,  209,  184,
       193,  186,  181,  151,  154,  141,    0,  152,    0,  152,
       136,    0,    0,    0,  140,  134,    0,  140,  139,  131,
       132,  129,  144,  143,    0,  131,    0,    0,    0,  123,
@@ -477,11 +479,13 @@ static yyconst short int yy_chk[371] =
 		#include <FlexLexer.h>		
 		extern int lineNum=1;
 		extern int colNum=0;
+		extern char* str = 0;
+		int index;
 #define multilinecomment 1
 
 #define String 2
 
-#line 485 "lex.yy.cc"
+#line 487 "lex.yy.cc"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -608,9 +612,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 48 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 39 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 
-#line 614 "lex.yy.cc"
+#line 616 "lex.yy.cc"
 
 	if ( yy_init )
 		{
@@ -695,7 +699,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 49 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 40 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;
@@ -705,7 +709,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 55 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 46 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;
@@ -715,7 +719,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 61 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 52 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -725,7 +729,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 67 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 58 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				lineNum ++;
 				colNum = 1;
@@ -736,7 +740,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 74 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 65 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -746,7 +750,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 80 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 71 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -756,7 +760,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 86 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 77 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -766,7 +770,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 92 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 83 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -776,17 +780,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 98 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 89 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 { 
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
-				return	BEGIN;
+				return	_BEGIN;
 			}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 104 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 95 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -796,7 +800,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 110 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 101 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -806,7 +810,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 116 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 107 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -816,7 +820,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 122 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 113 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -826,7 +830,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 128 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 119 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -836,7 +840,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 134 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 125 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -846,7 +850,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 140 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 131 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -856,7 +860,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 146 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 137 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -866,7 +870,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 152 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 143 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -876,7 +880,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 158 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 149 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -886,7 +890,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 164 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 155 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -896,7 +900,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 170 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 161 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -906,7 +910,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 176 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 167 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -916,7 +920,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 182 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 173 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -926,7 +930,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 179 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -936,17 +940,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 194 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 185 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
-				return	ASSERT
+				return	ASSERT;
 			}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 200 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 191 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -956,7 +960,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 206 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 197 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -966,7 +970,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 212 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 203 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -976,7 +980,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 218 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 209 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -986,7 +990,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 224 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 215 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -996,7 +1000,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 230 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 221 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1006,7 +1010,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 236 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 227 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1016,7 +1020,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 242 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 233 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1026,7 +1030,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 248 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 239 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1036,7 +1040,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 254 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 245 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {	
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1046,7 +1050,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 260 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 251 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1056,7 +1060,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 266 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1066,7 +1070,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 272 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 263 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1076,7 +1080,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 278 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 269 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1086,7 +1090,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 284 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 275 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1096,7 +1100,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 290 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 281 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1106,7 +1110,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 296 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 287 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1116,17 +1120,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 302 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 293 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
-				return	NOT
+				return	NOT;
 			}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 308 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 299 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1136,7 +1140,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 314 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 305 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1146,7 +1150,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 320 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 311 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1156,7 +1160,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 326 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 317 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1166,7 +1170,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 332 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 323 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1176,7 +1180,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 338 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 329 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1186,7 +1190,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 344 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 335 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1196,7 +1200,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 350 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1206,7 +1210,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 356 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 347 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1216,7 +1220,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 362 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 353 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1226,7 +1230,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1236,45 +1240,44 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 374 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 365 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 					int v = 1;int res=0;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						res =res+ v*((int)yytext[n]-48);
 						v=v*8;
-					 }
-					 colNum += strlen(yytext);
+					}
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 387 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 378 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 					int v = 1;int res=0;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						res =res+ v*((int)yytext[n]-48);v=v*2;
-					 }
-					 colNum += strlen(yytext);
+					}
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
-
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 400 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 390 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 					int v = 1;int res=0;int val;
-					 for(int n = (strlen(yytext)-1); n >1; n--)
-					 {
+					for(int n = (strlen(yytext)-1); n >1; n--)
+					{
 						if((yytext[n]=='a')||(yytext[n]=='A')) 
 						{val=10;} 
 						else if((yytext[n]=='b')||(yytext[n]=='B'))
@@ -1293,16 +1296,16 @@ YY_RULE_SETUP
 						} 
 						res =res+ v*val;v=v*16;
 					} 
-					 colNum += strlen(yytext);
+					colNum += strlen(yytext);
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
-					 yylval.r.intVal = res;
-					 return INTEGER_VALUE;
+					yylval.r.intVal = res;
+					return INTEGER_VALUE;
 				}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 428 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 418 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1319,7 +1322,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 431 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 				cout<<":Float value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1333,17 +1336,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {BEGIN String;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 442 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {cout<<"str1="<<yytext<<"\n";}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 453 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 443 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 							cout<<"str2="<<yytext<<"\n";
 							if(str == 0){
@@ -1356,18 +1359,18 @@ YY_RULE_SETUP
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 453 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {
 							cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
 							str[index] = '\0';
 							cout<<"The Full String is = "<<str<<"\n";
-							yylval.r.str = str;
+							yylval.r.strVal = str;
 							return STRING_VALUE;
 							str = 0;
 							BEGIN INITIAL;
@@ -1375,64 +1378,64 @@ YY_RULE_SETUP
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 473 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 474 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 464 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {colNum+=2;		BEGIN(multilinecomment);}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 475 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 465 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {lineNum+=1;	BEGIN(multilinecomment);}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 476 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 466 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 477 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 478 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 468 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {colNum+=strlen(yytext);	 BEGIN(INITIAL);}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 479 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 469 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 480 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 470 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {						
 							colNum += strlen(yytext);
 							yylval.r.colNum = colNum;
 							yylval.r.lineNum = lineNum;			
-							char [] x = new char[255];
+							char* x = new char[255];
 							x[0] = '\0';
-							strcpy(x, yytext);
-							yylval.r.str = x;
+							strcpy_s(x,255, yytext);
+							yylval.r.strVal = x;
 							return ID;												
 						}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 490 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 480 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 {cout<<"nothing";}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 ECHO;
 	YY_BREAK
-#line 1436 "lex.yy.cc"
+#line 1437 "lex.yy.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(multilinecomment):
 case YY_STATE_EOF(String):
@@ -2241,5 +2244,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
+#line 481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project\\lex.l"
 
