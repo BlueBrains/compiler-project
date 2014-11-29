@@ -60,7 +60,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				colNum = 1;
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
-				return NEW_LINE;
+				//return NEW_LINE;
 			}
 "("			{
 				colNum += strlen(yytext);
@@ -449,7 +449,6 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							str[index++] = yytext[0];
 							
 						}
-<String>\\\\["]			{cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
 <String>[^\\]\"			{
 							cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
@@ -465,7 +464,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 <multilinecomment>"\n"		 {lineNum+=1;	BEGIN(multilinecomment);}
 <multilinecomment>"*"*[^"/"] {colNum+=strlen(yytext);	}
 <multilinecomment>[^"*"]*    {colNum+=strlen(yytext);	}
-<multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	 BEGIN(INITIAL);}
+<multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	cout<<"comment"; BEGIN(INITIAL);}
 \'[a-zA-z]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 {identifier}			{						
 							colNum += strlen(yytext);
@@ -477,5 +476,4 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							yylval.r.strVal = x;
 							return ID;												
 						}
-.				{cout<<"nothing";}
 %%

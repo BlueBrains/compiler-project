@@ -50,21 +50,20 @@
 %left MULTI DIV MOD FLOOR
 %left  XNOT
 %nonassoc stmt_1_2
-%nonassoc stmt_1 stmt_2 stmt_3 stmt_4 stmt_5 stmt_6 stmt_7 stmt_8
+%nonassoc stmt_1 stmt_2 stmt_3 stmt_4 stmt_5 stmt_6 stmt_7 stmt_8 stmt_9
 %nonassoc ELSE ELIF FINALLY EXCEPT DOT
 %nonassoc ID _BEGIN IF WHILE FOR TRY WITH ASSERT DEL RETURN PRINT GLOBAL RAISE OPEN_D RE_COT YIELD PRIMARY   PASS CHAR_VALUE OPEN_S CLOSE_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE COMMA
 
 
 %%
-program: units	{                    cout <<"prgram : Units\n";
+program: program unit	{                    cout <<"prgram : Units\n";
                     if(!err->errQ->isEmpty())						   
 				    err->printErrQueue();
 					//amer
 					}
+				|unit      {cout<<" program unit";}
 ;
-units: units unit	{cout<<"units: unit\n";}
-		| unit	{cout<<"units: unit\n";}
-;
+
 
 unit:	IMPORT import_list class_decl	{;}
 		|IMPORT ID class_decl	{;}
@@ -102,30 +101,17 @@ expr_list:	expr_list COMMA expr	{;}
 
 //A.B.C , X.T.F->import_list
 import_list:	import_list COMMA import	{;}
-				|ID DOT ID  COMMA import	{;}
-				|import_list COMMA ID DOT ID {;}
-				|import_list COMMA ID	%prec stmt_2{;}
-				|ID DOT ID COMMA ID DOT ID {;}
-				|ID DOT ID COMMA ID	%prec stmt_1{;}
-				|ID COMMA import	{;}
-				|ID COMMA ID DOT ID	{;}
-				|ID COMMA ID %prec stmt_4	{;}
-			//A.B.C , X.Y.T, S.D.A
+				
+			
 			|import	{;}
 ;
 
 
-/*A.B.C.H
-reduce->import
-				  B
-				  DOT
-Stack:A->reduce:import
-			A
-*/
+
 
 import: import DOT ID	{;}//A.B
-		| ID DOT ID DOT ID
-		//A->import . B -> import . C->import
+		| ID 
+		
 ;
 
 class_body: END		{cout<<"class_body: END	\n";}//may begin will be deleted
@@ -178,27 +164,26 @@ arg:	STAR ID		{;}
 	| STAR ID ASSIGN expr	{;}
 ;
 
-block_stmt: _BEGIN END	{;}
-			|_BEGIN stmt_list END	{;}
+block_stmt: stmt_list END	{;}
 	;
 
 stmt_list:	stmt_list stmt	{;}
 			|stmt	{;}
 ;
 
-stmt: 			if_stmt	{;}
-                | while_stmt	{;}
+stmt: 			if_stmt {;}
+                | while_stmt {;}
                 | for_stmt	{;}
                 | try_stmt	{;}
                 | with_stmt	{;}
-				|block_stmt %prec stmt_4	{;}
-				|simple_stmt_list	{;}
+				|block_stmt  %prec stmt_4	{;}
+				|simple_stmt_list  {;}
 ;
 
 if_stmt:	if_header stmt %prec stmt_3	{;}
-		|if_header stmt ELSE stmt	{;}
-		|if_header stmt elif_stmt %prec stmt_6	{;}
-		|if_header stmt elif_stmt ELSE stmt	{;}
+			|if_header stmt ELSE stmt	{;}
+			|if_header stmt elif_stmt %prec stmt_6	{;}
+			|if_header stmt elif_stmt ELSE stmt	{;}
 ;
 
 elif_stmt: 	elif_header stmt elif_stmt	{;}
@@ -225,10 +210,10 @@ while_header: WHILE expr SEMI_COLUMN	{;}
 for_stmt: 	for_header stmt	{;}
 ;
 
-for_header: FOR target_list IN expr_list	{;}
-			|FOR ID COMMA ID IN expr_list	{;}
-			|FOR ID IN expr_list	{;}
-			|ID target_list IN expr_list {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>1-strlen($<r.strVal>1),"REServed WORD FOR Expected ","");}
+for_header: FOR target_list IN expr_list SEMI_COLUMN {;}
+			|FOR ID COMMA ID IN expr_list SEMI_COLUMN {;}
+			|FOR ID IN expr_list SEMI_COLUMN {;}
+			|ID target_list IN expr_list SEMI_COLUMN {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>1-strlen($<r.strVal>1),"REServed WORD FOR Expected ","");}
 ;
 
 target_list:	target_list COMMA target	{;}
@@ -236,7 +221,7 @@ target_list:	target_list COMMA target	{;}
 				|target_list COMMA ID	{;}
 				|ID COMMA ID COMMA ID	{;}
 				|ID COMMA target	{;}
-			|target	{;}
+				|target	{;}
 ;
 
 try_stmt: 	TRY SEMI_COLUMN stmt except_stmt	{;}
@@ -276,12 +261,12 @@ assert_stmt: 	ASSERT expr {;}
 				|ASSERT expr COMMA expr	{;}
 ;
 
-assignment_stmt:	target_list EQUAL expr_list 	{;}
-					|ID COMMA ID EQUAL expr_list 	{;}
-					|ID EQUAL expr_list 	{;}
-					|target_list EQUAL yield_expression	{;}
-					|ID COMMA ID EQUAL yield_expression	{;}
-					|ID EQUAL yield_expression	{;}
+assignment_stmt:	target_list ASSIGN expr_list 	{;}
+					|ID COMMA ID ASSIGN expr_list 	{;}
+					|ID ASSIGN expr_list 	{;}
+					|target_list ASSIGN yield_expression	{;}
+					|ID COMMA ID ASSIGN yield_expression	{;}
+					|ID ASSIGN yield_expression	{;}
 ;
 
 del_stmt:	DEL target_list	{;}
@@ -330,6 +315,7 @@ target: 	OPEN_S target_list CLOSE_S 	{;}//(
 			;
             
 attributeref: primary DOT ID	{;}
+			  |literal DOT ID	{;}
 			  |ID DOT ID %prec stmt_7	{;}
 ;
 
@@ -339,12 +325,11 @@ primary: 	atom 	{;}
 			| call	{;} //must continue
 ;
 
-atom:		literal 	{;}
-			| enclosure	{;}
+atom:		 enclosure	{;}
 ;
 
-literal:    STRING_VALUE 	{;}
-			| INTEGER_VALUE 	{;}
+literal:    STRING_VALUE 	{cout<<"String Value";}
+			| INTEGER_VALUE {cout<<"Integer Value";}
 			| LONG_VALUE	{;}
             | FLOAT_VALUE 	{;}
 			| CHAR_VALUE	{;}
@@ -378,14 +363,17 @@ yield_expression:	YIELD	{;}
 ;
 
 subscription:	PRIMARY OPEN_D expr_list CLOSE_D	{;}
+				|literal OPEN_D expr_list CLOSE_D	{;}
 ;
 
 call:	PRIMARY OPEN_D args_list CLOSE_D	{;}
+		|literal OPEN_D args_list CLOSE_D	{;}
 		|PRIMARY OPEN_D ID CLOSE_D	{;}
+		|literal OPEN_D ID CLOSE_D	{;}
 ;
 
 expr:	condition 	{;}
-		|literal	{;}
+		|literal %prec stmt_9	{;}
 		|expr op expr %prec stmt_1{;}
 		|long_id	%prec stmt_3{;}
 		//|expr expr %prec stmt_2 {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"Expected op ","");}
@@ -399,7 +387,7 @@ condition:  expr EQUAL expr			{cout<<" : \n";}
 		|expr MORE_OR_EQUAL expr	{cout<<" : \n";}
 ;
 
-long_id: ID OPEN_S	%prec stmt_8				{cout<<" : \n";}
+long_id: ID %prec stmt_8				{cout<<" : \n";}
 		 |ID OPEN_S CLOSE_S				{cout<<" : \n";}
 		 |ID OPEN_S expr_list CLOSE_S	{cout<<" : \n";}
 		 |ID OPEN_S expr	  CLOSE_S	{cout<<" : \n";}
@@ -421,7 +409,7 @@ op: PLUS				{cout<<" : \n";}
 %%
 void yyerror(char *s) 
 {
-	;
+	cout<<s;
 }
 
 int yylex()
@@ -433,5 +421,5 @@ void main(void)
 {
 	Parser* p = new Parser();
 	p->parse();
-	
+	system("pause");
 }
