@@ -91,10 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc" />
+    <ClCompile Include="..\MyMap.cpp" />
+    <ClCompile Include="..\SymbolTable.cpp" />
     <ClCompile Include="..\yacc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ErrorRevovery.h" />
+    <ClInclude Include="..\FlexLexer.h" />
+    <ClInclude Include="..\MyMap.h" />
+    <ClInclude Include="..\SymbolTable.h" />
+    <ClInclude Include="..\unistd.h" />
     <ClInclude Include="..\yacc.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

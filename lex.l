@@ -33,16 +33,23 @@ integer			[1-9][0-9]*|0
 float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option c++
 %x multilinecomment
+%x import
 %x String
 %option noyywrap
 
 %%
+"import"				{BEGIN import;}
+<import>{Identifier}    {yaccin(yytext); BEGIN INITIAL; return IMPORT;}
+
+
 "import"	{
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;
 				colNum += strlen(yytext);
 				return IMPORT;
 			}
+
+
 "class"		{
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;

@@ -30,6 +30,10 @@
 		int myLineNo;
 		int myColNo;
 	}r;
+	class YaccSimpleType * yaccSimpleType;
+		class Variable * variable;
+		class Function * function;
+		class Type * type;
 }
 
 %start program
