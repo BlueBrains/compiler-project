@@ -2,7 +2,9 @@
 %{
 	#include <iostream>
 	#include <FlexLexer.h>
+	#include <stack>
 	#include "ErrorRevovery.h"
+	#include <set>
 	using namespace std;
 	int yylex(void);
 	int yyparse();
@@ -10,7 +12,8 @@
 	int lineno=0,colnumber=0;
 	ErrorRecovery* err=new ErrorRecovery();
 	FlexLexer* lexer = new yyFlexLexer();
-	
+	char* i_type;
+	vector<char *>inhertance_list;
 	class Parser
 	{
 		public:
@@ -74,12 +77,15 @@ unit:	IMPORT import_list class_decl	{;}
 
 class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";}
 ;
-class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";}//class X :
+class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);}//class X :
 		|CLASS ID OPEN_S CLOSE_S SEMI_COLUMN//class X ():
-		{;}
-		|CLASS ID OPEN_S expr_list CLOSE_S SEMI_COLUMN	
+		{$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);;}
+		|CLASS ID OPEN_S inherted_list CLOSE_S SEMI_COLUMN	
 		//class X (A,B,T): OR class X(A):
-		{cout << "class_h:CLASS ID OPEN_S expr_list CLOSE_S SEMI_COLUMN\n";}
+		{cout << "class_h:CLASS ID OPEN_S expr_list CLOSE_S SEMI_COLUMN\n";
+			$<type>$ = p->createType($<r.str>2,inhertance_list, yylval.r.myLineNo, yylval.r.myColno);
+			inhertance_list.clear();
+		}
 		|CLASS SEMI_COLUMN	{
 				    
 									err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"CLASS NAME IS NOT FOUND ","");
@@ -95,7 +101,8 @@ class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";}//clas
 		           }
 		
 ;
-
+inherted_list:	inherted_list ID	{inhertance_list.push_back($<r.text>2);}
+				|ID {inhertance_list.push_back($<r.text>1);}
 expr_list:	expr_list COMMA expr	{;}
 			|expr %prec stmt_1	{;}
 ;				
