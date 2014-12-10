@@ -25,6 +25,7 @@ char* Variable::getType(){
 }
 //=======================================
 //============ Functions ================
+/*
 Function::Function(){
 	this->name = new char[255];
 	this->name[0] = '\0';
@@ -45,7 +46,7 @@ void Function::setScope(Scope* m){
 Scope* Function::getScope(){
 	return this->scope;
 }
-//=======================================
+//=======================================*/
 //============== Type ===================
 Type::Type(){
 	this->name = new char[255];
