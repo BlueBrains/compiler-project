@@ -72,4 +72,4 @@ Type * MyParser::createType(char* name, int lineno, int colno){
 Type * MyParser::finishTypeDeclaration(Type* t){
 	this->st->currScope = this->st->currScope->parent;
 	return t;
-}
+};
