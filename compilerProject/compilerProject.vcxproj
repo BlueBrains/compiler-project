@@ -90,13 +90,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc" />
+    <ClCompile Include="..\MyMap.cpp" />
+    <ClCompile Include="..\MyParser.cpp" />
+    <ClCompile Include="..\SymbolTable.cpp" />
     <ClCompile Include="..\yacc.cpp" />
+    <ClCompile Include="Function.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="Scope.cpp" />
+    <ClCompile Include="Symbol.cpp" />
+    <ClCompile Include="Type.cpp" />
+    <ClCompile Include="Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ErrorRevovery.h" />
+    <ClInclude Include="..\FlexLexer.h" />
+    <ClInclude Include="..\MyMap.h" />
+    <ClInclude Include="..\MyParser.h" />
+    <ClInclude Include="..\SymbolTable.h" />
+    <ClInclude Include="..\unistd.h" />
     <ClInclude Include="..\yacc.hpp" />
+    <ClInclude Include="Function.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="Scope.h" />
+    <ClInclude Include="Symbol.h" />
+    <ClInclude Include="Type.h" />
+    <ClInclude Include="Variable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ST">
+      <UniqueIdentifier>{04cecf11-20be-4ad0-b948-829ce2c18ad3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
@@ -30,6 +33,30 @@
     <ClCompile Include="object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\MyMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SymbolTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Symbol.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="Scope.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="Variable.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MyParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -38,7 +65,37 @@
     <ClInclude Include="..\ErrorRevovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\FlexLexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SymbolTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Symbol.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="Scope.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="Variable.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MyParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
