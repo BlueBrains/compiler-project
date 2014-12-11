@@ -46,7 +46,7 @@ void Function::setScope(Scope* m){
 Scope* Function::getScope(){
 	return this->scope;
 }
-//=======================================*/
+//=======================================
 //============== Type ===================
 Type::Type(){
 	this->name = new char[255];
@@ -84,7 +84,7 @@ Scope * Type::getScope(){
 	return this->scope;
 }
 
-//=======================================
+//=======================================*/
 
 SymbolTable::SymbolTable(void){
 	this->rootScope = new Scope();

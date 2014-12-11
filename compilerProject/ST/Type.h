@@ -1,9 +1,14 @@
+#pragma once
+#ifndef __TYPE__
+#define __TYPE__
 #include"Symbol.h"
 #include"Scope.h"
 #include<string>
+#include<set>
+
 enum AccessModifier{
-	Public = 0,
-	Private,
+	Private = 0,
+	Public,
 	Protected
 };
 enum completness{
@@ -11,12 +16,12 @@ enum completness{
 	implemented,
 	finished
 };
-class Type:Symbol {
+class Type :public Symbol {
 protected:
 	int _typeSize; // the size of an instance from this type in memory
-	Type* inhertedList;
+
 public:
-	
+	static int classesCount;
 	bool declared;/// multi-parse
 	Type();
 	~Type();
@@ -26,7 +31,13 @@ public:
 	Type* getouter_class();
 	void setScope(Scope * m);
 	Scope * getScope();
-
+	void addChild(set<int> &s){
+		for (auto i : s){
+			children_ids.insert(i);
+		}
+		if (inhertedList)
+			inhertedList->addChild(children_ids);
+	}
 
 
 	Type(string name, int typeSize = 4);
@@ -35,8 +46,14 @@ public:
 	void setImplemented();
 	completness getStatus();
 	void setStatus(completness);
-	completness status;
+	int getId();
+
 private:
+	completness status;
 	Type* outer_class;
 	Scope * scope;
+	int _id = -1;
+	Type* inhertedList;
+	set<int> children_ids;
 };
+#endif

@@ -1,13 +1,14 @@
 #pragma once
-#ifndef __My_Parser__
-#define __My_Parser__
-#include "SymbolTable.h"
-#include "ErrorRecovery.h"
+#ifndef __My_Parser_H__
+#define __My_Parser_H__
+#include "ST\SymbolTable.h"
+#include"ErrorRevovery.h"
+
 //===================== Data Structures From Help in Yacc ==============
 
 class YaccSimpleType{
 public:
-	Types t;
+	Type t;
 };
 //======================================================================
 class MyParser
@@ -17,7 +18,7 @@ public:
 	ErrorRecovery * errRecovery;
 	MyParser(void);
 	~MyParser(void);
-	YaccSimpleType* createYaccSimpleType(Types t);
+	YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n, YaccSimpleType* t, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(Variable* v);
 	Function * createTypeFunctionHeader(char* typeName, char* name, YaccSimpleType * t, int lineNo, int colNo);

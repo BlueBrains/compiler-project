@@ -1,10 +1,10 @@
 #include "MyMap.h"
-
-void MapElem::setName(char* name){
+#include<string>
+void MapElem::setName(string name){
 	this->name = name;
 }
 
-char* MapElem::getName(){
+string MapElem::getName(){
 	return this->name;
 }
 
@@ -35,19 +35,20 @@ MyMap::~MyMap(void)
 {
 }
 
-int MyMap::hash(char* name){
+int MyMap::hash(string name){
 	unsigned int i;
 	int retVal = 0;
-	for(i = 0 ; i < strlen(name); i++)
+	const char * x = name.c_str();
+	for(i = 0 ; i < strlen(name.c_str()); i++)
 	{		
 		retVal <<= 2;
-		retVal ^= (int)(*name);		
-		name++;
+		retVal ^= (int)(*name.c_str());		
+		x++;
 	}
 	return (retVal%mapLength);	
 }
 
-void MyMap::put(char* name, void* element){
+void MyMap::put(string name, void* element){
 	int index = this->hash(name);
 	MapElem * newMapElem = new MapElem();
 	newMapElem->setName(name);
@@ -57,10 +58,11 @@ void MyMap::put(char* name, void* element){
 	this->arr[index] = newMapElem;
 }
 
-void* MyMap::get(char* name){
+void* MyMap::get(string name){
 	int index = this->hash(name);
+	//string x = strcat(x, name);
 	MapElem * temp = this->arr[index];
-	while((temp != 0) && (strcmp(temp->getName(), name) != 0)){
+	while((temp != 0) && (strcmp(temp->getName(),name.c_str()) != 0)){
 		temp = temp->getNext();
 	}
 	if(temp == 0)

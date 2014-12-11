@@ -1,14 +1,16 @@
 #pragma once
 #define MAX_LENGTH 71
 #include <iostream>
+#include<string>
+using namespace std;
 class MapElem{
 private:
-	char* name;
+	string name;
 	void* elem;
 	MapElem * next;
 public:
-	void setName(char* name);
-	char* getName();
+	void setName(string name);
+	string getName();
 	void setElem(void* elem);
 	void* getElem();
 	MapElem* getNext();
@@ -20,10 +22,11 @@ class MyMap
 private:
 	static const int mapLength = MAX_LENGTH;
 	MapElem * arr[mapLength];
-	int hash(char* name);
+	int hash(string name);
 public:
 	MyMap(void);
 	~MyMap(void);
-	void put(char* name, void* item);
-	void* get(char* name);
+	void put(string name, void* item);
+	void* get(string name);
+	
 };

@@ -1,9 +1,12 @@
+#pragma once
+#ifndef __FUNCTION_H__
+#define __FUNCTION_H__
 #include"Scope.h"
 #include"Variable.h"
 #include"Symbol.h"
 
 #include<vector>
-class Function:Symbol{
+class Function :public Symbol{
 private:
 	Scope * scope;
 	//bool is_static;
@@ -21,5 +24,5 @@ public:
 	void setScope(Scope* m);
 	Scope* getScope();
 	void setparameters(vector<Variable *>parameters);
-	Scope* getScope();
 };
+#endif

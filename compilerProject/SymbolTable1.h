@@ -1,7 +1,12 @@
 #pragma once
 #ifndef __Symbol_Table__
 #define __Symbol_Table__
-#include "MyMap.h"
+
+#include "../MyMap.h"
+#include "Type.h"
+#include <stdio.h>
+#include <string>
+#include <iostream>
 
 //=============================
 /*class Variable{
@@ -29,7 +34,7 @@ public:
 	char* getName();
 	void setScope(Scope* m);
 	Scope* getScope();
-};*/
+};
 //=============================
 class Type {
 private:
@@ -49,7 +54,7 @@ public:
 	Type* getouter_class();
 	void setScope(Scope * m);
 	Scope * getScope();
-};
+};**/
 //=============================
 
 class SymbolTable

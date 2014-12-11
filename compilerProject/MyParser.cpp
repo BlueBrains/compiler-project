@@ -1,5 +1,5 @@
 #include "MyParser.h"
-
+#include "ErrorRevovery.h"
 MyParser::MyParser(void)
 {
 	this->st = new SymbolTable();
@@ -10,7 +10,7 @@ MyParser::~MyParser(void)
 {
 }
 
-YaccSimpleType* MyParser::createYaccSimpleType(Types t){
+YaccSimpleType* MyParser::createYaccSimpleType(Type t){
 	YaccSimpleType * ret = new YaccSimpleType();
 	ret->t = t;
 	return ret;
@@ -26,7 +26,7 @@ Variable* MyParser::insertVar(char* n, YaccSimpleType* t, int lineNo, int colNo)
 }
 Variable* MyParser::addVariableToCurrentScope(Variable* v){
 	if(v){
-		this->st->currScope->m->put(v->getName(), v);
+		this->st->currScope->m->put(v->get_name(), v);
 	}
 	return v;
 }
@@ -42,8 +42,8 @@ Function * MyParser::createTypeFunctionHeader(char* typeName, char* name, YaccSi
 		return 0;
 	}
 	f = new Function();
-	f->setName(name);
-	f->setReturnType(t->t);
+	f->set_name(name);
+	//f->setReturnType(t->t);
 	type->getScope()->m->put(name, f);
 
 	f->getScope()->parent = type->getScope();
@@ -63,7 +63,7 @@ Type * MyParser::createType(char* name, int lineno, int colno){
 		return 0;
 	}
 	t = new Type();
-	t->setName(name);
+	t->set_name(name);
 	t->getScope()->parent = this->st->currScope;
 	this->st->currScope->m->put(name, t);
 	this->st->currScope = t->getScope();

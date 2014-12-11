@@ -1,3 +1,4 @@
+#pragma once
 #ifndef VAR_H
 #define VAR_H
 #include <string>
@@ -5,11 +6,7 @@
 #include "Symbol.h"
 using namespace std;
 class Type;
-enum AccessModifier{
-	Private = 0,
-	Public,
-	Protected
-};
+
 class Variable :public Symbol{
 private:
 	Type * type;
@@ -26,6 +23,7 @@ public:
 	*/
 	Variable(string name, Type* type, string = "private");
 	Variable(Variable*);
+	Variable();
 	Variable(string name, Type* type, bool);
 	static bool compare(Variable *, Variable*);
 	string getAccessModifier();

@@ -24,6 +24,11 @@ Variable::Variable(string name, Type* type, string accessModifier) :Symbol(name)
 	this->isConst = false;
 	this->setAccessModifier(accessModifier);
 }
+Variable::Variable(){
+	this->type = NULL;
+	this->isConst = false;
+	//this->setAccessModifier(accessModifier);
+}
 Variable::Variable(string name, Type* type, bool isConst) : Symbol(name){
 	this->type = type;
 	this->isConst = isConst;
