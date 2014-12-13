@@ -5,12 +5,12 @@
 using namespace std;
 class MapElem{
 private:
-	string name;
+	char* name;
 	void* elem;
 	MapElem * next;
 public:
-	void setName(string name);
-	string getName();
+	void setName(char* name);
+	char* getName();
 	void setElem(void* elem);
 	void* getElem();
 	MapElem* getNext();
@@ -22,11 +22,11 @@ class MyMap
 private:
 	static const int mapLength = MAX_LENGTH;
 	MapElem * arr[mapLength];
-	int hash(string name);
+	int hash(char* name);
 public:
 	MyMap(void);
 	~MyMap(void);
-	void put(string name, void* item);
-	void* get(string name);
+	void put(char* name, void* item);
+	void* get(char* name);
 	
 };

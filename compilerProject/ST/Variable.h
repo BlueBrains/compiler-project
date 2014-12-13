@@ -21,13 +21,13 @@ public:
 	void setType(char* n);
 	char* getType();
 	*/
-	Variable(string name, Type* type, string = "private");
+	Variable(char* name, Type* type, char* = "private");
 	Variable(Variable*);
 	Variable();
-	Variable(string name, Type* type, bool);
+	Variable(char* name, Type* type, bool);
 	static bool compare(Variable *, Variable*);
-	string getAccessModifier();
-	void setAccessModifier(string);
+	char* getAccessModifier();
+	void setAccessModifier(char*);
 	virtual bool getIsConst();
 	virtual void setIsConst(bool);
 	Type* getType();

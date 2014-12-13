@@ -5,7 +5,7 @@
 #include"Scope.h"
 #include<string>
 #include<set>
-
+#include<vector>
 enum AccessModifier{
 	Private = 0,
 	Public,
@@ -26,24 +26,30 @@ public:
 	Type();
 	~Type();
 	void setInheritedType(Type*n);
-	Type* getInheritedType();
+	vector<Type*> getInheritedType();
 	void setouter_class(Type* e);
 	Type* getouter_class();
 	void setScope(Scope * m);
 	Scope * getScope();
 	void addChild(set<int> &s){
+		
 		for (auto i : s){
 			children_ids.insert(i);
 		}
-		if (inhertedList)
-			inhertedList->addChild(children_ids);
+		for (int i = 0; i < int(inhertedList.size()); i++)
+		{
+				inhertedList.at(i)->addChild(children_ids);
+		}
+		
 	}
 
 
-	Type(string name, int typeSize = 4);
+	Type(char* name, int typeSize = 4);
 	Type(Type*);
 	virtual int getTypeSize();
 	void setImplemented();
+	void setIs_final(bool final);
+	bool getIs_final();
 	completness getStatus();
 	void setStatus(completness);
 	int getId();
@@ -52,8 +58,10 @@ private:
 	completness status;
 	Type* outer_class;
 	Scope * scope;
+	bool is_final;
 	int _id = -1;
-	Type* inhertedList;
+	vector<Type*> inhertedList;
 	set<int> children_ids;
+	void setis_final(bool final);
 };
 #endif

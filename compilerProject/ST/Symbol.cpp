@@ -1,6 +1,6 @@
 #include "Symbol.h"
 
-Symbol::Symbol(string name)
+Symbol::Symbol(char* name)
 {
 	this->name = name;
 }
@@ -13,13 +13,13 @@ Symbol::Symbol()
 	this->name = "";
 }
 
-void Symbol::set_name(string name){
+void Symbol::set_name(char* name){
 	if ((this != NULL) && (name != "")){
 		this->name = name;
 	}
 	
 }
-string Symbol::get_name()
+char* Symbol::get_name()
 const{
 	if (this != NULL){
 		return this->name;

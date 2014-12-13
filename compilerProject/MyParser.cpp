@@ -9,15 +9,15 @@ MyParser::MyParser(void)
 MyParser::~MyParser(void)
 {
 }
-
+/*
 YaccSimpleType* MyParser::createYaccSimpleType(Type t){
 	YaccSimpleType * ret = new YaccSimpleType();
 	ret->t = t;
 	return ret;
 }
-
-Variable* MyParser::insertVar(char* n, YaccSimpleType* t, int lineNo, int colNo){
-	Variable * v = st->insertVariableInCurrentScope(n, t->t);
+*/
+Variable* MyParser::insertVar(char* n,char* acc_mod, int lineNo, int colNo){
+	Variable * v = st->insertVariableInCurrentScope(n,acc_mod);
 	if(!v){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
 		
@@ -69,7 +69,7 @@ Function * MyParser::finishFunctionDeclaration(Function * f){
 	return f;//useless now, but maybe we need it later
 }
 //========= Types =================
-Type * MyParser::createType(char* name, int lineno, int colno){
+Type * MyParser::createType(char* name,vector<char*>inherted_list, int lineno, int colno,bool is_final){
 	Type* t = (Type*)this->st->currScope->m->get(name);
 	if(t){
 		this->errRecovery->errQ->enqueue(lineno, colno, "Type is already exist", name);
@@ -77,9 +77,52 @@ Type * MyParser::createType(char* name, int lineno, int colno){
 	}
 	t = new Type();
 	t->set_name(name);
+	if (is_final)
+	{
+		t->setIs_final(true);
+	}
+
+	for (int i = 0; i < int(inherted_list.size()); i++)
+	{
+		char* x = inherted_list.at(i);
+		Type* t1 = (Type*)this->st->currScope->m->get(x);
+		if (t1)
+		{
+			if (t1->getIs_final())
+			{
+				this->errRecovery->errQ->enqueue(lineno, colno, "the type is final and you can't inheteted",t1->get_name());
+				return 0;
+			}
+			else
+			{
+				t->setInheritedType(t1);
+			}
+			
+		}
+		else
+		{
+			t1 = new Type();
+			t1->set_name(x);
+			t1->declared = 0;
+			//t1->setStatus(completness::under_constraction);
+			constraction_type.insert(t1);
+			t->setInheritedType(t1);
+		}
+	}
+	
 	t->getScope()->parent = this->st->currScope;
 	this->st->currScope->m->put(name, t);
 	this->st->currScope = t->getScope();
+	std::set<Type*>::iterator it = constraction_type.find(t);
+	if (it != constraction_type.end())
+	{
+		constraction_type.erase(it);
+	}
+	this->st->add_declareted_type(t);
+	if (!this->st->checkInhertanceLoop())
+	{
+		this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", name);
+	}
 	return t;
 }
 Type * MyParser::finishTypeDeclaration(Type* t){

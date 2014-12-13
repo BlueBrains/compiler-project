@@ -18,9 +18,9 @@ private:
 public:
 	Function();
 	~Function();
-	Function(string name);
-	//Method(string name, Type* return_type);
-	Function(string name, string access_modifier);
+	Function(char* name);
+	//Method(char* name, Type* return_type);
+	Function(char* name, char* access_modifier);
 	void setScope(Scope* m);
 	void set_final(char* m);
 	bool get_final();

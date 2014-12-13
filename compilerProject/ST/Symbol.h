@@ -11,18 +11,18 @@ class Symbol{
 private:
 
 	//Symbol* prev;
-	string name;
+	char* name;
 
-	//string path;
+	//char* path;
 public:
 	Symbol();	
-	Symbol(string);
+	Symbol(char*);
 	Symbol(Symbol*);
-	//	Symbol(string, string);
+	//	Symbol(char*, char*);
 	//virtual void set_prev(Symbol* next);	
 	//virtual Symbol* get_prev();	
-	virtual string get_name()const;
-	virtual void set_name(string name);
+	virtual char* get_name()const;
+	virtual void set_name(char* name);
 	//virtual void set_path(string path);
 	//virtual string get_path();
 	//virtual void set_full_path(string path);

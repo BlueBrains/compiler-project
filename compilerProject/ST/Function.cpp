@@ -3,7 +3,7 @@
 Function::Function(){
 
 }
-Function::Function(string name) :Symbol(name)
+Function::Function(char* name) :Symbol(name)
 {
 	/**this->parameters.clear();
 	this->scoopBody = NULL;
@@ -15,7 +15,7 @@ Function::Function(string name) :Symbol(name)
 	this->is_final = false;
 	//this->is_override = false;
 }
-Function::Function(string name, string access_modifier) :Symbol(name)
+Function::Function(char* name, char* access_modifier) :Symbol(name)
 {
 
 	this->is_final = false;
