@@ -15,15 +15,16 @@ class MyParser
 {
 public:
 	SymbolTable * st;
+	set<Type*>constraction_type;
 	ErrorRecovery * errRecovery;
 	MyParser(void);
 	~MyParser(void);
-	YaccSimpleType* createYaccSimpleType(Type t);
-	Variable* insertVar(char* n, YaccSimpleType* t, int lineNo, int colNo);
+	//YaccSimpleType* createYaccSimpleType(Type t);
+	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(Variable* v);
-	Function * createTypeFunctionHeader(char* typeName, char* name, YaccSimpleType * t, int lineNo, int colNo);
+	Function * createTypeFunctionHeader(char* typeName, char* name, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
-	Type * createType(char* name, int lineno, int colno);
+	Type * createType(char* name, vector<char*>inherted_list, int lineno, int colno, bool is_final);
 	Type * finishTypeDeclaration(Type* t);
 
 };

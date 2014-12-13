@@ -19,7 +19,7 @@ char* Variable::getType(){
 	return this->type;
 }
 */
-Variable::Variable(string name, Type* type, string accessModifier) :Symbol(name){
+Variable::Variable(char* name, Type* type, char* accessModifier) :Symbol(name){
 	this->type = type;
 	this->isConst = false;
 	this->setAccessModifier(accessModifier);
@@ -27,15 +27,16 @@ Variable::Variable(string name, Type* type, string accessModifier) :Symbol(name)
 Variable::Variable(){
 	this->type = NULL;
 	this->isConst = false;
+	this->setAccessModifier("private");
 	//this->setAccessModifier(accessModifier);
 }
-Variable::Variable(string name, Type* type, bool isConst) : Symbol(name){
+Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->type = type;
 	this->isConst = isConst;
-	this->setAccessModifier("public");
+	this->setAccessModifier("private");
 	
 }
-string Variable::getAccessModifier(){
+char* Variable::getAccessModifier(){
 	if (this != NULL){
 		switch (this->accessModifier){
 		case(AccessModifier::Protected) : {return "protected"; }
@@ -43,9 +44,13 @@ string Variable::getAccessModifier(){
 		default: return "private";
 		};
 	}
+	else
+	{
+		return NULL;
+	}
 }
 
-void Variable::setAccessModifier(string accessModifier){
+void Variable::setAccessModifier(char* accessModifier){
 	if (accessModifier == "public") {
 		this->accessModifier = Public;
 	}

@@ -13,6 +13,7 @@
 	ErrorRecovery* err=new ErrorRecovery();
 	FlexLexer* lexer = new yyFlexLexer();
 	char* i_type;
+	char* acc_mod;
 	vector<char *>inhertance_list;
 	class Parser
 	{
@@ -79,7 +80,7 @@ class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";}
 ;
 class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);}//class X :
 		|CLASS ID OPEN_S CLOSE_S SEMI_COLUMN//class X ():
-		{$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);;}
+		{$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);}
 
 
 		|CLASS ID OPEN_S inherted_list CLOSE_S SEMI_COLUMN	
@@ -103,8 +104,10 @@ class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>
 		           }
 		
 ;
-inherted_list:	inherted_list ID	{inhertance_list.push_back($<r.text>2);}
+inherted_list:	inherted_list COMMA ID	{inhertance_list.push_back($<r.text>3);}
 				|ID {inhertance_list.push_back($<r.text>1);}
+
+
 expr_list:	expr_list COMMA expr	{;}
 			|expr %prec stmt_1	{;}
 ;				
@@ -143,6 +146,7 @@ class_body: END		{cout<<"class_body: END	\n";}//may begin will be deleted
 
 dm_list:	dm_list DEF dm	{cout<<"dm_list:	dm_list DEF dm\n";}
 			|DEF dm	{cout<<"dm_list:	DEF dm\n";}
+			|dm    {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2,"ERROR: DEF not FOUND","");}
 ;
 
 dm: var_declaration	{cout<<"dm:	var_declaration\n";}
@@ -150,10 +154,19 @@ dm: var_declaration	{cout<<"dm:	var_declaration\n";}
 	|class_decl	{cout<<"dm:	class_decl\n";}
 ;
 
-var_declaration: access_modef ID 	{cout<<"var_declaration: access_modef ID\n";}//public x
-				|ID	{cout<<"var_declaration: ID\n";}					//x
-				|access_modef ID ASSIGN expr	{cout<<"var_declaration: access_modef ID ASSIGN expr\n";}//private x = 10
-				|ID ASSIGN expr	{cout<<"var_declaration:	ID ASSIGN expr\n";}//x = 5
+var_declaration: access_modef ID 	{cout<<"var_declaration: access_modef ID\n";
+										$<var>$ = p->insertVar($<r.str>2,null,acc_mod, yylval.r.myLineNo, yylval.r.myColno);
+									}//public x
+				|ID					{cout<<"var_declaration: ID\n";
+											$<var>$ = p->insertVar($<r.str>2,null,"", yylval.r.myLineNo, yylval.r.myColno);
+									}					//x
+				|access_modef ID ASSIGN expr	{cout<<"var_declaration: access_modef ID ASSIGN expr\n";
+														$<var>$ = p->insertVar($<r.str>2,null,acc_mod, yylval.r.myLineNo, yylval.r.myColno);
+														//assigment staement
+													}//private x = 10
+				|ID ASSIGN expr	{cout<<"var_declaration:	ID ASSIGN expr\n";
+									$<var>$ = p->insertVar($<r.str>2,null,"", yylval.r.myLineNo, yylval.r.myColno);
+								}//x = 5
 				|access_modef ID ID {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>3-strlen($<r.strVal>3),"unexpected Id ","");}
 				|ID ID  {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"unexpected id ","");}
 ;
