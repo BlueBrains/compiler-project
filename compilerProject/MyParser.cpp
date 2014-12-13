@@ -30,24 +30,37 @@ Variable* MyParser::addVariableToCurrentScope(Variable* v){
 	}
 	return v;
 }
-Function * MyParser::createTypeFunctionHeader(char* typeName, char* name, YaccSimpleType* t, int lineNo, int colNo){
-	Type * type = (Type *)this->st->rootScope->m->get(typeName);
+Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
+	Type * type = (Type *)this->st->rootScope->m->get(tname);
 	if(!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 		return 0;
 	}
+
+	/*
+	for (int i = 0; i < type->getInheritedTypeparameter.size; i++) {
+		f->setparameters(parameter[i], type);
+	}
+	*/
 	Function * f = (Function * )type->getScope()->m->get(name);
 	if(f){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Function is already exist inside type", name);
 		return 0;
 	}
+
 	f = new Function();
 	f->set_name(name);
-	//f->setReturnType(t->t);
+	f->set_final(access);
 	type->getScope()->m->put(name, f);
 
 	f->getScope()->parent = type->getScope();
 	this->st->currScope = f->getScope();
+
+	for (int i = 0; i < parameter.size;i++) {
+		f->setparameters(parameter[i], type);
+	}
+
+
 	return f;
 }
 
@@ -70,6 +83,15 @@ Type * MyParser::createType(char* name, int lineno, int colno){
 	return t;
 }
 Type * MyParser::finishTypeDeclaration(Type* t){
+	Function * f = (Function *)t->getScope()->m->get(t->get_name);
+	if (!f){
+		f = new Function();
+		f->set_name(t->get_name);
+		//f->setReturnType(t->t);
+		t->getScope()->m->put(t->get_name, f);
+		f->getScope()->parent = t->getScope();
+	}
 	this->st->currScope = this->st->currScope->parent;
 	return t;
 };
+

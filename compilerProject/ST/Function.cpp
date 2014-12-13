@@ -27,7 +27,20 @@ void Function::setScope(Scope* m){
 Scope* Function::getScope(){
 	return this->scope;
 }
-void Function::setparameters(vector<Variable *>parameters)
-{
 
+void  Function::setparameters(char * parameter,Type * type){
+		Variable * v = new Variable(parameter, type);
+		this->parameters.insert(parameters.end() ,v);
+}
+vector<Variable *>  Function::getparameters(){
+	return this->parameters;
+}
+
+void Function::set_final(char* m){
+	if (m == "final")
+		this->is_final = true;
+}
+
+bool Function::get_final(){
+	return this->is_final;
 }

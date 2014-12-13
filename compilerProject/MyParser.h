@@ -21,7 +21,7 @@ public:
 	YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n, YaccSimpleType* t, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(Variable* v);
-	Function * createTypeFunctionHeader(char* typeName, char* name, YaccSimpleType * t, int lineNo, int colNo);
+	Function * createTypeFunctionHeader(char* typeName, char* access, char* name, vector <char*> t, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
 	Type * createType(char* name, int lineno, int colno);
 	Type * finishTypeDeclaration(Type* t);
