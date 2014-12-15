@@ -36,12 +36,16 @@ Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* n
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 		return 0;
 	}
-
-	/*
-	for (int i = 0; i < type->getInheritedTypeparameter.size; i++) {
-		f->setparameters(parameter[i], type);
+	
+	for (int i = 0; i < int(type->getInheritedType().size()); i++)
+	{
+		char* x = type->getInheritedType().at(i)->get_name();
+		Function * f1 = (Function *)this->st->currScope->m->get(x);
+		if (f1 && f1->get_final)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't overrideit ", f1->get_name());
+		}
 	}
-	*/
 	Function * f = (Function * )type->getScope()->m->get(name);
 	if(f){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Function is already exist inside type", name);

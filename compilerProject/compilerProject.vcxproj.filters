@@ -57,6 +57,9 @@
     <ClCompile Include="MyParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="myvector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -96,6 +99,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ErrorRevovery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myvector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
