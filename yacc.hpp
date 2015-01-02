@@ -32,24 +32,24 @@
      IMPORT = 258,
      CLASS = 259,
      ID = 260,
-     SEMI_COLUMN = 261,
+     COLON = 261,
      CLOSE_S = 262,
      COMMA = 263,
      DOT = 264,
-     BEGIN = 265,
-     END = 266,
-     DEF = 267,
-     ASSIGN = 268,
-     STAR = 269,
-     ELSE = 270,
-     IF = 271,
-     ELIF = 272,
-     WHILE = 273,
-     FOR = 274,
-     IN = 275,
-     TRY = 276,
-     FINALLY = 277,
-     EXCEPT = 278,
+     END = 265,
+     DEF = 266,
+     ASSIGN = 267,
+     STAR = 268,
+     ELSE = 269,
+     IF = 270,
+     ELIF = 271,
+     WHILE = 272,
+     FOR = 273,
+     IN = 274,
+     TRY = 275,
+     FINALLY = 276,
+     MULTI = 277,
+     EXPECT = 278,
      WITH = 279,
      AS = 280,
      ASSERT = 281,
@@ -75,54 +75,59 @@
      DIV = 301,
      MOD = 302,
      NOT_EQUAL = 303,
-     LESS_THAN = 304,
-     LESS_OR_EQUAL = 305,
-     MORE_THAN = 306,
-     MORE_OR_EQUAL = 307,
-     TRUE = 308,
-     FALSE = 309,
-     NEW_LINE = 310,
-     PASS = 311,
-     CHAR_VALUE = 312,
-     OPEN_S = 313,
-     STRING_VALUE = 314,
-     INTEGER_VALUE = 315,
-     BREAK = 316,
-     CONTINUE = 317,
-     LONG_VALUE = 318,
-     FLOAT_VALUE = 319,
-     stmt_8 = 320,
-     stmt_7 = 321,
-     stmt_6 = 322,
-     stmt_5 = 323,
-     stmt_4 = 324,
-     stmt_3 = 325,
-     stmt_2 = 326,
-     stmt_1 = 327
+     FINAL = 304,
+     LESS_THAN = 305,
+     LESS_OR_EQUAL = 306,
+     MORE_THAN = 307,
+     MORE_OR_EQUAL = 308,
+     TRUE = 309,
+     FALSE = 310,
+     EXCEPT = 311,
+     SEMICOLON = 312,
+     NEW_LINE = 313,
+     PASS = 314,
+     CHAR_VALUE = 315,
+     OPEN_S = 316,
+     STRING_VALUE = 317,
+     INTEGER_VALUE = 318,
+     BREAK = 319,
+     CONTINUE = 320,
+     LONG_VALUE = 321,
+     FLOAT_VALUE = 322,
+     stmt_1_2 = 323,
+     stmt_9 = 324,
+     stmt_8 = 325,
+     stmt_7 = 326,
+     stmt_6 = 327,
+     stmt_5 = 328,
+     stmt_4 = 329,
+     stmt_3 = 330,
+     stmt_2 = 331,
+     stmt_1 = 332
    };
 #endif
 /* Tokens.  */
 #define IMPORT 258
 #define CLASS 259
 #define ID 260
-#define SEMI_COLUMN 261
+#define COLON 261
 #define CLOSE_S 262
 #define COMMA 263
 #define DOT 264
-#define BEGIN 265
-#define END 266
-#define DEF 267
-#define ASSIGN 268
-#define STAR 269
-#define ELSE 270
-#define IF 271
-#define ELIF 272
-#define WHILE 273
-#define FOR 274
-#define IN 275
-#define TRY 276
-#define FINALLY 277
-#define EXCEPT 278
+#define END 265
+#define DEF 266
+#define ASSIGN 267
+#define STAR 268
+#define ELSE 269
+#define IF 270
+#define ELIF 271
+#define WHILE 272
+#define FOR 273
+#define IN 274
+#define TRY 275
+#define FINALLY 276
+#define MULTI 277
+#define EXPECT 278
 #define WITH 279
 #define AS 280
 #define ASSERT 281
@@ -148,36 +153,41 @@
 #define DIV 301
 #define MOD 302
 #define NOT_EQUAL 303
-#define LESS_THAN 304
-#define LESS_OR_EQUAL 305
-#define MORE_THAN 306
-#define MORE_OR_EQUAL 307
-#define TRUE 308
-#define FALSE 309
-#define NEW_LINE 310
-#define PASS 311
-#define CHAR_VALUE 312
-#define OPEN_S 313
-#define STRING_VALUE 314
-#define INTEGER_VALUE 315
-#define BREAK 316
-#define CONTINUE 317
-#define LONG_VALUE 318
-#define FLOAT_VALUE 319
-#define stmt_8 320
-#define stmt_7 321
-#define stmt_6 322
-#define stmt_5 323
-#define stmt_4 324
-#define stmt_3 325
-#define stmt_2 326
-#define stmt_1 327
+#define FINAL 304
+#define LESS_THAN 305
+#define LESS_OR_EQUAL 306
+#define MORE_THAN 307
+#define MORE_OR_EQUAL 308
+#define TRUE 309
+#define FALSE 310
+#define EXCEPT 311
+#define SEMICOLON 312
+#define NEW_LINE 313
+#define PASS 314
+#define CHAR_VALUE 315
+#define OPEN_S 316
+#define STRING_VALUE 317
+#define INTEGER_VALUE 318
+#define BREAK 319
+#define CONTINUE 320
+#define LONG_VALUE 321
+#define FLOAT_VALUE 322
+#define stmt_1_2 323
+#define stmt_9 324
+#define stmt_8 325
+#define stmt_7 326
+#define stmt_6 327
+#define stmt_5 328
+#define stmt_4 329
+#define stmt_3 330
+#define stmt_2 331
+#define stmt_1 332
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 22 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 42 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -189,7 +199,7 @@ typedef union YYSTYPE {
 	}r;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 193 "yacc.hpp"
+#line 203 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
