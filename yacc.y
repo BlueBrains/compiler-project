@@ -10,6 +10,7 @@
 	#include <fstream>
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
+	#include <set>
 	using namespace std;
 	class ColonStack
 	{
@@ -28,6 +29,9 @@
 	extern string sourceFile="";
 	string dir_path="";
 	
+	char* i_type;
+	char* acc_mod;
+	vector<char *>inhertance_list;
 	class Parser
 	{
 		public:
@@ -74,7 +78,7 @@
 %%
 program: program unit {	Streams::verbose() <<"prgram : program unit\n";
 						Streams::verbose().flush();						
-					  }					  
+					}
 				|unit      {Streams::verbose()<<"program: unit\n";
 								Streams::verbose().flush();						
 							}
@@ -108,12 +112,12 @@ class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.pus
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>1+1));
 									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected Reserved word","");
-							 }
+						 }
 		|FINAL CLASS error	{							
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 									Streams::verbose()<<"Error: Expected class name at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected class name","");
-		}
+		           }
 		|FINAL ID error ID    {
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>3+1));
 									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
@@ -125,6 +129,8 @@ class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.pus
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected Reserved word","");
 							 }
 ;
+inherted_list:	inherted_list COMMA ID	{inhertance_list.push_back($<r.text>3);}
+				|ID {inhertance_list.push_back($<r.text>1);}
 
 expr_list:	expr_list COMMA expr	{Streams::verbose()<<"expr_list: expr_list COMMA expr\n";}
 			|expr %prec stmt_1	{Streams::verbose()<<"expr_list: expr %prec stmt_1\n";}

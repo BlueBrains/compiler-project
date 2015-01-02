@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ST">
+      <UniqueIdentifier>{140fc3ad-468c-495b-b571-9e587d90225c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
@@ -31,6 +34,7 @@
     <ClCompile Include="..\yacc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,6 +45,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Program.cpp">
+=======
+    <ClCompile Include="ST\Function.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\Scope.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\Symbol.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\SymbolTable.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\Type.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\Variable.cpp">
+      <Filter>Source Files\ST</Filter>
+    </ClCompile>
+    <ClCompile Include="ST\object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myvector.cpp">
+>>>>>>> a5e267863b8129c7117a38bd69d2f0980866b4a0
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,7 +82,43 @@
     <ClInclude Include="..\yacc.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\ErrorRevovery.h">
+    <ClInclude Include="..\FlexLexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\Function.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\Scope.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\Symbol.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\SymbolTable.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\Type.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\Variable.h">
+      <Filter>Source Files\ST</Filter>
+    </ClInclude>
+    <ClInclude Include="ST\object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorRevovery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myvector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Error.h">

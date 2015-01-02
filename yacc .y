@@ -10,7 +10,10 @@
 	int lineno=0,colnumber=0;
 	ErrorRecovery* err=new ErrorRecovery();
 	FlexLexer* lexer = new yyFlexLexer();
-	
+	vector<char*> parameters;
+	vector<char*> un_decfunction;
+	vector<char*> _decfunction;
+
 	class Parser
 	{
 		public:
@@ -30,6 +33,10 @@
 		int myLineNo;
 		int myColNo;
 	}r;
+	class YaccSimpleType * yaccSimpleType;
+		class Variable * variable;
+		class Function * function;
+		class Type * type;
 }
 
 %start program
@@ -59,7 +66,9 @@ unit: IMPORT import_list class_decl	{;}
 		|IMPORT ID class_decl	{;}
 		| class_decl				{;}
 ;
-class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";}
+class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";
+									 $<type>$ = p->finishTypeDeclaration($<type>1);
+								}
 ;
 class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";}//class X :
 		|CLASS ID OPEN_S CLOSE_S SEMI_COLUMN//class X ():
@@ -125,7 +134,7 @@ var_declaration: access_modef ID 	{;}//public x
 ;
 method_declaration: method_h block_stmt	{;}
 ;
-method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{;}
+method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{$<type>$ = p->createTypeFunctionHeader($<type>1, $<type>2, parameters, $<r.myLineNo>1,$<r.myColNo>1);}
 			|ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{;}
 			|access_modef ID OPEN_S  CLOSE_S SEMI_COLUMN	{;}
 			|ID OPEN_S CLOSE_S SEMI_COLUMN	{;}
@@ -136,16 +145,57 @@ method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{;}
 			|access_modef ID OPEN_S args_list CLOSE_S %prec stmt_1  {err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>5-strlen($<r.myColNo>5),"Expected : ","");s}
 			;//storage final const polymorephsim	
 
-args_list:	args_list COMMA arg	{;}
-			|ID COMMA arg {;}
-			|args_list COMMA ID {;}
-			|ID COMMA ID {;}
+args_list:	args_list COMMA arg	{ ;}
+			|ID COMMA arg { 
+						if (std::find(parameters.begin(), parameters.end(), $<type>1) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>1,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>1);
+												
+						}
+			|args_list COMMA ID { if (std::find(parameters.begin(), parameters.end(), $<type>3) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>3,$<r.myColNo>3,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>3);}
+			|ID COMMA ID { if (std::find(parameters.begin(), parameters.end(), $<type>1) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>1,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>3);
+						 
+						 if (std::find(parameters.begin(), parameters.end(), $<type>3) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>3,$<r.myColNo>3,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>3);
+						 }
 			|arg	{;}
 			;
 
-arg:	STAR ID		{;}
-		| ID ASSIGN expr	{;}
-		| STAR ID ASSIGN expr	{;}
+arg:	STAR ID		{ if (std::find(parameters.begin(), parameters.end(), $<type>2) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>2,$<r.myColNo>2,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>2);}
+		| ID ASSIGN literal	{ if (std::find(parameters.begin(), parameters.end(), $<type>1) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>1,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>1);}
+		| STAR ID ASSIGN literal	{ if (std::find(parameters.begin(), parameters.end(), $<type>2) != parameters.end())
+							{
+							  err->errQ->enqueue($<r.myLineNo>2,$<r.myColNo>2,"duplicated parameters","");
+							}
+						else 
+						 parameters.push_back($<type>2);}
 		;
 
 block_stmt: BEGIN END	{;}
