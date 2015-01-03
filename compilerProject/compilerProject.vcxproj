@@ -19,11 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-<<<<<<< HEAD
     <PlatformToolset>v110</PlatformToolset>
-=======
-    <PlatformToolset>v120_xp</PlatformToolset>
->>>>>>> a5e267863b8129c7117a38bd69d2f0980866b4a0
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -45,11 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-<<<<<<< HEAD
     <IncludePath>$(WindowsSdkDir)\lib;$(IncludePath)</IncludePath>
-=======
-    <IncludePath>$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
->>>>>>> a5e267863b8129c7117a38bd69d2f0980866b4a0
     <ReferencePath>$(VC_ReferencesPath_x86)</ReferencePath>
     <LibraryWPath>$(WindowsSDK_MetadataPath)</LibraryWPath>
     <SourcePath>$(VC_SourcePath)</SourcePath>
@@ -119,16 +111,11 @@
     <ClCompile Include="ST\Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="..\Error.h" />
     <ClInclude Include="..\ErrorRevovery.h" />
     <ClInclude Include="..\Program.h" />
     <ClInclude Include="..\Streams.h" />
     <ClInclude Include="..\SyntaxError.h" />
-=======
-    <ClInclude Include="..\FlexLexer.h" />
-    <ClInclude Include="..\unistd.h" />
->>>>>>> a5e267863b8129c7117a38bd69d2f0980866b4a0
     <ClInclude Include="..\yacc.hpp" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="MyMap.h" />

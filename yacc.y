@@ -129,8 +129,6 @@ class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.pus
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected Reserved word","");
 							 }
 ;
-inherted_list:	inherted_list COMMA ID	{inhertance_list.push_back($<r.text>3);}
-				|ID {inhertance_list.push_back($<r.text>1);}
 
 expr_list:	expr_list COMMA expr	{Streams::verbose()<<"expr_list: expr_list COMMA expr\n";}
 			|expr %prec stmt_1	{Streams::verbose()<<"expr_list: expr %prec stmt_1\n";}
@@ -222,8 +220,8 @@ method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"metho
 												err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2+1,"Expected '(' ","");
 											   }
 			|access_modef ID OPEN_S args_list error  {
-														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-(yylval.r.strVal)<<endl;
-														err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum-(yylval.r.strVal),"Expected ')' ","");
+														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
+														err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum-strlength(yylval.r.strVal),"Expected ')' ","");
 													 }
 			|access_modef ID OPEN_S ID error  {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>4+1<<endl;
@@ -248,8 +246,8 @@ arg:	STAR ID		{Streams::verbose()<<"arg:	STAR ID \n";}
 block_stmt:  COLON  END {Streams::verbose()<<"COLON  END \n";}			 
 			 |COLON stmt_list END	{Streams::verbose()<<"block_stmt:	stmt_list END \n";}
 			 |error END {
-						Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected ':' ","");			 
+						Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
 						}
 			 //|error stmt_list END	{Streams::verbose()<<"block_stmt:	stmt_list END \n";}
 	;
@@ -294,8 +292,8 @@ while_stmt: while_header stmt	{Streams::verbose()<<"while_stmt: while_header stm
 ;
 while_header: WHILE expr	{Streams::verbose()<<"while_header: WHILE expr \n";}
 			|ID error expr { 
-						Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected reserved word 'while' ","");
+						Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
 					 }		
 ;
 
@@ -306,8 +304,8 @@ for_header: FOR target_list IN expr_list {Streams::verbose()<<"for_header: FOR t
 			|FOR ID COMMA ID IN expr_list {Streams::verbose()<<"for_header:	FOR ID COMMA ID IN expr_list \n";}
 			|FOR ID IN expr_list {Streams::verbose()<<"for_header:	FOR ID IN expr_list \n";}
 			|ID error ID IN expr_list {
-								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected reserved word 'for' ","");
+								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'for' ","");
 								}			
 ;
 
@@ -394,12 +392,12 @@ yield_stmt:		yield_expression	{Streams::verbose()<<"yield_stmt:		yield_expressio
 print_stmt: PRINT expr_list	{Streams::verbose()<<"print_stmt: PRINT expr_list\n";}
 			|PRINT MORE_THAN MORE_THAN expr_list	{Streams::verbose()<<"print_stmt:	PRINT MORE_THAN MORE_THAN expr_list\n";}			
 			|ID error expr_list {
-								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected reserved word 'print' ","");
+								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'print' ","");
 								}
 			|ID MORE_THAN MORE_THAN expr_list	{
-												Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected reserved word 'print' ","");
+												Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'print' ","");
 												}
 ;
 global_stmt :GLOBAL id_list	{Streams::verbose()<<"global_stmt :GLOBAL id_list\n";}
@@ -421,8 +419,8 @@ raise_stmt: RAISE	{Streams::verbose()<<"raise_stmt: RAISE\n";}
 													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3+1,"Expected expression ","");
 												 }
 			|ID error expr COMMA expr {
-													Streams::verbose()<<"Error: Expected reserved word 'raise' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1,"Expected reserved word 'raise' ","");
+													Streams::verbose()<<"Error: Expected reserved word 'raise' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'raise' ","");
 												 }
 ;
 
@@ -479,8 +477,8 @@ parenth_form : 	OPEN_S expr CLOSE_S	{Streams::verbose()<<"parenth_form : 	OPEN_S
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected ')' ","");
 										}
 				|error expr CLOSE_S  {
-													Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-$<r.strVal>1<<endl;
-													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-$<r.strVal>1," Expected '(' ","");
+													Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1)," Expected '(' ","");
 												 }
 				|OPEN_S expr error {
 													Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
