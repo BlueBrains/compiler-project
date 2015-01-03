@@ -3,7 +3,6 @@
 #define __My_Parser_H__
 #include "ST\SymbolTable.h"
 #include"ErrorRevovery.h"
-
 //===================== Data Structures From Help in Yacc ==============
 
 class YaccSimpleType{

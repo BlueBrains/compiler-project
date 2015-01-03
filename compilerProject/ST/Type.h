@@ -22,7 +22,7 @@ protected:
 
 public:
 	static int classesCount;
-	bool declared;/// multi-parse
+	bool declared;/// multi-parse	
 	Type();
 	~Type();
 	void setInheritedType(Type*n);
@@ -59,7 +59,7 @@ private:
 	Type* outer_class;
 	Scope * scope;
 	bool is_final;
-	int _id = -1;
+	int _id;
 	vector<Type*> inhertedList;
 	set<int> children_ids;
 	void setis_final(bool final);

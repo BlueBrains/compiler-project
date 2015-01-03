@@ -4,11 +4,12 @@ template<class T>
 class myvector
 {
 public:
+	myvector();
 	T at(int i);
 	void insert(T new_obj);
-	void clear();
+	void clear(myvector);
 	T pop();
-	bool find();
+	bool find(T);
 
 private:
 	T Obj;

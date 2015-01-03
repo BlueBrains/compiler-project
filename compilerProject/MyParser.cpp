@@ -1,5 +1,6 @@
 #include "MyParser.h"
 #include "ErrorRevovery.h"
+#include "ST\Type.h"
 MyParser::MyParser(void)
 {
 	this->st = new SymbolTable();
@@ -41,7 +42,7 @@ Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* n
 	{
 		char* x = type->getInheritedType().at(i)->get_name();
 		Function * f1 = (Function *)this->st->currScope->m->get(x);
-		if (f1 && f1->get_final)
+		if (f1 && f1->get_final())
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't overrideit ", f1->get_name());
 		}
@@ -60,7 +61,7 @@ Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* n
 	f->getScope()->parent = type->getScope();
 	this->st->currScope = f->getScope();
 
-	for (int i = 0; i < parameter.size;i++) {
+	for (int i = 0; i < (int)parameter.size();i++) {
 		f->setparameters(parameter[i], type);
 	}
 
@@ -130,12 +131,12 @@ Type * MyParser::createType(char* name,vector<char*>inherted_list, int lineno, i
 	return t;
 }
 Type * MyParser::finishTypeDeclaration(Type* t){
-	Function * f = (Function *)t->getScope()->m->get(t->get_name);
+	Function * f = (Function *)t->getScope()->m->get(t->get_name());
 	if (!f){
 		f = new Function();
-		f->set_name(t->get_name);
+		f->set_name(t->get_name());
 		//f->setReturnType(t->t);
-		t->getScope()->m->put(t->get_name, f);
+		t->getScope()->m->put(t->get_name(), f);
 		f->getScope()->parent = t->getScope();
 	}
 	this->st->currScope = this->st->currScope->parent;
