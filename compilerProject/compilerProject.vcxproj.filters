@@ -22,10 +22,6 @@
     <None Include="..\yacc.y" />
     <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
-    <None Include="..\yacct.y" />
-    <None Include="..\yaccc1.y" />
-    <None Include="..\yaccc2.y" />
-    <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
@@ -34,18 +30,6 @@
     <ClCompile Include="..\yacc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\Error.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Streams.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SyntaxError.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Program.cpp">
-=======
     <ClCompile Include="ST\Function.cpp">
       <Filter>Source Files\ST</Filter>
     </ClCompile>
@@ -71,10 +55,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="myvector.cpp">
->>>>>>> a5e267863b8129c7117a38bd69d2f0980866b4a0
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,19 +98,7 @@
     <ClInclude Include="ErrorRevovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="myvector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Error.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Streams.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SyntaxError.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Program.h">
+    <ClInclude Include="ST\MyVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

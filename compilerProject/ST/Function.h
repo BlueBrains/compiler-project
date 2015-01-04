@@ -26,6 +26,7 @@ public:
 	bool get_final();
 	Scope* getScope();
 	void setparameters(char * parameters, Type * type);
+	bool comparePar(vector<char *> parameters);
 	vector<Variable *> getparameters();
 };
 #endif

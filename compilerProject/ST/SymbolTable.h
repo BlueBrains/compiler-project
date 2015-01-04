@@ -7,27 +7,24 @@
 #include"Type.h"
 #include"Variable.h"
 #include"Function.h"
-#include <string>
 #include <iostream>
-#include <vector>
-#include <string>
-#include<set>
-#include<map>
 using namespace std;
 
 
-typedef map<char*, Type*> TypesMap;
 class SymbolTable
 {
 public:
-    TypesMap declareted_type;
+    vector<Type*> declareted_type;
 	Scope * currScope;
 	Scope * rootScope;
 	Variable * insertVariableInCurrentScope(char* name, char* acc_mod);
 	Variable * getVariableFromCurrentScope(char* name);
 	Function * insertFunctionInCurrentScope(char* name);
 	Type * insertTypeInCurrentScope(char* name);
+	Type * getTypeFromCurrentScope(char* name);
+	Type * getTypeFromTypeScope(char* name,Type* type);
 	void add_declareted_type(Type* type);
+	Scope * getrootscope();
 	bool checkInhertanceLoop();
 	SymbolTable(void);
 	~SymbolTable(void);
