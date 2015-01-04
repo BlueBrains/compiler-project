@@ -1,5 +1,11 @@
+#sdfdsfs 
 class test:
-def public x ;
+def public x;
+/*
+dfgdfg
+dfg
+*/
 def public test ( x ):
 end
 end
+#dfdfg

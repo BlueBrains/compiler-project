@@ -76,34 +76,35 @@
      MOD = 302,
      NOT_EQUAL = 303,
      FINAL = 304,
-     LESS_THAN = 305,
-     LESS_OR_EQUAL = 306,
-     MORE_THAN = 307,
-     MORE_OR_EQUAL = 308,
-     TRUE = 309,
-     FALSE = 310,
-     EXCEPT = 311,
-     SEMICOLON = 312,
-     NEW_LINE = 313,
-     PASS = 314,
-     CHAR_VALUE = 315,
-     OPEN_S = 316,
-     STRING_VALUE = 317,
-     INTEGER_VALUE = 318,
-     BREAK = 319,
-     CONTINUE = 320,
-     LONG_VALUE = 321,
-     FLOAT_VALUE = 322,
-     stmt_1_2 = 323,
-     stmt_9 = 324,
-     stmt_8 = 325,
-     stmt_7 = 326,
-     stmt_6 = 327,
-     stmt_5 = 328,
-     stmt_4 = 329,
-     stmt_3 = 330,
-     stmt_2 = 331,
-     stmt_1 = 332
+     STATIC = 305,
+     LESS_THAN = 306,
+     LESS_OR_EQUAL = 307,
+     MORE_THAN = 308,
+     MORE_OR_EQUAL = 309,
+     TRUE = 310,
+     FALSE = 311,
+     EXCEPT = 312,
+     SEMICOLON = 313,
+     NEW_LINE = 314,
+     PASS = 315,
+     CHAR_VALUE = 316,
+     OPEN_S = 317,
+     STRING_VALUE = 318,
+     INTEGER_VALUE = 319,
+     BREAK = 320,
+     CONTINUE = 321,
+     LONG_VALUE = 322,
+     FLOAT_VALUE = 323,
+     stmt_1_2 = 324,
+     stmt_9 = 325,
+     stmt_8 = 326,
+     stmt_7 = 327,
+     stmt_6 = 328,
+     stmt_5 = 329,
+     stmt_4 = 330,
+     stmt_3 = 331,
+     stmt_2 = 332,
+     stmt_1 = 333
    };
 #endif
 /* Tokens.  */
@@ -154,34 +155,35 @@
 #define MOD 302
 #define NOT_EQUAL 303
 #define FINAL 304
-#define LESS_THAN 305
-#define LESS_OR_EQUAL 306
-#define MORE_THAN 307
-#define MORE_OR_EQUAL 308
-#define TRUE 309
-#define FALSE 310
-#define EXCEPT 311
-#define SEMICOLON 312
-#define NEW_LINE 313
-#define PASS 314
-#define CHAR_VALUE 315
-#define OPEN_S 316
-#define STRING_VALUE 317
-#define INTEGER_VALUE 318
-#define BREAK 319
-#define CONTINUE 320
-#define LONG_VALUE 321
-#define FLOAT_VALUE 322
-#define stmt_1_2 323
-#define stmt_9 324
-#define stmt_8 325
-#define stmt_7 326
-#define stmt_6 327
-#define stmt_5 328
-#define stmt_4 329
-#define stmt_3 330
-#define stmt_2 331
-#define stmt_1 332
+#define STATIC 305
+#define LESS_THAN 306
+#define LESS_OR_EQUAL 307
+#define MORE_THAN 308
+#define MORE_OR_EQUAL 309
+#define TRUE 310
+#define FALSE 311
+#define EXCEPT 312
+#define SEMICOLON 313
+#define NEW_LINE 314
+#define PASS 315
+#define CHAR_VALUE 316
+#define OPEN_S 317
+#define STRING_VALUE 318
+#define INTEGER_VALUE 319
+#define BREAK 320
+#define CONTINUE 321
+#define LONG_VALUE 322
+#define FLOAT_VALUE 323
+#define stmt_1_2 324
+#define stmt_9 325
+#define stmt_8 326
+#define stmt_7 327
+#define stmt_6 328
+#define stmt_5 329
+#define stmt_4 330
+#define stmt_3 331
+#define stmt_2 332
+#define stmt_1 333
 
 
 
@@ -199,7 +201,7 @@ typedef union YYSTYPE {
 	}r;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 203 "yacc.hpp"
+#line 205 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
