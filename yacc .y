@@ -10,7 +10,7 @@
 	int lineno=0,colnumber=0;
 	ErrorRecovery* err=new ErrorRecovery();
 	FlexLexer* lexer = new yyFlexLexer();
-	
+	char* acc_mod="";
 	class Parser
 	{
 		public:
@@ -65,7 +65,7 @@ unit: IMPORT import_list class_decl	{;}
 ;
 class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";}
 ;
-class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";}//class X :
+class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>$ = p->createType($<r.str>2, yylval.r.myLineNo, yylval.r.myColno);}//class X :
 		|CLASS ID OPEN_S CLOSE_S SEMI_COLUMN//class X ():
 		{;}
 		|CLASS ID OPEN_S expr_list CLOSE_S SEMI_COLUMN	
@@ -287,9 +287,9 @@ raise_stmt: RAISE	{;}
 			|RAISE expr COMMA %prec stmt_1	{err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>2,"expresion expected ","");}
 			|RAISE expr expr %prec stmt_1	{err->errQ->enqueue($<r.myLineNo>1,$<r.myColNo>2-strlen($<r.myColNo>2),"comma expected ","");}
 ;
-access_modef: 	PRIVATE 	{;}
-				|PUBLIC	{;}
-				|PROTECTED	{;}
+access_modef: 	PRIVATE 	{acc_mod="private";}
+				|PUBLIC	{acc_mod="public";}
+				|PROTECTED	{acc_mod="protected";}
 ;
 target: 	OPEN_S target_list CLOSE_S 	{;}//(
             |OPEN_D  target_list CLOSE_D 	{;}//[

@@ -30,11 +30,21 @@ MyMap::MyMap(void)
 		this->arr[i] = 0;
 	}
 }
+char* MapElem::gettype(){
+	return this->type;
+}
 
 MyMap::~MyMap(void)
 {
 }
+MapElem* MyMap::getbyId(int i){
 
+	MapElem * temp = this->arr[i];
+	if (temp == 0)
+		return 0;
+	else
+		return temp;
+}
 int MyMap::hash(char* name){
 	unsigned int i;
 	int retVal = 0;
@@ -48,16 +58,24 @@ int MyMap::hash(char* name){
 	return (retVal%mapLength);	
 }
 
-void MyMap::put(char* name, void* element){
+void MyMap::put(char* name, void* element, char* type){
 	int index = this->hash(name);
 	MapElem * newMapElem = new MapElem();
 	newMapElem->setName(name);
 	newMapElem->setElem(element);
+	newMapElem->type = type;
 	newMapElem->setNext(0);
 	newMapElem->setNext(this->arr[index]);
 	this->arr[index] = newMapElem;
 }
 
+void MyMap::remove(char* name)
+{
+	int index = this->hash(name);
+	MapElem * temp = this->arr[index];
+	this->arr[index] = this->arr[index]->getNext();
+	temp->setNext(0);
+}
 void* MyMap::get(char* name){
 	int index = this->hash(name);
 	//char* x = strcat(x, name);
@@ -69,4 +87,14 @@ void* MyMap::get(char* name){
 		return 0;
 	else
 		return temp->getElem();
+}
+
+void MyMap::clear()
+{
+
+	int size = sizeof(arr) / sizeof(int);
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = NULL;
+	}
 }

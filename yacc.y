@@ -3,8 +3,7 @@
 	#include <iostream>
 	#include <FlexLexer.h>
 	#include <stack>
-	#include "ErrorRevovery.h"
-	#include <set>
+	#include "c:\users\amer-hy\source\repos\compiler-project - Copy - Copy\compilerproject\myparser.h"
 	using namespace std;
 	int yylex(void);
 	int yyparse();
@@ -14,7 +13,11 @@
 	FlexLexer* lexer = new yyFlexLexer();
 	char* i_type;
 	char* acc_mod;
+	Type* t;
+	Variable* v;
 	vector<char *>inhertance_list;
+	vector<char *>ID_list;
+	char buffer[15];
 	class Parser
 	{
 		public:
@@ -23,6 +26,7 @@
 			return yyparse();
 		}
 	};
+	MyParser * p = new MyParser();
 %}		
 
 
@@ -35,6 +39,10 @@
 		int lineNum;
 		int colNum;
 	}r;
+	class YaccSimpleType * yaccSimpleType;
+		class Variable * var;
+		class Function * function;
+		class Type * type;
 }
 
 
@@ -60,9 +68,12 @@
 
 
 %%
-program: units	{                    cout <<"prgram : Units\n";
+program: units DOT	{                    cout <<"prgram : Units\n";
+					p->check_inhertance_list();
                     if(!err->errQ->isEmpty())						   
 				    err->printErrQueue();
+					if(!p->errRecovery->errQ->isEmpty())
+					p->errRecovery->printErrQueue();
 					//amer
 					}
 ;
@@ -73,20 +84,32 @@ units: units unit	{cout<<"units: unit\n";}
 unit:	IMPORT import_list class_decl	{cout<<"unit: IMPORT import_list class_decl\n";}
 		|IMPORT ID class_decl	{cout<<"unit: IMPORT ID class_decl\n";}
 		|IMPORT ID DOT ID class_decl	{cout<<"unit: IMPORT ID DOT ID class_decl\n";}
-		| class_decl				{cout<<"unit: class_decl\n";}
+		| class_decl				{
+		cout<<"unit: class_decl\n";
+		}
 ;
 
-class_decl: class_h class_body	{cout <<"class_decl: class_h class_body\n";}
+class_decl: class_h class_body	{
+cout <<"class_decl: class_h class_body\n";
+}
 ;
-class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);}//class X :
+class_h: CLASS ID SEMI_COLUMN	{
+									cout << "class_h: CLASS ID SEMI_COLUMN\n"; 
+									$<type>$=p->createType($<r.strVal>2,inhertance_list, yylval.r.lineNum, yylval.r.colNum,false);
+									t=$<type>$;
+									cout<<"done successfull"<<endl;
+								}//class X :
 		|CLASS ID OPEN_S CLOSE_S SEMI_COLUMN//class X ():
-		{$<type>$ = p->createType($<r.str>2,null, yylval.r.myLineNo, yylval.r.myColno);}
+				{			$<type>$ = p->createType($<r.strVal>2,inhertance_list, yylval.r.lineNum, yylval.r.colNum,false);
+							t=$<type>$;
+				}
 
 
 		|CLASS ID OPEN_S inherted_list CLOSE_S SEMI_COLUMN	
 		//class X (A,B,T): OR class X(A):
 		{cout << "class_h:CLASS ID OPEN_S expr_list CLOSE_S SEMI_COLUMN\n";
-			$<type>$ = p->createType($<r.str>2,inhertance_list, yylval.r.myLineNo, yylval.r.myColno);
+			$<type>$ = p->createType($<r.strVal>2,inhertance_list, $<r.lineNum>2, $<r.colNum>2,false);
+			t=$<type>$;
 			inhertance_list.clear();
 		}
 		|CLASS SEMI_COLUMN	{
@@ -104,8 +127,8 @@ class_h: CLASS ID SEMI_COLUMN	{cout << "class_h: CLASS ID SEMI_COLUMN\n";$<type>
 		           }
 		
 ;
-inherted_list:	inherted_list COMMA ID	{inhertance_list.push_back($<r.text>3);}
-				|ID {inhertance_list.push_back($<r.text>1);}
+inherted_list:	inherted_list COMMA ID	{inhertance_list.push_back($<r.strVal>3);}
+				|ID {inhertance_list.push_back($<r.strVal>1);}
 
 
 expr_list:	expr_list COMMA expr	{;}
@@ -120,7 +143,7 @@ import_list:	import_list COMMA import	{cout<<"import_list:	import_list COMMA imp
 				|ID DOT ID COMMA ID DOT ID {cout<<"import_list:	ID DOT ID COMMA ID DOT ID\n";}
 				|ID DOT ID COMMA ID	%prec stmt_1{cout<<"import_list:	ID DOT ID COMMA ID\n";}
 				|ID COMMA import	{cout<<"import_list:	ID COMMA import\n";}
-				|ID COMMA ID DOT ID	{cout<<"import_list:	ID COMMA ID DOT ID"\n;}
+				|ID COMMA ID DOT ID	{cout<<"import_list:	ID COMMA ID DOT ID\n";}
 				|ID COMMA ID %prec stmt_4	{cout<<"import_list:	ID COMMA ID\n";}
 			//A.B.C , X.Y.T, S.D.A
 			|import	{cout<<"import_list:	import\n";}
@@ -140,13 +163,21 @@ import: import DOT ID	{cout<<"import DOT ID\n";}//A.B
 		//A->import . B -> import . C->import
 ;
 
-class_body: END		{cout<<"class_body: END	\n";}//may begin will be deleted
-			|dm_list END	{cout<<"class_body: dm_list END\n";}
+class_body: END		{cout<<"class_body: END	\n"; $<type>$=p->finishTypeDeclaration(t);}//may begin will be deleted
+			|dm_list END	{cout<<"class_body: dm_list END\n"; $<type>$=p->finishTypeDeclaration(t);}
 ;
 
-dm_list:	dm_list DEF dm	{cout<<"dm_list:	dm_list DEF dm\n";}
-			|DEF dm	{cout<<"dm_list:	DEF dm\n";}
-			|dm    {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2,"ERROR: DEF not FOUND","");}
+dm_list:	dm_list DEF dm	{cout<<"dm_list:	dm_list DEF dm\n";
+								acc_mod="";}
+			|DEF dm	{cout<<"dm_list:	DEF dm\n";
+				acc_mod="";}
+			|dm    {if(v!=NULL)
+					{
+						p->remove_vatiable(v);
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1,"ERROR: DEF not FOUND For Variable",v->get_name());
+						v=NULL;
+					}
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1,"ERROR: DEF not FOUND","");}
 ;
 
 dm: var_declaration	{cout<<"dm:	var_declaration\n";}
@@ -155,17 +186,18 @@ dm: var_declaration	{cout<<"dm:	var_declaration\n";}
 ;
 
 var_declaration: access_modef ID 	{cout<<"var_declaration: access_modef ID\n";
-										$<var>$ = p->insertVar($<r.str>2,null,acc_mod, yylval.r.myLineNo, yylval.r.myColno);
+										$<var>$ = p->insertVar($<r.strVal>2,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+										v=$<var>$;
 									}//public x
 				|ID					{cout<<"var_declaration: ID\n";
-											$<var>$ = p->insertVar($<r.str>2,null,"", yylval.r.myLineNo, yylval.r.myColno);
+											$<var>$ = p->insertVar($<r.strVal>2,"", yylval.r.lineNum, yylval.r.colNum);
 									}					//x
 				|access_modef ID ASSIGN expr	{cout<<"var_declaration: access_modef ID ASSIGN expr\n";
-														$<var>$ = p->insertVar($<r.str>2,null,acc_mod, yylval.r.myLineNo, yylval.r.myColno);
+													//	$<var>$ = p->insertVar($<r.strVal>2,null,acc_mod, yylval.r.lineNum, yylval.r.colNum);
 														//assigment staement
 													}//private x = 10
 				|ID ASSIGN expr	{cout<<"var_declaration:	ID ASSIGN expr\n";
-									$<var>$ = p->insertVar($<r.str>2,null,"", yylval.r.myLineNo, yylval.r.myColno);
+									//$<var>$ = p->insertVar($<r.strVal>2,null,"", yylval.r.lineNum, yylval.r.colNum);
 								}//x = 5
 				|access_modef ID ID {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>3-strlen($<r.strVal>3),"unexpected Id ","");}
 				|ID ID  {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"unexpected id ","");}
@@ -174,18 +206,15 @@ var_declaration: access_modef ID 	{cout<<"var_declaration: access_modef ID\n";
 method_declaration: method_h block_stmt	{cout<<"method_declaration: method_h block_stmt\n";}
 ;
 
-method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{cout<<"method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN/n";}
-			|access_modef ID OPEN_S ID CLOSE_S SEMI_COLUMN	{cout<<"method_h:	access_modef ID OPEN_S ID CLOSE_S SEMI_COLUMN/n";}
-			|ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{cout<<"method_h:	ID OPEN_S args_list CLOSE_S SEMI_COLUMN/n";}
-			|ID OPEN_S ID CLOSE_S SEMI_COLUMN		{cout<<"method_h:	ID OPEN_S ID CLOSE_S SEMI_COLUMN/n";}
-			|access_modef ID OPEN_S  CLOSE_S SEMI_COLUMN	{cout<<"method_h:	access_modef ID OPEN_S  CLOSE_S SEMI_COLUMN/n";}
-			|ID OPEN_S CLOSE_S SEMI_COLUMN	{cout<<"method_h:	ID OPEN_S CLOSE_S SEMI_COLUMN/n";}
-			|access_modef OPEN_S args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"Expected ID ","");}
-			|OPEN_S args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlen($<r.strVal>1),"Expected ID ","");}
-			|access_modef ID args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue($<r.lineNum>3,$<r.colNum>3-strlen($<r.strVal>3),"Expected ( ","");}
-			|access_modef ID OPEN_S args_list SEMI_COLUMN  {err->errQ->enqueue($<r.lineNum>1,$<r.colNum>5-strlen($<r.strVal>5),"Expected ( ","");}
-			|access_modef ID OPEN_S args_list CLOSE_S %prec stmt_1  {err->errQ->enqueue($<r.lineNum>1,$<r.colNum>5-strlen($<r.strVal>5),"Expected : ","");}
-
+method_h: 	access_modef ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{testfunction = p->createTypeFunctionHeader(testtype->get_name(), $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);}
+			|ID OPEN_S args_list CLOSE_S SEMI_COLUMN	{;}
+			|access_modef ID OPEN_S  CLOSE_S SEMI_COLUMN	{;}
+			|ID OPEN_S CLOSE_S SEMI_COLUMN	{;}
+			|access_modef OPEN_S args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue(yylval.r.lineNum, yylval.r.colNum,"Expected ID ","");}
+			|OPEN_S args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue(yylval.r.lineNum, yylval.r.colNum,"Expected ID ","");}
+			|access_modef ID args_list CLOSE_S SEMI_COLUMN {err->errQ->enqueue(yylval.r.lineNum, yylval.r.colNum,"Expected ( ","");}
+			|access_modef ID OPEN_S args_list SEMI_COLUMN  {err->errQ->enqueue(yylval.r.lineNum, yylval.r.colNum,"Expected ( ","");}
+			|access_modef ID OPEN_S args_list CLOSE_S %prec stmt_1  {err->errQ->enqueue(yylval.r.lineNum, yylval.r.colNum,"Expected : ","");}
 			;//storage final const polymorephsim	
 
 args_list:	args_list COMMA arg	{cout<<"args_list:	args_list COMMA arg/n";}
@@ -197,7 +226,7 @@ args_list:	args_list COMMA arg	{cout<<"args_list:	args_list COMMA arg/n";}
 
 arg:	STAR ID		{cout<<"arg:	STAR ID/n";}
 		| ID ASSIGN expr	{cout<<"arg:	ID ASSIGN expr/n";}
-	| STAR ID ASSIGN exp	{cout<<"arg:	STAR ID ASSIGN exp/n";}
+	| STAR ID ASSIGN expr	{cout<<"arg:	STAR ID ASSIGN exp/n";}
 ;
 
 block_stmt: _BEGIN END	{cout<<"block_stmt: _BEGIN END/n";}
@@ -336,9 +365,9 @@ raise_stmt: RAISE	{cout<<"raise_stmt: RAISE/n";}
 			|RAISE expr COMMA %prec stmt_1	{err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3,"expresion expected ","");}
 ;
 
-access_modef: 	PRIVATE 	{cout<<"access_modef: 	PRIVATE/n";}
-				|PUBLIC		{cout<<"access_modef:	PUBLIC/n";}
-				|PROTECTED	{cout<<"access_modef:	PROTECTED/n";}
+access_modef: 	PRIVATE 	{acc_mod="private";}
+				|PUBLIC	{acc_mod="public";}
+				|PROTECTED	{acc_mod="protected";}
 ;
 
 target: 	OPEN_S target_list CLOSE_S 	{cout<<"target: 	OPEN_S target_list CLOSE_S /n";}//(
@@ -395,7 +424,7 @@ string_conversion:	RE_COT expr_list RE_COT	{cout<<"string_conversion:	RE_COT exp
 yield_atom:		OPEN_S yield_expression CLOSE_S		{cout<<"yield_atom:		OPEN_S yield_expression CLOSE_S\n";}
 ;
 
-yield_expression:	YIELD	{cotu<<"yield_expression:	YIELD"\n;}
+yield_expression:	YIELD	{cout<<"yield_expression:	YIELD\n";}
 					|YIELD expr_list	{cout<<"yield_expression:	YIELD expr_list\n";}
 ;
 
@@ -425,7 +454,7 @@ long_id: ID OPEN_S	%prec stmt_8				{cout<<"long_id:	\n";}
 		 |ID OPEN_S CLOSE_S				{cout<<"long_id:	ID OPEN_S CLOSE_S\n";}
 		 |ID OPEN_S expr_list CLOSE_S	{cout<<"long_id:	ID OPEN_S expr_list CLOSE_S\n";}
 		 |ID OPEN_S expr	  CLOSE_S	{cout<<"long_id:	ID OPEN_S expr	  CLOSE_S\n";}
-		 |long_id DOT ID				{cout<<"long_id:	long_id DOT ID\n";}
+		 |long_id DOT ID				{cout<<"long_id:	long_id DOT ID\n";strcat(buffer, ".");strcat(buffer,$<r.strVal>2);ID_list.push_back(buffer);}
 		 |long_id DOT ID OPEN_S CLOSE_S				{cout<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 |long_id DOT ID OPEN_S expr_list CLOSE_S	{cout<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}
 		 |long_id DOT ID OPEN_S expr	  CLOSE_S	{cout<<"long_id:	long_id DOT ID OPEN_S expr CLOSE_S\n";}
@@ -443,7 +472,7 @@ op: PLUS				{cout<<"op :PLUS\n";}
 %%
 void yyerror(char *s) 
 {
-	;
+	cout<< s;
 }
 
 int yylex()
@@ -451,9 +480,11 @@ int yylex()
 	return lexer->yylex();
 
 }
-void main(void)
+int main(int argc, char* argv[])
 {
 	Parser* p = new Parser();
 	p->parse();
+	system("pause");
+	return 0;
 	
 }

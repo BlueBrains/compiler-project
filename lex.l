@@ -38,8 +38,6 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
-"import"				{BEGIN import;}
-<import>{Identifier}    {yaccin(yytext); BEGIN INITIAL; return IMPORT;}
 
 
 "import"	{
@@ -67,7 +65,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				colNum = 1;
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
-				return NEW_LINE;
+				//return NEW_LINE;
 			}
 "("			{
 				colNum += strlen(yytext);
@@ -484,5 +482,4 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							yylval.r.strVal = x;
 							return ID;												
 						}
-.				{cout<<"nothing";}
 %%

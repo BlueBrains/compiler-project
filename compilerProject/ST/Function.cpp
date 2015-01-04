@@ -27,7 +27,31 @@ void Function::setScope(Scope* m){
 Scope* Function::getScope(){
 	return this->scope;
 }
-void Function::setparameters(vector<Variable *>parameters)
-{
 
+void  Function::setparameters(char * parameter, Type * type){
+	Variable * v = new Variable(parameter, type);
+	this->parameters.insert(parameters.end(), v);
+}
+vector<Variable *>  Function::getparameters(){
+	return this->parameters;
+}
+
+void Function::set_final(char* m){
+	if (m == "final")
+		this->is_final = true;
+}
+
+bool Function::get_final(){
+	return this->is_final;
+}
+
+bool Function::comparePar(vector<char *> outparameters)
+{
+	for (int i = 0; i<outparameters.size(); i++){
+		if (this->parameters[i]->get_name() != outparameters[i])
+			return false;
+	}
+	if (outparameters.size() != this->parameters.size())
+		return false;
+	return true;
 }

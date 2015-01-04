@@ -22,7 +22,11 @@ public:
 	//Method(char* name, Type* return_type);
 	Function(char* name, char* access_modifier);
 	void setScope(Scope* m);
+	void set_final(char* m);
+	bool get_final();
 	Scope* getScope();
-	void setparameters(vector<Variable *>parameters);
+	void setparameters(char * parameters, Type * type);
+	bool comparePar(vector<char *> parameters);
+	vector<Variable *> getparameters();
 };
 #endif

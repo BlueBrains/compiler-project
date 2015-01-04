@@ -98,5 +98,8 @@
     <ClInclude Include="ErrorRevovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ST\MyVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

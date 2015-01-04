@@ -3,9 +3,7 @@
 #define __TYPE__
 #include"Symbol.h"
 #include"Scope.h"
-#include<string>
-#include<set>
-#include<vector>
+
 enum AccessModifier{
 	Private = 0,
 	Public,
@@ -23,29 +21,44 @@ protected:
 public:
 	static int classesCount;
 	bool declared;/// multi-parse
-	Type();
+	Type(void);
 	~Type();
-	void setInheritedType(Type*n);
+	bool setInheritedType(Type*n);
 	vector<Type*> getInheritedType();
 	void setouter_class(Type* e);
 	Type* getouter_class();
 	void setScope(Scope * m);
 	Scope * getScope();
-	void addChild(set<int> &s){
-		
+	
+	bool addChild(vector<int> s){
+		/*
 		for (auto i : s){
-			children_ids.insert(i);
+			children_ids.push_back(i);
+		}*/
+		vector<int>::iterator it = std::find(s.begin(), s.end(), getId());
+		if (it != s.end())
+		{
+			return false;
 		}
+		for (int i = 0; i < int(s.size()); i++)
+		{
+				this->children_ids.push_back(s.at(i));
+		}
+		bool k = true;
 		for (int i = 0; i < int(inhertedList.size()); i++)
 		{
-				inhertedList.at(i)->addChild(children_ids);
+				k=inhertedList.at(i)->addChild(children_ids);
+				if (!k)
+				{
+					return false;
+				}
 		}
-		
+		return true;
 	}
 
 
 	Type(char* name, int typeSize = 4);
-	Type(Type*);
+	//Type(Type*);
 	virtual int getTypeSize();
 	void setImplemented();
 	void setIs_final(bool final);
@@ -53,15 +66,16 @@ public:
 	completness getStatus();
 	void setStatus(completness);
 	int getId();
-
+	bool operator==(Type xx);
 private:
 	completness status;
 	Type* outer_class;
+	//MyVector<char*>ll;
 	Scope * scope;
 	bool is_final;
 	int _id = -1;
-	vector<Type*> inhertedList;
-	set<int> children_ids;
+	vector<int> children_ids;
+vector<Type*> inhertedList;
 	void setis_final(bool final);
 };
 #endif
