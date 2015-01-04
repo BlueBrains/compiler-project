@@ -1,0 +1,15 @@
+class_h: CLASS ID 
+access_modef:	PUBLIC
+var_declaration: access_modef ID
+dm:	var_declaration SEMICOLON
+dm_list: DEF dm
+access_modef:	PUBLIC
+method_h: access_modef ID OPEN_S ID CLOSE_S 
+COLON  END 
+method_declaration: method_h block_stmt
+dm:	var_declaration
+dm_list: dm_list DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+program: unit

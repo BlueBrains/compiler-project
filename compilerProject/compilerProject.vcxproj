@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath)$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(WindowsSdkDir)\lib;$(IncludePath)</IncludePath>
     <ReferencePath>$(VC_ReferencesPath_x86)</ReferencePath>
     <LibraryWPath>$(WindowsSDK_MetadataPath)</LibraryWPath>
     <SourcePath>$(VC_SourcePath);C:\Users\AMER-HY\Source\Repos\compiler-project\compilerProject</SourcePath>
@@ -89,12 +89,21 @@
     <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
+    <None Include="..\yaccc1.y" />
+    <None Include="..\yaccc2.y" />
+    <None Include="..\yacct.y" />
+    <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Error.cpp" />
     <ClCompile Include="..\lex.yy.cc" />
+    <ClCompile Include="..\Program.cpp" />
+    <ClCompile Include="..\Streams.cpp" />
+    <ClCompile Include="..\SyntaxError.cpp" />
     <ClCompile Include="..\yacc.cpp" />
     <ClCompile Include="MyMap.cpp" />
     <ClCompile Include="MyParser.cpp" />
+    <ClCompile Include="myvector.cpp" />
     <ClCompile Include="ST\Function.cpp" />
     <ClCompile Include="ST\object.cpp" />
     <ClCompile Include="ST\Scope.cpp" />
@@ -104,12 +113,16 @@
     <ClCompile Include="ST\Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\FlexLexer.h" />
-    <ClInclude Include="..\unistd.h" />
+    <ClInclude Include="..\Error.h" />
+    <ClInclude Include="..\ErrorRevovery.h" />
+    <ClInclude Include="..\Program.h" />
+    <ClInclude Include="..\Streams.h" />
+    <ClInclude Include="..\SyntaxError.h" />
     <ClInclude Include="..\yacc.hpp" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyParser.h" />
+    <ClInclude Include="myvector.h" />
     <ClInclude Include="ST\Function.h" />
     <ClInclude Include="ST\MyVector.h" />
     <ClInclude Include="ST\object.h" />

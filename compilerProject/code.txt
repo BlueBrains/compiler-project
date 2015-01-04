@@ -1,0 +1,5 @@
+class test:
+def public x ;
+def public test ( x ):
+end
+end
