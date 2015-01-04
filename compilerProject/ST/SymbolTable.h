@@ -18,7 +18,7 @@ public:
 	Scope * currScope;
 	Scope * rootScope;
 	Variable * insertVariableInCurrentScope(char* name, char* acc_mod);
-	Variable * getVariableFromCurrentScope(char* name);
+	Variable * getVariableFromCurrentScope(char* name,Type* t);
 	Function * insertFunctionInCurrentScope(char* name);
 	Type * insertTypeInCurrentScope(char* name);
 	Type * getTypeFromCurrentScope(char* name);

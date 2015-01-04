@@ -51,6 +51,7 @@ void MyParser::remove_vatiable(Variable* v)
 }
 
 Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo){
+	Variable* v = (Variable*)this->st->currScope->m->get(n);
 	if(n){
 		Variable* v = (Variable*)this->st->currScope->m->get(n);
 		if (v)
@@ -65,8 +66,9 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo
 }
 
 
-Variable* MyParser::checkVariable(char* name, int lineNo, int colNo){
-	Variable * v = this->st->getVariableFromCurrentScope(name);
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
+
+	Variable * v = this->st->getVariableFromCurrentScope(name,t);
 	if (!v)
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
@@ -74,8 +76,8 @@ Variable* MyParser::checkVariable(char* name, int lineNo, int colNo){
 	return v;
 }
 
-Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
-	Type * type = (Type *)this->st->rootScope->m->get(tname);
+Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
+	Type * type =tname;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 		return 0;
@@ -83,14 +85,14 @@ Function * MyParser::createTypeFunctionHeader(char* tname, char* access, char* n
 
 	for (int i = 0; i < int(type->getInheritedType().size()); i++)
 	{
-		char* x = type->getInheritedType().at(i)->get_name();
-		Function * f1 = (Function *)this->st->currScope->m->get(x);
-		if (f1 && f1->get_final())
+		Type * x = type->getInheritedType().at(i);
+		Function * f1 = (Function *)x->getScope()->m->get(name);
+		if (f1 && f1->get_final() )
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't override it ", f1->get_name());
 			return 0;
 		}
-		else if (f1 && !f1->comparePar(parameter))
+		else if (f1 && !f1->comparePar(parameter) && (f1->get_name != "__init__"))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method didn't have the same overrided method parameter", f1->get_name());
 			return 0;
@@ -231,7 +233,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, int lineno, 
 	{
 		t->setouter_class(NULL);
 	}
-	vector<constraction*>::iterator it = find_if(constraction_type.begin(), constraction_type.end(),Comparator_constraction(new constraction(t)));
+	//vector<constraction*>::iterator it = find_if(constraction_type.begin(), constraction_type.end(),Comparator_constraction(new constraction(t)));
 	//int it = constraction_type.find(new constraction(t));
 	/*
 	if (it != constraction_type.end())
@@ -254,10 +256,77 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, int lineno, 
 		t->setIs_final(true);
 	}
 	//cout << "the size is " << inherted_list.size() << endl;
+	vector<char*>undeclarated_type;
 	if (inherted_list.size() > 0)
 	{
-		constraction* c = new constraction(t, inherted_list, true, lineno, colno);
-		constraction_type.push_back(c);
+		vector<char*>temp = inherted_list;
+		for (int j = 0; j < temp.size(); j++)
+		{
+			char* xx = temp.at(j);
+			char buffer[15];
+			bool found = false;
+			sprintf(buffer, xx);
+			tokenPtr = strtok(buffer, ".");
+			//cout << tokenPtr << endl;
+			Type* t1 = (Type*)this->st->getTypeFromCurrentScope(tokenPtr);
+			if (t1)
+			{
+				if (t1->getIs_final())
+				{
+					this->errRecovery->errQ->enqueue(lineno, colno, "can't inherted from final type", t1->get_name());
+					//no_error = 0;
+				}
+				tokenPtr = strtok(NULL, ".");
+				Type* t2 = new Type();
+				bool enter = false;
+				//Type* t3 = new Type();
+				while (tokenPtr != NULL)
+				{
+					char* x = new char[20];
+					//cout << "token " << *tokenPtr << endl;
+					strcpy(x, tokenPtr);
+					t2 = new Type();
+					t2->set_name(x);
+					t2->setouter_class(t1);
+					enter = true;
+					//t1 = (Type*)this->st->getTypeFromCurrentScope(x);
+					//Scope* tempScope = NULL;
+					tokenPtr = strtok(NULL, ".");
+					if (tokenPtr != NULL)
+					{
+						t1 = t2;
+					}
+				}
+				if (enter)
+				{
+					int j = findTypeByName(this->outer_type.back()->getInheritedType(), t1);
+					if (j == -1)
+					{
+						cout << "you can't inherted from inner class" << endl;
+						this->errRecovery->errQ->enqueue(lineno, colno, "you can't inherted from inner class", temp.at(j));
+						//no_error = 0;
+					}
+					t1 = this->returninner(t2->get_name(), t1, lineno, colno);
+				}
+				if (!t->setInheritedType(t1))
+				{
+					cout << "Error there is an inhertance Loop" << endl;
+					this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", temp.at(j));
+					//no_error = 0;
+				}
+
+			}
+			else
+			{
+				undeclarated_type.push_back(inherted_list.at(j));
+			}
+		}
+		if (undeclarated_type.size() > 0)
+		{
+			constraction* c = new constraction(t, undeclarated_type, true, lineno, colno);
+			constraction_type.push_back(c);
+		}
+		
 	}
 	
 	/*
