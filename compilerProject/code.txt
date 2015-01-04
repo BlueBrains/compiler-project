@@ -1,8 +1,11 @@
+#sdfdsfs 
 class test:
-def class amer(a)
-def y
-end
-def public x ;
+def public x;
+/*
+dfgdfg
+dfg
+*/
 def public test ( x ):
 end
 end
+#dfdfg

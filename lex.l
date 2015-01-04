@@ -14,7 +14,7 @@ letter			{lowercase}|{uppercase}
 lowercase		[a-z]
 uppercase		[A-Z]
 digit			[0-9]
-Single_line_comment		(\/\/)+[^\n]*	
+Single_line_comment		("#")+[^\n]*	
 longinteger    {integer}("l"|"L")
 octinteger		"0"("o"|"O"){octdigit}+|"0"{octdigit}+
 hexinteger		"0"("x"|"X"){hexdigit}+
@@ -38,10 +38,6 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
-"import"				{BEGIN import;}
-<import>{Identifier}    {yaccin(yytext); BEGIN INITIAL; return IMPORT;}
-
-
 "import"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -295,6 +291,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	FINAL;
+			}
+"static"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	STATIC;
 			}
 "return"	{
 				colNum += strlen(yytext);

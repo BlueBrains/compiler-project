@@ -61,7 +61,7 @@
 %token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY MULTI
 %token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL
 %token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD
-%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL
+%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL STATIC
 %token	LESS_THAN LESS_OR_EQUAL MORE_THAN MORE_OR_EQUAL TRUE FALSE EXCEPT SEMICOLON
 %token  NEW_LINE PASS CHAR_VALUE OPEN_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE
 %nonassoc stmt_1_2
@@ -86,18 +86,23 @@ program: program unit {	Streams::verbose() <<"prgram : program unit\n";
 
 unit:	IMPORT unit_list class_decl	{Streams::verbose()<<"unit: IMPORT unit_list class_decl\n";}
 		| class_decl				{Streams::verbose()<<"unit: class_decl\n";}
+		| IMPORT unit_list FINAL class_decl	{Streams::verbose()<<"unit: IMPORT unit_list FINAL class_decl\n";}
+		| FINAL class_decl				{Streams::verbose()<<"unit: FINAL class_decl\n";}
+		| IMPORT unit_list STATIC class_decl	{Streams::verbose()<<"unit: IMPORT unit_list STATIC class_decl\n";}
+		| STATIC class_decl				{Streams::verbose()<<"unit: STATIC class_decl\n";}
+		| IMPORT unit_list FINAL STATIC class_decl	{Streams::verbose()<<"unit: IMPORT unit_list FINAL STATIC class_decl\n";}
+		| FINAL STATIC class_decl				{Streams::verbose()<<"unit: FINAL STATIC class_decl\n";}
+		| IMPORT unit_list STATIC FINAL class_decl	{Streams::verbose()<<"unit: IMPORT unit_list STATIC FINAL class_decl\n";}
+		| STATIC FINAL class_decl				{Streams::verbose()<<"unit: STATIC FINAL class_decl\n";}
 ;
 
 class_decl: class_h class_body	{
 									Streams::verbose()<<"class_decl: class_h class_body\n";
-									}
+								}
 ;
 class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));}                                                   //class X 
 		|CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); }                     //class X ()
 		|CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));} //class X (A,B,T) OR class X(A)
-		|FINAL CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>3+1));}                                           //class X 
-		|FINAL CLASS ID OPEN_S CLOSE_S   {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));}              //class X ()
-		|FINAL CLASS ID OPEN_S unit_list CLOSE_S 		{Streams::verbose() << "class_h:FINAL CLASS ID OPEN_S unit_list CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>6+1));}  //class X (A,B,T) OR class X(A)
 		|CLASS error	{							
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>1+1));
 									Streams::verbose()<<"Error: Expected class name at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
@@ -113,21 +118,6 @@ class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.pus
 									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected Reserved word","");
 						 }
-		|FINAL CLASS error	{							
-									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-									Streams::verbose()<<"Error: Expected class name at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected class name","");
-		           }
-		|FINAL ID error ID    {
-									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>3+1));
-									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected Reserved word","");
-							 }
-		|FINAL ID error   {
-									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2),"Expected Reserved word","");
-							 }
 ;
 
 expr_list:	expr_list COMMA expr	{Streams::verbose()<<"expr_list: expr_list COMMA expr\n";}
@@ -166,6 +156,18 @@ dm_list:	dm_list DEF dm {Streams::verbose()<<"dm_list: dm_list DEF dm\n";}
 dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLON\n";}
 	|method_declaration	{Streams::verbose()<<"dm:	var_declaration\n";}
 	|class_decl	{Streams::verbose()<<"dm:	class_decl\n";}
+	|FINAL class_decl	{Streams::verbose()<<"dm: FINAL class_decl\n";}
+	|STATIC class_decl	{Streams::verbose()<<"dm: STATIC class_decl\n";}
+	|FINAL STATIC class_decl	{Streams::verbose()<<"dm: FINAL STATIC class_decl\n";}
+	|STATIC FINAL class_decl	{Streams::verbose()<<"dm: STATIC FINAL class_decl\n";}
+	|STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC var_declaration SEMICOLON\n";}
+	|STATIC method_declaration	{Streams::verbose()<<"dm: STATIC	var_declaration\n";}
+	|FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL var_declaration SEMICOLON\n";}
+	|FINAL method_declaration	{Streams::verbose()<<"dm: FINAL var_declaration\n";}
+	|STATIC FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC FINAL var_declaration SEMICOLON\n";}
+	|STATIC FINAL method_declaration	{Streams::verbose()<<"dm:STATIC FINAL var_declaration\n";}
+	|FINAL STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL STATIC var_declaration SEMICOLON\n";}
+	|FINAL STATIC method_declaration	{Streams::verbose()<<"dm: FINAL STATIC var_declaration\n";}
 	|var_declaration error {
 							Streams::verbose()<<"Error: Expected ';' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 							err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"Expected ';' ","");
