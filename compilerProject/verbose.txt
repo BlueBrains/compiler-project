@@ -1,14 +1,49 @@
-class_h: CLASS ID 
-access_modef:	PUBLIC
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
-dm_list: DEF dm
-access_modef:	PUBLIC
-method_h: access_modef ID OPEN_S ID CLOSE_S 
-COLON  END 
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+method_h: ID OPEN_S CLOSE_S COLON 
+literal:    STRING_VALUE
+expr:	literal
+literal:	INTEGER_VALUE
+expr:	literal
+key_datum : expr COLON expr
+key_datum_list: key_datum
+literal:    STRING_VALUE
+expr:	literal
+literal:    STRING_VALUE
+expr:	literal
+key_datum : expr COLON expr
+key_datum_list: key_datum_list COMMA key_datum 
+literal:	INTEGER_VALUE
+expr:	literal
+literal:	INTEGER_VALUE
+expr:	literal
+key_datum : expr COLON expr
+key_datum_list: key_datum_list COMMA key_datum 
+literal:	FLOAT_VALUE
+expr:	literal
+literal:	INTEGER_VALUE
+expr:	literal
+key_datum : expr COLON expr
+key_datum_list: key_datum_list COMMA key_datum 
+dict_display: OPEN_C key_datum_list CLOSE_C 
+enclosure:	dict_display
+atom:	enclosure
+primary: 	atom
+attributeref: primary DOT ID
+target: 	attributeref
+target_list:	target
+long_id:	
+expr:	long_id
+expr_list: expr %prec stmt_1
+assignment_stmt:	target_list ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt 
+block_stmt:	stmt_list END 
 method_declaration: method_h block_stmt
 dm:	var_declaration
-dm_list: dm_list DEF dm
+dm_list: DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl

@@ -51,8 +51,9 @@ void MyParser::remove_vatiable(Variable* v)
 }
 
 Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo){
+	Variable* v = NULL;
 	if(n){
-		Variable* v = (Variable*)this->st->currScope->m->get(n);
+		v = (Variable*)this->st->currScope->m->get(n);
 		if (v)
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);

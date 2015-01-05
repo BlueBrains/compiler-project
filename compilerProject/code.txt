@@ -1,11 +1,5 @@
-#sdfdsfs 
-class test:
-def public x;
-/*
-dfgdfg
-dfg
-*/
-def public test ( x ):
+class test (x) :
+def test():
+{"z":1,"r":"z",12:11,12.3:1}.y = x;
 end
 end
-#dfdfg

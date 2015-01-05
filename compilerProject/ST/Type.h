@@ -73,7 +73,7 @@ private:
 	//MyVector<char*>ll;
 	Scope * scope;
 	bool is_final;
-	int _id = -1;
+	int _id;
 	vector<int> children_ids;
 vector<Type*> inhertedList;
 	void setis_final(bool final);
