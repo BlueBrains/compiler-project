@@ -1,6 +1,7 @@
 %output ="yacc.cpp"
 
 %{
+	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
 	#include <FlexLexer.h>
 	#include <string>
@@ -11,6 +12,7 @@
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
 	#include <set>
+	#include "c:\users\amer-hy\source\repos\compiler-project - Copy - Copy\compilerproject\myparser.h"
 	using namespace std;
 	class ColonStack
 	{
@@ -28,10 +30,14 @@
 	FlexLexer* lexer = new yyFlexLexer();
 	extern string sourceFile="";
 	string dir_path="";
-	
+	string temp_id="";
 	char* i_type;
-	char* acc_mod;
+	char* t_id=new char[10];
+	char* acc_mod=new char[8];
 	vector<char *>inhertance_list;
+	vector<char *>ID_list;
+	Variable* v;
+	Type* t;
 	class Parser
 	{
 		public:
@@ -40,6 +46,7 @@
 			return yyparse();
 		}
 	};
+	MyParser * p = new MyParser();
 %}		
 
 
@@ -52,10 +59,14 @@
 		int lineNum;
 		int colNum;
 	}r;
+		class YaccSimpleType * yaccSimpleType;
+		class Variable * var;
+		class Function * function;
+		class Type * type;
 }
 
 
-%start program
+%start programes
 %token error
 %token	IMPORT CLASS ID COLON CLOSE_S COMMA DOT ID END
 %token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY MULTI
@@ -76,33 +87,81 @@
 
 
 %%
+
+programes: program DOT {Streams::verbose() <<"prgram : program unit\n";
+						p->check_inhertance_list();
+						if(!p->errRecovery->errQ->isEmpty())
+								p->errRecovery->printErrQueue();
+						p->print_symbol();
+						Streams::verbose().flush();						
+						}
 program: program unit {	Streams::verbose() <<"prgram : program unit\n";
 						Streams::verbose().flush();						
 					}
-				|unit      {Streams::verbose()<<"program: unit\n";
+				|unit      {
+							
+								Streams::verbose()<<"program: unit\n";
 								Streams::verbose().flush();						
 							}
+				
 ;
 
 unit:	IMPORT unit_list class_decl	{Streams::verbose()<<"unit: IMPORT unit_list class_decl\n";}
 		| class_decl				{Streams::verbose()<<"unit: class_decl\n";}
-		| IMPORT unit_list FINAL class_decl	{Streams::verbose()<<"unit: IMPORT unit_list FINAL class_decl\n";}
-		| FINAL class_decl				{Streams::verbose()<<"unit: FINAL class_decl\n";}
-		| IMPORT unit_list STATIC class_decl	{Streams::verbose()<<"unit: IMPORT unit_list STATIC class_decl\n";}
-		| STATIC class_decl				{Streams::verbose()<<"unit: STATIC class_decl\n";}
-		| IMPORT unit_list FINAL STATIC class_decl	{Streams::verbose()<<"unit: IMPORT unit_list FINAL STATIC class_decl\n";}
-		| FINAL STATIC class_decl				{Streams::verbose()<<"unit: FINAL STATIC class_decl\n";}
+		| IMPORT unit_list FINAL class_decl	{Streams::verbose()<<"unit: IMPORT unit_list FINAL class_decl\n";
+													t->setIs_final(true);
+												t=NULL;
+												}
+		| FINAL  class_decl				{Streams::verbose()<<"unit: FINAL STATIC class_decl\n";
+												t->setIs_final(true);
+												t=NULL;
+												}
+		| STATIC  class_decl				{Streams::verbose()<<"Error: UnExpected static Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+																err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1)," UnExpected static word","");
+												}
+												
+
 		| IMPORT unit_list STATIC FINAL class_decl	{Streams::verbose()<<"unit: IMPORT unit_list STATIC FINAL class_decl\n";}
-		| STATIC FINAL class_decl				{Streams::verbose()<<"unit: STATIC FINAL class_decl\n";}
 ;
 
 class_decl: class_h class_body	{
 									Streams::verbose()<<"class_decl: class_h class_body\n";
 								}
 ;
-class_h: CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));}                                                   //class X 
-		|CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); }                     //class X ()
-		|CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));} //class X (A,B,T) OR class X(A)
+class_h: 
+		CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+					}                                                   //class X 
+		|access_modef CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+					}  
+		|CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								}                     //class X ()
+		|access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+								}                     //class X ()
+		|CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													t=$<type>$;
+													inhertance_list.clear();
+											} //class X (A,B,T) OR class X(A)
+		|access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													t=$<type>$;
+													acc_mod="";
+													inhertance_list.clear();
+											} //class X (A,B,T) OR class X(A)
 		|CLASS error	{							
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>1+1));
 									Streams::verbose()<<"Error: Expected class name at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
@@ -124,17 +183,41 @@ expr_list:	expr_list COMMA expr	{Streams::verbose()<<"expr_list: expr_list COMMA
 			|expr %prec stmt_1	{Streams::verbose()<<"expr_list: expr %prec stmt_1\n";}
 ;				
 
-unit_list:	unit_list COMMA unit_import	{Streams::verbose()<<"unit_list:	unit_list COMMA unit_import\n";}		
-			|unit_import	{Streams::verbose()<<"unit_list:	unit_import\n";}
+unit_list:	unit_list COMMA unit_import	{
+												t_id=new char[10];
+												strcpy(t_id,temp_id.c_str());
+												inhertance_list.push_back(t_id);	
+												Streams::verbose()<<"unit_list:	unit_list COMMA unit_import\n";
+												temp_id="";
+												}		
+			|unit_import	{	
+								t_id=new char[10];
+								strcpy(t_id,temp_id.c_str());
+								inhertance_list.push_back(t_id);
+								Streams::verbose()<<"unit_list:	unit_import\n";
+								temp_id="";
+							}
 
 
-unit_import: unit_import DOT ID	{Streams::verbose()<<"unit_import: unit_import DOT ID\n";}//A.B
-		|ID {Streams::verbose()<<"unit_import: ID\n";}
+unit_import: unit_import DOT ID	{
+									temp_id=temp_id+"."+$<r.strVal>3;
+									Streams::verbose()<<"unit_import: unit_import DOT ID\n";
+								}//A.B
+			|ID {
+					temp_id=temp_id+$<r.strVal>1;
+					Streams::verbose()<<"unit_import: ID\n";
+				
+				}
 		//A->import . B -> import . C->import
 ;
 
-class_body:   COLON END		{Streams::verbose()<<"class_body:COLON END	\n";colonStack.pop();}
-			| COLON dm_list END	{Streams::verbose()<<"class_body:COLON dm_list END\n";colonStack.pop();}
+class_body:   COLON END		{
+								Streams::verbose()<<"class_body:COLON END	\n";colonStack.pop();
+								$<type>$=p->finishTypeDeclaration(t);
+							}
+			| COLON dm_list END	{Streams::verbose()<<"class_body:COLON dm_list END\n";colonStack.pop();
+										$<type>$=p->finishTypeDeclaration(t);
+									}
 			| END {
 					ColonStack* temp = colonStack.top();
 					colonStack.pop();
@@ -145,6 +228,7 @@ class_body:   COLON END		{Streams::verbose()<<"class_body:COLON END	\n";colonSta
 					ColonStack* temp = colonStack.top();
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected ':' at Line No:"<<temp->lineNum<<" Column No:"<<temp->colNum<<endl;
+						$<type>$=p->finishTypeDeclaration(t);
 					err->errQ->enqueue(temp->lineNum,temp->colNum,"Expected ':' ","");
 				  }
 ;
@@ -174,10 +258,25 @@ dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLO
 						   }
 ;
 
-var_declaration: access_modef ID {Streams::verbose()<<"var_declaration: access_modef ID\n";}	//public x
-				|ID					{Streams::verbose()<<"var_declaration: ID\n";}					//x
-				|access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef ID ASSIGN expr\n";}	//private x = 10
-				|ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: ID ASSIGN expr\n";}		//x = 5
+var_declaration: access_modef ID {
+									Streams::verbose()<<"var_declaration: access_modef ID\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+									acc_mod="";
+									}	//public x
+				|ID					{Streams::verbose()<<"var_declaration: ID\n";
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+										v=$<var>$;
+									}					//x
+				|access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef ID ASSIGN expr\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+													v=$<var>$;
+													acc_mod="";
+													}	//private x = 10
+				|ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: ID ASSIGN expr\n";
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+													v=$<var>$;
+										}		//x = 5
 				|access_modef ID ID error  {
 											Streams::verbose()<<"Error: UN Expected IDENTIFIER Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>2,$<r.colNum>3-strlen($<r.strVal>3),"UN Expected IDENTIFIER ","");
@@ -426,9 +525,9 @@ raise_stmt: RAISE	{Streams::verbose()<<"raise_stmt: RAISE\n";}
 												 }
 ;
 
-access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";}
-				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";}
-				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";}
+access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";}
+				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";}
+				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 ;
 
 target: 	OPEN_S target_list CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S target_list CLOSE_S \n";}//(

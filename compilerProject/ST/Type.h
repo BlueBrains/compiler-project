@@ -67,15 +67,20 @@ public:
 	void setStatus(completness);
 	int getId();
 	bool operator==(Type xx);
+	void setAccessModifier(char*);
+	char* getAccessModifier();
+	void print();
 private:
 	completness status;
 	Type* outer_class;
 	//MyVector<char*>ll;
+	enum	AccessModifier accessModifier;
 	Scope * scope;
 	bool is_final;
-	int _id = -1;
+	int _id;
 	vector<int> children_ids;
 vector<Type*> inhertedList;
 	void setis_final(bool final);
+
 };
 #endif

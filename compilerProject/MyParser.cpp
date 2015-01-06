@@ -4,6 +4,7 @@
 #include "ErrorRevovery.h"
 #include <algorithm>
 #include <cstring>
+#include "../Streams.h"
 
 void print_st(SymbolTable *s);
 bool check_type_name(char* name, vector<Type*> outer_type)
@@ -71,7 +72,8 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 	Variable * v = this->st->getVariableFromCurrentScope(name,t);
 	if (!v)
 	{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);		
+		Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
 	}
 	return v;
 }
@@ -92,7 +94,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't override it ", f1->get_name());
 			return 0;
 		}
-		else if (f1 && !f1->comparePar(parameter) && (f1->get_name != "__init__"))
+		else if (f1 && !f1->comparePar(parameter) && (strcmp( f1->get_name() , "__init__")!=0))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method didn't have the same overrided method parameter", f1->get_name());
 			return 0;
@@ -131,52 +133,27 @@ bool found(Type* t)
 }
 Type* MyParser::returninner(char* child, Type* t,int l,int cc)
 {
-	//Type* out = this->outer_type.end();
-	char* x = child;
-	bool found;//search if the inherted type is exist and not in contraction
-	vector<constraction*>::iterator it = find_if(constraction_type.begin(), constraction_type.end(), Comparator_constraction(new constraction(t)));
-	//int it = constraction_type.find(new constraction(t));
-	if (it != constraction_type.end())
+	Type* out = outer_type.back();
+	vector<Type*>out_inhertedList = out->getInheritedType();
+	vector<Type*>::iterator ot = find(out_inhertedList.begin(), out_inhertedList.end(), t);
+	if (ot == out_inhertedList.end())
 	{
-		found = false;
+		//error
+		return 0;
 	}
-	else
-		found = true;
-	//check if the outer class of new class is inherted from t 
-		if (found)
-		{
-			Type* t1 = (Type*)t->getScope()->m->get(x);
-			if (t1)
-			{
-				if (t1->getIs_final())
-				{
-					//this->errRecovery->errQ->enqueue(lineno, colno, "the type is final and you can't inheteted", name);
-					return 0;
-				}
-				else
-					return t1;
-			}
-			else
-			{
-				//this->errRecovery->errQ->enqueue(lineno, colno, "undeclarated type", name);
-				return 0;
-			}
-		}
-		else
-		{
-			Type* t1 = new Type();
-			t1->set_name(x);
-			//t1->declared = 0;
-			t1->setouter_class(t);
-			//t->getScope()->m->put(x, t1);
-			//t1->setStatus(completness::under_constraction);
-			constraction* c = new constraction(t1,false,l,cc);
-			constraction_type.push_back(c);
-			return t1;
-		}
-
-	
-
+	Type* tt = *ot;
+	Type* t2 = (Type*)tt->getScope()->m->get(child);
+	if (!t)
+	{
+		//error not found class child
+		return 0;
+	}
+	if (t2->getIs_final())
+	{
+		//error is final
+		return 0;
+	}
+	return t2;
 		
 }
 int findTypeByName(vector<Type*>Mylist, Type* t)
@@ -190,7 +167,7 @@ int findTypeByName(vector<Type*>Mylist, Type* t)
 	}
 	return -1;
 }
-Type * MyParser::createType(char* name, vector<char*>inherted_list, int lineno, int colno, bool is_final)
+Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final)
 {
 	//cout << "enter" << endl;
 	char *tokenPtr;
@@ -210,6 +187,27 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, int lineno, 
 	t->set_name(name);
 	//int g = findTypeByName(;
 	//for check that the new class are not in parent class in inhertance
+	if (outer_type.size() == 0)
+	{
+		if ((strcmp(acc_mod, "private") == 0))
+		{
+			cout << "modifier private not allowed here" << endl;
+			this->errRecovery->errQ->enqueue(lineno, colno, "modifier private not allowed here", name);
+			no_error = 0;
+		}
+		else if ((strcmp(acc_mod, "protected") == 0))
+		{
+			cout << "modifier protected not allowed here" << endl;
+			this->errRecovery->errQ->enqueue(lineno, colno, "modifier protected not allowed here", name);
+			no_error = 0;
+		}
+		else
+			t->setAccessModifier("public");
+	}
+	else
+	{
+		t->setAccessModifier(acc_mod);
+	}
 	if (outer_type.size() > 0)
 	{
 		for (int i = 0; i < outer_type.back()->getInheritedType().size(); i++)
@@ -233,24 +231,6 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, int lineno, 
 	{
 		t->setouter_class(NULL);
 	}
-	//vector<constraction*>::iterator it = find_if(constraction_type.begin(), constraction_type.end(),Comparator_constraction(new constraction(t)));
-	//int it = constraction_type.find(new constraction(t));
-	/*
-	if (it != constraction_type.end())
-	{
-		if (is_final)
-		{
-			int element_pos = distance(constraction_type.begin(), it);//for get the element finded in constraction type
-//			cout <<"the type def of it "<<typeid(*it).name;
-			//this->errRecovery->errQ->enqueue(lineno, colno, "there are another classes which inherted from this class", name);
-//			this->errRecovery->errQ->enqueue(constraction_type.at(element_pos)->get_LineNo, constraction_type.at(element_pos)->get_ColNo, "you can't inheterted from final class", name);
-			no_error = 0;
-		}
-		t = constraction_type.back()->get_type();
-		//Type* xx = new Type();
-		//xx = constraction_type.at(it)->get_type();
-		constraction_type.erase(it);
-	}*/
 	if (is_final)
 	{
 		t->setIs_final(true);
@@ -494,7 +474,7 @@ void  MyParser::check_inhertance_list()
 			sprintf(buffer, xx);
 			tokenPtr = strtok(buffer, ".");
 			//cout << tokenPtr << endl;
-			Type* t1 = (Type*)this->st->getTypeFromCurrentScope(tokenPtr);
+			Type* t1 = (Type*)this->st->getTypeFromTypeScope(tokenPtr,t);
 			if (t1)
 			{
 				if (t1->getIs_final())
@@ -610,7 +590,7 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 	}
 	else
 	{
-		if (y->getIs_final())
+		if ((y)&&(y->getIs_final()))
 		{
 			this->errRecovery->errQ->enqueue(t->get_LineNo(), t->get_ColNo(), "can't inhertance from final type", t->get_type()->get_name());
 		}
@@ -638,6 +618,7 @@ void printScope(Scope *s)
 							cout << t->getInheritedType()[i]->get_name() << ",";
 					}
 					cout << "):" << endl;
+					t->print();
 					printScope(t->getScope());
 				}
 
@@ -673,4 +654,8 @@ void print_st(SymbolTable *s)
 	cout << "rootScope {" << endl;
 	printScope(s->getrootscope());
 	cout << "end rootScope }" << endl;
+}
+void MyParser:: print_symbol()
+{
+	print_st(this->st);
 }

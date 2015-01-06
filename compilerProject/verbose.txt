@@ -1,25 +1,58 @@
 class_h: CLASS ID 
+class_h: CLASS ID 
 unit_import: ID
 unit_list:	unit_import
 class_h: CLASS ID OPEN_S unit_list CLOSE_S 
-var_declaration: ID
-Error: Expected ';' at Line No:4 Column No:0
-dm_list: DEF dm
-Error: Expected ':' at Line No:2 Column No:18
+class_h: CLASS ID 
+class_body:COLON END	
 class_decl: class_h class_body
 dm:	class_decl
 dm_list: DEF dm
-access_modef:	PUBLIC
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
+class_body:COLON dm_list END
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
 dm_list: dm_list DEF dm
-access_modef:	PUBLIC
-method_h: access_modef ID OPEN_S ID CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	var_declaration
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+dm:	class_decl
 dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl
 program: unit
+prgram : program unit

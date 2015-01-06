@@ -134,12 +134,13 @@ public:
 	Variable* addVariableToCurrentScope(char* n, char*acc_mod, int lineNo, int colNo);
 	Function * createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
-	Type * createType(char* name, vector<char*>inherted_list, int lineno, int colno, bool is_final);
+	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
 	Type * finishTypeDeclaration(Type* t);
 	Type* returninner( char* child, Type* t,int l,int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
 	Variable* checkVariable(char* v,Type* t, int lineNo, int colNo);
+	void print_symbol();
 };
 #endif

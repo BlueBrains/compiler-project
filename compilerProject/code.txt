@@ -1,11 +1,18 @@
-#sdfdsfs 
-class test:
-def public x;
-/*
-dfgdfg
-dfg
-*/
-def public test ( x ):
-end
-end
-#dfdfg
+class a:
+	def class d:
+		def class g(e):    # must find inheritance loop
+			def class k:
+			end
+		end
+	end
+	def class c(e): #error inheritance outter inherit from inner
+	end
+	def class b(d):
+		def class e(tt):
+			def class j(k):
+			end
+		end
+		def class tt(g):
+		end
+	end
+end.
