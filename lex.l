@@ -391,6 +391,24 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	CLOSE_D;
 			}
+"{"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	OPEN_C;
+			}
+"}"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	CLOSE_C;
+			}
 "`"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -620,19 +638,19 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.floatVal = f;
 				return FLOAT_VALUE;							
 			}
- \"       				{BEGIN (String);}
-<String>[\\/\"]			{cout<<"str1="<<yytext<<"\n";}
+ \"       				{							
+							BEGIN (String);
+							str = new char[255];
+							index = 0;
+						}
+<String>[\\/\"]			{cout<<"str1="<<yytext<<"\n";colNum+=2;}
 <String>[^\\]			{
-							cout<<"str2="<<yytext<<"\n";
-							if(str == 0){
-								str = new char[255];
-								index = 0;
-							}
+							//cout<<"str2="<<yytext<<"\n";
 							str[index++] = yytext[0];
 							
 						}
 <String>[^\\]\"			{
-							cout<<"str4="<<yytext<<"\n"; 
+							//cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
 							str[index] = '\0';
 							int len = 0;

@@ -37,74 +37,76 @@
      COMMA = 263,
      DOT = 264,
      END = 265,
-     DEF = 266,
-     ASSIGN = 267,
-     STAR = 268,
-     ELSE = 269,
-     IF = 270,
-     ELIF = 271,
-     WHILE = 272,
-     FOR = 273,
-     IN = 274,
-     TRY = 275,
-     FINALLY = 276,
-     MULTI = 277,
-     EXPECT = 278,
-     WITH = 279,
-     AS = 280,
-     ASSERT = 281,
-     EQUAL = 282,
-     DEL = 283,
-     RETURN = 284,
-     PRINT = 285,
-     GLOBAL = 286,
-     RAISE = 287,
-     PRIVATE = 288,
-     PUBLIC = 289,
-     PROTECTED = 290,
-     OPEN_D = 291,
-     CLOSE_D = 292,
-     RE_COT = 293,
-     YIELD = 294,
-     PRIMARY = 295,
-     OR = 296,
-     AND = 297,
-     NOT = 298,
-     PLUS = 299,
-     MINUS = 300,
-     DIV = 301,
-     MOD = 302,
-     NOT_EQUAL = 303,
-     FINAL = 304,
-     STATIC = 305,
-     LESS_THAN = 306,
-     LESS_OR_EQUAL = 307,
-     MORE_THAN = 308,
-     MORE_OR_EQUAL = 309,
-     TRUE = 310,
-     FALSE = 311,
-     EXCEPT = 312,
-     SEMICOLON = 313,
-     NEW_LINE = 314,
-     PASS = 315,
-     CHAR_VALUE = 316,
-     OPEN_S = 317,
-     STRING_VALUE = 318,
-     INTEGER_VALUE = 319,
-     BREAK = 320,
-     CONTINUE = 321,
-     LONG_VALUE = 322,
-     FLOAT_VALUE = 323,
-     stmt_1_2 = 324,
-     stmt_9 = 325,
-     stmt_8 = 326,
-     stmt_7 = 327,
-     stmt_6 = 328,
-     stmt_5 = 329,
-     stmt_4 = 330,
-     stmt_3 = 331,
-     stmt_2 = 332,
-     stmt_1 = 333
+     OPEN_C = 266,
+     CLOSE_C = 267,
+     DEF = 268,
+     ASSIGN = 269,
+     STAR = 270,
+     ELSE = 271,
+     IF = 272,
+     ELIF = 273,
+     WHILE = 274,
+     FOR = 275,
+     IN = 276,
+     TRY = 277,
+     FINALLY = 278,
+     MULTI = 279,
+     EXPECT = 280,
+     WITH = 281,
+     AS = 282,
+     ASSERT = 283,
+     EQUAL = 284,
+     DEL = 285,
+     RETURN = 286,
+     PRINT = 287,
+     GLOBAL = 288,
+     RAISE = 289,
+     PRIVATE = 290,
+     PUBLIC = 291,
+     PROTECTED = 292,
+     OPEN_D = 293,
+     CLOSE_D = 294,
+     RE_COT = 295,
+     YIELD = 296,
+     PRIMARY = 297,
+     OR = 298,
+     AND = 299,
+     NOT = 300,
+     PLUS = 301,
+     MINUS = 302,
+     DIV = 303,
+     MOD = 304,
+     NOT_EQUAL = 305,
+     FINAL = 306,
+     STATIC = 307,
+     LESS_THAN = 308,
+     LESS_OR_EQUAL = 309,
+     MORE_THAN = 310,
+     MORE_OR_EQUAL = 311,
+     TRUE = 312,
+     FALSE = 313,
+     EXCEPT = 314,
+     SEMICOLON = 315,
+     NEW_LINE = 316,
+     PASS = 317,
+     CHAR_VALUE = 318,
+     OPEN_S = 319,
+     STRING_VALUE = 320,
+     INTEGER_VALUE = 321,
+     BREAK = 322,
+     CONTINUE = 323,
+     LONG_VALUE = 324,
+     FLOAT_VALUE = 325,
+     stmt_1_2 = 326,
+     stmt_9 = 327,
+     stmt_8 = 328,
+     stmt_7 = 329,
+     stmt_6 = 330,
+     stmt_5 = 331,
+     stmt_4 = 332,
+     stmt_3 = 333,
+     stmt_2 = 334,
+     stmt_1 = 335
    };
 #endif
 /* Tokens.  */
@@ -116,80 +118,82 @@
 #define COMMA 263
 #define DOT 264
 #define END 265
-#define DEF 266
-#define ASSIGN 267
-#define STAR 268
-#define ELSE 269
-#define IF 270
-#define ELIF 271
-#define WHILE 272
-#define FOR 273
-#define IN 274
-#define TRY 275
-#define FINALLY 276
-#define MULTI 277
-#define EXPECT 278
-#define WITH 279
-#define AS 280
-#define ASSERT 281
-#define EQUAL 282
-#define DEL 283
-#define RETURN 284
-#define PRINT 285
-#define GLOBAL 286
-#define RAISE 287
-#define PRIVATE 288
-#define PUBLIC 289
-#define PROTECTED 290
-#define OPEN_D 291
-#define CLOSE_D 292
-#define RE_COT 293
-#define YIELD 294
-#define PRIMARY 295
-#define OR 296
-#define AND 297
-#define NOT 298
-#define PLUS 299
-#define MINUS 300
-#define DIV 301
-#define MOD 302
-#define NOT_EQUAL 303
-#define FINAL 304
-#define STATIC 305
-#define LESS_THAN 306
-#define LESS_OR_EQUAL 307
-#define MORE_THAN 308
-#define MORE_OR_EQUAL 309
-#define TRUE 310
-#define FALSE 311
-#define EXCEPT 312
-#define SEMICOLON 313
-#define NEW_LINE 314
-#define PASS 315
-#define CHAR_VALUE 316
-#define OPEN_S 317
-#define STRING_VALUE 318
-#define INTEGER_VALUE 319
-#define BREAK 320
-#define CONTINUE 321
-#define LONG_VALUE 322
-#define FLOAT_VALUE 323
-#define stmt_1_2 324
-#define stmt_9 325
-#define stmt_8 326
-#define stmt_7 327
-#define stmt_6 328
-#define stmt_5 329
-#define stmt_4 330
-#define stmt_3 331
-#define stmt_2 332
-#define stmt_1 333
+#define OPEN_C 266
+#define CLOSE_C 267
+#define DEF 268
+#define ASSIGN 269
+#define STAR 270
+#define ELSE 271
+#define IF 272
+#define ELIF 273
+#define WHILE 274
+#define FOR 275
+#define IN 276
+#define TRY 277
+#define FINALLY 278
+#define MULTI 279
+#define EXPECT 280
+#define WITH 281
+#define AS 282
+#define ASSERT 283
+#define EQUAL 284
+#define DEL 285
+#define RETURN 286
+#define PRINT 287
+#define GLOBAL 288
+#define RAISE 289
+#define PRIVATE 290
+#define PUBLIC 291
+#define PROTECTED 292
+#define OPEN_D 293
+#define CLOSE_D 294
+#define RE_COT 295
+#define YIELD 296
+#define PRIMARY 297
+#define OR 298
+#define AND 299
+#define NOT 300
+#define PLUS 301
+#define MINUS 302
+#define DIV 303
+#define MOD 304
+#define NOT_EQUAL 305
+#define FINAL 306
+#define STATIC 307
+#define LESS_THAN 308
+#define LESS_OR_EQUAL 309
+#define MORE_THAN 310
+#define MORE_OR_EQUAL 311
+#define TRUE 312
+#define FALSE 313
+#define EXCEPT 314
+#define SEMICOLON 315
+#define NEW_LINE 316
+#define PASS 317
+#define CHAR_VALUE 318
+#define OPEN_S 319
+#define STRING_VALUE 320
+#define INTEGER_VALUE 321
+#define BREAK 322
+#define CONTINUE 323
+#define LONG_VALUE 324
+#define FLOAT_VALUE 325
+#define stmt_1_2 326
+#define stmt_9 327
+#define stmt_8 328
+#define stmt_7 329
+#define stmt_6 330
+#define stmt_5 331
+#define stmt_4 332
+#define stmt_3 333
+#define stmt_2 334
+#define stmt_1 335
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 53 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 46 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -199,10 +203,6 @@ typedef union YYSTYPE {
 		int lineNum;
 		int colNum;
 	}r;
-		class YaccSimpleType * yaccSimpleType;
-		class Variable * var;
-		class Function * function;
-		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
 #line 209 "yacc.hpp"

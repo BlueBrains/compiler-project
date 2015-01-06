@@ -52,9 +52,9 @@ void MyParser::remove_vatiable(Variable* v)
 }
 
 Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo){
-	Variable* v = (Variable*)this->st->currScope->m->get(n);
+	Variable* v = NULL;
 	if(n){
-		Variable* v = (Variable*)this->st->currScope->m->get(n);
+		v = (Variable*)this->st->currScope->m->get(n);
 		if (v)
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
@@ -72,7 +72,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 	Variable * v = this->st->getVariableFromCurrentScope(name,t);
 	if (!v)
 	{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);		
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
 		Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
 	}
 	return v;
@@ -144,15 +144,15 @@ Type* MyParser::returninner(char* child, Type* t,int l,int cc)
 	Type* tt = *ot;
 	Type* t2 = (Type*)tt->getScope()->m->get(child);
 	if (!t)
-	{
+		{
 		//error not found class child
-		return 0;
-	}
+					return 0;
+				}
 	if (t2->getIs_final())
-	{
+			{
 		//error is final
-		return 0;
-	}
+				return 0;
+			}
 	return t2;
 		
 }
@@ -304,9 +304,9 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 		if (undeclarated_type.size() > 0)
 		{
 			constraction* c = new constraction(t, undeclarated_type, true, lineno, colno);
-			constraction_type.push_back(c);
-		}
-		
+		constraction_type.push_back(c);
+	}
+	
 	}
 	
 	/*

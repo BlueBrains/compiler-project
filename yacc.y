@@ -68,7 +68,7 @@
 
 %start programes
 %token error
-%token	IMPORT CLASS ID COLON CLOSE_S COMMA DOT ID END
+%token	IMPORT CLASS ID COLON CLOSE_S COMMA DOT ID END OPEN_C CLOSE_C 
 %token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY MULTI
 %token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL
 %token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD
@@ -540,8 +540,8 @@ target: 	OPEN_S target_list CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S targe
             |subscription	{Streams::verbose()<<"target: 	subscription\n";}
 			;
             
-attributeref: primary DOT ID	{Streams::verbose()<<"attributeref: primary DOT ID\n";}			  
-			|ID DOT ID{Streams::verbose()<<"attributeref: ID DOT ID\n";}			  
+attributeref: primary DOT ID	{Streams::verbose()<<"attributeref: primary DOT ID\n";}
+			|ID DOT ID		{Streams::verbose()<<"attributeref: ID DOT ID\n";}
 ;
 
 primary: 	atom 	{Streams::verbose()<<"primary: 	atom\n";}
@@ -551,7 +551,7 @@ primary: 	atom 	{Streams::verbose()<<"primary: 	atom\n";}
 ;
 
 atom:		 enclosure	{Streams::verbose()<<"atom:	enclosure\n";}
-			|literal {Streams::verbose()<<"atom:	literal\n";}			
+			|literal {Streams::verbose()<<"atom:	literal\n";	}
 ;
 
 literal:    STRING_VALUE 	{Streams::verbose()<<"literal:    STRING_VALUE\n";}
@@ -565,10 +565,21 @@ enclosure:	parenth_form 	{Streams::verbose()<<"enclosure:	parenth_form\n";}
 			| list_display	{Streams::verbose()<<"enclosure:	list_display\n";}
             | string_conversion	{Streams::verbose()<<"enclosure:	string_conversion\n";} 
 			| yield_atom	{Streams::verbose()<<"enclosure:	yield_atom\n";}
+			| dict_display  {Streams::verbose()<<"enclosure:	dict_display\n";}
 ;
 
-parenth_form : 	OPEN_S expr CLOSE_S	{Streams::verbose()<<"parenth_form : 	OPEN_S expr CLOSE_S";}
-				|OPEN_S  CLOSE_S	{Streams::verbose()<<"parenth_form : 	OPEN_S  CLOSE_S";}				
+dict_display:	OPEN_C CLOSE_C  {Streams::verbose()<<"dict_display: OPEN_C CLOSE_C \n";}
+				|OPEN_C key_datum_list CLOSE_C {Streams::verbose()<<"dict_display: OPEN_C key_datum_list CLOSE_C \n";}
+  
+key_datum_list: key_datum_list COMMA key_datum  {Streams::verbose()<<"key_datum_list: key_datum_list COMMA key_datum \n";}
+				|key_datum_list COMMA {Streams::verbose()<<"key_datum_list: key_datum_list COMMA\n";}
+				|key_datum {Streams::verbose()<<"key_datum_list: key_datum\n";}
+  
+key_datum :		expr COLON expr {Streams::verbose()<<"key_datum : expr COLON expr\n";}				
+
+
+parenth_form : 	OPEN_S expr CLOSE_S	{Streams::verbose()<<"parenth_form : 	OPEN_S expr CLOSE_S\n";}
+				|OPEN_S  CLOSE_S	{Streams::verbose()<<"parenth_form : 	OPEN_S  CLOSE_S\n";}				
 				|error CLOSE_S	{
 										Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected '(' ","");
