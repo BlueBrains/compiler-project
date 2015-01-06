@@ -120,6 +120,8 @@ struct Comparator_constraction {
 	} // Just an example using strcmp
 };
 //======================================================================
+
+
 class MyParser
 {
 public:
@@ -141,6 +143,7 @@ public:
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
 	Variable* checkVariable(char* v,Type* t, int lineNo, int colNo);
+	bool check_function(char*name,Function* f);
 	void print_symbol();
 };
 #endif

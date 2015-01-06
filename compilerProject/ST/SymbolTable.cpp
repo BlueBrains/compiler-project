@@ -30,6 +30,40 @@ Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
 	}
 	return v;
 }
+//lm nstkhdmh w glat galbn :)
+Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t)
+{
+	Function * f = (Function*)t->getScope()->m->get(name);
+	vector<Type*>i_t = t->getInheritedType();
+
+	if (!f){
+		int j = 0;
+		for (int i = 0; i < i_t.size(); i++)
+		{
+			f = (Function*)i_t.at(i)->getScope()->m->get(name);
+			j++;
+		}
+		if (!f)
+		{
+			Scope * temp = this->currScope->parent;
+			while (temp && !f){
+				f = (Function*)temp->m->get(name);
+				temp = temp->parent;
+			}
+		}
+		else
+		{
+			if (j > 1)
+				cout << "ambigious f in parents types";
+		}
+	}
+	else
+	{
+		f->getparameters().size();
+	}
+	return f;
+
+}
 Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
 	Variable * v = (Variable*)this->currScope->parent->m->get(name);
 	vector<Type*>i_t = t->getInheritedType();

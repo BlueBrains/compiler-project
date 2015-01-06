@@ -96,7 +96,7 @@ programes: program DOT {Streams::verbose() <<"prgram : program unit\n";
 						Streams::verbose().flush();						
 						}
 program: program unit {	Streams::verbose() <<"prgram : program unit\n";
-						Streams::verbose().flush();						
+						Streams::verbose().flush();		
 					}
 				|unit      {
 							

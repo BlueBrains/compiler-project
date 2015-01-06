@@ -78,6 +78,12 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 	return v;
 }
 
+bool MyParser::check_function(char* name,Function* f)
+{
+	Scope* s = this->st->currScope->parent;
+	//Function* ff=
+}
+
 Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
 	Type * type =tname;
 	if (!type){
