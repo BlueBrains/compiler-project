@@ -204,7 +204,8 @@ public:
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
+	void print_symbol();
 	void check_functions();
-	Variable* checkVariable(char* v, int lineNo, int colNo);
+	Variable* checkVariable(char* v, Type* t, int lineNo, int colNo);
 };
 #endif

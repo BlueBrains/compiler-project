@@ -31,14 +31,14 @@ Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
 	return v;
 }
 Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
-	Variable * v = (Variable*)this->currScope->parent->m->get(name, "Variable");
+	Variable * v = (Variable*)this->currScope->parent->m->get(name,"Variable");
 	vector<Type*>i_t = t->getInheritedType();
 	
 	if (!v){
 		int j = 0;
 		for (int i = 0; i < i_t.size(); i++)
 		{
-			v = (Variable*)i_t.at(i)->getScope()->m->get(name);
+			v = (Variable*)i_t.at(i)->getScope()->m->get(name,"Variable");
 			j++;
 		}
 		if (!v)

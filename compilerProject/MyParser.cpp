@@ -206,7 +206,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 		f->setparameters(parameter[i]);
 	}
 
-	if ((tname->getaccessmod() == "Public") && (f->get_static != "final"))
+	if ((tname->getAccessModifier() == "Public") && (f->get_static != "final"))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -246,7 +246,7 @@ Type* MyParser::returninner(char* child, Type* t,int l,int cc)
 		return 0;
 	}
 	Type* tt = *ot;
-	Type* t2 = (Type*)tt->getScope()->m->get(child);
+	Type* t2 = (Type*)tt->getScope()->m->get(child,"Class");
 	if (!t)
 		{
 		//error not found class child
@@ -790,7 +790,7 @@ void MyParser::check_functions()
 	}
 
 }
-void MyParser:: print_symbol()
+void MyParser::print_symbol()
 {
 	print_st(this->st);
 }
