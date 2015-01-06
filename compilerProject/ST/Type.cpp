@@ -8,6 +8,7 @@ Type::Type(void)
 	this->scope = new Scope();
 	is_final = false;
 	outer_class = NULL;
+	_id = -1;
 	//int *x=new int;
 	//*x = getId();
 	children_ids.push_back(getId());
@@ -17,6 +18,7 @@ Type::Type(char* name, int typeSize) :Symbol(name), _typeSize(typeSize){
 	///int i = ll.size();
 	is_final = false;
 	outer_class = NULL;
+	_id = -1;
 	this->scope = new Scope();
 	this->status = completness::under_constraction;
 	//int *x=new int;
@@ -52,8 +54,41 @@ int Type::getTypeSize()
 	return _typeSize;
 }
 
-
-
+void Type::print()
+{
+	cout << "children id is :{ ";
+	for (int i = 0; i < children_ids.size(); i++)
+	{
+		cout << children_ids.at(i) << " , ";
+	}
+	cout << "}:" << endl;
+}
+void Type::setAccessModifier(char* accessModifier){
+	if (strcmp(accessModifier, "public")==0) {
+		this->accessModifier = Public;
+	}
+	else if (strcmp(accessModifier, "protected")==0) {
+		this->accessModifier = Protected;
+	}
+	else if (strcmp(accessModifier, "private")==0){
+		this->accessModifier = Private;
+	}
+	else{ this->accessModifier = Private; }
+}
+char* Type:: getAccessModifier()
+{
+	if (this != NULL){
+		switch (this->accessModifier){
+		case(AccessModifier::Protected) : {return "protected"; }
+		case(AccessModifier::Public) : {return "public"; }
+		default: return "private";
+		};
+	}
+	else
+	{
+		return NULL;
+	}
+}
 bool Type::getIs_final()
 {
 	return is_final;

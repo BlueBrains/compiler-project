@@ -30,13 +30,29 @@ Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
 	}
 	return v;
 }
-Variable * SymbolTable::getVariableFromCurrentScope(char* name){
-	Variable * v = (Variable*)this->currScope->m->get(name, "Variable");
+Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
+	Variable * v = (Variable*)this->currScope->parent->m->get(name, "Variable");
+	vector<Type*>i_t = t->getInheritedType();
+	
 	if (!v){
+		int j = 0;
+		for (int i = 0; i < i_t.size(); i++)
+		{
+			v = (Variable*)i_t.at(i)->getScope()->m->get(name);
+			j++;
+		}
+		if (!v)
+		{
 		Scope * temp = this->currScope->parent;
 		while (temp && !v){
 			v = (Variable*)temp->m->get(name, "Variable");
 			temp = temp->parent;
+		}
+	}
+		else
+		{
+			if (j > 1)
+				cout << "ambigious v in parents types";
 		}
 	}
 	return v;
