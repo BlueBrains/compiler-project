@@ -17,6 +17,7 @@ public:
     vector<Type*> declareted_type;
 	Scope * currScope;
 	Scope * rootScope;
+	Function * mainfunc;
 	Variable * insertVariableInCurrentScope(char* name, char* acc_mod);
 	Variable * getVariableFromCurrentScope(char* name);
 	Function * insertFunctionInCurrentScope(char* name);

@@ -10,7 +10,7 @@ SymbolTable::~SymbolTable(void){
 }
 
 Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
-	Variable * v = (Variable*)this->currScope->m->get(name);
+	Variable * v = (Variable*)this->currScope->m->get(name,"Variable");
 	if (v){
 		return 0;//item is exist previously
 	}
@@ -31,22 +31,22 @@ Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
 	return v;
 }
 Variable * SymbolTable::getVariableFromCurrentScope(char* name){
-	Variable * v = (Variable*)this->currScope->m->get(name);
+	Variable * v = (Variable*)this->currScope->m->get(name, "Variable");
 	if (!v){
 		Scope * temp = this->currScope->parent;
 		while (temp && !v){
-			v = (Variable*)temp->m->get(name);
+			v = (Variable*)temp->m->get(name, "Variable");
 			temp = temp->parent;
 		}
 	}
 	return v;
 }
 Type * SymbolTable::getTypeFromCurrentScope(char* name){
-	Type * v = (Type*)this->currScope->m->get(name);
+	Type * v = (Type*)this->currScope->m->get(name, "Class");
 	if (!v){
 		Scope * temp = this->currScope->parent;
 		while (temp && !v){
-			v = (Type*)temp->m->get(name);
+			v = (Type*)temp->m->get(name, "Class");
 			temp = temp->parent;
 		}
 	}
@@ -54,19 +54,19 @@ Type * SymbolTable::getTypeFromCurrentScope(char* name){
 }
 Type * SymbolTable::getTypeFromTypeScope(char* name, Type* type){
 	Scope* s = type->getScope()->parent;
-	Type * v = (Type*)s->m->get(name);
+	Type * v = (Type*)s->m->get(name,"Class");
 	//Type * v = (Type*)this->currScope->m->get(name);
 	if (!v){
 		Scope * temp = s->parent;
 		while (temp && !v){
-			v = (Type*)temp->m->get(name);
+			v = (Type*)temp->m->get(name, "Class");
 			temp = temp->parent;
 		}
 	}
 	return v;
 }
 Function * SymbolTable::insertFunctionInCurrentScope(char* name){
-	Function * f = (Function*)this->currScope->m->get(name);
+	Function * f = (Function*)this->currScope->m->get(name, "Function");
 	if (f)
 		return 0;
 	f = new Function();
@@ -78,7 +78,7 @@ Scope * SymbolTable::getrootscope(){
 	return this->rootScope;
 }
 Type * SymbolTable::insertTypeInCurrentScope(char* name){
-	Type * t = (Type*)this->currScope->m->get(name);
+	Type * t = (Type*)this->currScope->m->get(name, "Class");
 	if (t)
 		return 0;
 	t = new Type();
