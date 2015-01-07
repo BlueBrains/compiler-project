@@ -197,6 +197,8 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 	f->set_name(name);
 	f->set_final(access);
 	f->set_static(access);
+	f->set_public(access);
+	f->set_private(access);
 	type->getScope()->m->put(name, f, "Function");
 	f->setScope(new Scope);
 	f->getScope()->parent = type->getScope();
@@ -206,11 +208,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 		f->setparameters(parameter[i]);
 	}
 
-	if ((tname->getAccessModifier() == "Public") && !f->get_static())
+	if ((tname->getAccessModifier() == "PUBLIC") && !f->get_static())
 	{
 		if (st->mainfunc == NULL)
 		{
-			f->set_static("static");
+			f->set_static("STATIC");
 			st->mainfunc = f;
 		}
 		else

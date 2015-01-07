@@ -38,7 +38,7 @@ vector<Variable *>  Function::getparameters(){
 }
 
 void Function::set_final(char* m){
-	if (strcmp(m , "final")==0)
+	if (strcmp(m , "FINAL")==0)
 		this->is_final = true;
 }
 
@@ -46,8 +46,26 @@ bool Function::get_final(){
 	return this->is_final;
 }
 
+void Function::set_public(char* m){
+	if (strcmp(m, "PUBLIC") == 0)
+		this->is_public = true;
+}
+
+bool Function::get_public(){
+	return this->is_public;
+}
+
+void Function::set_private(char* m){
+	if (strcmp(m, "PRIVATE") == 0)
+		this->is_private = true;
+}
+
+bool Function::get_private(){
+	return this->is_private;
+}
+
 void Function::set_static(char* m){
-	if (strcmp( m , "static")==0)
+	if (strcmp( m , "STATIC")==0)
 		this->is_static = true;
 }
 

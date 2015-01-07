@@ -10,8 +10,8 @@ class Function :public Symbol{
 private:
 	Scope * scope;
 	bool is_static;
-	//bool is_virtual;
-	//bool is_abstract;
+	bool is_public;
+	bool is_private;
 	//bool is_override;
 	bool is_final;
 	vector<Variable *> parameters;
@@ -24,6 +24,10 @@ public:
 	void setScope(Scope* m);
 	void set_final(char* m);
 	bool get_final();
+	void set_public(char* m);
+	bool get_public();
+	void set_private(char* m);
+	bool get_private();
 	void set_static(char* m);
 	bool get_static();
 	Scope* getScope();

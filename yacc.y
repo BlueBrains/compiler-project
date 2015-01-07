@@ -34,10 +34,13 @@
 	char* i_type;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
+	//char* facc_mod;
 	vector<char *>inhertance_list;
 	vector<char *>ID_list;
 	Variable* v;
 	Type* t;
+	class Function * testfunction;
+	vector<char *> parameters;
 	class Parser
 	{
 		public:
@@ -290,12 +293,12 @@ var_declaration: access_modef ID {
 method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";}
 ;
 
-method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S args_list CLOSE_S \n";}
-			|access_modef ID OPEN_S ID CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S ID CLOSE_S \n";}
-			|ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S args_list CLOSE_S \n";}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";}
-			|access_modef ID OPEN_S  CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S  CLOSE_S \n";}
-			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S COLON \n";}
+method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+			|access_modef ID OPEN_S ID CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S ID CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+			|ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+			|access_modef ID OPEN_S  CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S  CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S COLON \n";testfunction = p->createTypeFunctionHeader(t,facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
 			|access_modef error OPEN_S args_list CLOSE_S {
 														Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-1<<endl;
 														err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-1,"Expected IDENTIFIER ","");
@@ -333,15 +336,21 @@ method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"metho
 			;//storage final const polymorephsim	
 
 args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA arg\n";}
-			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n";}
-			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n";}
-			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n";}
+			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n"; parameters.push_back($<r.strVal>1);}
+			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
+			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
 			|arg	{Streams::verbose()<<"args_list: arg \n";}
 ;
 
-arg:	STAR ID		{Streams::verbose()<<"arg:	STAR ID \n";}
+arg:	STAR ID		{Streams::verbose()<<"arg:	STAR ID \n";std::string tempstr($<r.strVal>2);
+			std::string erro("*" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 		| ID ASSIGN expr	{Streams::verbose()<<"arg:	ID ASSIGN expr \n";}
-		| STAR ID ASSIGN expr	{Streams::verbose()<<"arg:	STAR ID ASSIGN expr \n";}
+		| STAR ID ASSIGN expr	{Streams::verbose()<<"arg:	STAR ID ASSIGN expr \n";std::string tempstr($<r.strVal>2);
+			std::string erro("*" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 ;
 
 block_stmt:  COLON  END {Streams::verbose()<<"COLON  END \n";}			 
@@ -525,9 +534,11 @@ raise_stmt: RAISE	{Streams::verbose()<<"raise_stmt: RAISE\n";}
 												 }
 ;
 
-access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";}
-				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";}
-				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
+access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";facc_mod="PRIVATE";}
+				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";facc_mod="PUBLIC";}
+				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";facc_mod="PROTECTED";}
+				//|STATIC	{Streams::verbose()<<"access_modef:	PROTECTED\n";facc_mod="STATIC";}
+
 ;
 
 target: 	OPEN_S target_list CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S target_list CLOSE_S \n";}//(
