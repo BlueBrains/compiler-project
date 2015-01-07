@@ -24,7 +24,7 @@ bool check_class_in(Type* name, vector<constraction*> cons)
 {
 	for (int i = 0; i < cons.size(); i++)
 	{
-		if (*name == *cons.at(i)->get_type())
+		if (name == cons.at(i)->get_type())
 		{
 			return true;
 		}
@@ -570,6 +570,8 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 			constraction_type.at(i)->get_type()->setouter_class(constraction_type.at(i)->get_type()->getouter_class()->getouter_class());
 		}
 	}*/
+	check_functions();
+	print_symbol();
 	return 0;
 };
 
