@@ -129,7 +129,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
 
-		if ((strcmp(parameter.at(0), "self") != 0) && ( !s || !fi))
+		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
