@@ -196,7 +196,7 @@ public:
 	//YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(char* n, char*acc_mod, int lineNo, int colNo);
-	Function * createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo);
+	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool f, char* name, vector <char*> parameter, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
 	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
 	Type * finishTypeDeclaration(Type* t);

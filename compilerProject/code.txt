@@ -8,4 +8,5 @@ class c(a):
 	def func(self,a,b):end
 	def fofo(a,b):end
         def sasa (self,a,b):end
+end
 end.

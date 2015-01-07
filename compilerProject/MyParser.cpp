@@ -93,7 +93,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 	return v;
 }
 
-Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
+Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
 	Type * type = tname;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
@@ -124,12 +124,12 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") == 0) && (access == "STATIC" || access == "FINAL"))
+		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
 
-		if ((strcmp(parameter.at(0), "self") != 0) && (access != "STATIC" || access != "FINAL"))
+		if ((strcmp(parameter.at(0), "self") != 0) && ( !s || !fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
@@ -195,10 +195,9 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 
 	f = new Function();
 	f->set_name(name);
-	f->set_final(access);
-	f->set_static(access);
-	f->set_public(access);
-	f->set_private(access);
+	f->set_final(fi);
+	f->set_static(s);
+	f->set_private(p);
 	type->getScope()->m->put(name, f, "Function");
 	f->setScope(new Scope);
 	f->getScope()->parent = type->getScope();
@@ -212,7 +211,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 	{
 		if (st->mainfunc == NULL)
 		{
-			f->set_static("STATIC");
+			f->set_static(s);
 			st->mainfunc = f;
 		}
 		else

@@ -34,7 +34,11 @@
 	char* i_type;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
-	//char* facc_mod;
+
+	bool ss=false;
+	bool ff=false;
+	bool pp=true;
+
 	vector<char *>inhertance_list;
 	vector<char *>ID_list;
 	Variable* v;
@@ -247,14 +251,14 @@ dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLO
 	|STATIC class_decl	{Streams::verbose()<<"dm: STATIC class_decl\n";}
 	|FINAL STATIC class_decl	{Streams::verbose()<<"dm: FINAL STATIC class_decl\n";}
 	|STATIC FINAL class_decl	{Streams::verbose()<<"dm: STATIC FINAL class_decl\n";}
-	|STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC var_declaration SEMICOLON\n";}
-	|STATIC method_declaration	{Streams::verbose()<<"dm: STATIC	var_declaration\n";}
-	|FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL var_declaration SEMICOLON\n";}
-	|FINAL method_declaration	{Streams::verbose()<<"dm: FINAL var_declaration\n";}
-	|STATIC FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC FINAL var_declaration SEMICOLON\n";}
-	|STATIC FINAL method_declaration	{Streams::verbose()<<"dm:STATIC FINAL var_declaration\n";}
-	|FINAL STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL STATIC var_declaration SEMICOLON\n";}
-	|FINAL STATIC method_declaration	{Streams::verbose()<<"dm: FINAL STATIC var_declaration\n";}
+	|STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC var_declaration SEMICOLON\n";ss=true;}
+	|STATIC method_declaration	{Streams::verbose()<<"dm: STATIC	var_declaration\n";ss=true;}
+	|FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL var_declaration SEMICOLON\n";ff=true;}
+	|FINAL method_declaration	{Streams::verbose()<<"dm: FINAL var_declaration\n";ff=true;}
+	|STATIC FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC FINAL var_declaration SEMICOLON\n";ff=true;ss=true;}
+	|STATIC FINAL method_declaration	{Streams::verbose()<<"dm:STATIC FINAL var_declaration\n";ff=true;ss=true;}
+	|FINAL STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL STATIC var_declaration SEMICOLON\n";ff=true;ss=true;}
+	|FINAL STATIC method_declaration	{Streams::verbose()<<"dm: FINAL STATIC var_declaration\n";ff=true;ss=true;}
 	|var_declaration error {
 							Streams::verbose()<<"Error: Expected ';' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 							err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"Expected ';' ","");
@@ -293,12 +297,12 @@ var_declaration: access_modef ID {
 method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";}
 ;
 
-method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
-			|access_modef ID OPEN_S ID CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S ID CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
-			|ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
-			|access_modef ID OPEN_S  CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S  CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, $<r.strVal>1, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
-			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S COLON \n";testfunction = p->createTypeFunctionHeader(t,facc_mod, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();}
+method_h: 	access_modef ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
+			|access_modef ID OPEN_S ID CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S ID CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
+			|ID OPEN_S args_list CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S args_list CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t, ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
+			|access_modef ID OPEN_S  CLOSE_S 	{Streams::verbose()<<"method_h: access_modef ID OPEN_S  CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t, ss,pp,ff, $<r.strVal>2,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
+			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S COLON \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);parameters.clear();ff=false;ss=false;pp=true;}
 			|access_modef error OPEN_S args_list CLOSE_S {
 														Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-1<<endl;
 														err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-1,"Expected IDENTIFIER ","");
@@ -534,9 +538,9 @@ raise_stmt: RAISE	{Streams::verbose()<<"raise_stmt: RAISE\n";}
 												 }
 ;
 
-access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";facc_mod="PRIVATE";}
-				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";facc_mod="PUBLIC";}
-				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";facc_mod="PROTECTED";}
+access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;}
+				|PUBLIC		{Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false}
+				|PROTECTED	{Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				//|STATIC	{Streams::verbose()<<"access_modef:	PROTECTED\n";facc_mod="STATIC";}
 
 ;

@@ -81,7 +81,7 @@ void* MyMap::get(char* name, char* elemtype){
 	int index = this->hash(name);
 	//char* x = strcat(x, name);
 	MapElem * temp = this->arr[index];
-	while ((temp != 0) && (strcmp(temp->getName(), name) != 0) && (strcmp(temp->type, elemtype) != 0)){
+	while ((temp != 0) && ((strcmp(temp->getName(), name) != 0) || (strcmp(temp->type, elemtype) != 0))){
 		temp = temp->getNext();
 	}
 	if (temp == 0)
