@@ -206,7 +206,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 		f->setparameters(parameter[i]);
 	}
 
-	if ((tname->getAccessModifier() == "Public") && (f->get_static != "final"))
+	if ((tname->getAccessModifier() == "Public") && !f->get_static())
 	{
 		if (st->mainfunc == NULL)
 		{

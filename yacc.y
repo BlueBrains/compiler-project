@@ -12,7 +12,7 @@
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
 	#include <set>
-	#include "c:\users\amer-hy\source\repos\compiler-project - Copy - Copy\compilerproject\myparser.h"
+	#include "MyParser.h"
 	using namespace std;
 	class ColonStack
 	{
