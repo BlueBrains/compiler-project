@@ -6,6 +6,28 @@
 #include<vector>
 
 //===================== Data Structures From Help in Yacc ==============
+struct Comparator_char {
+	char* expected_char;
+
+	Comparator_char(char* _expected_char)
+		: expected_char(_expected_char)
+	{}
+
+	bool operator()(char* r1) const
+	{
+		if (strcmp(r1, expected_char) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	} // Just an example using strcmp
+};
+
+
 struct Comparator_type {
 	 Type* expected_type;
 
@@ -120,11 +142,53 @@ struct Comparator_constraction {
 	} // Just an example using strcmp
 };
 //======================================================================
+class unfinished
+{
+private:
+	Type* type;
+	Function *f;
+	int LineNo, ColNo;
+public:
+	Type* get_type()
+	{
+		return type;
+	}
+	Function* get_function()
+	{
+		return f;
+	}
+	int get_LineNo()
+	{
+		return LineNo;
+	}
+	int get_ColNo()
+	{
+		return ColNo;
+	}
+	unfinished(void)
+	{
+		type = new Type();
+		f = new Function();
+		LineNo = 0;
+		ColNo = 0;
+	}
+	unfinished(Type*t, Function * fun, int L, int C)
+	{
+		type = new Type();
+		f = new Function();
+		this->type = t;
+		this->f = fun;
+		this->ColNo = C;
+		this->LineNo = L;
+	}
+};
+
 class MyParser
 {
 public:
 	SymbolTable * st;
 	vector<constraction*>constraction_type;
+	vector<unfinished*>unfinishfunction;
 	vector<Type*>outer_type;
 	ErrorRecovery * errRecovery;
 	MyParser(void);
@@ -132,14 +196,16 @@ public:
 	//YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(char* n, char*acc_mod, int lineNo, int colNo);
-	Function * createTypeFunctionHeader(char* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo);
+	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool f, char* name, vector <char*> parameter, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
-	Type * createType(char* name, vector<char*>inherted_list, int lineno, int colno, bool is_final);
+	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
 	Type * finishTypeDeclaration(Type* t);
 	Type* returninner( char* child, Type* t,int l,int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
-	Variable* checkVariable(char* v, int lineNo, int colNo);
+	void print_symbol();
+	void check_functions();
+	Variable* checkVariable(char* v, Type* t, int lineNo, int colNo);
 };
 #endif
