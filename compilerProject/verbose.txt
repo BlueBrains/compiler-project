@@ -1,50 +1,88 @@
 unit_import: ID
 unit_list:	unit_import
-class_h: CLASS ID OPEN_S unit_list CLOSE_S 
-method_h: ID OPEN_S CLOSE_S COLON 
+unit_import: ID
+unit_import: unit_import DOT ID
+unit_list:	unit_list COMMA unit_import
+import_stmt : IMPORT unit_list SEMICOLON 
+class_h: CLASS ID 
+literal:	INTEGER_VALUE
+expr:	literal
+var_declaration: ID ASSIGN expr
+dm:	var_declaration SEMICOLON
+dm_list: DEF dm
+access_modef:	PUBLIC
+var_declaration: access_modef ID
+dm:	var_declaration SEMICOLON
+dm_list: dm_list DEF dm
+access_modef:	PUBLIC
+storage_modef: STATIC
+arg:	STAR ID 
+args_list: ID COMMA arg 
+literal:	CHAR_VALUE
+expr:	literal
+default_arg:	ID ASSIGN expr 
+default_args_list: default_arg 
+arguments:	args_list COMMA default_args_list
+method_h: ID OPEN_S arguments CLOSE_S 
+id_dot:	ID
 literal:    STRING_VALUE
 expr:	literal
-literal:	INTEGER_VALUE
-expr:	literal
-key_datum : expr COLON expr
-key_datum_list: key_datum
-literal:    STRING_VALUE
-expr:	literal
-literal:    STRING_VALUE
-expr:	literal
-key_datum : expr COLON expr
-key_datum_list: key_datum_list COMMA key_datum 
-literal:	INTEGER_VALUE
-expr:	literal
-literal:	INTEGER_VALUE
-expr:	literal
-key_datum : expr COLON expr
-key_datum_list: key_datum_list COMMA key_datum 
-literal:	FLOAT_VALUE
-expr:	literal
-literal:	INTEGER_VALUE
-expr:	literal
-key_datum : expr COLON expr
-key_datum_list: key_datum_list COMMA key_datum 
-dict_display: OPEN_C key_datum_list CLOSE_C 
-enclosure:	dict_display
-atom:	enclosure
-primary: 	atom
-attributeref: primary DOT ID
-target: 	attributeref
-target_list:	target
-long_id:	
+op :PLUS
+id_dot:	ID
+long_id:	id_dot
 expr:	long_id
+op :PLUS
+literal:    STRING_VALUE
+expr:	literal
+expr:	expr op expr
+expr:	expr op expr
 expr_list: expr %prec stmt_1
-assignment_stmt:	target_list ASSIGN expr_list
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
 stmt_list:	stmt 
-block_stmt:	stmt_list END 
+id_dot:	ID
+long_id:	id_dot
+expr:	long_id
+expr_list: expr %prec stmt_1
+print_stmt: PRINT expr_list
+simple_stmt_list: 	print_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+block_stmt: COLON stmt_list END 
+method_declaration: access_modef storage_modef method_h block_stmt
+dm:	method_declaration
+dm_list: dm_list DEF dm
+method_h: ID OPEN_S ID CLOSE_S 
+id_dot:	ID
+literal:	INTEGER_VALUE
+expr:	literal
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt 
+id_dot:	ID
+id_dot:	ID
+long_id:	id_dot
+expr:	long_id
+op :PLUS
+literal:	INTEGER_VALUE
+expr:	literal
+expr:	expr op expr
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+block_stmt: COLON stmt_list END 
 method_declaration: method_h block_stmt
-dm:	var_declaration
-dm_list: DEF dm
+dm:	method_declaration
+dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
-unit: class_decl
+unit: import_stmt class_decl
 program: unit
