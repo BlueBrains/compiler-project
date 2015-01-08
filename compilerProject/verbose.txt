@@ -1,15 +1,19 @@
 class_h: CLASS ID 
 method_h: ID OPEN_S CLOSE_S COLON 
-long_id:	ID OPEN_S CLOSE_S
-expr:	long_id
-expr_list: expr %prec stmt_1
-simple_stmt_list: 	expr_list
-stmt:	simple_stmt_list
+method_declaration:self.id
 stmt_list:	stmt 
 block_stmt:	stmt_list END 
 method_declaration: method_h block_stmt
 dm:	var_declaration
 dm_list: DEF dm
+access_modef: PRIVATE
+var_declaration: access_modef ID
+dm: FINAL var_declaration SEMICOLON
+dm_list: dm_list DEF dm
+access_modef:	PUBLIC
+var_declaration: access_modef ID
+dm: STATIC var_declaration SEMICOLON
+dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl

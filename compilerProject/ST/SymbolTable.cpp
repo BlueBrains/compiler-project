@@ -10,7 +10,7 @@ SymbolTable::~SymbolTable(void){
 }
 
 Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
-	Variable * v = (Variable*)this->currScope->m->get(name);
+	Variable * v = (Variable*)this->currScope->m->get(name,"Variable");
 	if (v){
 		return 0;//item is exist previously
 	}
@@ -31,23 +31,23 @@ Variable * SymbolTable::insertVariableInCurrentScope(char* name, char* acc_mod){
 	return v;
 }
 //lm nstkhdmh w glat galbn :)
-Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t)
+Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t, vector<char*>parameter)
 {
-	Function * f = (Function*)t->getScope()->m->get(name);
+	Function * f = (Function*)t->getScope()->m->get(name,"Function");
 	vector<Type*>i_t = t->getInheritedType();
 
 	if (!f){
 		int j = 0;
 		for (int i = 0; i < i_t.size(); i++)
 		{
-			f = (Function*)i_t.at(i)->getScope()->m->get(name);
+			f = (Function*)i_t.at(i)->getScope()->m->get(name,"Function");
 			j++;
 		}
 		if (!f)
 		{
-			Scope * temp = this->currScope->parent;
+			Scope * temp = t->getScope()->parent;
 			while (temp && !f){
-				f = (Function*)temp->m->get(name);
+				f = (Function*)temp->m->get(name,"Function");
 				temp = temp->parent;
 			}
 		}
@@ -55,34 +55,38 @@ Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t)
 		{
 			if (j > 1)
 				cout << "ambigious f in parents types";
+			f = NULL;
 		}
 	}
 	else
 	{
-		f->getparameters().size();
+		if ((f)&&(f->getparameters().size() != parameter.size()))
+		{
+			cout << "to few argument in function call";
+		}
 	}
 	return f;
 
 }
 Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
-	Variable * v = (Variable*)this->currScope->parent->m->get(name);
+	Variable * v = (Variable*)this->currScope->parent->m->get(name,"Variable");
 	vector<Type*>i_t = t->getInheritedType();
 	
 	if (!v){
 		int j = 0;
 		for (int i = 0; i < i_t.size(); i++)
 		{
-			v = (Variable*)i_t.at(i)->getScope()->m->get(name);
+			v = (Variable*)i_t.at(i)->getScope()->m->get(name,"Variable");
 			j++;
 		}
 		if (!v)
 		{
-			Scope * temp = this->currScope->parent;
-			while (temp && !v){
-				v = (Variable*)temp->m->get(name);
-				temp = temp->parent;
-			}
+		Scope * temp = this->currScope->parent;
+		while (temp && !v){
+			v = (Variable*)temp->m->get(name, "Variable");
+			temp = temp->parent;
 		}
+	}
 		else
 		{
 			if (j > 1)
@@ -92,11 +96,11 @@ Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
 	return v;
 }
 Type * SymbolTable::getTypeFromCurrentScope(char* name){
-	Type * v = (Type*)this->currScope->m->get(name);
+	Type * v = (Type*)this->currScope->m->get(name, "Class");
 	if (!v){
 		Scope * temp = this->currScope->parent;
 		while (temp && !v){
-			v = (Type*)temp->m->get(name);
+			v = (Type*)temp->m->get(name, "Class");
 			temp = temp->parent;
 		}
 	}
@@ -104,19 +108,19 @@ Type * SymbolTable::getTypeFromCurrentScope(char* name){
 }
 Type * SymbolTable::getTypeFromTypeScope(char* name, Type* type){
 	Scope* s = type->getScope()->parent;
-	Type * v = (Type*)s->m->get(name);
+	Type * v = (Type*)s->m->get(name,"Class");
 	//Type * v = (Type*)this->currScope->m->get(name);
 	if (!v){
 		Scope * temp = s->parent;
 		while (temp && !v){
-			v = (Type*)temp->m->get(name);
+			v = (Type*)temp->m->get(name, "Class");
 			temp = temp->parent;
 		}
 	}
 	return v;
 }
 Function * SymbolTable::insertFunctionInCurrentScope(char* name){
-	Function * f = (Function*)this->currScope->m->get(name);
+	Function * f = (Function*)this->currScope->m->get(name, "Function");
 	if (f)
 		return 0;
 	f = new Function();
@@ -128,7 +132,7 @@ Scope * SymbolTable::getrootscope(){
 	return this->rootScope;
 }
 Type * SymbolTable::insertTypeInCurrentScope(char* name){
-	Type * t = (Type*)this->currScope->m->get(name);
+	Type * t = (Type*)this->currScope->m->get(name, "Class");
 	if (t)
 		return 0;
 	t = new Type();

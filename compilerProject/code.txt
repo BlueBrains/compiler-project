@@ -1,5 +1,8 @@
+#self
 class a:
 def x():
-y();
+self.k;
 end
+def final private x;
+def static public k;
 end.

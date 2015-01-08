@@ -12,6 +12,9 @@ private:
 	Type * type;
 	enum	AccessModifier accessModifier;
 	bool isConst;
+	bool is_array;
+	bool is_dic;
+	bool is_static;
 public:
 	/*
 	Variable();
@@ -21,7 +24,8 @@ public:
 	void setType(char* n);
 	char* getType();
 	*/
-	Variable(char* name, Type* type, char* = "private");
+	bool by_self;
+	Variable(char* name, bool is_array = false, bool is_dic = false, char* = "private");
 	Variable(Variable*);
 	Variable();
 	Variable(char* name, Type* type, bool);
@@ -32,6 +36,7 @@ public:
 	virtual void setIsConst(bool);
 	Type* getType();
 	void setType(Type*);
-	
+	void set_static(bool s);
+	bool get_static();
 };
 #endif

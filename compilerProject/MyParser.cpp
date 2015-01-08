@@ -18,6 +18,21 @@ bool check_type_name(char* name, vector<Type*> outer_type)
 	}
 	return true;
 }
+
+
+bool check_class_in(Type* name, vector<constraction*> cons)
+{
+	for (int i = 0; i < cons.size(); i++)
+	{
+		if (*name == *cons.at(i)->get_type())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
 MyParser::MyParser(void)
 {
 	this->st = new SymbolTable();
@@ -49,19 +64,38 @@ Variable* MyParser::insertVar(char* n,char* acc_mod, int lineNo, int colNo){
 void MyParser::remove_vatiable(Variable* v)
 {
 	this->st->currScope->m->remove(v->get_name());
+	
 }
-
-Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo){
+Variable* MyParser::set_storage_modifier(Variable* v, bool is_static, bool is_final)
+{
+	v->set_static(is_static);
+	v->setIsConst(is_final);
+	return v;
+}
+Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo,bool self){
 	Variable* v = NULL;
-	if(n){
-		v = (Variable*)this->st->currScope->m->get(n);
-		if (v)
+	if((n)){
+		v = (Variable*)this->st->currScope->m->get(n,"Variable");
+		if ((v)&&(!v->by_self)&&(!self))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
 			return 0;
 		}
-		v = new Variable();
-		this->st->currScope->m->put(n, v,"Variable");
+		else if ((v) && (v->by_self) && (!self))//if v is exist and declarated by self in function and come def x;
+		{
+			v->by_self = false;
+			v->setAccessModifier(acc_mod);
+			//v->set_static(is_static);
+		}
+		else if (!v)
+		{
+			v = new Variable();
+			v->set_name(n);
+			v->setAccessModifier(acc_mod);
+			
+			v->by_self = self;
+			this->st->currScope->m->put(n, v, "Variable");
+		}
 	}
 	return v;
 }
@@ -81,52 +115,142 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 bool MyParser::check_function(char* name,Function* f)
 {
 	Scope* s = this->st->currScope->parent;
+	return true;
 	//Function* ff=
 }
 
 Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
-	Type * type =tname;
+	Type * type = tname;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
-		return 0;
+	}
+
+	bool nullclass = false;
+	if (check_class_in(tname, constraction_type))
+	{
+		nullclass = true;
 	}
 
 	for (int i = 0; i < int(type->getInheritedType().size()); i++)
 	{
-		Type * x = type->getInheritedType().at(i);
-		Function * f1 = (Function *)x->getScope()->m->get(name);
-		if (f1 && f1->get_final() )
+		Type* x = type->getInheritedType().at(i);
+		Function * f1 = (Function *)x->getScope()->m->get(name, "Function");
+		if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't override it ", f1->get_name());
-			return 0;
 		}
-		else if (f1 && !f1->comparePar(parameter) && (strcmp( f1->get_name() , "__init__")!=0))
+		else if (f1 && !f1->comparePar(parameter) && (f1->get_name() != "__init__"))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "the method didn't have the same overrided method parameter", f1->get_name());
-			return 0;
 		}
 	}
-	Function * f = (Function *)type->getScope()->m->get(name);
+	Function * f = (Function *)type->getScope()->m->get(name, "Function");
 	if (f){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Function is already exist inside type", name);
-		return 0;
+	}
+
+	if (parameter.size()>0){
+		if ((strcmp(parameter.at(0), "self") == 0) && (access == "STATIC" || access == "FINAL"))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
+		}
+
+		if ((strcmp(parameter.at(0), "self") != 0) && (access != "STATIC" || access != "FINAL"))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
+		}
+
+
+		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
+		if (it != parameter.end()){
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
+		}
+
+	}
+
+	vector <char *> tempvec = parameter;
+	vector <char *> cleanp = parameter;
+	int k = 0;
+	for (int i = 0; i < parameter.size(); i++) {
+		char* temp = new char[strlen(parameter.at(i)) + 1];
+		for (int j = 0; j < strlen(parameter.at(i)); j++) {
+			if ('*' != parameter.at(i)[j])
+			{
+				temp[j] = parameter.at(i)[j];
+				k++;
+			}
+		}
+		temp[k + 1] = '\0';
+		k = 0;
+		cleanp.at(i) = temp;
+	}
+
+	for (int i = 0; i < parameter.size(); i++) {
+		tempvec.at(i) = "!";
+		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(parameter.at(i)));
+		if (it != tempvec.end()){
+			std::string tempstr(parameter.at(i));
+			std::string erro("dublicated parameter " + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+
+			this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+		}
+
+	}
+
+	int onestar = 0;
+	int twostar = 0;
+
+	for (int i = 0; i < parameter.size(); i++) {
+		if ('*' == parameter.at(i)[0])
+		{
+			if ((strlen(parameter.at(i)) > 2) && ('*' == parameter.at(i)[1]))
+			{
+				twostar++;
+				if (twostar>1)
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "duplicated ** just one parameter that can be **", name);
+			}
+			else{
+				onestar++;
+				if (onestar>1)
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "duplicated * just one parameter that can be *", name);
+			}
+		}
 	}
 
 	f = new Function();
 	f->set_name(name);
 	f->set_final(access);
+	f->set_static(access);
 	type->getScope()->m->put(name, f, "Function");
 	f->setScope(new Scope);
 	f->getScope()->parent = type->getScope();
 	this->st->currScope = f->getScope();
 
 	for (int i = 0; i < parameter.size(); i++) {
-		f->setparameters(parameter[i], type);
+		f->setparameters(parameter[i]);
 	}
 
+	if (strcmp(tname->getAccessModifier() , "Public") && (!f->get_static()))
+	{
+		if (st->mainfunc == NULL)
+		{
+			f->set_static("static");
+			st->mainfunc = f;
+		}
+		else
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
+	}
 
+	if (nullclass)
+	{
+		unfinished *temp = new unfinished(tname, f, lineNo, colNo);
+		unfinishfunction.push_back(temp);
+	}
 	return f;
 }
+
 
 Function * MyParser::finishFunctionDeclaration(Function * f){
 	this->st->currScope = this->st->currScope->parent;
@@ -148,7 +272,7 @@ Type* MyParser::returninner(char* child, Type* t,int l,int cc)
 		return 0;
 	}
 	Type* tt = *ot;
-	Type* t2 = (Type*)tt->getScope()->m->get(child);
+	Type* t2 = (Type*)tt->getScope()->m->get(child,"Class");
 	if (!t)
 		{
 		//error not found class child
@@ -177,7 +301,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 {
 	//cout << "enter" << endl;
 	char *tokenPtr;
-	Type* t = (Type*)this->st->currScope->m->get(name);
+	Type* t = (Type*)this->st->currScope->m->get(name,"Class");
 	bool no_error = true;
 	if (t){
 		this->errRecovery->errQ->enqueue(lineno, colno, "Type is already exist", name);
@@ -218,7 +342,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 	{
 		for (int i = 0; i < outer_type.back()->getInheritedType().size(); i++)
 		{
-			Type* temp = (Type*)outer_type.back()->getInheritedType().at(i)->getScope()->m->get(name);
+			Type* temp = (Type*)outer_type.back()->getInheritedType().at(i)->getScope()->m->get(name,"Class");
 			if (temp)
 			{
 				cout << "Type is already exist in the parent class of outer class" << endl;
@@ -237,8 +361,8 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 	{
 		t->setouter_class(NULL);
 	}
-	if (is_final)
-	{
+		if (is_final)
+		{
 		t->setIs_final(true);
 	}
 	//cout << "the size is " << inherted_list.size() << endl;
@@ -446,6 +570,15 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 		//cout <<"end type "<< constraction_type.at(i)->get_type()->get_name()<<endl;
 	}
 	//Type * tt = new Type();
+	Function * f = (Function *)st->currScope->m->get("__init__", "Function");
+	if (!f){
+		f = new Function();
+		f->set_name("__init__");
+		outer_type.back()->getScope()->m->put(outer_type.back()->get_name(), f, "Function");
+		f->setScope(new Scope);
+		f->getScope()->parent = outer_type.back()->getScope();
+	}
+
 	this->st->currScope = this->st->currScope->parent;
 	
 	if (!outer_type.back()->declared)
@@ -564,7 +697,7 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 	{
 		
 		Scope * s = xx.at(i)->getScope();
-		y = (Type*)s->m->get(x);
+		y = (Type*)s->m->get(x,"Class");
 		if (y)
 		{
 			const char* ct = xx.at(i)->get_name();
@@ -644,7 +777,7 @@ void printScope(Scope *s)
 				}
 				else if (tempelem->gettype() == "Variable"){
 					Variable* t = (Variable*)tempelem->getElem();
-					cout << "element is Variable it's name is" << t->getAccessModifier() << " " << t->get_name() << endl;
+					cout << "element is Variable it's name is" << t->getAccessModifier() << " " << ((t->get_static() == true) ? "is static " : "is not static ") << ((t->getIsConst() == true) ? "is final " : "is not final ") << t->get_name() << endl;
 				}
 				tempelem = tempelem->getNext();
 			}
@@ -657,11 +790,33 @@ void printScope(Scope *s)
 
 void print_st(SymbolTable *s)
 {
-	cout << "rootScope {" << endl;
+
 	printScope(s->getrootscope());
-	cout << "end rootScope }" << endl;
+
 }
-void MyParser:: print_symbol()
+
+void MyParser::check_functions()
+{
+	for (int j = 0; j< unfinishfunction.size(); j++){
+		Type* t = unfinishfunction.at(j)->get_type();
+		for (int i = 0; i < int(t->getInheritedType().size()); i++)
+		{
+			Type* x = t->getInheritedType().at(i);
+			Function * f1 = (Function *)x->getScope()->m->get(unfinishfunction.at(j)->get_function()->get_name(), "Function");
+			if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
+			{
+				cout << "erroe 1"; this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
+			}
+			else if (f1 && (f1->getparameters().size() != unfinishfunction.at(j)->get_function()->getparameters().size()) && (f1->get_name() != "__init__"))
+			{
+				cout << "erroe 2";  this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
+			}
+
+		}
+	}
+
+}
+void MyParser::print_symbol()
 {
 	print_st(this->st);
 }

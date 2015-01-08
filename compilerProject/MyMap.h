@@ -30,7 +30,7 @@ public:
 	MyMap(void);
 	~MyMap(void);
 	void put(char* name, void* item, char* type);
-	void* get(char* name);
+	void* get(char* name, char* type);
 	void clear();
 	void remove(char* name);
 	MapElem* getbyId(int i);

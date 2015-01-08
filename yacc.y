@@ -71,8 +71,8 @@
 %token	IMPORT CLASS ID COLON CLOSE_S COMMA DOT ID END OPEN_C CLOSE_C 
 %token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY MULTI
 %token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL
-%token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD
-%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL STATIC
+%token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD 
+%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL STATIC SELF
 %token	LESS_THAN LESS_OR_EQUAL MORE_THAN MORE_OR_EQUAL TRUE FALSE EXCEPT SEMICOLON
 %token  NEW_LINE PASS CHAR_VALUE OPEN_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE
 %nonassoc stmt_1_2
@@ -243,14 +243,26 @@ dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLO
 	|FINAL class_decl	{Streams::verbose()<<"dm: FINAL class_decl\n";}
 	|STATIC class_decl	{Streams::verbose()<<"dm: STATIC class_decl\n";}
 	|FINAL STATIC class_decl	{Streams::verbose()<<"dm: FINAL STATIC class_decl\n";}
-	|STATIC FINAL class_decl	{Streams::verbose()<<"dm: STATIC FINAL class_decl\n";}
-	|STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC var_declaration SEMICOLON\n";}
+	|STATIC FINAL class_decl	{Streams::verbose()<<"dm: STATIC FINAL class_decl\n";}  
+	|STATIC var_declaration	SEMICOLON {
+										Streams::verbose()<<"dm: STATIC var_declaration SEMICOLON\n";
+										v=p->set_storage_modifier(v,1,0);
+										}
 	|STATIC method_declaration	{Streams::verbose()<<"dm: STATIC	var_declaration\n";}
-	|FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL var_declaration SEMICOLON\n";}
+	|FINAL var_declaration	SEMICOLON {
+										Streams::verbose()<<"dm: FINAL var_declaration SEMICOLON\n";
+										v=p->set_storage_modifier(v,0,1);
+										}
 	|FINAL method_declaration	{Streams::verbose()<<"dm: FINAL var_declaration\n";}
-	|STATIC FINAL var_declaration	SEMICOLON {Streams::verbose()<<"dm: STATIC FINAL var_declaration SEMICOLON\n";}
+	|STATIC FINAL var_declaration	SEMICOLON {
+												Streams::verbose()<<"dm: STATIC FINAL var_declaration SEMICOLON\n";
+												v=p->set_storage_modifier(v,1,1);
+												}
 	|STATIC FINAL method_declaration	{Streams::verbose()<<"dm:STATIC FINAL var_declaration\n";}
-	|FINAL STATIC var_declaration	SEMICOLON {Streams::verbose()<<"dm: FINAL STATIC var_declaration SEMICOLON\n";}
+	|FINAL STATIC var_declaration	SEMICOLON {
+												Streams::verbose()<<"dm: FINAL STATIC var_declaration SEMICOLON\n";
+												v=p->set_storage_modifier(v,1,1);
+												}
 	|FINAL STATIC method_declaration	{Streams::verbose()<<"dm: FINAL STATIC var_declaration\n";}
 	|var_declaration error {
 							Streams::verbose()<<"Error: Expected ';' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
@@ -368,6 +380,16 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 				|ID DOT ID SEMICOLON	{Streams::verbose()<<"stmt:	ID DOT ID SEMICOLON\n";}
 				|ID COMMA ID DOT ID DOT ID SEMICOLON {Streams::verbose()<<"stmt:	ID COMMA ID DOT ID DOT ID SEMICOLON\n";}
 				|ID DOT ID COMMA ID DOT ID DOT ID SEMICOLON {Streams::verbose()<<"stmt:	ID DOT ID COMMA ID DOT ID DOT ID SEMICOLON\n";}
+				|SELF DOT ID SEMICOLON	{Streams::verbose()<<"method_declaration:self.id\n";
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod, yylval.r.lineNum, yylval.r.colNum,true);
+															v=$<var>$;
+															acc_mod="";
+									}
+				|SELF DOT ID ASSIGN expr_list	SEMICOLON {Streams::verbose()<<"method_declaration:self.id=EXPR\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod, yylval.r.lineNum, yylval.r.colNum,true);
+															v=$<var>$;
+															acc_mod="";
+														}
 ;
 
 if_stmt:	if_header stmt %prec stmt_3	{Streams::verbose()<<"if_stmt:	if_header stmt\n";}

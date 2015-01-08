@@ -19,14 +19,17 @@ char* Variable::getType(){
 	return this->type;
 }
 */
-Variable::Variable(char* name, Type* type, char* accessModifier) :Symbol(name){
-	this->type = type;
-	this->isConst = false;
+Variable::Variable(char* name, bool is_array ,bool is_dic, char* accessModifier) :Symbol(name){
+	this->is_array = is_array;
+	this->is_dic = is_dic;
 	this->setAccessModifier(accessModifier);
 }
 Variable::Variable(){
 	this->type = NULL;
 	this->isConst = false;
+	this->is_array = false;
+	this->is_dic = false;
+
 	this->setAccessModifier("private");
 	//this->setAccessModifier(accessModifier);
 }
@@ -35,6 +38,14 @@ Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->isConst = isConst;
 	this->setAccessModifier("private");
 	
+}
+void Variable::set_static(bool s)
+{
+	is_static = s;
+}
+bool Variable::get_static()
+{
+	return is_static;
 }
 char* Variable::getAccessModifier(){
 	if (this != NULL){
