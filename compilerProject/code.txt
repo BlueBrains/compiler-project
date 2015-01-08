@@ -1,11 +1,6 @@
 class c(a):
 	def func(self,a,b):end
-	def fofo(a,b):end
-        def sasa (self,a,b):end
 end
-class a:	
-        def final func(self,a,b):end
-	def final fofo(a,b):end
-        def soso (a,b):end
-        def sasa (self,a,b):end
+class a:
+        def func(self,a,b):end
 end

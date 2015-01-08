@@ -8,19 +8,6 @@ COLON  END
 method_declaration: method_h block_stmt
 dm:	var_declaration
 dm_list: DEF dm
-args_list:	ID COMMA ID 
-method_h: ID OPEN_S args_list CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	var_declaration
-dm_list: dm_list DEF dm
-args_list:	ID COMMA ID 
-args_list:	args_list COMMA ID 
-method_h: ID OPEN_S args_list CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	var_declaration
-dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl
@@ -31,27 +18,8 @@ args_list:	args_list COMMA ID
 method_h: ID OPEN_S args_list CLOSE_S 
 COLON  END 
 method_declaration: method_h block_stmt
-dm: FINAL var_declaration
+dm:	var_declaration
 dm_list: DEF dm
-args_list:	ID COMMA ID 
-method_h: ID OPEN_S args_list CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm: FINAL var_declaration
-dm_list: dm_list DEF dm
-args_list:	ID COMMA ID 
-method_h: ID OPEN_S args_list CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	var_declaration
-dm_list: dm_list DEF dm
-args_list:	ID COMMA ID 
-args_list:	args_list COMMA ID 
-method_h: ID OPEN_S args_list CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	var_declaration
-dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl
