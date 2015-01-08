@@ -197,9 +197,9 @@ public:
 	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(char* n, char*acc_mod, int lineNo, int colNo);
 	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool f, char* name, vector <char*> parameter, int lineNo, int colNo);
-	Function * finishFunctionDeclaration(Function * f);
+	Function * finishFunctionDeclaration(Function * f, , bool change);
 	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
-	Type * finishTypeDeclaration(Type* t, bool change);
+	Type * finishTypeDeclaration(Type* t);
 	Type* returninner( char* child, Type* t,int l,int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
