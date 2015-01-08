@@ -1,6 +1,19 @@
-class c(a):
-	def func(self,a,b):end
-end
+import x,g.h;
 class a:
-        def func(self,a,b):end
+	def i=5;
+	def public b;
+	def public static func1(x,*y,z=''):
+		text = "value of x is " + x + "!";
+        print text;
+	end
+	def func2(self):
+		j=0;
+		j=j+1;
+		
+end
+class a:	
+        def final func(self,a,b):end
+	def final fofo(a,b):end
+        def soso (a,b):end
+        def sasa (self,a,b):end
 end

@@ -98,15 +98,17 @@
      LONG_VALUE = 324,
      FLOAT_VALUE = 325,
      stmt_1_2 = 326,
-     stmt_9 = 327,
-     stmt_8 = 328,
-     stmt_7 = 329,
-     stmt_6 = 330,
-     stmt_5 = 331,
-     stmt_4 = 332,
-     stmt_3 = 333,
-     stmt_2 = 334,
-     stmt_1 = 335
+     stmt_11 = 327,
+     stmt_10 = 328,
+     stmt_9 = 329,
+     stmt_7 = 330,
+     stmt_6 = 331,
+     stmt_5 = 332,
+     stmt_4 = 333,
+     stmt_3 = 334,
+     stmt_2 = 335,
+     stmt_1 = 336,
+     stmt_8 = 337
    };
 #endif
 /* Tokens.  */
@@ -179,21 +181,23 @@
 #define LONG_VALUE 324
 #define FLOAT_VALUE 325
 #define stmt_1_2 326
-#define stmt_9 327
-#define stmt_8 328
-#define stmt_7 329
-#define stmt_6 330
-#define stmt_5 331
-#define stmt_4 332
-#define stmt_3 333
-#define stmt_2 334
-#define stmt_1 335
+#define stmt_11 327
+#define stmt_10 328
+#define stmt_9 329
+#define stmt_7 330
+#define stmt_6 331
+#define stmt_5 332
+#define stmt_4 333
+#define stmt_3 334
+#define stmt_2 335
+#define stmt_1 336
+#define stmt_8 337
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 60 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 46 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -203,10 +207,6 @@ typedef union YYSTYPE {
 		int lineNum;
 		int colNum;
 	}r;
-		class YaccSimpleType * yaccSimpleType;
-		class Variable * var;
-		class Function * function;
-		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
 #line 213 "yacc.hpp"
