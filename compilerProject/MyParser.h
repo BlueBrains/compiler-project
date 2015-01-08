@@ -199,7 +199,7 @@ public:
 	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool f, char* name, vector <char*> parameter, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f);
 	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
-	Type * finishTypeDeclaration(Type* t);
+	Type * finishTypeDeclaration(Type* t, bool change);
 	Type* returninner( char* child, Type* t,int l,int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();

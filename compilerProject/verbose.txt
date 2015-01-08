@@ -1,4 +1,6 @@
-class_h: CLASS ID 
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
 literal:	INTEGER_VALUE
 expr:	literal
 var_declaration: ID ASSIGN expr

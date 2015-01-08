@@ -1,7 +1,7 @@
-class a:
+class a(b):
 	def i=5;
 	def public b;
-	def public static func1(x,*y,z=''):
+	def public static func(x,*y,z=''):
 		text = "value of x is " + x + "!";
         print text;
 	end
