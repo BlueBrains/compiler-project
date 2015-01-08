@@ -1,4 +1,3 @@
-import x,g.h;
 class a:
 	def i=5;
 	def public b;
@@ -11,7 +10,8 @@ class a:
 		j=j+1;
 		
 end
-class a:	
+end
+class b:	
         def final func(self,a,b):end
 	def final fofo(a,b):end
         def soso (a,b):end

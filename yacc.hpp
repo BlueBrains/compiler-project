@@ -197,7 +197,7 @@
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 46 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 60 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -207,9 +207,13 @@ typedef union YYSTYPE {
 		int lineNum;
 		int colNum;
 	}r;
+		class YaccSimpleType * yaccSimpleType;
+		class Variable * var;
+		class Function * function;
+		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 213 "yacc.hpp"
+#line 217 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

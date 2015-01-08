@@ -38,7 +38,7 @@
 	bool ss=false;
 	bool ff=false;
 	bool pp=true;
-
+	
 	vector<char *>inhertance_list;
 	vector<char *>ID_list;
 	Variable* v;
@@ -287,13 +287,16 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 					|storage_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: storage_modef method_h block_stmt\n";}
 					|access_modef storage_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef storage_modef method_h block_stmt\n";}					
 					|storage_modef access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: storage_modef access_modef method_h block_stmt\n";}
-					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";}
-					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";}
+					|skipstatic access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";}
+					|skipfinal access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";}
 ;
 
-method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";}			
-			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";}
+skipstatic: STATIC{ss=true;}
+skipfinal:  FINAL{ff=true;}
+
+method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}			
+			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
 			|error OPEN_S arguments CLOSE_S {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
@@ -339,7 +342,10 @@ arg:	STAR ID		{
 						char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 					}
-		|STAR STAR ID		{Streams::verbose()<<"arg:	STAR STAR ID \n";}
+		|STAR STAR ID		{Streams::verbose()<<"arg:	STAR STAR ID \n";std::string tempstr($<r.strVal>3);
+						std::string erro("**" + tempstr);
+						char *cstr = new char[erro.length() + 1];
+						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 		|ID STAR error {
 							Streams::verbose()<<"Error: Un Expected '*' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 							err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2)," Un Expected '*' ","");
@@ -363,14 +369,17 @@ default_args_list:	default_args_list COMMA default_arg	{Streams::verbose()<<"def
 														}
 ;
 
-default_arg:  ID ASSIGN expr	{Streams::verbose()<<"default_arg:	ID ASSIGN expr \n";}
+default_arg:  ID ASSIGN expr	{Streams::verbose()<<"default_arg:	ID ASSIGN expr \n";parameters.push_back($<r.strVal>1);}
 			| STAR ID ASSIGN expr	{
 										Streams::verbose()<<"arg:	STAR ID ASSIGN expr \n";std::string tempstr($<r.strVal>2);
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 									}
-			| STAR STAR ID ASSIGN expr	{Streams::verbose()<<"default_arg:	STAR STAR ID ASSIGN expr \n";}
+			| STAR STAR ID ASSIGN expr	{Streams::verbose()<<"default_arg:	STAR STAR ID ASSIGN expr \n";std::string tempstr($<r.strVal>3);
+										std::string erro("**" + tempstr);
+										char *cstr = new char[erro.length() + 1];
+										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 			| ID STAR error STAR ASSIGN expr	{
 											Streams::verbose()<<"Error: Un Expected '**' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2)," Un Expected '**' ","");
@@ -580,8 +589,8 @@ access_modef: 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="
 				
 
 ;
-storage_modef:	 STATIC %prec stmt_10 {Streams::verbose()<<"storage_modef: STATIC\n";}
-				 |FINAL %prec stmt_10 {Streams::verbose()<<"storage_modef: FINAL\n";}
+storage_modef:	 STATIC %prec stmt_10 {Streams::verbose()<<"storage_modef: STATIC\n"; ss=true;}
+				 |FINAL %prec stmt_10 {Streams::verbose()<<"storage_modef: FINAL\n"; ff=true;}
 
 target: 	OPEN_S target_list CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S target_list CLOSE_S \n";}//(
 			|OPEN_S ID COMMA ID CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S ID COMMA ID CLOSE_S\n";}//(
