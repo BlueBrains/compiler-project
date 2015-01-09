@@ -47,8 +47,6 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);
 				return IMPORT;
 			}
-
-
 "class"		{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -59,6 +57,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal = x;
 				return CLASS;
 			}
+
 ":"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -282,6 +281,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	DEL;
+			}
+"print"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return PRINT;
 			}
 "final"		{
 				colNum += strlen(yytext);
@@ -681,6 +689,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 <multilinecomment>[^"*"]*    {colNum+=strlen(yytext);	}
 <multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	cout<<"comment"; BEGIN(INITIAL);}
 \'[a-zA-z]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+\'\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 {identifier}			{						
 							colNum += strlen(yytext);
 							yylval.r.colNum = colNum;

@@ -24,7 +24,7 @@ bool check_class_in(Type* name, vector<constraction*> cons)
 {
 	for (int i = 0; i < cons.size(); i++)
 	{
-		if (*name == *cons.at(i)->get_type())
+		if (name == cons.at(i)->get_type())
 		{
 			return true;
 		}
@@ -64,7 +64,7 @@ Variable* MyParser::insertVar(char* n,char* acc_mod, int lineNo, int colNo){
 void MyParser::remove_vatiable(Variable* v)
 {
 	this->st->currScope->m->remove(v->get_name());
-	
+
 }
 Variable* MyParser::set_storage_modifier(Variable* v, bool is_static, bool is_final)
 {
@@ -72,7 +72,7 @@ Variable* MyParser::set_storage_modifier(Variable* v, bool is_static, bool is_fi
 	v->setIsConst(is_final);
 	return v;
 }
-Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo,bool self){
+Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_static, bool is_final, int lineNo, int colNo, bool self){
 	Variable* v = NULL;
 	if((n)){
 		v = (Variable*)this->st->currScope->m->get(n,"Variable");
@@ -89,12 +89,29 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo
 		}
 		else if (!v)
 		{
-			v = new Variable();
+		v = new Variable();
 			v->set_name(n);
 			v->setAccessModifier(acc_mod);
-			
 			v->by_self = self;
-			this->st->currScope->m->put(n, v, "Variable");
+			if (self)
+			{
+				v->set_static(true);
+				this->st->currScope->parent->m->put(n, v, "Variable");
+			}
+			else
+			{
+				v->setIsConst(is_final);
+				v->set_static(is_static);
+				if (outer_type.back()->getouter_class() != NULL)
+				{
+					if ((is_static) &&(!is_final)&& (!outer_type.back()->getIs_static()))
+					{
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "Illegal static declaration in inner class", n);
+					}
+				}
+				this->st->currScope->m->put(n, v, "Variable");
+			}
+				
 		}
 	}
 	return v;
@@ -112,14 +129,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
 	return v;
 }
 
-bool MyParser::check_function(char* name,Function* f)
-{
-	Scope* s = this->st->currScope->parent;
-	return true;
-	//Function* ff=
-}
-
-Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* name, vector <char*> parameter, int lineNo, int colNo){
+Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
 	Type * type = tname;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
@@ -150,12 +160,12 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") == 0) && (access == "STATIC" || access == "FINAL"))
+		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
 
-		if ((strcmp(parameter.at(0), "self") != 0) && (access != "STATIC" || access != "FINAL"))
+		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
@@ -221,8 +231,9 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 
 	f = new Function();
 	f->set_name(name);
-	f->set_final(access);
-	f->set_static(access);
+	f->set_final(fi);
+	f->set_static(s);
+	f->set_private(p);
 	type->getScope()->m->put(name, f, "Function");
 	f->setScope(new Scope);
 	f->getScope()->parent = type->getScope();
@@ -232,11 +243,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 		f->setparameters(parameter[i]);
 	}
 
-	if (strcmp(tname->getAccessModifier() , "Public") && (!f->get_static()))
+	if ((tname->getAccessModifier() == "PUBLIC") && !f->get_static())
 	{
 		if (st->mainfunc == NULL)
 		{
-			f->set_static("static");
+			f->set_static(s);
 			st->mainfunc = f;
 		}
 		else
@@ -252,7 +263,12 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, char* access, char* n
 }
 
 
-Function * MyParser::finishFunctionDeclaration(Function * f){
+Function * MyParser::finishFunctionDeclaration(Function * f,bool change){
+	if (change)
+	{
+		f->set_static(true);
+		f->set_final(true);
+	}
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
@@ -562,13 +578,20 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 	//cout << r->get_name();
 	return t;
 };
-
+void MyParser::check_static(Type* t,int lineno,int colno)
+{
+	if (t->getouter_class()->getIs_static())
+	{
+		if (!t->getIs_static())
+		{
+			cout << "the outer class has the same name" << endl;
+			this->errRecovery->errQ->enqueue(lineno, colno, "the outer class has the same name", "ll");
+		}
+	}
+}
 Type * MyParser::finishTypeDeclaration(Type* t){
 	//cout <<"size "<< constraction_type.size() << endl;
-	for (int i = 0; i < constraction_type.size(); i++)
-	{
-		//cout <<"end type "<< constraction_type.at(i)->get_type()->get_name()<<endl;
-	}
+	
 	//Type * tt = new Type();
 	Function * f = (Function *)st->currScope->m->get("__init__", "Function");
 	if (!f){
@@ -595,6 +618,8 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 			constraction_type.at(i)->get_type()->setouter_class(constraction_type.at(i)->get_type()->getouter_class()->getouter_class());
 		}
 	}*/
+	check_functions();
+	print_symbol();
 	return 0;
 };
 

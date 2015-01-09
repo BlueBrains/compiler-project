@@ -1,21 +1,30 @@
-class_h: CLASS ID 
-method_h: ID OPEN_S CLOSE_S COLON 
-method_declaration:self.id
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+method_h: ID OPEN_S CLOSE_S 
+parenth_form : 	OPEN_S  CLOSE_S
+expr:	self.id()
+expr_list: expr %prec stmt_1
+simple_stmt_list: 	expr_list
+stmt:	simple_stmt_list
 stmt_list:	stmt 
-block_stmt:	stmt_list END 
+parenth_form : 	OPEN_S  CLOSE_S
+expr:	self.id()
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+expr:	self.id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+block_stmt: COLON stmt_list END 
 method_declaration: method_h block_stmt
-dm:	var_declaration
+dm:	method_declaration
 dm_list: DEF dm
 access_modef: PRIVATE
-var_declaration: access_modef ID
-dm: FINAL var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-access_modef:	PUBLIC
-var_declaration: access_modef ID
-dm: STATIC var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-class_body:COLON dm_list END
-class_decl: class_h class_body
-unit: class_decl
-program: unit
-prgram : program unit

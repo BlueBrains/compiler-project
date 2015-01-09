@@ -20,12 +20,10 @@
   <ItemGroup>
     <None Include="..\lex.l" />
     <None Include="..\yacc.y" />
-    <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
-    <None Include="..\yaccc1.y" />
-    <None Include="..\yaccc2.y" />
-    <None Include="..\yacct.y" />
     <None Include="khaled.y" />
+    <None Include="..\yacc - Copy.y" />
+    <None Include="..\yacc - Copy - Copy.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">

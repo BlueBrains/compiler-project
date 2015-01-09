@@ -9,6 +9,7 @@ Type::Type(void)
 	is_final = false;
 	outer_class = NULL;
 	_id = -1;
+	is_static = false;
 	//int *x=new int;
 	//*x = getId();
 	children_ids.push_back(getId());
@@ -18,6 +19,7 @@ Type::Type(char* name, int typeSize) :Symbol(name), _typeSize(typeSize){
 	///int i = ll.size();
 	is_final = false;
 	outer_class = NULL;
+	is_static = false;
 	_id = -1;
 	this->scope = new Scope();
 	this->status = completness::under_constraction;
@@ -93,6 +95,10 @@ bool Type::getIs_final()
 {
 	return is_final;
 }
+bool Type::getIs_static()
+{
+	return is_static;
+}
 void Type::setouter_class(Type* e)
 {
 	this->outer_class = e;
@@ -105,6 +111,11 @@ void Type::setIs_final(bool final)
 {
 	
 	is_final = true;
+}
+void Type::setIs_static(bool final)
+{
+
+	is_static = true;
 }
 bool Type::setInheritedType(Type* e){
 	bool k;

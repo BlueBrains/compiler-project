@@ -1,7 +1,8 @@
-#self
-class a:
+class a(b):
 def x():
-self.k;
+self.p();
+self.k=self.i();
+self.l=self.o;
 end
 def final private x;
 def static public k;

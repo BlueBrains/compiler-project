@@ -63,6 +63,8 @@ public:
 	void setImplemented();
 	void setIs_final(bool final);
 	bool getIs_final();
+	void setIs_static(bool final);
+	bool getIs_static();
 	completness getStatus();
 	void setStatus(completness);
 	int getId();
@@ -77,6 +79,7 @@ private:
 	enum	AccessModifier accessModifier;
 	Scope * scope;
 	bool is_final;
+	bool is_static;
 	int _id;
 	vector<int> children_ids;
 vector<Type*> inhertedList;
