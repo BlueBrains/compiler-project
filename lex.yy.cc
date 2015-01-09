@@ -711,9 +711,16 @@ do_action:	/* This label is used only to access EOF actions. */
 			yy_current_state = yy_last_accepting_state;
 			goto yy_find_action;
 
+case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(multilinecomment):
+case YY_STATE_EOF(import):
+case YY_STATE_EOF(String):
+#line 41 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+{cout<<"EOF found\n";return END_OF_FILE;}
+	YY_BREAK
 case 1:
 YY_RULE_SETUP
-#line 41 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 42 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -726,7 +733,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 50 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 51 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -740,7 +747,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 60 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 61 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -753,7 +760,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 69 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 70 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				lineNum ++;
 				colNum = 0;
@@ -764,7 +771,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 76 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 77 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -777,7 +784,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 85 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 86 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -790,7 +797,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 94 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 95 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -803,7 +810,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 103 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 104 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -816,7 +823,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 113 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 114 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -829,7 +836,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 122 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 123 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -842,7 +849,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 131 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 132 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -855,7 +862,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 140 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 141 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -868,7 +875,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 149 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 150 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -881,7 +888,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 158 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 159 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -894,7 +901,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 167 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 168 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -907,7 +914,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 176 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 177 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -920,7 +927,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 185 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 186 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -933,7 +940,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 194 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 195 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -946,7 +953,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 203 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 204 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -959,7 +966,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 212 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 213 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -972,7 +979,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 221 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 222 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -985,7 +992,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 230 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 231 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -998,7 +1005,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 239 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 240 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1011,7 +1018,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 248 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 249 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1024,7 +1031,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 257 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 258 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1037,7 +1044,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 266 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 267 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1050,7 +1057,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 275 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 276 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1063,7 +1070,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 284 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 285 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1076,7 +1083,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 293 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 294 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1089,7 +1096,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 302 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 303 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1102,7 +1109,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 311 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 312 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1115,7 +1122,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 320 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 321 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1128,7 +1135,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 329 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 330 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1141,7 +1148,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 338 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 339 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1154,7 +1161,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 347 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 348 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1167,7 +1174,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 356 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 357 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1180,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 365 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 366 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1193,7 +1200,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 374 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 375 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {	
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1206,7 +1213,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 383 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 384 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1219,7 +1226,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 392 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 393 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1232,7 +1239,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 401 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 402 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1245,7 +1252,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 410 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 411 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1258,7 +1265,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 419 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 420 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1271,7 +1278,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 428 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 429 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1284,7 +1291,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 437 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 438 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1297,7 +1304,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 446 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 447 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1310,7 +1317,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 455 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 456 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1323,7 +1330,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 464 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 465 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1336,7 +1343,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 473 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 474 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1349,7 +1356,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 482 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 483 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1362,7 +1369,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 491 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 492 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1375,7 +1382,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 500 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 501 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1388,7 +1395,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 509 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 510 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1401,7 +1408,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 518 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 519 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1414,7 +1421,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 527 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 528 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1427,7 +1434,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 536 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 537 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1440,7 +1447,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 545 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 546 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1453,7 +1460,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 554 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 555 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1466,7 +1473,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 563 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 564 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1479,7 +1486,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 572 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 573 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1496,7 +1503,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 585 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 586 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1512,7 +1519,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 597 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 598 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 					int v = 1;int res=0;int val;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1544,7 +1551,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 625 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 626 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				//cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1561,7 +1568,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 638 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 639 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 				//cout<<":Float value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1575,7 +1582,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 648 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 649 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {							
 							BEGIN (String);
 							str = new char[255];
@@ -1584,12 +1591,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 653 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{cout<<"str1="<<yytext<<"\n";colNum+=2;}
+#line 654 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+{//cout<<"str1="<<yytext<<"\n";
+							colNum+=2;
+						}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 654 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 657 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 							//cout<<"str2="<<yytext<<"\n";
 							str[index++] = yytext[0];
@@ -1598,7 +1607,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 659 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 662 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {
 							//cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
@@ -1610,7 +1619,7 @@ YY_RULE_SETUP
 							cout<<"The Full String is = "<<str<<"\n";
 							yylval.r.strVal = str;
 							yylval.r.colNum = colNum;
-							cout<<colNum;
+							//cout<<colNum;
 							str = 0;
 							BEGIN (INITIAL);
 							return STRING_VALUE;
@@ -1618,47 +1627,47 @@ YY_RULE_SETUP
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 675 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 678 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 676 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 679 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {colNum+=2;		BEGIN(multilinecomment);}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 677 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 680 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {lineNum+=1;	BEGIN(multilinecomment);}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 678 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 681 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 679 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 682 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 680 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{colNum+=strlen(yytext);	cout<<"comment"; BEGIN(INITIAL);}
+#line 683 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+{colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 681 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 684 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 682 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 685 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 683 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 686 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {						
 							colNum += strlen(yytext);
 							yylval.r.colNum = colNum;
@@ -1667,26 +1676,21 @@ YY_RULE_SETUP
 							x[0] = '\0';
 							strcpy_s(x,255, yytext);
 							yylval.r.strVal = x;
-							cout<<yylval.r.colNum;
+							//cout<<yylval.r.colNum;
 							return ID;												
 						}
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 694 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 697 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 {colNum+=strlen(yytext);yylval.r.colNum=colNum;}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 695 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 698 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 ECHO;
 	YY_BREAK
-#line 1683 "lex.yy.cc"
-case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(multilinecomment):
-case YY_STATE_EOF(import):
-case YY_STATE_EOF(String):
-	yyterminate();
+#line 1692 "lex.yy.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2491,5 +2495,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 695 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 698 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 
