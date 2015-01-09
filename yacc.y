@@ -243,7 +243,7 @@ class_h:
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
-					}
+					}  
 		|FINAL access_modef FINAL CLASS ID {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
@@ -564,7 +564,7 @@ class_body:   COLON END		{
 					ColonStack* temp = colonStack.top();
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected ':' at Line No:"<<temp->lineNum<<" Column No:"<<temp->colNum<<endl;
-					$<type>$=p->finishTypeDeclaration(t);
+						$<type>$=p->finishTypeDeclaration(t);
 					err->errQ->enqueue(temp->lineNum,temp->colNum,"Expected ':' ","");
 				  }
 			| COLON error {					
@@ -704,18 +704,18 @@ var_declaration: access_modef ID {
 						}
 ;
 
-method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";}
-					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";}
-					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";}
-					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";}
+method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
 					|access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";}					
 					|access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";}					
-					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";}
-					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";}
-					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";}
-					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";}
-					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";}
-					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";}
+					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true);parameters.clear();}
+					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true);parameters.clear();}
+					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
 					|FINAL access_modef FINAL error method_h block_stmt	{
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
@@ -742,9 +742,10 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 																			}
 ;
 
-method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";}			
-			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";}
+
+method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}			
+			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
 			|error OPEN_S arguments CLOSE_S {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
@@ -768,7 +769,7 @@ method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_
 			|ID OPEN_S ID error  {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>4+1<<endl;
 														err->errQ->enqueue($<r.lineNum>1,$<r.colNum>4+1,"Expected ')' ","");
-													 }	
+													 }
 ;
 
 arguments : args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n";}
@@ -788,7 +789,10 @@ arg:	STAR ID		{
 						char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 					}
-		|STAR STAR ID		{Streams::verbose()<<"arg:	STAR STAR ID \n";}
+		|STAR STAR ID		{Streams::verbose()<<"arg:	STAR STAR ID \n";std::string tempstr($<r.strVal>3);
+						std::string erro("**" + tempstr);
+						char *cstr = new char[erro.length() + 1];
+						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 		|ID STAR error {
 							Streams::verbose()<<"Error: Un Expected '*' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 							err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2)," Un Expected '*' ","");
@@ -812,14 +816,17 @@ default_args_list:	default_args_list COMMA default_arg	{Streams::verbose()<<"def
 														}
 ;
 
-default_arg:  ID ASSIGN expr	{Streams::verbose()<<"default_arg:	ID ASSIGN expr \n";}
+default_arg:  ID ASSIGN expr	{Streams::verbose()<<"default_arg:	ID ASSIGN expr \n";parameters.push_back($<r.strVal>1);}
 			| STAR ID ASSIGN expr	{
 										Streams::verbose()<<"arg:	STAR ID ASSIGN expr \n";std::string tempstr($<r.strVal>2);
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 									}
-			| STAR STAR ID ASSIGN expr	{Streams::verbose()<<"default_arg:	STAR STAR ID ASSIGN expr \n";}
+			| STAR STAR ID ASSIGN expr	{Streams::verbose()<<"default_arg:	STAR STAR ID ASSIGN expr \n";std::string tempstr($<r.strVal>3);
+										std::string erro("**" + tempstr);
+										char *cstr = new char[erro.length() + 1];
+										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);}
 			| ID STAR error STAR ASSIGN expr	{
 											Streams::verbose()<<"Error: Un Expected '**' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlength($<r.strVal>2)," Un Expected '**' ","");
@@ -843,7 +850,7 @@ block_stmt:  COLON  END {Streams::verbose()<<"COLON  END \n";}
 			 |error stmt_list END	{
 								Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
-									}			 
+						}
 			 |COLON stmt_list error	{
 										Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'end' ","");									
@@ -1042,7 +1049,7 @@ del_stmt:	DEL target_list	{Streams::verbose()<<"del_stmt:	DEL target_list\n";}
 
 return_stmt:	RETURN	{Streams::verbose()<<"return_stmt:	RETURN\n";}
 				|RETURN expr_list	{Streams::verbose()<<"return_stmt:	RETURN expr_list\n";}
-				;
+;
 
 yield_stmt:		yield_expression	{Streams::verbose()<<"yield_stmt:		yield_expression\n";}
 ;
@@ -1210,7 +1217,7 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		 //|long_id DOT ID OPEN_S CLOSE_S				{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 //|long_id DOT ID OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}		 		 
 		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";}		 		 
-		|id_dot parenth_form {Streams::verbose()<<"long_id:	id_dot parenth_form\n";}
+		|id_dot parenth_form {Streams::verbose()<<"long_id:	id_dot parenth_form\n";}		 		 
 		|id_dot OPEN_D expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";}
 		|id_dot OPEN_D expr COLON expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";}
 		|id_dot OPEN_D COLON CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";}

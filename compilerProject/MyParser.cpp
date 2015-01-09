@@ -227,7 +227,12 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 }
 
 
-Function * MyParser::finishFunctionDeclaration(Function * f){
+Function * MyParser::finishFunctionDeclaration(Function * f,bool change){
+	if (change)
+	{
+		f->set_static(true);
+		f->set_final(true);
+	}
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
