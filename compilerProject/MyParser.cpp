@@ -98,7 +98,14 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 	}
-
+	else
+	{
+		if ((outer_type.back()!=NULL) && (strcmp(tname->getAccessModifier(), "STATIC") != 0) && s)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add static function to not static inner class", name);
+		}
+	}
+   
 	bool nullclass = false;
 	if (check_class_in(tname, constraction_type))
 	{
@@ -207,15 +214,30 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		f->setparameters(parameter[i]);
 	}
 
-	if ((tname->getAccessModifier() == "PUBLIC") && !f->get_static())
+	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
-			f->set_static(s);
+			f->set_static(true);
 			st->mainfunc = f;
 		}
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
+	}
+	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
+	{
+		if (st->mainfunc == NULL)
+		{
+			f->set_static(true);
+			st->mainfunc = f;
+		}
+		else
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
+	}
+
+	if ((outer_type.back() != NULL) && (!tname->getIs_static()) && f->get_static())
+	{
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}
 
 	if (nullclass)
