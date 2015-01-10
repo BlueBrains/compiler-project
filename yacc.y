@@ -704,18 +704,18 @@ var_declaration: access_modef ID {
 						}
 ;
 
-method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";}					
-					|access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";}					
-					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true);parameters.clear();}
-					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true);parameters.clear();}
-					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
-					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false);parameters.clear();}
+method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false);parameters.clear();}
+					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false);parameters.clear();}
+					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}
+					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false);parameters.clear();}
+					|access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}					
+					|access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false);parameters.clear();}					
+					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}
+					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,ture,false);parameters.clear();}
+					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
+					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
+					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
+					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
 					|FINAL access_modef FINAL error method_h block_stmt	{
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
