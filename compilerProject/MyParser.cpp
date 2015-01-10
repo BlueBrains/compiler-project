@@ -223,7 +223,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
-	}
+	}/*
 	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
@@ -239,7 +239,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}
-
+	*/
 	if (nullclass)
 	{
 		unfinished *temp = new unfinished(tname, f, lineNo, colNo);
@@ -250,7 +250,9 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 
 Function * MyParser::finishFunctionDeclaration(Function * f,bool ff ,bool ss){
-		f->set_static(ff);
+	if (ff)
+   	    f->set_static(ff);
+	if (ss)
 		f->set_final(ss);
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
