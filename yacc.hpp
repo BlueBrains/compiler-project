@@ -29,28 +29,28 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IMPORT = 258,
-     CLASS = 259,
-     ID = 260,
-     COLON = 261,
-     CLOSE_S = 262,
-     COMMA = 263,
-     DOT = 264,
-     END = 265,
-     OPEN_C = 266,
-     CLOSE_C = 267,
-     DEF = 268,
-     ASSIGN = 269,
-     STAR = 270,
-     ELSE = 271,
-     IF = 272,
-     ELIF = 273,
-     WHILE = 274,
-     FOR = 275,
-     IN = 276,
-     TRY = 277,
-     FINALLY = 278,
-     MULTI = 279,
+     END_OF_FILE = 258,
+     IMPORT = 259,
+     CLASS = 260,
+     ID = 261,
+     COLON = 262,
+     CLOSE_S = 263,
+     COMMA = 264,
+     DOT = 265,
+     END = 266,
+     OPEN_C = 267,
+     CLOSE_C = 268,
+     DEF = 269,
+     ASSIGN = 270,
+     STAR = 271,
+     ELSE = 272,
+     IF = 273,
+     ELIF = 274,
+     WHILE = 275,
+     FOR = 276,
+     IN = 277,
+     TRY = 278,
+     FINALLY = 279,
      EXPECT = 280,
      WITH = 281,
      AS = 282,
@@ -108,32 +108,33 @@
      stmt_3 = 334,
      stmt_2 = 335,
      stmt_1 = 336,
-     stmt_8 = 337
+     stmt_8 = 337,
+     MULTI = 338
    };
 #endif
 /* Tokens.  */
-#define IMPORT 258
-#define CLASS 259
-#define ID 260
-#define COLON 261
-#define CLOSE_S 262
-#define COMMA 263
-#define DOT 264
-#define END 265
-#define OPEN_C 266
-#define CLOSE_C 267
-#define DEF 268
-#define ASSIGN 269
-#define STAR 270
-#define ELSE 271
-#define IF 272
-#define ELIF 273
-#define WHILE 274
-#define FOR 275
-#define IN 276
-#define TRY 277
-#define FINALLY 278
-#define MULTI 279
+#define END_OF_FILE 258
+#define IMPORT 259
+#define CLASS 260
+#define ID 261
+#define COLON 262
+#define CLOSE_S 263
+#define COMMA 264
+#define DOT 265
+#define END 266
+#define OPEN_C 267
+#define CLOSE_C 268
+#define DEF 269
+#define ASSIGN 270
+#define STAR 271
+#define ELSE 272
+#define IF 273
+#define ELIF 274
+#define WHILE 275
+#define FOR 276
+#define IN 277
+#define TRY 278
+#define FINALLY 279
 #define EXPECT 280
 #define WITH 281
 #define AS 282
@@ -192,12 +193,13 @@
 #define stmt_2 335
 #define stmt_1 336
 #define stmt_8 337
+#define MULTI 338
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 60 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 60 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -213,7 +215,7 @@ typedef union YYSTYPE {
 		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 217 "yacc.hpp"
+#line 219 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
