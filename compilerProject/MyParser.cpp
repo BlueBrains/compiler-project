@@ -127,6 +127,16 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 
 
 Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,bool self){
+	char* tokenPtr;
+	char buffer[15];
+	bool found = false;
+	sprintf(buffer, name);
+	tokenPtr = strtok(buffer, ".");
+	tokenPtr = strtok(NULL, ".");
+	if (tokenPtr != NULL)
+	{
+		return 0;
+	}
 	Variable *v = NULL;
 	if (self)
 	{
