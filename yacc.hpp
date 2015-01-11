@@ -60,56 +60,59 @@
      RETURN = 286,
      PRINT = 287,
      GLOBAL = 288,
-     RAISE = 289,
-     PRIVATE = 290,
-     PUBLIC = 291,
-     PROTECTED = 292,
-     OPEN_D = 293,
-     CLOSE_D = 294,
-     RE_COT = 295,
-     YIELD = 296,
-     PRIMARY = 297,
-     OR = 298,
-     AND = 299,
-     NOT = 300,
-     PLUS = 301,
-     MINUS = 302,
-     DIV = 303,
-     MOD = 304,
-     NOT_EQUAL = 305,
-     FINAL = 306,
-     STATIC = 307,
-     LESS_THAN = 308,
-     LESS_OR_EQUAL = 309,
-     MORE_THAN = 310,
-     MORE_OR_EQUAL = 311,
-     TRUE = 312,
-     FALSE = 313,
-     EXCEPT = 314,
-     SEMICOLON = 315,
-     NEW_LINE = 316,
-     PASS = 317,
-     CHAR_VALUE = 318,
-     OPEN_S = 319,
-     STRING_VALUE = 320,
-     INTEGER_VALUE = 321,
-     BREAK = 322,
-     CONTINUE = 323,
-     LONG_VALUE = 324,
-     FLOAT_VALUE = 325,
-     stmt_1_2 = 326,
-     stmt_11 = 327,
-     stmt_10 = 328,
-     stmt_9 = 329,
-     stmt_7 = 330,
-     stmt_6 = 331,
-     stmt_5 = 332,
-     stmt_4 = 333,
-     stmt_3 = 334,
-     stmt_2 = 335,
-     stmt_1 = 336,
-     stmt_8 = 337,
-     MULTI = 338
+     AND_W = 289,
+     OR_W = 290,
+     RAISE = 291,
+     PRIVATE = 292,
+     PUBLIC = 293,
+     PROTECTED = 294,
+     OPEN_D = 295,
+     CLOSE_D = 296,
+     RE_COT = 297,
+     YIELD = 298,
+     PRIMARY = 299,
+     OR = 300,
+     AND = 301,
+     NOT = 302,
+     PLUS = 303,
+     MINUS = 304,
+     DIV = 305,
+     MOD = 306,
+     NOT_EQUAL = 307,
+     FINAL = 308,
+     STATIC = 309,
+     SELF = 310,
+     LESS_THAN = 311,
+     LESS_OR_EQUAL = 312,
+     MORE_THAN = 313,
+     MORE_OR_EQUAL = 314,
+     TRUE = 315,
+     FALSE = 316,
+     EXCEPT = 317,
+     SEMICOLON = 318,
+     NEW_LINE = 319,
+     PASS = 320,
+     CHAR_VALUE = 321,
+     OPEN_S = 322,
+     STRING_VALUE = 323,
+     INTEGER_VALUE = 324,
+     BREAK = 325,
+     CONTINUE = 326,
+     LONG_VALUE = 327,
+     FLOAT_VALUE = 328,
+     stmt_1_2 = 329,
+     stmt_11 = 330,
+     stmt_10 = 331,
+     stmt_9 = 332,
+     stmt_7 = 333,
+     stmt_6 = 334,
+     stmt_5 = 335,
+     stmt_4 = 336,
+     stmt_3 = 337,
+     stmt_2 = 338,
+     stmt_1 = 339,
+     stmt_8 = 340,
+     MULTI = 341
    };
 #endif
 /* Tokens.  */
@@ -144,62 +147,65 @@
 #define RETURN 286
 #define PRINT 287
 #define GLOBAL 288
-#define RAISE 289
-#define PRIVATE 290
-#define PUBLIC 291
-#define PROTECTED 292
-#define OPEN_D 293
-#define CLOSE_D 294
-#define RE_COT 295
-#define YIELD 296
-#define PRIMARY 297
-#define OR 298
-#define AND 299
-#define NOT 300
-#define PLUS 301
-#define MINUS 302
-#define DIV 303
-#define MOD 304
-#define NOT_EQUAL 305
-#define FINAL 306
-#define STATIC 307
-#define LESS_THAN 308
-#define LESS_OR_EQUAL 309
-#define MORE_THAN 310
-#define MORE_OR_EQUAL 311
-#define TRUE 312
-#define FALSE 313
-#define EXCEPT 314
-#define SEMICOLON 315
-#define NEW_LINE 316
-#define PASS 317
-#define CHAR_VALUE 318
-#define OPEN_S 319
-#define STRING_VALUE 320
-#define INTEGER_VALUE 321
-#define BREAK 322
-#define CONTINUE 323
-#define LONG_VALUE 324
-#define FLOAT_VALUE 325
-#define stmt_1_2 326
-#define stmt_11 327
-#define stmt_10 328
-#define stmt_9 329
-#define stmt_7 330
-#define stmt_6 331
-#define stmt_5 332
-#define stmt_4 333
-#define stmt_3 334
-#define stmt_2 335
-#define stmt_1 336
-#define stmt_8 337
-#define MULTI 338
+#define AND_W 289
+#define OR_W 290
+#define RAISE 291
+#define PRIVATE 292
+#define PUBLIC 293
+#define PROTECTED 294
+#define OPEN_D 295
+#define CLOSE_D 296
+#define RE_COT 297
+#define YIELD 298
+#define PRIMARY 299
+#define OR 300
+#define AND 301
+#define NOT 302
+#define PLUS 303
+#define MINUS 304
+#define DIV 305
+#define MOD 306
+#define NOT_EQUAL 307
+#define FINAL 308
+#define STATIC 309
+#define SELF 310
+#define LESS_THAN 311
+#define LESS_OR_EQUAL 312
+#define MORE_THAN 313
+#define MORE_OR_EQUAL 314
+#define TRUE 315
+#define FALSE 316
+#define EXCEPT 317
+#define SEMICOLON 318
+#define NEW_LINE 319
+#define PASS 320
+#define CHAR_VALUE 321
+#define OPEN_S 322
+#define STRING_VALUE 323
+#define INTEGER_VALUE 324
+#define BREAK 325
+#define CONTINUE 326
+#define LONG_VALUE 327
+#define FLOAT_VALUE 328
+#define stmt_1_2 329
+#define stmt_11 330
+#define stmt_10 331
+#define stmt_9 332
+#define stmt_7 333
+#define stmt_6 334
+#define stmt_5 335
+#define stmt_4 336
+#define stmt_3 337
+#define stmt_2 338
+#define stmt_1 339
+#define stmt_8 340
+#define MULTI 341
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 62 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 63 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -215,7 +221,7 @@ typedef union YYSTYPE {
 		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 219 "yacc.hpp"
+#line 225 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
