@@ -38,6 +38,9 @@
 	bool ss=false;
 	bool ff=false;
 	bool pp=true;
+	int linefunc=0;
+	int colmfunc=0;
+
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
 	vector<char *>ID_list;
@@ -256,7 +259,7 @@ class_h:
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
-								  }
+					} 
 		|STATIC access_modef FINAL CLASS ID 	{Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
@@ -281,8 +284,8 @@ class_h:
 										   }
 		|CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
-										t=$<type>$;
-										inhertance_list.clear();
+								t=$<type>$;
+								inhertance_list.clear();
 										acc_mod="";
 								}                     //class X ()
 		|access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
@@ -429,8 +432,8 @@ class_h:
 										   }
 		|CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 												$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
-												t=$<type>$;
-												inhertance_list.clear();
+													t=$<type>$;
+													inhertance_list.clear();
 												acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
@@ -893,18 +896,18 @@ var_declaration: access_modef ID {
 						}
 ;
 
-method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false);parameters.clear();}
-					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false);parameters.clear();}
-					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}
-					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false);parameters.clear();}
-					|access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}					
-					|access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false);parameters.clear();}					
-					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true);parameters.clear();}
-					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false);parameters.clear();}
-					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
-					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
-					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
-					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true);parameters.clear();}
+method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}					
+					|access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}					
+					|STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|STATIC access_modef FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
 					|FINAL access_modef FINAL error method_h block_stmt	{
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
@@ -932,9 +935,9 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 ;
 
 
-method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}			
-			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();}
+method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}			
+			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
 			|error OPEN_S arguments CLOSE_S {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
@@ -1123,7 +1126,7 @@ while_header: WHILE expr	{Streams::verbose()<<"while_header: WHILE expr \n";}
 			|ID error expr { 
 						Streams::verbose()<<"Error: Expected reserved word 'while' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
-					 }			
+					 }		
 ;
 
 for_stmt: 	for_header stmt	{Streams::verbose()<<"for_stmt: 	for_header stmt\n";}

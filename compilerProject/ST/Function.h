@@ -28,6 +28,7 @@ public:
 	void set_static(bool m);
 	bool get_static();
 	Scope* getScope();
+	char* getfirstpara();
 	void setparameters(char * parameters);
 	bool comparePar(vector<char *> parameters);
 	vector<Variable *> getparameters();
