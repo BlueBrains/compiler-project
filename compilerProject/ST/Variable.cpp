@@ -39,6 +39,14 @@ Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->setAccessModifier("private");
 	
 }
+void Variable::set_static(bool s)
+{
+	is_static = s;
+}
+bool Variable::get_static()
+{
+	return is_static;
+}
 char* Variable::getAccessModifier(){
 	if (this != NULL){
 		switch (this->accessModifier){

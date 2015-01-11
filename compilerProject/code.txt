@@ -1,19 +1,48 @@
-class a(b):
-	def i=5;
-	def public b;
-	def public static func(x,*y,z=''):
-		text = "value of x is " + x + "!";
-        print text;
+final class tt:
+def h():
+self.aj;
+end
+end
+public class z(tt):
+	def public class x:
 	end
-	def func2(self):
-		j=0;
-		j=j+1;
-		
 end
+public class c:
+	def public class x:
+	end
 end
-class b:	
-        def final func(self,a,b):end
-	def final fofo(a,b,b):end
-        def soso (self,a,b,a):end
-        def sasa (self,a,b):end
+public class g(z,c):
+	def class v(x):
+	end
+	
+	def class n(z.x):
+	end
+	
+	def class m(z.x,c.x):end
+end
+static class a(b):
+		def class amer:
+			def class kh:
+				def class a:
+				end
+				def static molham;
+			end
+		end
+		def x():
+			self.p();
+			self.oo;
+			self.k=self.i();
+			self.l=self.o;
+		end
+		def final private xx;
+		def static public k;
+		def class aa(bb):
+		end
+		def class bb(cc):
+		end
+		def class cc(aa):
+		end
+		def final class amora:
+		end
+		def class ameer(amora):end
 end

@@ -38,7 +38,8 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
-<<EOF>>     {cout<<"EOF found\n";return END_OF_FILE;}
+<<EOF>>     {return END_OF_FILE; 
+				}
 "import"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -58,6 +59,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal = x;
 				return CLASS;
 			}
+
 ":"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -551,6 +553,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	MORE_OR_EQUAL;
+			}
+"self"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	SELF;
 			}
 "true"		{
 				colNum += strlen(yytext);

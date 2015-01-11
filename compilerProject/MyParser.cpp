@@ -64,27 +64,79 @@ Variable* MyParser::insertVar(char* n,char* acc_mod, int lineNo, int colNo){
 void MyParser::remove_vatiable(Variable* v)
 {
 	this->st->currScope->m->remove(v->get_name());
-}
 
-Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, int lineNo, int colNo){
+}
+Variable* MyParser::set_storage_modifier(Variable* v, bool is_static, bool is_final)
+{
+	v->set_static(is_static);
+	v->setIsConst(is_final);
+	return v;
+}
+Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_static, bool is_final, int lineNo, int colNo, bool self){
 	Variable* v = NULL;
-	if(n){
-		v = (Variable*)this->st->currScope->m->get(n,"Variable");
-		if (v)
+	if((n)){
+		if (self)
+		{
+			v = (Variable*)outer_type.back()->getScope()->m->get(n, "Variable");
+		}
+		else
+		{
+			v = (Variable*)this->st->currScope->m->get(n, "Variable");
+		}
+		
+		if ((v)&&(!v->by_self)&&(!self))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
 			return 0;
 		}
+		else if ((v) && (v->by_self) && (!self))//if v is exist and declarated by self in function and come def x;
+		{
+			v->by_self = false;
+			v->setAccessModifier(acc_mod);
+			//v->set_static(is_static);
+		}
+		else if (!v)
+		{
 		v = new Variable();
-		this->st->currScope->m->put(n, v,"Variable");
+			v->set_name(n);
+			v->setAccessModifier(acc_mod);
+			v->by_self = self;
+			if (self)
+			{
+				v->set_static(true);
+				this->st->currScope->parent->m->put(n, v, "Variable");
+			}
+			else
+			{
+				v->setIsConst(is_final);
+				v->set_static(is_static);
+				if (outer_type.back()->getouter_class() != NULL)
+				{
+					if ((is_static) &&(!is_final)&& (!outer_type.back()->getIs_static()))
+					{
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "Illegal static declaration in inner class", n);
+					}
+				}
+				this->st->currScope->m->put(n, v, "Variable");
+			}
+				
+		}
 	}
 	return v;
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,bool self){
+	Variable *v = NULL;
+	if (self)
+	{
+		 v = (Variable*)t->getScope()->m->get(name,"Variable");
+	}
+	else
+	{
+		 v = this->st->getVariableFromCurrentScope(name, t);
+	}
 
-	Variable * v = this->st->getVariableFromCurrentScope(name,t);
 	if (!v)
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
@@ -291,16 +343,11 @@ Type* MyParser::returninner(char* child, Type* t,int l,int cc)
 	}
 	Type* tt = *ot;
 	Type* t2 = (Type*)tt->getScope()->m->get(child,"Class");
-	if (!t)
+	if (!t2)
 		{
 		//error not found class child
 					return 0;
 				}
-	if (t2->getIs_final())
-			{
-		//error is final
-				return 0;
-			}
 	return t2;
 		
 }
@@ -315,7 +362,7 @@ int findTypeByName(vector<Type*>Mylist, Type* t)
 	}
 	return -1;
 }
-Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final)
+Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
 {
 	//cout << "enter" << endl;
 	char *tokenPtr;
@@ -326,28 +373,33 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 		no_error= 0;
 	}
 	if (!check_type_name(name,outer_type)){
-		cout << "the outer class has the same name" << endl;
+		//cout << "the outer class has the same name" << endl;
 		this->errRecovery->errQ->enqueue(lineno, colno, "the outer class has the same name", name);
 		no_error = 0;
 	}
 	
 	t = new Type();
 	t->set_name(name);
+	//cout <<name<<endl;
 	//int g = findTypeByName(;
-	//for check that the new class are not in parent class in inhertance
+	
+	/*this if for chaeck the access midifier of class
+	the outer class cant be private or protecected it's just public
+	the inner class the defult access modifier is private and it's can be aany other access modifier
+	*/
 	if (outer_type.size() == 0)
 	{
 		if ((strcmp(acc_mod, "private") == 0))
 		{
 			cout << "modifier private not allowed here" << endl;
 			this->errRecovery->errQ->enqueue(lineno, colno, "modifier private not allowed here", name);
-			no_error = 0;
+			//no_error = 0;
 		}
 		else if ((strcmp(acc_mod, "protected") == 0))
 		{
 			cout << "modifier protected not allowed here" << endl;
 			this->errRecovery->errQ->enqueue(lineno, colno, "modifier protected not allowed here", name);
-			no_error = 0;
+			//no_error = 0;
 		}
 		else
 			t->setAccessModifier("public");
@@ -356,6 +408,35 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 	{
 		t->setAccessModifier(acc_mod);
 	}
+	/*this if fot check the static modifier according java grammer
+	the outer class can't be static 
+	the inner class can't be staic if the outer class was not static
+	the inner class in first level just can static and his outer not static
+	*/
+	
+	if ((outer_type.size() == 0)&&(is_static))
+	{
+		cout << "modifier static not allowed here" << endl;
+		this->errRecovery->errQ->enqueue(lineno, colno, "modifier static not allowed here", name);
+	}
+	else if (outer_type.size() > 1)
+	{
+		Type*yu = outer_type.back();
+		if ((is_static) && (outer_type.back()->getIs_static()))
+		{
+			t->setIs_static(true);
+		}
+		else if ((is_static) && (!outer_type.back()->getIs_static()))
+		{
+			cout << "modifier static not allowed here" << endl;
+			this->errRecovery->errQ->enqueue(lineno, colno, "modifier static not allowed here", name);
+		}
+	}
+	else if (outer_type.size() == 1)
+	{
+		t->setIs_static(is_static);
+	}
+	//for check that the new class are not in parent class in inhertance
 	if (outer_type.size() > 0)
 	{
 		for (int i = 0; i < outer_type.back()->getInheritedType().size(); i++)
@@ -383,6 +464,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 		{
 		t->setIs_final(true);
 	}
+		t->getScope()->parent = this->st->currScope;
 	//cout << "the size is " << inherted_list.size() << endl;
 	vector<char*>undeclarated_type;
 	if (inherted_list.size() > 0)
@@ -430,13 +512,31 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 					int j = findTypeByName(this->outer_type.back()->getInheritedType(), t1);
 					if (j == -1)
 					{
-						cout << "you can't inherted from inner class" << endl;
-						this->errRecovery->errQ->enqueue(lineno, colno, "you can't inherted from inner class", temp.at(j));
+						//cout << "you can't inherted from inner class" << endl;
+
+						string temp_st;
+						temp_st = "an enclosing instance that contains ";
+						temp_st = temp_st + xx;
+						this->errRecovery->errQ->enqueue(lineno, colno, const_cast<char *>(temp_st.c_str()), name);
 						//no_error = 0;
 					}
 					t1 = this->returninner(t2->get_name(), t1, lineno, colno);
+					if (!t1)
+					{
+						string temp_st;
+						temp_st = "Undefind inner class ";
+						temp_st = temp_st + xx;
+						this->errRecovery->errQ->enqueue(lineno, colno, const_cast<char *>(temp_st.c_str()), name);
 				}
-				if (!t->setInheritedType(t1))
+					else if (t1->getIs_final())
+				{
+							string temp_st;
+						temp_st = "cannot inherit from final ";
+						temp_st = temp_st + t1->get_name();
+						this->errRecovery->errQ->enqueue(lineno, colno, const_cast<char *>(temp_st.c_str()), name);
+					}
+				}
+				if ((t1)&&(!t->setInheritedType(t1)))
 				{
 					cout << "Error there is an inhertance Loop" << endl;
 					this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", temp.at(j));
@@ -446,8 +546,19 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 			}
 			else
 			{
+				
+				Type* tcc;
+				//int xsi = constraction_type.size();
+				tcc = check_if_in_inner(new constraction(t, undeclarated_type, true, lineno, colno), tokenPtr);
+				if (tcc)
+				{
+					t->setInheritedType(tcc);
+				}
+				else
+				{
 				undeclarated_type.push_back(inherted_list.at(j));
 			}
+		}
 		}
 		if (undeclarated_type.size() > 0)
 		{
@@ -561,7 +672,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 		t->declared = 0;
 	}
 
-	t->getScope()->parent = this->st->currScope;
+	
 	
 	this->st->currScope->m->put(name, t,"Class");
 	
@@ -580,13 +691,20 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list,char* acc_mod
 	//cout << r->get_name();
 	return t;
 };
-
+void MyParser::check_static(Type* t,int lineno,int colno)
+{
+	if (t->getouter_class()->getIs_static())
+	{
+		if (!t->getIs_static())
+		{
+			cout << "the outer class has the same name" << endl;
+			this->errRecovery->errQ->enqueue(lineno, colno, "the outer class has the same name", "ll");
+		}
+	}
+}
 Type * MyParser::finishTypeDeclaration(Type* t){
 	//cout <<"size "<< constraction_type.size() << endl;
-	for (int i = 0; i < constraction_type.size(); i++)
-	{
-		//cout <<"end type "<< constraction_type.at(i)->get_type()->get_name()<<endl;
-	}
+	
 	//Type * tt = new Type();
 	Function * f = (Function *)st->currScope->m->get("__init__", "Function");
 	if (!f){
@@ -713,7 +831,7 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 	}
 	vector<Type*> xx = t->get_type()->getouter_class()->getInheritedType();
 	Type* y=NULL;
-	char*s1 = new char[20];
+	string s1;
 	s1 = " ";
 	for (int i = 0; i < xx.size();i++)
 	{
@@ -722,32 +840,21 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 		y = (Type*)s->m->get(x,"Class");
 		if (y)
 		{
-			const char* ct = xx.at(i)->get_name();
-			
-			char buffer[15];
-			sprintf(buffer, s1);
-			string f = xx.at(i)->get_name();
-			string xs;
-			s1=strcat(buffer, f.c_str());
-			strcat(s1,".");
-			//sprintf(buffer, x);
-			const char* ct2 = x;
-			strcat(s1, ct2);
-			strcat(s1, "  ");
+			string te = xx.at(i)->get_name();
+			te = te + ".";
+			te = te + x;
+			s1 = s1 + te;
+			s1 = s1 + " ";
 			n = n + 1;
 		}
 			
 	}
 	if (n>1)
 	{
-		char* ol = new char[50];
-		ol = "ambiguous type between ";
-		const char* ct = s1;
-		char buffer[15];
-		sprintf(buffer, ol);
-		ol = strcat(buffer, ct);
-		cout << ol << endl;
-		this->errRecovery->errQ->enqueue(t->get_LineNo(), t->get_ColNo(),ol, t->get_type()->get_name());
+		string temp_st;
+		temp_st = "ambiguous type between ";
+		temp_st = temp_st + s1;
+		this->errRecovery->errQ->enqueue(t->get_LineNo(), t->get_ColNo(), const_cast<char *>(temp_st.c_str()), t->get_type()->get_name());
 	}
 	else
 	{
@@ -799,7 +906,7 @@ void printScope(Scope *s)
 				}
 				else if (tempelem->gettype() == "Variable"){
 					Variable* t = (Variable*)tempelem->getElem();
-					cout << "element is Variable it's name is" << t->getAccessModifier() << " " << t->get_name() << endl;
+					cout << "element is Variable it's name is" << t->getAccessModifier() << " " << ((t->get_static() == true) ? "is static " : "is not static ") << ((t->getIsConst() == true) ? "is final " : "is not final ") << t->get_name() << endl;
 				}
 				tempelem = tempelem->getNext();
 			}

@@ -34,13 +34,14 @@
 	char* i_type;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
-
+	vector<char*> sto_mod;
 	bool ss=false;
 	bool ff=false;
 	bool pp=true;
 	int linefunc=0;
 	int colmfunc=0;
 
+	bool v_static,v_final;
 	vector<char *>inhertance_list;
 	vector<char *>ID_list;
 	Variable* v;
@@ -79,9 +80,9 @@
 %token error END_OF_FILE
 %token	IMPORT CLASS ID COLON CLOSE_S COMMA DOT ID END OPEN_C CLOSE_C 
 %token	DEF ASSIGN STAR ELSE IF ELIF WHILE FOR IN TRY FINALLY
-%token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL
+%token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL AND_W OR_W
 %token	RAISE PRIVATE PUBLIC PROTECTED OPEN_D CLOSE_D  RE_COT YIELD
-%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL STATIC
+%token	PRIMARY OR AND NOT PLUS MINUS DIV MOD NOT_EQUAL FINAL STATIC SELF
 %token	LESS_THAN LESS_OR_EQUAL MORE_THAN MORE_OR_EQUAL TRUE FALSE EXCEPT SEMICOLON
 %token  NEW_LINE PASS CHAR_VALUE OPEN_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE
 %nonassoc stmt_1_2
@@ -107,6 +108,7 @@ programes: program END_OF_FILE {Streams::verbose() <<"programes: program END_OF_
 						p->print_symbol();
 						Streams::verbose().flush();						
 						}
+
 program: program unit {	Streams::verbose() <<"prgram : program unit\n";
 						Streams::verbose().flush();						
 					}
@@ -132,96 +134,112 @@ class_decl: class_h class_body	{Streams::verbose()<<"class_decl: class_h class_b
 ;
 class_h: 
 		CLASS ID 	{Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 					}                                                   //class X 
 		|access_modef CLASS ID 	{Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|STATIC CLASS ID 	{Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}					  
 		|FINAL CLASS ID 	{Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|STATIC FINAL CLASS ID 	{Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|FINAL STATIC CLASS ID 	{Streams::verbose() << "class_h: FINAL STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|STATIC error STATIC CLASS ID {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								err->errQ->enqueue($<r.lineNum>5,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|FINAL error FINAL CLASS ID 	{Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								err->errQ->enqueue($<r.lineNum>5,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|STATIC access_modef CLASS ID 	{Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|FINAL access_modef CLASS ID 	{Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|STATIC FINAL access_modef CLASS ID 	{Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|FINAL STATIC access_modef CLASS ID 	{Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|STATIC error STATIC access_modef CLASS ID {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>6,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|FINAL error FINAL access_modef CLASS ID {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>6,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|access_modef STATIC CLASS ID 	{Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|access_modef FINAL CLASS ID 	{Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+							$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|access_modef STATIC FINAL CLASS ID 	{Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+							$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
 		|access_modef FINAL STATIC CLASS ID 	{Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
@@ -229,19 +247,21 @@ class_h:
 		|access_modef STATIC STATIC CLASS ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+								  $<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								  }
 		|access_modef FINAL FINAL CLASS ID	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
-								  }
-		|FINAL access_modef STATIC CLASS ID 	{Streams::verbose() << "class_h: FINAL access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								  $<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					} 
 		|STATIC access_modef FINAL CLASS ID 	{Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
-								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
@@ -249,42 +269,51 @@ class_h:
 		|FINAL access_modef FINAL CLASS ID {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+											$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+											t=$<type>$;
+											inhertance_list.clear();
+											acc_mod="";
 										   }
 		|STATIC access_modef STATIC CLASS ID {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+											$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+											t=$<type>$;
+											inhertance_list.clear();
+											acc_mod="";
 										   }
 		|CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
+										acc_mod="";
 								}                     //class X ()
 		|access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|STATIC CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|FINAL CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|STATIC FINAL CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|FINAL STATIC CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: FINAL STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
@@ -296,55 +325,63 @@ class_h:
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
 								}
 		|STATIC access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|FINAL access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|FINAL STATIC access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|STATIC error STATIC access_modef CLASS ID OPEN_S CLOSE_S {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>6,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|FINAL error FINAL access_modef CLASS ID OPEN_S CLOSE_S {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>6,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|access_modef STATIC CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|access_modef FINAL CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|access_modef FINAL STATIC CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
@@ -352,19 +389,27 @@ class_h:
 		|access_modef STATIC STATIC CLASS ID OPEN_S CLOSE_S {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								  }
 		|access_modef FINAL FINAL CLASS ID OPEN_S CLOSE_S {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								  }
 		|STATIC access_modef FINAL CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}                     //class X ()
 		|FINAL access_modef STATIC CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: FINAL access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
-									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
@@ -372,45 +417,54 @@ class_h:
 		|STATIC access_modef STATIC CLASS ID OPEN_S CLOSE_S {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+											$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 										   }
 		|FINAL access_modef FINAL CLASS ID OPEN_S CLOSE_S {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+										   $<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 										   }
 		|CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+												$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
+												acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|STATIC CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|FINAL CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|STATIC error STATIC CLASS ID OPEN_S unit_list CLOSE_S {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
@@ -419,86 +473,111 @@ class_h:
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
 								}
 		|STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
 		|FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
 		|STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
 		|FINAL STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
 		|STATIC error STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								} 
 		|FINAL error FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
 								}
 		|access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|access_modef STATIC STATIC CLASS ID OPEN_S unit_list CLOSE_S {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+										t=$<type>$;
+										inhertance_list.clear();
+										acc_mod="";
 								  }
 		|access_modef FINAL FINAL CLASS ID OPEN_S unit_list CLOSE_S {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+								 
 								  }
 		|FINAL access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: FINAL access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|STATIC access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S  {Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
-													$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod, yylval.r.lineNum, yylval.r.colNum,false);
+													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
-													acc_mod="";
 													inhertance_list.clear();
+													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
 		|STATIC access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+											$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+											t=$<type>$;
+											inhertance_list.clear();
+											acc_mod="";
 										   }
 		|FINAL access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+											$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+											t=$<type>$;
+											inhertance_list.clear();
+											acc_mod="";
 										   }
 		|CLASS error	{							
 									colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>1+1));
@@ -598,14 +677,30 @@ dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLO
 
 var_declaration: access_modef ID {
 									Streams::verbose()<<"var_declaration: access_modef ID\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
 									v=$<var>$;
 									acc_mod="";
 									}	//public x
-				|STATIC ID {Streams::verbose()<<"var_declaration: STATIC ID\n";}	//static x
-				|FINAL ID {Streams::verbose()<<"var_declaration: FINAL ID\n";}	//static x
-				|STATIC FINAL ID {Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";}	//static x
-				|FINAL STATIC ID {Streams::verbose()<<"var_declaration: FINAL STATIC ID\n";}	//static x
+				|STATIC ID {
+									Streams::verbose()<<"var_declaration: STATIC ID\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+							}	//static x
+				|FINAL ID {
+								Streams::verbose()<<"var_declaration: FINAL ID\n";
+								$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+								}	//static x
+				|STATIC FINAL ID {
+									Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+									}	//static x
+				|FINAL STATIC ID {
+									Streams::verbose()<<"var_declaration: FINAL STATIC ID\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+									}	//static x
 				|STATIC error STATIC ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
@@ -615,11 +710,23 @@ var_declaration: access_modef ID {
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
 								  }
 				|ID					{Streams::verbose()<<"var_declaration: ID\n";
-										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
 										v=$<var>$;
 									}					//x
+				|FINAL access_modef ID		{
+												Streams::verbose()<<"var_declaration: FINAL access_modef ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+													v=$<var>$;
+													acc_mod="";
+											}
+				|STATIC access_modef ID		{
+												Streams::verbose()<<"var_declaration: STATIC access_modef ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+													v=$<var>$;
+													acc_mod="";
+											}
 				|access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef ID ASSIGN expr\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
 													v=$<var>$;
 													acc_mod="";
 													}	//private x = 10
@@ -636,13 +743,34 @@ var_declaration: access_modef ID {
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
 								  }
 				|ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: ID ASSIGN expr\n";
-										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod, yylval.r.lineNum, yylval.r.colNum);
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
 													v=$<var>$;
 										}		//x = 5
-				|access_modef STATIC ID {Streams::verbose()<<"var_declaration: access_modef STATIC ID\n";}	//public x
-				|access_modef FINAL ID {Streams::verbose()<<"var_declaration: access_modef FINAL ID\n";}	//public x
-				|access_modef STATIC FINAL ID {Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID\n";}	//public x
-				|access_modef FINAL STATIC ID {Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID\n";}	//public x
+				|access_modef STATIC ID {
+											Streams::verbose()<<"var_declaration: access_modef STATIC ID\n";
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
+									v=$<var>$;
+									acc_mod="";
+											}	//public x
+				|access_modef FINAL ID {
+				
+											Streams::verbose()<<"var_declaration: access_modef FINAL ID\n";
+												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+												v=$<var>$;
+												acc_mod="";
+											}	//public x
+				|access_modef STATIC FINAL ID {
+												Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+												v=$<var>$;
+												acc_mod="";
+												}	//public x
+				|access_modef FINAL STATIC ID {
+												Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+												v=$<var>$;
+												acc_mod="";
+												}	//public x
 				|access_modef STATIC error STATIC ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
@@ -651,9 +779,20 @@ var_declaration: access_modef ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
 								  }
-				|STATIC access_modef ID {Streams::verbose()<<"var_declaration: STATIC access_modef ID\n";}	//static x
-				|STATIC FINAL access_modef ID {Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID\n";}	//static x
-				|FINAL STATIC access_modef ID {Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID\n";}	//static x
+				
+				|STATIC FINAL access_modef ID {
+												Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+												v=$<var>$;
+												acc_mod="";
+												}	//static x
+				|FINAL STATIC access_modef ID {
+													Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID\n";
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+													v=$<var>$;
+													acc_mod="";
+													
+													}	//static x
 				|STATIC error STATIC access_modef ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
@@ -662,10 +801,31 @@ var_declaration: access_modef ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
 								  }
-				|access_modef STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef STATIC ID ASSIGN expr\n";}	//private x = 10
-				|access_modef FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef FINAL ID ASSIGN expr\n";}	//private x = 10
-				|access_modef STATIC FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID ASSIGN expr\n";}	//private x = 10
-				|access_modef FINAL STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID ASSIGN expr\n";}	//private x = 10
+				|access_modef STATIC ID ASSIGN expr 	{
+				
+															Streams::verbose()<<"var_declaration: access_modef STATIC ID ASSIGN expr\n";
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";
+															}	//private x = 10
+				|access_modef FINAL ID ASSIGN expr 	{
+														Streams::verbose()<<"var_declaration: access_modef FINAL ID ASSIGN expr\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+														v=$<var>$;
+														acc_mod="";
+													}	//private x = 10
+				|access_modef STATIC FINAL ID ASSIGN expr 	{
+																Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID ASSIGN expr\n";
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";
+																}	//private x = 10
+				|access_modef FINAL STATIC ID ASSIGN expr 	{
+																Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID ASSIGN expr\n";
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																	v=$<var>$;
+																	acc_mod="";
+																}	//private x = 10
 				|access_modef STATIC error STATIC ID ASSIGN expr 	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
@@ -674,10 +834,30 @@ var_declaration: access_modef ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
 								  }
-				|STATIC access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC access_modef ID ASSIGN expr\n";}	//static x = 10
-				|FINAL access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL access_modef ID ASSIGN expr\n";}	//static x = 10
-				|STATIC FINAL access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID ASSIGN expr\n";}	//static x = 10
-				|FINAL STATIC access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID ASSIGN expr\n";}	//static x = 10
+				|STATIC access_modef ID ASSIGN expr 	{
+															Streams::verbose()<<"var_declaration: STATIC access_modef ID ASSIGN expr\n";
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";
+															}	//static x = 10
+				|FINAL access_modef ID ASSIGN expr 	{
+														Streams::verbose()<<"var_declaration: FINAL access_modef ID ASSIGN expr\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+															v=$<var>$;
+															acc_mod="";
+														}	//static x = 10
+				|STATIC FINAL access_modef ID ASSIGN expr 	{
+																Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID ASSIGN expr\n";
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																	v=$<var>$;
+																	acc_mod="";
+																}	//static x = 10
+				|FINAL STATIC access_modef ID ASSIGN expr 	{
+																Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID ASSIGN expr\n";
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";
+																}	//static x = 10
 				|STATIC error STATIC access_modef ID ASSIGN expr 	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
@@ -686,8 +866,18 @@ var_declaration: access_modef ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
 								  }
-				|STATIC access_modef FINAL ID ASSIGN expr {Streams::verbose()<<"var_declaration: STATIC access_modef FINAL ID ASSIGN expr\n";}	//static x = 10
-				|FINAL access_modef STATIC ID ASSIGN expr {Streams::verbose()<<"var_declaration: FINAL access_modef FINAL ID ASSIGN expr\n";}	//static x = 10
+				|STATIC access_modef FINAL ID ASSIGN expr {
+															Streams::verbose()<<"var_declaration: STATIC access_modef FINAL ID ASSIGN expr\n";
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";
+															}	//static x = 10
+				|FINAL access_modef STATIC ID ASSIGN expr {
+																Streams::verbose()<<"var_declaration: FINAL access_modef FINAL ID ASSIGN expr\n";
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+																v=$<var>$;
+																acc_mod="";	
+															}	//static x = 10
 				|STATIC access_modef STATIC error ID ASSIGN expr {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
@@ -845,18 +1035,11 @@ block_stmt:  COLON  END {Streams::verbose()<<"COLON  END \n";}
 						Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
 						}
-			 |COLON error {
-						Streams::verbose()<<"Error: Expected 'end' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
-						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected 'end' ","");			 
-						}
-			 |error stmt_list END	{
-								Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
-								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
-						}
-			 |COLON stmt_list error	{
-										Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
-										err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'end' ","");									
-									}
+			 //|COLON error {
+				//		Streams::verbose()<<"Error: Expected 'end' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+					//	err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected 'end' ","");			 
+						//}
+			
 	;
 
 stmt_list:	stmt_list stmt	{Streams::verbose()<<"stmt_list:	stmt_list stmt \n";}
@@ -874,7 +1057,29 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 										Streams::verbose()<<"Error: Expected ';' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected ';' ","");										
 									}
-				|ID SEMICOLON	{Streams::verbose()<<"stmt:	ID SEMICOLON\n";}
+				|SELF DOT ID SEMICOLON	{
+												Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		//cout<<"assignment list"<<endl;
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+																		v=$<var>$;
+																		acc_mod="";
+										}
+				|ID SEMICOLON	{
+									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+																		v=$<var>$;
+																		acc_mod="";
+								}
+				|STATIC ID SEMICOLON	{
+											Streams::verbose()<<"Error: illegal start of expression at Line No:"<<$<r.lineNum>1<<endl;
+										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum,"Error: illegal start of expression ","");										
+										}
+				|FINAL ID SEMICOLON		{
+												Streams::verbose()<<"stmt:	ID SEMICOLON\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+																		v=$<var>$;
+																		acc_mod="";
+										}
 				|ID DOT ID SEMICOLON	{Streams::verbose()<<"stmt:	ID DOT ID SEMICOLON\n";}
 				|ID COMMA ID DOT ID DOT ID SEMICOLON {Streams::verbose()<<"stmt:	ID COMMA ID DOT ID DOT ID SEMICOLON\n";}
 				|ID DOT ID COMMA ID DOT ID DOT ID SEMICOLON {Streams::verbose()<<"stmt:	ID DOT ID COMMA ID DOT ID DOT ID SEMICOLON\n";}
@@ -892,10 +1097,10 @@ if_stmt:	if_header stmt %prec stmt_3	{Streams::verbose()<<"if_stmt:	if_header st
 
 elif_stmt: 	elif_header stmt elif_stmt	{Streams::verbose()<<"elif_stmt: 	elif_header stmt elif_stmt\n";}
 			|elif_header stmt %prec stmt_7	{Streams::verbose()<<"elif_stmt:	elif_header stmt\n";}
-			|elif_header error %prec stmt_7	{
-										Streams::verbose()<<"Error: Expected statement at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
-										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected statement ","");										
-											}
+			//|elif_header error %prec stmt_7	{
+				//						Streams::verbose()<<"Error: Expected statement at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
+					//					err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected statement ","");										
+						//					}
 ;
 
 if_header:	IF expr 	{Streams::verbose()<<"if_header:	IF expr \n";}		//if(x > y):			
@@ -914,8 +1119,12 @@ while_stmt: while_header stmt	{Streams::verbose()<<"while_stmt: while_header stm
 
 ;
 while_header: WHILE expr	{Streams::verbose()<<"while_header: WHILE expr \n";}
-			|error ID expr { 
-						Streams::verbose()<<"Error: Expected reserved word at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+			//|error ID expr { 
+				//		Streams::verbose()<<"Error: Expected reserved word at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+					//	err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
+					 //}
+			|ID error expr { 
+						Streams::verbose()<<"Error: Expected reserved word 'while' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
 					 }		
 ;
@@ -1033,6 +1242,13 @@ assignment_stmt:	target_list ASSIGN left_assignment_side 	{Streams::verbose()<<"
 					|id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|ID COMMA ID ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN expr_list\n";}					
+					|SELF DOT ID ASSIGN left_assignment_side		{
+																		Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		//cout<<"assignment list"<<endl;
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+																		v=$<var>$;
+																		acc_mod="";
+																	}
 					//|target_list ASSIGN yield_expression	{Streams::verbose()<<"assignment_stmt:	target_list ASSIGN yield_expression\n";}
 					//|ID COMMA ID ASSIGN yield_expression	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN yield_expression\n";}
 					//|ID ASSIGN yield_expression	{Streams::verbose()<<"assignment_stmt:	ID ASSIGN yield_expression\n";}
@@ -1188,14 +1404,28 @@ subscription:	PRIMARY OPEN_D expr_list CLOSE_D	{Streams::verbose()<<"subscriptio
 
 call:	PRIMARY OPEN_D args_list CLOSE_D	{Streams::verbose()<<"call:	PRIMARY OPEN_D args_list CLOSE_D\n";}
 		|PRIMARY OPEN_D ID CLOSE_D	{Streams::verbose()<<"call:	PRIMARY OPEN_D ID CLOSE_D\n";}
-		|error ID OPEN_D ID CLOSE_D	{Streams::verbose()<<"call:	ID OPEN_D ID CLOSE_D\n";}//add this error
+		//|error ID OPEN_D ID CLOSE_D	{Streams::verbose()<<"call:	ID OPEN_D ID CLOSE_D\n";}//add this error
 ;
 
 expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 		|literal %prec stmt_9	{Streams::verbose()<<"expr:	literal\n";}
 		|expr op expr %prec stmt_1{Streams::verbose()<<"expr:	expr op expr\n";}
-		|long_id	%prec stmt_3{Streams::verbose()<<"expr:	long_id\n";}
-		|error expr expr %prec stmt_2 {
+		|SELF DOT ID	 %prec stmt_7{
+									Streams::verbose()<<"expr:	self.id\n";
+									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
+																		v=$<var>$;
+																		acc_mod="";
+									}
+		|SELF DOT ID parenth_form   {
+										Streams::verbose()<<"expr:	self.id()\n";
+										cout<<"hhhhhhhhh"<<endl;
+									}
+		|long_id	%prec stmt_3{
+									Streams::verbose()<<"expr:	long_id\n";
+									
+									}
+	
+		|expr error expr %prec stmt_2 {
 										Streams::verbose()<<"Error: Expected operand at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.lineNum>2-strlength($<r.strVal>2)<<endl;
 										err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"Expected operand ","");
 									  }
@@ -1208,8 +1438,10 @@ condition:  expr EQUAL expr			{Streams::verbose()<<"condition: expr EQUAL expr\n
 		|expr MORE_THAN expr		{Streams::verbose()<<"condition: expr MORE_THAN expr\n";}
 		|expr MORE_OR_EQUAL expr	{Streams::verbose()<<"condition: expr MORE_OR_EQUAL expr\n";}
 ;
-id_dot : ID %prec stmt_8 {Streams::verbose()<<"id_dot:	ID\n";}
-		 |id_dot DOT ID {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";}
+id_dot : ID %prec stmt_8 {Streams::verbose()<<"id_dot:	ID\n";
+								temp_id=temp_id+$<r.strVal>1;
+							}
+		 |id_dot DOT ID {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";temp_id=temp_id+"."+$<r.strVal>3;}
 		 ;
 
 long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
@@ -1218,12 +1450,15 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		 //|long_id DOT ID				{Streams::verbose()<<"long_id:	long_id DOT ID\n";}
 		 //|long_id DOT ID OPEN_S CLOSE_S				{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 //|long_id DOT ID OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}		 		 
-		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";}		 		 
+		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";
+										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum);
+										v=$<var>$;
+										temp_id="";
+								}		 		 
 		|id_dot parenth_form {Streams::verbose()<<"long_id:	id_dot parenth_form\n";}		 		 
 		|id_dot OPEN_D expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";}
 		|id_dot OPEN_D expr COLON expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";}
 		|id_dot OPEN_D COLON CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";}
-
 ;
 
 op: PLUS				{Streams::verbose()<<"op :PLUS\n";}

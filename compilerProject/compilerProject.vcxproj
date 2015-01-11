@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -59,8 +59,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Luay AL Assadi\Documents\Visual Studio 2013\Projects\compiler-project;C:\Users\Luay AL Assadi\Documents\Visual Studio 2013\Projects\compiler-project\compilerProject\ST;C:\Users\Luay AL Assadi\Documents\Visual Studio 2013\Projects\compiler-project\compilerProject;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>C:\Users\Luay AL Assadi\Documents\Visual Studio 2013\Projects\compiler-project\compilerProject\;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Luay AL Assadi\Documents\Visual Studio 2013\Projects\compiler-project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,10 +87,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
-    <None Include="..\yacc - Copy - Copy.y" />
-    <None Include="..\yacc - Copy.y" />
+    <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
+    <None Include="..\yaccc1.y" />
+    <None Include="..\yaccc2.y" />
+    <None Include="..\yacct.y" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,6 @@
 #include <iostream>
 using namespace std;
 
-
 /* Use prototypes in function declarations. */
 #define YY_USE_PROTOS
 
@@ -250,33 +249,33 @@ typedef unsigned char YY_CHAR;
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 79
-#define YY_END_OF_BUFFER 80
-static yyconst short int yy_accept[206] =
+#define YY_NUM_RULES 80
+#define YY_END_OF_BUFFER 81
+static yyconst short int yy_accept[209] =
     {   0,
-        0,    0,   73,   73,    0,    0,    0,    0,   80,   79,
-       78,    4,   48,   65,   69,   52,   79,   79,    5,    6,
-       13,   49,    7,   50,    9,   51,   63,   63,    3,    8,
-       54,   12,   56,   77,   39,   40,   43,   77,   77,   77,
-       77,   77,   77,   77,   77,   77,   77,   77,   77,   77,
-       77,   41,   79,   42,   72,   71,   72,   73,   67,   66,
-       66,   53,   69,   69,   47,   76,    0,    0,   70,   64,
-        0,   60,    0,    0,    0,   63,   55,   26,   57,   77,
-       24,   77,   77,   77,   77,   77,   77,   77,   77,   77,
-       77,   77,   15,   77,   19,   77,   77,   77,   77,   77,
+        0,    0,   74,   74,    0,    0,    0,    0,   81,   80,
+       79,    4,   48,   66,   70,   52,   80,   80,    5,    6,
+       13,   49,    7,   50,    9,   51,   64,   64,    3,    8,
+       54,   12,   56,   78,   39,   40,   43,   78,   78,   78,
+       78,   78,   78,   78,   78,   78,   78,   78,   78,   78,
+       78,   41,   80,   42,   73,   72,   73,   74,   68,   67,
+       67,   53,   70,   70,   47,   77,    0,    0,   71,   65,
+        0,   61,    0,    0,    0,   64,   55,   26,   57,   78,
+       24,   78,   78,   78,   78,   78,   78,   78,   78,   78,
+       78,   78,   15,   78,   19,   78,   78,   78,   78,   78,
 
-       77,   77,   77,   77,   46,   73,   72,   72,   74,   68,
-       75,   64,   61,   60,   62,   77,   77,   77,   77,   11,
-       27,   77,   77,   10,   77,   77,   77,   18,   77,   77,
-       77,   77,   77,   77,   77,   77,   77,   20,   77,   77,
-       77,   64,   77,   77,   77,   77,   16,   14,   77,   77,
-       77,   77,   77,   77,   77,   77,   77,   77,   77,   77,
-       77,   58,   77,   23,   77,   77,   37,    2,   77,   77,
-       59,   29,   77,   77,   77,   28,   77,   77,   77,   33,
-       77,   77,   17,   44,   25,   77,   22,   77,   32,    1,
-       77,   77,   77,   35,   31,   30,   77,   21,   45,   34,
+       78,   78,   78,   78,   78,   46,   74,   73,   73,   75,
+       69,   76,   65,   62,   61,   63,   78,   78,   78,   78,
+       11,   27,   78,   78,   10,   78,   78,   78,   18,   78,
+       78,   78,   78,   78,   78,   78,   78,   78,   78,   20,
+       78,   78,   78,   65,   78,   78,   78,   78,   16,   14,
+       78,   78,   78,   78,   78,   78,   78,   78,   78,   78,
+       78,   78,   58,   78,   59,   78,   23,   78,   78,   37,
+        2,   78,   78,   60,   29,   78,   78,   78,   28,   78,
+       78,   78,   33,   78,   78,   17,   44,   25,   78,   22,
+       78,   32,    1,   78,   78,   78,   35,   31,   30,   78,
 
-       77,   38,   77,   36,    0
+       21,   45,   34,   78,   38,   78,   36,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -322,63 +321,63 @@ static yyconst int yy_meta[68] =
         8,    8,    8,    8,    1,    1,    1
     } ;
 
-static yyconst short int yy_base[215] =
+static yyconst short int yy_base[218] =
     {   0,
-        0,    0,   64,   65,    0,    0,   62,   63,  326,  327,
-      327,  327,  297,  327,  315,  327,  312,  310,  327,  327,
-      327,   53,  327,   65,  327,  306,   92,   73,  327,  327,
-      292,  291,  290,    0,  327,  327,  327,  259,  259,   38,
-      270,   49,   69,  262,   74,   45,   63,  254,  255,   58,
-      262,  327,  244,  327,    0,    0,  102,    0,  301,  300,
-      327,  327,    0,  298,  327,  327,  294,  118,  327,  327,
-      108,  127,  114,  122,    0,  135,  327,  327,  327,    0,
-      247,  259,  262,  248,  114,  103,  257,  257,  247,  244,
-      240,  241,    0,  239,    0,  113,  252,  244,  233,  250,
+        0,    0,   64,   65,    0,    0,   62,   63,  329,  330,
+      330,  330,  300,  330,  318,  330,  315,  313,  330,  330,
+      330,   53,  330,   65,  330,  309,   92,   73,  330,  330,
+      295,  294,  293,    0,  330,  330,  330,  262,  262,   38,
+      273,   49,   69,  265,   74,   45,   63,   62,  259,   81,
+      266,  330,  248,  330,    0,    0,  102,    0,  305,  304,
+      330,  330,    0,  302,  330,  330,  298,  118,  330,  330,
+      122,  129,  110,  135,    0,  140,  330,  330,  330,    0,
+      251,  263,  266,  252,  108,  116,  261,  261,  251,  248,
+      244,  245,    0,  243,    0,  117,  256,  248,  237,  243,
 
-      103,  241,  230,  243,  327,    0,  327,  149,  327,  327,
-      327,  157,  149,  151,    0,  242,  245,  227,  225,    0,
-        0,  237,  237,    0,  236,  222,  238,    0,  236,  222,
-      122,  217,  223,  216,  213,  213,  226,    0,  218,  221,
-      216,  327,  210,  215,  207,  215,    0,    0,  207,  217,
-      202,  207,  189,  197,  178,  188,  157,  152,  155,  142,
-      149,    0,  152,    0,  152,  136,    0,    0,  140,  134,
-        0,  140,  139,  131,  132,    0,  129,  144,  143,    0,
-      131,  141,    0,    0,    0,  122,    0,  113,    0,    0,
-       89,   88,   62,    0,    0,    0,   64,    0,    0,    0,
+      253,  107,  244,  233,  246,  330,    0,  330,  153,  330,
+      330,  330,  161,  114,  154,    0,  245,  248,  230,  228,
+        0,    0,  240,  240,    0,  239,  225,  241,    0,  239,
+      225,  125,  220,  226,  219,  216,  229,  215,  228,    0,
+      220,  223,  218,  330,  212,  217,  209,  217,    0,    0,
+      202,  207,  198,  201,  184,  192,  147,  164,  159,  154,
+      157,  144,    0,  151,    0,  154,    0,  154,  138,    0,
+        0,  142,  136,    0,  142,  141,  133,  134,    0,  131,
+      146,  145,    0,  133,  138,    0,    0,    0,  120,    0,
+      106,    0,    0,   85,   88,   50,    0,    0,    0,   61,
 
-       46,    0,   34,    0,  327,  203,  211,  219,  227,  232,
-      235,  243,  251,  254
+        0,    0,    0,   46,    0,   34,    0,  330,  207,  215,
+      223,  231,  236,  239,  247,  255,  258
     } ;
 
-static yyconst short int yy_def[215] =
+static yyconst short int yy_def[218] =
     {   0,
-      205,    1,  206,  206,  207,  207,  208,  208,  205,  205,
-      205,  205,  205,  205,  209,  205,  205,  210,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  211,  205,  205,  205,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  205,  205,  205,  212,  212,  213,  212,  205,  205,
-      205,  205,  209,  209,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  214,  205,  205,  205,  205,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      208,    1,  209,  209,  210,  210,  211,  211,  208,  208,
+      208,  208,  208,  208,  212,  208,  208,  213,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  214,  208,  208,  208,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  208,  208,  208,  215,  215,  216,  215,  208,  208,
+      208,  208,  212,  212,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  217,  208,  208,  208,  208,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
 
-      211,  211,  211,  211,  205,  212,  205,  213,  205,  205,
-      205,  205,  205,  205,  214,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  205,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
-      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      214,  214,  214,  214,  214,  208,  215,  208,  216,  208,
+      208,  208,  208,  208,  208,  217,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  208,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
+      214,  214,  214,  214,  214,  214,  214,  214,  214,  214,
 
-      211,  211,  211,  211,    0,  205,  205,  205,  205,  205,
-      205,  205,  205,  205
+      214,  214,  214,  214,  214,  214,  214,    0,  208,  208,
+      208,  208,  208,  208,  208,  208,  208
     } ;
 
-static yyconst short int yy_nxt[395] =
+static yyconst short int yy_nxt[398] =
     {   0,
        10,   11,   11,   12,   11,   11,   13,   14,   15,   16,
        17,   18,   19,   20,   21,   22,   23,   24,   25,   26,
@@ -387,46 +386,46 @@ static yyconst short int yy_nxt[395] =
        38,   39,   40,   41,   42,   43,   44,   34,   45,   34,
        34,   34,   34,   34,   34,   46,   47,   48,   49,   34,
        34,   50,   34,   51,   52,   53,   54,   56,   56,   60,
-       60,   10,   10,   68,   68,   68,   68,  204,   57,   57,
+       60,   10,   10,   68,   68,   68,   68,  207,   57,   57,
        70,   60,   60,   58,   58,   68,   68,   68,   68,   83,
-      203,   71,   84,   76,   76,   76,   76,   61,   61,   70,
+      206,   71,   84,   76,   76,   76,   76,   61,   61,   70,
 
-       86,   96,   87,   98,   97,  102,  103,   99,  202,   89,
-       71,   88,   72,   72,   72,   68,  108,   90,   70,   93,
-      201,  109,   73,   91,   74,   75,   94,   95,  112,  112,
-      112,  112,  200,   73,  113,  113,   71,   70,   68,   68,
-       68,   68,  114,  114,  114,   71,   74,   72,   72,   72,
-       68,  122,  199,   71,   75,   76,   76,   76,   76,  120,
-      123,  131,  137,  108,  142,  121,  138,  132,  109,  113,
-      113,  114,  114,  114,  154,  155,  198,  112,  112,  112,
-      112,  197,  156,  196,  195,  194,  193,  192,  191,  190,
-      189,  188,  187,  186,  185,  184,  183,  182,  181,  180,
+       86,   96,   87,   98,   97,  205,  100,   99,  204,   89,
+       71,   88,   72,   72,   72,   68,  109,   90,   70,   93,
+      101,  110,   73,   91,   74,   75,   94,   95,  103,  104,
+      114,  114,  203,   73,  114,  114,   71,   70,   68,   68,
+       68,   68,  113,  113,  113,  113,   74,   71,  202,   72,
+       72,   72,   68,  121,   75,  115,  115,  115,   71,  122,
+       76,   76,   76,   76,  123,  132,  139,  109,  144,  201,
+      140,  133,  110,  124,  115,  115,  115,  156,  157,  200,
+      199,  113,  113,  113,  113,  158,  198,  197,  196,  195,
+      194,  193,  192,  191,  190,  189,  188,  187,  186,  185,
 
-      179,  178,  142,   55,   55,   55,   55,   55,   55,   55,
-       55,   10,   10,   10,   10,   10,   10,   10,   10,   59,
-       59,   59,   59,   59,   59,   59,   59,   63,  177,   63,
-       63,   63,   63,   63,   63,   67,  176,  175,   67,   67,
-       80,   80,   80,  106,  106,  174,  106,  173,  106,  106,
-      106,  107,  107,  172,  107,  107,  107,  107,  107,  115,
-      115,  171,  170,  169,  168,  167,  166,  165,  164,  163,
-      162,  161,  160,  159,  158,  157,  153,  152,  151,  150,
-      149,  148,  147,  146,  145,  144,  143,  141,  140,  139,
-      136,  135,  134,  133,  130,  129,  128,  127,  126,  125,
+      184,  183,  182,  181,  180,  179,  144,   55,   55,   55,
+       55,   55,   55,   55,   55,   10,   10,   10,   10,   10,
+       10,   10,   10,   59,   59,   59,   59,   59,   59,   59,
+       59,   63,  178,   63,   63,   63,   63,   63,   63,   67,
+      177,  176,   67,   67,   80,   80,   80,  107,  107,  175,
+      107,  174,  107,  107,  107,  108,  108,  173,  108,  108,
+      108,  108,  108,  116,  116,  172,  171,  170,  169,  168,
+      167,  166,  165,  164,  163,  162,  161,  160,  159,  155,
+      154,  153,  152,  151,  150,  149,  148,  147,  146,  145,
+      143,  142,  141,  138,  137,  136,  135,  134,  131,  130,
 
-      124,  119,  118,  117,  116,  111,   64,  110,  110,  105,
-      104,  101,  100,   92,   85,   82,   81,   79,   78,   77,
-       69,   66,   65,   64,   62,  205,    9,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205
+      129,  128,  127,  126,  125,  120,  119,  118,  117,  112,
+       64,  111,  111,  106,  105,  102,   92,   85,   82,   81,
+       79,   78,   77,   69,   66,   65,   64,   62,  208,    9,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208
 
     } ;
 
-static yyconst short int yy_chk[395] =
+static yyconst short int yy_chk[398] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -435,42 +434,42 @@ static yyconst short int yy_chk[395] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    3,    4,    7,
-        8,    3,    4,   22,   22,   22,   22,  203,    3,    4,
+        8,    3,    4,   22,   22,   22,   22,  206,    3,    4,
        28,    7,    8,    3,    4,   24,   24,   24,   24,   40,
-      201,   28,   40,   28,   28,   28,   28,    7,    8,   27,
+      204,   28,   40,   28,   28,   28,   28,    7,    8,   27,
 
-       42,   46,   42,   47,   46,   50,   50,   47,  197,   43,
+       42,   46,   42,   47,   46,  200,   48,   47,  196,   43,
        27,   42,   27,   27,   27,   27,   57,   43,   28,   45,
-      193,   57,   27,   43,   27,   27,   45,   45,   71,   71,
-       71,   71,  192,   27,   73,   73,   68,   27,   68,   68,
-       68,   68,   74,   74,   74,   72,   27,   72,   72,   72,
-       72,   86,  191,   76,   27,   76,   76,   76,   76,   85,
-       86,   96,  101,  108,  112,   85,  101,   96,  108,  113,
-      113,  114,  114,  114,  131,  131,  188,  112,  112,  112,
-      112,  186,  131,  182,  181,  179,  178,  177,  175,  174,
-      173,  172,  170,  169,  166,  165,  163,  161,  160,  159,
+       48,   57,   27,   43,   27,   27,   45,   45,   50,   50,
+       73,   73,  195,   27,  114,  114,   68,   27,   68,   68,
+       68,   68,   71,   71,   71,   71,   27,   72,  194,   72,
+       72,   72,   72,   85,   27,   74,   74,   74,   76,   85,
+       76,   76,   76,   76,   86,   96,  102,  109,  113,  191,
+      102,   96,  109,   86,  115,  115,  115,  132,  132,  189,
+      185,  113,  113,  113,  113,  132,  184,  182,  181,  180,
+      178,  177,  176,  175,  173,  172,  169,  168,  166,  164,
 
-      158,  157,  112,  206,  206,  206,  206,  206,  206,  206,
-      206,  207,  207,  207,  207,  207,  207,  207,  207,  208,
-      208,  208,  208,  208,  208,  208,  208,  209,  156,  209,
-      209,  209,  209,  209,  209,  210,  155,  154,  210,  210,
-      211,  211,  211,  212,  212,  153,  212,  152,  212,  212,
-      212,  213,  213,  151,  213,  213,  213,  213,  213,  214,
-      214,  150,  149,  146,  145,  144,  143,  141,  140,  139,
-      137,  136,  135,  134,  133,  132,  130,  129,  127,  126,
-      125,  123,  122,  119,  118,  117,  116,  104,  103,  102,
-      100,   99,   98,   97,   94,   92,   91,   90,   89,   88,
+      162,  161,  160,  159,  158,  157,  113,  209,  209,  209,
+      209,  209,  209,  209,  209,  210,  210,  210,  210,  210,
+      210,  210,  210,  211,  211,  211,  211,  211,  211,  211,
+      211,  212,  156,  212,  212,  212,  212,  212,  212,  213,
+      155,  154,  213,  213,  214,  214,  214,  215,  215,  153,
+      215,  152,  215,  215,  215,  216,  216,  151,  216,  216,
+      216,  216,  216,  217,  217,  148,  147,  146,  145,  143,
+      142,  141,  139,  138,  137,  136,  135,  134,  133,  131,
+      130,  128,  127,  126,  124,  123,  120,  119,  118,  117,
+      105,  104,  103,  101,  100,   99,   98,   97,   94,   92,
 
-       87,   84,   83,   82,   81,   67,   64,   60,   59,   53,
-       51,   49,   48,   44,   41,   39,   38,   33,   32,   31,
-       26,   18,   17,   15,   13,    9,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205,  205,  205,  205,  205,  205,  205,
-      205,  205,  205,  205
+       91,   90,   89,   88,   87,   84,   83,   82,   81,   67,
+       64,   60,   59,   53,   51,   49,   44,   41,   39,   38,
+       33,   32,   31,   26,   18,   17,   15,   13,    9,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208,  208,  208,  208,
+      208,  208,  208,  208,  208,  208,  208
 
     } ;
 
@@ -481,9 +480,9 @@ static yyconst short int yy_chk[395] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 1 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 #define INITIAL 0
-#line 2 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 2 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 		#include "yacc.hpp"		
 		#include <iostream>
 		#include <istream>
@@ -626,7 +625,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 40 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 40 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 
 #line 630 "lex.yy.cc"
 
@@ -679,13 +678,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 206 )
+				if ( yy_current_state >= 209 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 327 );
+		while ( yy_base[yy_current_state] != 330 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -715,12 +714,13 @@ case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(multilinecomment):
 case YY_STATE_EOF(import):
 case YY_STATE_EOF(String):
-#line 41 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{cout<<"EOF found\n";return END_OF_FILE;}
+#line 41 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{return END_OF_FILE; 
+				}
 	YY_BREAK
 case 1:
 YY_RULE_SETUP
-#line 42 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 43 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -733,7 +733,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 51 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 52 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -747,7 +747,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 61 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 63 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -760,7 +760,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 70 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 72 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				lineNum ++;
 				colNum = 0;
@@ -771,7 +771,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 77 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 79 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -784,7 +784,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 86 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 88 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -797,7 +797,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 95 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 97 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -810,7 +810,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 104 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 106 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -823,7 +823,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 114 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 116 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -836,7 +836,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 123 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 125 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -849,7 +849,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 132 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 134 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -862,7 +862,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 141 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 143 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -875,7 +875,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 150 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 152 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -888,7 +888,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 159 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 161 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -901,7 +901,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 168 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 170 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -914,7 +914,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 177 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 179 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -927,7 +927,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 186 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -940,7 +940,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 195 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 197 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -953,7 +953,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 204 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 206 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -966,7 +966,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 213 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 215 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -979,7 +979,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 222 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 224 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -992,7 +992,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 231 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 233 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1005,7 +1005,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 240 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 242 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1018,7 +1018,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 249 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 251 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1031,7 +1031,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 258 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 260 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1044,7 +1044,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 267 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 269 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1057,7 +1057,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 276 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 278 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1070,7 +1070,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 285 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 287 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1083,7 +1083,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 294 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 296 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1096,7 +1096,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 303 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 305 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1109,7 +1109,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 312 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 314 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1122,7 +1122,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 321 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 323 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1135,7 +1135,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 330 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 332 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1148,7 +1148,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 339 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1161,7 +1161,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 348 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 350 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1174,7 +1174,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 357 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1187,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 366 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1200,7 +1200,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 375 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 377 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {	
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1213,7 +1213,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 384 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 386 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1226,7 +1226,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 393 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 395 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1239,7 +1239,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 402 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1252,7 +1252,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 411 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 413 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1265,7 +1265,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 420 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 422 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1278,7 +1278,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 429 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 431 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1291,7 +1291,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 438 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 440 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1304,7 +1304,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 447 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 449 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1317,7 +1317,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 456 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1330,7 +1330,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 465 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1343,7 +1343,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 474 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 476 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1356,7 +1356,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 483 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 485 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1369,7 +1369,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 492 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 494 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1382,7 +1382,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 501 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 503 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1395,7 +1395,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 510 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 512 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1408,7 +1408,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 519 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 521 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1421,7 +1421,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 528 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 530 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1434,7 +1434,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 537 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 539 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1447,7 +1447,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 546 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 548 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1460,7 +1460,20 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 555 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 557 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	SELF;
+			}
+	YY_BREAK
+case 59:
+YY_RULE_SETUP
+#line 566 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1471,9 +1484,9 @@ YY_RULE_SETUP
 				return TRUE;
 			}
 	YY_BREAK
-case 59:
+case 60:
 YY_RULE_SETUP
-#line 564 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 575 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1484,9 +1497,9 @@ YY_RULE_SETUP
 				return FALSE;
 			}
 	YY_BREAK
-case 60:
+case 61:
 YY_RULE_SETUP
-#line 573 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 584 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1501,9 +1514,9 @@ YY_RULE_SETUP
 					return INTEGER_VALUE;
 				}
 	YY_BREAK
-case 61:
+case 62:
 YY_RULE_SETUP
-#line 586 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 597 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1517,9 +1530,9 @@ YY_RULE_SETUP
 					return INTEGER_VALUE;
 				}
 	YY_BREAK
-case 62:
+case 63:
 YY_RULE_SETUP
-#line 598 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 609 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 					int v = 1;int res=0;int val;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1549,9 +1562,9 @@ YY_RULE_SETUP
 					return INTEGER_VALUE;
 				}
 	YY_BREAK
-case 63:
+case 64:
 YY_RULE_SETUP
-#line 626 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 637 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				//cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1566,9 +1579,9 @@ YY_RULE_SETUP
 					return LONG_VALUE;
 			}
 	YY_BREAK
-case 64:
+case 65:
 YY_RULE_SETUP
-#line 639 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 650 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 				//cout<<":Float value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1580,34 +1593,34 @@ YY_RULE_SETUP
 				return FLOAT_VALUE;							
 			}
 	YY_BREAK
-case 65:
+case 66:
 YY_RULE_SETUP
-#line 649 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 660 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {							
 							BEGIN (String);
 							str = new char[255];
 							index = 0;
 						}
 	YY_BREAK
-case 66:
+case 67:
 YY_RULE_SETUP
-#line 654 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 665 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {//cout<<"str1="<<yytext<<"\n";
 							colNum+=2;
 						}
 	YY_BREAK
-case 67:
+case 68:
 YY_RULE_SETUP
-#line 657 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 668 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 							//cout<<"str2="<<yytext<<"\n";
 							str[index++] = yytext[0];
 							
 						}
 	YY_BREAK
-case 68:
+case 69:
 YY_RULE_SETUP
-#line 662 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 673 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {
 							//cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
@@ -1625,49 +1638,49 @@ YY_RULE_SETUP
 							return STRING_VALUE;
 						}
 	YY_BREAK
-case 69:
-YY_RULE_SETUP
-#line 678 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
-	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 679 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{colNum+=2;		BEGIN(multilinecomment);}
+#line 689 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 680 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{lineNum+=1;	BEGIN(multilinecomment);}
+#line 690 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{colNum+=2;		BEGIN(multilinecomment);}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 681 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{colNum+=strlen(yytext);	}
+#line 691 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{lineNum+=1;	BEGIN(multilinecomment);}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 682 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 692 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 683 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
+#line 693 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{colNum+=strlen(yytext);	}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 684 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+#line 694 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 685 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 695 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 686 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 696 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+	YY_BREAK
+case 78:
+YY_RULE_SETUP
+#line 697 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 {						
 							colNum += strlen(yytext);
 							yylval.r.colNum = colNum;
@@ -1680,17 +1693,17 @@ YY_RULE_SETUP
 							return ID;												
 						}
 	YY_BREAK
-case 78:
-YY_RULE_SETUP
-#line 697 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{colNum+=strlen(yytext);yylval.r.colNum=colNum;}
-	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 698 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 708 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
+{colNum+=strlen(yytext);yylval.r.colNum=colNum;}
+	YY_BREAK
+case 80:
+YY_RULE_SETUP
+#line 709 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 ECHO;
 	YY_BREAK
-#line 1692 "lex.yy.cc"
+#line 1706 "lex.yy.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2061,7 +2074,7 @@ yy_state_type yyFlexLexer::yy_get_previous_state()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 206 )
+			if ( yy_current_state >= 209 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -2091,11 +2104,11 @@ yy_state_type yyFlexLexer::yy_try_NUL_trans( yy_state_type yy_current_state )
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 206 )
+		if ( yy_current_state >= 209 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 205);
+	yy_is_jam = (yy_current_state == 208);
 
 	return yy_is_jam ? 0 : yy_current_state;
 	}
@@ -2495,5 +2508,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 698 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
+#line 709 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\lex.l"
 

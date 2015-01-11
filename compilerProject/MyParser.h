@@ -195,17 +195,20 @@ public:
 	~MyParser(void);
 	//YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
-	Variable* addVariableToCurrentScope(char* n, char*acc_mod, int lineNo, int colNo);
-	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool f, char* name, vector <char*> parameter, int lineNo, int colNo);
-	Function * finishFunctionDeclaration(Function * f, bool ff, bool ss, int line, int clm);
-	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod, int lineno, int colno, bool is_final);
+	Variable* addVariableToCurrentScope(char* n, char*acc_mod,bool is_static,bool is_final, int lineNo, int colNo,bool self=false);
+	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo);
+	Function * finishFunctionDeclaration(Function * f, bool ff, bool ss , int lineNo, int colNo);
+	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod,bool is_static,bool is_final, int lineno, int colno, bool is_final_t);
 	Type * finishTypeDeclaration(Type* t);
 	Type* returninner( char* child, Type* t,int l,int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
+	Variable* checkVariable(char* v,Type* t, int lineNo, int colNo,bool self=false);
+	bool check_function(char*name,Function* f);
 	void print_symbol();
 	void check_functions();
-	Variable* checkVariable(char* v, Type* t, int lineNo, int colNo);
+	Variable* set_storage_modifier(Variable* v,bool is_static,bool is_final);
+	void check_static(Type* t, int lineno, int colno);
 };
 #endif
