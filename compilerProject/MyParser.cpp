@@ -131,7 +131,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
+		/*if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
@@ -140,7 +140,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
-
+		*/
 
 		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
 		if (it != parameter.end()){
@@ -249,11 +249,28 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 }
 
 
-Function * MyParser::finishFunctionDeclaration(Function * f,bool ff ,bool ss){
+Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo){
 	if (ff)
-   	    f->set_static(ff);
+	{
+		f->set_final(ff);
+		char* first = f->getfirstpara();
+		if (strcmp("self",first)==0)
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
+	}
 	if (ss)
-		f->set_final(ss);
+	{
+		f->set_static(ss);
+		char* first = f->getfirstpara();
+		if (strcmp("self", first)==0)
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
+	}
+	if (!ff && !ss)
+	{
+		char* first = f->getfirstpara();
+		if (strcmp("self", first)!=0)
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
+	}
+
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
@@ -596,8 +613,8 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 			constraction_type.at(i)->get_type()->setouter_class(constraction_type.at(i)->get_type()->getouter_class()->getouter_class());
 		}
 	}*/
-	check_functions();
-	print_symbol();
+
+	
 	return 0;
 };
 
@@ -683,6 +700,8 @@ void  MyParser::check_inhertance_list()
 			}
 		}
 	}
+
+	check_functions();
 }
 Type* MyParser::check_if_in_inner(constraction* t, char*x)
 {

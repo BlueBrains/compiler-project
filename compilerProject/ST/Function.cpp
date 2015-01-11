@@ -72,3 +72,10 @@ bool Function::comparePar(vector<char *> outparameters)
 					 */
 	return true;
 }
+
+char* Function::getfirstpara()
+{
+	if (parameters.size()>0)
+		return this->parameters.at(0)->get_name();
+	return 0;
+}

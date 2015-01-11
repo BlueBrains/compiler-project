@@ -13,7 +13,7 @@ end
 end
 class b:	
         def final func(self,a,b):end
-	def final fofo(a,b):end
-        def soso (a,b):end
+	def final fofo(a,b,b):end
+        def soso (self,a,b,a):end
         def sasa (self,a,b):end
 end
