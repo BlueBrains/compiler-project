@@ -821,8 +821,8 @@ static const unsigned short int yyrline[] =
     1357,  1358,  1360,  1363,  1364,  1365,  1369,  1373,  1377,  1384,
     1385,  1388,  1391,  1394,  1395,  1398,  1402,  1403,  1407,  1408,
     1409,  1410,  1416,  1420,  1425,  1431,  1432,  1433,  1434,  1435,
-    1436,  1438,  1439,  1448,  1449,  1450,  1451,  1452,  1457,  1458,
-    1459,  1460,  1461,  1462,  1463
+    1436,  1438,  1441,  1450,  1455,  1456,  1457,  1458,  1461,  1462,
+    1463,  1464,  1465,  1466,  1467
 };
 #endif
 
@@ -4237,7 +4237,7 @@ yyreduce:
 #line 1070 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {
 											Streams::verbose()<<"Error: illegal start of expression at Line No:"<<(yyvsp[-2].r.lineNum)<<endl;
-										err->errQ->enqueue((yyvsp[-2].r.lineNum),yylval.r.colNum," Expected ';' ","");										
+										err->errQ->enqueue((yyvsp[-2].r.lineNum),yylval.r.colNum,"Error: illegal start of expression ","");										
 										;}
     break;
 
@@ -5173,71 +5173,77 @@ yyreduce:
 
   case 381:
 #line 1438 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"id_dot:	ID\n";;}
+    {Streams::verbose()<<"id_dot:	ID\n";
+								temp_id=temp_id+(yyvsp[0].r.strVal);
+							;}
     break;
 
   case 382:
-#line 1439 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";;}
+#line 1441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+    {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";temp_id=temp_id+"."+(yyvsp[0].r.strVal);;}
     break;
 
   case 383:
-#line 1448 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"long_id:	id_dot\n";;}
+#line 1450 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+    {Streams::verbose()<<"long_id:	id_dot\n";
+										(yyval.var)=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum);
+										v=(yyval.var);
+										temp_id="";
+								;}
     break;
 
   case 384:
-#line 1449 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1455 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot parenth_form\n";;}
     break;
 
   case 385:
-#line 1450 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1456 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";;}
     break;
 
   case 386:
-#line 1451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";;}
     break;
 
   case 387:
-#line 1452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";;}
     break;
 
   case 388:
-#line 1457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1461 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :PLUS\n";;}
     break;
 
   case 389:
-#line 1458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :MINUS\n";;}
     break;
 
   case 390:
-#line 1459 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :DIV\n";;}
     break;
 
   case 391:
-#line 1460 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1464 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :MOD\n";;}
     break;
 
   case 392:
-#line 1461 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1465 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :OR\n";;}
     break;
 
   case 393:
-#line 1462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1466 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :NOT\n";;}
     break;
 
   case 394:
-#line 1463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
     {Streams::verbose()<<"op :AND\n";;}
     break;
 
@@ -5246,7 +5252,7 @@ yyreduce:
     }
 
 /* Line 1126 of yacc.c.  */
-#line 5250 "yacc.cpp"
+#line 5256 "yacc.cpp"
 
   yyvsp -= yylen;
   yyssp -= yylen;
@@ -5514,7 +5520,7 @@ yyreturn:
 }
 
 
-#line 1465 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1469 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
 
 void yyerror(const char *s) 
 {

@@ -110,8 +110,18 @@ assignment_stmt:	self dot amer
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
+id_dot:	ID
+long_id:	id_dot
+Error: Undeclareted Variable at Line No:35 Column No:14
+expr:	long_id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
 expr:	self.id
-Error: Undeclareted Variable at Line No:35 Column No:17
+Error: Undeclareted Variable at Line No:36 Column No:17
 expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
 assignment_stmt:	self dot amer

@@ -1,7 +1,7 @@
 final class tt:
-def h():
-self.aj;
-end
+	def h():
+		self.aj;
+	end
 end
 public class z(tt):
 	def public class x:
@@ -32,6 +32,7 @@ static class a(b):
 			self.p();
 			self.oo;
 			self.k=self.i();
+			self.k=you;
 			self.l=self.o;
 		end
 		def final private xx;
