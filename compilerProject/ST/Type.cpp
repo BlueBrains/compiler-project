@@ -110,12 +110,12 @@ Type* Type::getouter_class()
 void Type::setIs_final(bool final)
 {
 	
-	is_final = true;
+	is_final = final;
 }
-void Type::setIs_static(bool final)
+void Type::setIs_static(bool is_static)
 {
 
-	is_static = true;
+	this->is_static = is_static;
 }
 bool Type::setInheritedType(Type* e){
 	bool k;

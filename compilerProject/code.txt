@@ -1,9 +1,44 @@
-class a(b):
-def x():
-self.p();
-self.k=self.i();
-self.l=self.o;
+final class tt:
 end
-def final private x;
-def static public k;
-end.
+public class z(tt):
+	def public class x:
+	end
+end
+public class c:
+	def public class x:
+	end
+end
+public class g(z,c):
+	def class v(x):
+	end
+	
+	def class n(z.x):
+	end
+	
+	def class m(z.x,c.x):end
+end
+static class a(b):
+		def class amer:
+			def class kh:
+				def class a:
+				end
+				def static molham;
+			end
+		end
+		def x():
+			self.p();
+			self.k=self.i();
+			self.l=self.o;
+		end
+		def final private xx;
+		def static public k;
+		def class aa(bb):
+		end
+		def class bb(cc):
+		end
+		def class cc(aa):
+		end
+		def final class amora:
+		end
+		def class ameer(amora):end
+end

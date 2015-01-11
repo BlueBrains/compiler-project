@@ -38,6 +38,8 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
+<<EOF>>     {return END_OF_FILE; 
+				}
 "import"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -660,7 +662,9 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							str = new char[255];
 							index = 0;
 						}
-<String>[\\/\"]			{cout<<"str1="<<yytext<<"\n";colNum+=2;}
+<String>[\\/\"]			{//cout<<"str1="<<yytext<<"\n";
+							colNum+=2;
+						}
 <String>[^\\]			{
 							//cout<<"str2="<<yytext<<"\n";
 							str[index++] = yytext[0];
@@ -677,7 +681,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							cout<<"The Full String is = "<<str<<"\n";
 							yylval.r.strVal = str;
 							yylval.r.colNum = colNum;
-							cout<<colNum;
+							//cout<<colNum;
 							str = 0;
 							BEGIN (INITIAL);
 							return STRING_VALUE;
@@ -687,7 +691,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 <multilinecomment>"\n"		 {lineNum+=1;	BEGIN(multilinecomment);}
 <multilinecomment>"*"*[^"/"] {colNum+=strlen(yytext);	}
 <multilinecomment>[^"*"]*    {colNum+=strlen(yytext);	}
-<multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	cout<<"comment"; BEGIN(INITIAL);}
+<multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
 \'[a-zA-z]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 \'\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 {identifier}			{						
@@ -698,7 +702,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							x[0] = '\0';
 							strcpy_s(x,255, yytext);
 							yylval.r.strVal = x;
-							cout<<yylval.r.colNum;
+							//cout<<yylval.r.colNum;
 							return ID;												
 						}
 " "|\t|\a|\r			{colNum+=strlen(yytext);yylval.r.colNum=colNum;}

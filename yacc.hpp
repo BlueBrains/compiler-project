@@ -29,28 +29,28 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IMPORT = 258,
-     CLASS = 259,
-     ID = 260,
-     COLON = 261,
-     CLOSE_S = 262,
-     COMMA = 263,
-     DOT = 264,
-     END = 265,
-     OPEN_C = 266,
-     CLOSE_C = 267,
-     DEF = 268,
-     ASSIGN = 269,
-     STAR = 270,
-     ELSE = 271,
-     IF = 272,
-     ELIF = 273,
-     WHILE = 274,
-     FOR = 275,
-     IN = 276,
-     TRY = 277,
-     FINALLY = 278,
-     MULTI = 279,
+     END_OF_FILE = 258,
+     IMPORT = 259,
+     CLASS = 260,
+     ID = 261,
+     COLON = 262,
+     CLOSE_S = 263,
+     COMMA = 264,
+     DOT = 265,
+     END = 266,
+     OPEN_C = 267,
+     CLOSE_C = 268,
+     DEF = 269,
+     ASSIGN = 270,
+     STAR = 271,
+     ELSE = 272,
+     IF = 273,
+     ELIF = 274,
+     WHILE = 275,
+     FOR = 276,
+     IN = 277,
+     TRY = 278,
+     FINALLY = 279,
      EXPECT = 280,
      WITH = 281,
      AS = 282,
@@ -60,81 +60,84 @@
      RETURN = 286,
      PRINT = 287,
      GLOBAL = 288,
-     RAISE = 289,
-     PRIVATE = 290,
-     PUBLIC = 291,
-     PROTECTED = 292,
-     OPEN_D = 293,
-     CLOSE_D = 294,
-     RE_COT = 295,
-     YIELD = 296,
-     PRIMARY = 297,
-     OR = 298,
-     AND = 299,
-     NOT = 300,
-     PLUS = 301,
-     MINUS = 302,
-     DIV = 303,
-     MOD = 304,
-     NOT_EQUAL = 305,
-     FINAL = 306,
-     STATIC = 307,
-     SELF = 308,
-     LESS_THAN = 309,
-     LESS_OR_EQUAL = 310,
-     MORE_THAN = 311,
-     MORE_OR_EQUAL = 312,
-     TRUE = 313,
-     FALSE = 314,
-     EXCEPT = 315,
-     SEMICOLON = 316,
-     NEW_LINE = 317,
-     PASS = 318,
-     CHAR_VALUE = 319,
-     OPEN_S = 320,
-     STRING_VALUE = 321,
-     INTEGER_VALUE = 322,
-     BREAK = 323,
-     CONTINUE = 324,
-     LONG_VALUE = 325,
-     FLOAT_VALUE = 326,
-     stmt_1_2 = 327,
-     stmt_11 = 328,
-     stmt_10 = 329,
-     stmt_9 = 330,
-     stmt_7 = 331,
-     stmt_6 = 332,
-     stmt_5 = 333,
-     stmt_4 = 334,
-     stmt_3 = 335,
-     stmt_2 = 336,
-     stmt_1 = 337,
-     stmt_8 = 338
+     AND_W = 289,
+     OR_W = 290,
+     RAISE = 291,
+     PRIVATE = 292,
+     PUBLIC = 293,
+     PROTECTED = 294,
+     OPEN_D = 295,
+     CLOSE_D = 296,
+     RE_COT = 297,
+     YIELD = 298,
+     PRIMARY = 299,
+     OR = 300,
+     AND = 301,
+     NOT = 302,
+     PLUS = 303,
+     MINUS = 304,
+     DIV = 305,
+     MOD = 306,
+     NOT_EQUAL = 307,
+     FINAL = 308,
+     STATIC = 309,
+     SELF = 310,
+     LESS_THAN = 311,
+     LESS_OR_EQUAL = 312,
+     MORE_THAN = 313,
+     MORE_OR_EQUAL = 314,
+     TRUE = 315,
+     FALSE = 316,
+     EXCEPT = 317,
+     SEMICOLON = 318,
+     NEW_LINE = 319,
+     PASS = 320,
+     CHAR_VALUE = 321,
+     OPEN_S = 322,
+     STRING_VALUE = 323,
+     INTEGER_VALUE = 324,
+     BREAK = 325,
+     CONTINUE = 326,
+     LONG_VALUE = 327,
+     FLOAT_VALUE = 328,
+     stmt_1_2 = 329,
+     stmt_11 = 330,
+     stmt_10 = 331,
+     stmt_9 = 332,
+     stmt_7 = 333,
+     stmt_6 = 334,
+     stmt_5 = 335,
+     stmt_4 = 336,
+     stmt_3 = 337,
+     stmt_2 = 338,
+     stmt_1 = 339,
+     stmt_8 = 340,
+     MULTI = 341
    };
 #endif
 /* Tokens.  */
-#define IMPORT 258
-#define CLASS 259
-#define ID 260
-#define COLON 261
-#define CLOSE_S 262
-#define COMMA 263
-#define DOT 264
-#define END 265
-#define OPEN_C 266
-#define CLOSE_C 267
-#define DEF 268
-#define ASSIGN 269
-#define STAR 270
-#define ELSE 271
-#define IF 272
-#define ELIF 273
-#define WHILE 274
-#define FOR 275
-#define IN 276
-#define TRY 277
-#define FINALLY 278
-#define MULTI 279
+#define END_OF_FILE 258
+#define IMPORT 259
+#define CLASS 260
+#define ID 261
+#define COLON 262
+#define CLOSE_S 263
+#define COMMA 264
+#define DOT 265
+#define END 266
+#define OPEN_C 267
+#define CLOSE_C 268
+#define DEF 269
+#define ASSIGN 270
+#define STAR 271
+#define ELSE 272
+#define IF 273
+#define ELIF 274
+#define WHILE 275
+#define FOR 276
+#define IN 277
+#define TRY 278
+#define FINALLY 279
 #define EXPECT 280
 #define WITH 281
 #define AS 282
@@ -144,56 +147,59 @@
 #define RETURN 286
 #define PRINT 287
 #define GLOBAL 288
-#define RAISE 289
-#define PRIVATE 290
-#define PUBLIC 291
-#define PROTECTED 292
-#define OPEN_D 293
-#define CLOSE_D 294
-#define RE_COT 295
-#define YIELD 296
-#define PRIMARY 297
-#define OR 298
-#define AND 299
-#define NOT 300
-#define PLUS 301
-#define MINUS 302
-#define DIV 303
-#define MOD 304
-#define NOT_EQUAL 305
-#define FINAL 306
-#define STATIC 307
-#define SELF 308
-#define LESS_THAN 309
-#define LESS_OR_EQUAL 310
-#define MORE_THAN 311
-#define MORE_OR_EQUAL 312
-#define TRUE 313
-#define FALSE 314
-#define EXCEPT 315
-#define SEMICOLON 316
-#define NEW_LINE 317
-#define PASS 318
-#define CHAR_VALUE 319
-#define OPEN_S 320
-#define STRING_VALUE 321
-#define INTEGER_VALUE 322
-#define BREAK 323
-#define CONTINUE 324
-#define LONG_VALUE 325
-#define FLOAT_VALUE 326
-#define stmt_1_2 327
-#define stmt_11 328
-#define stmt_10 329
-#define stmt_9 330
-#define stmt_7 331
-#define stmt_6 332
-#define stmt_5 333
-#define stmt_4 334
-#define stmt_3 335
-#define stmt_2 336
-#define stmt_1 337
-#define stmt_8 338
+#define AND_W 289
+#define OR_W 290
+#define RAISE 291
+#define PRIVATE 292
+#define PUBLIC 293
+#define PROTECTED 294
+#define OPEN_D 295
+#define CLOSE_D 296
+#define RE_COT 297
+#define YIELD 298
+#define PRIMARY 299
+#define OR 300
+#define AND 301
+#define NOT 302
+#define PLUS 303
+#define MINUS 304
+#define DIV 305
+#define MOD 306
+#define NOT_EQUAL 307
+#define FINAL 308
+#define STATIC 309
+#define SELF 310
+#define LESS_THAN 311
+#define LESS_OR_EQUAL 312
+#define MORE_THAN 313
+#define MORE_OR_EQUAL 314
+#define TRUE 315
+#define FALSE 316
+#define EXCEPT 317
+#define SEMICOLON 318
+#define NEW_LINE 319
+#define PASS 320
+#define CHAR_VALUE 321
+#define OPEN_S 322
+#define STRING_VALUE 323
+#define INTEGER_VALUE 324
+#define BREAK 325
+#define CONTINUE 326
+#define LONG_VALUE 327
+#define FLOAT_VALUE 328
+#define stmt_1_2 329
+#define stmt_11 330
+#define stmt_10 331
+#define stmt_9 332
+#define stmt_7 333
+#define stmt_6 334
+#define stmt_5 335
+#define stmt_4 336
+#define stmt_3 337
+#define stmt_2 338
+#define stmt_1 339
+#define stmt_8 340
+#define MULTI 341
 
 
 
@@ -215,7 +221,7 @@ typedef union YYSTYPE {
 		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 219 "yacc.hpp"
+#line 225 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
