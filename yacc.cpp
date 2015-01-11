@@ -823,9 +823,9 @@ static const unsigned short int yyrline[] =
     1345,  1346,  1349,  1350,  1351,  1352,  1353,  1356,  1357,  1359,
     1360,  1361,  1363,  1366,  1367,  1368,  1372,  1376,  1380,  1387,
     1388,  1391,  1394,  1397,  1398,  1401,  1405,  1406,  1410,  1411,
-    1412,  1413,  1419,  1423,  1428,  1434,  1435,  1436,  1437,  1438,
-    1439,  1441,  1444,  1453,  1458,  1459,  1460,  1461,  1464,  1465,
-    1466,  1467,  1468,  1469,  1470
+    1412,  1413,  1419,  1424,  1429,  1435,  1436,  1437,  1438,  1439,
+    1440,  1442,  1445,  1454,  1459,  1460,  1461,  1462,  1465,  1466,
+    1467,  1468,  1469,  1470,  1471
 };
 #endif
 
@@ -5124,12 +5124,13 @@ yyreduce:
 #line 1419 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"expr:	self.id()\n";
+										p->insert_func_Call(t,(yyvsp[-1].r.strVal),yylval.r.lineNum, yylval.r.colNum);
 										cout<<"hhhhhhhhh"<<endl;
 									;}
     break;
 
   case 373:
-#line 1423 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1424 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"expr:	long_id\n";
 									
@@ -5137,7 +5138,7 @@ yyreduce:
     break;
 
   case 374:
-#line 1428 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1429 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected operand at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.lineNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)-strlen((yyvsp[-1].r.strVal)),"Expected operand ","");
@@ -5145,49 +5146,49 @@ yyreduce:
     break;
 
   case 375:
-#line 1434 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1435 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr EQUAL expr\n";;}
     break;
 
   case 376:
-#line 1435 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1436 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr NOT_EQUAL expr\n";;}
     break;
 
   case 377:
-#line 1436 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1437 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr LESS_THAN expr\n";;}
     break;
 
   case 378:
-#line 1437 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1438 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr LESS_OR_EQUAL expr\n";;}
     break;
 
   case 379:
-#line 1438 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1439 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr MORE_THAN expr\n";;}
     break;
 
   case 380:
-#line 1439 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1440 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr MORE_OR_EQUAL expr\n";;}
     break;
 
   case 381:
-#line 1441 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1442 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_dot:	ID\n";
 								temp_id=temp_id+(yyvsp[0].r.strVal);
 							;}
     break;
 
   case 382:
-#line 1444 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1445 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";temp_id=temp_id+"."+(yyvsp[0].r.strVal);;}
     break;
 
   case 383:
-#line 1453 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1454 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot\n";
 										(yyval.var)=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum);
 										v=(yyval.var);
@@ -5196,57 +5197,57 @@ yyreduce:
     break;
 
   case 384:
-#line 1458 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1459 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot parenth_form\n";;}
     break;
 
   case 385:
-#line 1459 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1460 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";;}
     break;
 
   case 386:
-#line 1460 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1461 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";;}
     break;
 
   case 387:
-#line 1461 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1462 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";;}
     break;
 
   case 388:
-#line 1464 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1465 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :PLUS\n";;}
     break;
 
   case 389:
-#line 1465 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1466 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :MINUS\n";;}
     break;
 
   case 390:
-#line 1466 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1467 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :DIV\n";;}
     break;
 
   case 391:
-#line 1467 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1468 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :MOD\n";;}
     break;
 
   case 392:
-#line 1468 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1469 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :OR\n";;}
     break;
 
   case 393:
-#line 1469 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1470 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :NOT\n";;}
     break;
 
   case 394:
-#line 1470 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1471 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :AND\n";;}
     break;
 
@@ -5255,7 +5256,7 @@ yyreduce:
     }
 
 /* Line 1126 of yacc.c.  */
-#line 5259 "yacc.cpp"
+#line 5260 "yacc.cpp"
 
   yyvsp -= yylen;
   yyssp -= yylen;
@@ -5523,7 +5524,7 @@ yyreturn:
 }
 
 
-#line 1472 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
+#line 1473 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
 
 void yyerror(const char *s) 
 {

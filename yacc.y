@@ -1418,6 +1418,7 @@ expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 									}
 		|SELF DOT ID parenth_form   {
 										Streams::verbose()<<"expr:	self.id()\n";
+										p->insert_func_Call(t,$<r.strVal>3,yylval.r.lineNum, yylval.r.colNum);
 										cout<<"hhhhhhhhh"<<endl;
 									}
 		|long_id	%prec stmt_3{
