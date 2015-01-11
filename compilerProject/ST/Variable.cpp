@@ -98,6 +98,15 @@ Type* Variable::getType(){
 	return this->type;
 }
 
+bool  Variable::get_isarray()
+{
+	return this->is_array;
+}
+bool  Variable::get_isdic()
+{
+	return this->is_dic;
+}
+
 void Variable::setType(Type * type){
 	this->type = type;
 }

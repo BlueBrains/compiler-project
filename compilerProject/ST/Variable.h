@@ -32,6 +32,8 @@ public:
 	static bool compare(Variable *, Variable*);
 	char* getAccessModifier();
 	void setAccessModifier(char*);
+	bool get_isarray();
+	bool get_isdic();
 	virtual bool getIsConst();
 	virtual void setIsConst(bool);
 	Type* getType();
