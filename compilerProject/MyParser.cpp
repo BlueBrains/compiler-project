@@ -126,9 +126,17 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo){
-
-	Variable * v = this->st->getVariableFromCurrentScope(name,t);
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,bool self){
+	Variable *v = NULL;
+	if (self)
+	{
+		 v = (Variable*)t->getScope()->m->get(name,"Variable");
+	}
+	else
+	{
+		 v = this->st->getVariableFromCurrentScope(name, t);
+	}
+	
 	if (!v)
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);

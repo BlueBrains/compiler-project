@@ -1054,6 +1054,13 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 										Streams::verbose()<<"Error: Expected ';' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected ';' ","");										
 									}
+				|SELF DOT ID SEMICOLON	{
+												Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		//cout<<"assignment list"<<endl;
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+																		v=$<var>$;
+																		acc_mod="";
+										}
 				|ID SEMICOLON	{
 									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
 									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -1062,7 +1069,7 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 								}
 				|STATIC ID SEMICOLON	{
 											Streams::verbose()<<"Error: illegal start of expression at Line No:"<<$<r.lineNum>1<<endl;
-										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected ';' ","");										
+										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum,"Error: illegal start of expression ","");										
 										}
 				|FINAL ID SEMICOLON		{
 												Streams::verbose()<<"stmt:	ID SEMICOLON\n";
@@ -1402,14 +1409,13 @@ expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 		|expr op expr %prec stmt_1{Streams::verbose()<<"expr:	expr op expr\n";}
 		|SELF DOT ID	 %prec stmt_7{
 									Streams::verbose()<<"expr:	self.id\n";
-									cout<<"hhhhhhhhh"<<endl;
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
 																		v=$<var>$;
 																		acc_mod="";
 									}
 		|SELF DOT ID parenth_form   {
 										Streams::verbose()<<"expr:	self.id()\n";
-									cout<<"hhhhhhhhh"<<endl;
+										cout<<"hhhhhhhhh"<<endl;
 									}
 		|long_id	%prec stmt_3{
 									Streams::verbose()<<"expr:	long_id\n";
@@ -1429,8 +1435,10 @@ condition:  expr EQUAL expr			{Streams::verbose()<<"condition: expr EQUAL expr\n
 		|expr MORE_THAN expr		{Streams::verbose()<<"condition: expr MORE_THAN expr\n";}
 		|expr MORE_OR_EQUAL expr	{Streams::verbose()<<"condition: expr MORE_OR_EQUAL expr\n";}
 ;
-id_dot : ID %prec stmt_8 {Streams::verbose()<<"id_dot:	ID\n";}
-		 |id_dot DOT ID {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";}
+id_dot : ID %prec stmt_8 {Streams::verbose()<<"id_dot:	ID\n";
+								temp_id=temp_id+$<r.strVal>1;
+							}
+		 |id_dot DOT ID {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";temp_id=temp_id+"."+$<r.strVal>3;}
 		 ;
 
 long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
@@ -1439,13 +1447,15 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		 //|long_id DOT ID				{Streams::verbose()<<"long_id:	long_id DOT ID\n";}
 		 //|long_id DOT ID OPEN_S CLOSE_S				{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 //|long_id DOT ID OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}		 		 
-		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";}		 		 
+		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";
+										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum);
+										v=$<var>$;
+										temp_id="";
+								}		 		 
 		|id_dot parenth_form {Streams::verbose()<<"long_id:	id_dot parenth_form\n";}		 		 
 		|id_dot OPEN_D expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";}
 		|id_dot OPEN_D expr COLON expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";}
 		|id_dot OPEN_D COLON CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";}
-		
-
 ;
 
 op: PLUS				{Streams::verbose()<<"op :PLUS\n";}
