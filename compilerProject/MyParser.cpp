@@ -212,7 +212,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	vector <char *> tempvec = parameter;
-	vector <char *> cleanp = parameter;
+/*	vector <char *> cleanp = parameter;
 	int k = 0;
 	for (int i = 0; i < parameter.size(); i++) {
 		char* temp = new char[strlen(parameter.at(i)) + 1];
@@ -227,7 +227,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		k = 0;
 		cleanp.at(i) = temp;
 	}
-
+	*/
 	for (int i = 0; i < parameter.size(); i++) {
 		tempvec.at(i) = "!";
 		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(parameter.at(i)));
@@ -1008,7 +1008,7 @@ void MyParser::check_func_Call()
 				this->errRecovery->errQ->enqueue(funccaller.at(j)->get_LineNo(), funccaller.at(j)->get_ColNo(), "call to not define function", funccaller.at(j)->get_name());
 			else if (classname.size() > 1)
 			{
-				std::string erro("ambigous function was found in class");
+				std::string erro("ambiguous function was found in class");
 				for (int k = 0; k < classname.size(); k++)
 				{
 					std::string tempstr(classname.at(k));

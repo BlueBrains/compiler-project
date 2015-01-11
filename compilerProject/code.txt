@@ -1,19 +1,12 @@
-class a(b,c):
-	def dodo():
-		self.x();
-                x = self.y ;
+class a:
+	def soso(a,b):end
+
+	def koko(a,b,b):	
 	end
-end
-class b:
-	def x(): end
-end
-class c(d,e):
 
-end
-class d(e):
-
-end
-class e:
-	def final dodo(): end
-		def x(): end
+	def lolo(a,self,b):	
+	end
+	
+	def final jojo(self,k):end
+	def static jojo(self,k):end
 end

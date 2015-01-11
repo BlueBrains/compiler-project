@@ -973,8 +973,15 @@ args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA 
 			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
 			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
 			|arg	{Streams::verbose()<<"args_list: arg \n";}
+			|paraself {Streams::verbose()<<"args_list: paraself \n";}
 ;
 
+paraself: SELF COMMA args_list	{Streams::verbose()<<"paraself:	SELF COMMA args_list\n";parameters.push_back("self");}
+			|SELF COMMA ID {Streams::verbose()<<"paraself:	SELF COMMA ID \n"; parameters.push_back("self"); parameters.push_back($<r.strVal>3);}
+			|SELF %prec stmt_1 {Streams::verbose()<<"paraself:	SELF \n"; parameters.push_back("self");}
+			|args_list COMMA SELF {Streams::verbose()<<"paraself:	args_list COMMA SELF \n"; parameters.push_back("self");}
+			|ID COMMA SELF {Streams::verbose()<<"paraself:	ID COMMA SELF \n"; parameters.push_back($<r.strVal>1); parameters.push_back("self");}
+;
 arg:	STAR ID		{
 						Streams::verbose()<<"arg:	STAR ID \n";std::string tempstr($<r.strVal>2);
 						std::string erro("*" + tempstr);
