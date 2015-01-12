@@ -1,5 +1,5 @@
 class a:
-	def dodo(self,x,f):
+	def dodo(c,yy,**c,**y,*x):
 		self.x();
                 x = self.y ;
 	end
