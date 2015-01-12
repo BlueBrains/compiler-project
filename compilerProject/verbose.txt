@@ -7,6 +7,42 @@ args_list:	ID COMMA ID
 arguments:	args_list
 method_h: ID OPEN_S arguments CLOSE_S 
 id_dot:	ID
+id_dot:	ID
+parenth_form : 	OPEN_S  CLOSE_S
+long_id:	id_dot parenth_form
+expr:	long_id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt 
+id_dot:	ID
+id_dot:	id_dot DOT ID
+long_id:	id_dot
+expr:	long_id
+op :PLUS
+id_dot:	ID
+id_dot:	id_dot DOT ID
+long_id:	id_dot
+expr:	long_id
+expr:	expr op expr
+expr_list: expr %prec stmt_1
+parenth_form : 	OPEN_S expr_list CLOSE_S
+expr:	self.id()
+expr:	long_id
+expr_list: expr %prec stmt_1
+simple_stmt_list: 	expr_list
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+parenth_form : 	OPEN_S  CLOSE_S
+expr:	self.id()
+expr:	long_id
+expr_list: expr %prec stmt_1
+simple_stmt_list: 	expr_list
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+id_dot:	ID
 long_id:	id_dot
 expr:	long_id
 expr_list: expr %prec stmt_1
@@ -14,7 +50,7 @@ left_assignment_side : expr_list
 assignment_stmt:	self dot amer
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
-stmt_list:	stmt 
+stmt_list:	stmt_list stmt 
 id_dot:	ID
 long_id:	id_dot
 expr:	long_id
@@ -95,66 +131,6 @@ access_modef: PRIVATE
 var_declaration: access_modef ID
 dm:	var_declaration SEMICOLON
 dm_list: dm_list DEF dm
-class_h: CLASS ID 
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-id_dot:	ID
-parenth_form : 	OPEN_S  CLOSE_S
-long_id:	id_dot parenth_form
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-id_dot:	id_dot DOT ID
-long_id:	id_dot
-expr:	long_id
-op :PLUS
-id_dot:	ID
-id_dot:	id_dot DOT ID
-long_id:	id_dot
-expr:	long_id
-expr:	expr op expr
-Error: Expected '(' at Line No:19 Column No:14
-enclosure:	parenth_form
-atom:	enclosure
-primary: 	atom
-id_dot:	ID
-parenth_form : 	OPEN_S  CLOSE_S
-expr:	self.id()
-expr:	long_id
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:22 Column No:19
-expr:	long_id
-Error: Expected operand at Line No:20 Column No:21
-Error: Expected '(' at Line No:19 Column No:29
-enclosure:	parenth_form
-atom:	enclosure
-primary: 	atom
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:23 Column No:12
-expr:	long_id
-id_dot:	ID
-Error: Expected ')' at Line No:25 Column No:19
-long_id:	id_dot parenth_form
-expr:	long_id
-Error: Expected operand at Line No:23 Column No:22
-Error: Expected '(' at Line No:23 Column No:4
-enclosure:	parenth_form
-atom:	enclosure
-primary: 	atom
-Error: Expected ':' at Line No:25 Column No:23
-stmt:	block_stmt
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: DEF dm
 access_modef: PRIVATE
 method_h: ID OPEN_S CLOSE_S 
 id_dot:	ID
@@ -164,7 +140,7 @@ expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
 assignment_stmt:	id_dot ASSIGN expr_list
 simple_stmt_list: 	assignment_stmt
-Error: Expected ';' at Line No:30 Column No:8
+Error: Expected ';' at Line No:20 Column No:8
 stmt_list:	stmt 
 id_dot:	ID
 literal:    STRING_VALUE
@@ -215,9 +191,7 @@ stmt_list:	stmt_list stmt
 id_dot:	ID
 long_id:	id_dot
 expr:	long_id
-id_dot:	ID
 expr:	self.id
-Error: Undeclareted Variable at Line No:35 Column No:16
 expr:	long_id
 condition: expr MORE_THAN expr
 expr:	condition
@@ -339,10 +313,6 @@ method_declaration: access_modef method_h block_stmt
 dm:	method_declaration
 dm_list: dm_list DEF dm
 class_body:COLON dm_list END
-class_decl: class_h class_body
-dm:	class_decl
-dm_list: dm_list DEF dm
-Error: Expected 'end' at Line No:58 Column No:0
 class_decl: class_h class_body
 unit: import_stmt class_decl
 program: unit

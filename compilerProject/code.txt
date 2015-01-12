@@ -1,6 +1,9 @@
 import test.main;
 class point():
 	def __init__ (self,X,Y):  #constructor
+		a=ioo();
+		self.ty(x.l+y.o);
+		self.op();
 		self.x=X;
 		self.y=Y;
 	end
@@ -13,19 +16,6 @@ class point():
 	end
 	def private  x;
 	def private y;
-	def class help:
-		def __init__ (self):
-		   	temp=point();
-		 	self.print(temp.x+temp.y);
-			self.add_to_list();
-		end
-		def print(self,r):
-				print r;
-		end
-		def add_to_list(self):
-			
-		end
-	end
 	def private printFruit():
 		j=0
 		fruits = ["banana", "apple",  "mango"];
@@ -54,4 +44,4 @@ class point():
 			end
 		end
 	end
-end 
+end
