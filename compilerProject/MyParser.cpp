@@ -220,7 +220,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	vector <char *> tempvec = parameter;
-	vector <char *> cleanp = parameter;
+/*	vector <char *> cleanp = parameter;
 	int k = 0;
 	for (int i = 0; i < parameter.size(); i++) {
 		char* temp = new char[strlen(parameter.at(i)) + 1];
@@ -235,7 +235,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		k = 0;
 		cleanp.at(i) = temp;
 	}
-
+	*/
 	for (int i = 0; i < parameter.size(); i++) {
 		tempvec.at(i) = "!";
 		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(parameter.at(i)));
@@ -310,7 +310,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}
 	*/
-	if (nullclass)
+	if (nullclass && (strcmp(name,"__init__")!=0))
 	{
 		unfinished *temp = new unfinished(tname, f, lineNo, colNo);
 		unfinishfunction.push_back(temp);
@@ -320,27 +320,35 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 
 Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo){
-	if (ff)
-	{
-		f->set_final(ff);
-		char* first = f->getfirstpara();
-		if (strcmp("self",first)==0)
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
-	}
-	if (ss)
-	{
-		f->set_static(ss);
-		char* first = f->getfirstpara();
-		if (strcmp("self", first)==0)
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
-	}
-	if (!ff && !ss)
-	{
-		char* first = f->getfirstpara();
-		if ((first != NULL) && (strcmp("self", first)!=0))
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
-	}
+	if (f!=NULL)
+		{	
+				if (ff)
+			{
+				f->set_final(ff);
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
+			}
+			if (ss)
+			{
+				f->set_static(ss);
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
+			}
+			if (!ff && !ss)
+			{
 
+				char* first = f->getfirstpara();
+				if ((first != NULL) && (strcmp("self", first) != 0))
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
+			}
+
+	}
+	else 
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","error" );
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
@@ -839,6 +847,7 @@ void  MyParser::check_inhertance_list()
 	}
 
 	check_functions();
+	check_func_Call();
 }
 Type* MyParser::check_if_in_inner(constraction* t, char*x)
 {
@@ -943,28 +952,95 @@ void print_st(SymbolTable *s)
 
 }
 
+void MyParser::recrusive_up_parnet(Type *t, int j)
+{
+	if (t != NULL)
+	{
+		for (int i = 0; i < int(t->getInheritedType().size()); i++)
+		{
+			Type* x = t->getInheritedType().at(i);
+			recrusive_up_parnet(x,j);
+			Function * f1 = (Function *)x->getScope()->m->get(unfinishfunction.at(j)->get_function()->get_name(), "Function");
+			if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
+			{
+				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
+			}
+			else if (f1 && (f1->getparameters().size() != unfinishfunction.at(j)->get_function()->getparameters().size()) && (f1->get_name() != "__init__"))
+			{
+				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
+			}
+
+		}
+	}
+}
+
 void MyParser::check_functions()
 {
 	for (int j = 0; j< unfinishfunction.size(); j++){
 		Type* t = unfinishfunction.at(j)->get_type();
-		for (int i = 0; i < int(t->getInheritedType().size()); i++)
-		{
-			Type* x = t->getInheritedType().at(i);
-			Function * f1 = (Function *)x->getScope()->m->get(unfinishfunction.at(j)->get_function()->get_name(), "Function");
-			if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
-			{
-				cout << "erroe 1"; this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
-			}
-			else if (f1 && (f1->getparameters().size() != unfinishfunction.at(j)->get_function()->getparameters().size()) && (f1->get_name() != "__init__"))
-			{
-				cout << "erroe 2";  this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
-			}
-
-		}
+		recrusive_up_parnet(t,j);
 	}
 
 }
 void MyParser::print_symbol()
 {
 	print_st(this->st);
+}
+
+void MyParser::insert_func_Call(Type* t, char* name, int lineno, int colno)
+{
+	functionCaller * f = new functionCaller(t,name, lineno, colno);
+	funccaller.push_back(f);
+}
+
+void  MyParser::recrusive_up_caller(Type* t, int j)
+{
+	if (t != NULL){
+		Function * f1 = (Function *)t->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+		if (!f1){
+			recrusive_up_caller(t->getouter_class(), j);
+			for (int i = 0; i < int(t->getInheritedType().size()); i++)
+			{
+				Type* x = t->getInheritedType().at(i);
+				recrusive_up_caller(x, j);
+				Function * f2 = (Function *)x->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+				if (f2)
+				{
+					classname.push_back(x->get_name());
+				}
+			}
+
+		}
+		else
+			classname.push_back(t->get_name());
+	}
+}
+
+void MyParser::check_func_Call()
+{
+	
+	for (int j = 0; j< funccaller.size(); j++){
+		Type* t = funccaller.at(j)->get_type();
+		classname.clear() ;
+		Function * f1 = (Function *)t->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+		if (!f1){
+			recrusive_up_caller(t,j);
+			
+			if (classname.size() == 0)
+				this->errRecovery->errQ->enqueue(funccaller.at(j)->get_LineNo(), funccaller.at(j)->get_ColNo(), "call to not define function", funccaller.at(j)->get_name());
+			else if (classname.size() > 1)
+			{
+				std::string erro("ambiguous function was found in class");
+				for (int k = 0; k < classname.size(); k++)
+				{
+					std::string tempstr(classname.at(k));
+					erro = erro + " , " + tempstr;
+				}
+				
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+				this->errRecovery->errQ->enqueue(funccaller.at(j)->get_LineNo(), funccaller.at(j)->get_ColNo(), cstr, funccaller.at(j)->get_name());
+			}
+		}
+	}
 }

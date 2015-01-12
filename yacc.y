@@ -939,8 +939,9 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 ;
 
 
-method_h: 	ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
-			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back($<r.strVal>3);testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}			
+method_h: 	
+			ID OPEN_S SELF CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}			
+			|ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
 			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
 			|error OPEN_S arguments CLOSE_S {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
@@ -977,8 +978,15 @@ args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA 
 			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
 			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
 			|arg	{Streams::verbose()<<"args_list: arg \n";}
+			|paraself {Streams::verbose()<<"args_list: paraself \n";}
 ;
 
+paraself: SELF COMMA args_list	{Streams::verbose()<<"paraself:	SELF COMMA args_list\n";parameters.push_back("self");}
+			|SELF COMMA ID {Streams::verbose()<<"paraself:	SELF COMMA ID \n"; parameters.push_back("self"); parameters.push_back($<r.strVal>3);}
+			|SELF %prec stmt_1 {Streams::verbose()<<"paraself:	SELF \n"; parameters.push_back("self");}
+			|args_list COMMA SELF {Streams::verbose()<<"paraself:	args_list COMMA SELF \n"; parameters.push_back("self");}
+			|ID COMMA SELF {Streams::verbose()<<"paraself:	ID COMMA SELF \n"; parameters.push_back($<r.strVal>1); parameters.push_back("self");}
+;
 arg:	STAR ID		{
 						Streams::verbose()<<"arg:	STAR ID \n";std::string tempstr($<r.strVal>2);
 						std::string erro("*" + tempstr);
@@ -1426,6 +1434,7 @@ expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 									}
 		|SELF DOT ID parenth_form   {
 										Streams::verbose()<<"expr:	self.id()\n";
+										p->insert_func_Call(t,$<r.strVal>3,yylval.r.lineNum, yylval.r.colNum);
 										cout<<"hhhhhhhhh"<<endl;
 									}
 		|SELF DOT SELF				{

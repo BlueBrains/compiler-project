@@ -183,12 +183,75 @@ public:
 	}
 };
 
+//======================================================================
+class functionCaller
+{
+private:
+	char* name;
+	Type* type;
+	vector <char *> paramerter;
+	int LineNo, ColNo;
+public:
+	char* get_name()
+	{
+		return this->name;
+	}
+	Type* get_type()
+	{
+		return this->type;
+	}
+	void insertparameter(vector <char *> par)
+	{
+		 this->paramerter=par;
+	}
+	int get_LineNo()
+	{
+		return LineNo;
+	}
+	int get_ColNo()
+	{
+		return ColNo;
+	}
+	functionCaller(void)
+	{
+		name = new char();
+		LineNo = 0;
+		ColNo = 0;
+	}
+	functionCaller(Type *t, char *n, vector <char*> p, int L, int C)
+	{
+		this->type = new Type();
+		this->type = t;
+		this->name = n;
+		this->paramerter = p;
+		this->ColNo = C;
+		this->LineNo = L;
+	}
+	functionCaller(Type *t, char *n, int L, int C)
+	{
+		this->type = new Type();
+		this->type = t;
+		this->name = n;
+		this->ColNo = C;
+		this->LineNo = L;
+	}
+	
+	bool compare(vector <char*> p)
+	{
+		if (p.size() != this->paramerter.size())
+			return false;
+		return true;
+	}
+};
+
 class MyParser
 {
 public:
 	SymbolTable * st;
 	vector<constraction*>constraction_type;
 	vector<unfinished*>unfinishfunction;
+	vector<functionCaller*>funccaller;
+	vector <char*> classname;
 	vector<Type*>outer_type;
 	ErrorRecovery * errRecovery;
 	MyParser(void);
@@ -209,6 +272,10 @@ public:
 	void print_symbol();
 	void check_functions();
 	Variable* set_storage_modifier(Variable* v,bool is_static,bool is_final);
+	void insert_func_Call(Type* t, char* name, int lineno, int colno);
+	void recrusive_up_parnet(Type *t, int j);
+	void recrusive_up_caller(Type* t, int j);
 	void check_static(Type* t, int lineno, int colno);
+	void check_func_Call();
 };
 #endif
