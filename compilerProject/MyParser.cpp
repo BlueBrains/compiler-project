@@ -103,8 +103,10 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 			v->by_self = self;
 			if (self)
 			{
+				char* name = new char[50];
+				name = strcpy(name, n);
 				v->set_static(true);
-				this->st->currScope->parent->m->put(n, v, "Variable");
+				this->st->currScope->parent->m->put(name, v, "Variable");
 			}
 			else
 			{
@@ -117,7 +119,9 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "Illegal static declaration in inner class", n);
 					}
 				}
-				this->st->currScope->m->put(n, v, "Variable");
+				char* name = new char[50];
+				name=strcpy(name,n);
+				this->st->currScope->m->put(name, v, "Variable");
 			}
 				
 		}
@@ -219,26 +223,63 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 	}
 
-	vector <char *> tempvec = parameter;
-/*	vector <char *> cleanp = parameter;
-	int k = 0;
+	//vector <char *> tempvec = parameter;
+	vector <char *> cleanp = parameter;
+	vector <char *> clean2p = parameter;
+	vector <char *> clean3p = parameter;
+	bool dontdo1 = false;
+	bool dontdo2 = false;
+
 	for (int i = 0; i < parameter.size(); i++) {
-		char* temp = new char[strlen(parameter.at(i)) + 1];
-		for (int j = 0; j < strlen(parameter.at(i)); j++) {
-			if ('*' != parameter.at(i)[j])
+		if ('*' != parameter.at(i)[0])
+		{
+			std::string tempstr(parameter.at(i));
+			std::string erro("*" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+			cleanp.at(i) = cstr;
+		}
+		else
+		{
+			dontdo1 = true;
+		}
+	}
+	
+	if (dontdo1){
+		for (int i = 0; i < cleanp.size(); i++) {
+			if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
 			{
-				temp[j] = parameter.at(i)[j];
-				k++;
+				std::string tempstr(parameter.at(i));
+				std::string erro("*" + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+				clean2p.at(i) = cstr;
+			}
+			else if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' == parameter.at(i)[1]))
+			{
+				dontdo2 = true;
 			}
 		}
-		temp[k + 1] = '\0';
-		k = 0;
-		cleanp.at(i) = temp;
+
 	}
-	*/
+
+	if (dontdo2){
+		for (int i = 0; i < cleanp.size(); i++) {
+			if ('*' != parameter.at(i)[0])
+			{
+				std::string tempstr(parameter.at(i));
+				std::string erro("**" + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+				clean3p.at(i) = cstr;
+			}
+		}
+	}
+
+	vector <char *> tempvec = cleanp;
 	for (int i = 0; i < parameter.size(); i++) {
 		tempvec.at(i) = "!";
-		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(parameter.at(i)));
+		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(cleanp.at(i)));
 		if (it != tempvec.end()){
 			std::string tempstr(parameter.at(i));
 			std::string erro("dublicated parameter " + tempstr);
@@ -249,7 +290,42 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 
 	}
+	tempvec.clear();
+	if (dontdo1){
+		tempvec = clean2p;
+		for (int i = 0; i < parameter.size(); i++) {
+			tempvec.at(i) = "!";
 
+			vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean2p.at(i)));
+			if (it != tempvec.end()){
+				std::string tempstr(parameter.at(i));
+				std::string erro("dublicated parameter " + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+
+				this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+			}
+
+		}
+	}
+	tempvec.clear();
+	if (dontdo2){
+		tempvec = clean3p;
+		for (int i = 0; i < parameter.size(); i++) {
+			tempvec.at(i) = "!";
+
+			vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean3p.at(i)));
+			if (it != tempvec.end()){
+				std::string tempstr(parameter.at(i));
+				std::string erro("dublicated parameter " + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+
+				this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+			}
+
+		}
+	}
 	int onestar = 0;
 	int twostar = 0;
 
