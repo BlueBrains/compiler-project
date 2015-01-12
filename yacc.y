@@ -38,6 +38,8 @@
 	bool ss=false;
 	bool ff=false;
 	bool pp=true;
+	bool is_list=false;
+	bool is_dic=false;
 	int linefunc=0;
 	int colmfunc=0;
 
@@ -286,6 +288,7 @@ class_h:
 									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
+								temp_id="";
 										acc_mod="";
 								}                     //class X ()
 		|access_modef CLASS ID OPEN_S CLOSE_S  {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
@@ -681,28 +684,28 @@ dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLO
 
 var_declaration: access_modef ID {
 									Streams::verbose()<<"var_declaration: access_modef ID\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 									acc_mod="";
 									}	//public x
 				|STATIC ID {
 									Streams::verbose()<<"var_declaration: STATIC ID\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 							}	//static x
 				|FINAL ID {
 								Streams::verbose()<<"var_declaration: FINAL ID\n";
-								$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+								$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 								}	//static x
 				|STATIC FINAL ID {
 									Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 									}	//static x
 				|FINAL STATIC ID {
 									Streams::verbose()<<"var_declaration: FINAL STATIC ID\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 									}	//static x
 				|STATIC error STATIC ID {
@@ -714,85 +717,134 @@ var_declaration: access_modef ID {
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
 								  }
 				|ID					{Streams::verbose()<<"var_declaration: ID\n";
-										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 										v=$<var>$;
 									}					//x
 				|FINAL access_modef ID		{
 												Streams::verbose()<<"var_declaration: FINAL access_modef ID\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													acc_mod="";
 											}
 				|STATIC access_modef ID		{
 												Streams::verbose()<<"var_declaration: STATIC access_modef ID\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													acc_mod="";
 											}
 				|access_modef ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: access_modef ID ASSIGN expr\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
 													v=$<var>$;
 													acc_mod="";
 													}	//private x = 10
-				|STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC ID ASSIGN expr\n";}	//static x = 10
-				|FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL ID ASSIGN expr\n";}	//static x = 10
-				|STATIC FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC FINAL ID ASSIGN expr\n";}	//static x = 10
-				|FINAL STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL STATIC ID ASSIGN expr\n";}	//static x = 10
+				|STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC ID ASSIGN expr\n";
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+											v=$<var>$;
+											is_dic=false;
+											is_list=false;
+										}	//static x = 10
+				|FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL ID ASSIGN expr\n";
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
+										}	//static x = 10
+				|STATIC FINAL ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: STATIC FINAL ID ASSIGN expr\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
+												}	//static x = 10
+				|FINAL STATIC ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: FINAL STATIC ID ASSIGN expr\n";
+				
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
+													}	//static x = 10
 				|STATIC error STATIC ID ASSIGN expr {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
+								  $<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 								  }
 				|FINAL error FINAL ID ASSIGN expr {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 								  }
 				|ID ASSIGN expr 	{Streams::verbose()<<"var_declaration: ID ASSIGN expr\n";
-										$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
 													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 										}		//x = 5
 				|access_modef STATIC ID {
 											Streams::verbose()<<"var_declaration: access_modef STATIC ID\n";
-											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
-									v=$<var>$;
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 									acc_mod="";
 											}	//public x
 				|access_modef FINAL ID {
 				
 											Streams::verbose()<<"var_declaration: access_modef FINAL ID\n";
-												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
-												v=$<var>$;
+												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 												acc_mod="";
 											}	//public x
 				|access_modef STATIC FINAL ID {
 												Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-												v=$<var>$;
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 												acc_mod="";
 												}	//public x
 				|access_modef FINAL STATIC ID {
 												Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-												v=$<var>$;
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 												acc_mod="";
 												}	//public x
 				|access_modef STATIC error STATIC ID {
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
+													acc_mod="";
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
 								  }
 				|access_modef FINAL error FINAL ID {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");	
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
+													acc_mod="";								
 								  }
 				
 				|STATIC FINAL access_modef ID {
 												Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID\n";
-													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,0,0);
 												v=$<var>$;
 												acc_mod="";
 												}	//static x
 				|FINAL STATIC access_modef ID {
 													Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID\n";
-														$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,0,0);
 													v=$<var>$;
 													acc_mod="";
 													
@@ -808,91 +860,133 @@ var_declaration: access_modef ID {
 				|access_modef STATIC ID ASSIGN expr 	{
 				
 															Streams::verbose()<<"var_declaration: access_modef STATIC ID ASSIGN expr\n";
-																$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";
 															}	//private x = 10
 				|access_modef FINAL ID ASSIGN expr 	{
 														Streams::verbose()<<"var_declaration: access_modef FINAL ID ASSIGN expr\n";
-															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
-														v=$<var>$;
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 														acc_mod="";
 													}	//private x = 10
 				|access_modef STATIC FINAL ID ASSIGN expr 	{
 																Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID ASSIGN expr\n";
-																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";
 																}	//private x = 10
 				|access_modef FINAL STATIC ID ASSIGN expr 	{
 																Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID ASSIGN expr\n";
-																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																	v=$<var>$;
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																	acc_mod="";
 																}	//private x = 10
 				|access_modef STATIC error STATIC ID ASSIGN expr 	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+									is_list=false;
+													is_dic=false;
+																	acc_mod="";
 								  }
 				|access_modef FINAL error FINAL ID ASSIGN expr 	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");									
+								  is_list=false;
+													is_dic=false;
+																	acc_mod="";
 								  }
 				|STATIC access_modef ID ASSIGN expr 	{
 															Streams::verbose()<<"var_declaration: STATIC access_modef ID ASSIGN expr\n";
-																$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";
 															}	//static x = 10
 				|FINAL access_modef ID ASSIGN expr 	{
 														Streams::verbose()<<"var_declaration: FINAL access_modef ID ASSIGN expr\n";
-															$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum);
-															v=$<var>$;
+																$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 															acc_mod="";
 														}	//static x = 10
 				|STATIC FINAL access_modef ID ASSIGN expr 	{
 																Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID ASSIGN expr\n";
-																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																	v=$<var>$;
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																	acc_mod="";
 																}	//static x = 10
 				|FINAL STATIC access_modef ID ASSIGN expr 	{
 																Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID ASSIGN expr\n";
-																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";
 																}	//static x = 10
 				|STATIC error STATIC access_modef ID ASSIGN expr 	{
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
+									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");	
+										is_list=false;
+													is_dic=false;
+																acc_mod="";								
+								
 								  }
 				|FINAL error FINAL access_modef ID ASSIGN expr {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2-strlength($<r.strVal>2)<<endl;
-									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");									
+									err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2-strlen($<r.strVal>2),"repeated modifier ","");	
+										is_list=false;
+													is_dic=false;
+																acc_mod="";								
 								  }
 				|STATIC access_modef FINAL ID ASSIGN expr {
 															Streams::verbose()<<"var_declaration: STATIC access_modef FINAL ID ASSIGN expr\n";
-																$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";
 															}	//static x = 10
 				|FINAL access_modef STATIC ID ASSIGN expr {
 																Streams::verbose()<<"var_declaration: FINAL access_modef FINAL ID ASSIGN expr\n";
-																$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum);
-																v=$<var>$;
+																	$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=$<var>$;
+													is_list=false;
+													is_dic=false;
 																acc_mod="";	
 															}	//static x = 10
 				|STATIC access_modef STATIC error ID ASSIGN expr {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+																			is_list=false;
+																		is_dic=false;
+																					acc_mod="";
 																}
 				|FINAL access_modef FINAL error ID ASSIGN expr {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
+																			is_list=false;
+																			is_dic=false;
+																						acc_mod="";
 																}
 				|access_modef ID ID error  {
 											Streams::verbose()<<"Error: UN Expected IDENTIFIER Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 											err->errQ->enqueue($<r.lineNum>2,$<r.colNum>3-strlen($<r.strVal>3),"UN Expected IDENTIFIER ","");
+												is_list=false;
+													is_dic=false;
+																acc_mod="";
 										  }
 				|ID ID error {
 							Streams::verbose()<<"Error: UN Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
@@ -1075,19 +1169,28 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 				//						}
 				|ID SEMICOLON	{
 									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 																		v=$<var>$;
 																		acc_mod="";
+																		is_list=false;
+																		is_dic=false;
 								}
 				|STATIC ID SEMICOLON	{
 											Streams::verbose()<<"Error: illegal start of expression at Line No:"<<$<r.lineNum>1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum,"Error: illegal start of expression ","");										
+										$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+																		v=$<var>$;
+																		acc_mod="";
+																		is_list=false;
+																		is_dic=false;
 										}
 				|FINAL ID SEMICOLON		{
 												Streams::verbose()<<"stmt:	ID SEMICOLON\n";
-									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 																		v=$<var>$;
 																		acc_mod="";
+																		is_list=false;
+																		is_dic=false;
 										}
 				|ID DOT ID SEMICOLON	{Streams::verbose()<<"stmt:	ID DOT ID SEMICOLON\n";}
 				|ID COMMA ID DOT ID DOT ID SEMICOLON {Streams::verbose()<<"stmt:	ID COMMA ID DOT ID DOT ID SEMICOLON\n";}
@@ -1144,9 +1247,22 @@ for_stmt: 	for_header stmt	{Streams::verbose()<<"for_stmt: 	for_header stmt\n";}
 for_header: FOR target_list IN expr_list {Streams::verbose()<<"for_header: FOR target_list IN expr_list \n";}
 			|FOR target_list IN list_display {Streams::verbose()<<"for_header: FOR target_list IN list_display \n";}
 			|FOR ID COMMA ID IN expr_list {Streams::verbose()<<"for_header:	FOR ID COMMA ID IN expr_list \n";}
-			|FOR ID COMMA ID IN list_display {Streams::verbose()<<"for_header:	FOR ID COMMA ID IN list_display \n";}
-			|FOR ID IN expr_list {Streams::verbose()<<"for_header:	FOR ID IN expr_list \n";}
-			|FOR ID IN list_display {Streams::verbose()<<"for_header:	FOR ID IN list_display \n";}
+			|FOR ID COMMA ID IN list_display {
+												Streams::verbose()<<"for_header:	FOR ID COMMA ID IN list_display \n";
+												$<var>$=p->checkVariable($<r.strVal>2,t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
+												v=$<var>$;
+												temp_id="";
+												}
+			|FOR ID IN expr_list {Streams::verbose()<<"for_header:	FOR ID IN expr_list \n";
+									$<var>$=p->checkVariable($<r.strVal>2,t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
+																	v=$<var>$;
+																	temp_id="";
+									}
+			|FOR ID IN list_display {
+										$<var>$=p->checkVariable($<r.strVal>2,t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
+																	v=$<var>$;
+																	temp_id="";
+										Streams::verbose()<<"for_header:	FOR ID IN list_display \n";}
 			|ID error ID IN expr_list {
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'for' ","");
@@ -1240,27 +1356,35 @@ simple_stmt_list: 	expr_list	{Streams::verbose()<<"simple_stmt_list: 	expr_list\
 assert_stmt: 	ASSERT expr {Streams::verbose()<<"assert_stmt: 	ASSERT expr\n";}
 				|ASSERT expr COMMA expr	{Streams::verbose()<<"assert_stmt:	ASSERT expr COMMA expr\n";}
 ;
-left_assignment_side : expr_list {Streams::verbose()<<"left_assignment_side : expr_list\n";}
+left_assignment_side : expr_list {
+									Streams::verbose()<<"left_assignment_side : expr_list\n";
+
+									}
 					   |parenth_form {Streams::verbose()<<"left_assignment_side : parenth_form\n";}
-					   |list_display {Streams::verbose()<<"left_assignment_side : list_display\n";}
-					   |dict_display {Streams::verbose()<<"left_assignment_side : dict_display\n";}
+					   |list_display {Streams::verbose()<<"left_assignment_side : list_display\n";is_list=true;}
+					   |dict_display {Streams::verbose()<<"left_assignment_side : dict_display\n";is_dic=true;}
 					   ;
 
 assignment_stmt:	target_list ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	target_list ASSIGN expr_list\n";}
 					|id_dot ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot ASSIGN expr_list\n";
-																	$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,true);
+																	$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
 																	v=$<var>$;
 																	temp_id="";
+																	is_list=false;
+																	is_dic=false;
 																}
 					|id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|ID COMMA ID ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN expr_list\n";}					
-					|SELF DOT id_dot ASSIGN left_assignment_side		{
+					|SELF DOT ID ASSIGN left_assignment_side		{
 																		Streams::verbose()<<"assignment_stmt:	self dot amer\n";
 																		//cout<<"assignment list"<<endl;
-																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic,true);
 																		v=$<var>$;
 																		acc_mod="";
+																		is_list=false;
+																		is_dic=false;
+																		temp_id="";
 																	}
 					//|target_list ASSIGN yield_expression	{Streams::verbose()<<"assignment_stmt:	target_list ASSIGN yield_expression\n";}
 					//|ID COMMA ID ASSIGN yield_expression	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN yield_expression\n";}
@@ -1454,7 +1578,7 @@ condition:  expr EQUAL expr			{Streams::verbose()<<"condition: expr EQUAL expr\n
 		|expr MORE_OR_EQUAL expr	{Streams::verbose()<<"condition: expr MORE_OR_EQUAL expr\n";}
 ;
 id_dot : ID %prec stmt_8 {Streams::verbose()<<"id_dot:	ID\n";
-								temp_id=temp_id+$<r.strVal>1;
+								temp_id=$<r.strVal>1;
 							}
 		 |id_dot DOT ID {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";temp_id=temp_id+"."+$<r.strVal>3;}
 		 ;
@@ -1466,7 +1590,7 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		 //|long_id DOT ID OPEN_S CLOSE_S				{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 //|long_id DOT ID OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}		 		 
 		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";
-										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,false);
+										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
 										v=$<var>$;
 										temp_id="";
 								}		 		 
@@ -1481,7 +1605,7 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		|id_dot OPEN_D COLON CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";}
 		|SELF DOT id_dot	 %prec stmt_7{
 									Streams::verbose()<<"expr:	self.id\n";
-									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
+									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic,true);
 																		v=$<var>$;
 																		acc_mod="";
 									}

@@ -1,6 +1,6 @@
 import test.main;
 class point():
-	def __init__ (self,X):  #constructor
+	def __init__ (self,X,Y):  #constructor
 		self.x=X;
 		self.y=Y;
 	end
