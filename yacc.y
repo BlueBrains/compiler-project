@@ -970,21 +970,19 @@ method_h:
 ;
 
 arguments : args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n";}
-			|default_args_list {Streams::verbose()<<"arguments:	default_args_list\n";}
+			|SELF COMMA args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n";}
+			|SELF COMMA ID {Streams::verbose()<<"arguments:	args_list\n";}
+			|SELF COMMA default_args_list {Streams::verbose()<<"arguments:	default_args_list\n";}
 			|args_list COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
+			|SELF COMMA args_list COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
+			|SELF COMMA ID COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
 ;
 args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA arg\n";}
 			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n"; parameters.push_back($<r.strVal>1);}
 			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
 			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
 			|arg	{Streams::verbose()<<"args_list: arg \n";}
-			|paraself {Streams::verbose()<<"args_list: paraself \n";}
 ;
-
-paraself: SELF COMMA args_list	{Streams::verbose()<<"paraself:	SELF COMMA args_list\n";parameters.push_back("self");}
-			|SELF COMMA ID {Streams::verbose()<<"paraself:	SELF COMMA ID \n"; parameters.push_back("self"); parameters.push_back($<r.strVal>3);}
-			|args_list COMMA SELF {Streams::verbose()<<"paraself:	args_list COMMA SELF \n"; parameters.push_back("self");}
-			|ID COMMA SELF {Streams::verbose()<<"paraself:	ID COMMA SELF \n"; parameters.push_back($<r.strVal>1); parameters.push_back("self");}
 ;
 arg:	STAR ID		{
 						Streams::verbose()<<"arg:	STAR ID \n";std::string tempstr($<r.strVal>2);

@@ -1,120 +1,31 @@
-unit_import: ID
-unit_import: unit_import DOT ID
-unit_list:	unit_import
-import_stmt : IMPORT unit_list SEMICOLON 
-class_h: CLASS ID OPEN_S CLOSE_S 
-access_modef:	PUBLIC
+class_h: CLASS ID 
 args_list:	ID COMMA ID 
 arguments:	args_list
 method_h: ID OPEN_S arguments CLOSE_S 
 id_dot:	ID
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:4 Column No:11
+parenth_form : 	OPEN_S  CLOSE_S
+expr:	self.id()
 expr:	long_id
 expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
+simple_stmt_list: 	expr_list
 stmt:	simple_stmt_list
 stmt_list:	stmt 
 id_dot:	ID
 id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:5 Column No:11
+expr:	self.id
 expr:	long_id
 expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
-assignment_stmt:	self dot amer
+assignment_stmt:	id_dot ASSIGN expr_list
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
 block_stmt: COLON stmt_list END 
-method_declaration: access_modef method_h block_stmt
+method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
-access_modef:	PUBLIC
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-list_display:	OPEN_D CLOSE_D
-left_assignment_side : list_display
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-list_display:	OPEN_D  expr_list CLOSE_D
-for_header:	FOR ID IN list_display 
-id_dot:	ID
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:11 Column No:13
-expr:	long_id
-op :PLUS
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:11 Column No:15
-expr:	long_id
-expr:	expr op expr
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-for_stmt: 	for_header stmt
-stmt:	for_stmt
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: access_modef method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
-access_modef: PRIVATE
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-access_modef: PRIVATE
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-class_h: CLASS ID 
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-id_dot:	ID
-parenth_form : 	OPEN_S  CLOSE_S
-long_id:	id_dot parenth_form
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-id_dot:	ID
-id_dot:	id_dot DOT ID
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+program: unit
+programes: program END_OF_FILE

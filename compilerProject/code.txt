@@ -1,57 +1,6 @@
-import test.main;
-class point():
-	def public __init__ (X,Y):  #constructor
-		self.x=X;
-		self.y=Y;
+class a:
+	def dodo(self,x,f):
+		self.x();
+		x = self.y;
 	end
-	def public add_to_list(self):
-		i=0;
-		list=[];
-		for i in [1,2,3,4,5] :
-			list=list+i;
-		end
-	end
-	def private  x;
-	def private y;
-	def class help:
-		def __init__ (self):
-		   	temp=point();
-		 	self.pprint(temp.x+temp.y);
-			self.add_to_list();
-		end
-		def pprint(self,r):
-				print r;
-		end
-		def add_to_list(self):
-			
-		end
-	end
-	def private printFruit():
-		j=0
-		fruits = ["banana", "apple",  "mango"];
-		for fruit in fruits:        # fruits Loop
-			print "Current fruit :" , fruit;
-			j=j+1;
-			if j>self.y :
-				break;
-			end
-		end
-	end
-	def public setx(self):
-		if x==0 :
-			x=1;
-		end 
-		elif x>0:
-			print "positive number";
-			if y==0 :
-				y=1;
-			end
-		end
-		else:
-			print "negative number";
-			if y==0 :
-				y=1;
-			end
-		end
-	end
-end 
+end
