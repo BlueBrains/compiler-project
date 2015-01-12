@@ -1068,13 +1068,13 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 										Streams::verbose()<<"Error: Expected ';' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected ';' ","");										
 									}
-				|SELF DOT ID SEMICOLON	{
-												Streams::verbose()<<"assignment_stmt:	self dot amer\n";
-																		//cout<<"assignment list"<<endl;
-																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
-																		v=$<var>$;
-																		acc_mod="";
-										}
+				//|SELF DOT ID SEMICOLON	{
+				//								Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+				//														//cout<<"assignment list"<<endl;
+				//														$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
+				//														v=$<var>$;
+				//														acc_mod="";
+				//						}
 				|ID SEMICOLON	{
 									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
 									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -1257,7 +1257,7 @@ assignment_stmt:	target_list ASSIGN left_assignment_side 	{Streams::verbose()<<"
 					|id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|ID COMMA ID ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN expr_list\n";}					
-					|SELF DOT ID ASSIGN left_assignment_side		{
+					|SELF DOT id_dot ASSIGN left_assignment_side		{
 																		Streams::verbose()<<"assignment_stmt:	self dot amer\n";
 																		//cout<<"assignment list"<<endl;
 																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
@@ -1342,6 +1342,7 @@ target: 	OPEN_S target_list CLOSE_S 	{Streams::verbose()<<"target: 	OPEN_S targe
             
 attributeref: primary DOT ID	{Streams::verbose()<<"attributeref: primary DOT ID\n";}
 			|ID DOT ID		{Streams::verbose()<<"attributeref: ID DOT ID\n";}
+			//|SELF 		{Streams::verbose()<<"attributeref: ID DOT ID\n";}
 ;
 
 primary: 	atom 	{Streams::verbose()<<"primary: 	atom\n";}
@@ -1425,21 +1426,17 @@ call:	PRIMARY OPEN_D args_list CLOSE_D	{Streams::verbose()<<"call:	PRIMARY OPEN_
 expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 		|literal %prec stmt_9	{Streams::verbose()<<"expr:	literal\n";}
 		|expr op expr %prec stmt_1{Streams::verbose()<<"expr:	expr op expr\n";}
-		|SELF DOT ID	 %prec stmt_7{
-									Streams::verbose()<<"expr:	self.id\n";
-									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,false,true);
-																		v=$<var>$;
-																		acc_mod="";
-									}
-		|SELF DOT ID parenth_form   {
-										Streams::verbose()<<"expr:	self.id()\n";
-										p->insert_func_Call(t,$<r.strVal>3,yylval.r.lineNum, yylval.r.colNum);
-										cout<<"hhhhhhhhh"<<endl;
-									}
-		|SELF DOT SELF				{
-										Streams::verbose()<<"Error: unExpected self at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.lineNum>2-strlength($<r.strVal>2)<<endl;
-										err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"unExpected self ","");
-									}
+		//|SELF DOT ID	 %prec stmt_7{
+		//							Streams::verbose()<<"expr:	self.id\n";
+		//							$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
+		//																v=$<var>$;
+		//																acc_mod="";
+		//							}
+		//|SELF DOT ID parenth_form   {
+		//								Streams::verbose()<<"expr:	self.id()\n";
+		//								p->insert_func_Call(t,$<r.strVal>3,yylval.r.lineNum, yylval.r.colNum);
+		//								cout<<"hhhhhhhhh"<<endl;
+		//							}
 		|long_id	%prec stmt_3{
 									Streams::verbose()<<"expr:	long_id\n";
 									
@@ -1475,10 +1472,21 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 										v=$<var>$;
 										temp_id="";
 								}		 		 
+		|SELF DOT id_dot parenth_form   {
+										Streams::verbose()<<"expr:	self.id()\n";
+										p->insert_func_Call(t,$<r.strVal>3,yylval.r.lineNum, yylval.r.colNum);
+										//cout<<"hhhhhhhhh"<<endl;
+									}										 		 
 		|id_dot parenth_form {Streams::verbose()<<"long_id:	id_dot parenth_form\n";}		 		 
 		|id_dot OPEN_D expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";}
 		|id_dot OPEN_D expr COLON expr CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";}
 		|id_dot OPEN_D COLON CLOSE_D {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";}
+		|SELF DOT id_dot	 %prec stmt_7{
+									Streams::verbose()<<"expr:	self.id\n";
+									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
+																		v=$<var>$;
+																		acc_mod="";
+									}
 ;
 
 op: PLUS				{Streams::verbose()<<"op :PLUS\n";}
