@@ -87,7 +87,7 @@
 %token  NEW_LINE PASS CHAR_VALUE OPEN_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE
 %nonassoc stmt_1_2
 %nonassoc stmt_1 stmt_2 stmt_3 stmt_4 stmt_5 stmt_6 stmt_7  stmt_9 stmt_10 stmt_11
-%nonassoc DOT
+%nonassoc DOT 
 %nonassoc stmt_8
 %nonassoc ELSE ELIF FINALLY EXCEPT 
 
@@ -978,8 +978,7 @@ args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA 
 ;
 
 paraself: SELF COMMA args_list	{Streams::verbose()<<"paraself:	SELF COMMA args_list\n";parameters.push_back("self");}
-			|SELF COMMA ID {Streams::verbose()<<"paraself:	SELF COMMA ID \n"; parameters.push_back("self"); parameters.push_back($<r.strVal>3);}
-			|SELF %prec stmt_8 {Streams::verbose()<<"paraself:	SELF \n"; parameters.push_back("self");}
+			|SELF COMMA ID {Streams::verbose()<<"paraself:	SELF COMMA ID \n"; parameters.push_back("self"); parameters.push_back($<r.strVal>3);}			
 			|args_list COMMA SELF {Streams::verbose()<<"paraself:	args_list COMMA SELF \n"; parameters.push_back("self");}
 			|ID COMMA SELF {Streams::verbose()<<"paraself:	ID COMMA SELF \n"; parameters.push_back($<r.strVal>1); parameters.push_back("self");}
 ;
