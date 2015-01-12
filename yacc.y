@@ -664,6 +664,10 @@ class_body:   COLON END		{
 
 dm_list:	dm_list DEF dm {Streams::verbose()<<"dm_list: dm_list DEF dm\n";}
 			|DEF dm {Streams::verbose()<<"dm_list: DEF dm\n";}
+			|dm		{
+						Streams::verbose()<<"Error: Expected 'def' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
+						err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'def' ","");									
+						}
 ;
 
 dm: var_declaration	SEMICOLON {Streams::verbose()<<"dm:	var_declaration SEMICOLON\n";}
@@ -1238,7 +1242,11 @@ left_assignment_side : expr_list {Streams::verbose()<<"left_assignment_side : ex
 					   ;
 
 assignment_stmt:	target_list ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	target_list ASSIGN expr_list\n";}
-					|id_dot ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot ASSIGN expr_list\n";}
+					|id_dot ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot ASSIGN expr_list\n";
+																	$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,true);
+																	v=$<var>$;
+																	temp_id="";
+																}
 					|id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";}
 					|ID COMMA ID ASSIGN left_assignment_side 	{Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN expr_list\n";}					
@@ -1412,13 +1420,17 @@ expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 		|expr op expr %prec stmt_1{Streams::verbose()<<"expr:	expr op expr\n";}
 		|SELF DOT ID	 %prec stmt_7{
 									Streams::verbose()<<"expr:	self.id\n";
-									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,true);
+									$<var>$=p->checkVariable($<r.strVal>3,t, yylval.r.lineNum, yylval.r.colNum,false,true);
 																		v=$<var>$;
 																		acc_mod="";
 									}
 		|SELF DOT ID parenth_form   {
 										Streams::verbose()<<"expr:	self.id()\n";
 										cout<<"hhhhhhhhh"<<endl;
+									}
+		|SELF DOT SELF				{
+										Streams::verbose()<<"Error: unExpected self at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.lineNum>2-strlength($<r.strVal>2)<<endl;
+										err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"unExpected self ","");
 									}
 		|long_id	%prec stmt_3{
 									Streams::verbose()<<"expr:	long_id\n";
@@ -1451,7 +1463,7 @@ long_id: //ID	%prec stmt_8				{Streams::verbose()<<"long_id:	ID\n";}
 		 //|long_id DOT ID OPEN_S CLOSE_S				{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S CLOSE_S\n";}
 		 //|long_id DOT ID OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"long_id:	long_id DOT ID OPEN_S expr_list CLOSE_S\n";}		 		 
 		id_dot %prec stmt_1 {Streams::verbose()<<"long_id:	id_dot\n";
-										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum);
+										$<var>$=p->checkVariable(const_cast<char *>(temp_id.c_str()),t, yylval.r.lineNum, yylval.r.colNum,false);
 										v=$<var>$;
 										temp_id="";
 								}		 		 

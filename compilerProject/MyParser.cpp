@@ -126,7 +126,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,bool self){
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bool from_right,bool self){
 	char* tokenPtr;
 	char buffer[15];
 	bool found = false;
@@ -149,8 +149,16 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,boo
 
 	if (!v)
 	{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
-		Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
+		if (from_right)
+		{
+			v = this->addVariableToCurrentScope(name,"", false, false, lineNo, colNo);
+		}
+		else
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
+			Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
+		}
+		
 	}
 	return v;
 }
@@ -701,6 +709,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 	//cout << r->get_name();
 	return t;
 };
+
 void MyParser::check_static(Type* t,int lineno,int colno)
 {
 	if (t->getouter_class()->getIs_static())
