@@ -312,29 +312,32 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 
 Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo){
-	if (ff)
-	{
-		f->set_final(ff);
-		char* first = f->getfirstpara();
-		if (first !=NULL)
-		if (strcmp("self",first)==0)
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
-	}
-	if (ss)
-	{
-		f->set_static(ss);
-		char* first = f->getfirstpara();
-		if (first != NULL)
-		if (strcmp("self", first)==0)
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
-	}
-	if (!ff && !ss)
-	{
-		char* first = f->getfirstpara();
-		if ((first != NULL) && (strcmp("self", first)!=0))
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
-	}
+	if (f!=NULL)
+		{	
+				if (ff)
+			{
+				f->set_final(ff);
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
+			}
+			if (ss)
+			{
+				f->set_static(ss);
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
+			}
+			if (!ff && !ss)
+			{
 
+				char* first = f->getfirstpara();
+				if ((first != NULL) && (strcmp("self", first) != 0))
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
+			}
+}
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
