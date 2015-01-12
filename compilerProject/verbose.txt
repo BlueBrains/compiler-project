@@ -1,46 +1,18 @@
-class_h: CLASS ID 
-args_list:	ID COMMA ID 
+unit_import: ID
+unit_import: unit_import DOT ID
+unit_list:	unit_import
+import_stmt : IMPORT unit_list SEMICOLON 
+class_h: CLASS ID OPEN_S CLOSE_S 
+paraself:	SELF 
+args_list: paraself 
 arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
+Error: Expected IDENTIFIER at Line No:6 Column No:22
 COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
-args_list:	ID COMMA ID 
-args_list:	args_list COMMA ID 
-arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
-paraself:	ID COMMA SELF 
-args_list: paraself 
-args_list:	args_list COMMA ID 
-arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
-paraself:	SELF COMMA ID 
-args_list: paraself 
-arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
-method_declaration: FINAL method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
-paraself:	SELF COMMA ID 
-args_list: paraself 
-arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
-method_declaration: STATIC method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
-unit: class_decl
+unit: import_stmt class_decl
 program: unit
 programes: program END_OF_FILE

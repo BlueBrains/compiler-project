@@ -1,12 +1,9 @@
-class a:
-	def soso(a,b):end
+import test.main;
+class point():
+	def __init__ (self,X,Y):  
 
-	def koko(a,b,b):	
 	end
+	def public add_to_list(self):
 
-	def lolo(a,self,b):	
 	end
-	
-	def final jojo(self,k):end
-	def static jojo(self,k):end
-end
+end 
