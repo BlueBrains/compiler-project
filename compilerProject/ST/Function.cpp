@@ -1,5 +1,6 @@
 #include"Function.h"
 #include<string>
+#include <cstring>
 Function::Function(){
 
 }
@@ -29,7 +30,30 @@ Scope* Function::getScope(){
 }
 
 void  Function::setparameters(char * parameter){
-	Variable * v = new Variable(parameter);
+	std::string temp;
+	bool arr = false;
+	bool dic = false;
+	for (int i = 0; i < strlen(parameter); i++)
+	{
+		if (parameter[i]!='*')
+			temp = temp + parameter[i];
+		else
+		{
+			if (i==0)
+				arr = true;
+			else if (i == 1)
+			{
+				arr = false;
+				dic = true;
+			}
+
+		}
+	}
+
+	char *cstr = new char[temp.length() + 1];
+	cstr = _strdup(temp.c_str());
+	
+	Variable * v = new Variable(cstr,arr,dic);
 	this->parameters.insert(parameters.end(), v);
 }
 

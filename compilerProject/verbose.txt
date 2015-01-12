@@ -1,11 +1,9 @@
 class_h: CLASS ID 
-args_list:	ID COMMA ID 
-arg:	STAR STAR ID 
-args_list:	args_list COMMA arg
-arg:	STAR STAR ID 
-args_list:	args_list COMMA arg
 arg:	STAR ID 
+args_list: arg 
+arg:	STAR STAR ID 
 args_list:	args_list COMMA arg
+args_list:	args_list COMMA ID 
 arguments:	args_list
 method_h: ID OPEN_S arguments CLOSE_S 
 id_dot:	ID
