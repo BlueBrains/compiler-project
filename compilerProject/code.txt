@@ -1,22 +1,6 @@
-class a(b,c)
-def class xz:
-	def dodo(x,f):
+class a:
+	def dodo(self,x,f):
 		self.x();
                 x = self.y ;
 	end
-end
-end
-class b:
-
-end
-class c(k,d):
-
-end
-class k:   end
-class d(e):
-
-end
-class e:
-	def final dodo(x,f): end
-	def x():end
 end
