@@ -223,26 +223,47 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 	}
 
-	vector <char *> tempvec = parameter;
-/*	vector <char *> cleanp = parameter;
-	int k = 0;
+	//vector <char *> tempvec = parameter;
+	vector <char *> cleanp = parameter;
+	vector <char *> clean2p = parameter;
+	vector <char *> clean3p = parameter;
 	for (int i = 0; i < parameter.size(); i++) {
-		char* temp = new char[strlen(parameter.at(i)) + 1];
-		for (int j = 0; j < strlen(parameter.at(i)); j++) {
-			if ('*' != parameter.at(i)[j])
-			{
-				temp[j] = parameter.at(i)[j];
-				k++;
-			}
+		if ('*' != parameter.at(i)[0])
+		{
+			std::string tempstr(parameter.at(i));
+			std::string erro("*" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+			cleanp.at(i) = cstr;
 		}
-		temp[k + 1] = '\0';
-		k = 0;
-		cleanp.at(i) = temp;
 	}
-	*/
+
+	for (int i = 0; i < cleanp.size(); i++) {
+		if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
+		{
+			std::string tempstr(parameter.at(i));
+			std::string erro("*" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+			clean2p.at(i) = cstr;
+		}
+	}
+
+	for (int i = 0; i < cleanp.size(); i++) {
+		if ('*' != parameter.at(i)[0])
+		{
+			std::string tempstr(parameter.at(i));
+			std::string erro("**" + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+			clean3p.at(i) = cstr;
+		}
+	}
+
+	vector <char *> tempvec = cleanp;
 	for (int i = 0; i < parameter.size(); i++) {
 		tempvec.at(i) = "!";
-		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(parameter.at(i)));
+		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(cleanp.at(i)));
 		if (it != tempvec.end()){
 			std::string tempstr(parameter.at(i));
 			std::string erro("dublicated parameter " + tempstr);
@@ -253,7 +274,40 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 
 	}
+	tempvec.clear();
+	tempvec = clean2p;
+	for (int i = 0; i < parameter.size(); i++) {
+		tempvec.at(i) = "!";
 
+		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean2p.at(i)));
+		if (it != tempvec.end()){
+			std::string tempstr(clean2p.at(i));
+			std::string erro("dublicated parameter " + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+
+			this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+		}
+
+	}
+
+	tempvec.clear();
+	tempvec = clean3p;
+	for (int i = 0; i < parameter.size(); i++) {
+		tempvec.at(i) = "!";
+
+		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean3p.at(i)));
+		if (it != tempvec.end()){
+			std::string tempstr(clean3p.at(i));
+			std::string erro("dublicated parameter " + tempstr);
+			char *cstr = new char[erro.length() + 1];
+			strcpy(cstr, erro.c_str());
+
+			this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+		}
+
+	}
+	
 	int onestar = 0;
 	int twostar = 0;
 
@@ -286,6 +340,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 	for (int i = 0; i < parameter.size(); i++) {
 		f->setparameters(parameter[i]);
+	}
+	
+	for (int i = 0; i < f->getparameters().size(); i++) {
+		
+		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
 	}
 
 	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
@@ -352,9 +411,10 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 
 	}
 	else 
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","error" );
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","cant recognize function name" );
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
+
 }
 //========= Types =================
 bool found(Type* t)
