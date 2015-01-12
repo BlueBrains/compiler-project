@@ -103,8 +103,10 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 			v->by_self = self;
 			if (self)
 			{
+				char* name = new char[50];
+				name = strcpy(name, n);
 				v->set_static(true);
-				this->st->currScope->parent->m->put(n, v, "Variable");
+				this->st->currScope->parent->m->put(name, v, "Variable");
 			}
 			else
 			{
@@ -117,7 +119,9 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "Illegal static declaration in inner class", n);
 					}
 				}
-				this->st->currScope->m->put(n, v, "Variable");
+				char* name = new char[50];
+				name=strcpy(name,n);
+				this->st->currScope->m->put(name, v, "Variable");
 			}
 				
 		}
