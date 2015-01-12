@@ -126,7 +126,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,bool self){
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bool from_right,bool self){
 	char* tokenPtr;
 	char buffer[15];
 	bool found = false;
@@ -149,8 +149,16 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo,boo
 
 	if (!v)
 	{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
-		Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
+		if (from_right)
+		{
+			v = this->addVariableToCurrentScope(name,"", false, false, lineNo, colNo);
+		}
+		else
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
+			Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
+		}
+		
 	}
 	return v;
 }
@@ -275,6 +283,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	for (int i = 0; i < parameter.size(); i++) {
 		f->setparameters(parameter[i]);
 	}
+	
+	for (int i = 0; i < f->getparameters().size(); i++) {
+		
+		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
+	}
 
 	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
 	{
@@ -337,9 +350,13 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 				if ((first != NULL) && (strcmp("self", first) != 0))
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
-}
+
+	}
+	else 
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","cant recognize function name" );
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
+
 }
 //========= Types =================
 bool found(Type* t)
@@ -706,6 +723,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 	//cout << r->get_name();
 	return t;
 };
+
 void MyParser::check_static(Type* t,int lineno,int colno)
 {
 	if (t->getouter_class()->getIs_static())
@@ -984,16 +1002,23 @@ void MyParser::insert_func_Call(Type* t, char* name, int lineno, int colno)
 void  MyParser::recrusive_up_caller(Type* t, int j)
 {
 	if (t != NULL){
-		for (int i = 0; i < int(t->getInheritedType().size()); i++)
-		{
-			Type* x = t->getInheritedType().at(i);
-			recrusive_up_caller(x,j);
-			Function * f2 = (Function *)x->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
-			if (f2)
+		Function * f1 = (Function *)t->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+		if (!f1){
+			recrusive_up_caller(t->getouter_class(), j);
+			for (int i = 0; i < int(t->getInheritedType().size()); i++)
 			{
-				classname.push_back(x->get_name());
+				Type* x = t->getInheritedType().at(i);
+				recrusive_up_caller(x, j);
+				Function * f2 = (Function *)x->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+				if (f2)
+				{
+					classname.push_back(x->get_name());
+				}
 			}
+
 		}
+		else
+			classname.push_back(t->get_name());
 	}
 }
 
