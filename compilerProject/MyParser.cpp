@@ -275,6 +275,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	for (int i = 0; i < parameter.size(); i++) {
 		f->setparameters(parameter[i]);
 	}
+	
+	for (int i = 0; i < f->getparameters().size(); i++) {
+		
+		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
+	}
 
 	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
 	{
@@ -340,9 +345,10 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 
 	}
 	else 
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","error" );
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","cant recognize function name" );
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
+
 }
 //========= Types =================
 bool found(Type* t)

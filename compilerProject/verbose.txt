@@ -4,7 +4,9 @@ unit_import: ID
 unit_list:	unit_list COMMA unit_import
 class_h: CLASS ID OPEN_S unit_list CLOSE_S 
 class_h: CLASS ID 
-method_h: ID OPEN_S CLOSE_S 
+args_list:	ID COMMA ID 
+arguments:	args_list
+method_h: ID OPEN_S arguments CLOSE_S 
 parenth_form : 	OPEN_S  CLOSE_S
 expr:	self.id()
 expr_list: expr %prec stmt_1
@@ -59,7 +61,9 @@ class_decl: class_h class_body
 unit: class_decl
 prgram : program unit
 class_h: CLASS ID 
-method_h: ID OPEN_S CLOSE_S 
+args_list:	ID COMMA ID 
+arguments:	args_list
+method_h: ID OPEN_S arguments CLOSE_S 
 COLON  END 
 method_declaration: FINAL method_h block_stmt
 dm:	method_declaration

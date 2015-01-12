@@ -1,6 +1,6 @@
 class a(b,c)
 def class xz:
-	def dodo():
+	def dodo(x,f):
 		self.x();
                 x = self.y ;
 	end
@@ -17,6 +17,6 @@ class d(e):
 
 end
 class e:
-	def final dodo(): end
+	def final dodo(x,f): end
 	def x():end
 end
