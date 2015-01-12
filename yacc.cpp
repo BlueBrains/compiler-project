@@ -4035,17 +4035,17 @@ yyreduce:
 
   case 177:
 #line 973 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list\n";;}
+    {Streams::verbose()<<"arguments:	args_list\n";parameters.push_back("self");;}
     break;
 
   case 178:
 #line 974 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list\n";;}
+    {Streams::verbose()<<"arguments:	args_list\n";parameters.push_back("self");parameters.push_back((yyvsp[0].r.strVal));;}
     break;
 
   case 179:
 #line 975 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
-    {Streams::verbose()<<"arguments:	default_args_list\n";;}
+    {Streams::verbose()<<"arguments:	default_args_list\n";parameters.push_back("self");;}
     break;
 
   case 180:
@@ -4055,12 +4055,12 @@ yyreduce:
 
   case 181:
 #line 977 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";;}
+    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";parameters.push_back("self");;}
     break;
 
   case 182:
 #line 978 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";;}
+    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";parameters.push_back("self");parameters.push_back((yyvsp[-2].r.strVal));;}
     break;
 
   case 183:

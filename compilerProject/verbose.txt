@@ -5,31 +5,3 @@ arg:	STAR STAR ID
 args_list:	args_list COMMA arg
 args_list:	args_list COMMA ID 
 arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
-id_dot:	ID
-parenth_form : 	OPEN_S  CLOSE_S
-expr:	self.id()
-expr:	long_id
-expr_list: expr %prec stmt_1
-simple_stmt_list: 	expr_list
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-id_dot:	ID
-expr:	self.id
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: DEF dm
-class_body:COLON dm_list END
-class_decl: class_h class_body
-unit: class_decl
-program: unit
-programes: program END_OF_FILE
