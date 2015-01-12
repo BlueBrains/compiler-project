@@ -91,7 +91,7 @@
 %nonassoc stmt_8
 %nonassoc ELSE ELIF FINALLY EXCEPT 
 
-%nonassoc ID COLON IF WHILE FOR TRY WITH ASSERT DEL RETURN PRINT GLOBAL RAISE OPEN_D RE_COT YIELD PRIMARY PASS CHAR_VALUE OPEN_S CLOSE_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE COMMA CLOSE_D SEMICOLON error FINAL STATIC PUBLIC PROTECTED PRIVATE OPEN_C ASSIGN END  
+%nonassoc ID COLON IF WHILE FOR TRY WITH ASSERT DEL RETURN PRINT GLOBAL RAISE OPEN_D RE_COT YIELD PRIMARY PASS CHAR_VALUE OPEN_S CLOSE_S STRING_VALUE INTEGER_VALUE BREAK CONTINUE LONG_VALUE FLOAT_VALUE COMMA CLOSE_D SEMICOLON error FINAL STATIC PUBLIC PROTECTED PRIVATE OPEN_C ASSIGN END  SELF
 %left OR AND
 %left NOT
 %left NOT_EQUAL EQUAL LESS_THAN LESS_OR_EQUAL MORE_THAN MORE_OR_EQUAL
@@ -941,32 +941,58 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 
 method_h: 	
 			ID OPEN_S SELF CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}			
+			|ID OPEN_S ID CLOSE_S 		{Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}			
 			|ID OPEN_S arguments CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
 			|ID OPEN_S CLOSE_S 	{Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, $<r.strVal>1,parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;}
 			|error OPEN_S arguments CLOSE_S {
-										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
+										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
 									  }
 			|error OPEN_S ID CLOSE_S {
-										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>1-1<<endl;
+										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-1<<endl;
+										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
+									  }
+			|error OPEN_S SELF CLOSE_S {
+										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-1<<endl;
+										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
+									  }
+			|error OPEN_S CLOSE_S	  {
+										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-1,"Expected IDENTIFIER ","");
 									  }
 			|ID error arguments CLOSE_S {
-												Streams::verbose()<<"Error: Expected '(' at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2+1<<endl;
-												err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2+1,"Expected '(' ","");
+												Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected '(' ","");
 											   }
 			|ID error ID CLOSE_S {
-												Streams::verbose()<<"Error: Expected '(' at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>2+1<<endl;
-												err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2+1,"Expected '(' ","");
+												Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected '(' ","");
+											   }
+			|ID error SELF CLOSE_S {
+												Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected '(' ","");
+											   }
+			|ID error  CLOSE_S {
+												Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected '(' ","");
 											   }
 			|ID OPEN_S arguments error  {
-														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
+														Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum-strlength(yylval.r.strVal),"Expected ')' ","");
 													 }
 			|ID OPEN_S ID error  {
-														Streams::verbose()<<"Error: Expected ')' at Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>4+1<<endl;
-														err->errQ->enqueue($<r.lineNum>1,$<r.colNum>4+1,"Expected ')' ","");
+														Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>3+1<<endl;
+														err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3+1,"Expected ')' ","");
 													 }
+			|ID OPEN_S SELF error  {
+														Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>3+1<<endl;
+														err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3+1,"Expected ')' ","");
+													 }
+			|ID OPEN_S error  {
+														Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>2+1<<endl;
+														err->errQ->enqueue($<r.lineNum>1,$<r.colNum>2+1,"Expected ')' ","");
+													 }
+
 ;
 
 arguments : args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n";}
@@ -978,6 +1004,14 @@ arguments : args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n"
 			|SELF COMMA ID COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
 ;
 args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list:	args_list COMMA arg\n";}
+			|args_list COMMA error SELF	{
+										Streams::verbose()<<"Error: self should come at the first of the arguments list"<<$<r.lineNum>3<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
+										err->errQ->enqueue($<r.lineNum>3,$<r.colNum>3-strlength($<r.strVal>3),"Error: self should come at the first of the arguments list","");
+									}
+			|ID COMMA error SELF	{
+										Streams::verbose()<<"Error: self should come at the first of the arguments list"<<$<r.lineNum>3<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
+										err->errQ->enqueue($<r.lineNum>3,$<r.colNum>3-strlength($<r.strVal>3),"Error: self should come at the first of the arguments list","");
+									}
 			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n"; parameters.push_back($<r.strVal>1);}
 			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
 			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
@@ -1007,11 +1041,11 @@ arg:	STAR ID		{
 
 default_args_list:	default_args_list COMMA default_arg	{Streams::verbose()<<"default_args_list: default_args_list COMMA default_arg\n";}					
 					|default_arg {Streams::verbose()<<"default_args_list: default_arg \n";}
-					|default_args_list COMMA args_list error	{
+					|default_args_list error COMMA args_list 	{
 														Streams::verbose()<<"Error: default argument not at end of parameter list at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"default argument not at end of parameter list","");					
 														}					
-					|default_args_list COMMA ID error	{
+					|default_args_list error COMMA ID 	{
 														Streams::verbose()<<"Error: default argument not at end of parameter list at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"default argument not at end of parameter list","");					
 														}
@@ -1044,10 +1078,18 @@ block_stmt:  COLON  END {Streams::verbose()<<"COLON  END \n";}
 						Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
 						}
-			 //|COLON error {
-				//		Streams::verbose()<<"Error: Expected 'end' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
-					//	err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected 'end' ","");			 
-						//}
+			 |error stmt_list END {
+						Streams::verbose()<<"Error: Expected ':' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected ':' ","");			 
+						}
+			 |COLON error {
+						Streams::verbose()<<"Error: Expected 'end' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
+						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected 'end' ","");			 
+				}
+			 |COLON stmt_list error {
+						Streams::verbose()<<"Error: Expected 'end' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
+						err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum,"Expected 'end' ","");			 
+				}			
 			
 	;
 
@@ -1106,10 +1148,10 @@ if_stmt:	if_header stmt %prec stmt_3	{Streams::verbose()<<"if_stmt:	if_header st
 
 elif_stmt: 	elif_header stmt elif_stmt	{Streams::verbose()<<"elif_stmt: 	elif_header stmt elif_stmt\n";}
 			|elif_header stmt %prec stmt_7	{Streams::verbose()<<"elif_stmt:	elif_header stmt\n";}
-			//|elif_header error %prec stmt_7	{
-				//						Streams::verbose()<<"Error: Expected statement at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
-					//					err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected statement ","");										
-						//					}
+			|elif_header error %prec stmt_7	{
+										Streams::verbose()<<"Error: Expected statement at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
+										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected statement ","");										
+											}
 ;
 
 if_header:	IF expr 	{Streams::verbose()<<"if_header:	IF expr \n";}		//if(x > y):			
@@ -1128,14 +1170,10 @@ while_stmt: while_header stmt	{Streams::verbose()<<"while_stmt: while_header stm
 
 ;
 while_header: WHILE expr	{Streams::verbose()<<"while_header: WHILE expr \n";}
-			//|error ID expr { 
-				//		Streams::verbose()<<"Error: Expected reserved word at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
-					//	err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
-					 //}
-			|ID error expr { 
-						Streams::verbose()<<"Error: Expected reserved word 'while' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
+			  |error ID expr { 
+						Streams::verbose()<<"Error: Expected reserved word at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 						err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'while' ","");
-					 }		
+				}
 ;
 
 for_stmt: 	for_header stmt	{Streams::verbose()<<"for_stmt: 	for_header stmt\n";}
@@ -1292,7 +1330,7 @@ print_stmt: PRINT expr_list	{Streams::verbose()<<"print_stmt: PRINT expr_list\n"
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 								err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'print' ","");
 								}
-			|ID MORE_THAN MORE_THAN expr_list	{
+			|ID error MORE_THAN MORE_THAN expr_list	{
 												Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 												err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1),"Expected reserved word 'print' ","");
 												}
@@ -1387,7 +1425,7 @@ parenth_form : 	OPEN_S expr_list CLOSE_S	{Streams::verbose()<<"parenth_form : 	O
 										Streams::verbose()<<"Error: Expected ')' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1+1<<endl;
 										err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1+1,"Expected ')' ","");
 										}
-				|error expr CLOSE_S  {
+				|error expr_list CLOSE_S  {
 													Streams::verbose()<<"Error: Expected '(' at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.colNum>1-strlength($<r.strVal>1)<<endl;
 													err->errQ->enqueue($<r.lineNum>1,$<r.colNum>1-strlength($<r.strVal>1)," Expected '(' ","");
 												 }
@@ -1440,10 +1478,10 @@ expr:	condition 	{Streams::verbose()<<"expr:	condition\n";}
 									
 									}
 	
-		|expr error expr %prec stmt_2 {
-										Streams::verbose()<<"Error: Expected operand at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.lineNum>2-strlength($<r.strVal>2)<<endl;
-										err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"Expected operand ","");
-									  }
+		//|expr error expr %prec stmt_2 {
+		//								Streams::verbose()<<"Error: Expected operand at Line No:"<<$<r.lineNum>1<<" Column No:"<<$<r.lineNum>2-strlength($<r.strVal>2)<<endl;
+		//								err->errQ->enqueue($<r.lineNum>2,$<r.colNum>2-strlen($<r.strVal>2),"Expected operand ","");
+		//							  }
 ;
 
 condition:  expr EQUAL expr			{Streams::verbose()<<"condition: expr EQUAL expr\n";}
