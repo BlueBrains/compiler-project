@@ -194,8 +194,8 @@ Grammar
   163                   | access_modef FINAL error FINAL method_h block_stmt
   164                   | access_modef STATIC error STATIC method_h block_stmt
 
-  165 method_h: ID OPEN_S arguments CLOSE_S
-  166         | ID OPEN_S SELF CLOSE_S
+  165 method_h: ID OPEN_S SELF CLOSE_S
+  166         | ID OPEN_S arguments CLOSE_S
   167         | ID OPEN_S CLOSE_S
   168         | error OPEN_S arguments CLOSE_S
   169         | error OPEN_S ID CLOSE_S
@@ -580,7 +580,7 @@ STATIC (309) 11 13 14 15 17 19 20 21 23 25 26 27 29 31 34 36 37 38
     73 74 76 77 78 102 104 105 106 110 112 114 115 116 119 121 122
     123 125 126 127 129 131 132 133 135 137 138 139 141 142 143 149
     151 153 155 156 157 158 160 161 164 216
-SELF (310) 166 183 184 185 186 187 214 296 376 377
+SELF (310) 165 183 184 185 186 187 214 296 376 377
 LESS_THAN (311) 382
 LESS_OR_EQUAL (312) 383
 MORE_THAN (313) 311 313 384
@@ -662,7 +662,7 @@ method_h (102)
     on left: 165 166 167 168 169 170 171 172 173, on right: 147 148
     149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164
 arguments (103)
-    on left: 174 175 176, on right: 165 168 170 172
+    on left: 174 175 176, on right: 166 168 170 172
 args_list (104)
     on left: 177 178 179 180 181 182, on right: 174 176 177 179 183
     186 194 371
@@ -1835,8 +1835,8 @@ state 94
   108 var_declaration: ID .
   118                | ID . ASSIGN expr
   146                | ID . ID error
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -2433,8 +2433,8 @@ state 136
 
 state 137
 
-  165 method_h: ID OPEN_S . arguments CLOSE_S
-  166         | ID OPEN_S . SELF CLOSE_S
+  165 method_h: ID OPEN_S . SELF CLOSE_S
+  166         | ID OPEN_S . arguments CLOSE_S
   167         | ID OPEN_S . CLOSE_S
   172         | ID OPEN_S . arguments error
   173         | ID OPEN_S . ID error
@@ -2475,8 +2475,8 @@ state 139
 
   103 var_declaration: FINAL ID .
   113                | FINAL ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -2581,8 +2581,8 @@ state 145
 
   102 var_declaration: STATIC ID .
   112                | STATIC ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -2780,8 +2780,8 @@ state 155
   101 var_declaration: access_modef ID .
   111                | access_modef ID . ASSIGN expr
   145                | access_modef ID . ID error
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -3479,7 +3479,7 @@ state 213
 
 state 214
 
-  166 method_h: ID OPEN_S SELF . CLOSE_S
+  165 method_h: ID OPEN_S SELF . CLOSE_S
   183 paraself: SELF . COMMA args_list
   184         | SELF . COMMA ID
   185         | SELF .
@@ -3492,7 +3492,7 @@ state 214
 
 state 215
 
-  165 method_h: ID OPEN_S arguments . CLOSE_S
+  166 method_h: ID OPEN_S arguments . CLOSE_S
   172         | ID OPEN_S arguments . error
 
     error    shift, and go to state 381
@@ -3605,8 +3605,8 @@ state 223
 
   109 var_declaration: FINAL access_modef ID .
   136                | FINAL access_modef ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -3746,8 +3746,8 @@ state 233
 
   110 var_declaration: STATIC access_modef ID .
   135                | STATIC access_modef ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -5221,8 +5221,8 @@ state 307
 
   120 var_declaration: access_modef FINAL ID .
   130                | access_modef FINAL ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -5275,8 +5275,8 @@ state 311
 
   119 var_declaration: access_modef STATIC ID .
   129                | access_modef STATIC ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -6022,9 +6022,9 @@ state 379
 
 state 380
 
-  166 method_h: ID OPEN_S SELF CLOSE_S .
+  165 method_h: ID OPEN_S SELF CLOSE_S .
 
-    $default  reduce using rule 166 (method_h)
+    $default  reduce using rule 165 (method_h)
 
 
 state 381
@@ -6036,9 +6036,9 @@ state 381
 
 state 382
 
-  165 method_h: ID OPEN_S arguments CLOSE_S .
+  166 method_h: ID OPEN_S arguments CLOSE_S .
 
-    $default  reduce using rule 165 (method_h)
+    $default  reduce using rule 166 (method_h)
 
 
 state 383
@@ -6147,8 +6147,8 @@ state 389
 
   126 var_declaration: FINAL STATIC access_modef ID .
   138                | FINAL STATIC access_modef ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -6206,8 +6206,8 @@ state 392
 state 393
 
   142 var_declaration: FINAL access_modef STATIC ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -6314,8 +6314,8 @@ state 400
 
   125 var_declaration: STATIC FINAL access_modef ID .
   137                | STATIC FINAL access_modef ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -6372,8 +6372,8 @@ state 403
 state 404
 
   141 var_declaration: STATIC access_modef FINAL ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -8323,8 +8323,8 @@ state 533
 
 state 534
 
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -8440,8 +8440,8 @@ state 539
 state 540
 
   144 var_declaration: FINAL access_modef FINAL error ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -8649,8 +8649,8 @@ state 552
 state 553
 
   143 var_declaration: STATIC access_modef STATIC error ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -9971,8 +9971,8 @@ state 624
 
   124 var_declaration: access_modef FINAL error FINAL ID .
   134                | access_modef FINAL error FINAL ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S
@@ -10053,8 +10053,8 @@ state 628
 
   123 var_declaration: access_modef STATIC error STATIC ID .
   133                | access_modef STATIC error STATIC ID . ASSIGN expr
-  165 method_h: ID . OPEN_S arguments CLOSE_S
-  166         | ID . OPEN_S SELF CLOSE_S
+  165 method_h: ID . OPEN_S SELF CLOSE_S
+  166         | ID . OPEN_S arguments CLOSE_S
   167         | ID . OPEN_S CLOSE_S
   170         | ID . error arguments CLOSE_S
   171         | ID . error ID CLOSE_S

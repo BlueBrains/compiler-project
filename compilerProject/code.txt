@@ -1,9 +1,22 @@
-import test.main;
-class point():
-	def __init__ (self,X,Y):  
-
+class a(b,c)
+def class xz:
+	def dodo():
+		self.x();
+                x = self.y ;
 	end
-	def public add_to_list(self):
+end
+end
+class b:
 
-	end
-end 
+end
+class c(k,d):
+
+end
+class k:   end
+class d(e):
+
+end
+class e:
+	def final dodo(): end
+	def x():end
+end

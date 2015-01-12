@@ -1,18 +1,76 @@
 unit_import: ID
-unit_import: unit_import DOT ID
 unit_list:	unit_import
-import_stmt : IMPORT unit_list SEMICOLON 
-class_h: CLASS ID OPEN_S CLOSE_S 
-paraself:	SELF 
-args_list: paraself 
-arguments:	args_list
-Error: Expected IDENTIFIER at Line No:6 Column No:22
-COLON  END 
+unit_import: ID
+unit_list:	unit_list COMMA unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_h: CLASS ID 
+method_h: ID OPEN_S CLOSE_S 
+parenth_form : 	OPEN_S  CLOSE_S
+expr:	self.id()
+expr_list: expr %prec stmt_1
+simple_stmt_list: 	expr_list
+stmt:	simple_stmt_list
+stmt_list:	stmt 
+id_dot:	ID
+expr:	self.id
+Error: Undeclareted Variable at Line No:5 Column No:28
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
+block_stmt: COLON stmt_list END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
-unit: import_stmt class_decl
+dm:	class_decl
+dm_list: DEF dm
+Error: Expected ':' at Line No:1 Column No:13
+class_decl: class_h class_body
+unit: class_decl
 program: unit
+class_h: CLASS ID 
+class_body:COLON END	
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+unit_import: ID
+unit_list:	unit_import
+unit_import: ID
+unit_list:	unit_list COMMA unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+class_h: CLASS ID 
+class_body:COLON END	
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+class_h: CLASS ID 
+method_h: ID OPEN_S CLOSE_S 
+COLON  END 
+method_declaration: FINAL method_h block_stmt
+dm:	method_declaration
+dm_list: DEF dm
+method_h: ID OPEN_S CLOSE_S 
+COLON  END 
+method_declaration: method_h block_stmt
+dm:	method_declaration
+dm_list: dm_list DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
 programes: program END_OF_FILE

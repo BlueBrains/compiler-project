@@ -337,7 +337,10 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 				if ((first != NULL) && (strcmp("self", first) != 0))
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
-}
+
+	}
+	else 
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header","error" );
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
 }
@@ -984,16 +987,23 @@ void MyParser::insert_func_Call(Type* t, char* name, int lineno, int colno)
 void  MyParser::recrusive_up_caller(Type* t, int j)
 {
 	if (t != NULL){
-		for (int i = 0; i < int(t->getInheritedType().size()); i++)
-		{
-			Type* x = t->getInheritedType().at(i);
-			recrusive_up_caller(x,j);
-			Function * f2 = (Function *)x->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
-			if (f2)
+		Function * f1 = (Function *)t->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+		if (!f1){
+			recrusive_up_caller(t->getouter_class(), j);
+			for (int i = 0; i < int(t->getInheritedType().size()); i++)
 			{
-				classname.push_back(x->get_name());
+				Type* x = t->getInheritedType().at(i);
+				recrusive_up_caller(x, j);
+				Function * f2 = (Function *)x->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
+				if (f2)
+				{
+					classname.push_back(x->get_name());
+				}
 			}
+
 		}
+		else
+			classname.push_back(t->get_name());
 	}
 }
 
