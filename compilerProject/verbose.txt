@@ -2,3 +2,7 @@ unit_import: ID
 unit_import: unit_import DOT ID
 unit_list:	unit_import
 import_stmt : IMPORT unit_list SEMICOLON 
+class_h: CLASS ID OPEN_S CLOSE_S 
+paraself:	SELF COMMA ID 
+args_list: paraself 
+arguments:	args_list
