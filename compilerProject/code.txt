@@ -1,6 +1,14 @@
-public class test:
-	def fun (x,y=1,z=2):
+class a:
+end
+class b:
+	def public static main():
 	end
+end
+class c(a):
+	def class innerC(b):
+	end
+end
+public class d (a,b):
 	def public static main():
 	end
 end

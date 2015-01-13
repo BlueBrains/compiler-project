@@ -199,74 +199,18 @@ expr_list: expr %prec stmt_1
 for_header:	FOR ID IN expr_list 
 literal:    STRING_VALUE
 expr:	literal
-expr_list: expr %prec stmt_1
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-expr_list: expr_list COMMA expr
-print_stmt: PRINT expr_list
-simple_stmt_list: 	print_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-expr:	self.id
-expr:	long_id
-condition: expr MORE_THAN expr
-expr:	condition
-if_header:	IF expr 
-simple_stmt_list: 	BREAK
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-assignment_stmt:	self dot amer
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: access_modef method_h block_stmt
+default_arg:	ID ASSIGN expr 
+default_args_list: default_args_list COMMA default_arg
+arguments:	ID COMMA default_args_list
+method_h: ID OPEN_S arguments CLOSE_S 
+COLON  END 
+method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: dm_list DEF dm
 access_modef:	PUBLIC
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:38 Column No:14
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-expr:	self.id
-Error: Undeclareted Variable at Line No:39 Column No:17
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: method_h block_stmt
+method_h: ID OPEN_S CLOSE_S 
+COLON  END 
+method_declaration: access_modef STATIC method_h block_stmt
 dm:	method_declaration
 dm_list: dm_list DEF dm
 class_body:COLON dm_list END
