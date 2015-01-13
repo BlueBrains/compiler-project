@@ -1,15 +1,9 @@
 public class a(b):
-	
-	def main():
-
-	end
-end
-public class main:
-        def main(self):
-
-	end
+	def public add_to_list(self,k,**p):
+		p=[];
+		end
 end
 class b:
-
+def public add_to_list(self,o,**r,k,l,*i):end
 
 end

@@ -2,29 +2,11 @@ access_modef:	PUBLIC
 unit_import: ID
 unit_list:	unit_import
 class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S 
-method_h: ID OPEN_S CLOSE_S 
-block_stmt: COLON  END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: DEF dm
-class_body:COLON dm_list END
-class_decl: class_h class_body
-unit: class_decl
-program: unit
 access_modef:	PUBLIC
-class_h: access_modef CLASS ID 
-method_h: ID OPEN_S SELF CLOSE_S  
-block_stmt: COLON  END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: DEF dm
-class_body:COLON dm_list END
-class_decl: class_h class_body
-unit: class_decl
-prgram : program unit
-class_h: CLASS ID 
-class_body:COLON END	
-class_decl: class_h class_body
-unit: class_decl
-prgram : program unit
-programes: program END_OF_FILE
+arg:	STAR STAR ID 
+args_list: ID COMMA arg 
+arguments:	SELF COMMA args_list %prec stmt_11
+method_h: ID OPEN_S arguments CLOSE_S 
+id_dot:	ID
+list_display:	OPEN_D CLOSE_D
+left_assignment_side : list_display

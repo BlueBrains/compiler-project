@@ -217,7 +217,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
 		*/
-
+		/*
 		bool selflast = false;
 		for (int i = 0; i < parameter.size(); i++) {
 			if ('*' == parameter.at(i)[0])
@@ -225,13 +225,14 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 				selflast = true;
 			}
 		}
-
-		if (!selflast){
+		*/
+		//if (!selflast){
 			vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
 			if (it != parameter.end()){
 				this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
 			}
-		}
+		//}
+		/*
 		else
 		{
 			vector<char*>::iterator it = find_if(parameter.begin(), parameter.end()-1, Comparator_char("self"));
@@ -239,6 +240,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 				this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
 			}
 		}
+		*/
 	}
 
 	//vector <char *> tempvec = parameter;
@@ -833,7 +835,11 @@ void MyParser::check_static(Type* t,int lineno,int colno)
 }
 Type * MyParser::finishTypeDeclaration(Type* t){
 	//cout <<"size "<< constraction_type.size() << endl;
-	
+	if (t == NULL)
+	{
+		this->errRecovery->errQ->enqueue(0, 0, "error in define type header", "cant recognize function name");
+		return 0;
+	}
 	//Type * tt = new Type();
 	Function * f = (Function *)st->currScope->m->get("__init__", "Function");
 	if (!f){

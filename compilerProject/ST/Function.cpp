@@ -104,9 +104,9 @@ bool Function::comparePar(vector<Variable *> outparameters)
 	if (outparameters.size() != this->parameters.size())
 		return false;
 	for (int i = 0; i<outparameters.size(); i++){
-		if (outparameters.at(i)->get_isarray() && !this->parameters.at(i)->get_isarray())
+		if (outparameters.at(i)->get_isarray()!= this->parameters.at(i)->get_isarray())
 			return false;
-		if (outparameters.at(i)->get_isdic() && !this->parameters.at(i)->get_isdic())
+		if (outparameters.at(i)->get_isdic() != this->parameters.at(i)->get_isdic())
 			return false;
 	}
 
