@@ -34,6 +34,8 @@ public:
 	void setAccessModifier(char*);
 	bool get_isarray();
 	bool get_isdic();
+	void set_isarray(bool is_array);
+	void set_isdic(bool is_dic);
 	virtual bool getIsConst();
 	virtual void setIsConst(bool);
 	Type* getType();
