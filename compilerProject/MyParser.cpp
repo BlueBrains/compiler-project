@@ -448,6 +448,19 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 				if ((first != NULL) && (strcmp("self", first) != 0))
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
+			for (int i = 0; i < int(outer_type.back()->getInheritedType().size()); i++)
+			{
+				Type* x = outer_type.back()->getInheritedType().at(i);
+				Function * f1 = (Function *)x->getScope()->m->get(f->get_name(), "Function");
+				if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
+				{
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't override it ", f1->get_name());
+				}
+				else if (f1 && !f1->comparePar(f->getparameters()) && (f1->get_name() != "__init__"))
+				{
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "the method didn't have the same overrided method parameter", f1->get_name());
+				}
+			}
 
 	}
 	else 
