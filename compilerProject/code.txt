@@ -1,9 +1,13 @@
 public class a(b):
-	def public add_to_list(self,k,**p):
-		p=[];
-		end
-end
-class b:
-def public add_to_list(self,o,**r,k,l,*i):end
+	
+	def func1(self,z,w):
 
+	end
 end
+public class b:
+        def func1(self,y,*x):
+
+	end
+end
+
+
