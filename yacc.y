@@ -1093,9 +1093,9 @@ method_h:
 ;
 
 arguments : args_list %prec stmt_11{Streams::verbose()<<"args_list %prec stmt_11\n";}
-			|SELF COMMA args_list %prec stmt_11{Streams::verbose()<<"arguments:	SELF COMMA args_list %prec stmt_11\n";parameters.push_back("self");}
+			|SELF COMMA args_list %prec stmt_11{Streams::verbose()<<"arguments:	SELF COMMA args_list %prec stmt_11\n";parameters.insert(parameters.begin(),"self");}
 			|SELF COMMA ID {Streams::verbose()<<"arguments:	SELF COMMA ID\n";parameters.push_back("self");parameters.push_back($<r.strVal>3);}
-			|SELF COMMA default_args_list {Streams::verbose()<<"arguments:	SELF COMMA default_args_list\n";parameters.push_back("self");}
+			|SELF COMMA default_args_list {Streams::verbose()<<"arguments:	SELF COMMA default_args_list\n";parameters.insert(parameters.begin(),"self");}
 			|args_list COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
 			|ID COMMA default_args_list {Streams::verbose()<<"arguments:	ID COMMA default_args_list\n";}
 			|SELF COMMA args_list COMMA default_args_list {Streams::verbose()<<"arguments:	SELF COMMA args_list COMMA default_args_list\n";parameters.push_back("self");}
@@ -1110,7 +1110,7 @@ args_list:	args_list COMMA arg	{Streams::verbose()<<"args_list: args_list COMMA 
 										Streams::verbose()<<"Error: self should come at the first of the arguments list"<<$<r.lineNum>3<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 										err->errQ->enqueue($<r.lineNum>3,$<r.colNum>3-strlength($<r.strVal>3),"Error: self should come at the first of the arguments list","");
 									}
-			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n"; parameters.push_back($<r.strVal>1);}
+			|ID COMMA arg {Streams::verbose()<<"args_list: ID COMMA arg \n";parameters.insert(parameters.begin(),$<r.strVal>1);}
 			|args_list COMMA ID {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back($<r.strVal>3);}
 			|ID COMMA ID {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back($<r.strVal>1); parameters.push_back($<r.strVal>3);}
 			|arg	{Streams::verbose()<<"args_list: arg \n";}
