@@ -1,21 +1,15 @@
-class a(b):
+public class a(b):
 	
-	def dodo(self,c,y,**x):
+	def main():
 
 	end
 end
+public class main:
+        def main(self):
 
+	end
+end
 class b:
-	def dodo(self,*x,c,**yw):
 
-	end
-
-	def Sdodo(self,x,c,*yw):
-
-	end
-
-	def Sdodo(self,x,c,w,v,f,d,s,sk,*yw):
-
-	end
 
 end

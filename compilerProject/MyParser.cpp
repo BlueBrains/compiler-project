@@ -176,7 +176,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 	else
 	{
-		if ((outer_type.back()!=NULL) && (strcmp(tname->getAccessModifier(), "STATIC") != 0) && s)
+		if ((outer_type.size()>1) && !tname->getIs_static() && s)
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add static function to not static inner class", name);
 		}
@@ -375,15 +375,17 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	this->st->currScope = f->getScope();
 
 	for (int i = 0; i < parameter.size(); i++) {
+		
 		f->setparameters(parameter[i]);
 	}
 	
 	for (int i = 0; i < f->getparameters().size(); i++) {
 		
+		if (strcmp(f->getparameters().at(i)->get_name(),"self")!=0)
 		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
 	}
 
-	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
+	if ((outer_type.size() == 1) && (strcmp(tname->getAccessModifier(), "public") == 0) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -392,8 +394,8 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
-	}/*
-	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
+	}
+	if ((outer_type.size() >1) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -404,11 +406,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
 	}
 
-	if ((outer_type.back() != NULL) && (!tname->getIs_static()) && f->get_static())
+	if ((outer_type.size() >1) && (!tname->getIs_static()) && f->get_static())
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}
-	*/
+	
 	if (nullclass && (strcmp(name,"__init__")!=0))
 	{
 		unfinished *temp = new unfinished(tname, f, lineNo, colNo);
