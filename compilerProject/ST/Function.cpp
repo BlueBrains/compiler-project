@@ -115,7 +115,7 @@ bool Function::comparePar(vector<Variable *> outparameters)
 
 char* Function::getfirstpara()
 {
-	
+	/*
 	bool is_star = false;
 	for (int i = 0; i<this->getparameters().size(); i++){
 		if (this->parameters.at(i)->get_isdic() || this->parameters.at(i)->get_isarray())
@@ -124,9 +124,11 @@ char* Function::getfirstpara()
 	
 	if (parameters.size()>0 && is_star)
 		return this->parameters.at(parameters.size()-1)->get_name();
+		
 	else if (parameters.size()>0 && !is_star)
-	{
-		return this->parameters.at(0)->get_name();
-	}
+	{*/
+	if (this->parameters.size()>1)
+	return this->parameters.at(0)->get_name();
+	//}
 	return NULL;
 }
