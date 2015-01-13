@@ -72,7 +72,7 @@ Variable* MyParser::set_storage_modifier(Variable* v, bool is_static, bool is_fi
 	v->setIsConst(is_final);
 	return v;
 }
-Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_static, bool is_final, int lineNo, int colNo, bool self){
+Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_static, bool is_final, int lineNo, int colNo, bool is_array, bool is_dic, bool self){
 	Variable* v = NULL;
 	if((n)){
 		if (self)
@@ -101,6 +101,8 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 			v->set_name(n);
 			v->setAccessModifier(acc_mod);
 			v->by_self = self;
+			v->set_isdic(is_dic);
+			v->set_isarray(is_array);
 			if (self)
 			{
 				char* name = new char[50];
@@ -130,7 +132,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bool from_right,bool self){
+Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self){
 	char* tokenPtr;
 	char buffer[15];
 	bool found = false;
@@ -155,7 +157,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	{
 		if (from_right)
 		{
-			v = this->addVariableToCurrentScope(name,"", false, false, lineNo, colNo);
+			v = this->addVariableToCurrentScope(name,"", false, false, lineNo, colNo,is_array,is_dic);
 		}
 		else
 		{
