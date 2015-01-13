@@ -88,12 +88,28 @@ bool Function::get_static(){
 bool Function::comparePar(vector<char *> outparameters)
 {
 	if (outparameters.size() != this->parameters.size())
-		return false;/*
+		return false;
 					 for (int i = 0; i<outparameters.size(); i++){
-					 if (strcmp(this->parameters[i]->get_name(), outparameters[i])!=0)
-					 return false;
+						 if ((outparameters.at(i)[0] != '*') && (this->parameters.at(i)->get_isarray()))
+							return false;
+						 if (strlen(outparameters.at(i))>1 && (outparameters.at(i)[1] != '*') && this->parameters.at(i)->get_isdic())
+							 return false;
 					 }
-					 */
+					 
+	return true;
+}
+
+bool Function::comparePar(vector<Variable *> outparameters)
+{
+	if (outparameters.size() != this->parameters.size())
+		return false;
+	for (int i = 0; i<outparameters.size(); i++){
+		if (outparameters.at(i)->get_isarray() && !this->parameters.at(i)->get_isarray())
+			return false;
+		if (outparameters.at(i)->get_isdic() && !this->parameters.at(i)->get_isdic())
+			return false;
+	}
+
 	return true;
 }
 

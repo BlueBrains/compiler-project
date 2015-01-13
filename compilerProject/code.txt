@@ -1,7 +1,13 @@
-class a:
+class a(b):
 	
-	def dodo(self,*c,**c,c):
-		self.x();
-                x = self.y ;
+	def dodo(*c,**x,y):
+
 	end
+end
+
+class b:
+	def dodo(*x,*c,yw):
+
+	end
+
 end

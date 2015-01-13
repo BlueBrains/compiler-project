@@ -31,6 +31,7 @@ public:
 	char* getfirstpara();
 	void setparameters(char * parameters);
 	bool comparePar(vector<char *> parameters);
+	bool comparePar(vector<Variable *> parameters);
 	vector<Variable *> getparameters();
 };
 #endif

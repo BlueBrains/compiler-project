@@ -1047,7 +1047,7 @@ void MyParser::recrusive_up_parnet(Type *t, int j)
 			{
 				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
 			}
-			else if (f1 && (f1->getparameters().size() != unfinishfunction.at(j)->get_function()->getparameters().size()) && (f1->get_name() != "__init__"))
+			else if (f1 && !f1->comparePar(unfinishfunction.at(j)->get_function()->getparameters()) && (f1->get_name() != "__init__"))
 			{
 				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
 			}
