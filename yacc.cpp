@@ -232,7 +232,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 3 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 3 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
 
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
@@ -314,7 +314,7 @@
 #endif
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 63 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 66 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -2524,7 +2524,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 104 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 107 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() <<"programes: program END_OF_FILE\n";
 						p->check_inhertance_list();
 						if(!p->errRecovery->errQ->isEmpty())
@@ -2535,14 +2535,14 @@ yyreduce:
     break;
 
   case 3:
-#line 112 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 115 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {	Streams::verbose() <<"prgram : program unit\n";
 						Streams::verbose().flush();						
 					;}
     break;
 
   case 4:
-#line 115 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 118 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 							
 								Streams::verbose()<<"program: unit\n";
@@ -2551,12 +2551,12 @@ yyreduce:
     break;
 
   case 5:
-#line 123 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 126 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"import_stmt : IMPORT unit_list SEMICOLON \n";;}
     break;
 
   case 6:
-#line 124 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 127 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 							Streams::verbose()<<"Error: Expected ';' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
 							err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum,"Expected ';' ","");
@@ -2564,22 +2564,22 @@ yyreduce:
     break;
 
   case 7:
-#line 129 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 132 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"unit: import_stmt class_decl\n";;}
     break;
 
   case 8:
-#line 130 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 133 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"unit: class_decl\n";;}
     break;
 
   case 9:
-#line 133 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 136 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"class_decl: class_h class_body\n"; ;}
     break;
 
   case 10:
-#line 136 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 139 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-1].r.lineNum),(yyvsp[0].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2588,7 +2588,7 @@ yyreduce:
     break;
 
   case 11:
-#line 141 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 144 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2598,7 +2598,7 @@ yyreduce:
     break;
 
   case 12:
-#line 147 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 150 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2608,7 +2608,7 @@ yyreduce:
     break;
 
   case 13:
-#line 153 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 156 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2618,7 +2618,7 @@ yyreduce:
     break;
 
   case 14:
-#line 159 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 162 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2628,7 +2628,7 @@ yyreduce:
     break;
 
   case 15:
-#line 165 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 168 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2638,7 +2638,7 @@ yyreduce:
     break;
 
   case 16:
-#line 171 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 174 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[0].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2649,7 +2649,7 @@ yyreduce:
     break;
 
   case 17:
-#line 178 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 181 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[0].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2660,7 +2660,7 @@ yyreduce:
     break;
 
   case 18:
-#line 185 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 188 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2670,7 +2670,7 @@ yyreduce:
     break;
 
   case 19:
-#line 191 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 194 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2680,7 +2680,7 @@ yyreduce:
     break;
 
   case 20:
-#line 197 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 200 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2690,7 +2690,7 @@ yyreduce:
     break;
 
   case 21:
-#line 203 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 206 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2700,7 +2700,7 @@ yyreduce:
     break;
 
   case 22:
-#line 209 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 212 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2711,7 +2711,7 @@ yyreduce:
     break;
 
   case 23:
-#line 216 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 219 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2722,7 +2722,7 @@ yyreduce:
     break;
 
   case 24:
-#line 223 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 226 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2732,7 +2732,7 @@ yyreduce:
     break;
 
   case 25:
-#line 229 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 232 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2742,7 +2742,7 @@ yyreduce:
     break;
 
   case 26:
-#line 235 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 238 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2752,7 +2752,7 @@ yyreduce:
     break;
 
   case 27:
-#line 241 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 244 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2762,7 +2762,7 @@ yyreduce:
     break;
 
   case 28:
-#line 247 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 250 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");									
@@ -2774,7 +2774,7 @@ yyreduce:
     break;
 
   case 29:
-#line 255 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 258 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");									
@@ -2786,7 +2786,7 @@ yyreduce:
     break;
 
   case 30:
-#line 263 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 266 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[0].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2796,7 +2796,7 @@ yyreduce:
     break;
 
   case 31:
-#line 269 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 272 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");
@@ -2808,7 +2808,7 @@ yyreduce:
     break;
 
   case 32:
-#line 277 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 280 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");
@@ -2820,7 +2820,7 @@ yyreduce:
     break;
 
   case 33:
-#line 285 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 288 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[0].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2831,7 +2831,7 @@ yyreduce:
     break;
 
   case 34:
-#line 291 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 295 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-1].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2841,7 +2841,7 @@ yyreduce:
     break;
 
   case 35:
-#line 297 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 301 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-1].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2851,7 +2851,7 @@ yyreduce:
     break;
 
   case 36:
-#line 303 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 307 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-1].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2861,7 +2861,7 @@ yyreduce:
     break;
 
   case 37:
-#line 309 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 313 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2871,7 +2871,7 @@ yyreduce:
     break;
 
   case 38:
-#line 315 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 319 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2881,21 +2881,21 @@ yyreduce:
     break;
 
   case 39:
-#line 321 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 325 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");
 								;}
     break;
 
   case 40:
-#line 324 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 328 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");
 								;}
     break;
 
   case 41:
-#line 327 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 331 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2905,7 +2905,7 @@ yyreduce:
     break;
 
   case 42:
-#line 333 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 337 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2915,7 +2915,7 @@ yyreduce:
     break;
 
   case 43:
-#line 339 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 343 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2925,7 +2925,7 @@ yyreduce:
     break;
 
   case 44:
-#line 345 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 349 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2935,7 +2935,7 @@ yyreduce:
     break;
 
   case 45:
-#line 351 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 355 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-6].r.colNum)-strlength((yyvsp[-6].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-6].r.colNum)-strlen((yyvsp[-6].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2946,7 +2946,7 @@ yyreduce:
     break;
 
   case 46:
-#line 358 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 362 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-6].r.colNum)-strlength((yyvsp[-6].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-6].r.colNum)-strlen((yyvsp[-6].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -2957,7 +2957,7 @@ yyreduce:
     break;
 
   case 47:
-#line 365 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 369 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2967,7 +2967,7 @@ yyreduce:
     break;
 
   case 48:
-#line 371 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 375 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2977,7 +2977,7 @@ yyreduce:
     break;
 
   case 49:
-#line 377 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 381 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2987,7 +2987,7 @@ yyreduce:
     break;
 
   case 50:
-#line 383 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 387 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -2997,7 +2997,7 @@ yyreduce:
     break;
 
   case 51:
-#line 389 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 393 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3009,7 +3009,7 @@ yyreduce:
     break;
 
   case 52:
-#line 397 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 401 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3021,7 +3021,7 @@ yyreduce:
     break;
 
   case 53:
-#line 405 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 409 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3031,7 +3031,7 @@ yyreduce:
     break;
 
   case 54:
-#line 411 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 415 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-2].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3041,7 +3041,7 @@ yyreduce:
     break;
 
   case 55:
-#line 417 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 421 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -3053,7 +3053,7 @@ yyreduce:
     break;
 
   case 56:
-#line 425 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 429 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -3065,7 +3065,7 @@ yyreduce:
     break;
 
   case 57:
-#line 433 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 437 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[0].r.colNum)+1));
 												(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3075,7 +3075,7 @@ yyreduce:
     break;
 
   case 58:
-#line 439 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 443 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-1].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3085,7 +3085,7 @@ yyreduce:
     break;
 
   case 59:
-#line 445 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 449 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-1].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3095,7 +3095,7 @@ yyreduce:
     break;
 
   case 60:
-#line 451 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 455 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-1].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3105,7 +3105,7 @@ yyreduce:
     break;
 
   case 61:
-#line 457 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 461 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3115,7 +3115,7 @@ yyreduce:
     break;
 
   case 62:
-#line 463 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 467 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3125,21 +3125,21 @@ yyreduce:
     break;
 
   case 63:
-#line 469 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 473 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-6].r.colNum)-strlength((yyvsp[-6].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-6].r.colNum)-strlen((yyvsp[-6].r.strVal)),"repeated modifier ","");
 								;}
     break;
 
   case 64:
-#line 472 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 476 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-6].r.colNum)-strlength((yyvsp[-6].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-6].r.colNum)-strlen((yyvsp[-6].r.strVal)),"repeated modifier ","");
 								;}
     break;
 
   case 65:
-#line 475 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 479 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3149,7 +3149,7 @@ yyreduce:
     break;
 
   case 66:
-#line 481 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 485 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3159,7 +3159,7 @@ yyreduce:
     break;
 
   case 67:
-#line 487 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 491 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3169,7 +3169,7 @@ yyreduce:
     break;
 
   case 68:
-#line 493 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 497 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3179,7 +3179,7 @@ yyreduce:
     break;
 
   case 69:
-#line 499 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 503 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-7].r.colNum)-strlength((yyvsp[-7].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-8].r.lineNum),(yyvsp[-7].r.colNum)-strlen((yyvsp[-7].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-7].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3190,7 +3190,7 @@ yyreduce:
     break;
 
   case 70:
-#line 506 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 510 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-7].r.colNum)-strlength((yyvsp[-7].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-8].r.lineNum),(yyvsp[-7].r.colNum)-strlen((yyvsp[-7].r.strVal)),"repeated modifier ","");
 								(yyval.type)=p->createType((yyvsp[-7].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3201,7 +3201,7 @@ yyreduce:
     break;
 
   case 71:
-#line 513 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 517 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3211,7 +3211,7 @@ yyreduce:
     break;
 
   case 72:
-#line 519 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 523 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3221,7 +3221,7 @@ yyreduce:
     break;
 
   case 73:
-#line 525 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 529 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3231,7 +3231,7 @@ yyreduce:
     break;
 
   case 74:
-#line 531 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 535 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: access_modef FINAL STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3241,7 +3241,7 @@ yyreduce:
     break;
 
   case 75:
-#line 537 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 541 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");									
@@ -3253,7 +3253,7 @@ yyreduce:
     break;
 
   case 76:
-#line 545 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 549 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");									
@@ -3266,7 +3266,7 @@ yyreduce:
     break;
 
   case 77:
-#line 554 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 558 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: FINAL access_modef STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3276,7 +3276,7 @@ yyreduce:
     break;
 
   case 78:
-#line 560 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 564 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose() << "class_h: STATIC access_modef FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -3286,7 +3286,7 @@ yyreduce:
     break;
 
   case 79:
-#line 566 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 570 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");
@@ -3298,7 +3298,7 @@ yyreduce:
     break;
 
   case 80:
-#line 574 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 578 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-7].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");
@@ -3310,7 +3310,7 @@ yyreduce:
     break;
 
   case 81:
-#line 582 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 586 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {							
 									colonStack.push(new ColonStack((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)+1));
 									Streams::verbose()<<"Error: Expected class name at Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
@@ -3319,7 +3319,7 @@ yyreduce:
     break;
 
   case 82:
-#line 587 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 591 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									colonStack.push(new ColonStack((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1));
 									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
@@ -3328,7 +3328,7 @@ yyreduce:
     break;
 
   case 83:
-#line 592 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 596 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									colonStack.push(new ColonStack((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)+1));
 									Streams::verbose()<<"Error: Expected Reserved word at Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
@@ -3337,17 +3337,17 @@ yyreduce:
     break;
 
   case 84:
-#line 599 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 603 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"expr_list: expr_list COMMA expr\n";;}
     break;
 
   case 85:
-#line 600 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 604 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"expr_list: expr %prec stmt_1\n";;}
     break;
 
   case 86:
-#line 603 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 607 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												t_id=new char[10];
 												strcpy(t_id,temp_id.c_str());
@@ -3358,7 +3358,7 @@ yyreduce:
     break;
 
   case 87:
-#line 610 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 614 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {	
 								t_id=new char[10];
 								strcpy(t_id,temp_id.c_str());
@@ -3369,7 +3369,7 @@ yyreduce:
     break;
 
   case 88:
-#line 619 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 623 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									temp_id=temp_id+"."+(yyvsp[0].r.strVal);
 									Streams::verbose()<<"unit_import: unit_import DOT ID\n";
@@ -3377,7 +3377,7 @@ yyreduce:
     break;
 
   case 89:
-#line 623 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 627 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 					temp_id=temp_id+(yyvsp[0].r.strVal);
 					Streams::verbose()<<"unit_import: ID\n";
@@ -3386,7 +3386,7 @@ yyreduce:
     break;
 
   case 90:
-#line 631 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 635 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"class_body:COLON END	\n";colonStack.pop();
 								(yyval.type)=p->finishTypeDeclaration(t);
@@ -3394,14 +3394,14 @@ yyreduce:
     break;
 
   case 91:
-#line 635 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 639 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"class_body:COLON dm_list END\n";colonStack.pop();
 										(yyval.type)=p->finishTypeDeclaration(t);
 									;}
     break;
 
   case 92:
-#line 638 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 642 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 					ColonStack* temp = colonStack.top();
 					colonStack.pop();
@@ -3411,7 +3411,7 @@ yyreduce:
     break;
 
   case 93:
-#line 644 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 648 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 					ColonStack* temp = colonStack.top();
 					colonStack.pop();
@@ -3422,7 +3422,7 @@ yyreduce:
     break;
 
   case 94:
-#line 651 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 655 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {					
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
@@ -3432,7 +3432,7 @@ yyreduce:
     break;
 
   case 95:
-#line 657 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 661 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
@@ -3442,17 +3442,17 @@ yyreduce:
     break;
 
   case 96:
-#line 665 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 669 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dm_list: dm_list DEF dm\n";;}
     break;
 
   case 97:
-#line 666 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 670 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dm_list: DEF dm\n";;}
     break;
 
   case 98:
-#line 667 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 671 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"Error: Expected 'def' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
 						err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'def' ","");									
@@ -3460,22 +3460,22 @@ yyreduce:
     break;
 
   case 99:
-#line 673 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 677 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dm:	var_declaration SEMICOLON\n";;}
     break;
 
   case 100:
-#line 674 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 678 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dm:	method_declaration\n";;}
     break;
 
   case 101:
-#line 675 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 679 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dm:	class_decl\n";;}
     break;
 
   case 102:
-#line 676 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 680 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 							Streams::verbose()<<"Error: Expected ';' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 							err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"Expected ';' ","");
@@ -3483,7 +3483,7 @@ yyreduce:
     break;
 
   case 103:
-#line 682 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 686 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"var_declaration: access_modef ID\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3493,7 +3493,7 @@ yyreduce:
     break;
 
   case 104:
-#line 688 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 692 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"var_declaration: STATIC ID\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3502,7 +3502,7 @@ yyreduce:
     break;
 
   case 105:
-#line 693 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 697 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"var_declaration: FINAL ID\n";
 								(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3511,7 +3511,7 @@ yyreduce:
     break;
 
   case 106:
-#line 698 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 702 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[-1].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3520,7 +3520,7 @@ yyreduce:
     break;
 
   case 107:
-#line 703 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 707 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"var_declaration: FINAL STATIC ID\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[-1].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3529,7 +3529,7 @@ yyreduce:
     break;
 
   case 108:
-#line 708 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 712 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");									
@@ -3537,7 +3537,7 @@ yyreduce:
     break;
 
   case 109:
-#line 712 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 716 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");									
@@ -3545,7 +3545,7 @@ yyreduce:
     break;
 
   case 110:
-#line 716 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 720 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"var_declaration: ID\n";
 										(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 										v=(yyval.var);
@@ -3553,7 +3553,7 @@ yyreduce:
     break;
 
   case 111:
-#line 720 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 724 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"var_declaration: FINAL access_modef ID\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3563,7 +3563,7 @@ yyreduce:
     break;
 
   case 112:
-#line 726 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 730 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"var_declaration: STATIC access_modef ID\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -3573,7 +3573,7 @@ yyreduce:
     break;
 
   case 113:
-#line 732 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 736 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"var_declaration: access_modef ID ASSIGN expr\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
 													v=(yyval.var);
@@ -3582,27 +3582,48 @@ yyreduce:
     break;
 
   case 114:
-#line 737 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"var_declaration: STATIC ID ASSIGN expr\n";;}
+#line 741 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"var_declaration: STATIC ID ASSIGN expr\n";
+											(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+											v=(yyval.var);
+											is_dic=false;
+											is_list=false;
+										;}
     break;
 
   case 115:
-#line 738 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"var_declaration: FINAL ID ASSIGN expr\n";;}
+#line 747 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"var_declaration: FINAL ID ASSIGN expr\n";
+											(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=(yyval.var);
+													is_list=false;
+													is_dic=false;
+										;}
     break;
 
   case 116:
-#line 739 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"var_declaration: STATIC FINAL ID ASSIGN expr\n";;}
+#line 753 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"var_declaration: STATIC FINAL ID ASSIGN expr\n";
+													(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=(yyval.var);
+													is_list=false;
+													is_dic=false;
+												;}
     break;
 
   case 117:
-#line 740 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"var_declaration: FINAL STATIC ID ASSIGN expr\n";;}
+#line 759 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"var_declaration: FINAL STATIC ID ASSIGN expr\n";
+				
+														(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
+													v=(yyval.var);
+													is_list=false;
+													is_dic=false;
+													;}
     break;
 
   case 118:
-#line 741 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 766 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3614,7 +3635,7 @@ yyreduce:
     break;
 
   case 119:
-#line 745 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 774 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3626,7 +3647,7 @@ yyreduce:
     break;
 
   case 120:
-#line 749 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 782 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"var_declaration: ID ASSIGN expr\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
 													v=(yyval.var);
@@ -3636,7 +3657,7 @@ yyreduce:
     break;
 
   case 121:
-#line 753 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 788 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"var_declaration: access_modef STATIC ID\n";
 											(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3648,7 +3669,7 @@ yyreduce:
     break;
 
   case 122:
-#line 759 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 796 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 				
 											Streams::verbose()<<"var_declaration: access_modef FINAL ID\n";
@@ -3661,7 +3682,7 @@ yyreduce:
     break;
 
   case 123:
-#line 766 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 805 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3673,7 +3694,7 @@ yyreduce:
     break;
 
   case 124:
-#line 772 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 813 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3685,7 +3706,7 @@ yyreduce:
     break;
 
   case 125:
-#line 778 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 821 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
 													v=(yyval.var);
@@ -3698,7 +3719,7 @@ yyreduce:
     break;
 
   case 126:
-#line 782 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 830 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-2].r.colNum)-strlen((yyvsp[-2].r.strVal)),"repeated modifier ","");	
@@ -3711,7 +3732,7 @@ yyreduce:
     break;
 
   case 127:
-#line 787 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 840 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID\n";
 													(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,0,0);
@@ -3721,7 +3742,7 @@ yyreduce:
     break;
 
   case 128:
-#line 793 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 846 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 													Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID\n";
 														(yyval.var)=p->addVariableToCurrentScope((yyvsp[0].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,0,0);
@@ -3732,7 +3753,7 @@ yyreduce:
     break;
 
   case 129:
-#line 800 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 853 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");									
@@ -3740,7 +3761,7 @@ yyreduce:
     break;
 
   case 130:
-#line 804 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 857 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");									
@@ -3748,7 +3769,7 @@ yyreduce:
     break;
 
   case 131:
-#line 808 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 861 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 				
 															Streams::verbose()<<"var_declaration: access_modef STATIC ID ASSIGN expr\n";
@@ -3761,7 +3782,7 @@ yyreduce:
     break;
 
   case 132:
-#line 815 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 870 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"var_declaration: access_modef FINAL ID ASSIGN expr\n";
 															(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3773,7 +3794,7 @@ yyreduce:
     break;
 
   case 133:
-#line 821 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 878 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																Streams::verbose()<<"var_declaration: access_modef STATIC FINAL ID ASSIGN expr\n";
 																(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3785,7 +3806,7 @@ yyreduce:
     break;
 
   case 134:
-#line 827 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 886 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																Streams::verbose()<<"var_declaration: access_modef FINAL STATIC ID ASSIGN expr\n";
 																	(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3797,7 +3818,7 @@ yyreduce:
     break;
 
   case 135:
-#line 833 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 894 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3808,7 +3829,7 @@ yyreduce:
     break;
 
   case 136:
-#line 837 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 901 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");									
@@ -3819,7 +3840,7 @@ yyreduce:
     break;
 
   case 137:
-#line 841 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 908 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 															Streams::verbose()<<"var_declaration: STATIC access_modef ID ASSIGN expr\n";
 																	(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3831,7 +3852,7 @@ yyreduce:
     break;
 
   case 138:
-#line 847 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 916 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"var_declaration: FINAL access_modef ID ASSIGN expr\n";
 																(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3843,7 +3864,7 @@ yyreduce:
     break;
 
   case 139:
-#line 853 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 924 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																Streams::verbose()<<"var_declaration: STATIC FINAL access_modef ID ASSIGN expr\n";
 																		(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3855,7 +3876,7 @@ yyreduce:
     break;
 
   case 140:
-#line 859 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 932 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																Streams::verbose()<<"var_declaration: FINAL STATIC access_modef ID ASSIGN expr\n";
 																	(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3867,7 +3888,7 @@ yyreduce:
     break;
 
   case 141:
-#line 865 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 940 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");	
@@ -3879,7 +3900,7 @@ yyreduce:
     break;
 
   case 142:
-#line 869 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 948 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-5].r.colNum)-strlength((yyvsp[-5].r.strVal))<<endl;
 									err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-5].r.colNum)-strlen((yyvsp[-5].r.strVal)),"repeated modifier ","");	
@@ -3890,7 +3911,7 @@ yyreduce:
     break;
 
   case 143:
-#line 873 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 955 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 															Streams::verbose()<<"var_declaration: STATIC access_modef FINAL ID ASSIGN expr\n";
 																	(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3902,7 +3923,7 @@ yyreduce:
     break;
 
   case 144:
-#line 879 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 963 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																Streams::verbose()<<"var_declaration: FINAL access_modef FINAL ID ASSIGN expr\n";
 																	(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic);
@@ -3914,7 +3935,7 @@ yyreduce:
     break;
 
   case 145:
-#line 885 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 971 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -3925,7 +3946,7 @@ yyreduce:
     break;
 
   case 146:
-#line 889 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 978 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-6].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -3936,7 +3957,7 @@ yyreduce:
     break;
 
   case 147:
-#line 893 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 985 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: UN Expected IDENTIFIER Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)-strlen((yyvsp[-1].r.strVal)),"UN Expected IDENTIFIER ","");
@@ -3947,7 +3968,7 @@ yyreduce:
     break;
 
   case 148:
-#line 897 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 992 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 							Streams::verbose()<<"Error: UN Expected IDENTIFIER at Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[0].r.colNum)-strlength((yyvsp[0].r.strVal))<<endl;
 							err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[0].r.colNum)-strlen((yyvsp[0].r.strVal)),"UN Expected IDENTIFIER ","");						
@@ -3955,67 +3976,67 @@ yyreduce:
     break;
 
   case 149:
-#line 903 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 998 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 150:
-#line 904 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 999 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 151:
-#line 905 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1000 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 152:
-#line 906 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1001 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 153:
-#line 907 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1002 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 154:
-#line 908 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1003 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 155:
-#line 909 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1004 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,false,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 156:
-#line 910 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1005 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,false,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 157:
-#line 911 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1006 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: STATIC access_modef FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 158:
-#line 912 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1007 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 159:
-#line 913 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1008 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 160:
-#line 914 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1009 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;;}
     break;
 
   case 161:
-#line 915 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1010 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
@@ -4023,7 +4044,7 @@ yyreduce:
     break;
 
   case 162:
-#line 919 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1014 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
@@ -4031,7 +4052,7 @@ yyreduce:
     break;
 
   case 163:
-#line 923 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1018 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -4039,7 +4060,7 @@ yyreduce:
     break;
 
   case 164:
-#line 927 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1022 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlen((yyvsp[-4].r.strVal)),"repeated modifier ","");
@@ -4047,7 +4068,7 @@ yyreduce:
     break;
 
   case 165:
-#line 931 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1026 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
@@ -4055,7 +4076,7 @@ yyreduce:
     break;
 
   case 166:
-#line 935 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1030 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 																		err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-3].r.colNum)-strlen((yyvsp[-3].r.strVal)),"repeated modifier ","");
@@ -4063,27 +4084,27 @@ yyreduce:
     break;
 
   case 167:
-#line 943 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, (yyvsp[-3].r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;;}
+#line 1038 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"method_h: ID OPEN_S SELF CLOSE_S  \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, (yyvsp[-3].r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;;}
     break;
 
   case 168:
-#line 944 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1039 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_h: ID OPEN_S ID CLOSE_S \n";parameters.push_back("self");testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, (yyvsp[-3].r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;;}
     break;
 
   case 169:
-#line 945 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1040 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_h: ID OPEN_S arguments CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, (yyvsp[-3].r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;;}
     break;
 
   case 170:
-#line 946 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1041 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"method_h: ID OPEN_S CLOSE_S \n";testfunction = p->createTypeFunctionHeader(t,ss,pp,ff, (yyvsp[-2].r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);pp=true;ff=false;ss=false;parameters.clear();linefunc=yylval.r.lineNum;colmfunc=yylval.r.colNum;;}
     break;
 
   case 171:
-#line 947 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1042 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)-1<<endl;
 										err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-1,"Expected IDENTIFIER ","");
@@ -4091,7 +4112,7 @@ yyreduce:
     break;
 
   case 172:
-#line 951 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1046 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)-1<<endl;
 										err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-1,"Expected IDENTIFIER ","");
@@ -4099,7 +4120,7 @@ yyreduce:
     break;
 
   case 173:
-#line 955 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1050 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)-1<<endl;
 										err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-1,"Expected IDENTIFIER ","");
@@ -4107,7 +4128,7 @@ yyreduce:
     break;
 
   case 174:
-#line 959 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1054 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-1<<endl;
 										err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-1,"Expected IDENTIFIER ","");
@@ -4115,7 +4136,7 @@ yyreduce:
     break;
 
   case 175:
-#line 963 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1058 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)+1<<endl;
 												err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)+1,"Expected '(' ","");
@@ -4123,7 +4144,7 @@ yyreduce:
     break;
 
   case 176:
-#line 967 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1062 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)+1<<endl;
 												err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)+1,"Expected '(' ","");
@@ -4131,7 +4152,7 @@ yyreduce:
     break;
 
   case 177:
-#line 971 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1066 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)+1<<endl;
 												err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)+1,"Expected '(' ","");
@@ -4139,7 +4160,7 @@ yyreduce:
     break;
 
   case 178:
-#line 975 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1070 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)+1<<endl;
 												err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)+1,"Expected '(' ","");
@@ -4147,7 +4168,7 @@ yyreduce:
     break;
 
   case 179:
-#line 979 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1074 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue((yyvsp[-3].r.lineNum),yylval.r.colNum-strlength(yylval.r.strVal),"Expected ')' ","");
@@ -4155,7 +4176,7 @@ yyreduce:
     break;
 
   case 180:
-#line 983 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1078 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 														err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected ')' ","");
@@ -4163,7 +4184,7 @@ yyreduce:
     break;
 
   case 181:
-#line 987 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1082 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 														err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected ')' ","");
@@ -4171,7 +4192,7 @@ yyreduce:
     break;
 
   case 182:
-#line 991 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1086 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 														err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected ')' ","");
@@ -4179,47 +4200,47 @@ yyreduce:
     break;
 
   case 183:
-#line 998 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list\n";;}
+#line 1093 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"args_list %prec stmt_11\n";;}
     break;
 
   case 184:
-#line 999 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list\n";;}
+#line 1094 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"arguments:	SELF COMMA args_list %prec stmt_11\n";parameters.push_back("self");;}
     break;
 
   case 185:
-#line 1000 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list\n";;}
+#line 1095 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"arguments:	SELF COMMA ID\n";parameters.push_back("self");parameters.push_back((yyvsp[0].r.strVal));;}
     break;
 
   case 186:
-#line 1001 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	default_args_list\n";;}
+#line 1096 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"arguments:	SELF COMMA default_args_list\n";parameters.push_back("self");;}
     break;
 
   case 187:
-#line 1002 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1097 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";;}
     break;
 
   case 188:
-#line 1003 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";;}
+#line 1098 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"arguments:	SELF COMMA args_list COMMA default_args_list\n";parameters.push_back("self");;}
     break;
 
   case 189:
-#line 1004 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";;}
+#line 1099 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"arguments:	SELF COMMA ID COMMA default_args_list\n";parameters.push_back("self");parameters.push_back((yyvsp[-2].r.strVal));;}
     break;
 
   case 190:
-#line 1006 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"args_list:	args_list COMMA arg\n";;}
+#line 1101 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"args_list: args_list COMMA arg\n";;}
     break;
 
   case 191:
-#line 1007 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1102 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: self should come at the first of the arguments list"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Error: self should come at the first of the arguments list","");
@@ -4227,7 +4248,7 @@ yyreduce:
     break;
 
   case 192:
-#line 1011 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1106 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: self should come at the first of the arguments list"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Error: self should come at the first of the arguments list","");
@@ -4235,27 +4256,27 @@ yyreduce:
     break;
 
   case 193:
-#line 1015 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1110 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"args_list: ID COMMA arg \n"; parameters.push_back((yyvsp[-2].r.strVal));;}
     break;
 
   case 194:
-#line 1016 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1111 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"args_list:	args_list COMMA ID \n"; parameters.push_back((yyvsp[0].r.strVal));;}
     break;
 
   case 195:
-#line 1017 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1112 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"args_list:	ID COMMA ID \n"; parameters.push_back((yyvsp[-2].r.strVal)); parameters.push_back((yyvsp[0].r.strVal));;}
     break;
 
   case 196:
-#line 1018 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1113 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"args_list: arg \n";;}
     break;
 
   case 197:
-#line 1021 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1116 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"arg:	STAR ID \n";std::string tempstr((yyvsp[0].r.strVal));
 						std::string erro("*" + tempstr);
@@ -4265,7 +4286,7 @@ yyreduce:
     break;
 
   case 198:
-#line 1027 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1122 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"arg:	STAR STAR ID \n";std::string tempstr((yyvsp[0].r.strVal));
 						std::string erro("**" + tempstr);
 						char *cstr = new char[erro.length() + 1];
@@ -4273,7 +4294,7 @@ yyreduce:
     break;
 
   case 199:
-#line 1031 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1126 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 							Streams::verbose()<<"Error: Un Expected '*' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 							err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))," Un Expected '*' ","");
@@ -4281,7 +4302,7 @@ yyreduce:
     break;
 
   case 200:
-#line 1035 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1130 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Un Expected '**' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))," Un Expected '**' ","");
@@ -4289,17 +4310,17 @@ yyreduce:
     break;
 
   case 201:
-#line 1042 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1137 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"default_args_list: default_args_list COMMA default_arg\n";;}
     break;
 
   case 202:
-#line 1043 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1138 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"default_args_list: default_arg \n";;}
     break;
 
   case 203:
-#line 1044 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1139 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: default argument not at end of parameter list at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"default argument not at end of parameter list","");					
@@ -4307,7 +4328,7 @@ yyreduce:
     break;
 
   case 204:
-#line 1048 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1143 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 														Streams::verbose()<<"Error: default argument not at end of parameter list at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 														err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum-strlength(yylval.r.strVal),"default argument not at end of parameter list","");					
@@ -4315,14 +4336,14 @@ yyreduce:
     break;
 
   case 205:
-#line 1054 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1149 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"default_arg:	ID ASSIGN expr \n";parameters.push_back((yyvsp[-2].r.strVal));;}
     break;
 
   case 206:
-#line 1055 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1150 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-										Streams::verbose()<<"arg:	STAR ID ASSIGN expr \n";std::string tempstr((yyvsp[-2].r.strVal));
+										Streams::verbose()<<"default_arg: STAR ID ASSIGN expr \n";std::string tempstr((yyvsp[-2].r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
@@ -4330,7 +4351,7 @@ yyreduce:
     break;
 
   case 207:
-#line 1061 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1156 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"default_arg:	STAR STAR ID ASSIGN expr \n";std::string tempstr((yyvsp[-2].r.strVal));
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
@@ -4338,7 +4359,7 @@ yyreduce:
     break;
 
   case 208:
-#line 1065 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1160 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: Un Expected '**' at Line No:"<<(yyvsp[-5].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))," Un Expected '**' ","");
@@ -4346,7 +4367,7 @@ yyreduce:
     break;
 
   case 209:
-#line 1069 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1164 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: Un Expected '*' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))<<endl;
 											err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal))," Un Expected '*' ","");
@@ -4354,17 +4375,17 @@ yyreduce:
     break;
 
   case 210:
-#line 1075 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"COLON  END \n";;}
+#line 1170 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"block_stmt: COLON  END \n";;}
     break;
 
   case 211:
-#line 1076 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1171 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"block_stmt: COLON stmt_list END \n";;}
     break;
 
   case 212:
-#line 1077 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1172 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"Error: Expected ':' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 						err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Expected ':' ","");			 
@@ -4372,7 +4393,7 @@ yyreduce:
     break;
 
   case 213:
-#line 1081 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1176 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"Error: Expected ':' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 						err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal)),"Expected ':' ","");			 
@@ -4380,7 +4401,7 @@ yyreduce:
     break;
 
   case 214:
-#line 1085 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1180 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"Error: Expected 'end' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 						err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected 'end' ","");			 
@@ -4388,7 +4409,7 @@ yyreduce:
     break;
 
   case 215:
-#line 1089 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1184 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 						Streams::verbose()<<"Error: Expected 'end' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<yylval.r.colNum<<endl;
 						err->errQ->enqueue((yyvsp[-2].r.lineNum),yylval.r.colNum,"Expected 'end' ","");			 
@@ -4396,52 +4417,52 @@ yyreduce:
     break;
 
   case 216:
-#line 1096 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1191 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt_list:	stmt_list stmt \n";;}
     break;
 
   case 217:
-#line 1097 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1192 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt_list:	stmt \n";;}
     break;
 
   case 218:
-#line 1100 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"stmt: 		if_stmt\n";;}
+#line 1195 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"stmt: if_stmt\n";;}
     break;
 
   case 219:
-#line 1101 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1196 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	while_stmt\n";;}
     break;
 
   case 220:
-#line 1102 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1197 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	for_stmt\n";;}
     break;
 
   case 221:
-#line 1103 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1198 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	try_stmt\n";;}
     break;
 
   case 222:
-#line 1104 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1199 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	with_stmt\n";;}
     break;
 
   case 223:
-#line 1105 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"stmt:	block_stmt\n";;}
+#line 1200 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"stmt:	block_stmt %prec stmt_4\n";;}
     break;
 
   case 224:
-#line 1106 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
-    {Streams::verbose()<<"stmt:	simple_stmt_list\n";;}
+#line 1201 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"stmt:	simple_stmt_list SEMICOLON\n";;}
     break;
 
   case 225:
-#line 1107 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1202 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected ';' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),yylval.r.colNum," Expected ';' ","");										
@@ -4449,7 +4470,18 @@ yyreduce:
     break;
 
   case 226:
-#line 1213 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1206 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {
+												Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		//cout<<"assignment list"<<endl;
+																		(yyval.var)=p->addVariableToCurrentScope((yyvsp[-1].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0,true);
+																		v=(yyval.var);
+																		acc_mod="";
+										;}
+    break;
+
+  case 227:
+#line 1213 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[-1].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
@@ -4460,8 +4492,8 @@ yyreduce:
 								;}
     break;
 
-  case 227:
-#line 1221 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 228:
+#line 1221 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 											Streams::verbose()<<"Error: illegal start of expression at Line No:"<<(yyvsp[-2].r.lineNum)<<endl;
 										err->errQ->enqueue((yyvsp[-2].r.lineNum),yylval.r.colNum,"Error: illegal start of expression ","");										
@@ -4473,10 +4505,10 @@ yyreduce:
 										;}
     break;
 
-  case 228:
-#line 1230 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 229:
+#line 1230 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-												Streams::verbose()<<"stmt:	ID SEMICOLON\n";
+												Streams::verbose()<<"stmt:FINAL	ID SEMICOLON\n";
 									(yyval.var)=p->addVariableToCurrentScope((yyvsp[-1].r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 																		v=(yyval.var);
 																		acc_mod="";
@@ -4485,125 +4517,125 @@ yyreduce:
 										;}
     break;
 
-  case 229:
-#line 1238 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 230:
+#line 1238 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	ID DOT ID SEMICOLON\n";;}
     break;
 
-  case 230:
-#line 1239 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 231:
+#line 1239 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	ID COMMA ID DOT ID DOT ID SEMICOLON\n";;}
     break;
 
-  case 231:
-#line 1240 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 232:
+#line 1240 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"stmt:	ID DOT ID COMMA ID DOT ID DOT ID SEMICOLON\n";;}
     break;
 
-  case 232:
-#line 1243 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"if_stmt:	if_header stmt\n";;}
-    break;
-
   case 233:
-#line 1244 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"if_stmt:	if_header stmt ELSE stmt\n";;}
+#line 1243 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"if_stmt:	if_header stmt %prec stmt_3\n";;}
     break;
 
   case 234:
-#line 1245 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1244 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"if_stmt:	if_header stmt ELSE stmt\n";;}
+    break;
+
+  case 235:
+#line 1245 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected 'else' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 										err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))," Expected 'else' ","");										
 									;}
     break;
 
-  case 235:
-#line 1249 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 236:
+#line 1249 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"if_stmt:	if_header stmt elif_stmt\n";;}
     break;
 
-  case 236:
-#line 1250 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 237:
+#line 1250 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"if_stmt:	if_header stmt elif_stmt ELSE stmt\n";;}
     break;
 
-  case 237:
-#line 1253 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 238:
+#line 1253 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"elif_stmt: 	elif_header stmt elif_stmt\n";;}
     break;
 
-  case 238:
-#line 1254 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 239:
+#line 1254 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"elif_stmt:	elif_header stmt\n";;}
     break;
 
-  case 239:
-#line 1255 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 240:
+#line 1255 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected statement at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),yylval.r.colNum," Expected statement ","");										
 											;}
     break;
 
-  case 240:
-#line 1261 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 241:
+#line 1261 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"if_header:	IF expr \n";;}
     break;
 
-  case 241:
-#line 1264 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 242:
+#line 1264 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"elif_header:	ELIF expr \n";;}
     break;
 
-  case 242:
-#line 1265 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 243:
+#line 1265 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     { 
 						Streams::verbose()<<"Error: Expected reserved word at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 						err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal)),"Expected reserved word 'while' ","");
 					 ;}
     break;
 
-  case 243:
-#line 1271 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 244:
+#line 1271 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"while_stmt: while_header stmt\n";;}
     break;
 
-  case 244:
-#line 1276 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 245:
+#line 1276 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"while_header: WHILE expr \n";;}
     break;
 
-  case 245:
-#line 1277 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 246:
+#line 1277 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     { 
 						Streams::verbose()<<"Error: Expected reserved word at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 						err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal)),"Expected reserved word 'while' ","");
 				;}
     break;
 
-  case 246:
-#line 1283 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 247:
+#line 1283 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"for_stmt: 	for_header stmt\n";;}
     break;
 
-  case 247:
-#line 1286 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 248:
+#line 1286 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"for_header: FOR target_list IN expr_list \n";;}
     break;
 
-  case 248:
-#line 1287 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 249:
+#line 1287 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"for_header: FOR target_list IN list_display \n";;}
     break;
 
-  case 249:
-#line 1288 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 250:
+#line 1288 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"for_header:	FOR ID COMMA ID IN expr_list \n";;}
     break;
 
-  case 250:
-#line 1289 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 251:
+#line 1289 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"for_header:	FOR ID COMMA ID IN list_display \n";
 												(yyval.var)=p->checkVariable((yyvsp[-4].r.strVal),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
@@ -4612,8 +4644,8 @@ yyreduce:
 												;}
     break;
 
-  case 251:
-#line 1295 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 252:
+#line 1295 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"for_header:	FOR ID IN expr_list \n";
 									(yyval.var)=p->checkVariable((yyvsp[-2].r.strVal),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
 																	v=(yyval.var);
@@ -4621,8 +4653,8 @@ yyreduce:
 									;}
     break;
 
-  case 252:
-#line 1300 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 253:
+#line 1300 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										(yyval.var)=p->checkVariable((yyvsp[-2].r.strVal),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
 																	v=(yyval.var);
@@ -4630,16 +4662,8 @@ yyreduce:
 										Streams::verbose()<<"for_header:	FOR ID IN list_display \n";;}
     break;
 
-  case 253:
-#line 1305 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {
-								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
-								err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'for' ","");
-								;}
-    break;
-
   case 254:
-#line 1309 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1305 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'for' ","");
@@ -4647,7 +4671,7 @@ yyreduce:
     break;
 
   case 255:
-#line 1313 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1309 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'for' ","");
@@ -4655,7 +4679,7 @@ yyreduce:
     break;
 
   case 256:
-#line 1317 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1313 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'for' ","");
@@ -4663,258 +4687,266 @@ yyreduce:
     break;
 
   case 257:
-#line 1321 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1317 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
-								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal)),"Expected reserved word 'in' ","");
+								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
+								err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'for' ","");
 								;}
     break;
 
   case 258:
-#line 1325 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {
-								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
-								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Expected reserved word 'in' ","");
-								;}
-    break;
-
-  case 259:
-#line 1329 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1321 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal)),"Expected reserved word 'in' ","");
 								;}
     break;
 
-  case 260:
-#line 1333 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 259:
+#line 1325 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Expected reserved word 'in' ","");
 								;}
     break;
 
+  case 260:
+#line 1329 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {
+								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
+								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-3].r.colNum)-strlength((yyvsp[-3].r.strVal)),"Expected reserved word 'in' ","");
+								;}
+    break;
+
   case 261:
-#line 1340 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list:	import_list COMMA import\n";;}
+#line 1333 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {
+								Streams::verbose()<<"Error: Expected reserved word 'in' at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal))<<endl;
+								err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)-strlength((yyvsp[-1].r.strVal)),"Expected reserved word 'in' ","");
+								;}
     break;
 
   case 262:
-#line 1341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID COMMA import_list \n";;}
+#line 1340 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list:	import_list COMMA import\n";;}
     break;
 
   case 263:
-#line 1342 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID COMMA ID \n";;}
+#line 1341 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID COMMA import_list \n";;}
     break;
 
   case 264:
-#line 1343 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID COMMA ID DOT ID \n";;}
+#line 1342 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID COMMA ID \n";;}
     break;
 
   case 265:
-#line 1344 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID DOT ID COMMA import_list \n";;}
+#line 1343 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID COMMA ID DOT ID \n";;}
     break;
 
   case 266:
-#line 1345 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID DOT ID COMMA ID \n";;}
+#line 1344 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID DOT ID COMMA import_list \n";;}
     break;
 
   case 267:
-#line 1346 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list: ID DOT ID COMMA ID DOT ID \n";;}
+#line 1345 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID DOT ID COMMA ID \n";;}
     break;
 
   case 268:
-#line 1347 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import_list:	import\n";;}
+#line 1346 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list: ID DOT ID COMMA ID DOT ID \n";;}
     break;
 
   case 269:
-#line 1351 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import: import DOT ID\n";;}
+#line 1347 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import_list:	import\n";;}
     break;
 
   case 270:
-#line 1352 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"import:	ID DOT ID DOT ID;";}
+#line 1351 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import: import DOT ID\n";;}
     break;
 
   case 271:
-#line 1356 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	target_list COMMA target\n";;}
+#line 1352 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"import:	ID DOT ID DOT ID;";}
     break;
 
   case 272:
-#line 1357 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	ID COMMA ID COMMA target\n";;}
+#line 1356 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	target_list COMMA target\n";;}
     break;
 
   case 273:
-#line 1358 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	target_list COMMA ID\n";;}
+#line 1357 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	ID COMMA ID COMMA target\n";;}
     break;
 
   case 274:
-#line 1359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	ID COMMA ID COMMA ID\n";;}
+#line 1358 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	target_list COMMA ID\n";;}
     break;
 
   case 275:
-#line 1360 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	ID COMMA target\n";;}
+#line 1359 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	ID COMMA ID COMMA ID\n";;}
     break;
 
   case 276:
-#line 1361 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"target_list:	target\n";;}
+#line 1360 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	ID COMMA target\n";;}
     break;
 
   case 277:
-#line 1364 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"try_stmt: 	TRY  stmt except_stmt\n";;}
+#line 1361 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"target_list:	target\n";;}
     break;
 
   case 278:
-#line 1365 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"try_stmt: 	TRY  stmt finally_stmt\n";;}
+#line 1364 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"try_stmt: TRY  stmt COLON except_stmt END\n";;}
     break;
 
   case 279:
-#line 1368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"finally_stmt: 	FINALLY COLON block_stmt\n";;}
+#line 1365 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"try_stmt: TRY  stmt COLON finally_stmt END\n";;}
     break;
 
   case 280:
-#line 1371 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"except_stmt:	EXCEPT  stmt\n";;}
+#line 1368 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"finally_stmt: 	FINALLY COLON block_stmt\n";;}
     break;
 
   case 281:
-#line 1372 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"except_stmt:	EXCEPT  expr stmt\n";;}
+#line 1371 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"except_stmt:	EXCEPT  stmt\n";;}
     break;
 
   case 282:
-#line 1375 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"with_stmt:	WITH expr \n";;}
+#line 1372 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"except_stmt:	EXCEPT  expr stmt\n";;}
     break;
 
   case 283:
-#line 1376 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"with_stmt:	WITH expr AS target \n";;}
+#line 1375 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"with_stmt:	WITH expr \n";;}
     break;
 
   case 284:
-#line 1379 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	expr_list\n";;}
+#line 1376 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"with_stmt:	WITH expr AS target \n";;}
     break;
 
   case 285:
-#line 1380 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	assert_stmt\n";;}
+#line 1379 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	expr_list\n";;}
     break;
 
   case 286:
-#line 1381 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	assignment_stmt\n";;}
+#line 1380 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	assert_stmt\n";;}
     break;
 
   case 287:
-#line 1383 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	PASS\n";;}
+#line 1381 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	assignment_stmt\n";;}
     break;
 
   case 288:
-#line 1384 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	del_stmt\n";;}
+#line 1383 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	PASS\n";;}
     break;
 
   case 289:
-#line 1385 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	print_stmt\n";;}
+#line 1384 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	del_stmt\n";;}
     break;
 
   case 290:
-#line 1386 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	return_stmt\n";;}
+#line 1385 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	print_stmt\n";;}
     break;
 
   case 291:
-#line 1387 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	yield_stmt\n";;}
+#line 1386 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	return_stmt\n";;}
     break;
 
   case 292:
-#line 1388 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	raise_stmt\n";;}
+#line 1387 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	yield_stmt\n";;}
     break;
 
   case 293:
-#line 1389 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	BREAK\n";;}
+#line 1388 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	raise_stmt\n";;}
     break;
 
   case 294:
-#line 1390 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	CONTINUE\n";;}
+#line 1389 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	BREAK\n";;}
     break;
 
   case 295:
-#line 1391 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	import_list\n";;}
+#line 1390 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	CONTINUE\n";;}
     break;
 
   case 296:
-#line 1392 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"simple_stmt_list: 	global_stmt\n";;}
+#line 1391 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	import_list\n";;}
     break;
 
   case 297:
-#line 1395 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assert_stmt: 	ASSERT expr\n";;}
+#line 1392 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"simple_stmt_list: 	global_stmt\n";;}
     break;
 
   case 298:
-#line 1396 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assert_stmt:	ASSERT expr COMMA expr\n";;}
+#line 1395 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assert_stmt: 	ASSERT expr\n";;}
     break;
 
   case 299:
-#line 1398 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1396 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assert_stmt:	ASSERT expr COMMA expr\n";;}
+    break;
+
+  case 300:
+#line 1398 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"left_assignment_side : expr_list\n";
 
 									;}
     break;
 
-  case 300:
-#line 1402 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 301:
+#line 1402 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"left_assignment_side : parenth_form\n";;}
     break;
 
-  case 301:
-#line 1403 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 302:
+#line 1403 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"left_assignment_side : list_display\n";is_list=true;;}
     break;
 
-  case 302:
-#line 1404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 303:
+#line 1404 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"left_assignment_side : dict_display\n";is_dic=true;;}
     break;
 
-  case 303:
-#line 1407 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assignment_stmt:	target_list ASSIGN expr_list\n";;}
+  case 304:
+#line 1407 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assignment_stmt:	target_list ASSIGN left_assignment_side\n";;}
     break;
 
-  case 304:
-#line 1408 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assignment_stmt:	id_dot ASSIGN expr_list\n";
+  case 305:
+#line 1408 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assignment_stmt:	id_dot ASSIGN left_assignment_side\n";
 																	(yyval.var)=p->checkVariable(const_cast<char *>(temp_id1.top().c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
 																	v=(yyval.var);
 																	temp_id1.pop();
@@ -4923,25 +4955,25 @@ yyreduce:
 																;}
     break;
 
-  case 305:
-#line 1415 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";;}
-    break;
-
   case 306:
-#line 1416 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN expr_list\n";;}
+#line 1415 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side\n";;}
     break;
 
   case 307:
-#line 1417 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN expr_list\n";;}
+#line 1416 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assignment_stmt:	id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side\n";;}
     break;
 
   case 308:
-#line 1418 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1417 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"assignment_stmt:	ID COMMA ID ASSIGN left_assignment_side\n";;}
+    break;
+
+  case 309:
+#line 1418 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-																		Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		Streams::verbose()<<"assignment_stmt: SELF DOT ID ASSIGN left_assignment_side\n";
 																		//cout<<"assignment list"<<endl;
 																		(yyval.var)=p->addVariableToCurrentScope((yyvsp[-2].r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,is_list,is_dic,true);
 																		v=(yyval.var);
@@ -4952,475 +4984,475 @@ yyreduce:
 																	;}
     break;
 
-  case 309:
-#line 1433 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 310:
+#line 1433 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"del_stmt:	DEL target_list\n";;}
     break;
 
-  case 310:
-#line 1434 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 311:
+#line 1434 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"del_stmt:	DEL ID COMMA ID\n";;}
     break;
 
-  case 311:
-#line 1435 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 312:
+#line 1435 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"del_stmt:	DEL ID\n";;}
     break;
 
-  case 312:
-#line 1436 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 313:
+#line 1436 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"del_stmt:	DEL ID	OPEN_D expr CLOSE_D\n";;}
     break;
 
-  case 313:
-#line 1437 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"del_stmt:	DEL ID OPEN_D COLON CLOSE_D\n";;}
-    break;
-
   case 314:
-#line 1438 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"del_stmt:	DEL ID OPEN_D expr COLON expr CLOSE_D\n";;}
+#line 1437 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"del_stmt:	DEL ID	OPEN_D expr COLON expr CLOSE_D\n";;}
     break;
 
   case 315:
-#line 1439 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"del_stmt:	DEL target_list	OPEN_D expr CLOSE_D\n";;}
+#line 1438 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"del_stmt:	DEL ID	OPEN_D COLON CLOSE_D\n";;}
     break;
 
   case 316:
-#line 1440 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"del_stmt:	DEL target_list OPEN_D expr COLON expr CLOSE_D\n";;}
+#line 1439 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"del_stmt:	DEL target_list	OPEN_D expr CLOSE_D\n";;}
     break;
 
   case 317:
-#line 1441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"del_stmt:	DEL target_list OPEN_D COLON CLOSE_D\n";;}
+#line 1440 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"del_stmt:	DEL target_list OPEN_D expr COLON expr CLOSE_D\n";;}
     break;
 
   case 318:
-#line 1444 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"return_stmt:	RETURN\n";;}
+#line 1441 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"del_stmt:	DEL target_list OPEN_D COLON CLOSE_D\n";;}
     break;
 
   case 319:
-#line 1445 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"return_stmt:	RETURN expr_list\n";;}
+#line 1444 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"return_stmt:	RETURN\n";;}
     break;
 
   case 320:
-#line 1448 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"yield_stmt:		yield_expression\n";;}
+#line 1445 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"return_stmt:	RETURN expr_list\n";;}
     break;
 
   case 321:
-#line 1451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"print_stmt: PRINT expr_list\n";;}
+#line 1448 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"yield_stmt:		yield_expression\n";;}
     break;
 
   case 322:
-#line 1452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1451 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"print_stmt: PRINT expr_list\n";;}
     break;
 
   case 323:
-#line 1453 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
-    {Streams::verbose()<<"print_stmt:	PRINT MORE_THAN MORE_THAN expr_list\n";;}
+#line 1452 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"print_stmt: PRINT target_list\n";;}
     break;
 
   case 324:
-#line 1454 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+#line 1453 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
+    {Streams::verbose()<<"print_stmt:	PRINT MORE_THAN MORE_THAN expr_list\n";;}
+    break;
+
+  case 325:
+#line 1454 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 								Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 								err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal)),"Expected reserved word 'print' ","");
 								;}
     break;
 
-  case 325:
-#line 1458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 326:
+#line 1458 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 												Streams::verbose()<<"Error: Expected reserved word 'for' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 												err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'print' ","");
 												;}
     break;
 
-  case 326:
-#line 1463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 327:
+#line 1463 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"global_stmt :GLOBAL id_list\n";;}
     break;
 
-  case 327:
-#line 1464 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 328:
+#line 1464 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected IDENTIFIER at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+(yyvsp[-1].r.strVal)<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected IDENTIFIER ","");
 									   ;}
     break;
 
-  case 328:
-#line 1470 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 329:
+#line 1470 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_list: 	ID COMMA id_list\n";;}
     break;
 
-  case 329:
-#line 1471 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 330:
+#line 1471 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_list:	ID\n";;}
     break;
 
-  case 330:
-#line 1474 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 331:
+#line 1474 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"raise_stmt: RAISE\n";;}
     break;
 
-  case 331:
-#line 1475 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 332:
+#line 1475 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"raise_stmt:	RAISE expr\n";;}
     break;
 
-  case 332:
-#line 1476 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 333:
+#line 1476 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"raise_stmt:	RAISE expr COMMA expr\n";;}
     break;
 
-  case 333:
-#line 1477 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 334:
+#line 1477 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 													Streams::verbose()<<"Error: Expected expression at Line No:"<<(yyvsp[-3].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 													err->errQ->enqueue((yyvsp[-3].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected expression ","");
 												 ;}
     break;
 
-  case 334:
-#line 1481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 335:
+#line 1481 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 													Streams::verbose()<<"Error: Expected reserved word 'raise' at Line No:"<<(yyvsp[-4].r.lineNum)<<" Column No:"<<(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal))<<endl;
 													err->errQ->enqueue((yyvsp[-4].r.lineNum),(yyvsp[-4].r.colNum)-strlength((yyvsp[-4].r.strVal)),"Expected reserved word 'raise' ","");
 												 ;}
     break;
 
-  case 335:
-#line 1487 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 336:
+#line 1487 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;;}
     break;
 
-  case 336:
-#line 1488 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 337:
+#line 1488 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
     break;
 
-  case 337:
-#line 1489 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 338:
+#line 1489 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";;}
     break;
 
-  case 338:
-#line 1494 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 339:
+#line 1494 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_S target_list CLOSE_S \n";;}
     break;
 
-  case 339:
-#line 1495 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 340:
+#line 1495 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_S ID COMMA ID CLOSE_S\n";;}
     break;
 
-  case 340:
-#line 1496 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 341:
+#line 1496 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_S ID CLOSE_S\n";;}
     break;
 
-  case 341:
-#line 1497 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 342:
+#line 1497 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_D target_list CLOSE_D\n";;}
     break;
 
-  case 342:
-#line 1498 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 343:
+#line 1498 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_D ID COMMA ID CLOSE_D\n";;}
     break;
 
-  case 343:
-#line 1499 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 344:
+#line 1499 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	OPEN_D ID CLOSE_D\n";;}
     break;
 
-  case 344:
-#line 1500 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 345:
+#line 1500 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	attributeref\n";;}
     break;
 
-  case 345:
-#line 1501 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 346:
+#line 1501 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"target: 	subscription\n";;}
     break;
 
-  case 346:
-#line 1504 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 347:
+#line 1504 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"attributeref: primary DOT ID\n";;}
     break;
 
-  case 347:
-#line 1505 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 348:
+#line 1505 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"attributeref: ID DOT ID\n";;}
     break;
 
-  case 348:
-#line 1509 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 349:
+#line 1509 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"primary: 	atom\n";;}
     break;
 
-  case 349:
-#line 1510 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 350:
+#line 1510 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"primary:	attributeref\n";;}
     break;
 
-  case 350:
-#line 1511 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 351:
+#line 1511 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"primary:	subscription\n";;}
     break;
 
-  case 351:
-#line 1512 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 352:
+#line 1512 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"primary:	call\n";;}
     break;
 
-  case 352:
-#line 1515 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 353:
+#line 1515 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"atom:	enclosure\n";;}
     break;
 
-  case 353:
-#line 1516 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 354:
+#line 1516 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"atom:	literal\n";	;}
     break;
 
-  case 354:
-#line 1519 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 355:
+#line 1519 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"literal:    STRING_VALUE\n";;}
     break;
 
-  case 355:
-#line 1520 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 356:
+#line 1520 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"literal:	INTEGER_VALUE\n";;}
     break;
 
-  case 356:
-#line 1521 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 357:
+#line 1521 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"literal:	LONG_VALUE\n";;}
     break;
 
-  case 357:
-#line 1522 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 358:
+#line 1522 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"literal:	FLOAT_VALUE\n";;}
     break;
 
-  case 358:
-#line 1523 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 359:
+#line 1523 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"literal:	CHAR_VALUE\n";;}
     break;
 
-  case 359:
-#line 1526 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 360:
+#line 1526 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"enclosure:	parenth_form\n";;}
     break;
 
-  case 360:
-#line 1527 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 361:
+#line 1527 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"enclosure:	list_display\n";;}
     break;
 
-  case 361:
-#line 1528 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 362:
+#line 1528 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"enclosure:	string_conversion\n";;}
     break;
 
-  case 362:
-#line 1529 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 363:
+#line 1529 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"enclosure:	yield_atom\n";;}
     break;
 
-  case 363:
-#line 1530 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 364:
+#line 1530 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"enclosure:	dict_display\n";;}
     break;
 
-  case 364:
-#line 1533 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 365:
+#line 1533 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dict_display: OPEN_C CLOSE_C \n";;}
     break;
 
-  case 365:
-#line 1534 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 366:
+#line 1534 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"dict_display: OPEN_C key_datum_list CLOSE_C \n";;}
     break;
 
-  case 366:
-#line 1536 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 367:
+#line 1536 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"key_datum_list: key_datum_list COMMA key_datum \n";;}
     break;
 
-  case 367:
-#line 1537 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 368:
+#line 1537 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"key_datum_list: key_datum_list COMMA\n";;}
     break;
 
-  case 368:
-#line 1538 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 369:
+#line 1538 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"key_datum_list: key_datum\n";;}
     break;
 
-  case 369:
-#line 1540 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 370:
+#line 1540 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"key_datum : expr COLON expr\n";;}
     break;
 
-  case 370:
-#line 1543 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 371:
+#line 1543 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"parenth_form : 	OPEN_S expr_list CLOSE_S\n";;}
     break;
 
-  case 371:
-#line 1544 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 372:
+#line 1544 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"parenth_form : 	OPEN_S  CLOSE_S\n";;}
     break;
 
-  case 372:
-#line 1545 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 373:
+#line 1545 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)-1<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)-1,"Expected '(' ","");
 								;}
     break;
 
-  case 373:
-#line 1549 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 374:
+#line 1549 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 										Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-1].r.lineNum)<<" Column No:"<<(yyvsp[-1].r.colNum)+1<<endl;
 										err->errQ->enqueue((yyvsp[-1].r.lineNum),(yyvsp[-1].r.colNum)+1,"Expected ')' ","");
 										;}
     break;
 
-  case 374:
-#line 1553 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 375:
+#line 1553 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 													Streams::verbose()<<"Error: Expected '(' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))<<endl;
 													err->errQ->enqueue((yyvsp[-2].r.lineNum),(yyvsp[-2].r.colNum)-strlength((yyvsp[-2].r.strVal))," Expected '(' ","");
 												 ;}
     break;
 
-  case 375:
-#line 1557 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 376:
+#line 1557 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 													Streams::verbose()<<"Error: Expected ')' at Line No:"<<(yyvsp[-2].r.lineNum)<<" Column No:"<<yylval.r.colNum-strlength(yylval.r.strVal)<<endl;
 													err->errQ->enqueue((yyvsp[-2].r.lineNum),yylval.r.colNum-strlength(yylval.r.strVal)," Expected ')' ","");
 												 ;}
     break;
 
-  case 376:
-#line 1564 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 377:
+#line 1564 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"list_display:	OPEN_D  expr_list CLOSE_D\n";;}
     break;
 
-  case 377:
-#line 1565 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 378:
+#line 1565 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"list_display:	OPEN_D CLOSE_D\n";;}
     break;
 
-  case 378:
-#line 1568 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 379:
+#line 1568 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"string_conversion:	RE_COT expr_list RE_COT\n";;}
     break;
 
-  case 379:
-#line 1571 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 380:
+#line 1571 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"yield_atom:		OPEN_S yield_expression CLOSE_S\n";;}
     break;
 
-  case 380:
-#line 1574 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 381:
+#line 1574 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"yield_expression:	YIELD\n";;}
     break;
 
-  case 381:
-#line 1575 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 382:
+#line 1575 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"yield_expression:	YIELD expr_list\n";;}
     break;
 
-  case 382:
-#line 1578 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 383:
+#line 1578 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"subscription:	PRIMARY OPEN_D expr_list CLOSE_D\n";;}
     break;
 
-  case 383:
-#line 1582 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 384:
+#line 1582 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"call:	PRIMARY OPEN_D args_list CLOSE_D\n";;}
     break;
 
-  case 384:
-#line 1583 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 385:
+#line 1583 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"call:	PRIMARY OPEN_D ID CLOSE_D\n";;}
     break;
 
-  case 385:
-#line 1587 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 386:
+#line 1587 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"expr:	condition\n";;}
     break;
 
-  case 386:
-#line 1588 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 387:
+#line 1588 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"expr:	literal\n";;}
     break;
 
-  case 387:
-#line 1589 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 388:
+#line 1589 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"expr:	expr op expr\n";;}
     break;
 
-  case 388:
-#line 1601 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 389:
+#line 1601 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
 									Streams::verbose()<<"expr:	long_id\n";
 									
 									;}
     break;
 
-  case 389:
-#line 1612 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 390:
+#line 1612 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr EQUAL expr\n";;}
     break;
 
-  case 390:
-#line 1613 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 391:
+#line 1613 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr NOT_EQUAL expr\n";;}
     break;
 
-  case 391:
-#line 1614 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 392:
+#line 1614 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr LESS_THAN expr\n";;}
     break;
 
-  case 392:
-#line 1615 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 393:
+#line 1615 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr LESS_OR_EQUAL expr\n";;}
     break;
 
-  case 393:
-#line 1616 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 394:
+#line 1616 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr MORE_THAN expr\n";;}
     break;
 
-  case 394:
-#line 1617 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 395:
+#line 1617 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"condition: expr MORE_OR_EQUAL expr\n";;}
     break;
 
-  case 395:
-#line 1619 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 396:
+#line 1619 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_dot:	ID\n";
 								temp_id1.push((yyvsp[0].r.strVal));
 							;}
     break;
 
-  case 396:
-#line 1622 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 397:
+#line 1622 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"id_dot:	id_dot DOT ID\n";
 							temp_id=temp_id1.top();
 							temp_id=temp_id+"."+(yyvsp[0].r.strVal);
@@ -5429,8 +5461,8 @@ yyreduce:
 						;}
     break;
 
-  case 397:
-#line 1636 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 398:
+#line 1636 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot\n";
 										(yyval.var)=p->checkVariable(const_cast<char *>(temp_id1.top().c_str()),t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
 										v=(yyval.var);
@@ -5438,77 +5470,77 @@ yyreduce:
 								;}
     break;
 
-  case 398:
-#line 1641 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 399:
+#line 1641 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-										Streams::verbose()<<"expr:	self.id()\n";
+										Streams::verbose()<<"long_id:	SELF DOT ID parenth_form\n";
 										p->insert_func_Call(t,(yyvsp[-1].r.strVal),yylval.r.lineNum, yylval.r.colNum);
 										//cout<<"hhhhhhhhh"<<endl;
 									;}
     break;
 
-  case 399:
-#line 1646 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 400:
+#line 1646 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot parenth_form\n";temp_id1.pop();;}
     break;
 
-  case 400:
-#line 1647 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 401:
+#line 1647 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr CLOSE_D\n";;}
     break;
 
-  case 401:
-#line 1648 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 402:
+#line 1648 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D expr COLON expr CLOSE_D\n";;}
     break;
 
-  case 402:
-#line 1649 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 403:
+#line 1649 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"long_id:	id_dot OPEN_D COLON CLOSE_D\n";;}
     break;
 
-  case 403:
-#line 1650 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 404:
+#line 1650 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {
-									Streams::verbose()<<"expr:	self.id\n";
+									Streams::verbose()<<"long_id:	SELF DOT ID\n";
 									(yyval.var)=p->checkVariable((yyvsp[0].r.strVal),t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic,true);
 																		v=(yyval.var);
 																		acc_mod="";
 									;}
     break;
 
-  case 404:
-#line 1658 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 405:
+#line 1658 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :PLUS\n";;}
     break;
 
-  case 405:
-#line 1659 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 406:
+#line 1659 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :MINUS\n";;}
     break;
 
-  case 406:
-#line 1660 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 407:
+#line 1660 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :DIV\n";;}
     break;
 
-  case 407:
-#line 1661 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 408:
+#line 1661 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :MOD\n";;}
     break;
 
-  case 408:
-#line 1662 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 409:
+#line 1662 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :OR\n";;}
     break;
 
-  case 409:
-#line 1663 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 410:
+#line 1663 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :NOT\n";;}
     break;
 
-  case 410:
-#line 1664 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yacc.y"
+  case 411:
+#line 1664 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
     {Streams::verbose()<<"op :AND\n";;}
     break;
 
@@ -5785,7 +5817,7 @@ yyreturn:
 }
 
 
-#line 1536 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 1666 "C:\\Users\\Administrator.Sultan-PC\\Documents\\GitHub\\compiler-project\\yacc.y"
 
 void yyerror(const char *s) 
 {
