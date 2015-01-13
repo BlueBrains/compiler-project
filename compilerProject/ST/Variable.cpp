@@ -106,6 +106,14 @@ bool  Variable::get_isdic()
 {
 	return this->is_dic;
 }
+void  Variable::set_isarray(bool is_array)
+{
+	this->is_array=is_array;
+}
+void  Variable::set_isdic(bool is_dic)
+{
+	 this->is_dic=is_dic;
+}
 
 void Variable::setType(Type * type){
 	this->type = type;

@@ -364,7 +364,7 @@ Grammar
   304                | id_dot OPEN_D expr_list CLOSE_D ASSIGN left_assignment_side
   305                | id_dot OPEN_D CLOSE_D ASSIGN left_assignment_side
   306                | ID COMMA ID ASSIGN left_assignment_side
-  307                | SELF DOT id_dot ASSIGN left_assignment_side
+  307                | SELF DOT ID ASSIGN left_assignment_side
 
   308 del_stmt: DEL target_list
   309         | DEL ID COMMA ID
@@ -482,12 +482,12 @@ Grammar
   395       | id_dot DOT ID
 
   396 long_id: id_dot
-  397        | SELF DOT id_dot parenth_form
+  397        | SELF DOT ID parenth_form
   398        | id_dot parenth_form
   399        | id_dot OPEN_D expr CLOSE_D
   400        | id_dot OPEN_D expr COLON expr CLOSE_D
   401        | id_dot OPEN_D COLON CLOSE_D
-  402        | SELF DOT id_dot
+  402        | SELF DOT ID
 
   403 op: PLUS
   404   | MINUS
@@ -523,8 +523,8 @@ ID (261) 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
     177 178 179 180 181 184 188 191 192 193 194 196 197 198 199 203
     204 205 206 207 208 225 226 227 228 229 230 241 244 248 249 250
     251 252 253 254 255 256 257 261 262 263 264 265 266 268 269 271
-    272 273 274 306 309 310 311 312 313 323 324 327 328 333 338 339
-    341 342 345 346 383 394 395
+    272 273 274 306 307 309 310 311 312 313 323 324 327 328 333 338
+    339 341 342 345 346 383 394 395 397 402
 COLON (262) 89 90 93 94 209 210 213 214 276 277 312 313 315 316 368
     400 401
 CLOSE_S (263) 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49
@@ -799,8 +799,7 @@ expr (154)
 condition (155)
     on left: 388 389 390 391 392 393, on right: 384
 id_dot (156)
-    on left: 394 395, on right: 303 304 305 307 395 396 397 398 399
-    400 401 402
+    on left: 394 395, on right: 303 304 305 395 396 398 399 400 401
 long_id (157)
     on left: 396 397 398 399 400 401 402, on right: 387
 op (158)
@@ -3153,8 +3152,8 @@ state 172
 
 state 173
 
-  397 long_id: SELF . DOT id_dot parenth_form
-  402        | SELF . DOT id_dot
+  397 long_id: SELF . DOT ID parenth_form
+  402        | SELF . DOT ID
 
     DOT  shift, and go to state 331
 
@@ -4331,9 +4330,9 @@ state 231
 
 state 232
 
-  307 assignment_stmt: SELF . DOT id_dot ASSIGN left_assignment_side
-  397 long_id: SELF . DOT id_dot parenth_form
-  402        | SELF . DOT id_dot
+  307 assignment_stmt: SELF . DOT ID ASSIGN left_assignment_side
+  397 long_id: SELF . DOT ID parenth_form
+  402        | SELF . DOT ID
 
     DOT  shift, and go to state 421
 
@@ -5811,12 +5810,10 @@ state 330
 
 state 331
 
-  397 long_id: SELF DOT . id_dot parenth_form
-  402        | SELF DOT . id_dot
+  397 long_id: SELF DOT . ID parenth_form
+  402        | SELF DOT . ID
 
-    ID  shift, and go to state 172
-
-    id_dot  go to state 501
+    ID  shift, and go to state 501
 
 
 state 332
@@ -7168,13 +7165,11 @@ state 420
 
 state 421
 
-  307 assignment_stmt: SELF DOT . id_dot ASSIGN left_assignment_side
-  397 long_id: SELF DOT . id_dot parenth_form
-  402        | SELF DOT . id_dot
+  307 assignment_stmt: SELF DOT . ID ASSIGN left_assignment_side
+  397 long_id: SELF DOT . ID parenth_form
+  402        | SELF DOT . ID
 
-    ID  shift, and go to state 172
-
-    id_dot  go to state 577
+    ID  shift, and go to state 577
 
 
 state 422
@@ -8153,12 +8148,10 @@ state 500
 
 state 501
 
-  395 id_dot: id_dot . DOT ID
-  397 long_id: SELF DOT id_dot . parenth_form
-  402        | SELF DOT id_dot .
+  397 long_id: SELF DOT ID . parenth_form
+  402        | SELF DOT ID .
 
     error   shift, and go to state 346
-    DOT     shift, and go to state 347
     OPEN_S  shift, and go to state 349
 
     ID             reduce using rule 402 (long_id)
@@ -9514,13 +9507,11 @@ state 576
 
 state 577
 
-  307 assignment_stmt: SELF DOT id_dot . ASSIGN left_assignment_side
-  395 id_dot: id_dot . DOT ID
-  397 long_id: SELF DOT id_dot . parenth_form
-  402        | SELF DOT id_dot .
+  307 assignment_stmt: SELF DOT ID . ASSIGN left_assignment_side
+  397 long_id: SELF DOT ID . parenth_form
+  402        | SELF DOT ID .
 
     error   shift, and go to state 346
-    DOT     shift, and go to state 347
     ASSIGN  shift, and go to state 709
     OPEN_S  shift, and go to state 349
 
@@ -10562,7 +10553,7 @@ state 646
 
 state 647
 
-  397 long_id: SELF DOT id_dot parenth_form .
+  397 long_id: SELF DOT ID parenth_form .
 
     $default  reduce using rule 397 (long_id)
 
@@ -11549,7 +11540,7 @@ state 708
 
 state 709
 
-  307 assignment_stmt: SELF DOT id_dot ASSIGN . left_assignment_side
+  307 assignment_stmt: SELF DOT ID ASSIGN . left_assignment_side
 
     error          shift, and go to state 346
     ID             shift, and go to state 172
@@ -12846,7 +12837,7 @@ state 776
 
 state 777
 
-  307 assignment_stmt: SELF DOT id_dot ASSIGN left_assignment_side .
+  307 assignment_stmt: SELF DOT ID ASSIGN left_assignment_side .
 
     $default  reduce using rule 307 (assignment_stmt)
 

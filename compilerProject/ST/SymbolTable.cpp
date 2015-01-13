@@ -69,7 +69,7 @@ Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t, vector
 
 }
 Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
-	Variable * v = (Variable*)this->currScope->parent->m->get(name,"Variable");
+	Variable * v = (Variable*)this->currScope->m->get(name,"Variable");
 	vector<Type*>i_t = t->getInheritedType();
 	
 	if (!v){
