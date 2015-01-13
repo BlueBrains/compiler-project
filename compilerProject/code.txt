@@ -1,12 +1,20 @@
 class a(b):
 	
-	def dodo(self,*c,y,**x):
+	def dodo(self,c,y,**x):
 
 	end
 end
 
 class b:
-	def dodo(self,*x,**c,yw):
+	def dodo(self,*x,c,**yw):
+
+	end
+
+	def Sdodo(self,x,c,*yw):
+
+	end
+
+	def Sdodo(self,x,c,w,v,f,d,s,sk,*yw):
 
 	end
 

@@ -1,9 +1,7 @@
 unit_import: ID
 unit_list:	unit_import
 class_h: CLASS ID OPEN_S unit_list CLOSE_S 
-arg:	STAR ID 
-args_list: arg 
-args_list:	args_list COMMA ID 
+args_list:	ID COMMA ID 
 arg:	STAR STAR ID 
 args_list: args_list COMMA arg
 arguments:	SELF COMMA args_list %prec stmt_11
@@ -19,15 +17,39 @@ program: unit
 class_h: CLASS ID 
 arg:	STAR ID 
 args_list: arg 
+args_list:	args_list COMMA ID 
 arg:	STAR STAR ID 
 args_list: args_list COMMA arg
-args_list:	args_list COMMA ID 
 arguments:	SELF COMMA args_list %prec stmt_11
 method_h: ID OPEN_S arguments CLOSE_S 
 block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
+args_list:	ID COMMA ID 
+arg:	STAR ID 
+args_list: args_list COMMA arg
+arguments:	SELF COMMA args_list %prec stmt_11
+method_h: ID OPEN_S arguments CLOSE_S 
+block_stmt: COLON  END 
+method_declaration: method_h block_stmt
+dm:	method_declaration
+dm_list: dm_list DEF dm
+args_list:	ID COMMA ID 
+args_list:	args_list COMMA ID 
+args_list:	args_list COMMA ID 
+args_list:	args_list COMMA ID 
+args_list:	args_list COMMA ID 
+args_list:	args_list COMMA ID 
+args_list:	args_list COMMA ID 
+arg:	STAR ID 
+args_list: args_list COMMA arg
+arguments:	SELF COMMA args_list %prec stmt_11
+method_h: ID OPEN_S arguments CLOSE_S 
+block_stmt: COLON  END 
+method_declaration: method_h block_stmt
+dm:	method_declaration
+dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
 unit: class_decl

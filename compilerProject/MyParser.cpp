@@ -218,11 +218,27 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		*/
 
-		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
-		if (it != parameter.end()){
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
+		bool selflast = false;
+		for (int i = 0; i < parameter.size(); i++) {
+			if ('*' == parameter.at(i)[0])
+			{
+				selflast = true;
+			}
 		}
 
+		if (!selflast){
+			vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
+			if (it != parameter.end()){
+				this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
+			}
+		}
+		else
+		{
+			vector<char*>::iterator it = find_if(parameter.begin(), parameter.end()-1, Comparator_char("self"));
+			if (it != (parameter.end()-1)){
+				this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
+			}
+		}
 	}
 
 	//vector <char *> tempvec = parameter;
