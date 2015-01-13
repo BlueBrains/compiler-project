@@ -86,33 +86,31 @@
      LESS_OR_EQUAL = 312,
      MORE_THAN = 313,
      MORE_OR_EQUAL = 314,
-     TRUE = 315,
-     FALSE = 316,
-     EXCEPT = 317,
-     SEMICOLON = 318,
-     NEW_LINE = 319,
-     PASS = 320,
-     CHAR_VALUE = 321,
-     OPEN_S = 322,
-     STRING_VALUE = 323,
-     INTEGER_VALUE = 324,
-     BREAK = 325,
-     CONTINUE = 326,
-     LONG_VALUE = 327,
-     FLOAT_VALUE = 328,
-     stmt_1_2 = 329,
-     stmt_11 = 330,
-     stmt_10 = 331,
-     stmt_9 = 332,
-     stmt_7 = 333,
-     stmt_6 = 334,
-     stmt_5 = 335,
-     stmt_4 = 336,
-     stmt_3 = 337,
-     stmt_2 = 338,
-     stmt_1 = 339,
-     stmt_8 = 340,
-     MULTI = 341
+     EXCEPT = 315,
+     SEMICOLON = 316,
+     NEW_LINE = 317,
+     PASS = 318,
+     CHAR_VALUE = 319,
+     OPEN_S = 320,
+     STRING_VALUE = 321,
+     INTEGER_VALUE = 322,
+     BREAK = 323,
+     CONTINUE = 324,
+     LONG_VALUE = 325,
+     FLOAT_VALUE = 326,
+     stmt_1_2 = 327,
+     stmt_11 = 328,
+     stmt_10 = 329,
+     stmt_9 = 330,
+     stmt_7 = 331,
+     stmt_6 = 332,
+     stmt_5 = 333,
+     stmt_4 = 334,
+     stmt_3 = 335,
+     stmt_2 = 336,
+     stmt_1 = 337,
+     stmt_8 = 338,
+     MULTI = 339
    };
 #endif
 /* Tokens.  */
@@ -173,39 +171,37 @@
 #define LESS_OR_EQUAL 312
 #define MORE_THAN 313
 #define MORE_OR_EQUAL 314
-#define TRUE 315
-#define FALSE 316
-#define EXCEPT 317
-#define SEMICOLON 318
-#define NEW_LINE 319
-#define PASS 320
-#define CHAR_VALUE 321
-#define OPEN_S 322
-#define STRING_VALUE 323
-#define INTEGER_VALUE 324
-#define BREAK 325
-#define CONTINUE 326
-#define LONG_VALUE 327
-#define FLOAT_VALUE 328
-#define stmt_1_2 329
-#define stmt_11 330
-#define stmt_10 331
-#define stmt_9 332
-#define stmt_7 333
-#define stmt_6 334
-#define stmt_5 335
-#define stmt_4 336
-#define stmt_3 337
-#define stmt_2 338
-#define stmt_1 339
-#define stmt_8 340
-#define MULTI 341
+#define EXCEPT 315
+#define SEMICOLON 316
+#define NEW_LINE 317
+#define PASS 318
+#define CHAR_VALUE 319
+#define OPEN_S 320
+#define STRING_VALUE 321
+#define INTEGER_VALUE 322
+#define BREAK 323
+#define CONTINUE 324
+#define LONG_VALUE 325
+#define FLOAT_VALUE 326
+#define stmt_1_2 327
+#define stmt_11 328
+#define stmt_10 329
+#define stmt_9 330
+#define stmt_7 331
+#define stmt_6 332
+#define stmt_5 333
+#define stmt_4 334
+#define stmt_3 335
+#define stmt_2 336
+#define stmt_1 337
+#define stmt_8 338
+#define MULTI 339
 
 
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 63 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
+#line 66 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yacc.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -221,7 +217,7 @@ typedef union YYSTYPE {
 		class Type * type;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 225 "yacc.hpp"
+#line 221 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

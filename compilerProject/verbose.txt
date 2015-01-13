@@ -10,13 +10,13 @@ default_arg:	ID ASSIGN expr
 default_args_list: default_args_list COMMA default_arg
 arguments:	ID COMMA default_args_list
 method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
+block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
 access_modef:	PUBLIC
 method_h: ID OPEN_S CLOSE_S 
-COLON  END 
+block_stmt: COLON  END 
 method_declaration: access_modef STATIC method_h block_stmt
 dm:	method_declaration
 dm_list: dm_list DEF dm
