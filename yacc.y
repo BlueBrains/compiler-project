@@ -635,9 +635,11 @@ unit_import: unit_import DOT ID	{
 class_body:   COLON END		{
 								Streams::verbose()<<"class_body:COLON END	\n";colonStack.pop();
 								$<type>$=p->finishTypeDeclaration(t);
+								t=$<type>$;
 							}
 			| COLON dm_list END	{Streams::verbose()<<"class_body:COLON dm_list END\n";colonStack.pop();
 										$<type>$=p->finishTypeDeclaration(t);
+										t=$<type>$;
 									}
 			| error END {
 					ColonStack* temp = colonStack.top();
@@ -650,18 +652,21 @@ class_body:   COLON END		{
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected ':' at Line No:"<<temp->lineNum<<" Column No:"<<temp->colNum<<endl;
 						$<type>$=p->finishTypeDeclaration(t);
+						t=$<type>$;
 					err->errQ->enqueue(temp->lineNum,temp->colNum,"Expected ':' ","");
 				  }
 			| COLON error {					
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
 					$<type>$=p->finishTypeDeclaration(t);
+					t=$<type>$;
 					err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'end' ","");									
 				  }
 			| COLON dm_list error {
 					colonStack.pop();
 					Streams::verbose()<<"Error: Expected 'end' at Line No:"<<yylval.r.lineNum<<" Column No:"<<yylval.r.colNum<<endl;
 					$<type>$=p->finishTypeDeclaration(t);
+					t=$<type>$;
 					err->errQ->enqueue(yylval.r.lineNum,yylval.r.colNum," Expected 'end' ","");									
 				  }
 ;
