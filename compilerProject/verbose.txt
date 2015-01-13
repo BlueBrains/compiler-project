@@ -3,12 +3,12 @@ unit_list:	unit_import
 class_h: CLASS ID OPEN_S unit_list CLOSE_S 
 arg:	STAR ID 
 args_list: arg 
-arg:	STAR STAR ID 
-args_list:	args_list COMMA arg
 args_list:	args_list COMMA ID 
-arguments:	args_list
+arg:	STAR STAR ID 
+args_list: args_list COMMA arg
+arguments:	SELF COMMA args_list %prec stmt_11
 method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
+block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
@@ -19,12 +19,12 @@ program: unit
 class_h: CLASS ID 
 arg:	STAR ID 
 args_list: arg 
-arg:	STAR ID 
-args_list:	args_list COMMA arg
+arg:	STAR STAR ID 
+args_list: args_list COMMA arg
 args_list:	args_list COMMA ID 
-arguments:	args_list
+arguments:	SELF COMMA args_list %prec stmt_11
 method_h: ID OPEN_S arguments CLOSE_S 
-COLON  END 
+block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
