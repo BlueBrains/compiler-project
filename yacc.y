@@ -912,6 +912,8 @@ method_declaration: method_h block_stmt	{Streams::verbose()<<"method_declaration
 					|FINAL access_modef STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL access_modef STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
 					|STATIC FINAL access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: STATIC FINAL access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
 					|FINAL STATIC access_modef method_h block_stmt	{Streams::verbose()<<"method_declaration: FINAL STATIC access_modef method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|access_modef STATIC FINAL method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef STATIC FINAL method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
+					|access_modef FINAL STATIC method_h block_stmt	{Streams::verbose()<<"method_declaration: access_modef FINAL STATIC method_h block_stmt\n";testfunction = p->finishFunctionDeclaration(testfunction,true,true,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;}
 					|FINAL access_modef FINAL error method_h block_stmt	{
 																		Streams::verbose()<<"Error: repeated modifier Line No:"<<yylval.r.lineNum<<" Column No:"<<$<r.colNum>3-strlength($<r.strVal>3)<<endl;
 																		err->errQ->enqueue($<r.lineNum>1,$<r.colNum>3-strlen($<r.strVal>3),"repeated modifier ","");
@@ -1000,6 +1002,7 @@ arguments : args_list %prec stmt_11{Streams::verbose()<<"arguments:	args_list\n"
 			|SELF COMMA ID {Streams::verbose()<<"arguments:	args_list\n";parameters.push_back("self");parameters.push_back($<r.strVal>3);}
 			|SELF COMMA default_args_list {Streams::verbose()<<"arguments:	default_args_list\n";parameters.push_back("self");}
 			|args_list COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";}
+			|ID COMMA default_args_list {Streams::verbose()<<"arguments:	ID COMMA default_args_list\n";}
 			|SELF COMMA args_list COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";parameters.push_back("self");}
 			|SELF COMMA ID COMMA default_args_list {Streams::verbose()<<"arguments:	args_list COMMA default_args_list\n";parameters.push_back("self");parameters.push_back($<r.strVal>3);}
 ;

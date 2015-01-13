@@ -657,6 +657,10 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.floatVal = f;
 				return FLOAT_VALUE;							
 			}
+\"\"					{
+							colNum+=2;
+							return STRING_VALUE;
+						}
  \"       				{							
 							BEGIN (String);
 							str = new char[255];
@@ -670,6 +674,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							str[index++] = yytext[0];
 							
 						}
+<String>\\\\["]			{cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
 <String>[^\\]\"			{
 							//cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
@@ -692,7 +697,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 <multilinecomment>"*"*[^"/"] {colNum+=strlen(yytext);	}
 <multilinecomment>[^"*"]*    {colNum+=strlen(yytext);	}
 <multilinecomment>"*"+"/"	 {colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
-\'[a-zA-z]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+\'[a-zA-Z -~]\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 \'\'	{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 {identifier}			{						
 							colNum += strlen(yytext);
