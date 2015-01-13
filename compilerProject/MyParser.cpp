@@ -227,6 +227,9 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	vector <char *> cleanp = parameter;
 	vector <char *> clean2p = parameter;
 	vector <char *> clean3p = parameter;
+	bool dontdo1 = false;
+	bool dontdo2 = false;
+
 	for (int i = 0; i < parameter.size(); i++) {
 		if ('*' != parameter.at(i)[0])
 		{
@@ -236,27 +239,40 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			strcpy(cstr, erro.c_str());
 			cleanp.at(i) = cstr;
 		}
-	}
-
-	for (int i = 0; i < cleanp.size(); i++) {
-		if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
+		else
 		{
-			std::string tempstr(parameter.at(i));
-			std::string erro("*" + tempstr);
-			char *cstr = new char[erro.length() + 1];
-			strcpy(cstr, erro.c_str());
-			clean2p.at(i) = cstr;
+			dontdo1 = true;
 		}
 	}
+	
+	if (dontdo1){
+		for (int i = 0; i < cleanp.size(); i++) {
+			if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
+			{
+				std::string tempstr(parameter.at(i));
+				std::string erro("*" + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+				clean2p.at(i) = cstr;
+			}
+			else if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' == parameter.at(i)[1]))
+			{
+				dontdo2 = true;
+			}
+		}
 
-	for (int i = 0; i < cleanp.size(); i++) {
-		if ('*' != parameter.at(i)[0])
-		{
-			std::string tempstr(parameter.at(i));
-			std::string erro("**" + tempstr);
-			char *cstr = new char[erro.length() + 1];
-			strcpy(cstr, erro.c_str());
-			clean3p.at(i) = cstr;
+	}
+
+	if (dontdo2){
+		for (int i = 0; i < cleanp.size(); i++) {
+			if ('*' != parameter.at(i)[0])
+			{
+				std::string tempstr(parameter.at(i));
+				std::string erro("**" + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
+				clean3p.at(i) = cstr;
+			}
 		}
 	}
 
@@ -275,39 +291,41 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 	}
 	tempvec.clear();
-	tempvec = clean2p;
-	for (int i = 0; i < parameter.size(); i++) {
-		tempvec.at(i) = "!";
+	if (dontdo1){
+		tempvec = clean2p;
+		for (int i = 0; i < parameter.size(); i++) {
+			tempvec.at(i) = "!";
 
-		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean2p.at(i)));
-		if (it != tempvec.end()){
-			std::string tempstr(clean2p.at(i));
-			std::string erro("dublicated parameter " + tempstr);
-			char *cstr = new char[erro.length() + 1];
-			strcpy(cstr, erro.c_str());
+			vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean2p.at(i)));
+			if (it != tempvec.end()){
+				std::string tempstr(parameter.at(i));
+				std::string erro("dublicated parameter " + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
 
-			this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+				this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+			}
+
 		}
-
 	}
-
 	tempvec.clear();
-	tempvec = clean3p;
-	for (int i = 0; i < parameter.size(); i++) {
-		tempvec.at(i) = "!";
+	if (dontdo2){
+		tempvec = clean3p;
+		for (int i = 0; i < parameter.size(); i++) {
+			tempvec.at(i) = "!";
 
-		vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean3p.at(i)));
-		if (it != tempvec.end()){
-			std::string tempstr(clean3p.at(i));
-			std::string erro("dublicated parameter " + tempstr);
-			char *cstr = new char[erro.length() + 1];
-			strcpy(cstr, erro.c_str());
+			vector<char*>::iterator it = find_if(tempvec.begin(), tempvec.end(), Comparator_char(clean3p.at(i)));
+			if (it != tempvec.end()){
+				std::string tempstr(parameter.at(i));
+				std::string erro("dublicated parameter " + tempstr);
+				char *cstr = new char[erro.length() + 1];
+				strcpy(cstr, erro.c_str());
 
-			this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+				this->errRecovery->errQ->enqueue(lineNo, colNo, cstr, name);
+			}
+
 		}
-
 	}
-	
 	int onestar = 0;
 	int twostar = 0;
 
