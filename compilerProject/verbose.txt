@@ -2,9 +2,7 @@ access_modef:	PUBLIC
 unit_import: ID
 unit_list:	unit_import
 class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S 
-args_list:	ID COMMA ID 
-arguments:	SELF COMMA args_list %prec stmt_11
-method_h: ID OPEN_S arguments CLOSE_S 
+method_h: ID OPEN_S CLOSE_S 
 block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
@@ -15,10 +13,7 @@ unit: class_decl
 program: unit
 access_modef:	PUBLIC
 class_h: access_modef CLASS ID 
-arg:	STAR ID 
-args_list: ID COMMA arg 
-arguments:	SELF COMMA args_list %prec stmt_11
-method_h: ID OPEN_S arguments CLOSE_S 
+method_h: ID OPEN_S CLOSE_S 
 block_stmt: COLON  END 
 method_declaration: method_h block_stmt
 dm:	method_declaration

@@ -447,6 +447,8 @@ Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, i
 				char* first = f->getfirstpara();
 				if ((first != NULL) && (strcmp("self", first) != 0))
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
+				if (first == NULL)
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
 
 	}

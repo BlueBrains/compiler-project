@@ -1,11 +1,11 @@
 public class a(b):
 	
-	def func1(self,z,w):
+	def func1():
 
 	end
 end
 public class b:
-        def func1(self,y,*x):
+        def func1():
 
 	end
 end
