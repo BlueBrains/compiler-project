@@ -8,103 +8,6 @@ arguments:	args_list
 method_h: ID OPEN_S arguments CLOSE_S 
 id_dot:	ID
 id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:4 Column No:11
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:5 Column No:11
-expr:	long_id
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	self dot amer
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: DEF dm
-access_modef:	PUBLIC
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-list_display:	OPEN_D CLOSE_D
-left_assignment_side : list_display
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt_list stmt 
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr_list COMMA expr
-list_display:	OPEN_D  expr_list CLOSE_D
-for_header:	FOR ID IN list_display 
-id_dot:	ID
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:11 Column No:13
-expr:	long_id
-op :PLUS
-id_dot:	ID
-long_id:	id_dot
-Error: Undeclareted Variable at Line No:11 Column No:15
-expr:	long_id
-expr:	expr op expr
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-for_stmt: 	for_header stmt
-stmt:	for_stmt
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: access_modef method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
-access_modef: PRIVATE
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-access_modef: PRIVATE
-var_declaration: access_modef ID
-dm:	var_declaration SEMICOLON
-dm_list: dm_list DEF dm
-class_h: CLASS ID 
-method_h: ID OPEN_S ID CLOSE_S 
-id_dot:	ID
-id_dot:	ID
 parenth_form : 	OPEN_S  CLOSE_S
 long_id:	id_dot parenth_form
 expr:	long_id
@@ -114,7 +17,6 @@ assignment_stmt:	id_dot ASSIGN expr_list
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
 stmt_list:	stmt 
-id_dot:	ID
 id_dot:	ID
 id_dot:	id_dot DOT ID
 long_id:	id_dot
@@ -133,7 +35,6 @@ expr_list: expr %prec stmt_1
 simple_stmt_list: 	expr_list
 stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
-id_dot:	ID
 parenth_form : 	OPEN_S  CLOSE_S
 expr:	self.id()
 expr:	long_id
@@ -141,33 +42,132 @@ expr_list: expr %prec stmt_1
 simple_stmt_list: 	expr_list
 stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
+id_dot:	ID
+long_id:	id_dot
+expr:	long_id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+stmt_list:	stmt_list stmt 
+id_dot:	ID
+long_id:	id_dot
+expr:	long_id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
+stmt_list:	stmt_list stmt 
 block_stmt: COLON stmt_list END 
 method_declaration: method_h block_stmt
 dm:	method_declaration
 dm_list: DEF dm
-arguments:	args_list
-method_h: ID OPEN_S arguments CLOSE_S 
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+program: unit
+access_modef:	PUBLIC
+unit_import: ID
+unit_list:	unit_import
+class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S 
+access_modef:	PUBLIC
+class_h: access_modef CLASS ID 
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:23 Column No:12
+Error: Undeclareted Variable at Line No:11 Column No:13
 expr:	long_id
+op :PLUS
+id_dot:	ID
+long_id:	id_dot
+expr:	long_id
+expr:	expr op expr
 expr_list: expr %prec stmt_1
-print_stmt: PRINT expr_list
-simple_stmt_list: 	print_stmt
+left_assignment_side : expr_list
+assignment_stmt:	id_dot ASSIGN expr_list
+simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
 stmt_list:	stmt 
 block_stmt: COLON stmt_list END 
-method_declaration: method_h block_stmt
+stmt:	block_stmt
+for_stmt: 	for_header stmt
+stmt:	for_stmt
+stmt_list:	stmt_list stmt 
+block_stmt: COLON stmt_list END 
+method_declaration: access_modef method_h block_stmt
 dm:	method_declaration
 dm_list: dm_list DEF dm
-method_h: ID OPEN_S ID CLOSE_S 
-COLON  END 
-method_declaration: method_h block_stmt
-dm:	method_declaration
-dm_list: dm_list DEF dm
+access_modef: PRIVATE
+var_declaration: access_modef ID
+dm:	var_declaration SEMICOLON
+Error: Expected 'def' at Line No:10 Column No:10
 class_body:COLON dm_list END
 class_decl: class_h class_body
 dm:	class_decl
+dm_list: DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+access_modef:	PUBLIC
+class_h: access_modef CLASS ID 
+access_modef:	PUBLIC
+class_h: access_modef CLASS ID 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+access_modef:	PUBLIC
+unit_import: ID
+unit_list:	unit_import
+unit_import: ID
+unit_list:	unit_list COMMA unit_import
+class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S 
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+unit_import: ID
+unit_import: unit_import DOT ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+unit_import: ID
+unit_import: unit_import DOT ID
+unit_list:	unit_import
+unit_import: ID
+unit_import: unit_import DOT ID
+unit_list:	unit_list COMMA unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+class_body:COLON dm_list END
+class_decl: class_h class_body
+unit: class_decl
+prgram : program unit
+unit_import: ID
+unit_list:	unit_import
+class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S 
+class_h: CLASS ID 
+class_h: CLASS ID 
+class_h: CLASS ID 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: DEF dm
+var_declaration: STATIC ID
+dm:	var_declaration SEMICOLON
 dm_list: dm_list DEF dm
 access_modef: PRIVATE
 method_h: ID OPEN_S CLOSE_S 
@@ -178,7 +178,7 @@ expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
 assignment_stmt:	id_dot ASSIGN expr_list
 simple_stmt_list: 	assignment_stmt
-Error: Expected ';' at Line No:30 Column No:8
+Error: Expected ';' at Line No:20 Column No:8
 stmt_list:	stmt 
 id_dot:	ID
 literal:    STRING_VALUE
@@ -198,7 +198,6 @@ stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:32 Column No:22
 expr:	long_id
 expr_list: expr %prec stmt_1
 for_header:	FOR ID IN expr_list 
@@ -207,7 +206,6 @@ expr:	literal
 expr_list: expr %prec stmt_1
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:33 Column No:33
 expr:	long_id
 expr_list: expr_list COMMA expr
 print_stmt: PRINT expr_list
@@ -217,12 +215,7 @@ stmt_list:	stmt
 id_dot:	ID
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:34 Column No:7
 expr:	long_id
-op :PLUS
-literal:	INTEGER_VALUE
-expr:	literal
-expr:	expr op expr
 expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
 assignment_stmt:	id_dot ASSIGN expr_list
@@ -231,9 +224,7 @@ stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:35 Column No:8
 expr:	long_id
-id_dot:	ID
 expr:	self.id
 expr:	long_id
 condition: expr MORE_THAN expr
@@ -242,15 +233,7 @@ if_header:	IF expr
 simple_stmt_list: 	BREAK
 stmt:	simple_stmt_list
 stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-if_stmt:	if_header stmt
-stmt: 		if_stmt
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-for_stmt: 	for_header stmt
-stmt:	for_stmt
+assignment_stmt:	self dot amer
 stmt_list:	stmt_list stmt 
 block_stmt: COLON stmt_list END 
 method_declaration: access_modef method_h block_stmt
@@ -260,104 +243,79 @@ access_modef:	PUBLIC
 method_h: ID OPEN_S ID CLOSE_S 
 id_dot:	ID
 long_id:	id_dot
-Error: Undeclareted Variable at Line No:41 Column No:8
 expr:	long_id
-literal:	INTEGER_VALUE
-expr:	literal
-condition: expr EQUAL expr
-expr:	condition
-if_header:	IF expr 
-id_dot:	ID
-literal:	INTEGER_VALUE
-expr:	literal
 expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
+assignment_stmt:	self dot amer
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
+stmt_list:	stmt_list stmt 
 id_dot:	ID
 long_id:	id_dot
+Error: Undeclareted Variable at Line No:38 Column No:14
 expr:	long_id
-literal:	INTEGER_VALUE
-expr:	literal
-condition: expr MORE_THAN expr
-expr:	condition
-elif_header:	ELIF expr 
-literal:    STRING_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-print_stmt: PRINT expr_list
-simple_stmt_list: 	print_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-literal:	INTEGER_VALUE
-expr:	literal
-condition: expr EQUAL expr
-expr:	condition
-if_header:	IF expr 
-id_dot:	ID
-literal:	INTEGER_VALUE
-expr:	literal
 expr_list: expr %prec stmt_1
 left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
+assignment_stmt:	self dot amer
 simple_stmt_list: 	assignment_stmt
 stmt:	simple_stmt_list
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-if_stmt:	if_header stmt
-stmt: 		if_stmt
+stmt_list:	stmt_list stmt 
+expr:	self.id
+Error: Undeclareted Variable at Line No:39 Column No:17
+expr:	long_id
+expr_list: expr %prec stmt_1
+left_assignment_side : expr_list
+assignment_stmt:	self dot amer
+simple_stmt_list: 	assignment_stmt
+stmt:	simple_stmt_list
 stmt_list:	stmt_list stmt 
 block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-elif_stmt:	elif_header stmt
-literal:    STRING_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-print_stmt: PRINT expr_list
-simple_stmt_list: 	print_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-id_dot:	ID
-long_id:	id_dot
-expr:	long_id
-literal:	INTEGER_VALUE
-expr:	literal
-condition: expr EQUAL expr
-expr:	condition
-if_header:	IF expr 
-id_dot:	ID
-literal:	INTEGER_VALUE
-expr:	literal
-expr_list: expr %prec stmt_1
-left_assignment_side : expr_list
-assignment_stmt:	id_dot ASSIGN expr_list
-simple_stmt_list: 	assignment_stmt
-stmt:	simple_stmt_list
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-if_stmt:	if_header stmt
-stmt: 		if_stmt
-stmt_list:	stmt_list stmt 
-block_stmt: COLON stmt_list END 
-stmt:	block_stmt
-if_stmt:	if_header stmt elif_stmt ELSE stmt
-stmt: 		if_stmt
-stmt_list:	stmt 
-block_stmt: COLON stmt_list END 
-method_declaration: access_modef method_h block_stmt
+method_declaration: method_h block_stmt
 dm:	method_declaration
+dm_list: dm_list DEF dm
+access_modef: PRIVATE
+var_declaration: FINAL access_modef ID
+dm:	var_declaration SEMICOLON
+dm_list: dm_list DEF dm
+access_modef:	PUBLIC
+var_declaration: STATIC access_modef ID
+dm:	var_declaration SEMICOLON
+dm_list: dm_list DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+class_h: FINAL CLASS ID 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
+dm_list: dm_list DEF dm
+unit_import: ID
+unit_list:	unit_import
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
+class_body:COLON END	
+class_decl: class_h class_body
+dm:	class_decl
 dm_list: dm_list DEF dm
 class_body:COLON dm_list END
 class_decl: class_h class_body
-unit: import_stmt class_decl
-program: unit
+unit: class_decl
+prgram : program unit
 programes: program END_OF_FILE

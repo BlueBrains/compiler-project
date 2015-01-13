@@ -70,29 +70,35 @@ Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t, vector
 }
 Variable * SymbolTable::getVariableFromCurrentScope(char* name,Type* t){
 	Variable * v = (Variable*)this->currScope->m->get(name,"Variable");
-	vector<Type*>i_t = t->getInheritedType();
+	if (t == NULL)
+	{
+		return NULL;
+	}
+	if (!v)
+	{
+		v = (Variable*)t->getScope()->m->get(name, "Variable");
+		vector<Type*>i_t = t->getInheritedType();
+
+		if (!v){
+			int j = 0;
+			for (int i = 0; i < i_t.size(); i++)
+			{
+				v = (Variable*)i_t.at(i)->getScope()->m->get(name, "Variable");
+				j++;
+			}
+			if (!v)
+			{
+				Scope * temp = this->currScope->parent;
+				v = this->getVariableFromCurrentScope(name, t->getouter_class());
+			}
+			else
+			{
+				if (j > 1)
+					cout << "ambigious v in parents types";
+			}
+		}
+	}
 	
-	if (!v){
-		int j = 0;
-		for (int i = 0; i < i_t.size(); i++)
-		{
-			v = (Variable*)i_t.at(i)->getScope()->m->get(name,"Variable");
-			j++;
-		}
-		if (!v)
-		{
-		Scope * temp = this->currScope->parent;
-		while (temp && !v){
-			v = (Variable*)temp->m->get(name, "Variable");
-			temp = temp->parent;
-		}
-	}
-		else
-		{
-			if (j > 1)
-				cout << "ambigious v in parents types";
-		}
-	}
 	return v;
 }
 Type * SymbolTable::getTypeFromCurrentScope(char* name){
