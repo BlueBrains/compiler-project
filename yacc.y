@@ -1203,13 +1203,13 @@ stmt: 			if_stmt	{Streams::verbose()<<"stmt: 		if_stmt\n";}
 										Streams::verbose()<<"Error: Expected ';' at Line No:"<<$<r.lineNum>1<<" Column No:"<<yylval.r.colNum<<endl;
 										err->errQ->enqueue($<r.lineNum>1,yylval.r.colNum," Expected ';' ","");										
 									}
-				//|SELF DOT ID SEMICOLON	{
-				//								Streams::verbose()<<"assignment_stmt:	self dot amer\n";
-				//														//cout<<"assignment list"<<endl;
-				//														$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,true);
-				//														v=$<var>$;
-				//														acc_mod="";
-				//						}
+				|SELF DOT ID SEMICOLON	{
+												Streams::verbose()<<"assignment_stmt:	self dot amer\n";
+																		//cout<<"assignment list"<<endl;
+																		$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0,true);
+																		v=$<var>$;
+																		acc_mod="";
+										}
 				|ID SEMICOLON	{
 									Streams::verbose()<<"stmt:	ID SEMICOLON\n";
 									$<var>$=p->addVariableToCurrentScope($<r.strVal>1,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
