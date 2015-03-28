@@ -38,7 +38,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
-<<EOF>>     {return END_OF_FILE; 
+<<EOF>>     {return ENDMARKER; 
 				}
 "import"	{
 				colNum += strlen(yytext);
@@ -67,7 +67,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return COLON;
+				return ':';
 			}
 "\n"		{
 				lineNum ++;
@@ -83,7 +83,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return OPEN_S;
+				return '(';
 			}
 ")"			{
 				colNum += strlen(yytext);
@@ -92,7 +92,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return CLOSE_S;
+				return ')';
 			}
 ","			{
 				colNum += strlen(yytext);
@@ -101,7 +101,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return COMMA;
+				return ',';
 			}
 ";"			{
 				colNum += strlen(yytext);
@@ -110,9 +110,17 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return SEMICOLON;
+				return ';';
 			} 
-			 
+"..."			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);									
+				return DOT_3;
+			}			 
 "."			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -120,7 +128,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);									
-				return DOT;
+				return '.';
 			}
 "end"		{
 				colNum += strlen(yytext);
@@ -147,7 +155,34 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	ASSIGN;
+				return	'=';
+			}
+"**="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	STAR_2_EQUAL;
+			}
+"*="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	STAR_EQUAL;
+			}
+"**"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	STAR_2;
 			}
 "*"			{
 				colNum += strlen(yytext);
@@ -156,7 +191,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	STAR;
+				return	'*';
 			}
 "else"		{
 				colNum += strlen(yytext);
@@ -320,6 +355,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	RETURN;
 			}
+"nonlocal"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	NONLOCAL;
+			}
 "global"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -365,6 +409,24 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	PROTECTED;
 			}
+"True"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	TRUE;
+			}
+"False"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	FALSE;
+			}
 "break"		{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -383,6 +445,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return CONTINUE;
 			}
+"None"		{	
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return NONE;
+			}
 "["			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -390,7 +461,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	OPEN_D;
+				return	'[';
 			}
 "]"			{
 				colNum += strlen(yytext);
@@ -399,7 +470,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	CLOSE_D;
+				return	']';
 			}
 "{"			{
 				colNum += strlen(yytext);
@@ -408,7 +479,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	OPEN_C;
+				return	'{';
 			}
 "}"			{
 				colNum += strlen(yytext);
@@ -417,7 +488,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	CLOSE_C;
+				return	'}';
 			}
 "`"			{
 				colNum += strlen(yytext);
@@ -426,7 +497,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	RE_COT;
+				//return	RE_COT;
 			}
 "yield"		{
 				colNum += strlen(yytext);
@@ -446,6 +517,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	PRIMARY;
 			}
+"|="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	OR_EQUAL;
+			}
 "||"		{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -454,6 +534,15 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	OR;
+			}
+"&="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	AND_EQUAL;
 			}
 "&&"		{
 				colNum += strlen(yytext);
@@ -471,8 +560,18 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	NOT;
+				//return	NOT;
 			}
+"+="			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	PLUS_EQUAL;
+			}
+
 "+"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -480,8 +579,18 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	PLUS;
+				return	'+';
 			}
+"-="			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	MINUS_EQUAL;
+			}
+
 "-"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -489,7 +598,34 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	MINUS;
+				return	'-';
+			}
+"//="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	DIV_2_EQUAL;
+			}
+"//"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	DIV_2;
+			}
+"/="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	DIV_EQUAL;
 			}
 "/"			{
 				colNum += strlen(yytext);
@@ -498,7 +634,16 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	DIV;
+				return	'/';
+			}
+"%="		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	MOD_EQUAL;
 			}
 "%"			{
 				colNum += strlen(yytext);
@@ -507,7 +652,25 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	MOD;
+				return	'%';
+			}
+"^="			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	SHAPOO_EQUAL;
+			}
+"^"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	'^';
 			}
 "!="		{
 				colNum += strlen(yytext);
@@ -518,6 +681,42 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);
 				return	NOT_EQUAL;
 			}
+"->"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	ARROW;
+				}
+"<>"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	MORE_LESS;
+				}
+"<<="			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	LESS_THAN_2_EQUAL;
+				}
+"<<"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	LESS_THAN_2;
+			}
 "<"			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -525,7 +724,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	LESS_THAN;
+				return	'<';
 			}
 "<="		{
 				colNum += strlen(yytext);
@@ -536,14 +735,14 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	LESS_OR_EQUAL;
 			}
-">"			{
+">>="			{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	MORE_THAN;
+				return	MORE_THAN_2_EQUAL;
 			}
 ">="		{
 				colNum += strlen(yytext);
@@ -553,6 +752,33 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	MORE_OR_EQUAL;
+			}
+">>"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	MORE_THAN_2;
+			}
+">"			{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	'>';
+			}
+"pass"		{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	PASS;
 			}
 "self"		{
 				colNum += strlen(yytext);
@@ -574,7 +800,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
 					yylval.r.intVal = res;
-					return INTEGER_VALUE;
+					return NUMBER_INT;
 				}
 {bininteger}	{
 					int v = 1;int res=0;
@@ -586,7 +812,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
 					yylval.r.intVal = res;
-					return INTEGER_VALUE;
+					return NUMBER_INT;
 				}
 {hexinteger}	{
 					int v = 1;int res=0;int val;
@@ -614,7 +840,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 					yylval.r.colNum = colNum;
 					yylval.r.lineNum = lineNum;	
 					yylval.r.intVal = res;
-					return INTEGER_VALUE;
+					return NUMBER_INT;
 				}
 {integer}	{
 				//cout<<":Integer value (yytext) ="<<yytext<<"\n";
@@ -625,9 +851,9 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				//cout<<":Int value as int ="<<i<<endl;
 				yylval.r.intVal = i;
 				if(strlen(yytext) <= 4)
-					return INTEGER_VALUE;
+					return NUMBER_INT;
 				else
-					return LONG_VALUE;
+					return NUMBER_LONG;
 			}
 {float}		{
 				//cout<<":Float value (yytext) ="<<yytext<<"\n";
@@ -637,11 +863,11 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				float f = atof(yytext);
 				//cout<<":Float value as float ="<<f;
 				yylval.r.floatVal = f;
-				return FLOAT_VALUE;							
+				return NUMBER_FLOAT;							
 			}
 \"\"					{
 							colNum+=2;
-							return STRING_VALUE;
+							return STRING;
 						}
  \"       				{							
 							BEGIN (String);
@@ -671,7 +897,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							//cout<<colNum;
 							str = 0;
 							BEGIN (INITIAL);
-							return STRING_VALUE;
+							return STRING;
 						}
 {Single_line_comment}	{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
 "/*"						 {colNum+=2;		BEGIN(multilinecomment);}
@@ -690,7 +916,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 							strcpy_s(x,255, yytext);
 							yylval.r.strVal = x;
 							//cout<<yylval.r.colNum;
-							return ID;												
+							return NAME;												
 						}
 " "|\t|\a|\r			{colNum+=strlen(yytext);yylval.r.colNum=colNum;}
 %%

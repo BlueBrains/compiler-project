@@ -26,6 +26,7 @@
     <None Include="..\yaccc1.y" />
     <None Include="..\yaccc2.y" />
     <None Include="..\yacct.y" />
+    <None Include="..\yaccFinal.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
