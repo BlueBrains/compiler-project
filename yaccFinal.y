@@ -110,17 +110,19 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
           |temp2 {Streams::verbose() <<"program : temp2 \n";}
 		  ;
 
-temp2:  CLASS NAME ':' suite {Streams::verbose() <<"temp2:  CLASS NAME ':' suite \n";}
-		|CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"temp2: CLASS NAME '(' ')' ':' suite \n";}
-		|CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() <<"trmp2: CLASS NAME '(' arglist ')' ':' suite \n";}
-		|access CLASS NAME ':' suite {Streams::verbose() <<"temp2: access CLASS NAME ':' suite \n";}
-		|access CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"temp2: access CLASS NAME '(' ')' ':' suite \n";}
-		|access CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() <<"access CLASS NAME '(' arglist ')' ':' suite \n";}
+
+temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";}
 		;
+
+
+//temp1:  CLASS NAME ':'  {Streams::verbose() <<"temp1:  CLASS NAME ':'  \n";}
+		//|CLASS NAME '(' ')' ':'  {Streams::verbose() <<"temp1: CLASS NAME '(' ')' ':'  \n";}
+		//|CLASS NAME '(' arglist ')' ':'  {Streams::verbose() <<"trmp2: CLASS NAME '(' arglist ')' ':'  \n";}
+		//|access CLASS NAME ':'  {Streams::verbose() <<"temp1: access CLASS NAME ':'  \n";}
+		//|access CLASS NAME '(' ')' ':'  {Streams::verbose() <<"temp1: access CLASS NAME '(' ')' ':'  \n";}
+		//|access CLASS NAME '(' arglist ')' ':'  {Streams::verbose() <<"access CLASS NAME '(' arglist ')' ':'  \n";}
+		//;
 		
-	//temp1:  //temp1 stmt {Streams::verbose() <<"temp1 stmt\n";}
-		//|stmt {Streams::verbose() <<"stmt\n";}
-	//	;
 
 funcdef: funcheader suite {Streams::verbose() <<"funcdef:	funcheader suite \n";}
 	
