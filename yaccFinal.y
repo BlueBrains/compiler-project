@@ -595,25 +595,26 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 				|test comma_test_seq {Streams::verbose() <<"dictorsetmaker: test ','\n";}
 				|test comma_test_seq ',' {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";}
 				;
+classdef: classheader suite {Streams::verbose() <<"classdef: classheader suite\n";}
 
-classdef: CLASS NAME ':' suite {Streams::verbose() <<"classdef: CLASS NAME ':' suite\n";}
-		  |CLASS access NAME ':' suite {Streams::verbose() <<"classdef: CLASS access NAME ':' suite\n";}
-		  |CLASS STATIC NAME ':' suite {Streams::verbose() <<"classdef: CLASS STATIC NAME ':' suite\n";}
-		  |CLASS FINAL NAME ':' suite {Streams::verbose() <<"classdef: CLASS FINAL NAME ':' suite\n";}
-		  |CLASS STATIC FINAL NAME ':' suite {Streams::verbose() <<"classdef: CLASS STATIC FINAL NAME ':' suite\n";}
-		  |CLASS FINAL STATIC NAME ':' suite {Streams::verbose() <<"classdef: CLASS FINAL STATIC NAME ':' suite\n";}
-		  |CLASS FINAL access NAME ':' suite {Streams::verbose() <<"classdef: CLASS FINAL access NAME ':' suite\n";}
-		  |CLASS STATIC access NAME ':' suite {Streams::verbose() <<"classdef: CLASS STATIC access NAME ':' suite\n";}
-		  |CLASS STATIC FINAL access NAME ':' suite {Streams::verbose() <<"classdef: CLASS STATIC FINAL access NAME ':' suite\n";}
-		  |CLASS FINAL STATIC access NAME ':' suite {Streams::verbose() <<"classdef: CLASS FINAL STATIC access NAME ':' suite\n";}
-		  |CLASS access STATIC NAME ':' suite {Streams::verbose() <<"classdef: CLASS access STATIC NAME ':' suite\n";}
-		  |CLASS access FINAL NAME ':' suite {Streams::verbose() <<"classdef: CLASS access FINAL NAME ':' suite\n";}
-		  |CLASS access STATIC FINAL NAME ':' suite {Streams::verbose() <<"classdef: CLASS access STATIC FINAL NAME ':' suite\n";}
-		  |CLASS access FINAL STATIC NAME ':' suite {Streams::verbose() <<"classdef: CLASS access FINAL STATIC NAME ':' suite\n";}
-		  |CLASS STATIC access FINAL NAME ':' suite {Streams::verbose() <<"classdef: CLASS STATIC access FINAL NAME ':' suite\n";}
-		  |CLASS FINAL access STATIC NAME ':' suite {Streams::verbose() <<"classdef: CLASS FINAL access STATIC NAME ':' suite\n";}
-		  |CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"classdef: CLASS NAME '(' ')' ':' suite\n";}
-		  |CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() <<"classdef: CLASS NAME '(' arglist ')' ':' suite\n";}
+classheader: CLASS NAME ':'  {Streams::verbose() <<"classheader: CLASS NAME ':' \n";}
+		  |CLASS access NAME ':'  {Streams::verbose() <<"classheader: CLASS access NAME ':' \n";}
+		  |CLASS STATIC NAME ':'  {Streams::verbose() <<"classheader: CLASS STATIC NAME ':' \n";}
+		  |CLASS FINAL NAME ':'  {Streams::verbose() <<"classheader: CLASS FINAL NAME ':' \n";}
+		  |CLASS STATIC FINAL NAME ':'  {Streams::verbose() <<"classheader: CLASS STATIC FINAL NAME ':' \n";}
+		  |CLASS FINAL STATIC NAME ':'  {Streams::verbose() <<"classheader: CLASS FINAL STATIC NAME ':' \n";}
+		  |CLASS FINAL access NAME ':'  {Streams::verbose() <<"classheader: CLASS FINAL access NAME ':' \n";}
+		  |CLASS STATIC access NAME ':'  {Streams::verbose() <<"classheader: CLASS STATIC access NAME ':' \n";}
+		  |CLASS STATIC FINAL access NAME ':'  {Streams::verbose() <<"classheader: CLASS STATIC FINAL access NAME ':' \n";}
+		  |CLASS FINAL STATIC access NAME ':'  {Streams::verbose() <<"classheader: CLASS FINAL STATIC access NAME ':' \n";}
+		  |CLASS access STATIC NAME ':'  {Streams::verbose() <<"classheader: CLASS access STATIC NAME ':' \n";}
+		  |CLASS access FINAL NAME ':'  {Streams::verbose() <<"classheader: CLASS access FINAL NAME ':' \n";}
+		  |CLASS access STATIC FINAL NAME ':'  {Streams::verbose() <<"classheader: CLASS access STATIC FINAL NAME ':' \n";}
+		  |CLASS access FINAL STATIC NAME ':'  {Streams::verbose() <<"classheader: CLASS access FINAL STATIC NAME ':' \n";}
+		  |CLASS STATIC access FINAL NAME ':'  {Streams::verbose() <<"classheader: CLASS STATIC access FINAL NAME ':' \n";}
+		  |CLASS FINAL access STATIC NAME ':'  {Streams::verbose() <<"classheader: CLASS FINAL access STATIC NAME ':' \n";}
+		  |CLASS NAME '(' ')' ':'  {Streams::verbose() <<"classheader: CLASS NAME '(' ')' ':' \n";}
+		  |CLASS NAME '(' arglist ')' ':'  {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
 		  ;
 
 arg_comma_seq : argument ',' {Streams::verbose() <<"arg_comma_seq : argument ','\n";}
