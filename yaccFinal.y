@@ -110,17 +110,102 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
           |temp2 {Streams::verbose() <<"program : temp2 \n";}
 		  ;
 
-temp2:  CLASS NAME ':' suite {Streams::verbose() <<"temp2:  CLASS NAME ':' suite \n";}
-		|CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"temp2: CLASS NAME '(' ')' ':' suite \n";}
-		|CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() <<"trmp2: CLASS NAME '(' arglist ')' ':' suite \n";}
-		|access CLASS NAME ':' suite {Streams::verbose() <<"temp2: access CLASS NAME ':' suite \n";}
+temp2:  CLASS NAME ':' suite {Streams::verbose() <<"temp2:  CLASS NAME ':' suite \n";
+								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+							}
+		|CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"temp2: CLASS NAME '(' ')' ':' suite \n";
+												$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+												t=$<type>$;
+												inhertance_list.clear();
+												temp_id="";
+												acc_mod="";
+										}
+		|CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+												$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+													t=$<type>$;
+													inhertance_list.clear();
+												acc_mod="";
+											} //class X (A,B,T) OR class X(A)
+		|access CLASS NAME ':' suite 	{Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+					}
 		|access CLASS NAME '(' ')' ':' suite {Streams::verbose() <<"temp2: access CLASS NAME '(' ')' ':' suite \n";}
-		|access CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() <<"access CLASS NAME '(' arglist ')' ':' suite \n";}
-		;
+		|access CLASS NAME '(' arglist ')' ':' suite {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+														$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+														t=$<type>$;
+														inhertance_list.clear();
+														acc_mod="";
+											} //class X (A,B,T) OR class X(A)
+		|STATIC  CLASS NAME ':' suite	{Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+					}			
+		|FINAL CLASS NAME ':' suite		{Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=$<type>$;
+								inhertance_list.clear();
+								acc_mod="";
+					}
+		|STATIC  CLASS NAME '(' ')' ':' suite{	Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+												$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+												t=$<type>$;
+												inhertance_list.clear();
+												acc_mod="";
+								}           
+		|FINAL CLASS NAME '(' ')' ':' suite{
 		
-	//temp1:  //temp1 stmt {Streams::verbose() <<"temp1 stmt\n";}
-		//|stmt {Streams::verbose() <<"stmt\n";}
-	//	;
+		
+		}
+		|STATIC  CLASS NAME '(' arglist ')' ':' suite{
+		
+		
+		}
+		|FINAL CLASS NAME '(' arglist ')' ':' suite{
+		
+		
+		}
+		|STATIC access CLASS NAME ':' suite{
+		
+		
+		}
+		|FINAL access CLASS NAME ':' suite{
+		
+		
+		}
+		|STATIC access CLASS NAME '(' ')' ':' suite{
+		
+		
+		}
+		|FINAL access CLASS NAME '(' ')' ':' suite{
+		
+		
+		}
+		|STATIC access CLASS NAME '(' arglist ')' ':' suite{
+		
+		
+		}
+		|FINAL access CLASS NAME '(' arglist ')' ':' suite{
+		
+		
+		}
+		
+		|access STATIC CLASS NAME ':' suite{
+		
+		
+		}
+		
+		|access FINAL CLASS NAME ':' suite{
+		
+		
+		}
+		;
 
 funcdef:	DEF  NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef:	DEF  NAME parameters ARROW test ':' suite \n";}
 			|DEF access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef:  DEF access NAME parameters ARROW test ':' suite \n";}
