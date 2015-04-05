@@ -122,38 +122,40 @@ temp2:  CLASS NAME ':' suite {Streams::verbose() <<"temp2:  CLASS NAME ':' suite
 		//|stmt {Streams::verbose() <<"stmt\n";}
 	//	;
 
-funcdef:	DEF  NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef:	DEF  NAME parameters ARROW test ':' suite \n";}
-			|DEF access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef:  DEF access NAME parameters ARROW test ':' suite \n";}
-			|DEF NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF NAME parameters ':' suite\n";}
-			|DEF access NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF access NAME parameters ':' suite\n";}
-			|DEF STATIC NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF STATIC NAME parameters ARROW test ':' suite\n";}
-			|DEF FINAL NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF FINAL NAME parameters ARROW test ':' suite\n";}
-			|DEF STATIC NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC NAME parameters ':' suite\n";}
-			|DEF FINAL NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF FINAL NAME parameters ':' suite\n";}
-			|DEF STATIC FINAL NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF STATIC FINAL NAME parameters ARROW test ':' suite\n";}
-			|DEF FINAL STATIC NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF FINAL STATIC NAME parameters ARROW test ':' suite \n";}
-			|DEF STATIC FINAL NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC FINAL NAME parameters ':' suite \n";}
-			|DEF FINAL STATIC NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF FINAL STATIC NAME parameters ':' suite \n";}
-			|DEF FINAL access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF FINAL access NAME parameters ARROW test ':' suite \n";}
-			|DEF STATIC access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF STATIC access NAME parameters ARROW test ':' suite \n";}
-			|DEF STATIC access NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC access NAME parameters ':' suite \n";}
-			|DEF FINAL access NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC access NAME parameters ':' suite";}
-			|DEF STATIC FINAL access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF STATIC FINAL access NAME parameters ARROW test ':' suite \n";}
-			|DEF FINAL STATIC access NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF FINAL STATIC access NAME parameters ARROW test ':' suite \n";}
-			|DEF STATIC FINAL access NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC FINAL access NAME parameters ':' suite \n";}
-			|DEF FINAL STATIC access NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF FINAL STATIC access NAME parameters ':' suite \n";}
-			|DEF access STATIC NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF access STATIC NAME parameters ARROW test ':' suite \n";}
-			|DEF access FINAL NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF access FINAL NAME parameters ARROW test ':' suite \n";}
-			|DEF access STATIC NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF access STATIC NAME parameters ':' suite \n";}
-			|DEF access FINAL NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF access FINAL NAME parameters ':' suite \n";}
-			|DEF access STATIC FINAL NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF access STATIC FINAL NAME parameters ARROW test ':' suite \n";}
-			|DEF access FINAL STATIC NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF access FINAL STATIC NAME parameters ARROW test ':' suite \n";}
-			|DEF access STATIC FINAL NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF access STATIC FINAL NAME parameters ':' suite \n";}
-			|DEF access FINAL STATIC NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF access FINAL STATIC NAME parameters ':' suite \n";}
-			|DEF STATIC access FINAL NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF STATIC access FINAL NAME parameters ARROW test ':' suite \n";}
-			|DEF FINAL access STATIC NAME parameters ARROW test ':' suite {Streams::verbose() <<"funcdef: DEF FINAL access STATIC NAME parameters ARROW test ':' suite \n";}
-			|DEF STATIC access FINAL NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF STATIC access FINAL NAME parameters ':' suite \n";}
-			|DEF FINAL access STATIC NAME parameters ':' suite {Streams::verbose() <<"funcdef: DEF FINAL access STATIC NAME parameters ':' suite \n";}
+funcdef: funcheader suite {Streams::verbose() <<"funcdef:	funcheader suite \n";}
+	
+funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";}
+			|DEF access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";}
+			|DEF NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF NAME parameters ':' \n";}
+			|DEF access NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF access NAME parameters ':' \n";}
+			|DEF STATIC NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ARROW test ':' \n";}
+			|DEF FINAL NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ARROW test ':' \n";}
+			|DEF STATIC NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ':' \n";}
+			|DEF FINAL NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ':' \n";}
+			|DEF STATIC FINAL NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ARROW test ':' \n";}
+			|DEF FINAL STATIC NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ARROW test ':'  \n";}
+			|DEF STATIC FINAL NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ':'  \n";}
+			|DEF FINAL STATIC NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ':'  \n";}
+			|DEF FINAL access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF FINAL access NAME parameters ARROW test ':'  \n";}
+			|DEF STATIC access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ARROW test ':'  \n";}
+			|DEF STATIC access NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':'  \n";}
+			|DEF FINAL access NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':' ";}
+			|DEF STATIC FINAL access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':'  \n";}
+			|DEF FINAL STATIC access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':'  \n";}
+			|DEF STATIC FINAL access NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ':'  \n";}
+			|DEF FINAL STATIC access NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ':'  \n";}
+			|DEF access STATIC NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ARROW test ':'  \n";}
+			|DEF access FINAL NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ARROW test ':'  \n";}
+			|DEF access STATIC NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ':'  \n";}
+			|DEF access FINAL NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ':'  \n";}
+			|DEF access STATIC FINAL NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ARROW test ':'  \n";}
+			|DEF access FINAL STATIC NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ARROW test ':'  \n";}
+			|DEF access STATIC FINAL NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ':'  \n";}
+			|DEF access FINAL STATIC NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ':'  \n";}
+			|DEF STATIC access FINAL NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':'  \n";}
+			|DEF FINAL access STATIC NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':'  \n";}
+			|DEF STATIC access FINAL NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ':'  \n";}
+			|DEF FINAL access STATIC NAME parameters ':'  {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ':'  \n";}
 			;
 
 parameters: '(' arglist ')' {Streams::verbose() <<"parameters:'(' arglist ')'\n";}
