@@ -1,25 +1,25 @@
 #include "Variable.h"
 /*
 Variable::Variable(){
-	this->name = new char[255];
-	this->name[0] = '\0';
+this->name = new char[255];
+this->name[0] = '\0';
 }
 Variable::~Variable(){}
 void Variable::setName(char* n){
-	strcat(this->name, n);
+strcat(this->name, n);
 }
 char* Variable::getName(){
-	return this->name;
+return this->name;
 }
 
 void Variable::setType(char* n){
-	strcat(this->type, n);
+strcat(this->type, n);
 }
 char* Variable::getType(){
-	return this->type;
+return this->type;
 }
 */
-Variable::Variable(char* name, bool is_array ,bool is_dic, char* accessModifier) :Symbol(name){
+Variable::Variable(char* name, bool is_array, bool is_dic, char* accessModifier) :Symbol(name){
 	this->is_array = is_array;
 	this->is_dic = is_dic;
 	this->setAccessModifier(accessModifier);
@@ -37,7 +37,7 @@ Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->type = type;
 	this->isConst = isConst;
 	this->setAccessModifier("private");
-	
+
 }
 void Variable::set_static(bool s)
 {
@@ -108,11 +108,11 @@ bool  Variable::get_isdic()
 }
 void  Variable::set_isarray(bool is_array)
 {
-	this->is_array=is_array;
+	this->is_array = is_array;
 }
 void  Variable::set_isdic(bool is_dic)
 {
-	 this->is_dic=is_dic;
+	this->is_dic = is_dic;
 }
 
 void Variable::setType(Type * type){
