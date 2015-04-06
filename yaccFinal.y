@@ -117,8 +117,10 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 		  ;
 
 
-temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";}
+temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef classdeflist\n";}
+		|classdef  {Streams::verbose() <<"temp2: classdef \n";}
 		;
+
 
 
 //temp1:  CLASS NAME ':'  {Streams::verbose() <<"temp1:  CLASS NAME ':'  \n";}
