@@ -1071,8 +1071,9 @@ void printScope(Scope *s)
 
 void print_st(SymbolTable *s)
 {
-
+	
 	printScope(s->getrootscope());
+	
 
 }
 
@@ -1108,7 +1109,9 @@ void MyParser::check_functions()
 }
 void MyParser::print_symbol()
 {
+	check_functions();
 	print_st(this->st);
+	
 }
 
 void MyParser::insert_func_Call(Type* t, char* name, int lineno, int colno)
