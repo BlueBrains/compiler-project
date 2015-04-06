@@ -1,14 +1,9 @@
-class u:
-
 def class C(v):
-	def coco():
+	def final coco(self):
 	end
 
 end
 def class v:
 	def final coco():
 		end
-end
-
-
-end		
+end	
