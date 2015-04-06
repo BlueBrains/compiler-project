@@ -2247,7 +2247,7 @@ yyreduce:
 
   case 6:
 #line 136 "C:\\Users\\Luay AL Assadi\\Documents\\Visual Studio 2013\\Projects\\compiler-project\\yaccFinal.y"
-    {Streams::verbose() <<"funcdef:	funcheader suite \n";;}
+    {testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;Streams::verbose() <<"funcdef:	funcheader suite \n";;}
     break;
 
   case 7:

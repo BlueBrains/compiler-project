@@ -207,7 +207,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		/*if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
+		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
@@ -216,7 +216,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
-		*/
+		
 
 		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
 		if (it != parameter.end()){
@@ -403,26 +403,26 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 }
 
 
-Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo){
+Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int colNo){
 	if (f!=NULL)
 		{	
-				if (ff)
+			if (f->get_final())
 			{
-				f->set_final(ff);
+
 				char* first = f->getfirstpara();
 				if (first != NULL)
 					if (strcmp("self", first) == 0)
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
 			}
-			if (ss)
+			if (f->get_static())
 			{
-				f->set_static(ss);
+
 				char* first = f->getfirstpara();
 				if (first != NULL)
 					if (strcmp("self", first) == 0)
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
-			if (!ff && !ss)
+			if (!f->get_final() && !f->get_static())
 			{
 
 				char* first = f->getfirstpara();
