@@ -133,7 +133,7 @@ temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";}
 		//;
 		
 
-funcdef: funcheader suite {Streams::verbose() <<"funcdef:	funcheader suite \n";}
+funcdef: funcheader suite {testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;Streams::verbose() <<"funcdef:	funcheader suite \n";}
 	
 funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";}
 			|DEF access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";}

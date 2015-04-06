@@ -44,9 +44,9 @@ MyParser::~MyParser(void)
 }
 /*
 YaccSimpleType* MyParser::createYaccSimpleType(Type t){
-YaccSimpleType * ret = new YaccSimpleType();
-ret->t = t;
-return ret;
+	YaccSimpleType * ret = new YaccSimpleType();
+	ret->t = t;
+	return ret;
 }
 */
 Variable* MyParser::insertVar(char* n, char* acc_mod, int lineNo, int colNo){
@@ -57,7 +57,7 @@ Variable* MyParser::insertVar(char* n, char* acc_mod, int lineNo, int colNo){
 	Variable * v = st->insertVariableInCurrentScope(n, acc_mod);
 	if (!v){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
-
+		
 	}
 	return v;
 }
@@ -83,7 +83,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 		{
 			v = (Variable*)this->st->currScope->m->get(n, "Variable");
 		}
-
+		
 		if ((v) && (!v->by_self) && (!self))
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Variable is already declared", n);
@@ -97,7 +97,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 		}
 		else if (!v)
 		{
-			v = new Variable();
+		v = new Variable();
 			v->set_name(n);
 			v->setAccessModifier(acc_mod);
 			v->by_self = self;
@@ -125,7 +125,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 				name = strcpy(name, n);
 				this->st->currScope->m->put(name, v, "Variable");
 			}
-
+				
 		}
 	}
 	return v;
@@ -150,7 +150,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	}
 	else
 	{
-		v = this->st->getVariableFromCurrentScope(name, t);
+		 v = this->st->getVariableFromCurrentScope(name, t);
 	}
 
 	if (!v)
@@ -164,7 +164,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
 			Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
 		}
-
+		
 	}
 	return v;
 }
@@ -181,7 +181,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add static function to not static inner class", name);
 		}
 	}
-
+   
 	bool nullclass = false;
 	if (check_class_in(tname, constraction_type))
 	{
@@ -207,40 +207,22 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		/*if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
+		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
 
 		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
 		{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
-		*/
-		/*
-		bool selflast = false;
-		for (int i = 0; i < parameter.size(); i++) {
-		if ('*' == parameter.at(i)[0])
-		{
-		selflast = true;
-		}
-		}
-		*/
-		//if (!selflast){
+		
+
 		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
 		if (it != parameter.end()){
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
 		}
-		//}
-		/*
-		else
-		{
-		vector<char*>::iterator it = find_if(parameter.begin(), parameter.end()-1, Comparator_char("self"));
-		if (it != (parameter.end()-1)){
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
-		}
-		}
-		*/
+
 	}
 
 	//vector <char *> tempvec = parameter;
@@ -264,7 +246,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			dontdo1 = true;
 		}
 	}
-
+	
 	if (dontdo1){
 		for (int i = 0; i < cleanp.size(); i++) {
 			if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
@@ -378,17 +360,25 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	this->st->currScope = f->getScope();
 
 	for (int i = 0; i < parameter.size(); i++) {
-
 		f->setparameters(parameter[i]);
 	}
-
+	
 	for (int i = 0; i < f->getparameters().size(); i++) {
-
-		if (strcmp(f->getparameters().at(i)->get_name(), "self") != 0)
-			f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
+		
+		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
 	}
 
-	if ((outer_type.size() == 1) && (strcmp(tname->getAccessModifier(), "public") == 0) && (strcmp(name, "main") == 0))
+	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
+	{
+		if (st->mainfunc == NULL)
+		{
+			f->set_static(true);
+			st->mainfunc = f;
+		}
+		else
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
+	}/*
+	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -398,18 +388,8 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
 	}
-	if ((outer_type.size() >1) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
-	{
-		if (st->mainfunc == NULL)
-		{
-			f->set_static(true);
-			st->mainfunc = f;
-		}
-		else
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
-	}
 
-	if ((outer_type.size() >1) && (!tname->getIs_static()) && f->get_static())
+	if ((outer_type.back() != NULL) && (!tname->getIs_static()) && f->get_static())
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}
@@ -423,50 +403,35 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 }
 
 
-Function * MyParser::finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo){
-	if (f != NULL)
-	{
-		if (ff)
-		{
-			f->set_final(ff);
-			char* first = f->getfirstpara();
-			if (first != NULL)
-			if (strcmp("self", first) == 0)
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
-		}
-		if (ss)
-		{
-			f->set_static(ss);
-			char* first = f->getfirstpara();
-			if (first != NULL)
-			if (strcmp("self", first) == 0)
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
-		}
-		if (!ff && !ss)
-		{
+Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int colNo){
+	if (f!=NULL)
+		{	
+			if (f->get_final())
+			{
 
-			char* first = f->getfirstpara();
-			if ((first != NULL) && (strcmp("self", first) != 0))
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
-			if (first == NULL)
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
-		}
-		for (int i = 0; i < int(outer_type.back()->getInheritedType().size()); i++)
-		{
-			Type* x = outer_type.back()->getInheritedType().at(i);
-			Function * f1 = (Function *)x->getScope()->m->get(f->get_name(), "Function");
-			if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
-			{
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "the method is final and you can't override it ", f1->get_name());
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", f->get_name());
 			}
-			else if (f1 && !f1->comparePar(f->getparameters()) && (f1->get_name() != "__init__"))
+			if (f->get_static())
 			{
-				this->errRecovery->errQ->enqueue(lineNo, colNo, "the method didn't have the same overrided method parameter", f1->get_name());
+
+				char* first = f->getfirstpara();
+				if (first != NULL)
+					if (strcmp("self", first) == 0)
+						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
-		}
+			if (!f->get_final() && !f->get_static())
+			{
+
+				char* first = f->getfirstpara();
+				if ((first != NULL) && (strcmp("self", first) != 0))
+					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
+			}
 
 	}
-	else
+	else 
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header", "cant recognize function name");
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
@@ -490,12 +455,12 @@ Type* MyParser::returninner(char* child, Type* t, int l, int cc)
 	Type* tt = *ot;
 	Type* t2 = (Type*)tt->getScope()->m->get(child, "Class");
 	if (!t2)
-	{
+		{
 		//error not found class child
-		return 0;
-	}
+					return 0;
+				}
 	return t2;
-
+		
 }
 int findTypeByName(vector<Type*>Mylist, Type* t)
 {
@@ -523,12 +488,12 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 		this->errRecovery->errQ->enqueue(lineno, colno, "the outer class has the same name", name);
 		no_error = 0;
 	}
-
+	
 	t = new Type();
 	t->set_name(name);
 	//cout <<name<<endl;
 	//int g = findTypeByName(;
-
+	
 	/*this if for chaeck the access midifier of class
 	the outer class cant be private or protecected it's just public
 	the inner class the defult access modifier is private and it's can be aany other access modifier
@@ -555,11 +520,11 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 		t->setAccessModifier(acc_mod);
 	}
 	/*this if fot check the static modifier according java grammer
-	the outer class can't be static
+	the outer class can't be static 
 	the inner class can't be staic if the outer class was not static
 	the inner class in first level just can static and his outer not static
 	*/
-
+	
 	if ((outer_type.size() == 0) && (is_static))
 	{
 		cout << "modifier static not allowed here" << endl;
@@ -596,7 +561,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 			}
 		}
 	}
-
+	
 	//cout << t->get_name() << endl;
 	if (outer_type.size() != 0)
 	{
@@ -606,11 +571,11 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 	{
 		t->setouter_class(NULL);
 	}
-	if (is_final)
-	{
+		if (is_final)
+		{
 		t->setIs_final(true);
 	}
-	t->getScope()->parent = this->st->currScope;
+		t->getScope()->parent = this->st->currScope;
 	//cout << "the size is " << inherted_list.size() << endl;
 	vector<char*>undeclarated_type;
 	if (inherted_list.size() > 0)
@@ -673,10 +638,10 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 						temp_st = "Undefind inner class ";
 						temp_st = temp_st + xx;
 						this->errRecovery->errQ->enqueue(lineno, colno, const_cast<char *>(temp_st.c_str()), name);
-					}
+				}
 					else if (t1->getIs_final())
-					{
-						string temp_st;
+				{
+							string temp_st;
 						temp_st = "cannot inherit from final ";
 						temp_st = temp_st + t1->get_name();
 						this->errRecovery->errQ->enqueue(lineno, colno, const_cast<char *>(temp_st.c_str()), name);
@@ -692,7 +657,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 			}
 			else
 			{
-
+				
 				Type* tcc;
 				//int xsi = constraction_type.size();
 				tcc = check_if_in_inner(new constraction(t, undeclarated_type, true, lineno, colno), tokenPtr);
@@ -702,111 +667,111 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 				}
 				else
 				{
-					undeclarated_type.push_back(inherted_list.at(j));
-				}
+				undeclarated_type.push_back(inherted_list.at(j));
 			}
+		}
 		}
 		if (undeclarated_type.size() > 0)
 		{
 			constraction* c = new constraction(t, undeclarated_type, true, lineno, colno);
-			constraction_type.push_back(c);
-		}
-
+		constraction_type.push_back(c);
 	}
-
+	
+	}
+	
 	/*
 	for (int i = 0; i < int(inherted_list.size()); i++)
 	{
-	char* xx = inherted_list.at(i);
-	char buffer[15];
-	bool found=false;
-	sprintf(buffer, xx);
-	tokenPtr = strtok(buffer, ".");
-	//cout << tokenPtr << endl;
-	Type* t1 = (Type*)this->st->getTypeFromCurrentScope(tokenPtr);
-	if (t1)
-	{
-	if (t1->getIs_final())
-	{
-	this->errRecovery->errQ->enqueue(lineno, colno, "the type is final and you can't inheteted", t1->get_name());
-	no_error = 0;
-	}
-	else
-	{
-	found = true;
-	}
-	}
-	else
-	{
+		char* xx = inherted_list.at(i);
+		char buffer[15];
+		bool found=false;
+		sprintf(buffer, xx);
+		tokenPtr = strtok(buffer, ".");
+		//cout << tokenPtr << endl;
+		Type* t1 = (Type*)this->st->getTypeFromCurrentScope(tokenPtr);
+		if (t1)
+		{
+			if (t1->getIs_final())
+			{
+				this->errRecovery->errQ->enqueue(lineno, colno, "the type is final and you can't inheteted", t1->get_name());
+				no_error = 0;
+			}
+			else
+			{
+				found = true;
+			}
+		}
+		else
+		{
 
-	t1 = new Type();
-	char*n=new char[25];
-	//cout << "token " << *tokenPtr << endl;
-	strcpy(n,tokenPtr);
-	t1->set_name(n);
-	//t1->declared = 0;
+			t1 = new Type();
+			char*n=new char[25];
+			//cout << "token " << *tokenPtr << endl;
+			strcpy(n,tokenPtr);
+			t1->set_name(n);
+			//t1->declared = 0;
 
-	//t1->setouter_class(outer_type.end());
-	if (outer_type.size() != 0)
-	{
-	t1->setouter_class(outer_type.back());
-	}
-	else
-	{
-	t1->setouter_class(NULL);
-	}
-	//t1->setStatus(completness::under_constraction);
-	//t->setInheritedType(t1);
-	}
-
-	tokenPtr = strtok(NULL, ".");
-	Type* t2 = new Type();
-	bool enter = false;
-	//Type* t3 = new Type();
-	while (tokenPtr != NULL)
-	{
-	char* x = new char[20];
-	//cout << "token " << *tokenPtr << endl;
-	strcpy(x, tokenPtr);
-	t2 = new Type();
-	t2->set_name(x);
-	t2->setouter_class(t1);
-	enter = true;
-	//t1 = (Type*)this->st->getTypeFromCurrentScope(x);
-	//Scope* tempScope = NULL;
-	tokenPtr = strtok(NULL, ".");
-	if (tokenPtr != NULL)
-	{
-	t1 = t2;
-	}
-	}
-	if (enter)
-	{
-	int j = findTypeByName(this->outer_type.back()->getInheritedType(), t1);
-	if (j == -1)
-	{
-	cout << "you can't inherted from inner class" << endl;
-	this->errRecovery->errQ->enqueue(lineno, colno, "you can't inherted from inner class", name);
-	no_error = 0;
-	}
-	t1 = this->returninner(t2->get_name(), t1, lineno, colno);
-	}
-	vector<constraction*>::iterator it = std::find_if(constraction_type.begin(), constraction_type.end(), Comparator_constraction(new constraction(t)));
-
-	//int it = constraction_type.find(new constraction(t1));
-	if (!t->setInheritedType(t1))
-	{
-	cout << "Error there is an inhertance Loop" << endl;
-	this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", name);
-	no_error = 0;
-	}
-	if ((!found)&&(it == constraction_type.end()))
-	{
-	//t1->declared = true;
-	//t1->setIs_final (true);
-	constraction* c = new constraction(t1, true, lineno, colno);
-	constraction_type.push_back(c);
-	}
+			//t1->setouter_class(outer_type.end());
+			if (outer_type.size() != 0)
+			{
+				t1->setouter_class(outer_type.back());
+			}
+			else
+			{
+				t1->setouter_class(NULL);
+			}
+			//t1->setStatus(completness::under_constraction);
+			//t->setInheritedType(t1);
+		}
+			
+				tokenPtr = strtok(NULL, ".");
+				Type* t2 = new Type();
+				bool enter = false;
+				//Type* t3 = new Type();
+				while (tokenPtr != NULL)
+				{
+					char* x = new char[20];
+					//cout << "token " << *tokenPtr << endl;
+					strcpy(x, tokenPtr);
+					t2 = new Type();
+					t2->set_name(x);
+					t2->setouter_class(t1);
+					enter = true;
+					//t1 = (Type*)this->st->getTypeFromCurrentScope(x);
+					//Scope* tempScope = NULL;
+					tokenPtr = strtok(NULL, ".");
+					if (tokenPtr != NULL)
+					{
+						t1 = t2;
+					}
+				}
+				if (enter)
+				{
+					int j = findTypeByName(this->outer_type.back()->getInheritedType(), t1);
+					if (j == -1)
+					{
+						cout << "you can't inherted from inner class" << endl;
+						this->errRecovery->errQ->enqueue(lineno, colno, "you can't inherted from inner class", name);
+						no_error = 0;
+					}
+					t1 = this->returninner(t2->get_name(), t1, lineno, colno);
+				}
+				vector<constraction*>::iterator it = std::find_if(constraction_type.begin(), constraction_type.end(), Comparator_constraction(new constraction(t)));
+				
+				//int it = constraction_type.find(new constraction(t1));
+				if (!t->setInheritedType(t1))
+				{
+					cout << "Error there is an inhertance Loop" << endl;
+					this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", name);
+					no_error = 0;
+				}
+				if ((!found)&&(it == constraction_type.end()))
+				{
+					//t1->declared = true;
+					//t1->setIs_final (true);
+					constraction* c = new constraction(t1, true, lineno, colno);
+					constraction_type.push_back(c);
+				}
 	}
 	*/
 	if (no_error)
@@ -818,10 +783,10 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 		t->declared = 0;
 	}
 
-
-
+	
+	
 	this->st->currScope->m->put(name, t, "Class");
-
+	
 	this->st->currScope = t->getScope();
 
 	this->st->add_declareted_type(t);
@@ -831,7 +796,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 	/*
 	if (!this->st->checkInhertanceLoop())
 	{
-	this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", name);
+		this->errRecovery->errQ->enqueue(lineno, colno, "Error there is an inhertance Loop", name);
 	}*/
 	//Type* r = (Type*)this->st->currScope->m->get(name);
 	//cout << r->get_name();
@@ -867,7 +832,7 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 	}
 
 	this->st->currScope = this->st->currScope->parent;
-
+	
 	if (!outer_type.back()->declared)
 	{
 		//remove t from  current scope
@@ -877,13 +842,13 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 	/*
 	for (int i = 0; i < constraction_type.size(); i++)
 	{
-	if ((constraction_type.at(i)->get_type()->getouter_class() == outer_type.back()) && (constraction_type.at(i)->expect == true))
-	{
-	constraction_type.at(i)->get_type()->setouter_class(constraction_type.at(i)->get_type()->getouter_class()->getouter_class());
-	}
+		if ((constraction_type.at(i)->get_type()->getouter_class() == outer_type.back()) && (constraction_type.at(i)->expect == true))
+		{
+			constraction_type.at(i)->get_type()->setouter_class(constraction_type.at(i)->get_type()->getouter_class()->getouter_class());
+		}
 	}*/
 
-
+	
 	return 0;
 };
 
@@ -965,7 +930,7 @@ void  MyParser::check_inhertance_list()
 					this->errRecovery->errQ->enqueue(constraction_type.at(i)->get_LineNo(), constraction_type.at(i)->get_ColNo(), "undeclarated type", temp.at(j));
 				}
 				//check if inner class :) 
-
+				
 			}
 		}
 	}
@@ -987,7 +952,7 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 	s1 = " ";
 	for (int i = 0; i < xx.size(); i++)
 	{
-
+		
 		Scope * s = xx.at(i)->getScope();
 		y = (Type*)s->m->get(x, "Class");
 		if (y)
@@ -999,7 +964,7 @@ Type* MyParser::check_if_in_inner(constraction* t, char*x)
 			s1 = s1 + " ";
 			n = n + 1;
 		}
-
+			
 	}
 	if (n>1)
 	{
@@ -1084,15 +1049,15 @@ void MyParser::recrusive_up_parnet(Type *t, int j)
 		for (int i = 0; i < int(t->getInheritedType().size()); i++)
 		{
 			Type* x = t->getInheritedType().at(i);
-			recrusive_up_parnet(x, j);
+			recrusive_up_parnet(x,j);
 			Function * f1 = (Function *)x->getScope()->m->get(unfinishfunction.at(j)->get_function()->get_name(), "Function");
 			if (f1 && f1->get_final() && (f1->get_name() != "__init__"))
 			{
-				this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
+				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method is final and you can't override it ", f1->get_name());
 			}
-			else if (f1 && !f1->comparePar(unfinishfunction.at(j)->get_function()->getparameters()) && (f1->get_name() != "__init__"))
+			else if (f1 && (f1->getparameters().size() != unfinishfunction.at(j)->get_function()->getparameters().size()) && (f1->get_name() != "__init__"))
 			{
-				this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
+				 this->errRecovery->errQ->enqueue(unfinishfunction.at(j)->get_LineNo(), unfinishfunction.at(j)->get_ColNo(), "the method didn't have the same overrided method parameter", f1->get_name());
 			}
 
 		}
@@ -1145,14 +1110,14 @@ void  MyParser::recrusive_up_caller(Type* t, int j)
 
 void MyParser::check_func_Call()
 {
-
+	
 	for (int j = 0; j< funccaller.size(); j++){
 		Type* t = funccaller.at(j)->get_type();
 		classname.clear();
 		Function * f1 = (Function *)t->getScope()->m->get(funccaller.at(j)->get_name(), "Function");
 		if (!f1){
 			recrusive_up_caller(t, j);
-
+			
 			if (classname.size() == 0)
 				this->errRecovery->errQ->enqueue(funccaller.at(j)->get_LineNo(), funccaller.at(j)->get_ColNo(), "call to not define function", funccaller.at(j)->get_name());
 			else if (classname.size() > 1)
@@ -1163,7 +1128,7 @@ void MyParser::check_func_Call()
 					std::string tempstr(classname.at(k));
 					erro = erro + " , " + tempstr;
 				}
-
+				
 				char *cstr = new char[erro.length() + 1];
 				strcpy(cstr, erro.c_str());
 				this->errRecovery->errQ->enqueue(funccaller.at(j)->get_LineNo(), funccaller.at(j)->get_ColNo(), cstr, funccaller.at(j)->get_name());
