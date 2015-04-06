@@ -85,6 +85,14 @@ bool Function::get_static(){
 	return this->is_static;
 }
 
+void Function::set_protected(bool m){
+	this->is_protected = m;
+}
+
+bool Function::get_protected(){
+	return this->is_protected;
+}
+
 bool Function::comparePar(vector<char *> outparameters)
 {
 	if (outparameters.size() != this->parameters.size())

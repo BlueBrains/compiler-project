@@ -259,7 +259,7 @@ public:
 	//YaccSimpleType* createYaccSimpleType(Type t);
 	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
 	Variable* addVariableToCurrentScope(char* n, char*acc_mod,bool is_static,bool is_final, int lineNo, int colNo,bool is_array,bool is_dic,bool self=false);
-	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo);
+	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool protect ,bool fi, char* name, vector <char*> parameter, int lineNo, int colNo);
 	Function * finishFunctionDeclaration(Function * f, bool ff, bool ss , int lineNo, int colNo);
 	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod,bool is_static,bool is_final, int lineno, int colno, bool is_final_t);
 	Type * finishTypeDeclaration(Type* t);
