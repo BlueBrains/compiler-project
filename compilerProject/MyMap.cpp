@@ -26,7 +26,7 @@ void MapElem::setNext(MapElem * newMapElem){
 
 MyMap::MyMap(void)
 {
-	for(int i=0; i<this->mapLength; i++){
+	for (int i = 0; i<this->mapLength; i++){
 		this->arr[i] = 0;
 	}
 }
@@ -49,13 +49,13 @@ int MyMap::hash(char* name){
 	unsigned int i;
 	int retVal = 0;
 	const char * x = name;
-	for(i = 0 ; i < strlen(name); i++)
-	{		
+	for (i = 0; i < strlen(name); i++)
+	{
 		retVal <<= 2;
-		retVal ^= (int)(*name);		
+		retVal ^= (int)(*name);
 		x++;
 	}
-	return (retVal%mapLength);	
+	return (retVal%mapLength);
 }
 
 void MyMap::put(char* name, void* element, char* type){

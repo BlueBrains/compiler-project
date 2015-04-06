@@ -17,7 +17,7 @@ void Symbol::set_name(char* name){
 	if ((this != NULL) && (name != "")){
 		this->name = name;
 	}
-	
+
 }
 char* Symbol::get_name()
 const{

@@ -29,7 +29,7 @@ struct Comparator_char {
 
 
 struct Comparator_type {
-	 Type* expected_type;
+	Type* expected_type;
 
 	Comparator_type(Type* _expected_type)
 		: expected_type(_expected_type)
@@ -97,7 +97,7 @@ public:
 		this->LineNo = L;
 		ColNo = C;
 	}
-	constraction(Type*t,vector<char*>inh, bool exp, int L, int C)
+	constraction(Type*t, vector<char*>inh, bool exp, int L, int C)
 	{
 		this->type = new Type();
 		this->type = t;
@@ -202,7 +202,7 @@ public:
 	}
 	void insertparameter(vector <char *> par)
 	{
-		 this->paramerter=par;
+		this->paramerter = par;
 	}
 	int get_LineNo()
 	{
@@ -235,7 +235,7 @@ public:
 		this->ColNo = C;
 		this->LineNo = L;
 	}
-	
+
 	bool compare(vector <char*> p)
 	{
 		if (p.size() != this->paramerter.size())
@@ -257,21 +257,21 @@ public:
 	MyParser(void);
 	~MyParser(void);
 	//YaccSimpleType* createYaccSimpleType(Type t);
-	Variable* insertVar(char* n,char*acc_mod, int lineNo, int colNo);
-	Variable* addVariableToCurrentScope(char* n, char*acc_mod,bool is_static,bool is_final, int lineNo, int colNo,bool is_array,bool is_dic,bool self=false);
+	Variable* insertVar(char* n, char*acc_mod, int lineNo, int colNo);
+	Variable* addVariableToCurrentScope(char* n, char*acc_mod, bool is_static, bool is_final, int lineNo, int colNo, bool is_array, bool is_dic, bool self = false);
 	Function * createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo);
-	Function * finishFunctionDeclaration(Function * f, bool ff, bool ss , int lineNo, int colNo);
-	Type * createType(char* name, vector<char*>inherted_list,char* acc_mod,bool is_static,bool is_final, int lineno, int colno, bool is_final_t);
+	Function * finishFunctionDeclaration(Function * f, bool ff, bool ss, int lineNo, int colNo);
+	Type * createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t);
 	Type * finishTypeDeclaration(Type* t);
-	Type* returninner( char* child, Type* t,int l,int c);
+	Type* returninner(char* child, Type* t, int l, int c);
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
-	Variable* checkVariable(char* v,Type* t, int lineNo, int colNo,bool from_right,bool is_array,bool is_dic,bool self=false);
-	bool check_function(char*name,Function* f);
+	Variable* checkVariable(char* v, Type* t, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self = false);
+	bool check_function(char*name, Function* f);
 	void print_symbol();
 	void check_functions();
-	Variable* set_storage_modifier(Variable* v,bool is_static,bool is_final);
+	Variable* set_storage_modifier(Variable* v, bool is_static, bool is_final);
 	void insert_func_Call(Type* t, char* name, int lineno, int colno);
 	void recrusive_up_parnet(Type *t, int j);
 	void recrusive_up_caller(Type* t, int j);
