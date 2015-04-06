@@ -780,15 +780,6 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);
 				return	PASS;
 			}
-"self"		{
-				colNum += strlen(yytext);
-				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;				
-				yylval.r.strVal=new char[265];
-				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);
-				return	SELF;
-			}
 {octinteger}	{
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)

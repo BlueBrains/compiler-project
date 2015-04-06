@@ -4,6 +4,10 @@ dotted_as_name: dotted_name
 comma_dotted_as_name_seq: dotted_as_names: dotted_as_name 
 import_name: IMPORT dotted_as_names 
 import_stmt: import_name 
+dotted_name: NAME 
+dotted_as_name: dotted_name 
+comma_dotted_as_name_seq: dotted_as_names: dotted_as_name 
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
 atom: NAME
 power:	atom
 factor: power
@@ -53,6 +57,7 @@ test:	or_test
 argument: 	test
 arglist: arg_comma_seq argument
 parameters:'(' arglist ')'
+funcheader: DEF NAME parameters ':' 
 atom: NAME
 trailer:	'.' NAME
 trailer_seq: trailer 
@@ -130,7 +135,7 @@ stmt:	simple_stmt
 list_stmt : stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-funcdef: DEF NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 access_modef:	PUBLIC
@@ -151,6 +156,7 @@ test:	or_test
 argument: 	test
 arglist: argument
 parameters:'(' arglist ')'
+funcheader: DEF access NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -370,7 +376,7 @@ list_stmt : stmt
 list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-funcdef: DEF access NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 access_modef: PRIVATE
@@ -413,6 +419,7 @@ expr_stmt: testlist_star_expr
 small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
+class_h: CLASS ID 
 atom: NAME
 power:	atom
 factor: power
@@ -430,6 +437,7 @@ test:	or_test
 argument: 	test
 arglist: argument
 parameters:'(' arglist ')'
+funcheader: DEF NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -542,7 +550,7 @@ list_stmt : stmt
 list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-funcdef: DEF NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 atom: NAME
@@ -578,6 +586,7 @@ test:	or_test
 argument: 	test
 arglist: arg_comma_seq argument
 parameters:'(' arglist ')'
+funcheader: DEF NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -594,7 +603,7 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt
 suite:	list_stmt END
-funcdef: DEF NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 atom: NAME
@@ -614,19 +623,21 @@ test:	or_test
 argument: 	test
 arglist: argument
 parameters:'(' arglist ')'
+funcheader: DEF NAME parameters ':' 
 suite:	END
-funcdef: DEF NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt
 list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-classdef: CLASS NAME ':' suite
+classdef: classheader suite
 compound_stmt: DEF classdef
 stmt: compound_stmt
 access_modef: PRIVATE
 parameters:'(' ')'
+funcheader: DEF access NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -883,7 +894,7 @@ list_stmt : stmt
 list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-funcdef: DEF access NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 access_modef:	PUBLIC
@@ -904,6 +915,7 @@ test:	or_test
 argument: 	test
 arglist: argument
 parameters:'(' arglist ')'
+funcheader: DEF access NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -1163,7 +1175,7 @@ compound_stmt:  if_stmt
 stmt: compound_stmt
 list_stmt : stmt
 suite:	list_stmt END
-funcdef: DEF access NAME parameters ':' suite
+funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt
@@ -1174,6 +1186,7 @@ list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
-temp2: CLASS NAME '(' ')' ':' suite 
+classdef: classheader suite
+temp2: classdef
 program : import_stmt ';' temp2 
 file_input: program ENDMARKER
