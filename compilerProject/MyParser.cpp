@@ -169,7 +169,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	return v;
 }
 
-Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
+Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool protect, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
 	Type * type = tname;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
@@ -370,6 +370,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	f->set_name(name);
 	f->set_final(fi);
 	f->set_static(s);
+	f->set_protected(protect);
 	f->set_private(p);
 	type->getScope()->m->put(name, f, "Function");
 	f->setScope(new Scope);
