@@ -11,6 +11,7 @@ private:
 	Scope * scope;
 	bool is_static;
 	bool is_private;
+	bool is_protected;
 	//bool is_override;
 	bool is_final;
 	vector<Variable *> parameters;
@@ -27,6 +28,8 @@ public:
 	bool get_private();
 	void set_static(bool m);
 	bool get_static();
+	void set_protected(bool m);
+	bool get_protected();
 	Scope* getScope();
 	char* getfirstpara();
 	void setparameters(char * parameters);
