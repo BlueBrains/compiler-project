@@ -1,5 +1,5 @@
 import test.main;
-class point():
+class point(A):
 	def __init__ (sef,X,Y):  #constructor
 		sef.x=X;
 		sef.y=Y;
