@@ -781,47 +781,47 @@ static const short int yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const unsigned short int yyrline[] =
 {
-       0,   106,   106,   109,   110,   114,   127,   129,   130,   131,
-     132,   133,   134,   135,   136,   137,   138,   139,   140,   141,
-     142,   143,   144,   145,   146,   147,   148,   149,   150,   151,
-     152,   153,   154,   155,   156,   157,   158,   159,   160,   163,
-     164,   167,   168,   170,   172,   173,   174,   175,   176,   177,
-     178,   179,   182,   183,   184,   187,   188,   191,   192,   193,
-     194,   195,   196,   197,   200,   201,   204,   205,   207,   208,
-     209,   210,   211,   212,   213,   214,   215,   216,   217,   218,
-     221,   222,   223,   225,   226,   229,   232,   233,   234,   237,
-     240,   243,   244,   248,   251,   254,   255,   257,   263,   272,
-     275,   278,   279,   282,   285,   290,   291,   294,   295,   298,
-     299,   302,   303,   304,   305,   306,   307,   308,   311,   312,
-     315,   316,   317,   318,   321,   322,   325,   326,   329,   330,
-     331,   332,   335,   336,   339,   340,   343,   344,   347,   348,
-     351,   352,   353,   356,   357,   360,   361,   364,   365,   368,
-     369,   372,   373,   376,   377,   380,   381,   384,   385,   388,
-     389,   392,   393,   396,   397,   398,   399,   400,   401,   402,
-     403,   404,   405,   406,   409,   412,   413,   415,   416,   419,
-     420,   423,   424,   427,   428,   431,   432,   435,   436,   437,
-     438,   441,   442,   445,   446,   447,   448,   451,   452,   455,
-     456,   457,   458,   459,   460,   461,   462,   465,   466,   469,
-     470,   471,   472,   475,   476,   479,   480,   481,   482,   485,
-     486,   489,   490,   491,   492,   493,   494,   495,   496,   497,
-     498,   499,   500,   501,   502,   503,   504,   505,   506,   507,
-     508,   509,   510,   511,   512,   513,   514,   515,   516,   517,
-     518,   519,   520,   523,   524,   525,   526,   529,   530,   531,
-     532,   533,   534,   535,   536,   537,   538,   541,   542,   543,
-     544,   547,   548,   551,   552,   553,   554,   557,   558,   559,
-     560,   561,   562,   563,   564,   565,   568,   569,   572,   573,
-     574,   575,   578,   579,   580,   581,   582,   583,   584,   585,
-     588,   589,   592,   593,   594,   595,   598,   599,   601,   602,
-     605,   606,   607,   608,   609,   610,   611,   612,   613,   614,
-     616,   618,   623,   629,   635,   641,   647,   653,   659,   665,
-     671,   677,   683,   689,   695,   701,   707,   713,   720,   726,
-     732,   738,   744,   750,   756,   762,   768,   774,   780,   786,
-     792,   798,   804,   810,   816,   822,   828,   834,   840,   846,
-     852,   858,   864,   870,   871,   872,   878,   884,   890,   899,
-     900,   903,   904,   907,   908,   909,   910,   911,   912,   913,
-     914,   915,   916,   917,   918,   919,   920,   921,   922,   923,
-     924,   925,   926,   927,   931,   932,   935,   936,   939,   941,
-     942,   946,   947,   950,   951,   954,   955
+       0,   106,   106,   115,   116,   120,   133,   135,   136,   137,
+     138,   139,   140,   141,   142,   143,   144,   145,   146,   147,
+     148,   149,   150,   151,   152,   153,   154,   155,   156,   157,
+     158,   159,   160,   161,   162,   163,   164,   165,   166,   169,
+     170,   173,   174,   176,   178,   179,   180,   181,   182,   183,
+     184,   185,   188,   189,   190,   193,   194,   197,   198,   199,
+     200,   201,   202,   203,   206,   207,   210,   211,   213,   214,
+     215,   216,   217,   218,   219,   220,   221,   222,   223,   224,
+     227,   228,   229,   231,   232,   235,   238,   239,   240,   243,
+     246,   249,   250,   254,   257,   260,   261,   263,   269,   278,
+     281,   284,   285,   288,   291,   296,   297,   300,   301,   304,
+     305,   308,   309,   310,   311,   312,   313,   314,   317,   318,
+     321,   322,   323,   324,   327,   328,   331,   332,   335,   336,
+     337,   338,   341,   342,   345,   346,   349,   350,   353,   354,
+     357,   358,   359,   362,   363,   366,   367,   370,   371,   374,
+     375,   378,   379,   382,   383,   386,   387,   390,   391,   394,
+     395,   398,   399,   402,   403,   404,   405,   406,   407,   408,
+     409,   410,   411,   412,   415,   418,   419,   421,   422,   425,
+     426,   429,   430,   433,   434,   437,   438,   441,   442,   443,
+     444,   447,   448,   451,   452,   453,   454,   457,   458,   461,
+     462,   463,   464,   465,   466,   467,   468,   471,   472,   475,
+     476,   477,   478,   481,   482,   485,   486,   487,   488,   491,
+     492,   495,   496,   497,   498,   499,   500,   501,   502,   503,
+     504,   505,   506,   507,   508,   509,   510,   511,   512,   513,
+     514,   515,   516,   517,   518,   519,   520,   521,   522,   523,
+     524,   525,   526,   529,   530,   531,   532,   535,   536,   537,
+     538,   539,   540,   541,   542,   543,   544,   547,   548,   549,
+     550,   553,   554,   557,   558,   559,   560,   563,   564,   565,
+     566,   567,   568,   569,   570,   571,   574,   575,   578,   579,
+     580,   581,   584,   585,   586,   587,   588,   589,   590,   591,
+     594,   595,   598,   599,   600,   601,   604,   605,   607,   608,
+     611,   612,   613,   614,   615,   616,   617,   618,   619,   620,
+     622,   624,   629,   635,   641,   647,   653,   659,   665,   671,
+     677,   683,   689,   695,   701,   707,   713,   719,   726,   732,
+     738,   744,   750,   756,   762,   768,   774,   780,   786,   792,
+     798,   804,   810,   816,   822,   828,   834,   840,   846,   852,
+     858,   864,   870,   876,   877,   878,   884,   890,   896,   905,
+     906,   909,   910,   913,   914,   915,   916,   917,   918,   919,
+     920,   921,   922,   923,   924,   925,   926,   927,   928,   929,
+     930,   931,   932,   933,   937,   938,   941,   942,   945,   947,
+     948,   952,   953,   956,   957,   960,   961
 };
 #endif
 
@@ -2218,481 +2218,487 @@ yyreduce:
     {
         case 2:
 #line 106 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"file_input: program ENDMARKER\n";Streams::verbose().flush();;}
+    {Streams::verbose() <<"file_input: program ENDMARKER\n";Streams::verbose().flush();
+										p->check_inhertance_list();
+						if(!p->errRecovery->errQ->isEmpty())
+								p->errRecovery->printErrQueue();
+						p->print_symbol();
+						Streams::verbose().flush();	
+								;}
     break;
 
   case 3:
-#line 109 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 115 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"program : import_stmt ';' temp2 \n";;}
     break;
 
   case 4:
-#line 110 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 116 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"program : temp2 \n";;}
     break;
 
   case 5:
-#line 114 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 120 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"temp2: classdef\n";;}
     break;
 
   case 6:
-#line 127 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 133 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcdef:	funcheader suite \n";;}
     break;
 
   case 7:
-#line 129 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 135 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 8:
-#line 130 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 136 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 9:
-#line 131 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 137 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF NAME parameters ':' \n";;}
     break;
 
   case 10:
-#line 132 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 138 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access NAME parameters ':' \n";;}
     break;
 
   case 11:
-#line 133 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 139 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ARROW test ':' \n";;}
     break;
 
   case 12:
-#line 134 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 140 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ARROW test ':' \n";;}
     break;
 
   case 13:
-#line 135 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 141 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ':' \n";;}
     break;
 
   case 14:
-#line 136 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 142 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ':' \n";;}
     break;
 
   case 15:
-#line 137 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 143 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ARROW test ':' \n";;}
     break;
 
   case 16:
-#line 138 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 144 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 17:
-#line 139 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 145 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ':'  \n";;}
     break;
 
   case 18:
-#line 140 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 146 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ':'  \n";;}
     break;
 
   case 19:
-#line 141 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 147 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL access NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 20:
-#line 142 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 148 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 21:
-#line 143 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 149 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':'  \n";;}
     break;
 
   case 22:
-#line 144 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 150 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':' ";;}
     break;
 
   case 23:
-#line 145 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 151 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 24:
-#line 146 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 152 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 25:
-#line 147 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 153 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ':'  \n";;}
     break;
 
   case 26:
-#line 148 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 154 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ':'  \n";;}
     break;
 
   case 27:
-#line 149 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 155 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 28:
-#line 150 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 156 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 29:
-#line 151 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 157 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ':'  \n";;}
     break;
 
   case 30:
-#line 152 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 158 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ':'  \n";;}
     break;
 
   case 31:
-#line 153 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 159 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 32:
-#line 154 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 160 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 33:
-#line 155 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 161 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ':'  \n";;}
     break;
 
   case 34:
-#line 156 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 162 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ':'  \n";;}
     break;
 
   case 35:
-#line 157 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 163 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 36:
-#line 158 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 164 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':'  \n";;}
     break;
 
   case 37:
-#line 159 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 165 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ':'  \n";;}
     break;
 
   case 38:
-#line 160 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 166 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ':'  \n";;}
     break;
 
   case 39:
-#line 163 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 169 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"parameters:'(' arglist ')'\n";;}
     break;
 
   case 40:
-#line 164 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 170 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"parameters:'(' ')'\n";;}
     break;
 
   case 41:
-#line 167 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 173 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"stmt:	simple_stmt \n";;}
     break;
 
   case 42:
-#line 168 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 174 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"stmt: compound_stmt\n";;}
     break;
 
   case 43:
-#line 170 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 176 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";;}
     break;
 
   case 44:
-#line 172 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 178 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: expr_stmt \n";;}
     break;
 
   case 45:
-#line 173 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 179 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: del_stmt \n";;}
     break;
 
   case 46:
-#line 174 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 180 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: pass_stmt \n";;}
     break;
 
   case 47:
-#line 175 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 181 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: flow_stmt \n";;}
     break;
 
   case 48:
-#line 176 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 182 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: import_stmt \n";;}
     break;
 
   case 49:
-#line 177 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 183 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: global_stmt \n";;}
     break;
 
   case 50:
-#line 178 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 184 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: nonlocal_stmt \n";;}
     break;
 
   case 51:
-#line 179 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 185 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: print_stmt \n";;}
     break;
 
   case 52:
-#line 182 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";;}
     break;
 
   case 53:
-#line 183 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 189 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";;}
     break;
 
   case 54:
-#line 184 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 190 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";;}
     break;
 
   case 55:
-#line 187 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 193 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";;}
     break;
 
   case 56:
-#line 188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 194 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";;}
     break;
 
   case 57:
-#line 191 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 197 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";;}
     break;
 
   case 58:
-#line 192 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 198 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ ',' \n";;}
     break;
 
   case 59:
-#line 193 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 199 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"',' \n";;}
     break;
 
   case 60:
-#line 194 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 200 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: test comma_test_star_seqJ \n";;}
     break;
 
   case 61:
-#line 195 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 201 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: test \n";;}
     break;
 
   case 62:
-#line 196 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 202 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: star_expr comma_test_star_seqJ ',' \n";;}
     break;
 
   case 63:
-#line 197 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 203 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_star_expr: star_expr ',' \n";;}
     break;
 
   case 64:
-#line 200 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 206 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star : ',' test \n";;}
     break;
 
   case 65:
-#line 201 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 207 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star : ',' star_expr \n";;}
     break;
 
   case 66:
-#line 204 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 210 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star_seqJ comma_test_star \n";;}
     break;
 
   case 67:
-#line 205 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 211 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star \n";;}
     break;
 
   case 68:
-#line 207 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 213 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	PLUS_EQUAL \n";;}
     break;
 
   case 69:
-#line 208 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 214 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	MINUS_EQUAL \n";;}
     break;
 
   case 70:
-#line 209 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 215 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	STAR_EQUAL \n";;}
     break;
 
   case 71:
-#line 210 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 216 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	DIV_EQUAL \n";;}
     break;
 
   case 72:
-#line 211 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 217 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	MOD_EQUAL \n";;}
     break;
 
   case 73:
-#line 212 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 218 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	AND_EQUAL \n";;}
     break;
 
   case 74:
-#line 213 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 219 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	OR_EQUAL \n";;}
     break;
 
   case 75:
-#line 214 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 220 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	SHAPOO_EQUAL \n";;}
     break;
 
   case 76:
-#line 215 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 221 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	LESS_THAN_2_EQUAL \n";;}
     break;
 
   case 77:
-#line 216 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 222 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	MORE_THAN_2_EQUAL \n";;}
     break;
 
   case 78:
-#line 217 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 223 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	STAR_2_EQUAL \n";;}
     break;
 
   case 79:
-#line 218 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 224 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"augassign:	DIV_2_EQUAL \n";;}
     break;
 
   case 80:
-#line 221 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 227 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;;}
     break;
 
   case 81:
-#line 222 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 228 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
     break;
 
   case 82:
-#line 223 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 229 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";;}
     break;
 
   case 83:
-#line 225 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 231 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"print_stmt: PRINT exprlist \n";;}
     break;
 
   case 84:
-#line 226 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 232 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"del_stmt:   DEL exprlist \n";;}
     break;
 
   case 85:
-#line 229 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 235 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"pass_stmt:	PASS \n";;}
     break;
 
   case 86:
-#line 232 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 238 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"flow_stmt:	break_stmt \n";;}
     break;
 
   case 87:
-#line 233 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 239 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"flow_stmt: continue_stmt\n";;}
     break;
 
   case 88:
-#line 234 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 240 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"flow_stmt: return_stmt\n";;}
     break;
 
   case 89:
-#line 237 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 243 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"break_stmt: BREAK \n";;}
     break;
 
   case 90:
-#line 240 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 246 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"continue_stmt:	CONTINUE \n";;}
     break;
 
   case 91:
-#line 243 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 249 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"return_stmt:	RETURN testlist \n";;}
     break;
 
   case 92:
-#line 244 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 250 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"return_stmt:	RETURN \n";;}
     break;
 
   case 93:
-#line 248 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 254 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"import_stmt: import_name \n";;}
     break;
 
   case 94:
-#line 251 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";;}
     break;
 
   case 95:
-#line 254 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 260 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";;}
     break;
 
   case 96:
-#line 255 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 261 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_dotted_as_name_seq: comma_dotted_as_name_seq ',' dotted_as_name \n";;}
     break;
 
   case 97:
-#line 257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 263 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_dotted_as_name_seq: dotted_as_names: dotted_as_name \n";
 								t_id=new char[10];
 								strcpy(t_id,temp_id.c_str());
@@ -2702,7 +2708,7 @@ yyreduce:
     break;
 
   case 98:
-#line 263 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 269 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_dotted_as_name_seq: dotted_as_name comma_dotted_as_name_seq \n";
 						t_id=new char[10];
 								strcpy(t_id,temp_id.c_str());
@@ -2712,1123 +2718,1123 @@ yyreduce:
     break;
 
   case 99:
-#line 272 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 278 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_as_name: dotted_name \n";
 					
 					;}
     break;
 
   case 100:
-#line 275 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 281 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_as_name: dotted_name AS NAME\n";;}
     break;
 
   case 101:
-#line 278 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 284 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_name: NAME \n"; temp_id=temp_id+(yyvsp[0].r.strVal);;}
     break;
 
   case 102:
-#line 279 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 285 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_name: NAME dotted_name_seq \n";;}
     break;
 
   case 103:
-#line 282 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 288 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_name_seq: '.' NAME \n";
 							temp_id=temp_id+"."+(yyvsp[0].r.strVal);
 						;}
     break;
 
   case 104:
-#line 285 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 291 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dotted_name_seq: dotted_name_seq '.' NAME \n";
 					temp_id=temp_id+"."+(yyvsp[0].r.strVal);
 				 ;}
     break;
 
   case 105:
-#line 290 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 296 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_name_seq :	',' NAME \n";;}
     break;
 
   case 106:
-#line 291 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 297 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";;}
     break;
 
   case 107:
-#line 294 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 300 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"global_stmt: GLOBAL NAME \n";;}
     break;
 
   case 108:
-#line 295 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 301 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";;}
     break;
 
   case 109:
-#line 298 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 304 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME \n";;}
     break;
 
   case 110:
-#line 299 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 305 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"nonlocal_stmt: NONLOCAL NAME comma_name_seq \n";;}
     break;
 
   case 111:
-#line 302 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 308 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt:  if_stmt \n";;}
     break;
 
   case 112:
-#line 303 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 309 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: while_stmt\n";;}
     break;
 
   case 113:
-#line 304 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 310 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: for_stmt\n";;}
     break;
 
   case 114:
-#line 305 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 311 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: try_stmt\n";;}
     break;
 
   case 115:
-#line 306 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 312 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: with_stmt\n";;}
     break;
 
   case 116:
-#line 307 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 313 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: funcdef\n";;}
     break;
 
   case 117:
-#line 308 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 314 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"compound_stmt: DEF classdef\n";;}
     break;
 
   case 118:
-#line 311 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 317 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";;}
     break;
 
   case 119:
-#line 312 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 318 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";;}
     break;
 
   case 120:
-#line 315 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 321 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"if_stmt:	IF test ':' suite \n";;}
     break;
 
   case 121:
-#line 316 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 322 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";;}
     break;
 
   case 122:
-#line 317 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 323 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";;}
     break;
 
   case 123:
-#line 318 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 324 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";;}
     break;
 
   case 124:
-#line 321 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 327 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";;}
     break;
 
   case 125:
-#line 322 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 328 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";;}
     break;
 
   case 126:
-#line 325 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 331 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";;}
     break;
 
   case 127:
-#line 326 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 332 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";;}
     break;
 
   case 128:
-#line 329 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 335 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";;}
     break;
 
   case 129:
-#line 330 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 336 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";;}
     break;
 
   case 130:
-#line 331 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 337 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";;}
     break;
 
   case 131:
-#line 332 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 338 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";;}
     break;
 
   case 132:
-#line 335 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";;}
     break;
 
   case 133:
-#line 336 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 342 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";;}
     break;
 
   case 134:
-#line 339 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 345 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"with_seq:	',' with_item \n";;}
     break;
 
   case 135:
-#line 340 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 346 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"with_seq: with_seq ',' with_item\n";;}
     break;
 
   case 136:
-#line 343 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 349 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"with_stmt:  WITH with_item ':' suite \n";;}
     break;
 
   case 137:
-#line 344 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 350 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"with_stmt: WITH with_item with_seq ':' suite\n";;}
     break;
 
   case 138:
-#line 347 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 353 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<" with_item:  test\n";;}
     break;
 
   case 139:
-#line 348 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 354 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"with_item: test AS expr\n";;}
     break;
 
   case 140:
-#line 351 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 357 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"except_clause:  EXCEPT \n";;}
     break;
 
   case 141:
-#line 352 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 358 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"except_clause:  EXCEPT test\n";;}
     break;
 
   case 142:
-#line 353 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";;}
     break;
 
   case 143:
-#line 356 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 362 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams:: verbose() <<"list_stmt : stmt\n";;}
     break;
 
   case 144:
-#line 357 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 363 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams:: verbose() <<"list_stmt : stmt list_stmt\n";;}
     break;
 
   case 145:
-#line 360 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 366 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"suite:	list_stmt END\n";;}
     break;
 
   case 146:
-#line 361 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 367 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"suite:	END\n";;}
     break;
 
   case 147:
-#line 364 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 370 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"test:	or_test\n";;}
     break;
 
   case 148:
-#line 365 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 371 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_test IF or_test ELSE test\n";;}
     break;
 
   case 149:
-#line 368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 374 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_seq:	OR and_test \n";;}
     break;
 
   case 150:
-#line 369 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 375 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_seq: or_seq OR and_test \n";;}
     break;
 
   case 151:
-#line 372 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 378 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_test:	and_test\n";;}
     break;
 
   case 152:
-#line 373 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 379 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_test:	and_test or_seq\n";;}
     break;
 
   case 153:
-#line 376 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 382 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_seq: AND not_test \n";;}
     break;
 
   case 154:
-#line 377 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 383 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_seq: and_seq AND not_test \n";;}
     break;
 
   case 155:
-#line 380 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 386 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_test:	not_test\n";;}
     break;
 
   case 156:
-#line 381 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 387 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_test: not_test and_seq \n";;}
     break;
 
   case 157:
-#line 384 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 390 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"not_test:	NOT not_test\n";;}
     break;
 
   case 158:
-#line 385 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 391 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"not_test:	comparison\n";;}
     break;
 
   case 159:
-#line 388 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 394 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op_seq: comp_op expr \n";;}
     break;
 
   case 160:
-#line 389 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 395 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";;}
     break;
 
   case 161:
-#line 392 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 398 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comparison: expr\n";}
     break;
 
   case 162:
-#line 393 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 399 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comparison: expr comp_op_seq\n";}
     break;
 
   case 163:
-#line 396 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 402 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: '<' \n";;}
     break;
 
   case 164:
-#line 397 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 403 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: '>' \n";;}
     break;
 
   case 165:
-#line 398 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: EQUAL \n";;}
     break;
 
   case 166:
-#line 399 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 405 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";;}
     break;
 
   case 167:
-#line 400 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 406 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";;}
     break;
 
   case 168:
-#line 401 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 407 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: MORE_LESS \n";;}
     break;
 
   case 169:
-#line 402 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 408 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: NOT_EQUAL \n";;}
     break;
 
   case 170:
-#line 403 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 409 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: IN \n";;}
     break;
 
   case 171:
-#line 404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 410 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: NOT IN \n";;}
     break;
 
   case 172:
-#line 405 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 411 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: IS \n";;}
     break;
 
   case 173:
-#line 406 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 412 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_op: IS NOT \n";;}
     break;
 
   case 174:
-#line 409 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 415 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"star_expr: '*' expr \n";;}
     break;
 
   case 175:
-#line 412 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 418 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_xor_expr_seq: '|' xor_expr \n";;}
     break;
 
   case 176:
-#line 413 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 419 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"or_xor_expr_seq: or_xor_expr_seq '|' xor_expr\n";;}
     break;
 
   case 177:
-#line 415 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 421 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr: xor_expr\n";}
     break;
 
   case 178:
-#line 416 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 422 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr: xor_expr or_xor_expr_seq\n";;}
     break;
 
   case 179:
-#line 419 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 425 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"sha_and_expr_seq: '^' and_expr \n";;}
     break;
 
   case 180:
-#line 420 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 426 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"sha_and_expr_seq: sha_and_expr_seq '^' and_expr\n";;}
     break;
 
   case 181:
-#line 423 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 429 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"xor_expr: and_expr\n";}
     break;
 
   case 182:
-#line 424 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 430 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"xor_expr: and_expr sha_and_expr_seq\n";;}
     break;
 
   case 183:
-#line 427 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 433 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_shift_expr_seq: '&' shift_expr \n";;}
     break;
 
   case 184:
-#line 428 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 434 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_shift_expr_seq: and_shift_expr_seq '&' shift_expr\n";;}
     break;
 
   case 185:
-#line 431 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 437 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_expr: shift_expr\n";}
     break;
 
   case 186:
-#line 432 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 438 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"and_expr: shift_expr and_shift_expr_seq\n";;}
     break;
 
   case 187:
-#line 435 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_seq:	LESS_THAN_2 arith_expr \n";;}
     break;
 
   case 188:
-#line 436 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 442 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_seq:	MORE_THAN_2 arith_expr \n";;}
     break;
 
   case 189:
-#line 437 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 443 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_seq:	arith_seq LESS_THAN_2 arith_expr \n";;}
     break;
 
   case 190:
-#line 438 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 444 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_seq:	arith_seq MORE_THAN_2 arith_expr \n";;}
     break;
 
   case 191:
-#line 441 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 447 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"shift_expr: arith_expr\n";}
     break;
 
   case 192:
-#line 442 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 448 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n";}
     break;
 
   case 193:
-#line 445 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : '+' term \n";;}
     break;
 
   case 194:
-#line 446 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : '-' term \n";;}
     break;
 
   case 195:
-#line 447 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 453 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : term_seq '+' term \n";;}
     break;
 
   case 196:
-#line 448 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 454 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : term_seq '-' term \n";;}
     break;
 
   case 197:
-#line 451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_expr: term\n";}
     break;
 
   case 198:
-#line 452 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arith_expr: term term_seq\n";}
     break;
 
   case 199:
-#line 455 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 461 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '*' factor \n";;}
     break;
 
   case 200:
-#line 456 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '/' factor \n";;}
     break;
 
   case 201:
-#line 457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '%' factor \n";;}
     break;
 
   case 202:
-#line 458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 464 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: DIV_2 factor \n";;}
     break;
 
   case 203:
-#line 459 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 465 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";;}
     break;
 
   case 204:
-#line 460 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 466 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";;}
     break;
 
   case 205:
-#line 461 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";;}
     break;
 
   case 206:
-#line 462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 468 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";;}
     break;
 
   case 207:
-#line 465 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 471 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term: 	factor\n";}
     break;
 
   case 208:
-#line 466 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 472 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term: 	factor factor_seq\n";}
     break;
 
   case 209:
-#line 469 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 475 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor: '+' factor \n";;}
     break;
 
   case 210:
-#line 470 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 476 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor: '-' factor \n";;}
     break;
 
   case 211:
-#line 471 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 477 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor: '~' factor \n";;}
     break;
 
   case 212:
-#line 472 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 478 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor: power\n";}
     break;
 
   case 213:
-#line 475 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer_seq: trailer \n";;}
     break;
 
   case 214:
-#line 476 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 482 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";;}
     break;
 
   case 215:
-#line 479 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 485 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"power:	atom\n";}
     break;
 
   case 216:
-#line 480 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 486 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"power: atom trailer_seq \n";;}
     break;
 
   case 217:
-#line 481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 487 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";;}
     break;
 
   case 218:
-#line 482 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 488 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"power: atom STAR_2 factor \n";;}
     break;
 
   case 219:
-#line 485 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"str_seq:	STRING \n";;}
     break;
 
   case 220:
-#line 486 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 492 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"str_seq:	str_seq STRING \n";;}
     break;
 
   case 221:
-#line 489 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 495 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom:	'(' ')' \n";;}
     break;
 
   case 222:
-#line 490 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 496 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";;}
     break;
 
   case 223:
-#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 497 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom:	'[' ']' \n";;}
     break;
 
   case 224:
-#line 492 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 498 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: '{' '}' \n";;}
     break;
 
   case 225:
-#line 493 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 499 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: '{' '}' \n";;}
     break;
 
   case 226:
-#line 494 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 500 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";;}
     break;
 
   case 227:
-#line 495 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 501 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NAME\n";}
     break;
 
   case 228:
-#line 496 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 502 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF NAME\n";}
     break;
 
   case 229:
-#line 497 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 503 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access NAME\n";}
     break;
 
   case 230:
-#line 498 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 504 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC NAME\n";}
     break;
 
   case 231:
-#line 499 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 505 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL NAME\n";}
     break;
 
   case 232:
-#line 500 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 506 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC FINAL NAME\n";}
     break;
 
   case 233:
-#line 501 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 507 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL STATIC NAME\n";}
     break;
 
   case 234:
-#line 502 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 508 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC access NAME\n";}
     break;
 
   case 235:
-#line 503 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 509 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL access NAME\n";}
     break;
 
   case 236:
-#line 504 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 510 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC FINAL access NAME\n";}
     break;
 
   case 237:
-#line 505 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 511 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL STATIC access NAME\n";}
     break;
 
   case 238:
-#line 506 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 512 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access STATIC NAME\n";}
     break;
 
   case 239:
-#line 507 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 513 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access FINAL NAME\n";}
     break;
 
   case 240:
-#line 508 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 514 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access STATIC FINAL NAME\n";}
     break;
 
   case 241:
-#line 509 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 515 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access FINAL STATIC NAME\n";}
     break;
 
   case 242:
-#line 510 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 516 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC access FINAL NAME\n";}
     break;
 
   case 243:
-#line 511 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 517 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL access STATIC NAME\n";}
     break;
 
   case 244:
-#line 512 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 518 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_INT\n";}
     break;
 
   case 245:
-#line 513 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 519 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_FLOAT\n";}
     break;
 
   case 246:
-#line 514 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 520 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_FLOAT\n";}
     break;
 
   case 247:
-#line 515 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 521 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: CHAR_VALUE\n";}
     break;
 
   case 248:
-#line 516 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 522 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: str_seq\n";}
     break;
 
   case 249:
-#line 517 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 523 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DOT_3\n";}
     break;
 
   case 250:
-#line 518 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 524 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NONE\n";}
     break;
 
   case 251:
-#line 519 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 525 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: TRUE\n";}
     break;
 
   case 252:
-#line 520 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 526 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: FALSE\n";}
     break;
 
   case 253:
-#line 523 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 529 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seq: ',' test\n";}
     break;
 
   case 254:
-#line 524 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 530 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seq: ',' star_expr\n";}
     break;
 
   case 255:
-#line 525 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 531 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' test\n";}
     break;
 
   case 256:
-#line 526 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 532 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 257:
-#line 529 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 535 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_comp: test comp_for\n";}
     break;
 
   case 258:
-#line 530 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 536 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_comp: test\n";}
     break;
 
   case 259:
-#line 531 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 537 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_comp: test   comma_test_star_seq\n";}
     break;
 
   case 260:
-#line 532 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 261:
-#line 533 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 262:
-#line 534 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 263:
-#line 535 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 264:
-#line 536 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 265:
-#line 537 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
-    break;
-
-  case 266:
 #line 538 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
-  case 267:
+  case 261:
+#line 539 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 262:
+#line 540 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 263:
 #line 541 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 264:
+#line 542 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 265:
+#line 543 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 266:
+#line 544 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
+    break;
+
+  case 267:
+#line 547 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer:	'('  ')'\n";}
     break;
 
   case 268:
-#line 542 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 548 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer:	'(' arglist ')'\n";}
     break;
 
   case 269:
-#line 543 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 549 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";}
     break;
 
   case 270:
-#line 544 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 550 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"trailer:	'.' NAME\n";}
     break;
 
   case 271:
-#line 547 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 553 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n";}
     break;
 
   case 272:
-#line 548 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 554 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n";}
     break;
 
   case 273:
-#line 551 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 557 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscriptlist:	subscript\n";}
     break;
 
   case 274:
-#line 552 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 558 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";}
     break;
 
   case 275:
-#line 553 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 559 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscriptlist:	subscript  ','\n";}
     break;
 
   case 276:
-#line 554 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 560 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";}
     break;
 
   case 277:
-#line 557 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 563 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  test\n";}
     break;
 
   case 278:
-#line 558 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 564 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  ':'\n";}
     break;
 
   case 279:
-#line 559 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 565 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript: test ':'\n";}
     break;
 
   case 280:
-#line 560 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 566 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  test ':' test\n";}
     break;
 
   case 281:
-#line 561 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 567 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
     break;
 
   case 282:
-#line 562 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 568 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}
     break;
 
   case 283:
-#line 563 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 569 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  ':' test\n";}
     break;
 
   case 284:
-#line 564 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 570 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  ':' sliceop\n";}
     break;
 
   case 285:
-#line 565 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 571 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"subscript:  ':' test sliceop\n";}
     break;
 
   case 286:
-#line 568 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 574 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"sliceop: ':'\n";}
     break;
 
   case 287:
-#line 569 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 575 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"sliceop: ':' test\n";}
     break;
 
   case 288:
-#line 572 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 578 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";;}
     break;
 
   case 289:
-#line 573 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 579 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";;}
     break;
 
   case 290:
-#line 574 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 580 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";;}
     break;
 
   case 291:
-#line 575 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 581 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";;}
     break;
 
   case 292:
-#line 578 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 584 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	expr \n";;}
     break;
 
   case 293:
-#line 579 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 585 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";;}
     break;
 
   case 294:
-#line 580 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 586 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	star_expr \n";;}
     break;
 
   case 295:
-#line 581 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 587 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";;}
     break;
 
   case 296:
-#line 582 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 588 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	expr ',' \n";;}
     break;
 
   case 297:
-#line 583 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 589 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";;}
     break;
 
   case 298:
-#line 584 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 590 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	star_expr ',' \n";;}
     break;
 
   case 299:
-#line 585 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 591 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";;}
     break;
 
   case 300:
-#line 588 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 594 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test: ',' test \n";;}
     break;
 
   case 301:
-#line 589 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 595 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"',' test comma_test \n";;}
     break;
 
   case 302:
-#line 592 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 598 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist:	test \n";;}
     break;
 
   case 303:
-#line 593 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 599 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist:	test comma_test \n";;}
     break;
 
   case 304:
-#line 594 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 600 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist:	 test ','\n";;}
     break;
 
   case 305:
-#line 595 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 601 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"testlist:	 test comma_test ','\n";;}
     break;
 
   case 306:
-#line 598 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 604 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_colon_test_seq:  ',' test ':' test \n";;}
     break;
 
   case 307:
-#line 599 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 605 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' test\n";;}
     break;
 
   case 308:
-#line 601 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 607 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_seq: ',' test \n";;}
     break;
 
   case 309:
-#line 602 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 608 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_test_seq: comma_test_seq ',' test \n";;}
     break;
 
   case 310:
-#line 605 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 611 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ':' test comp_for \n";;}
     break;
 
   case 311:
-#line 606 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 612 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ':' test \n";;}
     break;
 
   case 312:
-#line 607 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 613 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ':' test ',' \n";;}
     break;
 
   case 313:
-#line 608 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 614 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq \n";;}
     break;
 
   case 314:
-#line 609 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 615 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq ','\n";;}
     break;
 
   case 315:
-#line 610 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 616 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test comp_for\n";;}
     break;
 
   case 316:
-#line 611 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 617 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test\n";;}
     break;
 
   case 317:
-#line 612 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 618 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ','\n";;}
     break;
 
   case 318:
-#line 613 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 619 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test ','\n";;}
     break;
 
   case 319:
-#line 614 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 620 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";;}
     break;
 
   case 320:
-#line 616 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 622 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"classdef: classheader suite\n";;}
     break;
 
   case 321:
-#line 618 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 624 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-2].r.lineNum),(yyvsp[-1].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3837,7 +3843,7 @@ yyreduce:
     break;
 
   case 322:
-#line 623 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 629 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3847,7 +3853,7 @@ yyreduce:
     break;
 
   case 323:
-#line 629 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 635 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3857,7 +3863,7 @@ yyreduce:
     break;
 
   case 324:
-#line 635 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 641 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-3].r.lineNum),(yyvsp[-2].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3867,16 +3873,6 @@ yyreduce:
     break;
 
   case 325:
-#line 641 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
-								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-					;}
-    break;
-
-  case 326:
 #line 647 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3886,8 +3882,18 @@ yyreduce:
 					;}
     break;
 
-  case 327:
+  case 326:
 #line 653 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
+								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+					;}
+    break;
+
+  case 327:
+#line 659 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3897,7 +3903,7 @@ yyreduce:
     break;
 
   case 328:
-#line 659 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 665 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3907,16 +3913,6 @@ yyreduce:
     break;
 
   case 329:
-#line 665 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
-								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-					;}
-    break;
-
-  case 330:
 #line 671 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3926,8 +3922,18 @@ yyreduce:
 					;}
     break;
 
-  case 331:
+  case 330:
 #line 677 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
+								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+					;}
+    break;
+
+  case 331:
+#line 683 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 								(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3937,7 +3943,7 @@ yyreduce:
     break;
 
   case 332:
-#line 683 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 689 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-3].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -3947,16 +3953,6 @@ yyreduce:
     break;
 
   case 333:
-#line 689 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
-							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-					;}
-    break;
-
-  case 334:
 #line 695 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3966,7 +3962,7 @@ yyreduce:
 					;}
     break;
 
-  case 335:
+  case 334:
 #line 701 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3976,7 +3972,7 @@ yyreduce:
 					;}
     break;
 
-  case 336:
+  case 335:
 #line 707 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
 							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -3986,8 +3982,18 @@ yyreduce:
 					;}
     break;
 
-  case 337:
+  case 336:
 #line 713 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-4].r.colNum)+1));
+							(yyval.type)=p->createType((yyvsp[-1].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+					;}
+    break;
+
+  case 337:
+#line 719 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-4].r.lineNum),(yyvsp[-1].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 									t=(yyval.type);
@@ -3998,7 +4004,7 @@ yyreduce:
     break;
 
   case 338:
-#line 720 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 726 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4008,7 +4014,7 @@ yyreduce:
     break;
 
   case 339:
-#line 726 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 732 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4018,7 +4024,7 @@ yyreduce:
     break;
 
   case 340:
-#line 732 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 738 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-2].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4028,16 +4034,6 @@ yyreduce:
     break;
 
   case 341:
-#line 738 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
-									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-								;}
-    break;
-
-  case 342:
 #line 744 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4047,8 +4043,18 @@ yyreduce:
 								;}
     break;
 
-  case 343:
+  case 342:
 #line 750 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
+									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+								;}
+    break;
+
+  case 343:
+#line 756 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4058,7 +4064,7 @@ yyreduce:
     break;
 
   case 344:
-#line 756 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 762 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4068,16 +4074,6 @@ yyreduce:
     break;
 
   case 345:
-#line 762 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
-									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-								;}
-    break;
-
-  case 346:
 #line 768 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4087,8 +4083,18 @@ yyreduce:
 								;}
     break;
 
-  case 347:
+  case 346:
 #line 774 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
+									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+								;}
+    break;
+
+  case 347:
+#line 780 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 								(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4098,7 +4104,7 @@ yyreduce:
     break;
 
   case 348:
-#line 780 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 786 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-3].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=(yyval.type);
@@ -4108,16 +4114,6 @@ yyreduce:
     break;
 
   case 349:
-#line 786 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
-									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-								t=(yyval.type);
-								inhertance_list.clear();
-								acc_mod="";
-								;}
-    break;
-
-  case 350:
 #line 792 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4127,7 +4123,7 @@ yyreduce:
 								;}
     break;
 
-  case 351:
+  case 350:
 #line 798 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4137,7 +4133,7 @@ yyreduce:
 								;}
     break;
 
-  case 352:
+  case 351:
 #line 804 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
 									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4147,8 +4143,18 @@ yyreduce:
 								;}
     break;
 
-  case 353:
+  case 352:
 #line 810 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-4].r.colNum)+1)); 
+									(yyval.type)=p->createType((yyvsp[-3].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+								t=(yyval.type);
+								inhertance_list.clear();
+								acc_mod="";
+								;}
+    break;
+
+  case 353:
+#line 816 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-5].r.lineNum),(yyvsp[-1].r.colNum)+1));
 												(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4158,7 +4164,7 @@ yyreduce:
     break;
 
   case 354:
-#line 816 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 822 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4168,7 +4174,7 @@ yyreduce:
     break;
 
   case 355:
-#line 822 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 828 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4178,7 +4184,7 @@ yyreduce:
     break;
 
   case 356:
-#line 828 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 834 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-6].r.lineNum),(yyvsp[-2].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4188,16 +4194,6 @@ yyreduce:
     break;
 
   case 357:
-#line 834 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
-													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-													t=(yyval.type);
-													inhertance_list.clear();
-													acc_mod="";
-											;}
-    break;
-
-  case 358:
 #line 840 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4207,8 +4203,18 @@ yyreduce:
 											;}
     break;
 
-  case 359:
+  case 358:
 #line 846 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
+													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													t=(yyval.type);
+													inhertance_list.clear();
+													acc_mod="";
+											;}
+    break;
+
+  case 359:
+#line 852 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4218,7 +4224,7 @@ yyreduce:
     break;
 
   case 360:
-#line 852 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 858 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-7].r.lineNum),(yyvsp[-3].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
@@ -4228,16 +4234,6 @@ yyreduce:
     break;
 
   case 361:
-#line 858 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
-													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
-													t=(yyval.type);
-													acc_mod="";
-													inhertance_list.clear();
-											;}
-    break;
-
-  case 362:
 #line 864 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4247,19 +4243,9 @@ yyreduce:
 											;}
     break;
 
-  case 363:
+  case 362:
 #line 870 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
-    break;
-
-  case 364:
-#line 871 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
-    break;
-
-  case 365:
-#line 872 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
+    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=(yyval.type);
 													acc_mod="";
@@ -4267,7 +4253,17 @@ yyreduce:
 											;}
     break;
 
-  case 366:
+  case 363:
+#line 876 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
+    break;
+
+  case 364:
+#line 877 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
+    break;
+
+  case 365:
 #line 878 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4277,7 +4273,7 @@ yyreduce:
 											;}
     break;
 
-  case 367:
+  case 366:
 #line 884 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4287,7 +4283,7 @@ yyreduce:
 											;}
     break;
 
-  case 368:
+  case 367:
 #line 890 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
 													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
@@ -4297,193 +4293,203 @@ yyreduce:
 											;}
     break;
 
+  case 368:
+#line 896 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((yyvsp[-8].r.lineNum),(yyvsp[-4].r.colNum)+1));
+													(yyval.type)=p->createType((yyvsp[-4].r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													t=(yyval.type);
+													acc_mod="";
+													inhertance_list.clear();
+											;}
+    break;
+
   case 369:
-#line 899 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 905 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arg_comma_seq : argument ','\n";;}
     break;
 
   case 370:
-#line 900 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 906 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arg_comma_seq : argument ',' arg_comma_seq\n";;}
     break;
 
   case 371:
-#line 903 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 909 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_arg_seq:	',' argument\n";;}
     break;
 
   case 372:
-#line 904 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 910 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_arg_seq:	comma_arg_seq ',' argument\n";;}
     break;
 
   case 373:
-#line 907 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 913 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: argument\n";;}
     break;
 
   case 374:
-#line 908 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 914 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: default_arg\n";;}
     break;
 
   case 375:
-#line 909 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 915 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: argument ','\n";;}
     break;
 
   case 376:
-#line 910 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 916 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test\n";;}
     break;
 
   case 377:
-#line 911 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 917 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test ',' STAR_2 test\n";;}
     break;
 
   case 378:
-#line 912 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 918 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";;}
     break;
 
   case 379:
-#line 913 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 919 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";;}
     break;
 
   case 380:
-#line 914 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 920 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";;}
     break;
 
   case 381:
-#line 915 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 921 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: '*' test comma_arg_seq ',' STAR_2 test\n";;}
     break;
 
   case 382:
-#line 916 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 922 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: STAR_2 test\n";;}
     break;
 
   case 383:
-#line 917 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 923 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq argument\n";;}
     break;
 
   case 384:
-#line 918 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 924 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq default_arg\n";;}
     break;
 
   case 385:
-#line 919 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 925 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq default_arg_comma_seq default_arg\n";;}
     break;
 
   case 386:
-#line 920 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 926 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq argument ','\n";;}
     break;
 
   case 387:
-#line 921 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 927 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test\n";;}
     break;
 
   case 388:
-#line 922 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 928 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test ',' STAR_2 test\n";;}
     break;
 
   case 389:
-#line 923 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 929 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq\n";;}
     break;
 
   case 390:
-#line 924 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 930 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_default_arg_seq\n";;}
     break;
 
   case 391:
-#line 925 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 931 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq\n";;}
     break;
 
   case 392:
-#line 926 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 932 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test\n";;}
     break;
 
   case 393:
-#line 927 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 933 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"arglist: arg_comma_seq STAR_2 test\n";;}
     break;
 
   case 394:
-#line 931 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 937 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_default_arg_seq: ',' default_arg\n";;}
     break;
 
   case 395:
-#line 932 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 938 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comma_default_arg_seq: comma_default_arg_seq ',' default_arg\n";;}
     break;
 
   case 396:
-#line 935 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 941 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";;}
     break;
 
   case 397:
-#line 936 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 942 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";;}
     break;
 
   case 398:
-#line 939 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 945 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"default_arg: test '=' test\n";;}
     break;
 
   case 399:
-#line 941 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 947 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"argument: 	test\n";;}
     break;
 
   case 400:
-#line 942 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 948 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"argument: 	test comp_for\n";;}
     break;
 
   case 401:
-#line 946 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 952 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_iter:  comp_for\n";;}
     break;
 
   case 402:
-#line 947 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 953 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_iter:  comp_if\n";;}
     break;
 
   case 403:
-#line 950 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 956 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_for: 	FOR exprlist IN or_test\n";;}
     break;
 
   case 404:
-#line 951 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 957 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_for: FOR exprlist IN or_test comp_iter\n";;}
     break;
 
   case 405:
-#line 954 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 960 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_if: IF or_test\n";;}
     break;
 
   case 406:
-#line 955 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 961 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"comp_if: IF or_test comp_iter\n";;}
     break;
 
@@ -4492,7 +4498,7 @@ yyreduce:
     }
 
 /* Line 1126 of yacc.c.  */
-#line 4496 "yacc.cpp"
+#line 4502 "yacc.cpp"
 
   yyvsp -= yylen;
   yyssp -= yylen;
@@ -4760,7 +4766,7 @@ yyreturn:
 }
 
 
-#line 958 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 964 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
 
 void yyerror(const char *s) 
 {

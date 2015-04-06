@@ -103,7 +103,13 @@
 
 
 
-file_input: program ENDMARKER {Streams::verbose() <<"file_input: program ENDMARKER\n";Streams::verbose().flush();}
+file_input: program ENDMARKER {Streams::verbose() <<"file_input: program ENDMARKER\n";Streams::verbose().flush();
+										p->check_inhertance_list();
+						if(!p->errRecovery->errQ->isEmpty())
+								p->errRecovery->printErrQueue();
+						p->print_symbol();
+						Streams::verbose().flush();	
+								}
 			;
 
 program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';' temp2 \n";}
