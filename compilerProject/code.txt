@@ -1,9 +1,5 @@
-def class C(v):
+class C(v):
 	def final coco(self):
 	end
 
 end
-def class v:
-	def final coco():
-		end
-end	

@@ -377,7 +377,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
-	}/*
+	}
 	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
