@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -121,13 +121,10 @@
     <ClInclude Include="..\Streams.h" />
     <ClInclude Include="..\SyntaxError.h" />
     <ClInclude Include="..\yacc.hpp" />
-    <ClInclude Include="AST.h" />
-    <ClInclude Include="ClassNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyParser.h" />
     <ClInclude Include="myvector.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="ST\Function.h" />
     <ClInclude Include="ST\MyVector.h" />
     <ClInclude Include="ST\object.h" />
