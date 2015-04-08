@@ -121,7 +121,7 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 
 
 temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";
-					ast->createClassNode($<type>1);
+//					ast->createClassNode($<type>1);
 				}
 		;
 

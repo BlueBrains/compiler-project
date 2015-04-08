@@ -1,4 +1,4 @@
-public class a:
+class a:
 
 end
 class c:

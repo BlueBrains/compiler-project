@@ -1,6 +1,10 @@
-access_modef:	PUBLIC
-class_h: access_modef CLASS ID 
+class_h: CLASS ID 
 suite:	END
 classdef: classheader suite
-temp2: classdef
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+temp2: classdef 
+temp2: classdef classdeflist
 program : temp2 
+file_input: program ENDMARKER
