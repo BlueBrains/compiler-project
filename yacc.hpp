@@ -51,52 +51,52 @@
      TRY = 277,
      FINALLY = 278,
      ARROW = 279,
-     PASS = 280,
-     NONLOCAL = 281,
-     PLUS_EQUAL = 282,
-     MINUS_EQUAL = 283,
-     DIV_EQUAL = 284,
-     MOD_EQUAL = 285,
-     AND_EQUAL = 286,
-     OR_EQUAL = 287,
-     SHAPOO_EQUAL = 288,
-     LESS_THAN_2_EQUAL = 289,
-     MORE_THAN_2_EQUAL = 290,
-     STAR_2_EQUAL = 291,
-     DIV_2_EQUAL = 292,
-     MORE_LESS = 293,
-     FALSE = 294,
-     TRUE = 295,
-     STAR_2 = 296,
-     NUMBER_INT = 297,
-     NUMBER_LONG = 298,
-     NUMBER_FLOAT = 299,
-     NAME = 300,
-     DOT_3 = 301,
-     EXPECT = 302,
-     WITH = 303,
-     AS = 304,
-     ASSERT = 305,
-     EQUAL = 306,
-     DEL = 307,
-     RETURN = 308,
-     PRINT = 309,
-     GLOBAL = 310,
-     STAR_EQUAL = 311,
-     LESS_THAN_2 = 312,
-     RAISE = 313,
-     PRIVATE = 314,
-     PUBLIC = 315,
-     PROTECTED = 316,
-     YIELD = 317,
-     MORE_THAN_2 = 318,
-     STRING = 319,
-     NONE = 320,
-     IS = 321,
-     DIV_2 = 322,
-     LESS_OR_EQUAL = 323,
-     MORE_OR_EQUAL = 324,
-     EXCEPT = 325,
+     NONLOCAL = 280,
+     PLUS_EQUAL = 281,
+     MINUS_EQUAL = 282,
+     DIV_EQUAL = 283,
+     MOD_EQUAL = 284,
+     AND_EQUAL = 285,
+     OR_EQUAL = 286,
+     SHAPOO_EQUAL = 287,
+     LESS_THAN_2_EQUAL = 288,
+     MORE_THAN_2_EQUAL = 289,
+     STAR_2_EQUAL = 290,
+     DIV_2_EQUAL = 291,
+     MORE_LESS = 292,
+     FALSE = 293,
+     TRUE = 294,
+     STAR_2 = 295,
+     NUMBER_INT = 296,
+     NUMBER_LONG = 297,
+     NUMBER_FLOAT = 298,
+     NAME = 299,
+     DOT_3 = 300,
+     EXPECT = 301,
+     WITH = 302,
+     AS = 303,
+     ASSERT = 304,
+     EQUAL = 305,
+     DEL = 306,
+     RETURN = 307,
+     PRINT = 308,
+     GLOBAL = 309,
+     STAR_EQUAL = 310,
+     LESS_THAN_2 = 311,
+     RAISE = 312,
+     PRIVATE = 313,
+     PUBLIC = 314,
+     PROTECTED = 315,
+     YIELD = 316,
+     MORE_THAN_2 = 317,
+     STRING = 318,
+     NONE = 319,
+     IS = 320,
+     DIV_2 = 321,
+     LESS_OR_EQUAL = 322,
+     MORE_OR_EQUAL = 323,
+     EXCEPT = 324,
+     PASS = 325,
      CHAR_VALUE = 326,
      BREAK = 327,
      CONTINUE = 328,
@@ -139,52 +139,52 @@
 #define TRY 277
 #define FINALLY 278
 #define ARROW 279
-#define PASS 280
-#define NONLOCAL 281
-#define PLUS_EQUAL 282
-#define MINUS_EQUAL 283
-#define DIV_EQUAL 284
-#define MOD_EQUAL 285
-#define AND_EQUAL 286
-#define OR_EQUAL 287
-#define SHAPOO_EQUAL 288
-#define LESS_THAN_2_EQUAL 289
-#define MORE_THAN_2_EQUAL 290
-#define STAR_2_EQUAL 291
-#define DIV_2_EQUAL 292
-#define MORE_LESS 293
-#define FALSE 294
-#define TRUE 295
-#define STAR_2 296
-#define NUMBER_INT 297
-#define NUMBER_LONG 298
-#define NUMBER_FLOAT 299
-#define NAME 300
-#define DOT_3 301
-#define EXPECT 302
-#define WITH 303
-#define AS 304
-#define ASSERT 305
-#define EQUAL 306
-#define DEL 307
-#define RETURN 308
-#define PRINT 309
-#define GLOBAL 310
-#define STAR_EQUAL 311
-#define LESS_THAN_2 312
-#define RAISE 313
-#define PRIVATE 314
-#define PUBLIC 315
-#define PROTECTED 316
-#define YIELD 317
-#define MORE_THAN_2 318
-#define STRING 319
-#define NONE 320
-#define IS 321
-#define DIV_2 322
-#define LESS_OR_EQUAL 323
-#define MORE_OR_EQUAL 324
-#define EXCEPT 325
+#define NONLOCAL 280
+#define PLUS_EQUAL 281
+#define MINUS_EQUAL 282
+#define DIV_EQUAL 283
+#define MOD_EQUAL 284
+#define AND_EQUAL 285
+#define OR_EQUAL 286
+#define SHAPOO_EQUAL 287
+#define LESS_THAN_2_EQUAL 288
+#define MORE_THAN_2_EQUAL 289
+#define STAR_2_EQUAL 290
+#define DIV_2_EQUAL 291
+#define MORE_LESS 292
+#define FALSE 293
+#define TRUE 294
+#define STAR_2 295
+#define NUMBER_INT 296
+#define NUMBER_LONG 297
+#define NUMBER_FLOAT 298
+#define NAME 299
+#define DOT_3 300
+#define EXPECT 301
+#define WITH 302
+#define AS 303
+#define ASSERT 304
+#define EQUAL 305
+#define DEL 306
+#define RETURN 307
+#define PRINT 308
+#define GLOBAL 309
+#define STAR_EQUAL 310
+#define LESS_THAN_2 311
+#define RAISE 312
+#define PRIVATE 313
+#define PUBLIC 314
+#define PROTECTED 315
+#define YIELD 316
+#define MORE_THAN_2 317
+#define STRING 318
+#define NONE 319
+#define IS 320
+#define DIV_2 321
+#define LESS_OR_EQUAL 322
+#define MORE_OR_EQUAL 323
+#define EXCEPT 324
+#define PASS 325
 #define CHAR_VALUE 326
 #define BREAK 327
 #define CONTINUE 328
