@@ -120,7 +120,7 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 		  ;
 
 
-temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef classdeflist\n";}
+temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";}
 		|classdef  {Streams::verbose() <<"temp2: classdef \n";}
 		;
 
