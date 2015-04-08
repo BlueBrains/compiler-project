@@ -22,10 +22,6 @@
     <None Include="..\yacc.y" />
     <None Include="..\yacc.output" />
     <None Include="khaled.y" />
-    <None Include="..\yacc .y" />
-    <None Include="..\yaccc1.y" />
-    <None Include="..\yaccc2.y" />
-    <None Include="..\yacct.y" />
     <None Include="..\yaccFinal.y" />
   </ItemGroup>
   <ItemGroup>
