@@ -120,7 +120,9 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 		  ;
 
 
-temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";}
+temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";
+					ast->createClassNode($<type>1);
+				}
 		;
 
 
@@ -716,6 +718,7 @@ classdef: classheader suite {Streams::verbose() <<"classdef: classheader suite\n
 classheader: CLASS NAME ':'  {Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
+
 								inhertance_list.clear();
 					}
 		  |access CLASS NAME ':'  {Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));

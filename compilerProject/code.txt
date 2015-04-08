@@ -1,12 +1,7 @@
-public class a(b):
-	
-	def a():
+public class a:
 
-	end
-	def class c(f):
-	end
-	def class f(c):
-	end
+end
+class c:
 end
 
 
