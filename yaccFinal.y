@@ -11,6 +11,7 @@
 	#include <fstream>
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
+	#include "compilerProject/AST.h"
 	#include <set>
 	#include "compilerProject/MyParser.h"
 	using namespace std;
@@ -63,6 +64,7 @@
 		}
 	};
 	MyParser * p = new MyParser();
+	AST * ast = new AST();
 %}		
 
 
@@ -79,6 +81,7 @@
 		class Variable * var;
 		class Function * function;
 		class Type * type;
+		class Node * tn;
 }
 
 
@@ -111,6 +114,7 @@ file_input: program ENDMARKER {Streams::verbose() <<"file_input: program ENDMARK
 						if(!p->errRecovery->errQ->isEmpty())
 								p->errRecovery->printErrQueue();
 						p->print_symbol();
+						ast->print($<tn>1, 0);
 						Streams::verbose().flush();	
 								}
 			;
@@ -120,10 +124,16 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 		  ;
 
 
-temp2:  classdef {Streams::verbose() <<"temp2: classdef\n";
-//					ast->createClassNode($<type>1);
-				}
+temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
+							ast->addNext($<tn>1,$<tn>2);
+							cout<<"enter upper"<<endl;
+						}
+		|classdef  {Streams::verbose() <<"temp2: classdef \n";
+							//ast->createClassNode();
+							cout<<"enter classdef"<<endl;
+					}
 		;
+
 
 
 //temp1:  CLASS NAME ':'  {Streams::verbose() <<"temp1:  CLASS NAME ':'  \n";}
@@ -262,8 +272,8 @@ parameters: '(' arglist ')' {Streams::verbose() <<"parameters:'(' arglist ')'\n"
 			|'(' ')' {Streams::verbose() <<"parameters:'(' ')'\n";}
 			;
 
-stmt:	simple_stmt {Streams::verbose() <<"stmt:	simple_stmt \n";}
-		| compound_stmt {Streams::verbose() <<"stmt: compound_stmt\n";}
+stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";}
+		| compound_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt: compound_stmt\n";}
 		;
 simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
 			 ;
@@ -403,7 +413,9 @@ compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
 				| try_stmt {Streams::verbose() <<"compound_stmt: try_stmt\n";}
 				| with_stmt {Streams::verbose() <<"compound_stmt: with_stmt\n";}
 				| funcdef  {Streams::verbose() <<"compound_stmt: funcdef\n";}
-				| DEF classdef {Streams::verbose() <<"compound_stmt: DEF classdef\n";}
+				| DEF classdef {Streams::verbose() <<"compound_stmt: DEF classdef\n";
+									$<tn>$=$<tn>2;
+								}
 				;
 
 elif_seq :  ELIF test ':' suite {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";}
@@ -451,12 +463,18 @@ except_clause:  EXCEPT {Streams::verbose() <<"except_clause:  EXCEPT \n";}
 				|EXCEPT test AS NAME {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";}
 				;
 
-list_stmt : stmt {Streams:: verbose() <<"list_stmt : stmt\n";}
-			|stmt list_stmt {Streams:: verbose() <<"list_stmt : stmt list_stmt\n";}
+list_stmt: stmt {	$<tn>$=$<tn>1;	Streams:: verbose() <<"list_stmt : stmt\n";}
+			|stmt list_stmt {Streams:: verbose() <<"list_stmt : stmt list_stmt\n";
+						ast->addNext($<tn>1,$<tn>2);
+						$<tn>$=$<tn>1;	
+			}
 			;
 
-suite:	list_stmt END {Streams::verbose() <<"suite:	list_stmt END\n";}
-		|END {Streams::verbose() <<"suite:	END\n";}
+suite:	list_stmt END {
+							Streams::verbose() <<"suite:	list_stmt END\n";
+							$<tn>$=$<tn>1;	
+						}
+		|END {	$<tn>$=NULL;	Streams::verbose() <<"suite:	END\n"; $<tn>$=NULL;}
 		;
 
 test:	or_test {Streams::verbose() <<"test:	or_test\n";}
@@ -713,6 +731,7 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 				;
 classdef: classheader suite {Streams::verbose() <<"classdef: classheader suite\n";
 								$<type>$=p->finishTypeDeclaration(t);
+								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL);
 							}
 
 classheader: CLASS NAME ':'  {Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));

@@ -1,10 +1,30 @@
 class_h: CLASS ID 
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+compound_stmt: DEF classdef
+stmt: compound_stmt
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+compound_stmt: DEF classdef
+stmt: compound_stmt
+list_stmt : stmt
+list_stmt : stmt list_stmt
+suite:	list_stmt END
+classdef: classheader suite
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+class_h: CLASS ID 
 suite:	END
 classdef: classheader suite
 class_h: CLASS ID 
 suite:	END
 classdef: classheader suite
 temp2: classdef 
-temp2: classdef classdeflist
+temp2: classdef temp2
+temp2: classdef temp2
+temp2: classdef temp2
 program : temp2 
 file_input: program ENDMARKER

@@ -207,7 +207,7 @@
 
 
 #if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 69 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 71 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
 typedef union YYSTYPE {
 	struct R{
 		int intVal;
@@ -221,9 +221,10 @@ typedef union YYSTYPE {
 		class Variable * var;
 		class Function * function;
 		class Type * type;
+		class Node * tn;
 } YYSTYPE;
 /* Line 1447 of yacc.c.  */
-#line 227 "yacc.hpp"
+#line 228 "yacc.hpp"
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

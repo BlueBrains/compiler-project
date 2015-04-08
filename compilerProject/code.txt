@@ -1,8 +1,12 @@
-class a:
-
+class u:
+def class d:
 end
-class c:
+def class y:
 end
-
-
-
+end		
+class C:
+end
+class i:
+end
+class g:
+end
