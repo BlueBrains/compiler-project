@@ -135,7 +135,7 @@ temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";}
 		//;
 		
 
-funcdef: funcheader suite {Streams::verbose() <<"funcdef:	funcheader suite \n";}
+funcdef: funcheader suite {testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);parameters.clear();linefunc=0;colmfunc=0;Streams::verbose() <<"funcdef:	funcheader suite \n";}
 	
 funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";}
 			|DEF access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";}
@@ -711,7 +711,9 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 				|test comma_test_seq {Streams::verbose() <<"dictorsetmaker: test ','\n";}
 				|test comma_test_seq ',' {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";}
 				;
-classdef: classheader suite {Streams::verbose() <<"classdef: classheader suite\n";}
+classdef: classheader suite {Streams::verbose() <<"classdef: classheader suite\n";
+								$<type>$=p->finishTypeDeclaration(t);
+							}
 
 classheader: CLASS NAME ':'  {Streams::verbose() << "class_h: CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);

@@ -1,6 +1,6 @@
 #include "Type.h"
 #include "Function.h"
-int Type:: classesCount=0;
+int Type::classesCount = 0;
 Type::Type(void)
 {
 	declared = 0;
@@ -27,17 +27,17 @@ Type::Type(char* name, int typeSize) :Symbol(name), _typeSize(typeSize){
 	//*x = getId();
 	children_ids.push_back(getId());
 }/*
-Type::Type(Type* type) : Symbol(type->get_name()){
-	/*
-	this->setStatus(type->status);
-	this->set_name(type->get_name());
-	this->inhertedList = type->getInheritedType();
-	this->setouter_class(type->getouter_class());
-	this->_id = type->getId();
-	
-}*/
+ Type::Type(Type* type) : Symbol(type->get_name()){
+ /*
+ this->setStatus(type->status);
+ this->set_name(type->get_name());
+ this->inhertedList = type->getInheritedType();
+ this->setouter_class(type->getouter_class());
+ this->_id = type->getId();
+
+ }*/
 void Type::setImplemented(){
-	
+
 	this->status = completness::implemented;
 }
 completness Type::getStatus(){
@@ -66,18 +66,18 @@ void Type::print()
 	cout << "}:" << endl;
 }
 void Type::setAccessModifier(char* accessModifier){
-	if (strcmp(accessModifier, "public")==0) {
+	if (strcmp(accessModifier, "public") == 0) {
 		this->accessModifier = Public;
 	}
-	else if (strcmp(accessModifier, "protected")==0) {
+	else if (strcmp(accessModifier, "protected") == 0) {
 		this->accessModifier = Protected;
 	}
-	else if (strcmp(accessModifier, "private")==0){
+	else if (strcmp(accessModifier, "private") == 0){
 		this->accessModifier = Private;
 	}
 	else{ this->accessModifier = Private; }
 }
-char* Type:: getAccessModifier()
+char* Type::getAccessModifier()
 {
 	if (this != NULL){
 		switch (this->accessModifier){
@@ -109,7 +109,7 @@ Type* Type::getouter_class()
 }
 void Type::setIs_final(bool final)
 {
-	
+
 	is_final = final;
 }
 void Type::setIs_static(bool is_static)
@@ -119,13 +119,14 @@ void Type::setIs_static(bool is_static)
 }
 bool Type::setInheritedType(Type* e){
 	bool k;
-	k=e->addChild(children_ids);
+	k = e->addChild(children_ids);
 	if (!k)
 		return false;
-	this->inhertedList.push_back (e);
+	this->inhertedList.push_back(e);
 	return true;
 }
-vector<Type*> Type::getInheritedType(){
+vector <Type*> Type::getInheritedType()
+{
 	return this->inhertedList;
 }
 void Type::setScope(Scope * m){
@@ -152,7 +153,7 @@ bool Type::operator==(Type xx)
 	{
 		return false;
 	}
-	if ((strcmp(get_name() , xx.get_name())==0) && ((*outer_class) == (*xx.outer_class)))
+	if ((strcmp(get_name(), xx.get_name()) == 0) && ((*outer_class) == (*xx.outer_class)))
 	{
 		//cout << "enter" << endl;
 		return true;

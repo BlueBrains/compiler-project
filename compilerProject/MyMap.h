@@ -34,5 +34,5 @@ public:
 	void clear();
 	void remove(char* name);
 	MapElem* getbyId(int i);
-	
+
 };
