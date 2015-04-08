@@ -91,13 +91,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
-    <None Include="..\yacc .y" />
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
-    <None Include="..\yaccc1.y" />
-    <None Include="..\yaccc2.y" />
     <None Include="..\yaccFinal.y" />
-    <None Include="..\yacct.y" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
