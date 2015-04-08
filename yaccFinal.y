@@ -45,7 +45,7 @@
 	bool is_dic=false;
 	int linefunc=0;
 	int colmfunc=0;
-
+	operand op;
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
 
@@ -147,6 +147,7 @@ temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
 
 funcdef: funcheader suite {
 							testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);
+							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL);
 							parameters.clear();
 							linefunc=0;colmfunc=0;
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
@@ -447,7 +448,9 @@ compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
 				| for_stmt {Streams::verbose() <<"compound_stmt: for_stmt\n";}
 				| try_stmt {Streams::verbose() <<"compound_stmt: try_stmt\n";}
 				| with_stmt {Streams::verbose() <<"compound_stmt: with_stmt\n";}
-				| funcdef  {Streams::verbose() <<"compound_stmt: funcdef\n";}
+				| funcdef  {Streams::verbose() <<"compound_stmt: funcdef\n";
+								$<tn>$=$<tn>1;
+							}
 				| DEF classdef {Streams::verbose() <<"compound_stmt: DEF classdef\n";
 									$<tn>$=$<tn>2;
 								}
@@ -593,14 +596,22 @@ shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n"}
 			|arith_expr arith_seq {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n"} 
 			;
 
-term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";}
-			|'-' term {Streams::verbose() <<"term_seq : '-' term \n";}
-			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";}
-			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";}
+term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
+						op=PLUS;
+						}
+			|'-' term {Streams::verbose() <<"term_seq : '-' term \n";
+							op=MINUS;
+						}
+			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;}
+			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;}
 			;
 
 arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n"} 
-			|term term_seq %prec stmt_13 {Streams::verbose() <<"arith_expr: term term_seq\n"} 
+			|term term_seq %prec stmt_13 {
+											Streams::verbose() <<"arith_expr: term term_seq\n";
+											$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
+										}
+											 
 			;
 
 factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";}
