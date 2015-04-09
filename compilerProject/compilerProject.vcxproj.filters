@@ -147,6 +147,12 @@
     <ClInclude Include="expressionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />

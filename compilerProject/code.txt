@@ -3,6 +3,8 @@ class u:
 	def final coco():
 
 	end
+	def soso():
+	end
 end
 
 class C(v):
