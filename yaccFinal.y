@@ -312,7 +312,7 @@ stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";}
 		;
 simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
 			 ;
-small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";}
+small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";}			
 			|del_stmt {Streams::verbose() <<"small_stmt: del_stmt \n";}
 			|pass_stmt {Streams::verbose() <<"small_stmt: pass_stmt \n";}
 			|flow_stmt {Streams::verbose() <<"small_stmt: flow_stmt \n";}
@@ -449,12 +449,15 @@ compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
 				| for_stmt {Streams::verbose() <<"compound_stmt: for_stmt\n";}
 				| try_stmt {Streams::verbose() <<"compound_stmt: try_stmt\n";}
 				| with_stmt {Streams::verbose() <<"compound_stmt: with_stmt\n";}
-				| funcdef  {Streams::verbose() <<"compound_stmt: funcdef\n";
+				| DEF expr_stmt ';' {Streams::verbose() <<"compound_stmt: DEF expr_stmt ';'\n";}
+				| funcdef  {	
+								Streams::verbose() <<"compound_stmt: funcdef\n";
 								$<tn>$=$<tn>1;
-							}
-				| DEF classdef {Streams::verbose() <<"compound_stmt: DEF classdef\n";
+						   }
+				| DEF classdef {
+									Streams::verbose() <<"compound_stmt: DEF classdef\n";
 									$<tn>$=$<tn>2;
-								}
+							   }
 				;
 
 elif_seq :  ELIF test ':' suite {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";}
@@ -655,8 +658,8 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
-		| NAME { Streams::verbose() <<"atom: NAME\n";} 
-		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";} 
+		| NAME %prec stmt_14 { Streams::verbose() <<"atom: NAME\n";} 
+		//| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";} 
 		| DEF access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access NAME\n";} 
 		| DEF STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC NAME\n";} 
 		| DEF FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL NAME\n";} 

@@ -140,6 +140,9 @@
     <ClInclude Include="ST\Variable.h" />
     <ClInclude Include="WhileNode.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="code.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
