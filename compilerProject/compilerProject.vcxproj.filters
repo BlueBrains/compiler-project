@@ -73,6 +73,9 @@
     <ClCompile Include="myvector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="functionNode.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -127,6 +130,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="myvector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WhileNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="expressionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

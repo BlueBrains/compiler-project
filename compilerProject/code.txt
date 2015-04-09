@@ -1,5 +1,14 @@
-class u:
-
-end		
-class C:
+class v:
+	def final coco():
+	end
+end
+class C(v):
+	def coco1(self):
+	end
+end
+class k:
+def class d:
+end
+def class e:
+end
 end
