@@ -1,27 +1,44 @@
-/* A Bison parser, made by GNU Bison 2.1.  */
+/* A Bison parser, made by GNU Bison 2.7.  */
 
-/* Skeleton parser for Yacc-like parsing with Bison,
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-
-   This program is free software; you can redistribute it and/or modify
+/* Skeleton interface for Bison GLR parsers in C
+   
+      Copyright (C) 2002-2012 Free Software Foundation, Inc.
+   
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-/* As a special exception, when this file is copied by Bison into a
-   Bison output file, you may use that output file without restriction.
-   This special exception was added by the Free Software Foundation
-   in version 1.24 of Bison.  */
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+   
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+#ifndef YY_YY_YACC_HPP_INCLUDED
+# define YY_YY_YACC_HPP_INCLUDED
+/* Enabling traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -116,99 +133,13 @@
      stmt_1 = 342
    };
 #endif
-/* Tokens.  */
-#define ENDMARKER 258
-#define IMPORT 259
-#define CLASS 260
-#define END 261
-#define PRIMARY 262
-#define OR 263
-#define AND 264
-#define NOT 265
-#define NOT_EQUAL 266
-#define FINAL 267
-#define STATIC 268
-#define SELF 269
-#define DEF 270
-#define ELSE 271
-#define IF 272
-#define ELIF 273
-#define WHILE 274
-#define FOR 275
-#define IN 276
-#define TRY 277
-#define FINALLY 278
-#define ARROW 279
-#define NONLOCAL 280
-#define PLUS_EQUAL 281
-#define MINUS_EQUAL 282
-#define DIV_EQUAL 283
-#define MOD_EQUAL 284
-#define AND_EQUAL 285
-#define OR_EQUAL 286
-#define SHAPOO_EQUAL 287
-#define LESS_THAN_2_EQUAL 288
-#define MORE_THAN_2_EQUAL 289
-#define STAR_2_EQUAL 290
-#define DIV_2_EQUAL 291
-#define MORE_LESS 292
-#define FALSE 293
-#define TRUE 294
-#define STAR_2 295
-#define NUMBER_INT 296
-#define NUMBER_LONG 297
-#define NUMBER_FLOAT 298
-#define NAME 299
-#define DOT_3 300
-#define EXPECT 301
-#define WITH 302
-#define AS 303
-#define ASSERT 304
-#define EQUAL 305
-#define DEL 306
-#define RETURN 307
-#define PRINT 308
-#define GLOBAL 309
-#define STAR_EQUAL 310
-#define LESS_THAN_2 311
-#define RAISE 312
-#define PRIVATE 313
-#define PUBLIC 314
-#define PROTECTED 315
-#define YIELD 316
-#define MORE_THAN_2 317
-#define STRING 318
-#define NONE 319
-#define IS 320
-#define DIV_2 321
-#define LESS_OR_EQUAL 322
-#define MORE_OR_EQUAL 323
-#define EXCEPT 324
-#define PASS 325
-#define CHAR_VALUE 326
-#define BREAK 327
-#define CONTINUE 328
-#define stmt_14 329
-#define stmt_13 330
-#define stmt_12 331
-#define stmt_11 332
-#define stmt_10 333
-#define stmt_9 334
-#define stmt_8 335
-#define stmt_7 336
-#define stmt_6 337
-#define stmt_5 338
-#define stmt_4 339
-#define stmt_3 340
-#define stmt_2 341
-#define stmt_1 342
 
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef union YYSTYPE
+{
+/* Line 2579 of glr.c  */
+#line 72 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yaccFinal.y"
 
-
-
-#if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 71 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-typedef union YYSTYPE {
 	struct R{
 		int intVal;
 		float floatVal;
@@ -222,15 +153,18 @@ typedef union YYSTYPE {
 		class Function * function;
 		class Type * type;
 		class Node * tn;
+
+
+/* Line 2579 of glr.c  */
+#line 160 "yacc.hpp"
 } YYSTYPE;
-/* Line 1447 of yacc.c.  */
-#line 228 "yacc.hpp"
+# define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
 #endif
 
 extern YYSTYPE yylval;
 
+int yyparse (void);
 
-
+#endif /* !YY_YY_YACC_HPP_INCLUDED  */

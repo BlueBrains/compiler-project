@@ -1,5 +1,6 @@
 %output ="yacc.cpp"
-
+%error-verbose
+%glr-parser
 %{
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
@@ -1293,6 +1294,7 @@ comp_if: IF or_test {Streams::verbose() <<"comp_if: IF or_test\n";}
 void yyerror(const char *s) 
 {
 	Program::addError(new SyntaxError(s));
+	fprintf(stderr, "Error:%s\n", s);
 	//cout<<s;
 }
 
