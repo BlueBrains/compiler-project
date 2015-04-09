@@ -1,5 +1,6 @@
 %output ="yacc.cpp"
-
+%error-verbose
+%glr-parser
 %{
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
@@ -89,8 +90,8 @@
 %start	file_input
 %token	error ENDMARKER
 %token	IMPORT CLASS END PRIMARY OR AND NOT NOT_EQUAL FINAL STATIC SELF
-%token	DEF ELSE IF ELIF WHILE FOR IN TRY FINALLY ARROW PASS NONLOCAL
-%token  PLUS_EQUAL MINUS_EQUAL PLUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
+%token	DEF ELSE IF ELIF WHILE FOR IN TRY FINALLY ARROW NONLOCAL
+%token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
 %token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
@@ -362,7 +363,7 @@ augassign:	PLUS_EQUAL {Streams::verbose() <<"augassign:	PLUS_EQUAL \n";}
 			;
 
 access:		 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;}
-				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false}
+				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
 				|PROTECTED	{pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				;
 print_stmt: PRINT exprlist {Streams::verbose() <<"print_stmt: PRINT exprlist \n";}
@@ -544,8 +545,8 @@ comp_op_seq: comp_op expr %prec stmt_7 {Streams::verbose() <<"comp_op_seq: comp_
 			 |comp_op_seq comp_op expr {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";}
 			 ;
 				
-comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n"}
-			|expr comp_op_seq %prec stmt_12 {Streams::verbose() <<"comparison: expr comp_op_seq\n"}
+comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";}
+			|expr comp_op_seq %prec stmt_12 {Streams::verbose() <<"comparison: expr comp_op_seq\n";}
 			;
 
 comp_op: '<' {Streams::verbose() <<"comp_op: '<' \n";}
@@ -567,7 +568,7 @@ star_expr: '*' expr {Streams::verbose() <<"star_expr: '*' expr \n";}
 or_xor_expr_seq: '|' xor_expr {Streams::verbose() <<"or_xor_expr_seq: '|' xor_expr \n";}
 				  |or_xor_expr_seq '|' xor_expr {Streams::verbose() <<"or_xor_expr_seq: or_xor_expr_seq '|' xor_expr\n";}
 				  ;
-expr: xor_expr {Streams::verbose() <<"expr: xor_expr\n"}
+expr: xor_expr {Streams::verbose() <<"expr: xor_expr\n";}
 		|xor_expr or_xor_expr_seq {Streams::verbose() <<"expr: xor_expr or_xor_expr_seq\n";}
 		;
 
@@ -575,7 +576,7 @@ sha_and_expr_seq: '^' and_expr {Streams::verbose() <<"sha_and_expr_seq: '^' and_
 				  |sha_and_expr_seq '^' and_expr {Streams::verbose() <<"sha_and_expr_seq: sha_and_expr_seq '^' and_expr\n";}
 				  ;
 
-xor_expr: and_expr {Streams::verbose() <<"xor_expr: and_expr\n"} 
+xor_expr: and_expr {Streams::verbose() <<"xor_expr: and_expr\n";} 
 		  |and_expr sha_and_expr_seq {Streams::verbose() <<"xor_expr: and_expr sha_and_expr_seq\n";}
 		  ;
 
@@ -583,7 +584,7 @@ and_shift_expr_seq: '&' shift_expr {Streams::verbose() <<"and_shift_expr_seq: '&
 					|and_shift_expr_seq '&' shift_expr {Streams::verbose() <<"and_shift_expr_seq: and_shift_expr_seq '&' shift_expr\n";}
 					;
 
-and_expr: shift_expr {Streams::verbose() <<"and_expr: shift_expr\n"} 
+and_expr: shift_expr {Streams::verbose() <<"and_expr: shift_expr\n";} 
 		  |shift_expr and_shift_expr_seq {Streams::verbose() <<"and_expr: shift_expr and_shift_expr_seq\n";}
 		  ;
 
@@ -593,8 +594,8 @@ arith_seq:	LESS_THAN_2 arith_expr {Streams::verbose() <<"arith_seq:	LESS_THAN_2 
 			|arith_seq MORE_THAN_2 arith_expr {Streams::verbose() <<"arith_seq:	arith_seq MORE_THAN_2 arith_expr \n";}
 			;
 
-shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n"} 
-			|arith_expr arith_seq {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n"} 
+shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n";} 
+			|arith_expr arith_seq {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n";} 
 			;
 
 term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
@@ -613,7 +614,7 @@ term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 								}
 			;
 
-arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n"} 
+arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";} 
 			|term term_seq %prec stmt_13 {
 											Streams::verbose() <<"arith_expr: term term_seq\n";
 											$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
@@ -658,14 +659,14 @@ term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n"}
 factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";}
 		|'-' factor {Streams::verbose() <<"factor: '-' factor \n";}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
-		| power {Streams::verbose() <<"factor: power\n"} 
+		| power {Streams::verbose() <<"factor: power\n";} 
 		;
 
 trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";}
 			 |trailer_seq trailer {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";}
 			 ;
 			
-power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n"} 
+power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
@@ -801,53 +802,53 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 				} 
 		;
 
-comma_test_star_seq: ',' test  {Streams::verbose() <<"comma_test_star_seq: ',' test\n"} 
-					 |',' star_expr {Streams::verbose() <<"comma_test_star_seq: ',' star_expr\n"} 
-					 |comma_test_star_seq ',' test {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' test\n"} 
-					 |comma_test_star_seq ',' star_expr {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' star_expr\n"} 
+comma_test_star_seq: ',' test  {Streams::verbose() <<"comma_test_star_seq: ',' test\n";} 
+					 |',' star_expr {Streams::verbose() <<"comma_test_star_seq: ',' star_expr\n";} 
+					 |comma_test_star_seq ',' test {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' test\n";} 
+					 |comma_test_star_seq ',' star_expr {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' star_expr\n";} 
 					 ;
 
-testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for\n"} 
-			   |test   {Streams::verbose() <<"testlist_comp: test\n"} 
-			   |test   comma_test_star_seq  {Streams::verbose() <<"testlist_comp: test   comma_test_star_seq\n"} 
-			   |test    ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |test   comma_test_star_seq ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |star_expr comp_for {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |star_expr   {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |star_expr   comma_test_star_seq   {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |star_expr    ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
-			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n"} 
+testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for\n";} 
+			   |test   {Streams::verbose() <<"testlist_comp: test\n";} 
+			   |test   comma_test_star_seq  {Streams::verbose() <<"testlist_comp: test   comma_test_star_seq\n";} 
+			   |test    ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |test   comma_test_star_seq ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |star_expr comp_for {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |star_expr   {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |star_expr   comma_test_star_seq   {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |star_expr    ',' {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
+			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
 			   ;
 
-trailer:	'('  ')' {Streams::verbose() <<"trailer:	'('  ')'\n"} 
-			|'(' arglist ')' {Streams::verbose() <<"trailer:	'(' arglist ')'\n"} 
-			|'[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n"} 
-			|'.' NAME {Streams::verbose() <<"trailer:	'.' NAME\n"} 
+trailer:	'('  ')' {Streams::verbose() <<"trailer:	'('  ')'\n";} 
+			|'(' arglist ')' {Streams::verbose() <<"trailer:	'(' arglist ')'\n";} 
+			|'[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";} 
+			|'.' NAME {Streams::verbose() <<"trailer:	'.' NAME\n";} 
 			;
 
-comma_subscript_seq: ',' subscript {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n"} 
-					 |comma_subscript_seq ',' subscript {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n"} 
+comma_subscript_seq: ',' subscript {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n";} 
+					 |comma_subscript_seq ',' subscript {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n";} 
 					 ;
 
-subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n"} 
-				|subscript comma_subscript_seq {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n"} 
-				|subscript  ',' {Streams::verbose() <<"subscriptlist:	subscript  ','\n"} 
-				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n"} 
+subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";} 
+				|subscript comma_subscript_seq {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";} 
+				|subscript  ',' {Streams::verbose() <<"subscriptlist:	subscript  ','\n";} 
+				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";} 
 				;
 
-subscript:  test {Streams::verbose() <<"subscript:  test\n"}
-			|':' {Streams::verbose() <<"subscript:  ':'\n"}
-			| test ':' {Streams::verbose() <<"subscript: test ':'\n"}
-			| test ':' test {Streams::verbose() <<"subscript:  test ':' test\n"}
-			| test ':' sliceop {Streams::verbose() <<"subscript:  test ':' sliceop\n"}
-			| test ':' test sliceop {Streams::verbose() <<"subscript:  test ':' test sliceop\n"}
-			|':' test {Streams::verbose() <<"subscript:  ':' test\n"}
-			|':' sliceop {Streams::verbose() <<"subscript:  ':' sliceop\n"}
-			|':' test sliceop {Streams::verbose() <<"subscript:  ':' test sliceop\n"}
+subscript:  test {Streams::verbose() <<"subscript:  test\n";}
+			|':' {Streams::verbose() <<"subscript:  ':'\n";}
+			| test ':' {Streams::verbose() <<"subscript: test ':'\n";}
+			| test ':' test {Streams::verbose() <<"subscript:  test ':' test\n";}
+			| test ':' sliceop {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
+			| test ':' test sliceop {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}
+			|':' test {Streams::verbose() <<"subscript:  ':' test\n";}
+			|':' sliceop {Streams::verbose() <<"subscript:  ':' sliceop\n";}
+			|':' test sliceop {Streams::verbose() <<"subscript:  ':' test sliceop\n";}
 			;
 
-sliceop: ':' {Streams::verbose() <<"sliceop: ':'\n"}
-		 |':' test {Streams::verbose() <<"sliceop: ':' test\n"}
+sliceop: ':' {Streams::verbose() <<"sliceop: ':'\n";}
+		 |':' test {Streams::verbose() <<"sliceop: ':' test\n";}
 		 ;
 
 comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";}
@@ -1412,6 +1413,7 @@ comp_if: IF or_test {Streams::verbose() <<"comp_if: IF or_test\n";}
 void yyerror(const char *s) 
 {
 	Program::addError(new SyntaxError(s));
+	fprintf(stderr, "Error:%s\n", s);
 	//cout<<s;
 }
 

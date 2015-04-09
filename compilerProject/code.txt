@@ -1,4 +1,4 @@
-class v:
+class u:
 	def final coco():
 	end
 	def soso():
