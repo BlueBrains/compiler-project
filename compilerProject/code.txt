@@ -1,6 +1,8 @@
 class v:
 	def final coco():
 	end
+	def soso():
+	end
 end
 class C(v):
 	def coco1(self):

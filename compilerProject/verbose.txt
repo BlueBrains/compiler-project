@@ -5,7 +5,14 @@ suite:	END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
+parameters:'(' ')'
+funcheader: DEF NAME parameters ':' 
+suite:	END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
 list_stmt : stmt
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 classdef: classheader suite
 dotted_name: NAME 

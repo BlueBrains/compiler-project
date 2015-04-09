@@ -72,6 +72,7 @@
 	struct R{
 		int intVal;
 		float floatVal;
+		long longVal;
 		char charVal;
 		char* strVal;
 		int lineNum;
@@ -598,12 +599,18 @@ shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n"}
 
 term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 						op=PLUS;
+						$<tn>$=$<tn>2;
 						}
 			|'-' term {Streams::verbose() <<"term_seq : '-' term \n";
 							op=MINUS;
+							$<tn>$=$<tn>2;
 						}
-			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;}
-			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;}
+			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+								}
+			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+								}
 			;
 
 arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n"} 
@@ -614,18 +621,38 @@ arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n"}
 											 
 			;
 
-factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";}
-			|'/' factor {Streams::verbose() <<"factor_seq: '/' factor \n";}
-			|'%' factor {Streams::verbose() <<"factor_seq: '%' factor \n";}
+factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
+							op=MULT;
+							$<tn>$=$<tn>2;
+						}
+			|'/' factor {Streams::verbose() <<"factor_seq: '/' factor \n";
+								op=DIV;
+							$<tn>$=$<tn>2;
+							}
+			|'%' factor {Streams::verbose() <<"factor_seq: '%' factor \n";
+								op=MOD;
+							$<tn>$=$<tn>2;
+							}
 			|DIV_2 factor %prec stmt_8 {Streams::verbose() <<"factor_seq: DIV_2 factor \n";}
-			|factor_seq '*' factor {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";}
-			|factor_seq '/' factor {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";}
-			|factor_seq '%' factor {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";}
+			|factor_seq '*' factor {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";
+									op=MULT;
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									}
+			|factor_seq '/' factor {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";
+									op=DIV;
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									}
+			|factor_seq '%' factor {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";
+									op=MOD;
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									}
 			|factor_seq DIV_2 factor {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";}
 			;
 
 term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n"} 
-		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n"} 
+		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n";
+								$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
+							} 
 		;
 
 factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";}
@@ -654,32 +681,124 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
-		| NAME { Streams::verbose() <<"atom: NAME\n"} 
-		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n"} 
-		| DEF access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access NAME\n"} 
-		| DEF STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC NAME\n"} 
-		| DEF FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL NAME\n"} 
-		| DEF STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL NAME\n"} 
-		| DEF FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC NAME\n"} 
-		| DEF STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access NAME\n"} 
-		| DEF FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access NAME\n"} 
-		| DEF STATIC FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL access NAME\n"} 
-		| DEF FINAL STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC access NAME\n"} 
-		| DEF access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC NAME\n"} 
-		| DEF access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL NAME\n"} 
-		| DEF access STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC FINAL NAME\n"} 
-		| DEF access FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL STATIC NAME\n"} 
-		| DEF STATIC access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access FINAL NAME\n"} 
-		| DEF FINAL access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access STATIC NAME\n"} 
-		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT\n"} 
-		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n"} 
-		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n"} 
+		| NAME { Streams::verbose() <<"atom: NAME\n";$<tn>$ = ast->createIDNode();} 
+		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
+										v=$<var>$;
+									$<tn>$ = ast->createIDNode(v,0,0);
+									} 
+		| DEF access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access NAME\n";
+											Streams::verbose()<<"var_declaration: access_modef ID\n";
+									$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+									v=$<var>$;
+									acc_mod="";
+									$<tn>$ = ast->createIDNode(v,0,0);
+											} 
+		| DEF STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC NAME\n";
+											Streams::verbose()<<"var_declaration: STATIC ID\n";
+											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+											v=$<var>$;
+											$<tn>$ = ast->createIDNode(v,0,0);
+										} 
+		| DEF FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL NAME\n";
+												Streams::verbose()<<"var_declaration: FINAL ID\n";
+												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													$<tn>$ = ast->createIDNode(v,0,0);
+										} 
+		| DEF STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL NAME\n";
+													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													$<tn>$ = ast->createIDNode(v,0,0);
+												} 
+		| DEF FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC NAME\n";
+													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													$<tn>$ = ast->createIDNode(v,0,0);
+												} 
+		| DEF STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access NAME\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													acc_mod="";
+													$<tn>$ = ast->createIDNode(v,0,0);
+												} 
+		| DEF FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access NAME\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													acc_mod="";
+													$<tn>$ = ast->createIDNode(v,0,0);
+												} 
+		| DEF STATIC FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL access NAME\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															v=$<var>$;
+															acc_mod="";
+															$<tn>$ = ast->createIDNode(v,0,0);
+														} 
+		| DEF FINAL STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC access NAME\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															v=$<var>$;
+															acc_mod="";
+															$<tn>$ = ast->createIDNode(v,0,0);
+														} 
+		| DEF access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC NAME\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													acc_mod="";
+													$<tn>$ = ast->createIDNode(v,0,0);
+												} 
+		| DEF access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL NAME\n";
+													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													v=$<var>$;
+													acc_mod="";
+													$<tn>$ = ast->createIDNode(v,0,0);
+											} 
+		| DEF access STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC FINAL NAME\n";
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														v=$<var>$;
+														acc_mod="";
+														$<tn>$ = ast->createIDNode(v,0,0);
+													} 
+		| DEF access FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL STATIC NAME\n";
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														v=$<var>$;
+														acc_mod="";
+														$<tn>$ = ast->createIDNode(v,0,0);
+													} 
+		| DEF STATIC access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access FINAL NAME\n";
+															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															v=$<var>$;
+															acc_mod="";
+															$<tn>$ = ast->createIDNode(v,0,0);
+														} 
+		| DEF FINAL access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access STATIC NAME\n";
+														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														v=$<var>$;
+														acc_mod="";
+														$<tn>$ = ast->createIDNode(v,0,0);
+													} 
+		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT\n";
+						$<tn>$ = ast->createTypeNode($<r.intVal>1,0,0,INT);
+						} 
+		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
+							$<tn>$ = ast->createTypeNode($<r.floatVal>1,0,0,FLOAT);
+						} 
+		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
+							$<tn>$ = ast->createTypeNode($<r.longVal>1,0,0,LONG);
+						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n"} 
-		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n"} 
+		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
+									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,STRINGS);
+								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n"} 
-		| NONE {Streams::verbose() <<"atom: NONE\n"} 
-		| TRUE {Streams::verbose() <<"atom: TRUE\n"} 
-		| FALSE {Streams::verbose() <<"atom: FALSE\n"} 
+		| NONE {Streams::verbose() <<"atom: NONE\n";} 
+		| TRUE {Streams::verbose() <<"atom: TRUE\n";
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,TRUEVAL);
+				} 
+		| FALSE {Streams::verbose() <<"atom: FALSE\n";
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,FALSEVAL);
+				} 
 		;
 
 comma_test_star_seq: ',' test  {Streams::verbose() <<"comma_test_star_seq: ',' test\n"} 

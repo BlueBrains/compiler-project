@@ -126,6 +126,7 @@
     <ClInclude Include="ClassNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="expressionNode.h" />
+    <ClInclude Include="IDNode.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyParser.h" />
     <ClInclude Include="myvector.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="ST\SymbolTable.h" />
     <ClInclude Include="ST\Type.h" />
     <ClInclude Include="ST\Variable.h" />
+    <ClInclude Include="TypeNode.h" />
     <ClInclude Include="WhileNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

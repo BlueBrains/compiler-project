@@ -5,9 +5,11 @@
 #include"ClassNode.h"
 #include"WhileNode.h"
 #include"expressionNode.h"
+#include"IDNode.h"
+#include"TypeNode.h"
 #include"functionNode.h"
 char* arr[] =
-{ "rootNode","intValNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
+{ "rootNode","typeNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
 "ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode",
 "idTypeNode", "intTypeNode", "stringTypeNode","classNode" };
@@ -43,11 +45,26 @@ public:
 		ExpressionNode* temp = new ExpressionNode(v1,v2,op, son, next);
 		return temp;
 	}
+	IDNode * createIDNode(Variable* v1, Node * son, Node* next)
+	{
+		IDNode* temp = new IDNode(v1, son, next);
+		return temp;
+	}
+	TypeNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
+	{
+		TypeNode* temp = new TypeNode(v1,t, son, next);
+		return temp;
+	}
 	
 	Node * addNext(Node* base,Node* next)
 	{
 		base->Next = next;
 		return base->Next;
+	}
+	Node * addSon(Node* base, Node* Son)
+	{
+		base->Son = Son;
+		return base->Son;
 	}
 	//Node * addToLastRight(TreeNode * basic, TreeNode* newItem);
 	void print(Node * tn, int lvl)
