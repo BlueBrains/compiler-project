@@ -1,8 +1,8 @@
 /* A Bison parser, made by GNU Bison 2.7.  */
 
-/* Skeleton interface for Bison GLR parsers in C
+/* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 2002-2012 Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -57,93 +57,92 @@ extern int yydebug;
      NOT_EQUAL = 266,
      FINAL = 267,
      STATIC = 268,
-     SELF = 269,
-     DEF = 270,
-     ELSE = 271,
-     IF = 272,
-     ELIF = 273,
-     WHILE = 274,
-     FOR = 275,
-     IN = 276,
-     TRY = 277,
-     FINALLY = 278,
-     ARROW = 279,
-     NONLOCAL = 280,
-     PLUS_EQUAL = 281,
-     MINUS_EQUAL = 282,
-     DIV_EQUAL = 283,
-     MOD_EQUAL = 284,
-     AND_EQUAL = 285,
-     OR_EQUAL = 286,
-     SHAPOO_EQUAL = 287,
-     LESS_THAN_2_EQUAL = 288,
-     MORE_THAN_2_EQUAL = 289,
-     STAR_2_EQUAL = 290,
-     DIV_2_EQUAL = 291,
-     MORE_LESS = 292,
-     FALSE = 293,
-     TRUE = 294,
-     STAR_2 = 295,
-     NUMBER_INT = 296,
-     NUMBER_LONG = 297,
-     NUMBER_FLOAT = 298,
-     NAME = 299,
-     DOT_3 = 300,
-     EXPECT = 301,
-     WITH = 302,
-     AS = 303,
-     ASSERT = 304,
-     EQUAL = 305,
-     DEL = 306,
-     RETURN = 307,
-     PRINT = 308,
-     GLOBAL = 309,
-     STAR_EQUAL = 310,
-     LESS_THAN_2 = 311,
-     RAISE = 312,
-     PRIVATE = 313,
-     PUBLIC = 314,
-     PROTECTED = 315,
-     YIELD = 316,
-     MORE_THAN_2 = 317,
-     STRING = 318,
-     NONE = 319,
-     IS = 320,
-     DIV_2 = 321,
-     LESS_OR_EQUAL = 322,
-     MORE_OR_EQUAL = 323,
-     EXCEPT = 324,
-     PASS = 325,
-     CHAR_VALUE = 326,
-     BREAK = 327,
-     CONTINUE = 328,
-     stmt_14 = 329,
-     stmt_13 = 330,
-     stmt_12 = 331,
-     stmt_11 = 332,
-     stmt_10 = 333,
-     stmt_9 = 334,
-     stmt_8 = 335,
-     stmt_7 = 336,
-     stmt_6 = 337,
-     stmt_5 = 338,
-     stmt_4 = 339,
-     stmt_3 = 340,
-     stmt_2 = 341,
-     stmt_1 = 342
+     DEF = 269,
+     ELSE = 270,
+     IF = 271,
+     ELIF = 272,
+     WHILE = 273,
+     FOR = 274,
+     IN = 275,
+     TRY = 276,
+     FINALLY = 277,
+     ARROW = 278,
+     NONLOCAL = 279,
+     PLUS_EQUAL = 280,
+     MINUS_EQUAL = 281,
+     DIV_EQUAL = 282,
+     MOD_EQUAL = 283,
+     AND_EQUAL = 284,
+     OR_EQUAL = 285,
+     SHAPOO_EQUAL = 286,
+     LESS_THAN_2_EQUAL = 287,
+     MORE_THAN_2_EQUAL = 288,
+     STAR_2_EQUAL = 289,
+     DIV_2_EQUAL = 290,
+     MORE_LESS = 291,
+     FALSE = 292,
+     TRUE = 293,
+     STAR_2 = 294,
+     NUMBER_INT = 295,
+     NUMBER_LONG = 296,
+     NUMBER_FLOAT = 297,
+     NAME = 298,
+     DOT_3 = 299,
+     EXPECT = 300,
+     WITH = 301,
+     AS = 302,
+     ASSERT = 303,
+     EQUAL = 304,
+     DEL = 305,
+     RETURN = 306,
+     PRINT = 307,
+     GLOBAL = 308,
+     STAR_EQUAL = 309,
+     LESS_THAN_2 = 310,
+     RAISE = 311,
+     PRIVATE = 312,
+     PUBLIC = 313,
+     PROTECTED = 314,
+     YIELD = 315,
+     MORE_THAN_2 = 316,
+     STRING = 317,
+     NONE = 318,
+     IS = 319,
+     DIV_2 = 320,
+     LESS_OR_EQUAL = 321,
+     MORE_OR_EQUAL = 322,
+     EXCEPT = 323,
+     PASS = 324,
+     CHAR_VALUE = 325,
+     BREAK = 326,
+     CONTINUE = 327,
+     stmt_14 = 328,
+     stmt_13 = 329,
+     stmt_12 = 330,
+     stmt_11 = 331,
+     stmt_10 = 332,
+     stmt_9 = 333,
+     stmt_8 = 334,
+     stmt_7 = 335,
+     stmt_6 = 336,
+     stmt_5 = 337,
+     stmt_4 = 338,
+     stmt_3 = 339,
+     stmt_2 = 340,
+     stmt_1 = 341
    };
 #endif
+
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
-/* Line 2579 of glr.c  */
-#line 72 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yaccFinal.y"
+/* Line 2058 of yacc.c  */
+#line 69 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\yaccTemp.y"
 
 	struct R{
 		int intVal;
 		float floatVal;
-		long longVal;
 		char charVal;
 		char* strVal;
 		int lineNum;
@@ -153,11 +152,10 @@ typedef union YYSTYPE
 		class Variable * var;
 		class Function * function;
 		class Type * type;
-		class Node * tn;
 
 
-/* Line 2579 of glr.c  */
-#line 161 "yacc.hpp"
+/* Line 2058 of yacc.c  */
+#line 159 "yacc.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -166,6 +164,18 @@ typedef union YYSTYPE
 
 extern YYSTYPE yylval;
 
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int yyparse (void *YYPARSE_PARAM);
+#else
+int yyparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
 int yyparse (void);
+#else
+int yyparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
 #endif /* !YY_YY_YACC_HPP_INCLUDED  */

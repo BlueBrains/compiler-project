@@ -23,6 +23,7 @@
     <None Include="..\yacc.output" />
     <None Include="khaled.y" />
     <None Include="..\yaccFinal.y" />
+    <None Include="..\yaccTemp.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">

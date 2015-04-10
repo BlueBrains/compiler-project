@@ -157,3 +157,6 @@ $RECYCLE.BIN/
 
 *.vcxproj
 *.exe
+*.output
+*.cpp
+*.hpp

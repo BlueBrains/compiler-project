@@ -94,6 +94,7 @@
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
     <None Include="..\yaccFinal.y" />
+    <None Include="..\yaccTemp.y" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
