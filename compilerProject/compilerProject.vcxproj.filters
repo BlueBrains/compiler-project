@@ -150,7 +150,13 @@
     <ClInclude Include="IDNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TypeNode.h">
+    <ClInclude Include="ValueNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignmentNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

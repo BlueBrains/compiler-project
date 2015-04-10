@@ -35,6 +35,7 @@
 	string temp_id="";
 	stack<string> temp_id1;
 	char* i_type;
+	Node* k;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
 	vector<char*> sto_mod;
@@ -313,7 +314,9 @@ stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";}
 		;
 simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
 			 ;
-small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";}
+small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";
+							$<tn>$=$<tn>1;
+						}
 			|del_stmt {Streams::verbose() <<"small_stmt: del_stmt \n";}
 			|pass_stmt {Streams::verbose() <<"small_stmt: pass_stmt \n";}
 			|flow_stmt {Streams::verbose() <<"small_stmt: flow_stmt \n";}
@@ -325,18 +328,21 @@ small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";}
 
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
-			|testlist_star_expr right_testlist {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";}
+			|testlist_star_expr right_testlist {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";
+													ast->addNext($<tn>1,$<tn>2);
+													$<tn>$=ast->createAssignNode($<tn>1,NULL);
+												}
 			;
 					
 right_testlist : '=' testlist_star_expr right_testlist {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
-				|'=' testlist_star_expr {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";}
+				|'=' testlist_star_expr {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";$<tn>$=$<tn>2;}
 				;
 
 testlist_star_expr: comma_test_star_seqJ {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";}
 					|comma_test_star_seqJ ',' {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ ',' \n";}
 					|',' {Streams::verbose() <<"',' \n";}
 					|test comma_test_star_seqJ {Streams::verbose() <<"testlist_star_expr: test comma_test_star_seqJ \n";}
-					|test {Streams::verbose() <<"testlist_star_expr: test \n";}
+					|test {Streams::verbose() <<"testlist_star_expr: test \n"; $<tn>$=$<tn>1;}
 					|star_expr comma_test_star_seqJ ',' {Streams::verbose() <<"testlist_star_expr: star_expr comma_test_star_seqJ ',' \n";}
 					|star_expr ',' {Streams::verbose() <<"testlist_star_expr: star_expr ',' \n";}
 					;
@@ -517,7 +523,7 @@ suite:	list_stmt END {
 		|END {	$<tn>$=NULL;	Streams::verbose() <<"suite:	END\n"; $<tn>$=NULL;}
 		;
 
-test:	or_test {Streams::verbose() <<"test:	or_test\n";}
+test:	or_test {Streams::verbose() <<"test:	or_test\n";$<tn>$=$<tn>1;}
 		|or_test IF or_test ELSE test {Streams::verbose() <<"or_test IF or_test ELSE test\n";}
 		;
 
@@ -525,7 +531,7 @@ or_seq:	OR and_test {Streams::verbose() <<"or_seq:	OR and_test \n";}
 		|or_seq OR and_test {Streams::verbose() <<"or_seq: or_seq OR and_test \n";}
 		;
 
-or_test: and_test {Streams::verbose() <<"or_test:	and_test\n";}
+or_test: and_test {Streams::verbose() <<"or_test:	and_test\n";$<tn>$=$<tn>1;}
 		|and_test or_seq {Streams::verbose() <<"or_test:	and_test or_seq\n";}
 		;
 
@@ -533,20 +539,20 @@ and_seq: AND not_test {Streams::verbose() <<"and_seq: AND not_test \n";}
 		|and_seq AND not_test {Streams::verbose() <<"and_seq: and_seq AND not_test \n";}
 		;
 
-and_test: not_test {Streams::verbose() <<"and_test:	not_test\n";}
+and_test: not_test {Streams::verbose() <<"and_test:	not_test\n";$<tn>$=$<tn>1;}
 		  |not_test and_seq {Streams::verbose() <<"and_test: not_test and_seq \n";}
 		  ;
 
 not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";}
-			| comparison {Streams::verbose() <<"not_test:	comparison\n";}
+			| comparison {Streams::verbose() <<"not_test:	comparison\n";$<tn>$=$<tn>1;}
 			;
 
 comp_op_seq: comp_op expr %prec stmt_7 {Streams::verbose() <<"comp_op_seq: comp_op expr \n";}
 			 |comp_op_seq comp_op expr {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";}
 			 ;
 				
-comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";}
-			|expr comp_op_seq %prec stmt_12 {Streams::verbose() <<"comparison: expr comp_op_seq\n";}
+comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;}
+			|expr comp_op_seq %prec stmt_12 {Streams::verbose() <<"comparison: expr comp_op_seq\n";$<tn>$=$<tn>1;}
 			;
 
 comp_op: '<' {Streams::verbose() <<"comp_op: '<' \n";}
@@ -568,7 +574,7 @@ star_expr: '*' expr {Streams::verbose() <<"star_expr: '*' expr \n";}
 or_xor_expr_seq: '|' xor_expr {Streams::verbose() <<"or_xor_expr_seq: '|' xor_expr \n";}
 				  |or_xor_expr_seq '|' xor_expr {Streams::verbose() <<"or_xor_expr_seq: or_xor_expr_seq '|' xor_expr\n";}
 				  ;
-expr: xor_expr {Streams::verbose() <<"expr: xor_expr\n";}
+expr: xor_expr {Streams::verbose() <<"expr: xor_expr\n";$<tn>$=$<tn>1;}
 		|xor_expr or_xor_expr_seq {Streams::verbose() <<"expr: xor_expr or_xor_expr_seq\n";}
 		;
 
@@ -576,7 +582,7 @@ sha_and_expr_seq: '^' and_expr {Streams::verbose() <<"sha_and_expr_seq: '^' and_
 				  |sha_and_expr_seq '^' and_expr {Streams::verbose() <<"sha_and_expr_seq: sha_and_expr_seq '^' and_expr\n";}
 				  ;
 
-xor_expr: and_expr {Streams::verbose() <<"xor_expr: and_expr\n";} 
+xor_expr: and_expr {Streams::verbose() <<"xor_expr: and_expr\n";$<tn>$=$<tn>1;} 
 		  |and_expr sha_and_expr_seq {Streams::verbose() <<"xor_expr: and_expr sha_and_expr_seq\n";}
 		  ;
 
@@ -584,7 +590,7 @@ and_shift_expr_seq: '&' shift_expr {Streams::verbose() <<"and_shift_expr_seq: '&
 					|and_shift_expr_seq '&' shift_expr {Streams::verbose() <<"and_shift_expr_seq: and_shift_expr_seq '&' shift_expr\n";}
 					;
 
-and_expr: shift_expr {Streams::verbose() <<"and_expr: shift_expr\n";} 
+and_expr: shift_expr {Streams::verbose() <<"and_expr: shift_expr\n";$<tn>$=$<tn>1;} 
 		  |shift_expr and_shift_expr_seq {Streams::verbose() <<"and_expr: shift_expr and_shift_expr_seq\n";}
 		  ;
 
@@ -594,7 +600,7 @@ arith_seq:	LESS_THAN_2 arith_expr {Streams::verbose() <<"arith_seq:	LESS_THAN_2 
 			|arith_seq MORE_THAN_2 arith_expr {Streams::verbose() <<"arith_seq:	arith_seq MORE_THAN_2 arith_expr \n";}
 			;
 
-shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n";} 
+shift_expr: arith_expr {Streams::verbose() <<"shift_expr: arith_expr\n";$<tn>$=$<tn>1;} 
 			|arith_expr arith_seq {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n";} 
 			;
 
@@ -607,17 +613,24 @@ term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 							$<tn>$=$<tn>2;
 						}
 			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;
-									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									k=ast->addNext($<tn>1,$<tn>2);
+									//ValueNode* v = static_cast<ValueNode*>(k);
+									//cout << "value is in term_seq " << v->get_value()<<endl;
+									$<tn>$ = ast->createExprNode($<tn>1,NULL,op);
 								}
 			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;
-									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									k=ast->addNext($<tn>1,$<tn>2);
+									$<tn>$ = ast->createExprNode(k,NULL,op);
 								}
 			;
 
-arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";} 
+arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";$<tn>$=$<tn>1;} 
 			|term term_seq %prec stmt_13 {
 											Streams::verbose() <<"arith_expr: term term_seq\n";
-											$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
+											k=ast->addNext($<tn>1,$<tn>2);
+											cout<<"op= "<<op<<endl;
+											$<tn>$ = ast->createExprNode($<tn>1,NULL,op);
+											
 										}
 											 
 			;
@@ -637,36 +650,36 @@ factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
 			|DIV_2 factor %prec stmt_8 {Streams::verbose() <<"factor_seq: DIV_2 factor \n";}
 			|factor_seq '*' factor {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";
 									op=MULT;
-									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									$<tn>$ = ast->createExprNode(NULL,NULL,op);
 									}
 			|factor_seq '/' factor {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";
 									op=DIV;
-									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									$<tn>$ = ast->createExprNode(NULL,NULL,op);
 									}
 			|factor_seq '%' factor {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";
 									op=MOD;
-									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,NULL,op);
+									$<tn>$ = ast->createExprNode(NULL,NULL,op);
 									}
 			|factor_seq DIV_2 factor {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";}
 			;
 
-term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n"} 
+term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n";$<tn>$=$<tn>1;} 
 		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n";
-								$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
+								$<tn>$ = ast->createExprNode(NULL,NULL,op);
 							} 
 		;
 
 factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";}
 		|'-' factor {Streams::verbose() <<"factor: '-' factor \n";}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
-		| power {Streams::verbose() <<"factor: power\n";} 
+		| power {Streams::verbose() <<"factor: power\n";$<tn>$=$<tn>1;} 
 		;
 
 trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";}
 			 |trailer_seq trailer {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";}
 			 ;
 			
-power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";} 
+power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";$<tn>$=$<tn>1;} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
@@ -682,7 +695,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
-		| NAME { Streams::verbose() <<"atom: NAME\n";$<tn>$ = ast->createIDNode();} 
+		| NAME { Streams::verbose() <<"atom: NAME\n";} 
 		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";
 											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 										v=$<var>$;
@@ -780,13 +793,16 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 														$<tn>$ = ast->createIDNode(v,0,0);
 													} 
 		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT\n";
-						$<tn>$ = ast->createTypeNode($<r.intVal>1,0,0,INT);
+						int xx=$<r.intVal>1;
+						$<tn>$ = ast->createTypeNode(&xx,0,0,INT);
 						} 
 		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							$<tn>$ = ast->createTypeNode($<r.floatVal>1,0,0,FLOAT);
+							float x=$<r.floatVal>1;
+							$<tn>$ = ast->createTypeNode(&x,0,0,FLOAT);
 						} 
 		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							$<tn>$ = ast->createTypeNode($<r.longVal>1,0,0,LONG);
+							long xxx=$<r.longVal>1;
+							$<tn>$ = ast->createTypeNode(&xxx,0,0,LONG);
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n"} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
@@ -795,10 +811,10 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n"} 
 		| NONE {Streams::verbose() <<"atom: NONE\n";} 
 		| TRUE {Streams::verbose() <<"atom: TRUE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,TRUEVAL);
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,True);
 				} 
 		| FALSE {Streams::verbose() <<"atom: FALSE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,FALSEVAL);
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,False);
 				} 
 		;
 

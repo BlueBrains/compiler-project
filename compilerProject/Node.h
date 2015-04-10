@@ -2,7 +2,7 @@
 #ifndef __NODE__
 #define __NODE__
 enum NodeType {//Expressions
-	rootNode=0,typeNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
+	rootNode = 0, valueNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
 
 	//statements
 	ifNode, stmtListNode, whileNode, declrationStmtNode, expressionNode,

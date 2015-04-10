@@ -4,9 +4,9 @@
 #include"Node.h"
 #include"ST\Type.h"
 enum Types {
-	INT, FLOAT, CHAR, LONG,STRINGS,TRUEVAL,FALSEVAL
+	INT, FLOAT, CHAR, LONG,STRINGS,True,False
 };
-class TypeNode :public Node
+class ValueNode :public Node
 {
 private:
 	Types varType;
@@ -20,11 +20,11 @@ public:
 	{
 		return varType;
 	}
-	TypeNode() :varType(INT), Node(NULL, NULL, typeNode)
+	ValueNode() :varType(INT), Node(NULL, NULL, valueNode)
 	{
 
 	}
-	TypeNode(void* v1, Types type, Node* son, Node*next) :VarValue(v1), varType(type), Node(son, next, typeNode)
+	ValueNode(void* v1, Types type, Node* son, Node*next) :VarValue(v1), varType(type), Node(son, next, valueNode)
 	{
 
 	}

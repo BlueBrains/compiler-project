@@ -6,10 +6,11 @@
 #include"WhileNode.h"
 #include"expressionNode.h"
 #include"IDNode.h"
-#include"TypeNode.h"
+#include"AssignmentNode.h"
+#include"ValueNode.h"
 #include"functionNode.h"
 char* arr[] =
-{ "rootNode","typeNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
+{ "rootNode","valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
 "ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode",
 "idTypeNode", "intTypeNode", "stringTypeNode","classNode" };
@@ -40,9 +41,9 @@ public:
 		WhileNode* temp = new WhileNode(cond, son, next);
 		return temp;
 	}
-	ExpressionNode * createExprNode(Node* v1,Node* v2, Node * son, Node* next,operand op)
+	ExpressionNode * createExprNode(Node * son, Node* next,operand op)
 	{
-		ExpressionNode* temp = new ExpressionNode(v1,v2,op, son, next);
+		ExpressionNode* temp = new ExpressionNode(op, son, next);
 		return temp;
 	}
 	IDNode * createIDNode(Variable* v1, Node * son, Node* next)
@@ -50,9 +51,15 @@ public:
 		IDNode* temp = new IDNode(v1, son, next);
 		return temp;
 	}
-	TypeNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
+	 AssignmentNode* createAssignNode(Node * son, Node* next)
 	{
-		TypeNode* temp = new TypeNode(v1,t, son, next);
+		AssignmentNode* temp = new AssignmentNode(son, next);
+		return temp;
+	}
+
+	ValueNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
+	{
+		ValueNode* temp = new ValueNode(v1, t, son, next);
 		return temp;
 	}
 	
@@ -84,6 +91,11 @@ public:
 				FunctionNode* test = static_cast<FunctionNode*>(tn);
 				cout << "function name is " << test->get_function()->get_name() << endl;
 
+			}
+			else if (arr[tn->type] == "valueNode")
+			{
+				ValueNode* v = static_cast<ValueNode*>(tn);
+				cout << "value is " << v->get_value()<<endl;
 			}
 			print(tn->Son, lvl + 1);
 			print(tn->Next, lvl + 1);
