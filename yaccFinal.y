@@ -450,7 +450,7 @@ compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
 				| for_stmt {Streams::verbose() <<"compound_stmt: for_stmt\n";}
 				| try_stmt {Streams::verbose() <<"compound_stmt: try_stmt\n";}
 				| with_stmt {Streams::verbose() <<"compound_stmt: with_stmt\n";}
-				| DEF expr_stmt ';' {Streams::verbose() <<"compound_stmt: DEF expr_stmt ';'\n";}
+				//| DEF expr_stmt ';' {Streams::verbose() <<"compound_stmt: DEF expr_stmt ';'\n";}
 				| funcdef  {	
 								Streams::verbose() <<"compound_stmt: funcdef\n";
 								$<tn>$=$<tn>1;
@@ -653,7 +653,7 @@ factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
 			|factor_seq DIV_2 factor {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";}
 			;
 
-term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n"} 
+term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n";} 
 		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n";
 								$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,NULL,op);
 							} 
@@ -791,7 +791,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
 							$<tn>$ = ast->createTypeNode($<r.longVal>1,0,0,LONG);
 						} 
-		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n"} 
+		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
 									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,STRINGS);
 								} 

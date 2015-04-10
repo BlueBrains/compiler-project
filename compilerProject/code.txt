@@ -1,7 +1,6 @@
 class u:
-	x = 4;
 	def final coco():
-
+		x = 3 + 3;
 	end
 	def soso():
 	end
