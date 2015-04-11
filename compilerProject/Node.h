@@ -2,16 +2,16 @@
 #ifndef __NODE__
 #define __NODE__
 enum NodeType {//Expressions
-	rootNode=0,typeNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
+	rootNode = 0, valueNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
 
 	//statements
 	ifNode, stmtListNode, whileNode, declrationStmtNode, expressionNode,
 
 	//function
-	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,
+	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,FunctionCall,
 
 	//type: Here AST is used as temporoy data structure to hold type to upper grammars
-	idTypeNode, intTypeNode, stringTypeNode,classNode
+	idTypeNode, intTypeNode, stringTypeNode,classNode,TypeCall,VariableCall
 };
 class Node
 {

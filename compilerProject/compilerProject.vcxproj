@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -123,7 +123,11 @@
     <ClInclude Include="..\Streams.h" />
     <ClInclude Include="..\SyntaxError.h" />
     <ClInclude Include="..\yacc.hpp" />
+    <ClInclude Include="AssignmentNode.h" />
     <ClInclude Include="AST.h" />
+    <ClInclude Include="callFunctionNode.h" />
+    <ClInclude Include="CallTypeNode.h" />
+    <ClInclude Include="CallVariableNode.h" />
     <ClInclude Include="ClassNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="expressionNode.h" />
@@ -141,7 +145,7 @@
     <ClInclude Include="ST\SymbolTable.h" />
     <ClInclude Include="ST\Type.h" />
     <ClInclude Include="ST\Variable.h" />
-    <ClInclude Include="TypeNode.h" />
+    <ClInclude Include="ValueNode.h" />
     <ClInclude Include="WhileNode.h" />
   </ItemGroup>
   <ItemGroup>

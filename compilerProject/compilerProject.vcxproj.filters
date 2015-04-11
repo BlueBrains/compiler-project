@@ -151,7 +151,19 @@
     <ClInclude Include="IDNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TypeNode.h">
+    <ClInclude Include="ValueNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignmentNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallVariableNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallTypeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="callFunctionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ifNode.h">
