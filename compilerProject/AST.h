@@ -69,7 +69,7 @@ public:
 	ValueNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
 	{
 		
-		cout << "value is amer " << (*(int*)v1) << endl;
+		//cout << "value is amer " << (*(int*)v1) << endl;
 		ValueNode* temp = new ValueNode(v1, t, son, next);
 		return temp;
 	}
