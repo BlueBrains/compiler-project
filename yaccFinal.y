@@ -465,7 +465,10 @@ elif_seq :  ELIF test ':' suite {Streams::verbose() <<"elif_seq :  ELIF test ':'
 			|elif_seq ELIF test ':' suite {Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";}
 			;
 				
-if_stmt:	IF test ':' suite {Streams::verbose() <<"if_stmt:	IF test ':' suite \n";}
+if_stmt:	IF test ':' suite {
+								Streams::verbose() <<"if_stmt:	IF test ':' suite \n";
+								$<tn>$ = ast->createIfNode($<tn>4,null,$<tn>2,null);
+							  }
 			|IF test ':' suite elif_seq {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";}
 			|IF test ':' suite ELSE ':' suite {Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";}
 			|IF test ':' suite elif_seq ELSE ':' suite {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";}

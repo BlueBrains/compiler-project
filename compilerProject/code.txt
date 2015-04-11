@@ -1,6 +1,10 @@
-class u:
+def fun():
+end
+class :
 	def final coco():
-		x = 3 + 3;
+		if 1 > 2:
+			print x;
+		end
 	end
 	def soso():
 	end

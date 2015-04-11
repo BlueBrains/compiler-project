@@ -1,5 +1,6 @@
 %output ="yacc.cpp"
-
+%error-verbose
+%glr-parser
 %{
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
@@ -1288,7 +1289,7 @@ void main(void)
 	lexer = new yyFlexLexer(&inf);
 	Parser* p = new Parser();
 	p->parse();
-	//Program::printErrors();
+	Program::printErrors();
 	err->printErrQueue();
 	system("pause");
 }

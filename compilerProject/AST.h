@@ -8,6 +8,7 @@
 #include"IDNode.h"
 #include"TypeNode.h"
 #include"functionNode.h"
+#include"ifNode.h"
 char* arr[] =
 { "rootNode","typeNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
 "ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
@@ -55,7 +56,10 @@ public:
 		TypeNode* temp = new TypeNode(v1,t, son, next);
 		return temp;
 	}
-	
+	IfNode* createIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	{
+		IfNode* temp = new IfNode(condition, scoop, son, next);
+	}
 	Node * addNext(Node* base,Node* next)
 	{
 		base->Next = next;
@@ -83,6 +87,12 @@ public:
 			{
 				FunctionNode* test = static_cast<FunctionNode*>(tn);
 				cout << "function name is " << test->get_function()->get_name() << endl;
+
+			}
+			else if (arr[tn->type] == "ifNode")
+			{
+				IfNode* test = static_cast<IfNode*>(tn);
+				cout << "IF NODE !" << endl;
 
 			}
 			print(tn->Son, lvl + 1);
