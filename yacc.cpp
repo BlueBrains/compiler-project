@@ -1,30 +1,42 @@
-/* A Bison parser, made by GNU Bison 2.1.  */
+/* A Bison parser, made by GNU Bison 2.7.  */
 
-/* Skeleton parser for GLR parsing with Bison,
-   Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
-
-   This program is free software; you can redistribute it and/or modify
+/* Skeleton implementation for Bison GLR parsers in C
+   
+      Copyright (C) 2002-2012 Free Software Foundation, Inc.
+   
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-/* This is the parser code for GLR (Generalized LR) parser. */
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+   
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+/* C GLR parser skeleton written by Paul Hilfinger.  */
 
 /* Identify Bison output.  */
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "2.1"
+#define YYBISON_VERSION "2.7"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "glr.c"
@@ -32,195 +44,13 @@
 /* Pure parsers.  */
 #define YYPURE 0
 
-/* Using locations.  */
-#define YYLSP_NEEDED 0
 
-
-
-/* Tokens.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     ENDMARKER = 258,
-     IMPORT = 259,
-     CLASS = 260,
-     END = 261,
-     PRIMARY = 262,
-     OR = 263,
-     AND = 264,
-     NOT = 265,
-     NOT_EQUAL = 266,
-     FINAL = 267,
-     STATIC = 268,
-     SELF = 269,
-     DEF = 270,
-     ELSE = 271,
-     IF = 272,
-     ELIF = 273,
-     WHILE = 274,
-     FOR = 275,
-     IN = 276,
-     TRY = 277,
-     FINALLY = 278,
-     ARROW = 279,
-     NONLOCAL = 280,
-     PLUS_EQUAL = 281,
-     MINUS_EQUAL = 282,
-     DIV_EQUAL = 283,
-     MOD_EQUAL = 284,
-     AND_EQUAL = 285,
-     OR_EQUAL = 286,
-     SHAPOO_EQUAL = 287,
-     LESS_THAN_2_EQUAL = 288,
-     MORE_THAN_2_EQUAL = 289,
-     STAR_2_EQUAL = 290,
-     DIV_2_EQUAL = 291,
-     MORE_LESS = 292,
-     FALSE = 293,
-     TRUE = 294,
-     STAR_2 = 295,
-     NUMBER_INT = 296,
-     NUMBER_LONG = 297,
-     NUMBER_FLOAT = 298,
-     NAME = 299,
-     DOT_3 = 300,
-     EXPECT = 301,
-     WITH = 302,
-     AS = 303,
-     ASSERT = 304,
-     EQUAL = 305,
-     DEL = 306,
-     RETURN = 307,
-     PRINT = 308,
-     GLOBAL = 309,
-     STAR_EQUAL = 310,
-     LESS_THAN_2 = 311,
-     RAISE = 312,
-     PRIVATE = 313,
-     PUBLIC = 314,
-     PROTECTED = 315,
-     YIELD = 316,
-     MORE_THAN_2 = 317,
-     STRING = 318,
-     NONE = 319,
-     IS = 320,
-     DIV_2 = 321,
-     LESS_OR_EQUAL = 322,
-     MORE_OR_EQUAL = 323,
-     EXCEPT = 324,
-     PASS = 325,
-     CHAR_VALUE = 326,
-     BREAK = 327,
-     CONTINUE = 328,
-     stmt_14 = 329,
-     stmt_13 = 330,
-     stmt_12 = 331,
-     stmt_11 = 332,
-     stmt_10 = 333,
-     stmt_9 = 334,
-     stmt_8 = 335,
-     stmt_7 = 336,
-     stmt_6 = 337,
-     stmt_5 = 338,
-     stmt_4 = 339,
-     stmt_3 = 340,
-     stmt_2 = 341,
-     stmt_1 = 342
-   };
-#endif
-/* Tokens.  */
-#define ENDMARKER 258
-#define IMPORT 259
-#define CLASS 260
-#define END 261
-#define PRIMARY 262
-#define OR 263
-#define AND 264
-#define NOT 265
-#define NOT_EQUAL 266
-#define FINAL 267
-#define STATIC 268
-#define SELF 269
-#define DEF 270
-#define ELSE 271
-#define IF 272
-#define ELIF 273
-#define WHILE 274
-#define FOR 275
-#define IN 276
-#define TRY 277
-#define FINALLY 278
-#define ARROW 279
-#define NONLOCAL 280
-#define PLUS_EQUAL 281
-#define MINUS_EQUAL 282
-#define DIV_EQUAL 283
-#define MOD_EQUAL 284
-#define AND_EQUAL 285
-#define OR_EQUAL 286
-#define SHAPOO_EQUAL 287
-#define LESS_THAN_2_EQUAL 288
-#define MORE_THAN_2_EQUAL 289
-#define STAR_2_EQUAL 290
-#define DIV_2_EQUAL 291
-#define MORE_LESS 292
-#define FALSE 293
-#define TRUE 294
-#define STAR_2 295
-#define NUMBER_INT 296
-#define NUMBER_LONG 297
-#define NUMBER_FLOAT 298
-#define NAME 299
-#define DOT_3 300
-#define EXPECT 301
-#define WITH 302
-#define AS 303
-#define ASSERT 304
-#define EQUAL 305
-#define DEL 306
-#define RETURN 307
-#define PRINT 308
-#define GLOBAL 309
-#define STAR_EQUAL 310
-#define LESS_THAN_2 311
-#define RAISE 312
-#define PRIVATE 313
-#define PUBLIC 314
-#define PROTECTED 315
-#define YIELD 316
-#define MORE_THAN_2 317
-#define STRING 318
-#define NONE 319
-#define IS 320
-#define DIV_2 321
-#define LESS_OR_EQUAL 322
-#define MORE_OR_EQUAL 323
-#define EXCEPT 324
-#define PASS 325
-#define CHAR_VALUE 326
-#define BREAK 327
-#define CONTINUE 328
-#define stmt_14 329
-#define stmt_13 330
-#define stmt_12 331
-#define stmt_11 332
-#define stmt_10 333
-#define stmt_9 334
-#define stmt_8 335
-#define stmt_7 336
-#define stmt_6 337
-#define stmt_5 338
-#define stmt_4 339
-#define stmt_3 340
-#define stmt_2 341
-#define stmt_1 342
 
 
 
 
 /* Copy the first part of user declarations.  */
+/* Line 207 of glr.c  */
 #line 4 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
 
 	#define _CRT_SECURE_NO_WARNINGS
@@ -289,11 +119,18 @@
 	MyParser * p = new MyParser();
 	AST * ast = new AST();
 
+/* Line 207 of glr.c  */
+#line 124 "yacc.cpp"
 
-/* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
+# ifndef YY_NULL
+#  if defined __cplusplus && 201103L <= __cplusplus
+#   define YY_NULL nullptr
+#  else
+#   define YY_NULL 0
+#  endif
+# endif
+
+#include "yacc.hpp"
 
 /* Enabling verbose error messages.  */
 #ifdef YYERROR_VERBOSE
@@ -303,74 +140,56 @@
 # define YYERROR_VERBOSE 1
 #endif
 
-/* Enabling the token table.  */
-#ifndef YYTOKEN_TABLE
-# define YYTOKEN_TABLE 0
-#endif
-
-#if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
-#line 73 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-typedef union YYSTYPE {
-	struct R{
-		int intVal;
-		float floatVal;
-		long longVal;
-		char charVal;
-		char* strVal;
-		int lineNum;
-		int colNum;
-	}r;
-		class YaccSimpleType * yaccSimpleType;
-		class Variable * var;
-		class Function * function;
-		class Type * type;
-		class Node * tn;
-} YYSTYPE;
-/* Line 186 of glr.c.  */
-#line 331 "yacc.cpp"
-# define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
-#endif
-
-#if ! defined (YYLTYPE) && ! defined (YYLTYPE_IS_DECLARED)
-typedef struct YYLTYPE
-{
-
-  char yydummy;
-
-} YYLTYPE;
-# define YYLTYPE_IS_DECLARED 1
-# define YYLTYPE_IS_TRIVIAL 1
-#endif
-
 /* Default (constant) value used for initialization for null
-   right-hand sides.  Unlike the standard yacc.c template,
-   here we set the default value of $$ to a zeroed-out value.
-   Since the default value is undefined, this behavior is
-   technically correct. */
+   right-hand sides.  Unlike the standard yacc.c template, here we set
+   the default value of $$ to a zeroed-out value.  Since the default
+   value is undefined, this behavior is technically correct.  */
 static YYSTYPE yyval_default;
 
 /* Copy the second part of user declarations.  */
 
-
-/* Line 217 of glr.c.  */
-#line 358 "yacc.cpp"
+/* Line 230 of glr.c  */
+#line 153 "yacc.cpp"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
 
 #ifndef YY_
-# if YYENABLE_NLS
+# if defined YYENABLE_NLS && YYENABLE_NLS
 #  if ENABLE_NLS
 #   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
-#   define YY_(msgid) dgettext ("bison-runtime", msgid)
+#   define YY_(Msgid) dgettext ("bison-runtime", Msgid)
 #  endif
 # endif
 # ifndef YY_
-#  define YY_(msgid) msgid
+#  define YY_(Msgid) Msgid
 # endif
+#endif
+
+/* Suppress unused-variable warnings by "using" E.  */
+#if ! defined lint || defined __GNUC__
+# define YYUSE(E) ((void) (E))
+#else
+# define YYUSE(E) /* empty */
+#endif
+
+/* Identity function, used to suppress warnings about constant conditions.  */
+#ifndef lint
+# define YYID(N) (N)
+#else
+#if (defined __STDC__ || defined __C99__FUNC__ \
+     || defined __cplusplus || defined _MSC_VER)
+static int
+YYID (int i)
+#else
+static int
+YYID (i)
+    int i;
+#endif
+{
+  return i;
+}
 #endif
 
 #ifndef YYFREE
@@ -396,8 +215,9 @@ static YYSTYPE yyval_default;
 #ifndef YYSETJMP
 # include <setjmp.h>
 # define YYJMP_BUF jmp_buf
-# define YYSETJMP(env) setjmp (env)
-# define YYLONGJMP(env, val) longjmp (env, val)
+# define YYSETJMP(Env) setjmp (Env)
+/* Pacify clang.  */
+# define YYLONGJMP(Env, Val) (longjmp (Env, Val), YYASSERT (0))
 #endif
 
 /*-----------------.
@@ -406,49 +226,41 @@ static YYSTYPE yyval_default;
 
 #ifndef __attribute__
 /* This feature is available in gcc versions 2.5 and later.  */
-# if (!defined (__GNUC__) || __GNUC__ < 2 \
-      || (__GNUC__ == 2 && __GNUC_MINOR__ < 5) || __STRICT_ANSI__)
+# if (! defined __GNUC__ || __GNUC__ < 2 \
+      || (__GNUC__ == 2 && __GNUC_MINOR__ < 5))
 #  define __attribute__(Spec) /* empty */
 # endif
 #endif
 
-
-#ifdef __cplusplus
-# define YYOPTIONAL_LOC(Name) /* empty */
-#else
-# define YYOPTIONAL_LOC(Name) Name __attribute__ ((__unused__))
-#endif
-
 #ifndef YYASSERT
-# define YYASSERT(condition) ((void) ((condition) || (abort (), 0)))
+# define YYASSERT(Condition) ((void) ((Condition) || (abort (), 0)))
 #endif
 
-/* YYFINAL -- State number of the termination state. */
+/* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  27
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1365
+#define YYLAST   1446
 
-/* YYNTOKENS -- Number of terminals. */
+/* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  110
-/* YYNNTS -- Number of nonterminals. */
+/* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  100
-/* YYNRULES -- Number of rules. */
+/* YYNRULES -- Number of rules.  */
 #define YYNRULES  407
-/* YYNRULES -- Number of states. */
-#define YYNSTATES  764
-/* YYMAXRHS -- Maximum number of symbols on right-hand side of rule. */
+/* YYNRULES -- Number of states.  */
+#define YYNSTATES  763
+/* YYMAXRHS -- Maximum number of symbols on right-hand side of rule.  */
 #define YYMAXRHS 9
 /* YYMAXLEFT -- Maximum number of symbols to the left of a handle
-   accessed by $0, $-1, etc., in any rule. */
+   accessed by $0, $-1, etc., in any rule.  */
 #define YYMAXLEFT 0
 
 /* YYTRANSLATE(X) -- Bison symbol number corresponding to X.  */
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   342
 
-#define YYTRANSLATE(YYX)						\
-  ((YYX <= 0) ? YYEOF :							\
-   (unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+#define YYTRANSLATE(YYX)                                                \
+  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
 static const unsigned char yytranslate[] =
@@ -538,7 +350,7 @@ static const unsigned short int yyprhs[] =
     1693,  1695,  1698,  1700,  1702,  1707,  1713,  1716
 };
 
-/* YYRHS -- A `-1'-separated list of the rules' RHS. */
+/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const short int yyrhs[] =
 {
      111,     0,    -1,   112,     3,    -1,   134,    98,   113,    -1,
@@ -724,47 +536,47 @@ static const unsigned short int yyrline[] =
      257,   265,   273,   274,   275,   283,   290,   291,   292,   299,
      308,   309,   312,   313,   315,   317,   320,   321,   322,   323,
      324,   325,   326,   329,   330,   331,   337,   338,   341,   342,
-     343,   344,   345,   346,   347,   350,   351,   354,   355,   357,
-     358,   359,   360,   361,   362,   363,   364,   365,   366,   367,
-     368,   371,   372,   373,   375,   376,   379,   382,   383,   384,
-     387,   390,   393,   394,   398,   401,   404,   405,   407,   414,
-     424,   425,   428,   429,   432,   436,   442,   443,   446,   447,
-     450,   451,   454,   455,   456,   457,   458,   459,   462,   467,
-     468,   471,   472,   473,   474,   477,   478,   481,   482,   485,
-     486,   487,   488,   491,   492,   495,   496,   499,   500,   503,
-     504,   507,   508,   509,   512,   513,   519,   523,   526,   527,
-     530,   531,   534,   535,   538,   539,   542,   543,   546,   547,
-     550,   551,   554,   555,   558,   559,   560,   561,   562,   563,
-     564,   565,   566,   567,   568,   571,   574,   575,   577,   578,
-     581,   582,   585,   586,   589,   590,   593,   594,   597,   598,
-     599,   600,   603,   604,   607,   611,   615,   621,   627,   628,
-     638,   642,   646,   650,   651,   655,   659,   663,   666,   667,
-     672,   673,   674,   675,   678,   679,   682,   683,   684,   685,
-     688,   689,   692,   693,   694,   695,   696,   697,   698,   699,
-     704,   711,   717,   723,   729,   735,   741,   747,   753,   759,
-     765,   771,   777,   783,   789,   795,   799,   803,   807,   808,
-     811,   812,   813,   816,   821,   822,   823,   824,   827,   828,
-     829,   830,   831,   832,   833,   834,   835,   836,   839,   840,
-     841,   842,   845,   846,   849,   850,   851,   852,   855,   856,
-     857,   858,   859,   860,   861,   862,   863,   866,   867,   870,
-     871,   872,   873,   876,   877,   878,   879,   880,   881,   882,
-     883,   886,   887,   890,   891,   892,   893,   896,   897,   899,
-     900,   903,   904,   905,   906,   907,   908,   909,   910,   911,
-     912,   914,   920,   928,   935,   942,   949,   956,   963,   970,
-     977,   984,   991,   998,  1005,  1012,  1019,  1026,  1033,  1041,
-    1048,  1055,  1062,  1069,  1076,  1083,  1090,  1097,  1104,  1111,
-    1118,  1125,  1132,  1139,  1146,  1153,  1160,  1167,  1174,  1181,
-    1188,  1195,  1202,  1209,  1216,  1217,  1218,  1225,  1232,  1239,
-    1249,  1250,  1253,  1254,  1257,  1258,  1260,  1262,  1270,  1283,
-    1292,  1301,  1309,  1321,  1328,  1329,  1330,  1331,  1333,  1341,
-    1354,  1362,  1370,  1378,  1391,  1401,  1402,  1405,  1406,  1409,
-    1411,  1412,  1416,  1417,  1420,  1421,  1424,  1425
+     343,   344,   345,   349,   350,   353,   354,   357,   358,   360,
+     361,   362,   363,   364,   365,   366,   367,   368,   369,   370,
+     371,   374,   375,   376,   378,   379,   382,   385,   386,   387,
+     390,   393,   396,   397,   401,   404,   407,   408,   410,   417,
+     427,   428,   431,   432,   435,   439,   445,   446,   449,   450,
+     453,   454,   457,   458,   459,   460,   461,   463,   467,   473,
+     474,   477,   478,   479,   480,   483,   484,   487,   488,   491,
+     492,   493,   494,   497,   498,   501,   502,   505,   506,   509,
+     510,   513,   514,   515,   518,   519,   525,   529,   532,   533,
+     536,   537,   540,   541,   544,   545,   548,   549,   552,   553,
+     556,   557,   560,   561,   564,   565,   566,   567,   568,   569,
+     570,   571,   572,   573,   574,   577,   580,   581,   583,   587,
+     590,   591,   594,   595,   598,   599,   602,   603,   606,   607,
+     608,   609,   612,   616,   619,   623,   627,   633,   639,   640,
+     650,   654,   658,   662,   663,   667,   671,   675,   678,   679,
+     684,   685,   686,   687,   693,   694,   697,   698,   699,   700,
+     703,   704,   707,   708,   709,   710,   711,   712,   713,   716,
+     721,   728,   734,   740,   746,   752,   758,   764,   770,   776,
+     782,   788,   794,   800,   806,   812,   817,   821,   825,   826,
+     829,   830,   831,   834,   839,   840,   841,   842,   845,   846,
+     847,   848,   849,   850,   851,   852,   853,   854,   857,   858,
+     859,   860,   863,   864,   867,   868,   869,   870,   873,   874,
+     875,   876,   877,   878,   879,   880,   881,   884,   885,   888,
+     889,   890,   891,   894,   895,   896,   897,   898,   899,   900,
+     901,   904,   905,   908,   909,   910,   911,   914,   915,   917,
+     918,   921,   922,   923,   924,   925,   926,   927,   928,   929,
+     930,   932,   938,   946,   953,   960,   967,   974,   981,   988,
+     995,  1002,  1009,  1016,  1023,  1030,  1037,  1044,  1051,  1059,
+    1066,  1073,  1080,  1087,  1094,  1101,  1108,  1115,  1122,  1129,
+    1136,  1143,  1150,  1157,  1164,  1171,  1178,  1185,  1192,  1199,
+    1206,  1213,  1220,  1227,  1234,  1235,  1236,  1243,  1250,  1257,
+    1267,  1268,  1271,  1272,  1275,  1276,  1278,  1280,  1288,  1301,
+    1310,  1319,  1327,  1339,  1346,  1347,  1348,  1349,  1351,  1359,
+    1372,  1380,  1388,  1396,  1409,  1419,  1420,  1423,  1424,  1427,
+    1429,  1430,  1434,  1435,  1438,  1439,  1442,  1443
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
+#if YYDEBUG || YYERROR_VERBOSE || 1
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
-   First, the terminals, then, starting at YYNTOKENS, nonterminals. */
+   First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ENDMARKER", "IMPORT", "CLASS", "END",
@@ -804,7 +616,7 @@ static const char *const yytname[] =
   "comma_test_colon_test_seq", "comma_test_seq", "dictorsetmaker",
   "classdef", "classheader", "arg_comma_seq", "comma_arg_seq", "arglist",
   "comma_default_arg_seq", "default_arg_comma_seq", "default_arg",
-  "argument", "comp_iter", "comp_for", "comp_if", 0
+  "argument", "comp_iter", "comp_for", "comp_if", YY_NULL
 };
 #endif
 
@@ -900,7 +712,7 @@ static const unsigned char yyr2[] =
        1,     2,     1,     1,     4,     5,     2,     3
 };
 
-/* YYDPREC[RULE-NUM] -- Dynamic precedence of rule #RULE-NUM (0 if none). */
+/* YYDPREC[RULE-NUM] -- Dynamic precedence of rule #RULE-NUM (0 if none).  */
 static const unsigned char yydprec[] =
 {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
@@ -946,7 +758,7 @@ static const unsigned char yydprec[] =
        0,     0,     0,     0,     0,     0,     0,     0
 };
 
-/* YYMERGER[RULE-NUM] -- Index of merging function for rule #RULE-NUM. */
+/* YYMERGER[RULE-NUM] -- Index of merging function for rule #RULE-NUM.  */
 static const unsigned char yymerger[] =
 {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
@@ -992,9 +804,9 @@ static const unsigned char yymerger[] =
        0,     0,     0,     0,     0,     0,     0,     0
 };
 
-/* YYDEFACT[S] -- default rule to reduce with in state S when YYTABLE
-   doesn't specify something else to do.  Zero means the default is an
-   error.  */
+/* YYDEFACT[S] -- default reduction number in state S.  Performed when
+   YYTABLE doesn't specify something else to do.  Zero means the default
+   is an error.  */
 static const unsigned short int yydefact[] =
 {
        0,     0,     0,     0,     0,    81,    82,    83,     0,     0,
@@ -1052,31 +864,31 @@ static const unsigned short int yydefact[] =
      238,     0,    15,   244,     0,     0,   237,     0,    14,   243,
        0,    40,     0,   242,     0,   241,     0,     0,    11,     0,
        0,   122,     0,   292,   291,     0,     0,   142,     0,     0,
-       0,     0,   107,   136,   138,     0,   302,     0,   256,   257,
-     313,   314,   311,   310,   149,     0,   379,   380,   399,   394,
-     388,     0,   386,   397,   371,   288,   286,   281,   282,   272,
-     277,   357,   343,     0,     0,     0,   345,     0,     0,     0,
-     356,   342,     0,     0,     0,   344,     0,     0,     0,   355,
-     349,     0,     0,     0,   348,     0,     0,     0,   238,   244,
-     237,   243,   242,   241,     0,    19,     0,     0,     0,     0,
-      23,     0,    18,     0,     0,     0,     0,    22,     8,     0,
-       0,    31,     0,     0,    30,     0,     0,     0,     0,     0,
-       0,   127,   132,     0,     0,     0,     0,   133,   404,     0,
-     315,     0,   395,   372,     0,   381,     0,     0,   390,   391,
-     398,   283,   273,   359,   347,     0,   361,   353,     0,   358,
-     346,     0,   360,   352,     0,   365,   351,     0,   364,   350,
-       0,     0,     0,    27,    13,     0,    39,     0,     0,     0,
-      26,    12,     0,    38,     0,     0,    35,     0,     0,    34,
-       0,     9,   123,     0,     0,     0,   126,     0,   143,   130,
-     131,   134,     0,   405,   402,   403,     0,     0,   378,     0,
-     373,   396,     0,     0,   392,   363,   369,   362,   368,   367,
-     366,    17,     0,     0,    20,    16,     0,     0,    21,     0,
-      29,     0,    28,   119,   124,     0,     0,   406,   307,     0,
-     382,   389,     0,    25,    37,    24,    36,    33,    32,   120,
-     128,   407,   308,   393
+       0,     0,   107,   136,   138,   302,     0,   256,   257,   313,
+     314,   311,   310,   149,     0,   379,   380,   399,   394,   388,
+       0,   386,   397,   371,   288,   286,   281,   282,   272,   277,
+     357,   343,     0,     0,     0,   345,     0,     0,     0,   356,
+     342,     0,     0,     0,   344,     0,     0,     0,   355,   349,
+       0,     0,     0,   348,     0,     0,     0,   238,   244,   237,
+     243,   242,   241,     0,    19,     0,     0,     0,     0,    23,
+       0,    18,     0,     0,     0,     0,    22,     8,     0,     0,
+      31,     0,     0,    30,     0,     0,     0,     0,     0,     0,
+     127,   132,     0,     0,     0,     0,   133,   404,     0,   315,
+       0,   395,   372,     0,   381,     0,     0,   390,   391,   398,
+     283,   273,   359,   347,     0,   361,   353,     0,   358,   346,
+       0,   360,   352,     0,   365,   351,     0,   364,   350,     0,
+       0,     0,    27,    13,     0,    39,     0,     0,     0,    26,
+      12,     0,    38,     0,     0,    35,     0,     0,    34,     0,
+       9,   123,     0,     0,     0,   126,     0,   143,   130,   131,
+     134,     0,   405,   402,   403,     0,     0,   378,     0,   373,
+     396,     0,     0,   392,   363,   369,   362,   368,   367,   366,
+      17,     0,     0,    20,    16,     0,     0,    21,     0,    29,
+       0,    28,   119,   124,     0,     0,   406,   307,     0,   382,
+     389,     0,    25,    37,    24,    36,    33,    32,   120,   128,
+     407,   308,   393
 };
 
-/* YYPDEFGOTO[NTERM-NUM]. */
+/* YYPDEFGOTO[NTERM-NUM].  */
 static const short int yydefgoto[] =
 {
       -1,     8,     9,    10,    68,    69,   272,    70,    71,    72,
@@ -1087,253 +899,260 @@ static const short int yydefgoto[] =
      197,    97,    98,   210,    99,   211,   100,   213,   101,   215,
      102,   217,   103,   220,   104,   223,   105,   228,   106,   107,
      234,   108,   109,   110,   295,   160,   235,   474,   352,   353,
-     470,   279,   145,   291,   152,   561,   304,   169,    14,    15,
-     346,   566,   347,   567,   463,   652,   349,   713,   714,   715
+     470,   279,   145,   291,   152,   560,   304,   169,    14,    15,
+     346,   565,   347,   566,   463,   651,   349,   712,   713,   714
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -521
+#define YYPACT_NINF -524
 static const short int yypact[] =
 {
-     180,    16,    97,   357,   292,  -521,  -521,  -521,    79,    55,
-    -521,   553,   -23,  -521,   287,   650,    -4,  -521,    68,   128,
-     204,   154,   216,   427,   176,   318,    60,  -521,  -521,   179,
-     452,    88,   287,  -521,  -521,  1221,   313,  1221,  1221,   403,
-     145,   214,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  1221,
-     403,  1221,   403,   245,  -521,  -521,  -521,  -521,  -521,  -521,
-     960,   807,   847,  1257,  1257,  1257,  1257,   690,  -521,   650,
-     497,  -521,   222,  -521,   595,  -521,   277,  -521,  -521,  -521,
-    -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,  -521,   105,  -521,   286,   316,   377,   429,  -521,
-     298,    34,   294,   352,   386,   407,   261,   355,  -521,   397,
-      14,   451,   406,    16,   414,   469,    12,  -521,   209,   476,
-     528,   515,   567,   290,   530,   573,   539,   583,   365,   550,
-     593,   555,   596,  -521,    50,  -521,   323,   351,   511,   266,
-    -521,   505,   507,   519,   520,   588,   650,   522,   125,   563,
-    -521,   524,  -521,  -521,   522,  -521,  -521,  -521,    31,    33,
-     518,  -521,   508,  -521,  -521,  -521,  -521,  -521,    32,   523,
-    -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,  -521,  -521,  -521,   888,  -521,  1221,   960,  -521,
-    -521,   960,   286,  1221,  1221,   608,  1221,   624,   960,   546,
-     614,  -521,  -521,  -521,  -521,   626,  -521,  -521,  -521,  -521,
-      34,  1257,  1257,   534,  1257,   536,  1257,   537,  1257,  1257,
-     432,  1257,  1257,   308,  1257,  1257,  1257,  1257,   409,  -521,
-    1257,   726,   996,   597,    99,  -521,  -521,   599,  -521,    16,
-    -521,   545,   547,    13,  -521,   372,   602,   379,   605,    17,
-    -521,   383,   607,   388,   609,    42,  -521,   400,   613,   438,
-     615,   224,   348,  -521,   170,   236,   511,   324,   257,   511,
-     415,   766,    23,   391,   418,   511,   650,   650,   403,   574,
-     403,   575,  1221,    45,   620,   578,  1221,   650,   203,  1257,
-    1221,   580,   578,   403,   960,   585,  -521,   960,   586,  -521,
-    -521,  -521,  1221,  1221,   589,  -521,  -521,   570,  -521,   660,
-    -521,  1221,  -521,  1221,   960,  -521,  -521,  1257,  -521,  -521,
-    1257,  -521,  1257,  -521,  1257,  -521,  -521,  1257,  1257,  -521,
-    -521,  1257,  1257,  -521,  -521,  -521,  -521,  1257,  1257,  1257,
-    1257,  -521,  1221,  1221,  -521,    29,   924,   584,  -521,   590,
-    1036,   591,   576,   610,  -521,  1257,  -521,  -521,  -521,  -521,
-     600,   611,   587,   102,  -521,   456,   115,  -521,   457,   612,
-     606,   126,  -521,   458,   131,  -521,   463,   617,   618,   136,
-    -521,   464,   142,  -521,   465,   466,  -521,   156,   471,  -521,
-     165,   166,   295,  -521,   511,    71,    24,   173,   511,   511,
-     242,    35,   370,   511,  -521,   619,  1221,  -521,   375,   511,
-     393,   511,    46,   516,   691,  -521,  -521,   403,   403,   625,
-     627,  1221,   265,   628,  -521,   664,  -521,  -521,  1221,   650,
-    -521,   621,  -521,   696,  -521,  -521,   960,   960,  -521,    85,
-    1221,  -521,  1221,  -521,  -521,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,   637,  1221,
-    -521,  1221,  1221,  1221,   642,   649,  -521,   646,  1221,   643,
-    -521,  1036,  -521,   996,   659,  -521,  -521,  -521,   651,   652,
-     648,   143,  -521,   653,   655,   146,  -521,  -521,   658,   661,
-     662,   152,  -521,   673,   663,   155,  -521,  -521,   674,   675,
-     677,   161,  -521,   676,   678,   164,  -521,  -521,   705,   715,
-    -521,  -521,   738,   741,  -521,   742,  -521,   743,  -521,    53,
-     511,  1221,  -521,   511,    54,    56,   511,  1221,  -521,   511,
-      58,  -521,   689,   511,    59,   511,    61,  1221,  -521,   692,
-    1221,   579,   693,  -521,  -521,   650,   650,   745,   695,   701,
-     702,   650,  -521,  -521,  -521,  1221,  -521,  1221,  -521,  -521,
-    1221,   707,  -521,  -521,  -521,  1077,   714,   724,  -521,  -521,
-     725,   713,   730,  -521,   703,  -521,  -521,   643,  -521,  -521,
-     996,  -521,  -521,   728,   729,   723,  -521,   732,   734,   735,
-    -521,  -521,   737,   739,   740,  -521,   744,   748,   753,  -521,
-    -521,   755,   759,   763,  -521,   765,   768,   769,  -521,  -521,
-    -521,  -521,  -521,  -521,  1221,  -521,    63,   774,    64,  1221,
-    -521,  1221,  -521,    66,   776,    67,  1221,  -521,  -521,    72,
-    1221,  -521,    73,  1221,  -521,   777,   650,   778,   780,  1221,
-     650,   808,  -521,   781,   650,   650,   650,  -521,   556,   782,
-    1221,  1221,  -521,  -521,  1113,   724,  1221,  1149,   751,   724,
-    -521,  -521,  -521,  -521,  -521,   783,  -521,  -521,   784,  -521,
-    -521,   785,  -521,  -521,   788,  -521,  -521,   794,  -521,  -521,
-     795,   796,  1221,  -521,  -521,  1221,  -521,   800,   805,  1221,
-    -521,  -521,  1221,  -521,   806,  1221,  -521,   809,  1221,  -521,
-     810,  -521,  -521,   650,   650,   813,  -521,   815,  -521,  -521,
-    -521,  -521,  1221,  -521,  -521,  -521,  1221,   817,  -521,  1221,
-    -521,  -521,  1221,  1185,   724,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,   818,   820,  -521,  -521,   821,   822,  -521,   823,
-    -521,   824,  -521,  -521,  -521,   650,   650,   556,  -521,  1221,
-    -521,  -521,  1221,  -521,  -521,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,  -521,  -521
+     180,    28,    32,   313,   409,  -524,  -524,  -524,   200,    76,
+    -524,   262,   120,  -524,   338,   649,   145,  -524,   170,   228,
+     173,   244,   319,   276,   260,   439,   212,  -524,  -524,   289,
+     332,   447,   338,  -524,  -524,  1266,   316,  1266,  1266,  1302,
+     237,   360,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  1266,
+    1302,  1266,  1302,   379,  -524,  -524,  -524,  -524,  -524,  -524,
+    1005,   852,   893,  1338,  1338,  1338,  1338,   450,  -524,   649,
+     731,  -524,   287,  -524,   265,  -524,   349,  -524,  -524,  -524,
+    -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,  -524,  -524,   440,  -524,   386,   431,   442,   462,  -524,
+     387,    40,   401,   402,   421,   498,    18,   323,  -524,   444,
+      12,   464,   426,    28,   441,   497,    15,  -524,   269,   502,
+     544,   509,   556,   291,   518,   559,   521,   561,   293,   523,
+     563,   525,   566,  -524,   465,  -524,   357,   351,   483,   166,
+    -524,   474,   476,   489,   494,   564,   649,   496,   -32,   538,
+    -524,   499,  -524,  -524,   496,  -524,  -524,  -524,    29,    37,
+     490,  -524,   482,  -524,  -524,  -524,  -524,  -524,    21,   484,
+    -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,  -524,  -524,  -524,  -524,   933,  -524,  1266,  1005,  -524,
+    -524,  1005,   386,  1266,  1266,   583,  1266,   585,  1005,   508,
+     576,  -524,  -524,  -524,  -524,   588,  -524,  -524,  -524,  -524,
+      40,  1338,  1338,   500,  1338,   495,  1338,   503,  1338,  1338,
+     501,  1338,  1338,    79,  1338,  1338,  1338,  1338,   435,  -524,
+    1338,   771,  1041,   558,   112,  -524,  -524,   560,  -524,    28,
+    -524,   506,   507,    16,  -524,   339,   562,   341,   565,    49,
+    -524,   343,   567,   346,   570,    69,  -524,   352,   571,   365,
+     573,   224,   475,  -524,   290,   403,   483,   266,   452,   483,
+     171,   812,    23,   273,   311,   483,   649,   649,  1302,   512,
+    1302,   522,  1266,    30,   577,   532,  1266,   649,     1,  1338,
+    1266,   534,   532,  1302,  1005,   535,  -524,  1005,   536,  -524,
+    -524,  -524,  1266,  1266,   537,  -524,  -524,   526,  -524,   610,
+    -524,  1266,  -524,  1266,  1005,  -524,  -524,  1338,  -524,  -524,
+    1338,  -524,  1338,  -524,  1338,  -524,  -524,  1338,  1338,  -524,
+    -524,  1338,  1338,  -524,  -524,  -524,  -524,  1338,  1338,  1338,
+    1338,  -524,  1266,  1266,  -524,    20,   969,   528,  -524,   541,
+    1081,   531,   524,   545,  -524,  1338,  -524,  -524,  -524,  -524,
+     533,   540,   542,    75,  -524,   367,   121,  -524,   383,   546,
+     543,   133,  -524,   416,   136,  -524,   448,   547,   548,   142,
+    -524,   449,   143,  -524,   456,   458,  -524,   169,   492,  -524,
+      50,   176,   186,  -524,   483,    53,    24,   165,   483,   483,
+     236,    31,   302,   483,  -524,   549,  1266,  -524,   303,   483,
+     362,   483,    39,    80,   618,  -524,  -524,  1302,  1302,   551,
+     553,  1266,    87,   557,  -524,   591,  -524,  -524,  1266,   649,
+    -524,   552,  -524,   615,  -524,  -524,  1005,  1005,  -524,    55,
+    1266,  -524,  1266,  -524,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,   574,  1266,
+    -524,  1266,  1266,  1266,   575,   579,  -524,   572,  1266,   578,
+    -524,  1081,  -524,  1041,   582,  -524,  -524,  -524,   584,   587,
+     589,   144,  -524,   596,   597,   146,  -524,  -524,   599,   600,
+     604,   152,  -524,   606,   607,   155,  -524,  -524,   609,   611,
+     616,   161,  -524,   619,   617,   164,  -524,  -524,   614,   621,
+    -524,  -524,   629,   631,  -524,   632,  -524,   638,  -524,    45,
+     483,  1266,  -524,   483,    46,    47,   483,  1266,  -524,   483,
+      54,  -524,   624,   483,    56,   483,    58,  1266,  -524,   625,
+    1266,   336,   626,  -524,  -524,   649,   649,   593,   627,   628,
+     630,   649,  -524,  -524,  -524,  -524,  1266,  -524,  -524,  1266,
+     640,  -524,  -524,  -524,  1122,   642,   643,  -524,  -524,   644,
+     605,   645,  -524,   634,  -524,  -524,   578,  -524,  -524,  1041,
+    -524,  -524,   637,   641,   647,  -524,   646,   650,   652,  -524,
+    -524,   655,   659,   660,  -524,   662,   663,   664,  -524,  -524,
+     666,   667,   668,  -524,   672,   678,   679,  -524,  -524,  -524,
+    -524,  -524,  -524,  1266,  -524,    59,   681,    60,  1266,  -524,
+    1266,  -524,    61,   688,    63,  1266,  -524,  -524,    64,  1266,
+    -524,    67,  1266,  -524,   689,   649,   690,   691,  1266,   649,
+     693,  -524,   671,   649,   649,   649,  -524,   366,   692,  1266,
+    1266,  -524,  -524,  1158,   643,  1266,  1194,   675,   643,  -524,
+    -524,  -524,  -524,  -524,   694,  -524,  -524,   697,  -524,  -524,
+     698,  -524,  -524,   699,  -524,  -524,   700,  -524,  -524,   701,
+     706,  1266,  -524,  -524,  1266,  -524,   707,   708,  1266,  -524,
+    -524,  1266,  -524,   709,  1266,  -524,   718,  1266,  -524,   719,
+    -524,  -524,   649,   649,   724,  -524,   729,  -524,  -524,  -524,
+    -524,  1266,  -524,  -524,  -524,  1266,   730,  -524,  1266,  -524,
+    -524,  1266,  1230,   643,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,   732,   733,  -524,  -524,   734,   737,  -524,   739,  -524,
+     741,  -524,  -524,  -524,   649,   649,   366,  -524,  1266,  -524,
+    -524,  1266,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,  -524,  -524
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const short int yypgoto[] =
 {
-    -521,  -521,  -521,    75,  -521,  -521,   -50,  -521,  -521,  -521,
-    -521,   535,   656,   -59,   172,  -521,    70,  -521,  -521,  -521,
-    -521,  -521,  -521,  -521,   844,  -521,  -521,   -52,  -107,  -521,
-    -521,   711,  -521,  -521,  -521,  -521,  -521,  -521,  -521,  -521,
-    -521,  -521,  -521,  -281,   446,   836,   -65,   -37,  -521,  -191,
-    -521,  -183,   -28,  -521,  -521,   670,   -24,  -521,   -30,  -521,
-    -193,  -521,  -187,  -521,  -195,  -521,  -179,  -521,  -188,     3,
-    -521,  -521,  -521,  -521,   779,   862,   694,  -521,  -521,  -444,
-    -453,   791,   -42,   494,  -145,  -521,  -521,  -521,   907,  -521,
-    -521,   374,   679,  -520,  -521,  -228,  -333,   198,  -127,  -521
+    -524,  -524,  -524,    72,  -524,  -524,   -50,  -524,  -524,  -524,
+    -524,   354,   656,   -63,   307,  -524,    70,  -524,  -524,  -524,
+    -524,  -524,  -524,  -524,   759,  -524,  -524,   -52,  -102,  -524,
+    -524,   613,  -524,  -524,  -524,  -524,  -524,  -524,  -524,  -524,
+    -524,  -524,  -524,  -280,   370,   760,   -65,   -37,  -524,  -191,
+    -524,  -178,   -28,  -524,  -524,   633,   -24,  -524,   -30,  -524,
+    -185,  -524,  -180,  -524,  -177,  -524,  -187,  -524,  -204,     2,
+    -524,  -524,  -524,  -524,   685,   783,   612,  -524,  -524,  -440,
+    -450,   703,   -42,   417,  -158,  -524,  -524,  -524,   813,  -524,
+    -524,   294,   598,  -523,  -524,  -228,  -341,   113,  -114,  -524
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule which
-   number is the opposite.  If zero, do what YYDEFACT says.
-   If YYTABLE_NINF, syntax error.  */
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 #define YYTABLE_NINF -388
 static const short int yytable[] =
 {
-     141,   142,   309,   348,   170,   426,   238,   135,   150,   144,
-     153,   310,   149,   465,   151,   143,   576,   189,   578,   319,
-     144,   323,   144,   155,   158,   158,   143,   321,   143,   579,
-     168,   296,   299,   329,   330,   165,   156,   159,   159,   325,
-     326,   305,   308,   348,   200,   201,   655,   406,   521,   293,
-     659,   293,   293,   293,   230,   202,    16,    16,    28,   527,
-      16,    16,   261,   262,   242,   126,   163,   164,   420,   166,
-     537,   203,   127,    23,    26,    32,   246,   614,   619,    27,
-     621,   283,   626,   630,   204,   633,    16,   682,   685,    33,
-     689,   692,   120,   131,   263,   125,   695,   698,   111,   205,
-     132,   206,   207,   231,   232,   293,   139,   133,     5,     6,
-       7,   190,   241,   361,   421,   520,   233,   369,   464,   294,
-     302,   297,   407,   522,   661,   208,   209,   446,   443,   448,
-     459,   303,   358,   189,   528,   447,   662,   419,   724,   355,
-     189,    20,   377,   451,   452,   538,    16,   553,   449,   450,
-     151,   155,   615,   620,   155,   622,   113,   627,   631,    16,
-     634,   155,   683,   686,   156,   690,   693,   156,   312,   509,
-      16,   696,   699,   560,   156,    16,   115,   513,   248,   515,
-      16,   318,   391,   392,     1,     2,    16,    16,   231,   232,
-      16,   362,     3,     4,   345,   351,    16,   370,   118,    16,
-     510,   233,   479,   378,   264,    16,   267,   270,    16,   514,
-     516,   413,   414,   286,   393,   483,   396,   523,   460,   401,
-     123,   119,   427,   128,   287,   412,   489,   333,   334,   335,
-     336,   493,   653,   341,   345,   572,   499,   385,     5,     6,
-       7,   119,   503,   584,   146,   151,   588,   252,   416,   149,
-     416,   433,   593,   431,   415,   597,   415,   434,   147,   430,
-     434,   602,   124,   144,   606,   438,   439,   192,   386,   143,
-     435,    29,   199,   435,     5,     6,     7,   155,   273,   274,
-     394,   548,     5,     6,     7,   444,   526,   445,   549,   154,
-     156,   428,     2,   116,     5,     6,     7,    24,   243,     3,
-       4,   399,   429,   117,    25,   457,   458,   517,   244,   345,
-     275,   480,   562,   469,   484,     5,     6,     7,     2,   490,
-     172,   720,   494,   124,   653,   136,   137,   500,    21,   121,
-     504,   387,   390,   193,   421,   395,   265,   397,   400,   518,
-     453,   454,   455,   456,   519,     5,     6,     7,   524,   525,
-       5,     6,     7,   530,   221,   222,    24,   138,   475,   534,
-     388,   536,    21,   268,   554,   188,   648,   266,   398,   532,
-      22,     5,     6,     7,   191,   254,     5,     6,     7,   249,
-     258,     5,     6,     7,   547,   194,   198,   544,   544,   250,
-     720,   149,   389,   543,   543,   269,   129,   212,   260,   558,
-     558,   331,   332,   563,   408,   564,     5,     6,     7,     5,
-       6,     7,   559,   559,   529,     5,     6,     7,   134,   533,
-     126,   224,   568,   131,   569,   570,   571,   402,   721,   585,
-     410,   575,   121,   589,   577,   409,   351,   535,   196,   594,
-     122,    42,    43,   598,    44,    45,    46,    47,    48,   603,
-     225,   226,   227,   607,   255,   508,   214,   129,   512,   403,
-     229,   363,   411,   218,   256,   130,    54,    55,   366,   219,
-     616,   364,   371,   618,    57,   337,   623,   374,   367,   625,
-     641,   642,   372,   629,   617,   632,   647,   375,   327,   379,
-     624,   216,    61,    62,   328,   236,    63,    64,    65,   380,
-     635,     1,   239,   637,   338,   339,   340,    35,   237,    66,
-     507,    67,    36,   240,    37,   511,    38,    39,   431,    40,
-     245,   747,    41,   649,     5,     6,     7,   382,   345,     5,
-       6,     7,   539,   246,   540,    42,    43,   383,    44,    45,
-      46,    47,    48,   351,    49,   481,   485,   491,    50,    51,
-      52,    53,   495,   501,   505,   482,   486,   492,    29,   247,
-      54,    55,   496,   502,   506,    30,    31,    56,    57,    58,
-      59,   702,   248,   712,   251,   706,   293,   681,   252,   709,
-     710,   711,   687,   253,   688,    60,    61,    62,   254,   694,
-      63,    64,    65,   697,   257,   638,   700,   639,   258,   259,
-     271,   260,   705,    66,   276,    67,   277,   278,   280,   282,
-     284,   289,   290,   717,   718,   301,   311,   345,   300,   571,
-     345,   173,   174,   175,   176,   177,   178,   179,   180,   181,
-     182,   183,   306,   313,   314,   315,   316,   320,   743,   744,
-     322,   354,   324,   357,   359,   732,   365,   360,   733,   368,
-     184,   373,   736,   376,     1,   737,    34,   381,   739,   384,
-      35,   741,   417,   418,   424,    36,   425,    37,   432,    38,
-      39,   185,    40,   436,   437,    41,   442,   440,   467,   748,
-     759,   760,   750,   472,   466,   751,   345,   478,    42,    43,
-     471,    44,    45,    46,    47,    48,   185,    49,   473,   476,
-      35,    50,    51,    52,    53,   134,   488,   542,   552,  -388,
-     477,   487,   762,    54,    55,   763,   497,   557,   498,   531,
-      56,    57,    58,    59,   545,   565,   546,   551,    42,    43,
-     573,    44,    45,    46,    47,    48,    35,   574,    60,    61,
-      62,   134,   468,    63,    64,    65,  -376,   580,   583,   608,
-     581,   582,   586,    54,    55,   587,    66,   590,    67,   609,
-     591,    57,   592,   596,    42,    43,   342,    44,    45,    46,
-      47,    48,   595,   599,   600,   604,    35,   601,   605,    61,
-      62,   134,   610,    63,    64,   611,   612,   613,   628,    54,
-      55,   636,   640,   643,   644,   650,    66,    57,    67,   167,
-     645,   646,   654,  -387,    42,    43,   342,    44,    45,    46,
-      47,    48,   656,   657,   459,    61,    62,    35,   660,    63,
-      64,   343,   134,   665,   707,   708,   344,   663,   664,    54,
-      55,   666,    66,   667,    67,   668,   669,    57,   670,   723,
-     671,   307,   441,   672,    12,    42,    43,   673,    44,    45,
-      46,    47,    48,   674,   675,    61,    62,    35,   676,    63,
-      64,   343,   134,   677,   678,   292,   404,   679,   550,   680,
-      54,    55,    66,   684,    67,   691,   701,   703,    57,   704,
-     317,   716,   725,   726,   727,    42,    43,   728,    44,    45,
-      46,    47,    48,   729,   730,   731,    61,    62,    35,   734,
-      63,    64,    65,   134,   735,   738,   171,   157,   740,   742,
-      54,    55,   745,    66,   746,    67,   749,   753,    57,   754,
-     755,   756,   757,   758,   162,   556,    42,    43,   356,    44,
-      45,    46,    47,    48,    35,   281,    61,    62,   298,   134,
-      63,    64,    65,   140,   658,   761,     0,     0,     0,     0,
-     405,    54,    55,    66,   161,    67,     0,     0,     0,    57,
-       0,     0,    42,    43,   461,    44,    45,    46,    47,    48,
-      35,     0,     0,     0,     0,   134,    60,    61,    62,     0,
-       0,    63,    64,    65,     0,     0,     0,    54,    55,     0,
-       0,     0,     0,     0,    66,    57,    67,     0,    42,    43,
-       0,    44,    45,    46,    47,    48,    35,     0,     0,     0,
-       0,   134,     0,    61,    62,     0,     0,    63,    64,   462,
-       0,     0,     0,    54,    55,     0,     0,     0,     0,     0,
-      66,    57,    67,     0,    42,    43,     0,    44,    45,    46,
-      47,    48,     0,     0,     0,     0,    35,     0,     0,    61,
-      62,   134,     0,    63,    64,    65,     0,     0,     0,    54,
-      55,     0,     0,     0,     0,     0,    66,    57,    67,     0,
-       0,     0,     0,     0,    42,    43,     0,    44,    45,    46,
-      47,    48,     0,     0,     0,    61,    62,    35,     0,    63,
-      64,     0,   134,     0,     0,   350,     0,     0,     0,    54,
-      55,     0,    66,     0,    67,     0,     0,    57,     0,     0,
-       0,     0,     0,     0,     0,    42,    43,   651,    44,    45,
-      46,    47,    48,    35,     0,    61,    62,     0,   134,    63,
-      64,     0,     0,     0,     0,   468,     0,     0,     0,     0,
-      54,    55,    66,     0,    67,     0,     0,     0,    57,     0,
-       0,    42,    43,   719,    44,    45,    46,    47,    48,    35,
-       0,     0,     0,     0,   134,     0,    61,    62,     0,     0,
-      63,    64,     0,     0,     0,     0,    54,    55,     0,     0,
-       0,     0,     0,    66,    57,    67,     0,    42,    43,   722,
+     141,   142,   309,   348,   170,   465,   426,   135,   150,   144,
+     153,   238,   149,   189,   151,   143,   310,   329,   330,   575,
+     144,   577,   144,   155,   158,   158,   143,   319,   143,   308,
+     168,   325,   326,   578,   321,   165,   156,   159,   159,   323,
+     293,   293,   654,   348,   296,   299,   658,   406,   521,   293,
+     200,   201,   230,   420,   305,   527,   286,   293,   246,    16,
+      16,   202,   513,   537,   242,   163,   164,   287,   166,   613,
+     618,   620,    16,    23,    26,   293,    20,   203,   625,    28,
+     629,   283,   632,   681,   684,   688,    33,   691,   694,   428,
+     204,   697,   120,    16,   514,   125,   539,   520,   540,   421,
+     429,   231,   232,   548,   133,   205,   139,   206,   207,   302,
+     549,   221,   222,    16,   233,   241,   361,   294,   464,    16,
+     303,   459,   407,   522,   419,   297,   660,   451,   452,   189,
+     528,   208,   209,   443,   723,   446,   189,   358,   538,   661,
+     449,   450,   447,   559,   614,   619,   621,   448,   553,   369,
+     151,   155,   355,   626,   155,   630,   421,   633,   682,   685,
+     689,   155,   692,   695,   156,    16,   698,   156,   312,   377,
+     248,    29,   331,   332,   156,   479,   126,    16,   273,   274,
+      16,   318,   509,   402,     1,     2,    16,    16,    16,   515,
+      16,   362,     3,     4,   345,   351,    16,   370,   517,    16,
+      27,   231,   232,   378,   264,    16,   267,   270,    16,   523,
+     275,   413,   414,   510,   233,   403,   396,   126,    32,   401,
+     516,   483,   427,   652,   127,   412,   333,   334,   335,   336,
+     518,   460,   341,   489,   345,   571,   493,   385,     5,     6,
+       7,   252,   499,   503,   583,   151,   587,   111,   416,   149,
+     416,   433,   592,   431,   415,   596,   415,   434,   113,   430,
+     434,   601,   116,   144,   605,   438,   439,    29,   386,   143,
+     435,   121,   117,   435,    30,    31,   115,   155,   129,   397,
+     526,   121,     5,     6,     7,   444,   408,   445,   118,   122,
+     156,   173,   174,   175,   176,   177,   178,   179,   180,   181,
+     182,   183,   391,   392,   123,   457,   458,   254,   258,   345,
+     398,   480,   719,   469,   484,   652,   131,   409,    21,   490,
+     184,     2,   494,   410,   119,   561,    22,   500,   136,   137,
+     504,   387,   390,   128,   393,   395,   146,   129,   400,   453,
+     454,   455,   456,     2,   519,   130,   529,   533,   524,   525,
+       3,     4,   637,   530,   638,   411,    24,   475,   243,   534,
+     138,   536,    21,   268,   554,   647,   185,   260,   244,   532,
+     265,     5,     6,     7,     5,     6,     7,     5,     6,     7,
+     249,   719,   255,   711,   547,   172,   293,   544,   544,   224,
+     250,   149,   256,   543,   543,   269,     5,     6,     7,   557,
+     557,   266,   192,   562,   147,   563,   535,   199,   119,     5,
+       6,     7,   558,   558,    24,     5,     6,     7,   225,   226,
+     227,    25,   567,   154,   568,   569,   570,   720,   363,   584,
+     366,   574,   371,   588,   576,   374,   351,   188,   364,   593,
+     367,   379,   372,   597,   124,   375,   190,   394,   193,   602,
+     194,   380,   131,   606,   382,   508,   481,   124,   512,   132,
+      35,     5,     6,     7,   383,   134,   482,     5,     6,     7,
+     615,   196,   485,   617,   191,   198,   622,   261,   262,   624,
+     640,   641,   486,   628,   616,   631,   646,   388,    42,    43,
+     623,    44,    45,    46,    47,    48,   399,     5,     6,     7,
+     634,   337,   507,   636,   212,   491,   214,   229,   236,   263,
+       5,     6,     7,    54,    55,   492,     5,     6,     7,   389,
+     746,    57,   648,     5,     6,     7,   216,   345,   237,   239,
+     338,   339,   340,     5,     6,     7,   511,   495,   501,    61,
+      62,   240,   351,    63,    64,   505,   245,   496,   502,   246,
+       5,     6,     7,   247,   218,   506,    66,   327,    67,   167,
+     219,   248,   251,   328,   252,   253,   254,   257,   258,   259,
+     701,   260,   271,   276,   705,   277,   680,   278,   708,   709,
+     710,   686,   280,   687,   284,   282,   289,   290,   693,   301,
+     300,   311,   696,   306,   313,   699,   314,   315,   316,   322,
+     417,   704,   354,   320,   357,   359,   365,   360,   324,   368,
+     418,   373,   716,   717,   376,   381,   345,   384,   570,   345,
+     425,   424,   432,   436,   437,   440,   442,   185,   466,   467,
+     471,   472,   476,   473,   542,   552,   556,   742,   743,   477,
+    -388,   642,   478,   488,   731,   487,   497,   732,   498,   531,
+     545,   735,   546,     1,   736,    34,   551,   738,   607,    35,
+     740,   441,   564,   572,    36,   608,    37,   573,    38,    39,
+     579,    40,  -376,   609,    41,   610,   611,   468,   747,   758,
+     759,   749,   612,   580,   750,   345,   581,    42,    43,   582,
+      44,    45,    46,    47,    48,   585,    49,   586,   589,   590,
+      50,    51,    52,    53,   591,   594,   459,   595,   598,   706,
+     599,   761,    54,    55,   762,   707,   600,   604,   603,    56,
+      57,    58,    59,   627,   635,   639,   643,   644,   649,   645,
+     653,   655,   656,   659,  -387,     1,   662,    60,    61,    62,
+     663,    35,    63,    64,    65,   665,    36,   664,    37,   666,
+      38,    39,   667,    40,   668,    66,    41,    67,   669,    12,
+     670,   671,   672,   722,   673,   674,   675,   292,   676,    42,
+      43,   677,    44,    45,    46,    47,    48,   678,    49,   679,
+     683,    35,    50,    51,    52,    53,   134,   690,   700,   702,
+     703,   715,   550,   724,    54,    55,   725,   726,   727,   728,
+     729,    56,    57,    58,    59,   730,   733,   734,   737,    42,
+      43,   342,    44,    45,    46,    47,    48,   739,   741,    60,
+      61,    62,    35,   744,    63,    64,    65,   134,   745,   748,
+     171,   752,   753,   754,    54,    55,   755,    66,   756,    67,
+     757,   307,    57,   317,   298,   162,   356,   281,   555,   140,
+      42,    43,   342,    44,    45,    46,    47,    48,     0,   760,
+      61,    62,    35,   657,    63,    64,   343,   134,     0,   405,
+       0,   344,     0,     0,     0,    54,    55,    66,     0,    67,
+       0,     0,     0,    57,     0,     0,     0,     0,     0,     0,
+      42,    43,     0,    44,    45,    46,    47,    48,     0,     0,
+       0,    61,    62,    35,     0,    63,    64,   343,   134,     0,
+       0,     0,   404,     0,     0,    54,    55,     0,    66,     0,
+      67,     0,     0,    57,     0,     0,     0,     0,     0,     0,
+       0,    42,    43,     0,    44,    45,    46,    47,    48,     0,
+       0,    61,    62,    35,     0,    63,    64,    65,   134,     0,
+       0,     0,   157,     0,     0,     0,    54,    55,    66,     0,
+      67,     0,     0,     0,    57,     0,     0,     0,     0,     0,
+       0,    42,    43,     0,    44,    45,    46,    47,    48,    35,
+       0,     0,    61,    62,   134,     0,    63,    64,    65,     0,
+       0,     0,     0,     0,     0,     0,    54,    55,     0,    66,
+     161,    67,     0,     0,    57,     0,     0,    42,    43,   461,
       44,    45,    46,    47,    48,    35,     0,     0,     0,     0,
-     134,     0,    61,    62,     0,     0,    63,    64,     0,     0,
+     134,    60,    61,    62,     0,     0,    63,    64,    65,     0,
        0,     0,    54,    55,     0,     0,     0,     0,     0,    66,
-      57,    67,     0,    42,    43,   752,    44,    45,    46,    47,
+      57,    67,     0,    42,    43,     0,    44,    45,    46,    47,
       48,    35,     0,     0,     0,     0,   134,     0,    61,    62,
-       0,     0,    63,    64,     0,     0,     0,     0,    54,    55,
+       0,     0,    63,    64,   462,     0,     0,     0,    54,    55,
        0,     0,     0,     0,     0,    66,    57,    67,     0,    42,
       43,     0,    44,    45,    46,    47,    48,     0,     0,     0,
-       0,     0,   134,     0,    61,    62,     0,     0,    63,    64,
-       0,     0,     0,     0,    54,    55,     0,     0,     0,     0,
-       0,    66,    57,    67,     0,    42,    43,     0,    44,    45,
-      46,    47,    48,     0,     0,     0,     0,     0,     0,     0,
-      61,    62,     0,     0,    63,    64,     0,     0,     0,     0,
-      54,    55,     0,     0,     0,     0,     0,    66,    57,    67,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    61,    62,     0,     0,
-      63,    64,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    66,     0,    67
+       0,    35,     0,     0,    61,    62,   134,     0,    63,    64,
+      65,     0,     0,     0,    54,    55,     0,     0,     0,     0,
+       0,    66,    57,    67,     0,     0,     0,     0,     0,    42,
+      43,     0,    44,    45,    46,    47,    48,     0,     0,     0,
+      61,    62,    35,     0,    63,    64,     0,   134,     0,     0,
+     350,     0,     0,     0,    54,    55,     0,    66,     0,    67,
+       0,     0,    57,     0,     0,     0,     0,     0,     0,     0,
+      42,    43,   650,    44,    45,    46,    47,    48,    35,     0,
+      61,    62,     0,   134,    63,    64,     0,     0,     0,     0,
+     468,     0,     0,     0,     0,    54,    55,    66,     0,    67,
+       0,     0,     0,    57,     0,     0,    42,    43,   718,    44,
+      45,    46,    47,    48,    35,     0,     0,     0,     0,   134,
+       0,    61,    62,     0,     0,    63,    64,     0,     0,     0,
+       0,    54,    55,     0,     0,     0,     0,     0,    66,    57,
+      67,     0,    42,    43,   721,    44,    45,    46,    47,    48,
+      35,     0,     0,     0,     0,   134,     0,    61,    62,     0,
+       0,    63,    64,     0,     0,     0,     0,    54,    55,     0,
+       0,     0,     0,     0,    66,    57,    67,     0,    42,    43,
+     751,    44,    45,    46,    47,    48,    35,     0,     0,     0,
+       0,   134,     0,    61,    62,     0,     0,    63,    64,     0,
+       0,     0,     0,    54,    55,     0,     0,     0,     0,     0,
+      66,    57,    67,     0,    42,    43,     0,    44,    45,    46,
+      47,    48,     0,     0,     0,     0,     0,   134,     0,    61,
+      62,     0,     0,    63,    64,     0,     0,     0,     0,    54,
+      55,     0,     0,     0,     0,     0,    66,    57,    67,     0,
+      42,    43,     0,    44,    45,    46,    47,    48,     0,     0,
+       0,     0,     0,   134,     0,    61,    62,     0,     0,    63,
+      64,     0,     0,     0,     0,    54,    55,     0,     0,     0,
+       0,     0,    66,    57,    67,     0,    42,    43,     0,    44,
+      45,    46,    47,    48,     0,     0,     0,     0,     0,     0,
+       0,    61,    62,     0,     0,    63,    64,    65,     0,     0,
+       0,    54,    55,     0,     0,     0,     0,     0,    66,    57,
+      67,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    61,    62,     0,
+       0,    63,    64,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    66,     0,    67
 };
 
 /* YYCONFLP[YYPACT[STATE-NUM]] -- Pointer into YYCONFL of start of
@@ -1478,7 +1297,15 @@ static const unsigned char yyconflp[] =
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0
 };
 
 /* YYCONFL[I] -- lists of conflicting rule numbers, each terminated by
@@ -1490,143 +1317,151 @@ static const short int yyconfl[] =
 
 static const short int yycheck[] =
 {
-      37,    38,   193,   231,    69,   286,   113,    35,    50,    39,
-      52,   194,    49,   346,    51,    39,   469,    76,   471,   212,
-      50,   216,    52,    60,    61,    62,    50,   214,    52,   473,
-      67,   158,   159,   221,   222,    65,    60,    61,    62,   218,
-     219,   168,   187,   271,    10,    11,   566,    24,    24,    20,
-     570,    20,    20,    20,    40,    21,    44,    44,     3,    24,
-      44,    44,    12,    13,   116,     5,    63,    64,    23,    66,
-      24,    37,    12,     3,     4,    98,     5,    24,    24,     0,
-      24,   146,    24,    24,    50,    24,    44,    24,    24,    14,
-      24,    24,    22,     5,    44,    25,    24,    24,   102,    65,
-      12,    67,    68,    89,    90,    20,    36,    32,    58,    59,
-      60,     6,   100,   100,    69,    44,   102,   100,   346,    88,
-      88,    88,    99,    99,   577,    91,    92,   320,   311,   324,
-     101,    99,   239,   192,    99,   322,   580,   282,   658,    40,
-     199,    44,   100,   331,   332,    99,    44,   428,   327,   328,
-     187,   188,    99,    99,   191,    99,    88,    99,    99,    44,
-      99,   198,    99,    99,   188,    99,    99,   191,   196,    13,
-      44,    99,    99,    88,   198,    44,    48,    12,     5,    13,
-      44,   211,    12,    13,     4,     5,    44,    44,    89,    90,
-      44,   243,    12,    13,   231,   232,    44,   249,    44,    44,
-      44,   102,   100,   255,   134,    44,   136,   137,    44,    44,
-      44,   276,   277,    88,    44,   100,   266,    44,   345,   269,
-      44,     5,   287,    44,    99,   275,   100,   224,   225,   226,
-     227,   100,   565,   230,   271,   463,   100,    13,    58,    59,
-      60,     5,   100,   100,    99,   282,   100,     5,   278,   286,
-     280,   293,   100,   290,   278,   100,   280,   294,    44,   289,
-     297,   100,     5,   293,   100,   302,   303,    95,    44,   293,
-     294,     5,   100,   297,    58,    59,    60,   314,    12,    13,
-      44,    16,    58,    59,    60,   313,    44,   317,    23,    44,
-     314,    88,     5,    89,    58,    59,    60,     5,    89,    12,
-      13,    44,    99,    99,    12,   342,   343,    12,    99,   346,
-      44,   363,   439,   350,   366,    58,    59,    60,     5,   371,
-      98,   654,   374,     5,   657,    12,    13,   379,     5,     5,
-     382,   261,   262,    17,    69,   265,    13,    13,   268,    44,
-     337,   338,   339,   340,   394,    58,    59,    60,   398,   399,
-      58,    59,    60,   403,    93,    94,     5,    44,   355,   409,
-      12,   411,     5,    12,   429,    88,   557,    44,    44,   406,
-      13,    58,    59,    60,    88,     5,    58,    59,    60,    89,
-       5,    58,    59,    60,   421,     8,    88,   417,   418,    99,
-     723,   428,    44,   417,   418,    44,     5,   103,     5,   436,
-     437,    93,    94,   440,    13,   442,    58,    59,    60,    58,
-      59,    60,   436,   437,    44,    58,    59,    60,    15,    44,
-       5,    66,   459,     5,   461,   462,   463,    12,   656,   481,
-      12,   468,     5,   485,   471,    44,   473,    44,     9,   491,
-      13,    38,    39,   495,    41,    42,    43,    44,    45,   501,
-      95,    96,    97,   505,    89,   385,   104,     5,   388,    44,
-      63,    89,    44,    56,    99,    13,    63,    64,    89,    62,
-     520,    99,    89,   523,    71,    66,   526,    89,    99,   529,
-     545,   546,    99,   533,   521,   535,   551,    99,    56,    89,
-     527,   105,    89,    90,    62,    44,    93,    94,    95,    99,
-     537,     4,    88,   540,    95,    96,    97,    10,   102,   106,
-      44,   108,    15,    44,    17,    44,    19,    20,   555,    22,
-      44,   712,    25,   560,    58,    59,    60,    89,   565,    58,
-      59,    60,    16,     5,    18,    38,    39,    99,    41,    42,
-      43,    44,    45,   580,    47,    89,    89,    89,    51,    52,
-      53,    54,    89,    89,    89,    99,    99,    99,     5,    44,
-      63,    64,    99,    99,    99,    12,    13,    70,    71,    72,
-      73,   636,     5,    17,    44,   640,    20,   614,     5,   644,
-     645,   646,   619,    44,   621,    88,    89,    90,     5,   626,
-      93,    94,    95,   630,    44,    16,   633,    18,     5,    44,
-      89,     5,   639,   106,    99,   108,    99,    88,    88,    21,
-      88,    48,    88,   650,   651,   107,     8,   654,   100,   656,
-     657,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,   109,     9,    88,    21,    10,   103,   703,   704,
-     104,    44,   105,    44,    99,   682,    44,   100,   685,    44,
-      55,    44,   689,    44,     4,   692,     6,    44,   695,    44,
-      10,   698,    88,    88,    44,    15,    88,    17,    88,    19,
-      20,   101,    22,    88,    88,    25,    16,    88,    88,   716,
-     745,   746,   719,   107,   100,   722,   723,   100,    38,    39,
-      99,    41,    42,    43,    44,    45,   101,    47,    88,    99,
-      10,    51,    52,    53,    54,    15,   100,    16,    44,    88,
-      99,    99,   749,    63,    64,   752,    99,    21,   100,   100,
-      70,    71,    72,    73,    99,    88,    99,    99,    38,    39,
-      88,    41,    42,    43,    44,    45,    10,    88,    88,    89,
-      90,    15,    99,    93,    94,    95,   100,    88,   100,    44,
-      99,    99,    99,    63,    64,   100,   106,    99,   108,    44,
-      99,    71,   100,   100,    38,    39,    40,    41,    42,    43,
-      44,    45,    99,    99,    99,    99,    10,   100,   100,    89,
-      90,    15,    44,    93,    94,    44,    44,    44,    99,    63,
-      64,    99,    99,    48,    99,    88,   106,    71,   108,   109,
-      99,    99,    88,   100,    38,    39,    40,    41,    42,    43,
-      44,    45,    88,    88,   101,    89,    90,    10,    88,    93,
-      94,    95,    15,   100,    16,    44,   100,    99,    99,    63,
-      64,    99,   106,    99,   108,   100,    99,    71,    99,    88,
-     100,   185,   307,    99,     0,    38,    39,    99,    41,    42,
-      43,    44,    45,   100,    99,    89,    90,    10,    99,    93,
-      94,    95,    15,   100,    99,   154,   100,    99,   422,   100,
-      63,    64,   106,    99,   108,    99,    99,    99,    71,    99,
-     210,    99,    99,    99,    99,    38,    39,    99,    41,    42,
-      43,    44,    45,    99,    99,    99,    89,    90,    10,    99,
-      93,    94,    95,    15,    99,    99,    70,   100,    99,    99,
-      63,    64,    99,   106,    99,   108,    99,    99,    71,    99,
-      99,    99,    99,    99,    62,   431,    38,    39,   234,    41,
-      42,    43,    44,    45,    10,   144,    89,    90,   159,    15,
-      93,    94,    95,    36,   570,   747,    -1,    -1,    -1,    -1,
-     271,    63,    64,   106,   107,   108,    -1,    -1,    -1,    71,
-      -1,    -1,    38,    39,    40,    41,    42,    43,    44,    45,
-      10,    -1,    -1,    -1,    -1,    15,    88,    89,    90,    -1,
-      -1,    93,    94,    95,    -1,    -1,    -1,    63,    64,    -1,
-      -1,    -1,    -1,    -1,   106,    71,   108,    -1,    38,    39,
-      -1,    41,    42,    43,    44,    45,    10,    -1,    -1,    -1,
-      -1,    15,    -1,    89,    90,    -1,    -1,    93,    94,    95,
-      -1,    -1,    -1,    63,    64,    -1,    -1,    -1,    -1,    -1,
-     106,    71,   108,    -1,    38,    39,    -1,    41,    42,    43,
-      44,    45,    -1,    -1,    -1,    -1,    10,    -1,    -1,    89,
-      90,    15,    -1,    93,    94,    95,    -1,    -1,    -1,    63,
-      64,    -1,    -1,    -1,    -1,    -1,   106,    71,   108,    -1,
-      -1,    -1,    -1,    -1,    38,    39,    -1,    41,    42,    43,
-      44,    45,    -1,    -1,    -1,    89,    90,    10,    -1,    93,
-      94,    -1,    15,    -1,    -1,    99,    -1,    -1,    -1,    63,
-      64,    -1,   106,    -1,   108,    -1,    -1,    71,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    38,    39,    40,    41,    42,
-      43,    44,    45,    10,    -1,    89,    90,    -1,    15,    93,
-      94,    -1,    -1,    -1,    -1,    99,    -1,    -1,    -1,    -1,
-      63,    64,   106,    -1,   108,    -1,    -1,    -1,    71,    -1,
-      -1,    38,    39,    40,    41,    42,    43,    44,    45,    10,
-      -1,    -1,    -1,    -1,    15,    -1,    89,    90,    -1,    -1,
-      93,    94,    -1,    -1,    -1,    -1,    63,    64,    -1,    -1,
-      -1,    -1,    -1,   106,    71,   108,    -1,    38,    39,    40,
+      37,    38,   193,   231,    69,   346,   286,    35,    50,    39,
+      52,   113,    49,    76,    51,    39,   194,   221,   222,   469,
+      50,   471,    52,    60,    61,    62,    50,   212,    52,   187,
+      67,   218,   219,   473,   214,    65,    60,    61,    62,   216,
+      20,    20,   565,   271,   158,   159,   569,    24,    24,    20,
+      10,    11,    40,    23,   168,    24,    88,    20,     5,    44,
+      44,    21,    12,    24,   116,    63,    64,    99,    66,    24,
+      24,    24,    44,     3,     4,    20,    44,    37,    24,     3,
+      24,   146,    24,    24,    24,    24,    14,    24,    24,    88,
+      50,    24,    22,    44,    44,    25,    16,    44,    18,    69,
+      99,    89,    90,    16,    32,    65,    36,    67,    68,    88,
+      23,    93,    94,    44,   102,   100,   100,    88,   346,    44,
+      99,   101,    99,    99,   282,    88,   576,   331,   332,   192,
+      99,    91,    92,   311,   657,   320,   199,   239,    99,   579,
+     327,   328,   322,    88,    99,    99,    99,   324,   428,   100,
+     187,   188,    40,    99,   191,    99,    69,    99,    99,    99,
+      99,   198,    99,    99,   188,    44,    99,   191,   196,   100,
+       5,     5,    93,    94,   198,   100,     5,    44,    12,    13,
+      44,   211,    13,    12,     4,     5,    44,    44,    44,    13,
+      44,   243,    12,    13,   231,   232,    44,   249,    12,    44,
+       0,    89,    90,   255,   134,    44,   136,   137,    44,    44,
+      44,   276,   277,    44,   102,    44,   266,     5,    98,   269,
+      44,   100,   287,   564,    12,   275,   224,   225,   226,   227,
+      44,   345,   230,   100,   271,   463,   100,    13,    58,    59,
+      60,     5,   100,   100,   100,   282,   100,   102,   278,   286,
+     280,   293,   100,   290,   278,   100,   280,   294,    88,   289,
+     297,   100,    89,   293,   100,   302,   303,     5,    44,   293,
+     294,     5,    99,   297,    12,    13,    48,   314,     5,    13,
+      44,     5,    58,    59,    60,   313,    13,   317,    44,    13,
+     314,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    12,    13,    44,   342,   343,     5,     5,   346,
+      44,   363,   653,   350,   366,   656,     5,    44,     5,   371,
+      55,     5,   374,    12,     5,   439,    13,   379,    12,    13,
+     382,   261,   262,    44,    44,   265,    99,     5,   268,   337,
+     338,   339,   340,     5,   394,    13,    44,    44,   398,   399,
+      12,    13,    16,   403,    18,    44,     5,   355,    89,   409,
+      44,   411,     5,    12,   429,   556,   101,     5,    99,   406,
+      13,    58,    59,    60,    58,    59,    60,    58,    59,    60,
+      89,   722,    89,    17,   421,    98,    20,   417,   418,    66,
+      99,   428,    99,   417,   418,    44,    58,    59,    60,   436,
+     437,    44,    95,   440,    44,   442,    44,   100,     5,    58,
+      59,    60,   436,   437,     5,    58,    59,    60,    95,    96,
+      97,    12,   459,    44,   461,   462,   463,   655,    89,   481,
+      89,   468,    89,   485,   471,    89,   473,    88,    99,   491,
+      99,    89,    99,   495,     5,    99,     6,    44,    17,   501,
+       8,    99,     5,   505,    89,   385,    89,     5,   388,    12,
+      10,    58,    59,    60,    99,    15,    99,    58,    59,    60,
+     520,     9,    89,   523,    88,    88,   526,    12,    13,   529,
+     545,   546,    99,   533,   521,   535,   551,    12,    38,    39,
+     527,    41,    42,    43,    44,    45,    44,    58,    59,    60,
+     537,    66,    44,   540,   103,    89,   104,    63,    44,    44,
+      58,    59,    60,    63,    64,    99,    58,    59,    60,    44,
+     711,    71,   559,    58,    59,    60,   105,   564,   102,    88,
+      95,    96,    97,    58,    59,    60,    44,    89,    89,    89,
+      90,    44,   579,    93,    94,    89,    44,    99,    99,     5,
+      58,    59,    60,    44,    56,    99,   106,    56,   108,   109,
+      62,     5,    44,    62,     5,    44,     5,    44,     5,    44,
+     635,     5,    89,    99,   639,    99,   613,    88,   643,   644,
+     645,   618,    88,   620,    88,    21,    48,    88,   625,   107,
+     100,     8,   629,   109,     9,   632,    88,    21,    10,   104,
+      88,   638,    44,   103,    44,    99,    44,   100,   105,    44,
+      88,    44,   649,   650,    44,    44,   653,    44,   655,   656,
+      88,    44,    88,    88,    88,    88,    16,   101,   100,    88,
+      99,   107,    99,    88,    16,    44,    21,   702,   703,    99,
+      88,    48,   100,   100,   681,    99,    99,   684,   100,   100,
+      99,   688,    99,     4,   691,     6,    99,   694,    44,    10,
+     697,   307,    88,    88,    15,    44,    17,    88,    19,    20,
+      88,    22,   100,    44,    25,    44,    44,    99,   715,   744,
+     745,   718,    44,    99,   721,   722,    99,    38,    39,   100,
+      41,    42,    43,    44,    45,    99,    47,   100,    99,    99,
+      51,    52,    53,    54,   100,    99,   101,   100,    99,    16,
+      99,   748,    63,    64,   751,    44,   100,   100,    99,    70,
+      71,    72,    73,    99,    99,    99,    99,    99,    88,    99,
+      88,    88,    88,    88,   100,     4,    99,    88,    89,    90,
+      99,    10,    93,    94,    95,    99,    15,   100,    17,    99,
+      19,    20,   100,    22,    99,   106,    25,   108,    99,     0,
+     100,    99,    99,    88,   100,    99,    99,   154,   100,    38,
+      39,    99,    41,    42,    43,    44,    45,    99,    47,   100,
+      99,    10,    51,    52,    53,    54,    15,    99,    99,    99,
+      99,    99,   422,    99,    63,    64,    99,    99,    99,    99,
+      99,    70,    71,    72,    73,    99,    99,    99,    99,    38,
+      39,    40,    41,    42,    43,    44,    45,    99,    99,    88,
+      89,    90,    10,    99,    93,    94,    95,    15,    99,    99,
+      70,    99,    99,    99,    63,    64,    99,   106,    99,   108,
+      99,   185,    71,   210,   159,    62,   234,   144,   431,    36,
+      38,    39,    40,    41,    42,    43,    44,    45,    -1,   746,
+      89,    90,    10,   569,    93,    94,    95,    15,    -1,   271,
+      -1,   100,    -1,    -1,    -1,    63,    64,   106,    -1,   108,
+      -1,    -1,    -1,    71,    -1,    -1,    -1,    -1,    -1,    -1,
+      38,    39,    -1,    41,    42,    43,    44,    45,    -1,    -1,
+      -1,    89,    90,    10,    -1,    93,    94,    95,    15,    -1,
+      -1,    -1,   100,    -1,    -1,    63,    64,    -1,   106,    -1,
+     108,    -1,    -1,    71,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    38,    39,    -1,    41,    42,    43,    44,    45,    -1,
+      -1,    89,    90,    10,    -1,    93,    94,    95,    15,    -1,
+      -1,    -1,   100,    -1,    -1,    -1,    63,    64,   106,    -1,
+     108,    -1,    -1,    -1,    71,    -1,    -1,    -1,    -1,    -1,
+      -1,    38,    39,    -1,    41,    42,    43,    44,    45,    10,
+      -1,    -1,    89,    90,    15,    -1,    93,    94,    95,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    63,    64,    -1,   106,
+     107,   108,    -1,    -1,    71,    -1,    -1,    38,    39,    40,
       41,    42,    43,    44,    45,    10,    -1,    -1,    -1,    -1,
-      15,    -1,    89,    90,    -1,    -1,    93,    94,    -1,    -1,
+      15,    88,    89,    90,    -1,    -1,    93,    94,    95,    -1,
       -1,    -1,    63,    64,    -1,    -1,    -1,    -1,    -1,   106,
-      71,   108,    -1,    38,    39,    40,    41,    42,    43,    44,
+      71,   108,    -1,    38,    39,    -1,    41,    42,    43,    44,
       45,    10,    -1,    -1,    -1,    -1,    15,    -1,    89,    90,
-      -1,    -1,    93,    94,    -1,    -1,    -1,    -1,    63,    64,
+      -1,    -1,    93,    94,    95,    -1,    -1,    -1,    63,    64,
       -1,    -1,    -1,    -1,    -1,   106,    71,   108,    -1,    38,
       39,    -1,    41,    42,    43,    44,    45,    -1,    -1,    -1,
-      -1,    -1,    15,    -1,    89,    90,    -1,    -1,    93,    94,
-      -1,    -1,    -1,    -1,    63,    64,    -1,    -1,    -1,    -1,
-      -1,   106,    71,   108,    -1,    38,    39,    -1,    41,    42,
-      43,    44,    45,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      89,    90,    -1,    -1,    93,    94,    -1,    -1,    -1,    -1,
-      63,    64,    -1,    -1,    -1,    -1,    -1,   106,    71,   108,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    89,    90,    -1,    -1,
-      93,    94,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,   106,    -1,   108
+      -1,    10,    -1,    -1,    89,    90,    15,    -1,    93,    94,
+      95,    -1,    -1,    -1,    63,    64,    -1,    -1,    -1,    -1,
+      -1,   106,    71,   108,    -1,    -1,    -1,    -1,    -1,    38,
+      39,    -1,    41,    42,    43,    44,    45,    -1,    -1,    -1,
+      89,    90,    10,    -1,    93,    94,    -1,    15,    -1,    -1,
+      99,    -1,    -1,    -1,    63,    64,    -1,   106,    -1,   108,
+      -1,    -1,    71,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      38,    39,    40,    41,    42,    43,    44,    45,    10,    -1,
+      89,    90,    -1,    15,    93,    94,    -1,    -1,    -1,    -1,
+      99,    -1,    -1,    -1,    -1,    63,    64,   106,    -1,   108,
+      -1,    -1,    -1,    71,    -1,    -1,    38,    39,    40,    41,
+      42,    43,    44,    45,    10,    -1,    -1,    -1,    -1,    15,
+      -1,    89,    90,    -1,    -1,    93,    94,    -1,    -1,    -1,
+      -1,    63,    64,    -1,    -1,    -1,    -1,    -1,   106,    71,
+     108,    -1,    38,    39,    40,    41,    42,    43,    44,    45,
+      10,    -1,    -1,    -1,    -1,    15,    -1,    89,    90,    -1,
+      -1,    93,    94,    -1,    -1,    -1,    -1,    63,    64,    -1,
+      -1,    -1,    -1,    -1,   106,    71,   108,    -1,    38,    39,
+      40,    41,    42,    43,    44,    45,    10,    -1,    -1,    -1,
+      -1,    15,    -1,    89,    90,    -1,    -1,    93,    94,    -1,
+      -1,    -1,    -1,    63,    64,    -1,    -1,    -1,    -1,    -1,
+     106,    71,   108,    -1,    38,    39,    -1,    41,    42,    43,
+      44,    45,    -1,    -1,    -1,    -1,    -1,    15,    -1,    89,
+      90,    -1,    -1,    93,    94,    -1,    -1,    -1,    -1,    63,
+      64,    -1,    -1,    -1,    -1,    -1,   106,    71,   108,    -1,
+      38,    39,    -1,    41,    42,    43,    44,    45,    -1,    -1,
+      -1,    -1,    -1,    15,    -1,    89,    90,    -1,    -1,    93,
+      94,    -1,    -1,    -1,    -1,    63,    64,    -1,    -1,    -1,
+      -1,    -1,   106,    71,   108,    -1,    38,    39,    -1,    41,
+      42,    43,    44,    45,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    89,    90,    -1,    -1,    93,    94,    95,    -1,    -1,
+      -1,    63,    64,    -1,    -1,    -1,    -1,    -1,   106,    71,
+     108,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    89,    90,    -1,
+      -1,    93,    94,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,   106,    -1,   108
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -1688,47 +1523,35 @@ static const unsigned char yystos[] =
       44,    24,    99,    44,   116,   116,    44,    24,    99,    44,
      116,   100,   157,    44,   116,    44,   116,    24,    99,    16,
       18,   145,    16,   166,   168,    99,    99,   157,    16,    23,
-     154,    99,    44,   153,   156,    88,   193,    21,   157,   166,
-      88,   195,   208,   157,   157,    88,   201,   203,   157,   157,
-     157,   157,   205,    88,    88,   157,   190,   157,   190,   189,
-      88,    99,    99,   100,   100,   137,    99,   100,   100,   137,
+     154,    99,    44,   153,   156,   193,    21,   157,   166,    88,
+     195,   208,   157,   157,    88,   201,   203,   157,   157,   157,
+     157,   205,    88,    88,   157,   190,   157,   190,   189,    88,
       99,    99,   100,   100,   137,    99,   100,   100,   137,    99,
-      99,   100,   100,   137,    99,   100,   100,   137,    44,    44,
-      44,    44,    44,    44,    24,    99,   116,   157,   116,    24,
-      99,    24,    99,   116,   157,   116,    24,    99,    99,   116,
-      24,    99,   116,    24,    99,   157,    99,   157,    16,    18,
-      99,   156,   156,    48,    99,    99,    99,   156,   159,   157,
-      88,    40,   205,   206,    88,   203,    88,    88,   201,   203,
-      88,   190,   189,    99,    99,   100,    99,    99,   100,    99,
-      99,   100,    99,    99,   100,    99,    99,   100,    99,    99,
-     100,   157,    24,    99,    99,    24,    99,   157,   157,    24,
-      99,    99,    24,    99,   157,    24,    99,   157,    24,    99,
-     157,    99,   156,    99,    99,   157,   156,    16,    44,   156,
-     156,   156,    17,   207,   208,   209,    99,   157,   157,    40,
-     206,   205,    40,    88,   203,    99,    99,    99,    99,    99,
-      99,    99,   157,   157,    99,    99,   157,   157,    99,   157,
-      99,   157,    99,   156,   156,    99,    99,   159,   157,    99,
-     157,   157,    40,    99,    99,    99,    99,    99,    99,   156,
-     156,   207,   157,   157
+      99,   100,   100,   137,    99,   100,   100,   137,    99,    99,
+     100,   100,   137,    99,   100,   100,   137,    44,    44,    44,
+      44,    44,    44,    24,    99,   116,   157,   116,    24,    99,
+      24,    99,   116,   157,   116,    24,    99,    99,   116,    24,
+      99,   116,    24,    99,   157,    99,   157,    16,    18,    99,
+     156,   156,    48,    99,    99,    99,   156,   159,   157,    88,
+      40,   205,   206,    88,   203,    88,    88,   201,   203,    88,
+     190,   189,    99,    99,   100,    99,    99,   100,    99,    99,
+     100,    99,    99,   100,    99,    99,   100,    99,    99,   100,
+     157,    24,    99,    99,    24,    99,   157,   157,    24,    99,
+      99,    24,    99,   157,    24,    99,   157,    24,    99,   157,
+      99,   156,    99,    99,   157,   156,    16,    44,   156,   156,
+     156,    17,   207,   208,   209,    99,   157,   157,    40,   206,
+     205,    40,    88,   203,    99,    99,    99,    99,    99,    99,
+      99,   157,   157,    99,    99,   157,   157,    99,   157,    99,
+     157,    99,   156,   156,    99,    99,   159,   157,    99,   157,
+     157,    40,    99,    99,    99,    99,    99,    99,   156,   156,
+     207,   157,   157
 };
-
-
-/* Prevent warning if -Wmissing-prototypes.  */
-int yyparse (void);
 
 /* Error token number */
 #define YYTERROR 1
 
-/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
-   If N is 0, then set CURRENT to the empty location which ends
-   the previous symbol: RHS[0] (always defined).  */
 
-
-#ifndef YYLLOC_DEFAULT
-# define YYLLOC_DEFAULT(Current, Rhs, N) ((void) 0)
-#endif
-
-
+/* This macro is provided for backward compatibility. */
 #ifndef YY_LOCATION_PRINT
 # define YY_LOCATION_PRINT(File, Loc) ((void) 0)
 #endif
@@ -1739,8 +1562,6 @@ int yyparse (void);
 
 YYSTYPE yylval;
 
-YYLTYPE yylloc;
-
 int yynerrs;
 int yychar;
 
@@ -1749,61 +1570,74 @@ static const int YYEMPTY = -2;
 
 typedef enum { yyok, yyaccept, yyabort, yyerr } YYRESULTTAG;
 
-#define YYCHK(YYE)							     \
-   do { YYRESULTTAG yyflag = YYE; if (yyflag != yyok) return yyflag; }	     \
-   while (0)
+#define YYCHK(YYE)                                                           \
+   do { YYRESULTTAG yyflag = YYE; if (yyflag != yyok) return yyflag; }       \
+   while (YYID (0))
 
 #if YYDEBUG
 
-#if ! defined (YYFPRINTF)
+# ifndef YYFPRINTF
 #  define YYFPRINTF fprintf
-#endif
+# endif
 
-# define YYDPRINTF(Args)			\
-do {						\
-  if (yydebug)					\
-    YYFPRINTF Args;				\
-} while (0)
+# define YYDPRINTF(Args)                        \
+do {                                            \
+  if (yydebug)                                  \
+    YYFPRINTF Args;                             \
+} while (YYID (0))
+
 
 /*--------------------------------.
 | Print this symbol on YYOUTPUT.  |
 `--------------------------------*/
 
+/*ARGSUSED*/
 static void
-yysymprint (FILE *yyoutput, int yytype, YYSTYPE *yyvaluep)
+yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
 {
-  /* Pacify ``unused variable'' warnings.  */
-  (void) yyvaluep;
-
-  if (yytype < YYNTOKENS)
-    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
-  else
-    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
-
-
+  FILE *yyo = yyoutput;
+  YYUSE (yyo);
+  if (!yyvaluep)
+    return;
 # ifdef YYPRINT
   if (yytype < YYNTOKENS)
     YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
+# else
+  YYUSE (yyoutput);
 # endif
   switch (yytype)
     {
       default:
         break;
     }
-  YYFPRINTF (yyoutput, ")");
 }
 
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)		\
-do {								\
-  if (yydebug)							\
-    {								\
-      YYFPRINTF (stderr, "%s ", Title);				\
-      yysymprint (stderr,					\
-                  Type, Value);	\
-      YYFPRINTF (stderr, "\n");					\
-    }								\
-} while (0)
+/*--------------------------------.
+| Print this symbol on YYOUTPUT.  |
+`--------------------------------*/
+
+static void
+yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+{
+  if (yytype < YYNTOKENS)
+    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
+  else
+    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
+
+  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
+  YYFPRINTF (yyoutput, ")");
+}
+
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)          \
+do {                                                            \
+  if (yydebug)                                                  \
+    {                                                           \
+      YYFPRINTF (stderr, "%s ", Title);                         \
+      yy_symbol_print (stderr, Type, Value);        \
+      YYFPRINTF (stderr, "\n");                                 \
+    }                                                           \
+} while (YYID (0))
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
@@ -1817,7 +1651,7 @@ int yydebug;
 #endif /* !YYDEBUG */
 
 /* YYINITDEPTH -- initial size of the parser's stacks.  */
-#ifndef	YYINITDEPTH
+#ifndef YYINITDEPTH
 # define YYINITDEPTH 200
 #endif
 
@@ -1836,22 +1670,37 @@ int yydebug;
    allocation.  This is to allow allocation and initialization
    to be completed by functions that call yyexpandGLRStack before the
    stack is expanded, thus insuring that all necessary pointers get
-   properly redirected to new data. */
+   properly redirected to new data.  */
 #define YYHEADROOM 2
 
 #ifndef YYSTACKEXPANDABLE
-# if (! defined (__cplusplus) \
-      || (defined (YYSTYPE_IS_TRIVIAL) && YYSTYPE_IS_TRIVIAL))
+# if (! defined __cplusplus \
+      || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL))
 #  define YYSTACKEXPANDABLE 1
 # else
 #  define YYSTACKEXPANDABLE 0
 # endif
 #endif
 
+#if YYSTACKEXPANDABLE
+# define YY_RESERVE_GLRSTACK(Yystack)                   \
+  do {                                                  \
+    if (Yystack->yyspaceLeft < YYHEADROOM)              \
+      yyexpandGLRStack (Yystack);                       \
+  } while (YYID (0))
+#else
+# define YY_RESERVE_GLRSTACK(Yystack)                   \
+  do {                                                  \
+    if (Yystack->yyspaceLeft < YYHEADROOM)              \
+      yyMemoryExhausted (Yystack);                      \
+  } while (YYID (0))
+#endif
+
+
 #if YYERROR_VERBOSE
 
 # ifndef yystpcpy
-#  if defined (__GLIBC__) && defined (_STRING_H) && defined (_GNU_SOURCE)
+#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
 #   define yystpcpy stpcpy
 #  else
 /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
@@ -1887,27 +1736,27 @@ yytnamerr (char *yyres, const char *yystr)
       char const *yyp = yystr;
 
       for (;;)
-	switch (*++yyp)
-	  {
-	  case '\'':
-	  case ',':
-	    goto do_not_strip_quotes;
+        switch (*++yyp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
 
-	  case '\\':
-	    if (*++yyp != '\\')
-	      goto do_not_strip_quotes;
-	    /* Fall through.  */
-	  default:
-	    if (yyres)
-	      yyres[yyn] = *yyp;
-	    yyn++;
-	    break;
+          case '\\':
+            if (*++yyp != '\\')
+              goto do_not_strip_quotes;
+            /* Fall through.  */
+          default:
+            if (yyres)
+              yyres[yyn] = *yyp;
+            yyn++;
+            break;
 
-	  case '"':
-	    if (yyres)
-	      yyres[yyn] = '\0';
-	    return yyn;
-	  }
+          case '"':
+            if (yyres)
+              yyres[yyn] = '\0';
+            return yyn;
+          }
     do_not_strip_quotes: ;
     }
 
@@ -1933,18 +1782,18 @@ typedef short int yySymbol;
 typedef short int yyItemNum;
 
 typedef struct yyGLRState yyGLRState;
+typedef struct yyGLRStateSet yyGLRStateSet;
 typedef struct yySemanticOption yySemanticOption;
 typedef union yyGLRStackItem yyGLRStackItem;
 typedef struct yyGLRStack yyGLRStack;
-typedef struct yyGLRStateSet yyGLRStateSet;
 
 struct yyGLRState {
-  /** Type tag: always true. */
+  /** Type tag: always true.  */
   yybool yyisState;
-  /** Type tag for yysemantics. If true, yysval applies, otherwise
-   *  yyfirstVal applies. */
+  /** Type tag for yysemantics.  If true, yysval applies, otherwise
+   *  yyfirstVal applies.  */
   yybool yyresolved;
-  /** Number of corresponding LALR(1) machine state. */
+  /** Number of corresponding LALR(1) machine state.  */
   yyStateNum yylrState;
   /** Preceding state in this stack */
   yyGLRState* yypred;
@@ -1953,34 +1802,40 @@ struct yyGLRState {
   union {
     /** First in a chain of alternative reductions producing the
      *  non-terminal corresponding to this state, threaded through
-     *  yynext. */
+     *  yynext.  */
     yySemanticOption* yyfirstVal;
-    /** Semantic value for this state. */
+    /** Semantic value for this state.  */
     YYSTYPE yysval;
   } yysemantics;
-  /** Source location for this state. */
-  YYLTYPE yyloc;
 };
 
 struct yyGLRStateSet {
   yyGLRState** yystates;
+  /** During nondeterministic operation, yylookaheadNeeds tracks which
+   *  stacks have actually needed the current lookahead.  During deterministic
+   *  operation, yylookaheadNeeds[0] is not maintained since it would merely
+   *  duplicate yychar != YYEMPTY.  */
+  yybool* yylookaheadNeeds;
   size_t yysize, yycapacity;
 };
 
 struct yySemanticOption {
-  /** Type tag: always false. */
+  /** Type tag: always false.  */
   yybool yyisState;
   /** Rule number for this reduction */
   yyRuleNum yyrule;
-  /** The last RHS state in the list of states to be reduced. */
+  /** The last RHS state in the list of states to be reduced.  */
   yyGLRState* yystate;
-  /** Next sibling in chain of options. To facilitate merging,
-   *  options are chained in decreasing order by address. */
+  /** The lookahead for this reduction.  */
+  int yyrawchar;
+  YYSTYPE yyval;
+  /** Next sibling in chain of options.  To facilitate merging,
+   *  options are chained in decreasing order by address.  */
   yySemanticOption* yynext;
 };
 
-/** Type of the items in the GLR stack. The yyisState field
- *  indicates which item of the union is valid. */
+/** Type of the items in the GLR stack.  The yyisState field
+ *  indicates which item of the union is valid.  */
 union yyGLRStackItem {
   yyGLRState yystate;
   yySemanticOption yyoption;
@@ -1990,7 +1845,6 @@ struct yyGLRStack {
   int yyerrState;
 
 
-  yySymbol* yytokenp;
   YYJMP_BUF yyexception_buffer;
   yyGLRStackItem* yyitems;
   yyGLRStackItem* yynextFree;
@@ -2000,24 +1854,26 @@ struct yyGLRStack {
   yyGLRStateSet yytops;
 };
 
-static void yyexpandGLRStack (yyGLRStack* yystack);
+#if YYSTACKEXPANDABLE
+static void yyexpandGLRStack (yyGLRStack* yystackp);
+#endif
 
-static void yyFail (yyGLRStack* yystack, const char* yymsg)
+static void yyFail (yyGLRStack* yystackp, const char* yymsg)
   __attribute__ ((__noreturn__));
 static void
-yyFail (yyGLRStack* yystack, const char* yymsg)
+yyFail (yyGLRStack* yystackp, const char* yymsg)
 {
-  if (yymsg != NULL)
+  if (yymsg != YY_NULL)
     yyerror (yymsg);
-  YYLONGJMP (yystack->yyexception_buffer, 1);
+  YYLONGJMP (yystackp->yyexception_buffer, 1);
 }
 
-static void yyMemoryExhausted (yyGLRStack* yystack)
+static void yyMemoryExhausted (yyGLRStack* yystackp)
   __attribute__ ((__noreturn__));
 static void
-yyMemoryExhausted (yyGLRStack* yystack)
+yyMemoryExhausted (yyGLRStack* yystackp)
 {
-  YYLONGJMP (yystack->yyexception_buffer, 2);
+  YYLONGJMP (yystackp->yyexception_buffer, 2);
 }
 
 #if YYDEBUG || YYERROR_VERBOSE
@@ -2034,28 +1890,25 @@ yytokenName (yySymbol yytoken)
 
 /** Fill in YYVSP[YYLOW1 .. YYLOW0-1] from the chain of states starting
  *  at YYVSP[YYLOW0].yystate.yypred.  Leaves YYVSP[YYLOW1].yystate.yypred
- *  containing the pointer to the next state in the chain. Assumes
- *  YYLOW1 < YYLOW0.  */
+ *  containing the pointer to the next state in the chain.  */
 static void yyfillin (yyGLRStackItem *, int, int) __attribute__ ((__unused__));
 static void
 yyfillin (yyGLRStackItem *yyvsp, int yylow0, int yylow1)
 {
-  yyGLRState* s;
   int i;
-  s = yyvsp[yylow0].yystate.yypred;
+  yyGLRState *s = yyvsp[yylow0].yystate.yypred;
   for (i = yylow0-1; i >= yylow1; i -= 1)
     {
       YYASSERT (s->yyresolved);
       yyvsp[i].yystate.yyresolved = yytrue;
       yyvsp[i].yystate.yysemantics.yysval = s->yysemantics.yysval;
-      yyvsp[i].yystate.yyloc = s->yyloc;
       s = yyvsp[i].yystate.yypred = s->yypred;
     }
 }
 
 /* Do nothing if YYNORMAL or if *YYLOW <= YYLOW1.  Otherwise, fill in
-   YYVSP[YYLOW1 .. *YYLOW-1] as in yyfillin and set *YYLOW = YYLOW1.
-   For convenience, always return YYLOW1.  */
+ * YYVSP[YYLOW1 .. *YYLOW-1] as in yyfillin and set *YYLOW = YYLOW1.
+ * For convenience, always return YYLOW1.  */
 static inline int yyfill (yyGLRStackItem *, int *, int, yybool)
      __attribute__ ((__unused__));
 static inline int
@@ -2072,21 +1925,18 @@ yyfill (yyGLRStackItem *yyvsp, int *yylow, int yylow1, yybool yynormal)
 /** Perform user action for rule number YYN, with RHS length YYRHSLEN,
  *  and top stack item YYVSP.  YYLVALP points to place to put semantic
  *  value ($$), and yylocp points to place for location information
- *  (@$). Returns yyok for normal return, yyaccept for YYACCEPT,
- *  yyerr for YYERROR, yyabort for YYABORT. */
-static YYRESULTTAG
+ *  (@$).  Returns yyok for normal return, yyaccept for YYACCEPT,
+ *  yyerr for YYERROR, yyabort for YYABORT.  */
+/*ARGSUSED*/ static YYRESULTTAG
 yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
-	      YYSTYPE* yyvalp,
-	      YYLTYPE* YYOPTIONAL_LOC (yylocp),
-	      yyGLRStack* yystack
-              )
+              yyGLRStack* yystackp,
+              YYSTYPE* yyvalp)
 {
   yybool yynormal __attribute__ ((__unused__)) =
-    (yystack->yysplitPoint == NULL);
+    (yystackp->yysplitPoint == YY_NULL);
   int yylow;
-
 # undef yyerrok
-# define yyerrok (yystack->yyerrState = 0)
+# define yyerrok (yystackp->yyerrState = 0)
 # undef YYACCEPT
 # define YYACCEPT return yyaccept
 # undef YYABORT
@@ -2094,2743 +1944,3166 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 # undef YYERROR
 # define YYERROR return yyerrok, yyerr
 # undef YYRECOVERING
-# define YYRECOVERING (yystack->yyerrState != 0)
+# define YYRECOVERING() (yystackp->yyerrState != 0)
 # undef yyclearin
-# define yyclearin (yychar = *(yystack->yytokenp) = YYEMPTY)
+# define yyclearin (yychar = YYEMPTY)
 # undef YYFILL
 # define YYFILL(N) yyfill (yyvsp, &yylow, N, yynormal)
 # undef YYBACKUP
-# define YYBACKUP(Token, Value)						     \
+# define YYBACKUP(Token, Value)                                              \
   return yyerror (YY_("syntax error: cannot back up")),     \
-	 yyerrok, yyerr
+         yyerrok, yyerr
 
   yylow = 1;
   if (yyrhslen == 0)
     *yyvalp = yyval_default;
   else
     *yyvalp = yyvsp[YYFILL (1-yyrhslen)].yystate.yysemantics.yysval;
-  YYLLOC_DEFAULT (*yylocp, yyvsp - yyrhslen, yyrhslen);
-
   switch (yyn)
     {
         case 2:
+/* Line 868 of glr.c  */
 #line 115 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"file_input: program ENDMARKER\n";
 										p->check_inhertance_list();
 						if(!p->errRecovery->errQ->isEmpty())
 								p->errRecovery->printErrQueue();
 						p->print_symbol();
-						ast->print((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn), 0);
+						ast->print((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn), 0);
 						Streams::verbose().flush();	
-								;}
+								}
     break;
 
   case 3:
+/* Line 868 of glr.c  */
 #line 125 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"program : import_stmt ';' temp2 \n";;}
+    {Streams::verbose() <<"program : import_stmt ';' temp2 \n";}
     break;
 
   case 4:
+/* Line 868 of glr.c  */
 #line 126 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"program : temp2 \n";;}
+    {Streams::verbose() <<"program : temp2 \n";}
     break;
 
   case 5:
+/* Line 868 of glr.c  */
 #line 130 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"temp2: classdef temp2\n";
-							ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn));
+							ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn));
 							cout<<"enter upper"<<endl;
-						;}
+						}
     break;
 
   case 6:
+/* Line 868 of glr.c  */
 #line 134 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"temp2: classdef \n";
 							//ast->createClassNode();
 							cout<<"enter classdef"<<endl;
-					;}
+					}
     break;
 
   case 7:
+/* Line 868 of glr.c  */
 #line 151 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 							testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);
-							((*yyvalp).tn)=ast->createFunctionNode(testfunction,(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn),NULL);
+							((*yyvalp).tn)=ast->createFunctionNode(testfunction,(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn),NULL);
 							parameters.clear();
 							linefunc=0;colmfunc=0;
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
-						  ;}
+						  }
     break;
 
   case 8:
+/* Line 868 of glr.c  */
 #line 159 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";}
     break;
 
   case 9:
+/* Line 868 of glr.c  */
 #line 160 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";}
     break;
 
   case 10:
+/* Line 868 of glr.c  */
 #line 161 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+											testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 											Streams::verbose() <<"funcheader: DEF NAME parameters ':' \n";
 											
-									   ;}
+									   }
     break;
 
   case 11:
+/* Line 868 of glr.c  */
 #line 170 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     { 
-												testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+												testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF access NAME parameters ':' \n";
-											  ;}
+											  }
     break;
 
   case 12:
+/* Line 868 of glr.c  */
 #line 178 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ARROW test ':' \n";;}
+    {Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ARROW test ':' \n";}
     break;
 
   case 13:
+/* Line 868 of glr.c  */
 #line 179 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ARROW test ':' \n";;}
+    {Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ARROW test ':' \n";}
     break;
 
   case 14:
+/* Line 868 of glr.c  */
 #line 180 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-												testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+												testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ':' \n";
-											 ;}
+											 }
     break;
 
   case 15:
+/* Line 868 of glr.c  */
 #line 188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+											testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ':' \n";
-											 ;}
+											 }
     break;
 
   case 16:
+/* Line 868 of glr.c  */
 #line 196 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ARROW test ':' \n";;}
+    {Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ARROW test ':' \n";}
     break;
 
   case 17:
+/* Line 868 of glr.c  */
 #line 197 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ARROW test ':'  \n";}
     break;
 
   case 18:
+/* Line 868 of glr.c  */
 #line 198 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+														testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ':'  \n";
-												    ;}
+												    }
     break;
 
   case 19:
+/* Line 868 of glr.c  */
 #line 206 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+													testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 													Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ':'  \n";
-													;}
+													}
     break;
 
   case 20:
+/* Line 868 of glr.c  */
 #line 214 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+																testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 																Streams::verbose() <<"funcheader: DEF FINAL access NAME parameters ARROW test ':'  \n";
-															  ;}
+															  }
     break;
 
   case 21:
+/* Line 868 of glr.c  */
 #line 222 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ARROW test ':'  \n";}
     break;
 
   case 22:
+/* Line 868 of glr.c  */
 #line 223 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 														colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':'  \n";
-													;}
+													}
     break;
 
   case 23:
+/* Line 868 of glr.c  */
 #line 230 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':' ";
-													;}
+													}
     break;
 
   case 24:
+/* Line 868 of glr.c  */
 #line 238 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':'  \n";}
     break;
 
   case 25:
+/* Line 868 of glr.c  */
 #line 239 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':'  \n";}
     break;
 
   case 26:
+/* Line 868 of glr.c  */
 #line 240 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 															Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ':'  \n";
-														  ;}
+														  }
     break;
 
   case 27:
+/* Line 868 of glr.c  */
 #line 248 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ':'  \n";
-														  ;}
+														  }
     break;
 
   case 28:
+/* Line 868 of glr.c  */
 #line 255 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ARROW test ':'  \n";}
     break;
 
   case 29:
+/* Line 868 of glr.c  */
 #line 256 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ARROW test ':'  \n";}
     break;
 
   case 30:
+/* Line 868 of glr.c  */
 #line 257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+														testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ':'  \n";
-													;}
+													}
     break;
 
   case 31:
+/* Line 868 of glr.c  */
 #line 265 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ':'  \n";
-													;}
+													}
     break;
 
   case 32:
+/* Line 868 of glr.c  */
 #line 273 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ARROW test ':'  \n";}
     break;
 
   case 33:
+/* Line 868 of glr.c  */
 #line 274 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ARROW test ':'  \n";}
     break;
 
   case 34:
+/* Line 868 of glr.c  */
 #line 275 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 															Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ':'  \n";
-			   											  ;}
+			   											  }
     break;
 
   case 35:
+/* Line 868 of glr.c  */
 #line 283 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ':'  \n";
-			  											  ;}
+			  											  }
     break;
 
   case 36:
+/* Line 868 of glr.c  */
 #line 290 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':'  \n";}
     break;
 
   case 37:
+/* Line 868 of glr.c  */
 #line 291 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':'  \n";;}
+    {Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':'  \n";}
     break;
 
   case 38:
+/* Line 868 of glr.c  */
 #line 292 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ':'  \n";
-			  											  ;}
+			  											  }
     break;
 
   case 39:
+/* Line 868 of glr.c  */
 #line 299 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
+															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, (((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.strVal),parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ':'  \n";
-														  ;}
+														  }
     break;
 
   case 40:
+/* Line 868 of glr.c  */
 #line 308 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"parameters:'(' arglist ')'\n";;}
+    {Streams::verbose() <<"parameters:'(' arglist ')'\n";}
     break;
 
   case 41:
+/* Line 868 of glr.c  */
 #line 309 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"parameters:'(' ')'\n";;}
+    {Streams::verbose() <<"parameters:'(' ')'\n";}
     break;
 
   case 42:
+/* Line 868 of glr.c  */
 #line 312 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);	Streams::verbose() <<"stmt:	simple_stmt \n";;}
+    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);	Streams::verbose() <<"stmt:	simple_stmt \n";}
     break;
 
   case 43:
+/* Line 868 of glr.c  */
 #line 313 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);	Streams::verbose() <<"stmt: compound_stmt\n";;}
+    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);	Streams::verbose() <<"stmt: compound_stmt\n";}
     break;
 
   case 44:
+/* Line 868 of glr.c  */
 #line 315 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";;}
+    {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
     break;
 
   case 45:
+/* Line 868 of glr.c  */
 #line 317 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"small_stmt: expr_stmt \n";
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-						;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+						}
     break;
 
   case 46:
+/* Line 868 of glr.c  */
 #line 320 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: del_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: del_stmt \n";}
     break;
 
   case 47:
+/* Line 868 of glr.c  */
 #line 321 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: pass_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: pass_stmt \n";}
     break;
 
   case 48:
+/* Line 868 of glr.c  */
 #line 322 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: flow_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: flow_stmt \n";}
     break;
 
   case 49:
+/* Line 868 of glr.c  */
 #line 323 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: import_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: import_stmt \n";}
     break;
 
   case 50:
+/* Line 868 of glr.c  */
 #line 324 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: global_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: global_stmt \n";}
     break;
 
   case 51:
+/* Line 868 of glr.c  */
 #line 325 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: nonlocal_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: nonlocal_stmt \n";}
     break;
 
   case 52:
+/* Line 868 of glr.c  */
 #line 326 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"small_stmt: print_stmt \n";;}
+    {Streams::verbose() <<"small_stmt: print_stmt \n";}
     break;
 
   case 53:
+/* Line 868 of glr.c  */
 #line 329 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";;}
+    {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
     break;
 
   case 54:
+/* Line 868 of glr.c  */
 #line 330 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";;}
+    {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
     break;
 
   case 55:
+/* Line 868 of glr.c  */
 #line 331 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";
-													ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn));
-													((*yyvalp).tn)=ast->createAssignNode((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),NULL);
-												;}
+													ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn));
+													((*yyvalp).tn)=ast->createAssignNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),NULL);
+												}
     break;
 
   case 56:
+/* Line 868 of glr.c  */
 #line 337 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";;}
+    {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
     break;
 
   case 57:
+/* Line 868 of glr.c  */
 #line 338 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+    {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 58:
+/* Line 868 of glr.c  */
 #line 341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";;}
+    {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";}
     break;
 
   case 59:
+/* Line 868 of glr.c  */
 #line 342 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ ',' \n";;}
+    {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ ',' \n";}
     break;
 
   case 60:
+/* Line 868 of glr.c  */
 #line 343 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"',' \n";;}
+    {Streams::verbose() <<"',' \n";}
     break;
 
   case 61:
+/* Line 868 of glr.c  */
 #line 344 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: test comma_test_star_seqJ \n";;}
+    {Streams::verbose() <<"testlist_star_expr: test comma_test_star_seqJ \n";}
     break;
 
   case 62:
+/* Line 868 of glr.c  */
 #line 345 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: test \n"; ((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+    {
+								Streams::verbose() <<"testlist_star_expr: test \n"; 
+								((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+							}
     break;
 
   case 63:
-#line 346 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: star_expr comma_test_star_seqJ ',' \n";;}
+/* Line 868 of glr.c  */
+#line 349 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_star_expr: star_expr comma_test_star_seqJ ',' \n";}
     break;
 
   case 64:
-#line 347 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_star_expr: star_expr ',' \n";;}
+/* Line 868 of glr.c  */
+#line 350 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_star_expr: star_expr ',' \n";}
     break;
 
   case 65:
-#line 350 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star : ',' test \n";;}
+/* Line 868 of glr.c  */
+#line 353 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star : ',' test \n";}
     break;
 
   case 66:
-#line 351 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star : ',' star_expr \n";;}
+/* Line 868 of glr.c  */
+#line 354 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star : ',' star_expr \n";}
     break;
 
   case 67:
-#line 354 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star_seqJ comma_test_star \n";;}
+/* Line 868 of glr.c  */
+#line 357 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star_seqJ comma_test_star \n";}
     break;
 
   case 68:
-#line 355 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star \n";;}
+/* Line 868 of glr.c  */
+#line 358 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seqJ : comma_test_star \n";}
     break;
 
   case 69:
-#line 357 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	PLUS_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 360 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	PLUS_EQUAL \n";}
     break;
 
   case 70:
-#line 358 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	MINUS_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 361 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	MINUS_EQUAL \n";}
     break;
 
   case 71:
-#line 359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	STAR_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 362 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	STAR_EQUAL \n";}
     break;
 
   case 72:
-#line 360 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	DIV_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 363 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	DIV_EQUAL \n";}
     break;
 
   case 73:
-#line 361 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	MOD_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 364 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	MOD_EQUAL \n";}
     break;
 
   case 74:
-#line 362 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	AND_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 365 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	AND_EQUAL \n";}
     break;
 
   case 75:
-#line 363 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	OR_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 366 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	OR_EQUAL \n";}
     break;
 
   case 76:
-#line 364 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	SHAPOO_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 367 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	SHAPOO_EQUAL \n";}
     break;
 
   case 77:
-#line 365 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	LESS_THAN_2_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	LESS_THAN_2_EQUAL \n";}
     break;
 
   case 78:
-#line 366 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	MORE_THAN_2_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 369 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	MORE_THAN_2_EQUAL \n";}
     break;
 
   case 79:
-#line 367 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	STAR_2_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 370 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	STAR_2_EQUAL \n";}
     break;
 
   case 80:
-#line 368 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"augassign:	DIV_2_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 371 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"augassign:	DIV_2_EQUAL \n";}
     break;
 
   case 81:
-#line 371 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;;}
+/* Line 868 of glr.c  */
+#line 374 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="private";pp=true;}
     break;
 
   case 82:
-#line 372 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;;}
+/* Line 868 of glr.c  */
+#line 375 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
     break;
 
   case 83:
-#line 373 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";;}
+/* Line 868 of glr.c  */
+#line 376 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
     break;
 
   case 84:
-#line 375 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"print_stmt: PRINT exprlist \n";;}
+/* Line 868 of glr.c  */
+#line 378 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"print_stmt: PRINT exprlist \n";}
     break;
 
   case 85:
-#line 376 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"del_stmt:   DEL exprlist \n";;}
+/* Line 868 of glr.c  */
+#line 379 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"del_stmt:   DEL exprlist \n";}
     break;
 
   case 86:
-#line 379 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"pass_stmt:	PASS \n";;}
+/* Line 868 of glr.c  */
+#line 382 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"pass_stmt:	PASS \n";}
     break;
 
   case 87:
-#line 382 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"flow_stmt:	break_stmt \n";;}
+/* Line 868 of glr.c  */
+#line 385 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"flow_stmt:	break_stmt \n";}
     break;
 
   case 88:
-#line 383 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"flow_stmt: continue_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 386 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"flow_stmt: continue_stmt\n";}
     break;
 
   case 89:
-#line 384 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"flow_stmt: return_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 387 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"flow_stmt: return_stmt\n";}
     break;
 
   case 90:
-#line 387 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"break_stmt: BREAK \n";;}
+/* Line 868 of glr.c  */
+#line 390 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"break_stmt: BREAK \n";}
     break;
 
   case 91:
-#line 390 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"continue_stmt:	CONTINUE \n";;}
+/* Line 868 of glr.c  */
+#line 393 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"continue_stmt:	CONTINUE \n";}
     break;
 
   case 92:
-#line 393 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"return_stmt:	RETURN testlist \n";;}
+/* Line 868 of glr.c  */
+#line 396 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"return_stmt:	RETURN testlist \n";}
     break;
 
   case 93:
-#line 394 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"return_stmt:	RETURN \n";;}
+/* Line 868 of glr.c  */
+#line 397 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"return_stmt:	RETURN \n";}
     break;
 
   case 94:
-#line 398 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"import_stmt: import_name \n";;}
+/* Line 868 of glr.c  */
+#line 401 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"import_stmt: import_name \n";}
     break;
 
   case 95:
-#line 401 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";;}
+/* Line 868 of glr.c  */
+#line 404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";}
     break;
 
   case 96:
-#line 404 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";;}
+/* Line 868 of glr.c  */
+#line 407 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";}
     break;
 
   case 97:
-#line 405 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_dotted_as_name_seq: comma_dotted_as_name_seq ',' dotted_as_name \n";;}
+/* Line 868 of glr.c  */
+#line 408 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_dotted_as_name_seq: comma_dotted_as_name_seq ',' dotted_as_name \n";}
     break;
 
   case 98:
-#line 407 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 410 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 									Streams::verbose() <<"comma_dotted_as_name_seq: dotted_as_names: dotted_as_name \n";
 								t_id=new char[10];
 								strcpy(t_id,temp_id.c_str());
 								inhertance_list.push_back(t_id);
 								temp_id="";
-					;}
+					}
     break;
 
   case 99:
-#line 414 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 417 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 															Streams::verbose() <<"comma_dotted_as_name_seq: dotted_as_name comma_dotted_as_name_seq \n";
 						t_id=new char[10];
 								strcpy(t_id,temp_id.c_str());
 								inhertance_list.push_back(t_id);
 								temp_id="";
-				 ;}
+				 }
     break;
 
   case 100:
-#line 424 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dotted_as_name: dotted_name \n";;}
+/* Line 868 of glr.c  */
+#line 427 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dotted_as_name: dotted_name \n";}
     break;
 
   case 101:
-#line 425 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dotted_as_name: dotted_name AS NAME\n";;}
+/* Line 868 of glr.c  */
+#line 428 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dotted_as_name: dotted_name AS NAME\n";}
     break;
 
   case 102:
-#line 428 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dotted_name: NAME \n"; temp_id=temp_id+(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal);;}
+/* Line 868 of glr.c  */
+#line 431 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dotted_name: NAME \n"; temp_id=temp_id+(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal);}
     break;
 
   case 103:
-#line 429 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dotted_name: NAME dotted_name_seq \n";;}
+/* Line 868 of glr.c  */
+#line 432 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dotted_name: NAME dotted_name_seq \n";}
     break;
 
   case 104:
-#line 432 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 435 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 							Streams::verbose() <<"dotted_name_seq: '.' NAME \n";
-							temp_id=temp_id+"."+(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal);
-						;}
+							temp_id=temp_id+"."+(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.r.strVal);
+						}
     break;
 
   case 105:
-#line 436 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 439 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 												Streams::verbose() <<"dotted_name_seq: dotted_name_seq '.' NAME \n";
-					temp_id=temp_id+"."+(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal);
-				 ;}
+					temp_id=temp_id+"."+(((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal);
+				 }
     break;
 
   case 106:
-#line 442 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_name_seq :	',' NAME \n";;}
+/* Line 868 of glr.c  */
+#line 445 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_name_seq :	',' NAME \n";}
     break;
 
   case 107:
-#line 443 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";;}
+/* Line 868 of glr.c  */
+#line 446 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";}
     break;
 
   case 108:
-#line 446 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"global_stmt: GLOBAL NAME \n";;}
+/* Line 868 of glr.c  */
+#line 449 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"global_stmt: GLOBAL NAME \n";}
     break;
 
   case 109:
-#line 447 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";;}
+/* Line 868 of glr.c  */
+#line 450 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";}
     break;
 
   case 110:
-#line 450 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME \n";;}
+/* Line 868 of glr.c  */
+#line 453 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME \n";}
     break;
 
   case 111:
-#line 451 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"nonlocal_stmt: NONLOCAL NAME comma_name_seq \n";;}
+/* Line 868 of glr.c  */
+#line 454 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"nonlocal_stmt: NONLOCAL NAME comma_name_seq \n";}
     break;
 
   case 112:
-#line 454 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt:  if_stmt \n";;}
+/* Line 868 of glr.c  */
+#line 457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
     break;
 
   case 113:
-#line 455 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: while_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"compound_stmt: while_stmt\n";}
     break;
 
   case 114:
-#line 456 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: for_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 459 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"compound_stmt: for_stmt\n";}
     break;
 
   case 115:
-#line 457 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: try_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 460 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"compound_stmt: try_stmt\n";}
     break;
 
   case 116:
-#line 458 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: with_stmt\n";;}
+/* Line 868 of glr.c  */
+#line 461 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"compound_stmt: with_stmt\n";}
     break;
 
   case 117:
-#line 459 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: funcdef\n";
-								((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-							;}
+/* Line 868 of glr.c  */
+#line 463 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {	
+								Streams::verbose() <<"compound_stmt: funcdef\n";
+								((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+							}
     break;
 
   case 118:
-#line 462 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"compound_stmt: DEF classdef\n";
-									((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-								;}
+/* Line 868 of glr.c  */
+#line 467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {
+									Streams::verbose() <<"compound_stmt: DEF classdef\n";
+									((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+								}
     break;
 
   case 119:
-#line 467 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 473 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";}
     break;
 
   case 120:
-#line 468 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 474 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";}
     break;
 
   case 121:
-#line 471 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"if_stmt:	IF test ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 477 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"if_stmt:	IF test ':' suite \n";}
     break;
 
   case 122:
-#line 472 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";;}
+/* Line 868 of glr.c  */
+#line 478 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";}
     break;
 
   case 123:
-#line 473 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 479 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";}
     break;
 
   case 124:
-#line 474 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 480 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";}
     break;
 
   case 125:
-#line 477 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 483 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";}
     break;
 
   case 126:
-#line 478 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 484 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";}
     break;
 
   case 127:
-#line 481 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 487 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";}
     break;
 
   case 128:
-#line 482 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 488 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";}
     break;
 
   case 129:
-#line 485 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";;}
+/* Line 868 of glr.c  */
+#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";}
     break;
 
   case 130:
-#line 486 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 492 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";}
     break;
 
   case 131:
-#line 487 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 493 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";}
     break;
 
   case 132:
-#line 488 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 494 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";}
     break;
 
   case 133:
-#line 491 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 497 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";}
     break;
 
   case 134:
-#line 492 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 498 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";}
     break;
 
   case 135:
-#line 495 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"with_seq:	',' with_item \n";;}
+/* Line 868 of glr.c  */
+#line 501 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"with_seq:	',' with_item \n";}
     break;
 
   case 136:
-#line 496 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"with_seq: with_seq ',' with_item\n";;}
+/* Line 868 of glr.c  */
+#line 502 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"with_seq: with_seq ',' with_item\n";}
     break;
 
   case 137:
-#line 499 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"with_stmt:  WITH with_item ':' suite \n";;}
+/* Line 868 of glr.c  */
+#line 505 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"with_stmt:  WITH with_item ':' suite \n";}
     break;
 
   case 138:
-#line 500 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"with_stmt: WITH with_item with_seq ':' suite\n";;}
+/* Line 868 of glr.c  */
+#line 506 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"with_stmt: WITH with_item with_seq ':' suite\n";}
     break;
 
   case 139:
-#line 503 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<" with_item:  test\n";;}
+/* Line 868 of glr.c  */
+#line 509 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<" with_item:  test\n";}
     break;
 
   case 140:
-#line 504 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"with_item: test AS expr\n";;}
+/* Line 868 of glr.c  */
+#line 510 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"with_item: test AS expr\n";}
     break;
 
   case 141:
-#line 507 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"except_clause:  EXCEPT \n";;}
+/* Line 868 of glr.c  */
+#line 513 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"except_clause:  EXCEPT \n";}
     break;
 
   case 142:
-#line 508 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"except_clause:  EXCEPT test\n";;}
+/* Line 868 of glr.c  */
+#line 514 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"except_clause:  EXCEPT test\n";}
     break;
 
   case 143:
-#line 509 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";;}
+/* Line 868 of glr.c  */
+#line 515 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";}
     break;
 
   case 144:
-#line 512 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);	Streams:: verbose() <<"list_stmt : stmt\n";;}
+/* Line 868 of glr.c  */
+#line 518 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {	((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);	Streams:: verbose() <<"list_stmt : stmt\n";}
     break;
 
   case 145:
-#line 513 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 519 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams:: verbose() <<"list_stmt : stmt list_stmt\n";
-						ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn));
-						((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn);	
-			;}
+						ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn));
+						((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn);	
+			}
     break;
 
   case 146:
-#line 519 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 525 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 							Streams::verbose() <<"suite:	list_stmt END\n";
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn);	
-						;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn);	
+						}
     break;
 
   case 147:
-#line 523 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {	((*yyvalp).tn)=NULL;	Streams::verbose() <<"suite:	END\n"; ((*yyvalp).tn)=NULL;;}
+/* Line 868 of glr.c  */
+#line 529 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {	((*yyvalp).tn)=NULL;	Streams::verbose() <<"suite:	END\n"; ((*yyvalp).tn)=NULL;}
     break;
 
   case 148:
-#line 526 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"test:	or_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 532 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"test:	or_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 149:
-#line 527 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_test IF or_test ELSE test\n";;}
+/* Line 868 of glr.c  */
+#line 533 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_test IF or_test ELSE test\n";}
     break;
 
   case 150:
-#line 530 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_seq:	OR and_test \n";;}
+/* Line 868 of glr.c  */
+#line 536 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_seq:	OR and_test \n";}
     break;
 
   case 151:
-#line 531 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_seq: or_seq OR and_test \n";;}
+/* Line 868 of glr.c  */
+#line 537 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_seq: or_seq OR and_test \n";}
     break;
 
   case 152:
-#line 534 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_test:	and_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 540 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_test:	and_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 153:
-#line 535 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_test:	and_test or_seq\n";;}
+/* Line 868 of glr.c  */
+#line 541 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_test:	and_test or_seq\n";}
     break;
 
   case 154:
-#line 538 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_seq: AND not_test \n";;}
+/* Line 868 of glr.c  */
+#line 544 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_seq: AND not_test \n";}
     break;
 
   case 155:
-#line 539 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_seq: and_seq AND not_test \n";;}
+/* Line 868 of glr.c  */
+#line 545 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_seq: and_seq AND not_test \n";}
     break;
 
   case 156:
-#line 542 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_test:	not_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 548 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_test:	not_test\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 157:
-#line 543 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_test: not_test and_seq \n";;}
+/* Line 868 of glr.c  */
+#line 549 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_test: not_test and_seq \n";}
     break;
 
   case 158:
-#line 546 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"not_test:	NOT not_test\n";;}
+/* Line 868 of glr.c  */
+#line 552 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"not_test:	NOT not_test\n";}
     break;
 
   case 159:
-#line 547 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"not_test:	comparison\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 553 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"not_test:	comparison\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 160:
-#line 550 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op_seq: comp_op expr \n";;}
+/* Line 868 of glr.c  */
+#line 556 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op_seq: comp_op expr \n";}
     break;
 
   case 161:
-#line 551 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";;}
+/* Line 868 of glr.c  */
+#line 557 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";}
     break;
 
   case 162:
-#line 554 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comparison: expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 560 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comparison: expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 163:
-#line 555 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comparison: expr comp_op_seq\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 561 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comparison: expr comp_op_seq\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 164:
-#line 558 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: '<' \n";;}
+/* Line 868 of glr.c  */
+#line 564 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: '<' \n";}
     break;
 
   case 165:
-#line 559 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: '>' \n";;}
+/* Line 868 of glr.c  */
+#line 565 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: '>' \n";}
     break;
 
   case 166:
-#line 560 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 566 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: EQUAL \n";}
     break;
 
   case 167:
-#line 561 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 567 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";}
     break;
 
   case 168:
-#line 562 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 568 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";}
     break;
 
   case 169:
-#line 563 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: MORE_LESS \n";;}
+/* Line 868 of glr.c  */
+#line 569 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: MORE_LESS \n";}
     break;
 
   case 170:
-#line 564 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: NOT_EQUAL \n";;}
+/* Line 868 of glr.c  */
+#line 570 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: NOT_EQUAL \n";}
     break;
 
   case 171:
-#line 565 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: IN \n";;}
+/* Line 868 of glr.c  */
+#line 571 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: IN \n";}
     break;
 
   case 172:
-#line 566 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: NOT IN \n";;}
+/* Line 868 of glr.c  */
+#line 572 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: NOT IN \n";}
     break;
 
   case 173:
-#line 567 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: IS \n";;}
+/* Line 868 of glr.c  */
+#line 573 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: IS \n";}
     break;
 
   case 174:
-#line 568 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_op: IS NOT \n";;}
+/* Line 868 of glr.c  */
+#line 574 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_op: IS NOT \n";}
     break;
 
   case 175:
-#line 571 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"star_expr: '*' expr \n";;}
+/* Line 868 of glr.c  */
+#line 577 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"star_expr: '*' expr \n";}
     break;
 
   case 176:
-#line 574 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_xor_expr_seq: '|' xor_expr \n";;}
+/* Line 868 of glr.c  */
+#line 580 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_xor_expr_seq: '|' xor_expr \n";}
     break;
 
   case 177:
-#line 575 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"or_xor_expr_seq: or_xor_expr_seq '|' xor_expr\n";;}
+/* Line 868 of glr.c  */
+#line 581 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"or_xor_expr_seq: or_xor_expr_seq '|' xor_expr\n";}
     break;
 
   case 178:
-#line 577 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"expr: xor_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 583 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {
+					Streams::verbose() <<"expr: xor_expr\n";
+					((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+				}
     break;
 
   case 179:
-#line 578 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"expr: xor_expr or_xor_expr_seq\n";;}
+/* Line 868 of glr.c  */
+#line 587 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"expr: xor_expr or_xor_expr_seq\n";}
     break;
 
   case 180:
-#line 581 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"sha_and_expr_seq: '^' and_expr \n";;}
+/* Line 868 of glr.c  */
+#line 590 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"sha_and_expr_seq: '^' and_expr \n";}
     break;
 
   case 181:
-#line 582 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"sha_and_expr_seq: sha_and_expr_seq '^' and_expr\n";;}
+/* Line 868 of glr.c  */
+#line 591 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"sha_and_expr_seq: sha_and_expr_seq '^' and_expr\n";}
     break;
 
   case 182:
-#line 585 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"xor_expr: and_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 594 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"xor_expr: and_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 183:
-#line 586 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"xor_expr: and_expr sha_and_expr_seq\n";;}
+/* Line 868 of glr.c  */
+#line 595 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"xor_expr: and_expr sha_and_expr_seq\n";}
     break;
 
   case 184:
-#line 589 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_shift_expr_seq: '&' shift_expr \n";;}
+/* Line 868 of glr.c  */
+#line 598 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_shift_expr_seq: '&' shift_expr \n";}
     break;
 
   case 185:
-#line 590 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_shift_expr_seq: and_shift_expr_seq '&' shift_expr\n";;}
+/* Line 868 of glr.c  */
+#line 599 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_shift_expr_seq: and_shift_expr_seq '&' shift_expr\n";}
     break;
 
   case 186:
-#line 593 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_expr: shift_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 602 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_expr: shift_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 187:
-#line 594 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"and_expr: shift_expr and_shift_expr_seq\n";;}
+/* Line 868 of glr.c  */
+#line 603 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"and_expr: shift_expr and_shift_expr_seq\n";}
     break;
 
   case 188:
-#line 597 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arith_seq:	LESS_THAN_2 arith_expr \n";;}
+/* Line 868 of glr.c  */
+#line 606 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arith_seq:	LESS_THAN_2 arith_expr \n";}
     break;
 
   case 189:
-#line 598 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arith_seq:	MORE_THAN_2 arith_expr \n";;}
+/* Line 868 of glr.c  */
+#line 607 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arith_seq:	MORE_THAN_2 arith_expr \n";}
     break;
 
   case 190:
-#line 599 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arith_seq:	arith_seq LESS_THAN_2 arith_expr \n";;}
+/* Line 868 of glr.c  */
+#line 608 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arith_seq:	arith_seq LESS_THAN_2 arith_expr \n";}
     break;
 
   case 191:
-#line 600 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arith_seq:	arith_seq MORE_THAN_2 arith_expr \n";;}
+/* Line 868 of glr.c  */
+#line 609 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arith_seq:	arith_seq MORE_THAN_2 arith_expr \n";}
     break;
 
   case 192:
-#line 603 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"shift_expr: arith_expr\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 612 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {
+							Streams::verbose() <<"shift_expr: arith_expr\n";
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+						}
     break;
 
   case 193:
-#line 604 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n";;}
+/* Line 868 of glr.c  */
+#line 616 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"shift_expr: arith_expr arith_seq\n";}
     break;
 
   case 194:
-#line 607 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 619 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : '+' term \n";
 						op=PLUS;
-						((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-						;}
+						((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+						}
     break;
 
   case 195:
-#line 611 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 623 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : '-' term \n";
 							op=MINUS;
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-						;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+						}
     break;
 
   case 196:
-#line 615 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 627 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;
-									k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn));
+									k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.tn));
 									//ValueNode* v = static_cast<ValueNode*>(k);
 									//cout << "value is in term_seq " << v->get_value()<<endl;
-									((*yyvalp).tn) = ast->createExprNode((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.tn),NULL,op);
-								;}
+									((*yyvalp).tn) = ast->createExprNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.tn),NULL,op);
+								}
     break;
 
   case 197:
-#line 621 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 633 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;
-									k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn));
+									k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.tn));
 									((*yyvalp).tn) = ast->createExprNode(k,NULL,op);
-								;}
+								}
     break;
 
   case 198:
-#line 627 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arith_expr: term\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 639 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arith_expr: term\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 199:
-#line 628 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 640 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 											Streams::verbose() <<"arith_expr: term term_seq\n";
-											k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn));
-											cout<<"op= "<<op<<endl;
-											((*yyvalp).tn) = ast->createExprNode((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.tn),NULL,op);
+											k=ast->addNext((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn));
+											//cout<<"op= "<<op<<endl;
+											((*yyvalp).tn) = ast->createExprNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.tn),NULL,op);
 											
-										;}
+										}
     break;
 
   case 200:
-#line 638 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 650 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '*' factor \n";
 							op=MULT;
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-						;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+						}
     break;
 
   case 201:
-#line 642 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 654 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '/' factor \n";
 								op=DIV;
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-							;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+							}
     break;
 
   case 202:
-#line 646 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 658 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: '%' factor \n";
 								op=MOD;
-							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);
-							;}
+							((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn);
+							}
     break;
 
   case 203:
-#line 650 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor_seq: DIV_2 factor \n";;}
+/* Line 868 of glr.c  */
+#line 662 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"factor_seq: DIV_2 factor \n";}
     break;
 
   case 204:
-#line 651 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 663 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";
 									op=MULT;
 									((*yyvalp).tn) = ast->createExprNode(NULL,NULL,op);
-									;}
+									}
     break;
 
   case 205:
-#line 655 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 667 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";
 									op=DIV;
 									((*yyvalp).tn) = ast->createExprNode(NULL,NULL,op);
-									;}
+									}
     break;
 
   case 206:
-#line 659 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 671 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";
 									op=MOD;
 									((*yyvalp).tn) = ast->createExprNode(NULL,NULL,op);
-									;}
+									}
     break;
 
   case 207:
-#line 663 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";;}
+/* Line 868 of glr.c  */
+#line 675 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";}
     break;
 
   case 208:
-#line 666 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"term: 	factor\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 678 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"term: 	factor\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 209:
-#line 667 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 679 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"term: 	factor factor_seq\n";
 								((*yyvalp).tn) = ast->createExprNode(NULL,NULL,op);
-							;}
+							}
     break;
 
   case 210:
-#line 672 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor: '+' factor \n";;}
+/* Line 868 of glr.c  */
+#line 684 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"factor: '+' factor \n";}
     break;
 
   case 211:
-#line 673 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor: '-' factor \n";;}
+/* Line 868 of glr.c  */
+#line 685 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"factor: '-' factor \n";}
     break;
 
   case 212:
-#line 674 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor: '~' factor \n";;}
+/* Line 868 of glr.c  */
+#line 686 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"factor: '~' factor \n";}
     break;
 
   case 213:
-#line 675 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"factor: power\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 687 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {
+					Streams::verbose() <<"factor: power\n";
+					((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);
+				}
     break;
 
   case 214:
-#line 678 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer_seq: trailer \n";;}
+/* Line 868 of glr.c  */
+#line 693 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer_seq: trailer \n";}
     break;
 
   case 215:
-#line 679 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";;}
+/* Line 868 of glr.c  */
+#line 694 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";}
     break;
 
   case 216:
-#line 682 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"power:	atom\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn);;}
+/* Line 868 of glr.c  */
+#line 697 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"power:	atom\n";((*yyvalp).tn)=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.tn);}
     break;
 
   case 217:
-#line 683 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"power: atom trailer_seq \n";;}
+/* Line 868 of glr.c  */
+#line 698 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"power: atom trailer_seq \n";}
     break;
 
   case 218:
-#line 684 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";;}
+/* Line 868 of glr.c  */
+#line 699 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
     break;
 
   case 219:
-#line 685 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"power: atom STAR_2 factor \n";;}
+/* Line 868 of glr.c  */
+#line 700 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"power: atom STAR_2 factor \n";}
     break;
 
   case 220:
-#line 688 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"str_seq:	STRING \n";;}
+/* Line 868 of glr.c  */
+#line 703 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"str_seq:	STRING \n";}
     break;
 
   case 221:
-#line 689 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"str_seq:	str_seq STRING \n";;}
+/* Line 868 of glr.c  */
+#line 704 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"str_seq:	str_seq STRING \n";}
     break;
 
   case 222:
-#line 692 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom:	'(' ')' \n";;}
+/* Line 868 of glr.c  */
+#line 707 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom:	'(' ')' \n";}
     break;
 
   case 223:
-#line 693 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";;}
+/* Line 868 of glr.c  */
+#line 708 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";}
     break;
 
   case 224:
-#line 694 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom:	'[' ']' \n";;}
+/* Line 868 of glr.c  */
+#line 709 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom:	'[' ']' \n";}
     break;
 
   case 225:
-#line 695 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom: '{' '}' \n";;}
+/* Line 868 of glr.c  */
+#line 710 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom: '{' '}' \n";}
     break;
 
   case 226:
-#line 696 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom: '{' '}' \n";;}
+/* Line 868 of glr.c  */
+#line 711 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom: '{' '}' \n";}
     break;
 
   case 227:
-#line 697 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";;}
+/* Line 868 of glr.c  */
+#line 712 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
     break;
 
   case 228:
-#line 698 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    { Streams::verbose() <<"atom: NAME\n";;}
+/* Line 868 of glr.c  */
+#line 713 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    { Streams::verbose() <<"atom: NAME\n";
+							((*yyvalp).tn)=ast->createCallVarNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal),NULL,NULL);
+					}
     break;
 
   case 229:
-#line 699 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 716 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF NAME\n";
-											((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
+											((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 										v=((*yyvalp).var);
 									((*yyvalp).tn) = ast->createIDNode(v,0,0);
-									;}
+									}
     break;
 
   case 230:
-#line 704 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 721 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access NAME\n";
 											Streams::verbose()<<"var_declaration: access_modef ID\n";
-									((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+									((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal),acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=((*yyvalp).var);
 									acc_mod="";
 									((*yyvalp).tn) = ast->createIDNode(v,0,0);
-											;}
+											}
     break;
 
   case 231:
-#line 711 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 728 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC NAME\n";
 											Streams::verbose()<<"var_declaration: STATIC ID\n";
-											((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+											((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 											v=((*yyvalp).var);
 											((*yyvalp).tn) = ast->createIDNode(v,0,0);
-										;}
+										}
     break;
 
   case 232:
-#line 717 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 734 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL NAME\n";
 												Streams::verbose()<<"var_declaration: FINAL ID\n";
-												((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+												((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-										;}
+										}
     break;
 
   case 233:
-#line 723 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 740 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC FINAL NAME\n";
 													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-												;}
+												}
     break;
 
   case 234:
-#line 729 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 746 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL STATIC NAME\n";
 													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-												;}
+												}
     break;
 
   case 235:
-#line 735 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 752 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC access NAME\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													acc_mod="";
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-												;}
+												}
     break;
 
   case 236:
-#line 741 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 758 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL access NAME\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													acc_mod="";
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-												;}
+												}
     break;
 
   case 237:
-#line 747 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 764 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC FINAL access NAME\n";
-															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=((*yyvalp).var);
 															acc_mod="";
 															((*yyvalp).tn) = ast->createIDNode(v,0,0);
-														;}
+														}
     break;
 
   case 238:
-#line 753 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 770 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL STATIC access NAME\n";
-															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=((*yyvalp).var);
 															acc_mod="";
 															((*yyvalp).tn) = ast->createIDNode(v,0,0);
-														;}
+														}
     break;
 
   case 239:
-#line 759 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 776 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access STATIC NAME\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													acc_mod="";
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-												;}
+												}
     break;
 
   case 240:
-#line 765 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 782 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access FINAL NAME\n";
-													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+													((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (4))].yystate.yysemantics.yysval.r.strVal),acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=((*yyvalp).var);
 													acc_mod="";
 													((*yyvalp).tn) = ast->createIDNode(v,0,0);
-											;}
+											}
     break;
 
   case 241:
-#line 771 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 788 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access STATIC FINAL NAME\n";
-														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=((*yyvalp).var);
 														acc_mod="";
 														((*yyvalp).tn) = ast->createIDNode(v,0,0);
-													;}
+													}
     break;
 
   case 242:
-#line 777 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 794 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF access FINAL STATIC NAME\n";
-														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=((*yyvalp).var);
 														acc_mod="";
 														((*yyvalp).tn) = ast->createIDNode(v,0,0);
-													;}
+													}
     break;
 
   case 243:
-#line 783 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 800 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF STATIC access FINAL NAME\n";
-															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+															((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=((*yyvalp).var);
 															acc_mod="";
 															((*yyvalp).tn) = ast->createIDNode(v,0,0);
-														;}
+														}
     break;
 
   case 244:
-#line 789 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 806 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DEF FINAL access STATIC NAME\n";
-														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
+														((*yyvalp).var)=p->addVariableToCurrentScope((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal),acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=((*yyvalp).var);
 														acc_mod="";
 														((*yyvalp).tn) = ast->createIDNode(v,0,0);
-													;}
+													}
     break;
 
   case 245:
-#line 795 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 812 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_INT\n";
-						int xx=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.intVal);
-						((*yyvalp).tn) = ast->createTypeNode(&xx,0,0,INT);
-						;}
+						int xx=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.intVal);
+						cout<<"yhe number is"<<xx<<endl;
+						((*yyvalp).tn) = ast->createTypeNode(xx,0,0,INT);
+						}
     break;
 
   case 246:
-#line 799 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 817 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							float x=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.floatVal);
+							float x=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.floatVal);
 							((*yyvalp).tn) = ast->createTypeNode(&x,0,0,FLOAT);
-						;}
+						}
     break;
 
   case 247:
-#line 803 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 821 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							long xxx=(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.longVal);
+							long xxx=(((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.longVal);
 							((*yyvalp).tn) = ast->createTypeNode(&xxx,0,0,LONG);
-						;}
+						}
     break;
 
   case 248:
-#line 807 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 825 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: CHAR_VALUE\n";}
     break;
 
   case 249:
-#line 808 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 826 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: str_seq\n";
-									((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),0,0,STRINGS);
-								;}
+									((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal),0,0,STRINGS);
+								}
     break;
 
   case 250:
-#line 811 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 829 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: DOT_3\n";}
     break;
 
   case 251:
-#line 812 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"atom: NONE\n";;}
+/* Line 868 of glr.c  */
+#line 830 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"atom: NONE\n";}
     break;
 
   case 252:
-#line 813 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 831 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: TRUE\n";
-					((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),0,0,True);
-				;}
+					((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal),0,0,True);
+				}
     break;
 
   case 253:
-#line 816 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 834 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {Streams::verbose() <<"atom: FALSE\n";
-					((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal),0,0,False);
-				;}
+					((*yyvalp).tn) = ast->createTypeNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal),0,0,False);
+				}
     break;
 
   case 254:
-#line 821 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seq: ',' test\n";;}
+/* Line 868 of glr.c  */
+#line 839 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seq: ',' test\n";}
     break;
 
   case 255:
-#line 822 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seq: ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 840 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seq: ',' star_expr\n";}
     break;
 
   case 256:
-#line 823 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' test\n";;}
+/* Line 868 of glr.c  */
+#line 841 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' test\n";}
     break;
 
   case 257:
-#line 824 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 842 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_star_seq: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 258:
-#line 827 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: test comp_for\n";;}
+/* Line 868 of glr.c  */
+#line 845 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: test comp_for\n";}
     break;
 
   case 259:
-#line 828 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: test\n";;}
+/* Line 868 of glr.c  */
+#line 846 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: test\n";}
     break;
 
   case 260:
-#line 829 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: test   comma_test_star_seq\n";;}
+/* Line 868 of glr.c  */
+#line 847 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: test   comma_test_star_seq\n";}
     break;
 
   case 261:
-#line 830 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 848 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 262:
-#line 831 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 849 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 263:
-#line 832 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 850 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 264:
-#line 833 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 851 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 265:
-#line 834 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 852 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 266:
-#line 835 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 853 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 267:
-#line 836 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";;}
+/* Line 868 of glr.c  */
+#line 854 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";}
     break;
 
   case 268:
-#line 839 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer:	'('  ')'\n";;}
+/* Line 868 of glr.c  */
+#line 857 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer:	'('  ')'\n";}
     break;
 
   case 269:
-#line 840 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer:	'(' arglist ')'\n";;}
+/* Line 868 of glr.c  */
+#line 858 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer:	'(' arglist ')'\n";}
     break;
 
   case 270:
-#line 841 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";;}
+/* Line 868 of glr.c  */
+#line 859 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";}
     break;
 
   case 271:
-#line 842 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"trailer:	'.' NAME\n";;}
+/* Line 868 of glr.c  */
+#line 860 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"trailer:	'.' NAME\n";}
     break;
 
   case 272:
-#line 845 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n";;}
+/* Line 868 of glr.c  */
+#line 863 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n";}
     break;
 
   case 273:
-#line 846 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n";;}
+/* Line 868 of glr.c  */
+#line 864 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n";}
     break;
 
   case 274:
-#line 849 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscriptlist:	subscript\n";;}
+/* Line 868 of glr.c  */
+#line 867 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscriptlist:	subscript\n";}
     break;
 
   case 275:
-#line 850 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";;}
+/* Line 868 of glr.c  */
+#line 868 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";}
     break;
 
   case 276:
-#line 851 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscriptlist:	subscript  ','\n";;}
+/* Line 868 of glr.c  */
+#line 869 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscriptlist:	subscript  ','\n";}
     break;
 
   case 277:
-#line 852 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";;}
+/* Line 868 of glr.c  */
+#line 870 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";}
     break;
 
   case 278:
-#line 855 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  test\n";;}
+/* Line 868 of glr.c  */
+#line 873 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  test\n";}
     break;
 
   case 279:
-#line 856 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  ':'\n";;}
+/* Line 868 of glr.c  */
+#line 874 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  ':'\n";}
     break;
 
   case 280:
-#line 857 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript: test ':'\n";;}
+/* Line 868 of glr.c  */
+#line 875 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript: test ':'\n";}
     break;
 
   case 281:
-#line 858 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  test ':' test\n";;}
+/* Line 868 of glr.c  */
+#line 876 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  test ':' test\n";}
     break;
 
   case 282:
-#line 859 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  test ':' sliceop\n";;}
+/* Line 868 of glr.c  */
+#line 877 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
     break;
 
   case 283:
-#line 860 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  test ':' test sliceop\n";;}
+/* Line 868 of glr.c  */
+#line 878 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}
     break;
 
   case 284:
-#line 861 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  ':' test\n";;}
+/* Line 868 of glr.c  */
+#line 879 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  ':' test\n";}
     break;
 
   case 285:
-#line 862 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  ':' sliceop\n";;}
+/* Line 868 of glr.c  */
+#line 880 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  ':' sliceop\n";}
     break;
 
   case 286:
-#line 863 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"subscript:  ':' test sliceop\n";;}
+/* Line 868 of glr.c  */
+#line 881 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"subscript:  ':' test sliceop\n";}
     break;
 
   case 287:
-#line 866 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"sliceop: ':'\n";;}
+/* Line 868 of glr.c  */
+#line 884 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"sliceop: ':'\n";}
     break;
 
   case 288:
-#line 867 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"sliceop: ':' test\n";;}
+/* Line 868 of glr.c  */
+#line 885 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"sliceop: ':' test\n";}
     break;
 
   case 289:
-#line 870 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";;}
+/* Line 868 of glr.c  */
+#line 888 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";}
     break;
 
   case 290:
-#line 871 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";;}
+/* Line 868 of glr.c  */
+#line 889 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";}
     break;
 
   case 291:
-#line 872 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";;}
+/* Line 868 of glr.c  */
+#line 890 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";}
     break;
 
   case 292:
-#line 873 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";;}
+/* Line 868 of glr.c  */
+#line 891 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";}
     break;
 
   case 293:
-#line 876 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	expr \n";;}
+/* Line 868 of glr.c  */
+#line 894 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	expr \n";}
     break;
 
   case 294:
-#line 877 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";;}
+/* Line 868 of glr.c  */
+#line 895 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";}
     break;
 
   case 295:
-#line 878 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	star_expr \n";;}
+/* Line 868 of glr.c  */
+#line 896 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	star_expr \n";}
     break;
 
   case 296:
-#line 879 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";;}
+/* Line 868 of glr.c  */
+#line 897 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";}
     break;
 
   case 297:
-#line 880 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	expr ',' \n";;}
+/* Line 868 of glr.c  */
+#line 898 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	expr ',' \n";}
     break;
 
   case 298:
-#line 881 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";;}
+/* Line 868 of glr.c  */
+#line 899 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";}
     break;
 
   case 299:
-#line 882 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	star_expr ',' \n";;}
+/* Line 868 of glr.c  */
+#line 900 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	star_expr ',' \n";}
     break;
 
   case 300:
-#line 883 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";;}
+/* Line 868 of glr.c  */
+#line 901 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";}
     break;
 
   case 301:
-#line 886 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test: ',' test \n";;}
+/* Line 868 of glr.c  */
+#line 904 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test: ',' test \n";}
     break;
 
   case 302:
-#line 887 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"',' test comma_test \n";;}
+/* Line 868 of glr.c  */
+#line 905 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"',' test comma_test \n";}
     break;
 
   case 303:
-#line 890 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist:	test \n";;}
+/* Line 868 of glr.c  */
+#line 908 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist:	test \n";}
     break;
 
   case 304:
-#line 891 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist:	test comma_test \n";;}
+/* Line 868 of glr.c  */
+#line 909 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist:	test comma_test \n";}
     break;
 
   case 305:
-#line 892 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist:	 test ','\n";;}
+/* Line 868 of glr.c  */
+#line 910 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist:	 test ','\n";}
     break;
 
   case 306:
-#line 893 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"testlist:	 test comma_test ','\n";;}
+/* Line 868 of glr.c  */
+#line 911 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"testlist:	 test comma_test ','\n";}
     break;
 
   case 307:
-#line 896 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_colon_test_seq:  ',' test ':' test \n";;}
+/* Line 868 of glr.c  */
+#line 914 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_colon_test_seq:  ',' test ':' test \n";}
     break;
 
   case 308:
-#line 897 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' test\n";;}
+/* Line 868 of glr.c  */
+#line 915 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' test\n";}
     break;
 
   case 309:
-#line 899 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_seq: ',' test \n";;}
+/* Line 868 of glr.c  */
+#line 917 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_seq: ',' test \n";}
     break;
 
   case 310:
-#line 900 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_test_seq: comma_test_seq ',' test \n";;}
+/* Line 868 of glr.c  */
+#line 918 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_test_seq: comma_test_seq ',' test \n";}
     break;
 
   case 311:
-#line 903 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ':' test comp_for \n";;}
+/* Line 868 of glr.c  */
+#line 921 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ':' test comp_for \n";}
     break;
 
   case 312:
-#line 904 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ':' test \n";;}
+/* Line 868 of glr.c  */
+#line 922 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ':' test \n";}
     break;
 
   case 313:
-#line 905 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ':' test ',' \n";;}
+/* Line 868 of glr.c  */
+#line 923 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ':' test ',' \n";}
     break;
 
   case 314:
-#line 906 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq \n";;}
+/* Line 868 of glr.c  */
+#line 924 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq \n";}
     break;
 
   case 315:
-#line 907 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq ','\n";;}
+/* Line 868 of glr.c  */
+#line 925 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ':' test comma_test_colon_test_seq ','\n";}
     break;
 
   case 316:
-#line 908 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test comp_for\n";;}
+/* Line 868 of glr.c  */
+#line 926 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test comp_for\n";}
     break;
 
   case 317:
-#line 909 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test\n";;}
+/* Line 868 of glr.c  */
+#line 927 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test\n";}
     break;
 
   case 318:
-#line 910 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ','\n";;}
+/* Line 868 of glr.c  */
+#line 928 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ','\n";}
     break;
 
   case 319:
-#line 911 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test ','\n";;}
+/* Line 868 of glr.c  */
+#line 929 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test ','\n";}
     break;
 
   case 320:
-#line 912 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";;}
+/* Line 868 of glr.c  */
+#line 930 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";}
     break;
 
   case 321:
-#line 914 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 932 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 								Streams::verbose() <<"classdef: classheader suite\n";
 								((*yyvalp).type)=p->finishTypeDeclaration(t);
-								((*yyvalp).tn)=ast->createClassNode((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.type),(((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.tn),NULL);
-							;}
+								((*yyvalp).tn)=ast->createClassNode((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.type),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.tn),NULL);
+							}
     break;
 
   case 322:
-#line 920 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 938 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
 								Streams::verbose() << "class_h: CLASS ID \n";
-								colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+								colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 
 								inhertance_list.clear();
-					;}
+					}
     break;
 
   case 323:
-#line 928 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 946 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-									Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+									Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 324:
-#line 935 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 953 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-									Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+									Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 325:
-#line 942 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 960 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-									Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+									Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (4))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 326:
-#line 949 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 967 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 327:
-#line 956 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 974 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-												Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+												Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 328:
-#line 963 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 981 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 329:
-#line 970 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 988 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 330:
-#line 977 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 995 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 331:
-#line 984 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1002 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 332:
-#line 991 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1009 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 333:
-#line 998 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1016 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.colNum)+1));
+							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 334:
-#line 1005 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1023 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 335:
-#line 1012 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1030 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 336:
-#line 1019 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1037 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 337:
-#line 1026 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1044 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+							((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-					;}
+					}
     break;
 
   case 338:
-#line 1033 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1051 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-										Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+										Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (5))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (5))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 									t=((*yyvalp).type);
 									inhertance_list.clear();
 									temp_id="";
 									acc_mod="";
-								;}
+								}
     break;
 
   case 339:
-#line 1041 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1059 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 340:
-#line 1048 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1066 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 341:
-#line 1055 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1073 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+											Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (6))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 342:
-#line 1062 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1080 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 343:
-#line 1069 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1087 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 344:
-#line 1076 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1094 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 345:
-#line 1083 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1101 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 346:
-#line 1090 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1108 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 347:
-#line 1097 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1115 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 348:
-#line 1104 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1122 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+								((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 349:
-#line 1111 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1129 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+													Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 350:
-#line 1118 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1136 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 351:
-#line 1125 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1143 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 352:
-#line 1132 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1150 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 353:
-#line 1139 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1157 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1)); 
-									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.colNum)+1)); 
+									((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=((*yyvalp).type);
 								inhertance_list.clear();
 								acc_mod="";
-								;}
+								}
     break;
 
   case 354:
-#line 1146 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1164 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-5)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.colNum)+1));
-												((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+														Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (6))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (6))].yystate.yysemantics.yysval.r.colNum)+1));
+												((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 												acc_mod="";
-											;}
+											}
     break;
 
   case 355:
-#line 1153 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1171 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
+																Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 													acc_mod="";
-											;}
+											}
     break;
 
   case 356:
-#line 1160 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1178 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 													acc_mod="";
-											;}
+											}
     break;
 
   case 357:
-#line 1167 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1185 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-															Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-6)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+															Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (7))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (7))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 													acc_mod="";
-											;}
+											}
     break;
 
   case 358:
-#line 1174 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1192 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 													acc_mod="";
-											;}
+											}
     break;
 
   case 359:
-#line 1181 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1199 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													inhertance_list.clear();
 													acc_mod="";
-											;}
+											}
     break;
 
   case 360:
-#line 1188 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1206 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																		Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
+																		Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 361:
-#line 1195 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1213 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																	Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-7)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
+																	Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (8))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (8))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((4) - (8))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 362:
-#line 1202 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1220 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 363:
-#line 1209 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1227 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 364:
-#line 1216 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
+/* Line 868 of glr.c  */
+#line 1234 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
     break;
 
   case 365:
-#line 1217 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";;}
+/* Line 868 of glr.c  */
+#line 1235 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
     break;
 
   case 366:
-#line 1218 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1236 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 367:
-#line 1225 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1243 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 368:
-#line 1232 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1250 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 369:
-#line 1239 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL (-8)].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.colNum)+1));
-													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (9))].yystate.yysemantics.yysval.r.lineNum),(((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.colNum)+1));
+													((*yyvalp).type)=p->createType((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (9))].yystate.yysemantics.yysval.r.strVal),inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=((*yyvalp).type);
 													acc_mod="";
 													inhertance_list.clear();
-											;}
+											}
     break;
 
   case 370:
-#line 1249 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arg_comma_seq : argument ','\n";;}
+/* Line 868 of glr.c  */
+#line 1267 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arg_comma_seq : argument ','\n";}
     break;
 
   case 371:
-#line 1250 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arg_comma_seq : argument ',' arg_comma_seq\n";;}
+/* Line 868 of glr.c  */
+#line 1268 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arg_comma_seq : argument ',' arg_comma_seq\n";}
     break;
 
   case 372:
-#line 1253 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_arg_seq:	',' argument\n";;}
+/* Line 868 of glr.c  */
+#line 1271 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_arg_seq:	',' argument\n";}
     break;
 
   case 373:
-#line 1254 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_arg_seq:	comma_arg_seq ',' argument\n";;}
+/* Line 868 of glr.c  */
+#line 1272 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_arg_seq:	comma_arg_seq ',' argument\n";}
     break;
 
   case 374:
-#line 1257 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: argument\n";;}
+/* Line 868 of glr.c  */
+#line 1275 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: argument\n";}
     break;
 
   case 375:
-#line 1258 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: default_arg\n";;}
+/* Line 868 of glr.c  */
+#line 1276 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: default_arg\n";}
     break;
 
   case 376:
-#line 1260 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: argument ','\n";;}
+/* Line 868 of glr.c  */
+#line 1278 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: argument ','\n";}
     break;
 
   case 377:
-#line 1262 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1280 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {    
-						std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+						std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.r.strVal));
 						std::string erro("*" + tempstr);
 						char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 						Streams::verbose() <<"arglist: '*' test\n";
-				   ;}
+				   }
     break;
 
   case 378:
-#line 1270 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1288 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (5))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL ((5) - (5))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 										
 										Streams::verbose() <<"arglist: '*' test ',' STAR_2 test\n";
-									;}
+									}
     break;
 
   case 379:
-#line 1283 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1301 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-		 					   		    std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal));
+		 					   		    std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 									    
 										Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
-								 ;}
+								 }
     break;
 
   case 380:
-#line 1292 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1310 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (3))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 
 											Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
-										 ;}
+										 }
     break;
 
   case 381:
-#line 1301 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1319 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-		 										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal));
+		 										std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (4))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 															Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
-													   ;}
+													   }
     break;
 
   case 382:
-#line 1309 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1327 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-													std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal));
+													std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (6))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										
-										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (6))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 													strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);Streams::verbose() <<"arglist: '*' test comma_arg_seq ',' STAR_2 test\n";
-												  ;}
+												  }
     break;
 
   case 383:
-#line 1321 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1339 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-						std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+						std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((2) - (2))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);Streams::verbose() <<"arglist: STAR_2 test\n";
-					  ;}
+					  }
     break;
 
   case 384:
-#line 1328 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: arg_comma_seq argument\n";;}
+/* Line 868 of glr.c  */
+#line 1346 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: arg_comma_seq argument\n";}
     break;
 
   case 385:
-#line 1329 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: arg_comma_seq default_arg\n";;}
+/* Line 868 of glr.c  */
+#line 1347 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: arg_comma_seq default_arg\n";}
     break;
 
   case 386:
-#line 1330 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: arg_comma_seq default_arg_comma_seq default_arg\n";;}
+/* Line 868 of glr.c  */
+#line 1348 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: arg_comma_seq default_arg_comma_seq default_arg\n";}
     break;
 
   case 387:
-#line 1331 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"arglist: arg_comma_seq argument ','\n";;}
+/* Line 868 of glr.c  */
+#line 1349 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"arglist: arg_comma_seq argument ','\n";}
     break;
 
   case 388:
-#line 1333 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1351 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {		
-									std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+									std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 									Streams::verbose() <<"arglist: arg_comma_seq '*' test\n";
-								  ;}
+								  }
     break;
 
   case 389:
-#line 1341 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1359 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-											std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-3)].yystate.yysemantics.yysval.r.strVal));
+											std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (6))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										
-										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL ((6) - (6))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 													Streams::verbose() <<"arglist: arg_comma_seq '*' test ',' STAR_2 test\n";
-												 ;}
+												 }
     break;
 
   case 390:
-#line 1354 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1372 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-												std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal));
+												std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 												Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq\n";
-											   ;}
+											   }
     break;
 
   case 391:
-#line 1362 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1380 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-														std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal));
+														std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (4))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 														Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_default_arg_seq\n";
-													   ;}
+													   }
     break;
 
   case 392:
-#line 1370 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1388 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																		std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal));
+																		std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (5))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 																		Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq\n";
-																	 ;}
+																	 }
     break;
 
   case 393:
-#line 1378 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 868 of glr.c  */
+#line 1396 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
     {
-																std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (-4)].yystate.yysemantics.yysval.r.strVal));
+																std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (7))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										
-										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+										std::string tempstr1((((yyGLRStackItem const *)yyvsp)[YYFILL ((7) - (7))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 																Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test\n";
-															   ;}
+															   }
     break;
 
   case 394:
-#line 1391 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {	std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal));
+/* Line 868 of glr.c  */
+#line 1409 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {	std::string tempstr((((yyGLRStackItem const *)yyvsp)[YYFILL ((3) - (3))].yystate.yysemantics.yysval.r.strVal));
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										Streams::verbose() <<"arglist: arg_comma_seq STAR_2 test\n";
-								    ;}
+								    }
     break;
 
   case 395:
-#line 1401 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_default_arg_seq: ',' default_arg\n";;}
+/* Line 868 of glr.c  */
+#line 1419 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_default_arg_seq: ',' default_arg\n";}
     break;
 
   case 396:
-#line 1402 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comma_default_arg_seq: comma_default_arg_seq ',' default_arg\n";;}
+/* Line 868 of glr.c  */
+#line 1420 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comma_default_arg_seq: comma_default_arg_seq ',' default_arg\n";}
     break;
 
   case 397:
-#line 1405 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";;}
+/* Line 868 of glr.c  */
+#line 1423 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";}
     break;
 
   case 398:
-#line 1406 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";;}
+/* Line 868 of glr.c  */
+#line 1424 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";}
     break;
 
   case 399:
-#line 1409 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL (-2)].yystate.yysemantics.yysval.r.strVal));Streams::verbose() <<"default_arg: test '=' test\n";;}
+/* Line 868 of glr.c  */
+#line 1427 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (3))].yystate.yysemantics.yysval.r.strVal));Streams::verbose() <<"default_arg: test '=' test\n";}
     break;
 
   case 400:
-#line 1411 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL (0)].yystate.yysemantics.yysval.r.strVal)); Streams::verbose() <<"argument: 	test\n";;}
+/* Line 868 of glr.c  */
+#line 1429 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (1))].yystate.yysemantics.yysval.r.strVal)); Streams::verbose() <<"argument: 	test\n";}
     break;
 
   case 401:
-#line 1412 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL (-1)].yystate.yysemantics.yysval.r.strVal));Streams::verbose() <<"argument: 	test comp_for\n";;}
+/* Line 868 of glr.c  */
+#line 1430 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {parameters.push_back((((yyGLRStackItem const *)yyvsp)[YYFILL ((1) - (2))].yystate.yysemantics.yysval.r.strVal));Streams::verbose() <<"argument: 	test comp_for\n";}
     break;
 
   case 402:
-#line 1416 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_iter:  comp_for\n";;}
+/* Line 868 of glr.c  */
+#line 1434 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_iter:  comp_for\n";}
     break;
 
   case 403:
-#line 1417 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_iter:  comp_if\n";;}
+/* Line 868 of glr.c  */
+#line 1435 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_iter:  comp_if\n";}
     break;
 
   case 404:
-#line 1420 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_for: 	FOR exprlist IN or_test\n";;}
+/* Line 868 of glr.c  */
+#line 1438 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_for: 	FOR exprlist IN or_test\n";}
     break;
 
   case 405:
-#line 1421 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_for: FOR exprlist IN or_test comp_iter\n";;}
+/* Line 868 of glr.c  */
+#line 1439 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_for: FOR exprlist IN or_test comp_iter\n";}
     break;
 
   case 406:
-#line 1424 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_if: IF or_test\n";;}
+/* Line 868 of glr.c  */
+#line 1442 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_if: IF or_test\n";}
     break;
 
   case 407:
-#line 1425 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
-    {Streams::verbose() <<"comp_if: IF or_test comp_iter\n";;}
+/* Line 868 of glr.c  */
+#line 1443 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+    {Streams::verbose() <<"comp_if: IF or_test comp_iter\n";}
     break;
 
 
+/* Line 868 of glr.c  */
+#line 5107 "yacc.cpp"
       default: break;
     }
 
@@ -4842,17 +5115,14 @@ yyuserAction (yyRuleNum yyn, int yyrhslen, yyGLRStackItem* yyvsp,
 # undef YYBACKUP
 # undef yyclearin
 # undef YYRECOVERING
-/* Line 872 of glr.c.  */
-#line 4847 "yacc.cpp"
 }
 
 
-static void
+/*ARGSUSED*/ static void
 yyuserMerge (int yyn, YYSTYPE* yy0, YYSTYPE* yy1)
 {
-  /* `Use' the arguments.  */
-  (void) yy0;
-  (void) yy1;
+  YYUSE (yy0);
+  YYUSE (yy1);
 
   switch (yyn)
     {
@@ -4861,17 +5131,17 @@ yyuserMerge (int yyn, YYSTYPE* yy0, YYSTYPE* yy1)
     }
 }
 
-			      /* Bison grammar-table manipulation.  */
+                              /* Bison grammar-table manipulation.  */
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
+/*ARGSUSED*/
 static void
 yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
 {
-  /* Pacify ``unused variable'' warnings.  */
-  (void) yyvaluep;
+  YYUSE (yyvaluep);
 
   if (!yymsg)
     yymsg = "Deleting";
@@ -4897,17 +5167,20 @@ yydestroyGLRState (char const *yymsg, yyGLRState *yys)
 {
   if (yys->yyresolved)
     yydestruct (yymsg, yystos[yys->yylrState],
-		&yys->yysemantics.yysval);
+                &yys->yysemantics.yysval);
   else
     {
 #if YYDEBUG
       if (yydebug)
-	{
-	  YYFPRINTF (stderr, "%s unresolved ", yymsg);
-	  yysymprint (stderr, yystos[yys->yylrState],
-		      &yys->yysemantics.yysval);
-	  YYFPRINTF (stderr, "\n");
-	}
+        {
+          if (yys->yysemantics.yyfirstVal)
+            YYFPRINTF (stderr, "%s unresolved ", yymsg);
+          else
+            YYFPRINTF (stderr, "%s incomplete ", yymsg);
+          yy_symbol_print (stderr, yystos[yys->yylrState],
+                           YY_NULL);
+          YYFPRINTF (stderr, "\n");
+        }
 #endif
 
       if (yys->yysemantics.yyfirstVal)
@@ -4923,33 +5196,33 @@ yydestroyGLRState (char const *yymsg, yyGLRState *yys)
     }
 }
 
-/** Left-hand-side symbol for rule #RULE. */
+/** Left-hand-side symbol for rule #RULE.  */
 static inline yySymbol
 yylhsNonterm (yyRuleNum yyrule)
 {
   return yyr1[yyrule];
 }
 
-#define yyis_pact_ninf(yystate) \
-  ((yystate) == YYPACT_NINF)
+#define yypact_value_is_default(Yystate) \
+  (!!((Yystate) == (-524)))
 
 /** True iff LR state STATE has only a default reduction (regardless
- *  of token). */
+ *  of token).  */
 static inline yybool
 yyisDefaultedState (yyStateNum yystate)
 {
-  return yyis_pact_ninf (yypact[yystate]);
+  return yypact_value_is_default (yypact[yystate]);
 }
 
-/** The default reduction for STATE, assuming it has one. */
+/** The default reduction for STATE, assuming it has one.  */
 static inline yyRuleNum
 yydefaultAction (yyStateNum yystate)
 {
   return yydefact[yystate];
 }
 
-#define yyis_table_ninf(yytable_value) \
-  ((yytable_value) == YYTABLE_NINF)
+#define yytable_value_is_error(Yytable_value) \
+  (!!((Yytable_value) == (-388)))
 
 /** Set *YYACTION to the action to take in YYSTATE on seeing YYTOKEN.
  *  Result R means
@@ -4961,15 +5234,16 @@ yydefaultAction (yyStateNum yystate)
  */
 static inline void
 yygetLRActions (yyStateNum yystate, int yytoken,
-	        int* yyaction, const short int** yyconflicts)
+                int* yyaction, const short int** yyconflicts)
 {
   int yyindex = yypact[yystate] + yytoken;
-  if (yyindex < 0 || YYLAST < yyindex || yycheck[yyindex] != yytoken)
+  if (yypact_value_is_default (yypact[yystate])
+      || yyindex < 0 || YYLAST < yyindex || yycheck[yyindex] != yytoken)
     {
       *yyaction = -yydefact[yystate];
       *yyconflicts = yyconfl;
     }
-  else if (! yyis_table_ninf (yytable[yyindex]))
+  else if (! yytable_value_is_error (yytable[yyindex]))
     {
       *yyaction = yytable[yyindex];
       *yyconflicts = yyconfl + yyconflp[yyindex];
@@ -5004,28 +5278,50 @@ yyisErrorAction (int yyaction)
   return yyaction == 0;
 }
 
-				/* GLRStates */
+                                /* GLRStates */
 
-static void
-yyaddDeferredAction (yyGLRStack* yystack, yyGLRState* yystate,
-		     yyGLRState* rhs, yyRuleNum yyrule)
+/** Return a fresh GLRStackItem.  Callers should call
+ * YY_RESERVE_GLRSTACK afterwards to make sure there is sufficient
+ * headroom.  */
+
+static inline yyGLRStackItem*
+yynewGLRStackItem (yyGLRStack* yystackp, yybool yyisState)
 {
-  yySemanticOption* yynewItem;
-  yynewItem = &yystack->yynextFree->yyoption;
-  yystack->yyspaceLeft -= 1;
-  yystack->yynextFree += 1;
-  yynewItem->yyisState = yyfalse;
-  yynewItem->yystate = rhs;
-  yynewItem->yyrule = yyrule;
-  yynewItem->yynext = yystate->yysemantics.yyfirstVal;
-  yystate->yysemantics.yyfirstVal = yynewItem;
-  if (yystack->yyspaceLeft < YYHEADROOM)
-    yyexpandGLRStack (yystack);
+  yyGLRStackItem* yynewItem = yystackp->yynextFree;
+  yystackp->yyspaceLeft -= 1;
+  yystackp->yynextFree += 1;
+  yynewItem->yystate.yyisState = yyisState;
+  return yynewItem;
 }
 
-				/* GLRStacks */
+/** Add a new semantic action that will execute the action for rule
+ *  RULENUM on the semantic values in RHS to the list of
+ *  alternative actions for STATE.  Assumes that RHS comes from
+ *  stack #K of *STACKP. */
+static void
+yyaddDeferredAction (yyGLRStack* yystackp, size_t yyk, yyGLRState* yystate,
+                     yyGLRState* rhs, yyRuleNum yyrule)
+{
+  yySemanticOption* yynewOption =
+    &yynewGLRStackItem (yystackp, yyfalse)->yyoption;
+  yynewOption->yystate = rhs;
+  yynewOption->yyrule = yyrule;
+  if (yystackp->yytops.yylookaheadNeeds[yyk])
+    {
+      yynewOption->yyrawchar = yychar;
+      yynewOption->yyval = yylval;
+    }
+  else
+    yynewOption->yyrawchar = YYEMPTY;
+  yynewOption->yynext = yystate->yysemantics.yyfirstVal;
+  yystate->yysemantics.yyfirstVal = yynewOption;
 
-/** Initialize SET to a singleton set containing an empty stack. */
+  YY_RESERVE_GLRSTACK (yystackp);
+}
+
+                                /* GLRStacks */
+
+/** Initialize SET to a singleton set containing an empty stack.  */
 static yybool
 yyinitStateSet (yyGLRStateSet* yyset)
 {
@@ -5034,284 +5330,306 @@ yyinitStateSet (yyGLRStateSet* yyset)
   yyset->yystates = (yyGLRState**) YYMALLOC (16 * sizeof yyset->yystates[0]);
   if (! yyset->yystates)
     return yyfalse;
-  yyset->yystates[0] = NULL;
+  yyset->yystates[0] = YY_NULL;
+  yyset->yylookaheadNeeds =
+    (yybool*) YYMALLOC (16 * sizeof yyset->yylookaheadNeeds[0]);
+  if (! yyset->yylookaheadNeeds)
+    {
+      YYFREE (yyset->yystates);
+      return yyfalse;
+    }
   return yytrue;
 }
 
 static void yyfreeStateSet (yyGLRStateSet* yyset)
 {
   YYFREE (yyset->yystates);
+  YYFREE (yyset->yylookaheadNeeds);
 }
 
 /** Initialize STACK to a single empty stack, with total maximum
- *  capacity for all stacks of SIZE. */
+ *  capacity for all stacks of SIZE.  */
 static yybool
-yyinitGLRStack (yyGLRStack* yystack, size_t yysize)
+yyinitGLRStack (yyGLRStack* yystackp, size_t yysize)
 {
-  yystack->yyerrState = 0;
+  yystackp->yyerrState = 0;
   yynerrs = 0;
-  yystack->yyspaceLeft = yysize;
-  yystack->yyitems =
-    (yyGLRStackItem*) YYMALLOC (yysize * sizeof yystack->yynextFree[0]);
-  if (!yystack->yyitems)
+  yystackp->yyspaceLeft = yysize;
+  yystackp->yyitems =
+    (yyGLRStackItem*) YYMALLOC (yysize * sizeof yystackp->yynextFree[0]);
+  if (!yystackp->yyitems)
     return yyfalse;
-  yystack->yynextFree = yystack->yyitems;
-  yystack->yysplitPoint = NULL;
-  yystack->yylastDeleted = NULL;
-  return yyinitStateSet (&yystack->yytops);
+  yystackp->yynextFree = yystackp->yyitems;
+  yystackp->yysplitPoint = YY_NULL;
+  yystackp->yylastDeleted = YY_NULL;
+  return yyinitStateSet (&yystackp->yytops);
 }
 
-#define YYRELOC(YYFROMITEMS,YYTOITEMS,YYX,YYTYPE) \
+
+#if YYSTACKEXPANDABLE
+# define YYRELOC(YYFROMITEMS,YYTOITEMS,YYX,YYTYPE) \
   &((YYTOITEMS) - ((YYFROMITEMS) - (yyGLRStackItem*) (YYX)))->YYTYPE
 
 /** If STACK is expandable, extend it.  WARNING: Pointers into the
     stack from outside should be considered invalid after this call.
     We always expand when there are 1 or fewer items left AFTER an
     allocation, so that we can avoid having external pointers exist
-    across an allocation. */
+    across an allocation.  */
 static void
-yyexpandGLRStack (yyGLRStack* yystack)
+yyexpandGLRStack (yyGLRStack* yystackp)
 {
-#if YYSTACKEXPANDABLE
   yyGLRStackItem* yynewItems;
   yyGLRStackItem* yyp0, *yyp1;
-  size_t yysize, yynewSize;
+  size_t yynewSize;
   size_t yyn;
-  yysize = yystack->yynextFree - yystack->yyitems;
-  if (YYMAXDEPTH <= yysize)
-    yyMemoryExhausted (yystack);
+  size_t yysize = yystackp->yynextFree - yystackp->yyitems;
+  if (YYMAXDEPTH - YYHEADROOM < yysize)
+    yyMemoryExhausted (yystackp);
   yynewSize = 2*yysize;
   if (YYMAXDEPTH < yynewSize)
     yynewSize = YYMAXDEPTH;
   yynewItems = (yyGLRStackItem*) YYMALLOC (yynewSize * sizeof yynewItems[0]);
   if (! yynewItems)
-    yyMemoryExhausted (yystack);
-  for (yyp0 = yystack->yyitems, yyp1 = yynewItems, yyn = yysize;
+    yyMemoryExhausted (yystackp);
+  for (yyp0 = yystackp->yyitems, yyp1 = yynewItems, yyn = yysize;
        0 < yyn;
        yyn -= 1, yyp0 += 1, yyp1 += 1)
     {
       *yyp1 = *yyp0;
       if (*(yybool *) yyp0)
-	{
-	  yyGLRState* yys0 = &yyp0->yystate;
-	  yyGLRState* yys1 = &yyp1->yystate;
-	  if (yys0->yypred != NULL)
-	    yys1->yypred =
-	      YYRELOC (yyp0, yyp1, yys0->yypred, yystate);
-	  if (! yys0->yyresolved && yys0->yysemantics.yyfirstVal != NULL)
-	    yys1->yysemantics.yyfirstVal =
-	      YYRELOC(yyp0, yyp1, yys0->yysemantics.yyfirstVal, yyoption);
-	}
+        {
+          yyGLRState* yys0 = &yyp0->yystate;
+          yyGLRState* yys1 = &yyp1->yystate;
+          if (yys0->yypred != YY_NULL)
+            yys1->yypred =
+              YYRELOC (yyp0, yyp1, yys0->yypred, yystate);
+          if (! yys0->yyresolved && yys0->yysemantics.yyfirstVal != YY_NULL)
+            yys1->yysemantics.yyfirstVal =
+              YYRELOC (yyp0, yyp1, yys0->yysemantics.yyfirstVal, yyoption);
+        }
       else
-	{
-	  yySemanticOption* yyv0 = &yyp0->yyoption;
-	  yySemanticOption* yyv1 = &yyp1->yyoption;
-	  if (yyv0->yystate != NULL)
-	    yyv1->yystate = YYRELOC (yyp0, yyp1, yyv0->yystate, yystate);
-	  if (yyv0->yynext != NULL)
-	    yyv1->yynext = YYRELOC (yyp0, yyp1, yyv0->yynext, yyoption);
-	}
+        {
+          yySemanticOption* yyv0 = &yyp0->yyoption;
+          yySemanticOption* yyv1 = &yyp1->yyoption;
+          if (yyv0->yystate != YY_NULL)
+            yyv1->yystate = YYRELOC (yyp0, yyp1, yyv0->yystate, yystate);
+          if (yyv0->yynext != YY_NULL)
+            yyv1->yynext = YYRELOC (yyp0, yyp1, yyv0->yynext, yyoption);
+        }
     }
-  if (yystack->yysplitPoint != NULL)
-    yystack->yysplitPoint = YYRELOC (yystack->yyitems, yynewItems,
-				 yystack->yysplitPoint, yystate);
+  if (yystackp->yysplitPoint != YY_NULL)
+    yystackp->yysplitPoint = YYRELOC (yystackp->yyitems, yynewItems,
+                                 yystackp->yysplitPoint, yystate);
 
-  for (yyn = 0; yyn < yystack->yytops.yysize; yyn += 1)
-    if (yystack->yytops.yystates[yyn] != NULL)
-      yystack->yytops.yystates[yyn] =
-	YYRELOC (yystack->yyitems, yynewItems,
-		 yystack->yytops.yystates[yyn], yystate);
-  YYFREE (yystack->yyitems);
-  yystack->yyitems = yynewItems;
-  yystack->yynextFree = yynewItems + yysize;
-  yystack->yyspaceLeft = yynewSize - yysize;
-
-#else
-  yyMemoryExhausted (yystack);
-#endif
+  for (yyn = 0; yyn < yystackp->yytops.yysize; yyn += 1)
+    if (yystackp->yytops.yystates[yyn] != YY_NULL)
+      yystackp->yytops.yystates[yyn] =
+        YYRELOC (yystackp->yyitems, yynewItems,
+                 yystackp->yytops.yystates[yyn], yystate);
+  YYFREE (yystackp->yyitems);
+  yystackp->yyitems = yynewItems;
+  yystackp->yynextFree = yynewItems + yysize;
+  yystackp->yyspaceLeft = yynewSize - yysize;
 }
+#endif
 
 static void
-yyfreeGLRStack (yyGLRStack* yystack)
+yyfreeGLRStack (yyGLRStack* yystackp)
 {
-  YYFREE (yystack->yyitems);
-  yyfreeStateSet (&yystack->yytops);
+  YYFREE (yystackp->yyitems);
+  yyfreeStateSet (&yystackp->yytops);
 }
 
 /** Assuming that S is a GLRState somewhere on STACK, update the
  *  splitpoint of STACK, if needed, so that it is at least as deep as
- *  S. */
+ *  S.  */
 static inline void
-yyupdateSplit (yyGLRStack* yystack, yyGLRState* yys)
+yyupdateSplit (yyGLRStack* yystackp, yyGLRState* yys)
 {
-  if (yystack->yysplitPoint != NULL && yystack->yysplitPoint > yys)
-    yystack->yysplitPoint = yys;
+  if (yystackp->yysplitPoint != YY_NULL && yystackp->yysplitPoint > yys)
+    yystackp->yysplitPoint = yys;
 }
 
-/** Invalidate stack #K in STACK. */
+/** Invalidate stack #K in STACK.  */
 static inline void
-yymarkStackDeleted (yyGLRStack* yystack, size_t yyk)
+yymarkStackDeleted (yyGLRStack* yystackp, size_t yyk)
 {
-  if (yystack->yytops.yystates[yyk] != NULL)
-    yystack->yylastDeleted = yystack->yytops.yystates[yyk];
-  yystack->yytops.yystates[yyk] = NULL;
+  if (yystackp->yytops.yystates[yyk] != YY_NULL)
+    yystackp->yylastDeleted = yystackp->yytops.yystates[yyk];
+  yystackp->yytops.yystates[yyk] = YY_NULL;
 }
 
 /** Undelete the last stack that was marked as deleted.  Can only be
     done once after a deletion, and only when all other stacks have
-    been deleted. */
+    been deleted.  */
 static void
-yyundeleteLastStack (yyGLRStack* yystack)
+yyundeleteLastStack (yyGLRStack* yystackp)
 {
-  if (yystack->yylastDeleted == NULL || yystack->yytops.yysize != 0)
+  if (yystackp->yylastDeleted == YY_NULL || yystackp->yytops.yysize != 0)
     return;
-  yystack->yytops.yystates[0] = yystack->yylastDeleted;
-  yystack->yytops.yysize = 1;
+  yystackp->yytops.yystates[0] = yystackp->yylastDeleted;
+  yystackp->yytops.yysize = 1;
   YYDPRINTF ((stderr, "Restoring last deleted stack as stack #0.\n"));
-  yystack->yylastDeleted = NULL;
+  yystackp->yylastDeleted = YY_NULL;
 }
 
 static inline void
-yyremoveDeletes (yyGLRStack* yystack)
+yyremoveDeletes (yyGLRStack* yystackp)
 {
   size_t yyi, yyj;
   yyi = yyj = 0;
-  while (yyj < yystack->yytops.yysize)
+  while (yyj < yystackp->yytops.yysize)
     {
-      if (yystack->yytops.yystates[yyi] == NULL)
-	{
-	  if (yyi == yyj)
-	    {
-	      YYDPRINTF ((stderr, "Removing dead stacks.\n"));
-	    }
-	  yystack->yytops.yysize -= 1;
-	}
+      if (yystackp->yytops.yystates[yyi] == YY_NULL)
+        {
+          if (yyi == yyj)
+            {
+              YYDPRINTF ((stderr, "Removing dead stacks.\n"));
+            }
+          yystackp->yytops.yysize -= 1;
+        }
       else
-	{
-	  yystack->yytops.yystates[yyj] = yystack->yytops.yystates[yyi];
-	  if (yyj != yyi)
-	    {
-	      YYDPRINTF ((stderr, "Rename stack %lu -> %lu.\n",
-			  (unsigned long int) yyi, (unsigned long int) yyj));
-	    }
-	  yyj += 1;
-	}
+        {
+          yystackp->yytops.yystates[yyj] = yystackp->yytops.yystates[yyi];
+          /* In the current implementation, it's unnecessary to copy
+             yystackp->yytops.yylookaheadNeeds[yyi] since, after
+             yyremoveDeletes returns, the parser immediately either enters
+             deterministic operation or shifts a token.  However, it doesn't
+             hurt, and the code might evolve to need it.  */
+          yystackp->yytops.yylookaheadNeeds[yyj] =
+            yystackp->yytops.yylookaheadNeeds[yyi];
+          if (yyj != yyi)
+            {
+              YYDPRINTF ((stderr, "Rename stack %lu -> %lu.\n",
+                          (unsigned long int) yyi, (unsigned long int) yyj));
+            }
+          yyj += 1;
+        }
       yyi += 1;
     }
 }
 
 /** Shift to a new state on stack #K of STACK, corresponding to LR state
- * LRSTATE, at input position POSN, with (resolved) semantic value SVAL. */
+ * LRSTATE, at input position POSN, with (resolved) semantic value SVAL.  */
 static inline void
-yyglrShift (yyGLRStack* yystack, size_t yyk, yyStateNum yylrState,
-	    size_t yyposn,
-	    YYSTYPE yysval, YYLTYPE* yylocp)
+yyglrShift (yyGLRStack* yystackp, size_t yyk, yyStateNum yylrState,
+            size_t yyposn,
+            YYSTYPE* yyvalp)
 {
-  yyGLRStackItem* yynewItem;
+  yyGLRState* yynewState = &yynewGLRStackItem (yystackp, yytrue)->yystate;
 
-  yynewItem = yystack->yynextFree;
-  yystack->yynextFree += 1;
-  yystack->yyspaceLeft -= 1;
-  yynewItem->yystate.yyisState = yytrue;
-  yynewItem->yystate.yylrState = yylrState;
-  yynewItem->yystate.yyposn = yyposn;
-  yynewItem->yystate.yyresolved = yytrue;
-  yynewItem->yystate.yypred = yystack->yytops.yystates[yyk];
-  yystack->yytops.yystates[yyk] = &yynewItem->yystate;
-  yynewItem->yystate.yysemantics.yysval = yysval;
-  yynewItem->yystate.yyloc = *yylocp;
-  if (yystack->yyspaceLeft < YYHEADROOM)
-    yyexpandGLRStack (yystack);
+  yynewState->yylrState = yylrState;
+  yynewState->yyposn = yyposn;
+  yynewState->yyresolved = yytrue;
+  yynewState->yypred = yystackp->yytops.yystates[yyk];
+  yynewState->yysemantics.yysval = *yyvalp;
+  yystackp->yytops.yystates[yyk] = yynewState;
+
+  YY_RESERVE_GLRSTACK (yystackp);
 }
 
 /** Shift stack #K of YYSTACK, to a new state corresponding to LR
  *  state YYLRSTATE, at input position YYPOSN, with the (unresolved)
- *  semantic value of YYRHS under the action for YYRULE. */
+ *  semantic value of YYRHS under the action for YYRULE.  */
 static inline void
-yyglrShiftDefer (yyGLRStack* yystack, size_t yyk, yyStateNum yylrState,
-		 size_t yyposn, yyGLRState* rhs, yyRuleNum yyrule)
+yyglrShiftDefer (yyGLRStack* yystackp, size_t yyk, yyStateNum yylrState,
+                 size_t yyposn, yyGLRState* rhs, yyRuleNum yyrule)
 {
-  yyGLRStackItem* yynewItem;
+  yyGLRState* yynewState = &yynewGLRStackItem (yystackp, yytrue)->yystate;
 
-  yynewItem = yystack->yynextFree;
-  yynewItem->yystate.yyisState = yytrue;
-  yynewItem->yystate.yylrState = yylrState;
-  yynewItem->yystate.yyposn = yyposn;
-  yynewItem->yystate.yyresolved = yyfalse;
-  yynewItem->yystate.yypred = yystack->yytops.yystates[yyk];
-  yynewItem->yystate.yysemantics.yyfirstVal = NULL;
-  yystack->yytops.yystates[yyk] = &yynewItem->yystate;
-  yystack->yynextFree += 1;
-  yystack->yyspaceLeft -= 1;
-  yyaddDeferredAction (yystack, &yynewItem->yystate, rhs, yyrule);
+  yynewState->yylrState = yylrState;
+  yynewState->yyposn = yyposn;
+  yynewState->yyresolved = yyfalse;
+  yynewState->yypred = yystackp->yytops.yystates[yyk];
+  yynewState->yysemantics.yyfirstVal = YY_NULL;
+  yystackp->yytops.yystates[yyk] = yynewState;
+
+  /* Invokes YY_RESERVE_GLRSTACK.  */
+  yyaddDeferredAction (yystackp, yyk, yynewState, rhs, yyrule);
 }
 
 /** Pop the symbols consumed by reduction #RULE from the top of stack
  *  #K of STACK, and perform the appropriate semantic action on their
  *  semantic values.  Assumes that all ambiguities in semantic values
- *  have been previously resolved. Set *VALP to the resulting value,
+ *  have been previously resolved.  Set *VALP to the resulting value,
  *  and *LOCP to the computed location (if any).  Return value is as
- *  for userAction. */
+ *  for userAction.  */
 static inline YYRESULTTAG
-yydoAction (yyGLRStack* yystack, size_t yyk, yyRuleNum yyrule,
-	    YYSTYPE* yyvalp, YYLTYPE* yylocp)
+yydoAction (yyGLRStack* yystackp, size_t yyk, yyRuleNum yyrule,
+            YYSTYPE* yyvalp)
 {
   int yynrhs = yyrhsLength (yyrule);
 
-  if (yystack->yysplitPoint == NULL)
+  if (yystackp->yysplitPoint == YY_NULL)
     {
-      /* Standard special case: single stack. */
-      yyGLRStackItem* rhs = (yyGLRStackItem*) yystack->yytops.yystates[yyk];
+      /* Standard special case: single stack.  */
+      yyGLRStackItem* rhs = (yyGLRStackItem*) yystackp->yytops.yystates[yyk];
       YYASSERT (yyk == 0);
-      yystack->yynextFree -= yynrhs;
-      yystack->yyspaceLeft += yynrhs;
-      yystack->yytops.yystates[0] = & yystack->yynextFree[-1].yystate;
-      return yyuserAction (yyrule, yynrhs, rhs,
-			   yyvalp, yylocp, yystack);
+      yystackp->yynextFree -= yynrhs;
+      yystackp->yyspaceLeft += yynrhs;
+      yystackp->yytops.yystates[0] = & yystackp->yynextFree[-1].yystate;
+      return yyuserAction (yyrule, yynrhs, rhs, yystackp,
+                           yyvalp);
     }
   else
     {
+      /* At present, doAction is never called in nondeterministic
+       * mode, so this branch is never taken.  It is here in
+       * anticipation of a future feature that will allow immediate
+       * evaluation of selected actions in nondeterministic mode.  */
       int yyi;
       yyGLRState* yys;
       yyGLRStackItem yyrhsVals[YYMAXRHS + YYMAXLEFT + 1];
       yys = yyrhsVals[YYMAXRHS + YYMAXLEFT].yystate.yypred
-	= yystack->yytops.yystates[yyk];
+        = yystackp->yytops.yystates[yyk];
       for (yyi = 0; yyi < yynrhs; yyi += 1)
-	{
-	  yys = yys->yypred;
-	  YYASSERT (yys);
-	}
-      yyupdateSplit (yystack, yys);
-      yystack->yytops.yystates[yyk] = yys;
+        {
+          yys = yys->yypred;
+          YYASSERT (yys);
+        }
+      yyupdateSplit (yystackp, yys);
+      yystackp->yytops.yystates[yyk] = yys;
       return yyuserAction (yyrule, yynrhs, yyrhsVals + YYMAXRHS + YYMAXLEFT - 1,
-			   yyvalp, yylocp, yystack);
+                           yystackp, yyvalp);
     }
 }
 
 #if !YYDEBUG
-# define YY_REDUCE_PRINT(K, Rule)
+# define YY_REDUCE_PRINT(Args)
 #else
-# define YY_REDUCE_PRINT(K, Rule)	\
-do {					\
-  if (yydebug)				\
-    yy_reduce_print (K, Rule);		\
-} while (0)
+# define YY_REDUCE_PRINT(Args)          \
+do {                                    \
+  if (yydebug)                          \
+    yy_reduce_print Args;               \
+} while (YYID (0))
 
 /*----------------------------------------------------------.
 | Report that the RULE is going to be reduced on stack #K.  |
 `----------------------------------------------------------*/
 
-static inline void
-yy_reduce_print (size_t yyk, yyRuleNum yyrule)
+/*ARGSUSED*/ static inline void
+yy_reduce_print (yyGLRStack* yystackp, size_t yyk, yyRuleNum yyrule,
+                 YYSTYPE* yyvalp)
 {
+  int yynrhs = yyrhsLength (yyrule);
+  yybool yynormal __attribute__ ((__unused__)) =
+    (yystackp->yysplitPoint == YY_NULL);
+  yyGLRStackItem* yyvsp = (yyGLRStackItem*) yystackp->yytops.yystates[yyk];
+  int yylow = 1;
   int yyi;
-  YYFPRINTF (stderr, "Reducing stack %lu by rule %d (line %lu), ",
-	     (unsigned long int) yyk, yyrule - 1,
-	     (unsigned long int) yyrline[yyrule]);
-  /* Print the symbols being reduced, and their result.  */
-  for (yyi = yyprhs[yyrule]; 0 <= yyrhs[yyi]; yyi++)
-    YYFPRINTF (stderr, "%s ", yytokenName (yyrhs[yyi]));
-  YYFPRINTF (stderr, "-> %s\n", yytokenName (yyr1[yyrule]));
+  YYUSE (yyvalp);
+  YYFPRINTF (stderr, "Reducing stack %lu by rule %d (line %lu):\n",
+             (unsigned long int) yyk, yyrule - 1,
+             (unsigned long int) yyrline[yyrule]);
+  /* The symbols being reduced.  */
+  for (yyi = 0; yyi < yynrhs; yyi++)
+    {
+      YYFPRINTF (stderr, "   $%d = ", yyi + 1);
+      yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
+                       &(((yyGLRStackItem const *)yyvsp)[YYFILL ((yyi + 1) - (yynrhs))].yystate.yysemantics.yysval)
+                                              );
+      YYFPRINTF (stderr, "\n");
+    }
 }
 #endif
 
@@ -5323,99 +5641,117 @@ yy_reduce_print (size_t yyk, yyRuleNum yyrule)
  *  the new state.  If the new state would have an identical input
  *  position, LR state, and predecessor to an existing state on the stack,
  *  it is identified with that existing state, eliminating stack #K from
- *  the STACK. In this case, the (necessarily deferred) semantic value is
+ *  the STACK.  In this case, the (necessarily deferred) semantic value is
  *  added to the options for the existing state's semantic value.
  */
 static inline YYRESULTTAG
-yyglrReduce (yyGLRStack* yystack, size_t yyk, yyRuleNum yyrule,
+yyglrReduce (yyGLRStack* yystackp, size_t yyk, yyRuleNum yyrule,
              yybool yyforceEval)
 {
-  size_t yyposn = yystack->yytops.yystates[yyk]->yyposn;
+  size_t yyposn = yystackp->yytops.yystates[yyk]->yyposn;
 
-  if (yyforceEval || yystack->yysplitPoint == NULL)
+  if (yyforceEval || yystackp->yysplitPoint == YY_NULL)
     {
       YYSTYPE yysval;
-      YYLTYPE yyloc;
 
-      YY_REDUCE_PRINT (yyk, yyrule);
-      YYCHK (yydoAction (yystack, yyk, yyrule, &yysval, &yyloc));
-      yyglrShift (yystack, yyk,
-		  yyLRgotoState (yystack->yytops.yystates[yyk]->yylrState,
-				 yylhsNonterm (yyrule)),
-		  yyposn, yysval, &yyloc);
+      YY_REDUCE_PRINT ((yystackp, yyk, yyrule, &yysval));
+      YYCHK (yydoAction (yystackp, yyk, yyrule, &yysval));
+      YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyrule], &yysval, &yyloc);
+      yyglrShift (yystackp, yyk,
+                  yyLRgotoState (yystackp->yytops.yystates[yyk]->yylrState,
+                                 yylhsNonterm (yyrule)),
+                  yyposn, &yysval);
     }
   else
     {
       size_t yyi;
       int yyn;
-      yyGLRState* yys, *yys0 = yystack->yytops.yystates[yyk];
+      yyGLRState* yys, *yys0 = yystackp->yytops.yystates[yyk];
       yyStateNum yynewLRState;
 
-      for (yys = yystack->yytops.yystates[yyk], yyn = yyrhsLength (yyrule);
-	   0 < yyn; yyn -= 1)
-	{
-	  yys = yys->yypred;
-	  YYASSERT (yys);
-	}
-      yyupdateSplit (yystack, yys);
+      for (yys = yystackp->yytops.yystates[yyk], yyn = yyrhsLength (yyrule);
+           0 < yyn; yyn -= 1)
+        {
+          yys = yys->yypred;
+          YYASSERT (yys);
+        }
+      yyupdateSplit (yystackp, yys);
       yynewLRState = yyLRgotoState (yys->yylrState, yylhsNonterm (yyrule));
       YYDPRINTF ((stderr,
-		  "Reduced stack %lu by rule #%d; action deferred. Now in state %d.\n",
-		  (unsigned long int) yyk, yyrule - 1, yynewLRState));
-      for (yyi = 0; yyi < yystack->yytops.yysize; yyi += 1)
-	if (yyi != yyk && yystack->yytops.yystates[yyi] != NULL)
-	  {
-	    yyGLRState* yyp, *yysplit = yystack->yysplitPoint;
-	    yyp = yystack->yytops.yystates[yyi];
-	    while (yyp != yys && yyp != yysplit && yyp->yyposn >= yyposn)
-	      {
-		if (yyp->yylrState == yynewLRState && yyp->yypred == yys)
-		  {
-		    yyaddDeferredAction (yystack, yyp, yys0, yyrule);
-		    yymarkStackDeleted (yystack, yyk);
-		    YYDPRINTF ((stderr, "Merging stack %lu into stack %lu.\n",
-				(unsigned long int) yyk,
-				(unsigned long int) yyi));
-		    return yyok;
-		  }
-		yyp = yyp->yypred;
-	      }
-	  }
-      yystack->yytops.yystates[yyk] = yys;
-      yyglrShiftDefer (yystack, yyk, yynewLRState, yyposn, yys0, yyrule);
+                  "Reduced stack %lu by rule #%d; action deferred.  Now in state %d.\n",
+                  (unsigned long int) yyk, yyrule - 1, yynewLRState));
+      for (yyi = 0; yyi < yystackp->yytops.yysize; yyi += 1)
+        if (yyi != yyk && yystackp->yytops.yystates[yyi] != YY_NULL)
+          {
+            yyGLRState *yysplit = yystackp->yysplitPoint;
+            yyGLRState *yyp = yystackp->yytops.yystates[yyi];
+            while (yyp != yys && yyp != yysplit && yyp->yyposn >= yyposn)
+              {
+                if (yyp->yylrState == yynewLRState && yyp->yypred == yys)
+                  {
+                    yyaddDeferredAction (yystackp, yyk, yyp, yys0, yyrule);
+                    yymarkStackDeleted (yystackp, yyk);
+                    YYDPRINTF ((stderr, "Merging stack %lu into stack %lu.\n",
+                                (unsigned long int) yyk,
+                                (unsigned long int) yyi));
+                    return yyok;
+                  }
+                yyp = yyp->yypred;
+              }
+          }
+      yystackp->yytops.yystates[yyk] = yys;
+      yyglrShiftDefer (yystackp, yyk, yynewLRState, yyposn, yys0, yyrule);
     }
   return yyok;
 }
 
 static size_t
-yysplitStack (yyGLRStack* yystack, size_t yyk)
+yysplitStack (yyGLRStack* yystackp, size_t yyk)
 {
-  if (yystack->yysplitPoint == NULL)
+  if (yystackp->yysplitPoint == YY_NULL)
     {
       YYASSERT (yyk == 0);
-      yystack->yysplitPoint = yystack->yytops.yystates[yyk];
+      yystackp->yysplitPoint = yystackp->yytops.yystates[yyk];
     }
-  if (yystack->yytops.yysize >= yystack->yytops.yycapacity)
+  if (yystackp->yytops.yysize >= yystackp->yytops.yycapacity)
     {
       yyGLRState** yynewStates;
-      if (! ((yystack->yytops.yycapacity
-	      <= (YYSIZEMAX / (2 * sizeof yynewStates[0])))
-	     && (yynewStates =
-		 (yyGLRState**) YYREALLOC (yystack->yytops.yystates,
-					   ((yystack->yytops.yycapacity *= 2)
-					    * sizeof yynewStates[0])))))
-	yyMemoryExhausted (yystack);
-      yystack->yytops.yystates = yynewStates;
+      yybool* yynewLookaheadNeeds;
+
+      yynewStates = YY_NULL;
+
+      if (yystackp->yytops.yycapacity
+          > (YYSIZEMAX / (2 * sizeof yynewStates[0])))
+        yyMemoryExhausted (yystackp);
+      yystackp->yytops.yycapacity *= 2;
+
+      yynewStates =
+        (yyGLRState**) YYREALLOC (yystackp->yytops.yystates,
+                                  (yystackp->yytops.yycapacity
+                                   * sizeof yynewStates[0]));
+      if (yynewStates == YY_NULL)
+        yyMemoryExhausted (yystackp);
+      yystackp->yytops.yystates = yynewStates;
+
+      yynewLookaheadNeeds =
+        (yybool*) YYREALLOC (yystackp->yytops.yylookaheadNeeds,
+                             (yystackp->yytops.yycapacity
+                              * sizeof yynewLookaheadNeeds[0]));
+      if (yynewLookaheadNeeds == YY_NULL)
+        yyMemoryExhausted (yystackp);
+      yystackp->yytops.yylookaheadNeeds = yynewLookaheadNeeds;
     }
-  yystack->yytops.yystates[yystack->yytops.yysize]
-    = yystack->yytops.yystates[yyk];
-  yystack->yytops.yysize += 1;
-  return yystack->yytops.yysize-1;
+  yystackp->yytops.yystates[yystackp->yytops.yysize]
+    = yystackp->yytops.yystates[yyk];
+  yystackp->yytops.yylookaheadNeeds[yystackp->yytops.yysize]
+    = yystackp->yytops.yylookaheadNeeds[yyk];
+  yystackp->yytops.yysize += 1;
+  return yystackp->yytops.yysize-1;
 }
 
 /** True iff Y0 and Y1 represent identical options at the top level.
  *  That is, they represent the same rule applied to RHS symbols
- *  that produce the same terminal symbols. */
+ *  that produce the same terminal symbols.  */
 static yybool
 yyidenticalOptions (yySemanticOption* yyy0, yySemanticOption* yyy1)
 {
@@ -5424,11 +5760,11 @@ yyidenticalOptions (yySemanticOption* yyy0, yySemanticOption* yyy1)
       yyGLRState *yys0, *yys1;
       int yyn;
       for (yys0 = yyy0->yystate, yys1 = yyy1->yystate,
-	   yyn = yyrhsLength (yyy0->yyrule);
-	   yyn > 0;
-	   yys0 = yys0->yypred, yys1 = yys1->yypred, yyn -= 1)
-	if (yys0->yyposn != yys1->yyposn)
-	  return yyfalse;
+           yyn = yyrhsLength (yyy0->yyrule);
+           yyn > 0;
+           yys0 = yys0->yypred, yys1 = yys1->yypred, yyn -= 1)
+        if (yys0->yyposn != yys1->yyposn)
+          return yyfalse;
       return yytrue;
     }
   else
@@ -5436,7 +5772,7 @@ yyidenticalOptions (yySemanticOption* yyy0, yySemanticOption* yyy1)
 }
 
 /** Assuming identicalOptions (Y0,Y1), destructively merge the
- *  alternative semantic values for the RHS-symbols of Y1 and Y0. */
+ *  alternative semantic values for the RHS-symbols of Y1 and Y0.  */
 static void
 yymergeOptionSets (yySemanticOption* yyy0, yySemanticOption* yyy1)
 {
@@ -5448,49 +5784,47 @@ yymergeOptionSets (yySemanticOption* yyy0, yySemanticOption* yyy1)
        yys0 = yys0->yypred, yys1 = yys1->yypred, yyn -= 1)
     {
       if (yys0 == yys1)
-	break;
+        break;
       else if (yys0->yyresolved)
-	{
-	  yys1->yyresolved = yytrue;
-	  yys1->yysemantics.yysval = yys0->yysemantics.yysval;
-	}
+        {
+          yys1->yyresolved = yytrue;
+          yys1->yysemantics.yysval = yys0->yysemantics.yysval;
+        }
       else if (yys1->yyresolved)
-	{
-	  yys0->yyresolved = yytrue;
-	  yys0->yysemantics.yysval = yys1->yysemantics.yysval;
-	}
+        {
+          yys0->yyresolved = yytrue;
+          yys0->yysemantics.yysval = yys1->yysemantics.yysval;
+        }
       else
-	{
-	  yySemanticOption** yyz0p;
-	  yySemanticOption* yyz1;
-	  yyz0p = &yys0->yysemantics.yyfirstVal;
-	  yyz1 = yys1->yysemantics.yyfirstVal;
-	  while (yytrue)
-	    {
-	      if (yyz1 == *yyz0p || yyz1 == NULL)
-		break;
-	      else if (*yyz0p == NULL)
-		{
-		  *yyz0p = yyz1;
-		  break;
-		}
-	      else if (*yyz0p < yyz1)
-		{
-		  yySemanticOption* yyz = *yyz0p;
-		  *yyz0p = yyz1;
-		  yyz1 = yyz1->yynext;
-		  (*yyz0p)->yynext = yyz;
-		}
-	      yyz0p = &(*yyz0p)->yynext;
-	    }
-	  yys1->yysemantics.yyfirstVal = yys0->yysemantics.yyfirstVal;
-	}
+        {
+          yySemanticOption** yyz0p = &yys0->yysemantics.yyfirstVal;
+          yySemanticOption* yyz1 = yys1->yysemantics.yyfirstVal;
+          while (YYID (yytrue))
+            {
+              if (yyz1 == *yyz0p || yyz1 == YY_NULL)
+                break;
+              else if (*yyz0p == YY_NULL)
+                {
+                  *yyz0p = yyz1;
+                  break;
+                }
+              else if (*yyz0p < yyz1)
+                {
+                  yySemanticOption* yyz = *yyz0p;
+                  *yyz0p = yyz1;
+                  yyz1 = yyz1->yynext;
+                  (*yyz0p)->yynext = yyz;
+                }
+              yyz0p = &(*yyz0p)->yynext;
+            }
+          yys1->yysemantics.yyfirstVal = yys0->yysemantics.yyfirstVal;
+        }
     }
 }
 
 /** Y0 and Y1 represent two possible actions to take in a given
  *  parsing state; return 0 if no combination is possible,
- *  1 if user-mergeable, 2 if Y0 is preferred, 3 if Y1 is preferred. */
+ *  1 if user-mergeable, 2 if Y0 is preferred, 3 if Y1 is preferred.  */
 static int
 yypreference (yySemanticOption* y0, yySemanticOption* y1)
 {
@@ -5500,9 +5834,9 @@ yypreference (yySemanticOption* y0, yySemanticOption* y1)
   if (p0 == p1)
     {
       if (yymerger[r0] == 0 || yymerger[r0] != yymerger[r1])
-	return 0;
+        return 0;
       else
-	return 1;
+        return 1;
     }
   if (p0 == 0 || p1 == 0)
     return 0;
@@ -5513,46 +5847,62 @@ yypreference (yySemanticOption* y0, yySemanticOption* y1)
   return 0;
 }
 
-static YYRESULTTAG yyresolveValue (yySemanticOption* yyoptionList,
-				   yyGLRStack* yystack, YYSTYPE* yyvalp,
-				   YYLTYPE* yylocp);
+static YYRESULTTAG yyresolveValue (yyGLRState* yys,
+                                   yyGLRStack* yystackp);
 
+
+/** Resolve the previous N states starting at and including state S.  If result
+ *  != yyok, some states may have been left unresolved possibly with empty
+ *  semantic option chains.  Regardless of whether result = yyok, each state
+ *  has been left with consistent data so that yydestroyGLRState can be invoked
+ *  if necessary.  */
 static YYRESULTTAG
-yyresolveStates (yyGLRState* yys, int yyn, yyGLRStack* yystack)
+yyresolveStates (yyGLRState* yys, int yyn,
+                 yyGLRStack* yystackp)
 {
-  YYRESULTTAG yyflag;
   if (0 < yyn)
     {
       YYASSERT (yys->yypred);
-      yyflag = yyresolveStates (yys->yypred, yyn-1, yystack);
-      if (yyflag != yyok)
-	return yyflag;
+      YYCHK (yyresolveStates (yys->yypred, yyn-1, yystackp));
       if (! yys->yyresolved)
-	{
-	  yyflag = yyresolveValue (yys->yysemantics.yyfirstVal, yystack,
-				   &yys->yysemantics.yysval, &yys->yyloc
-				  );
-	  if (yyflag != yyok)
-	    return yyflag;
-	  yys->yyresolved = yytrue;
-	}
+        YYCHK (yyresolveValue (yys, yystackp));
     }
   return yyok;
 }
 
+/** Resolve the states for the RHS of OPT, perform its user action, and return
+ *  the semantic value and location.  Regardless of whether result = yyok, all
+ *  RHS states have been destroyed (assuming the user action destroys all RHS
+ *  semantic values if invoked).  */
 static YYRESULTTAG
-yyresolveAction (yySemanticOption* yyopt, yyGLRStack* yystack,
-	         YYSTYPE* yyvalp, YYLTYPE* yylocp)
+yyresolveAction (yySemanticOption* yyopt, yyGLRStack* yystackp,
+                 YYSTYPE* yyvalp)
 {
   yyGLRStackItem yyrhsVals[YYMAXRHS + YYMAXLEFT + 1];
-  int yynrhs;
+  int yynrhs = yyrhsLength (yyopt->yyrule);
+  YYRESULTTAG yyflag =
+    yyresolveStates (yyopt->yystate, yynrhs, yystackp);
+  if (yyflag != yyok)
+    {
+      yyGLRState *yys;
+      for (yys = yyopt->yystate; yynrhs > 0; yys = yys->yypred, yynrhs -= 1)
+        yydestroyGLRState ("Cleanup: popping", yys);
+      return yyflag;
+    }
 
-  yynrhs = yyrhsLength (yyopt->yyrule);
-  YYCHK (yyresolveStates (yyopt->yystate, yynrhs, yystack));
   yyrhsVals[YYMAXRHS + YYMAXLEFT].yystate.yypred = yyopt->yystate;
-  return yyuserAction (yyopt->yyrule, yynrhs,
-		       yyrhsVals + YYMAXRHS + YYMAXLEFT - 1,
-		       yyvalp, yylocp, yystack);
+  {
+    int yychar_current = yychar;
+    YYSTYPE yylval_current = yylval;
+    yychar = yyopt->yyrawchar;
+    yylval = yyopt->yyval;
+    yyflag = yyuserAction (yyopt->yyrule, yynrhs,
+                           yyrhsVals + YYMAXRHS + YYMAXLEFT - 1,
+                           yystackp, yyvalp);
+    yychar = yychar_current;
+    yylval = yylval_current;
+  }
+  return yyflag;
 }
 
 #if YYDEBUG
@@ -5562,12 +5912,12 @@ yyreportTree (yySemanticOption* yyx, int yyindent)
   int yynrhs = yyrhsLength (yyx->yyrule);
   int yyi;
   yyGLRState* yys;
-  yyGLRState* yystates[YYMAXRHS];
+  yyGLRState* yystates[1 + YYMAXRHS];
   yyGLRState yyleftmost_state;
 
   for (yyi = yynrhs, yys = yyx->yystate; 0 < yyi; yyi -= 1, yys = yys->yypred)
     yystates[yyi] = yys;
-  if (yys == NULL)
+  if (yys == YY_NULL)
     {
       yyleftmost_state.yyposn = 0;
       yystates[0] = &yyleftmost_state;
@@ -5577,42 +5927,38 @@ yyreportTree (yySemanticOption* yyx, int yyindent)
 
   if (yyx->yystate->yyposn < yys->yyposn + 1)
     YYFPRINTF (stderr, "%*s%s -> <Rule %d, empty>\n",
-	       yyindent, "", yytokenName (yylhsNonterm (yyx->yyrule)),
-	       yyx->yyrule);
+               yyindent, "", yytokenName (yylhsNonterm (yyx->yyrule)),
+               yyx->yyrule - 1);
   else
     YYFPRINTF (stderr, "%*s%s -> <Rule %d, tokens %lu .. %lu>\n",
-	       yyindent, "", yytokenName (yylhsNonterm (yyx->yyrule)),
-	       yyx->yyrule, (unsigned long int) (yys->yyposn + 1),
-	       (unsigned long int) yyx->yystate->yyposn);
+               yyindent, "", yytokenName (yylhsNonterm (yyx->yyrule)),
+               yyx->yyrule - 1, (unsigned long int) (yys->yyposn + 1),
+               (unsigned long int) yyx->yystate->yyposn);
   for (yyi = 1; yyi <= yynrhs; yyi += 1)
     {
       if (yystates[yyi]->yyresolved)
-	{
-	  if (yystates[yyi-1]->yyposn+1 > yystates[yyi]->yyposn)
-	    YYFPRINTF (stderr, "%*s%s <empty>\n", yyindent+2, "",
-		       yytokenName (yyrhs[yyprhs[yyx->yyrule]+yyi-1]));
-	  else
-	    YYFPRINTF (stderr, "%*s%s <tokens %lu .. %lu>\n", yyindent+2, "",
-		       yytokenName (yyrhs[yyprhs[yyx->yyrule]+yyi-1]),
-		       (unsigned long int) (yystates[yyi - 1]->yyposn + 1),
-		       (unsigned long int) yystates[yyi]->yyposn);
-	}
+        {
+          if (yystates[yyi-1]->yyposn+1 > yystates[yyi]->yyposn)
+            YYFPRINTF (stderr, "%*s%s <empty>\n", yyindent+2, "",
+                       yytokenName (yyrhs[yyprhs[yyx->yyrule]+yyi-1]));
+          else
+            YYFPRINTF (stderr, "%*s%s <tokens %lu .. %lu>\n", yyindent+2, "",
+                       yytokenName (yyrhs[yyprhs[yyx->yyrule]+yyi-1]),
+                       (unsigned long int) (yystates[yyi - 1]->yyposn + 1),
+                       (unsigned long int) yystates[yyi]->yyposn);
+        }
       else
-	yyreportTree (yystates[yyi]->yysemantics.yyfirstVal, yyindent+2);
+        yyreportTree (yystates[yyi]->yysemantics.yyfirstVal, yyindent+2);
     }
 }
 #endif
 
-static void yyreportAmbiguity (yySemanticOption* yyx0, yySemanticOption* yyx1,
-			       yyGLRStack* yystack)
-  __attribute__ ((__noreturn__));
-static void
-yyreportAmbiguity (yySemanticOption* yyx0, yySemanticOption* yyx1,
-		   yyGLRStack* yystack)
+/*ARGSUSED*/ static YYRESULTTAG
+yyreportAmbiguity (yySemanticOption* yyx0,
+                   yySemanticOption* yyx1)
 {
-  /* `Unused' warnings.  */
-  (void) yyx0;
-  (void) yyx1;
+  YYUSE (yyx0);
+  YYUSE (yyx1);
 
 #if YYDEBUG
   YYFPRINTF (stderr, "Ambiguity detected.\n");
@@ -5622,411 +5968,466 @@ yyreportAmbiguity (yySemanticOption* yyx0, yySemanticOption* yyx1,
   yyreportTree (yyx1, 2);
   YYFPRINTF (stderr, "\n");
 #endif
-  yyFail (yystack, YY_("syntax is ambiguous"));
+
+  yyerror (YY_("syntax is ambiguous"));
+  return yyabort;
 }
 
-
-/** Resolve the ambiguity represented by OPTIONLIST, perform the indicated
- *  actions, and return the result. */
+/** Resolve the ambiguity represented in state S, perform the indicated
+ *  actions, and set the semantic value of S.  If result != yyok, the chain of
+ *  semantic options in S has been cleared instead or it has been left
+ *  unmodified except that redundant options may have been removed.  Regardless
+ *  of whether result = yyok, S has been left with consistent data so that
+ *  yydestroyGLRState can be invoked if necessary.  */
 static YYRESULTTAG
-yyresolveValue (yySemanticOption* yyoptionList, yyGLRStack* yystack,
-		YYSTYPE* yyvalp, YYLTYPE* yylocp)
+yyresolveValue (yyGLRState* yys, yyGLRStack* yystackp)
 {
-  yySemanticOption* yybest;
+  yySemanticOption* yyoptionList = yys->yysemantics.yyfirstVal;
+  yySemanticOption* yybest = yyoptionList;
   yySemanticOption** yypp;
-  yybool yymerge;
+  yybool yymerge = yyfalse;
+  YYSTYPE yysval;
+  YYRESULTTAG yyflag;
 
-  yybest = yyoptionList;
-  yymerge = yyfalse;
-  for (yypp = &yyoptionList->yynext; *yypp != NULL; )
+  for (yypp = &yyoptionList->yynext; *yypp != YY_NULL; )
     {
       yySemanticOption* yyp = *yypp;
 
       if (yyidenticalOptions (yybest, yyp))
-	{
-	  yymergeOptionSets (yybest, yyp);
-	  *yypp = yyp->yynext;
-	}
+        {
+          yymergeOptionSets (yybest, yyp);
+          *yypp = yyp->yynext;
+        }
       else
-	{
-	  switch (yypreference (yybest, yyp))
-	    {
-	    case 0:
-	      yyreportAmbiguity (yybest, yyp, yystack);
-	      break;
-	    case 1:
-	      yymerge = yytrue;
-	      break;
-	    case 2:
-	      break;
-	    case 3:
-	      yybest = yyp;
-	      yymerge = yyfalse;
-	      break;
-	    default:
-	      /* This cannot happen so it is not worth a YYASSERT (yyfalse),
-	         but some compilers complain if the default case is
-		 omitted.  */
-	      break;
-	    }
-	  yypp = &yyp->yynext;
-	}
+        {
+          switch (yypreference (yybest, yyp))
+            {
+            case 0:
+              return yyreportAmbiguity (yybest, yyp);
+              break;
+            case 1:
+              yymerge = yytrue;
+              break;
+            case 2:
+              break;
+            case 3:
+              yybest = yyp;
+              yymerge = yyfalse;
+              break;
+            default:
+              /* This cannot happen so it is not worth a YYASSERT (yyfalse),
+                 but some compilers complain if the default case is
+                 omitted.  */
+              break;
+            }
+          yypp = &yyp->yynext;
+        }
     }
 
   if (yymerge)
     {
       yySemanticOption* yyp;
       int yyprec = yydprec[yybest->yyrule];
-      YYCHK (yyresolveAction (yybest, yystack, yyvalp, yylocp));
-      for (yyp = yybest->yynext; yyp != NULL; yyp = yyp->yynext)
-	{
-	  if (yyprec == yydprec[yyp->yyrule])
-	    {
-	      YYSTYPE yyval1;
-	      YYLTYPE yydummy;
-	      YYCHK (yyresolveAction (yyp, yystack, &yyval1, &yydummy));
-	      yyuserMerge (yymerger[yyp->yyrule], yyvalp, &yyval1);
-	    }
-	}
-      return yyok;
+      yyflag = yyresolveAction (yybest, yystackp, &yysval);
+      if (yyflag == yyok)
+        for (yyp = yybest->yynext; yyp != YY_NULL; yyp = yyp->yynext)
+          {
+            if (yyprec == yydprec[yyp->yyrule])
+              {
+                YYSTYPE yysval_other;
+                yyflag = yyresolveAction (yyp, yystackp, &yysval_other);
+                if (yyflag != yyok)
+                  {
+                    yydestruct ("Cleanup: discarding incompletely merged value for",
+                                yystos[yys->yylrState],
+                                &yysval);
+                    break;
+                  }
+                yyuserMerge (yymerger[yyp->yyrule], &yysval, &yysval_other);
+              }
+          }
     }
   else
-    return yyresolveAction (yybest, yystack, yyvalp, yylocp);
+    yyflag = yyresolveAction (yybest, yystackp, &yysval);
+
+  if (yyflag == yyok)
+    {
+      yys->yyresolved = yytrue;
+      yys->yysemantics.yysval = yysval;
+    }
+  else
+    yys->yysemantics.yyfirstVal = YY_NULL;
+  return yyflag;
 }
 
 static YYRESULTTAG
-yyresolveStack (yyGLRStack* yystack)
+yyresolveStack (yyGLRStack* yystackp)
 {
-  if (yystack->yysplitPoint != NULL)
+  if (yystackp->yysplitPoint != YY_NULL)
     {
       yyGLRState* yys;
       int yyn;
 
-      for (yyn = 0, yys = yystack->yytops.yystates[0];
-	   yys != yystack->yysplitPoint;
-	   yys = yys->yypred, yyn += 1)
-	continue;
-      YYCHK (yyresolveStates (yystack->yytops.yystates[0], yyn, yystack
-			     ));
+      for (yyn = 0, yys = yystackp->yytops.yystates[0];
+           yys != yystackp->yysplitPoint;
+           yys = yys->yypred, yyn += 1)
+        continue;
+      YYCHK (yyresolveStates (yystackp->yytops.yystates[0], yyn, yystackp
+                             ));
     }
   return yyok;
 }
 
 static void
-yycompressStack (yyGLRStack* yystack)
+yycompressStack (yyGLRStack* yystackp)
 {
   yyGLRState* yyp, *yyq, *yyr;
 
-  if (yystack->yytops.yysize != 1 || yystack->yysplitPoint == NULL)
+  if (yystackp->yytops.yysize != 1 || yystackp->yysplitPoint == YY_NULL)
     return;
 
-  for (yyp = yystack->yytops.yystates[0], yyq = yyp->yypred, yyr = NULL;
-       yyp != yystack->yysplitPoint;
+  for (yyp = yystackp->yytops.yystates[0], yyq = yyp->yypred, yyr = YY_NULL;
+       yyp != yystackp->yysplitPoint;
        yyr = yyp, yyp = yyq, yyq = yyp->yypred)
     yyp->yypred = yyr;
 
-  yystack->yyspaceLeft += yystack->yynextFree - yystack->yyitems;
-  yystack->yynextFree = ((yyGLRStackItem*) yystack->yysplitPoint) + 1;
-  yystack->yyspaceLeft -= yystack->yynextFree - yystack->yyitems;
-  yystack->yysplitPoint = NULL;
-  yystack->yylastDeleted = NULL;
+  yystackp->yyspaceLeft += yystackp->yynextFree - yystackp->yyitems;
+  yystackp->yynextFree = ((yyGLRStackItem*) yystackp->yysplitPoint) + 1;
+  yystackp->yyspaceLeft -= yystackp->yynextFree - yystackp->yyitems;
+  yystackp->yysplitPoint = YY_NULL;
+  yystackp->yylastDeleted = YY_NULL;
 
-  while (yyr != NULL)
+  while (yyr != YY_NULL)
     {
-      yystack->yynextFree->yystate = *yyr;
+      yystackp->yynextFree->yystate = *yyr;
       yyr = yyr->yypred;
-      yystack->yynextFree->yystate.yypred = & yystack->yynextFree[-1].yystate;
-      yystack->yytops.yystates[0] = &yystack->yynextFree->yystate;
-      yystack->yynextFree += 1;
-      yystack->yyspaceLeft -= 1;
+      yystackp->yynextFree->yystate.yypred = &yystackp->yynextFree[-1].yystate;
+      yystackp->yytops.yystates[0] = &yystackp->yynextFree->yystate;
+      yystackp->yynextFree += 1;
+      yystackp->yyspaceLeft -= 1;
     }
 }
 
 static YYRESULTTAG
-yyprocessOneStack (yyGLRStack* yystack, size_t yyk,
-	           size_t yyposn, YYSTYPE* yylvalp, YYLTYPE* yyllocp
-		  )
+yyprocessOneStack (yyGLRStack* yystackp, size_t yyk,
+                   size_t yyposn)
 {
   int yyaction;
   const short int* yyconflicts;
   yyRuleNum yyrule;
-  yySymbol* const yytokenp = yystack->yytokenp;
 
-  while (yystack->yytops.yystates[yyk] != NULL)
+  while (yystackp->yytops.yystates[yyk] != YY_NULL)
     {
-      yyStateNum yystate = yystack->yytops.yystates[yyk]->yylrState;
+      yyStateNum yystate = yystackp->yytops.yystates[yyk]->yylrState;
       YYDPRINTF ((stderr, "Stack %lu Entering state %d\n",
-		  (unsigned long int) yyk, yystate));
+                  (unsigned long int) yyk, yystate));
 
       YYASSERT (yystate != YYFINAL);
 
       if (yyisDefaultedState (yystate))
-	{
-	  yyrule = yydefaultAction (yystate);
-	  if (yyrule == 0)
-	    {
-	      YYDPRINTF ((stderr, "Stack %lu dies.\n",
-			  (unsigned long int) yyk));
-	      yymarkStackDeleted (yystack, yyk);
-	      return yyok;
-	    }
-	  YYCHK (yyglrReduce (yystack, yyk, yyrule, yyfalse));
-	}
+        {
+          yyrule = yydefaultAction (yystate);
+          if (yyrule == 0)
+            {
+              YYDPRINTF ((stderr, "Stack %lu dies.\n",
+                          (unsigned long int) yyk));
+              yymarkStackDeleted (yystackp, yyk);
+              return yyok;
+            }
+          YYCHK (yyglrReduce (yystackp, yyk, yyrule, yyfalse));
+        }
       else
-	{
-	  if (*yytokenp == YYEMPTY)
-	    {
-	      YYDPRINTF ((stderr, "Reading a token: "));
-	      yychar = YYLEX;
-	      *yytokenp = YYTRANSLATE (yychar);
-	      YY_SYMBOL_PRINT ("Next token is", *yytokenp, yylvalp, yyllocp);
-	    }
-	  yygetLRActions (yystate, *yytokenp, &yyaction, &yyconflicts);
+        {
+          yySymbol yytoken;
+          yystackp->yytops.yylookaheadNeeds[yyk] = yytrue;
+          if (yychar == YYEMPTY)
+            {
+              YYDPRINTF ((stderr, "Reading a token: "));
+              yychar = YYLEX;
+            }
 
-	  while (*yyconflicts != 0)
-	    {
-	      size_t yynewStack = yysplitStack (yystack, yyk);
-	      YYDPRINTF ((stderr, "Splitting off stack %lu from %lu.\n",
-			  (unsigned long int) yynewStack,
-			  (unsigned long int) yyk));
-	      YYCHK (yyglrReduce (yystack, yynewStack,
-				  *yyconflicts, yyfalse));
-	      YYCHK (yyprocessOneStack (yystack, yynewStack, yyposn,
-					yylvalp, yyllocp));
-	      yyconflicts += 1;
-	    }
+          if (yychar <= YYEOF)
+            {
+              yychar = yytoken = YYEOF;
+              YYDPRINTF ((stderr, "Now at end of input.\n"));
+            }
+          else
+            {
+              yytoken = YYTRANSLATE (yychar);
+              YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
+            }
 
-	  if (yyisShiftAction (yyaction))
-	    {
-	      YYDPRINTF ((stderr, "On stack %lu, ", (unsigned long int) yyk));
-	      YY_SYMBOL_PRINT ("shifting", *yytokenp, yylvalp, yyllocp);
-	      yyglrShift (yystack, yyk, yyaction, yyposn+1,
-			  *yylvalp, yyllocp);
-	      YYDPRINTF ((stderr, "Stack %lu now in state #%d\n",
-			  (unsigned long int) yyk,
-			  yystack->yytops.yystates[yyk]->yylrState));
-	      break;
-	    }
-	  else if (yyisErrorAction (yyaction))
-	    {
-	      YYDPRINTF ((stderr, "Stack %lu dies.\n",
-			  (unsigned long int) yyk));
-	      yymarkStackDeleted (yystack, yyk);
-	      break;
-	    }
-	  else
-	    YYCHK (yyglrReduce (yystack, yyk, -yyaction, yyfalse));
-	}
+          yygetLRActions (yystate, yytoken, &yyaction, &yyconflicts);
+
+          while (*yyconflicts != 0)
+            {
+              size_t yynewStack = yysplitStack (yystackp, yyk);
+              YYDPRINTF ((stderr, "Splitting off stack %lu from %lu.\n",
+                          (unsigned long int) yynewStack,
+                          (unsigned long int) yyk));
+              YYCHK (yyglrReduce (yystackp, yynewStack,
+                                  *yyconflicts, yyfalse));
+              YYCHK (yyprocessOneStack (yystackp, yynewStack,
+                                        yyposn));
+              yyconflicts += 1;
+            }
+
+          if (yyisShiftAction (yyaction))
+            break;
+          else if (yyisErrorAction (yyaction))
+            {
+              YYDPRINTF ((stderr, "Stack %lu dies.\n",
+                          (unsigned long int) yyk));
+              yymarkStackDeleted (yystackp, yyk);
+              break;
+            }
+          else
+            YYCHK (yyglrReduce (yystackp, yyk, -yyaction,
+                                yyfalse));
+        }
     }
   return yyok;
 }
 
-static void
-yyreportSyntaxError (yyGLRStack* yystack,
-		     YYSTYPE* yylvalp, YYLTYPE* yyllocp)
+/*ARGSUSED*/ static void
+yyreportSyntaxError (yyGLRStack* yystackp)
 {
-  /* `Unused' warnings. */
-  (void) yylvalp;
-  (void) yyllocp;
+  if (yystackp->yyerrState != 0)
+    return;
+#if ! YYERROR_VERBOSE
+  yyerror (YY_("syntax error"));
+#else
+  {
+  yySymbol yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
+  size_t yysize0 = yytnamerr (YY_NULL, yytokenName (yytoken));
+  size_t yysize = yysize0;
+  yybool yysize_overflow = yyfalse;
+  char* yymsg = YY_NULL;
+  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+  /* Internationalized format string. */
+  const char *yyformat = YY_NULL;
+  /* Arguments of yyformat. */
+  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+  /* Number of reported tokens (one for the "unexpected", one per
+     "expected").  */
+  int yycount = 0;
 
-  if (yystack->yyerrState == 0)
+  /* There are many possibilities here to consider:
+     - If this state is a consistent state with a default action, then
+       the only way this function was invoked is if the default action
+       is an error action.  In that case, don't check for expected
+       tokens because there are none.
+     - The only way there can be no lookahead present (in yychar) is if
+       this state is a consistent state with a default action.  Thus,
+       detecting the absence of a lookahead is sufficient to determine
+       that there is no unexpected or expected token to report.  In that
+       case, just report a simple "syntax error".
+     - Don't assume there isn't a lookahead just because this state is a
+       consistent state with a default action.  There might have been a
+       previous inconsistent state, consistent state with a non-default
+       action, or user semantic action that manipulated yychar.
+     - Of course, the expected token list depends on states to have
+       correct lookahead information, and it depends on the parser not
+       to perform extra reductions after fetching a lookahead from the
+       scanner and before detecting a syntax error.  Thus, state merging
+       (from LALR or IELR) and default reductions corrupt the expected
+       token list.  However, the list is correct for canonical LR with
+       one exception: it will still contain any token that will not be
+       accepted due to an error action in a later state.
+  */
+  if (yytoken != YYEMPTY)
     {
-#if YYERROR_VERBOSE
-      yySymbol* const yytokenp = yystack->yytokenp;
-      int yyn;
-      yyn = yypact[yystack->yytops.yystates[0]->yylrState];
-      if (YYPACT_NINF < yyn && yyn < YYLAST)
-	{
-	  size_t yysize0 = yytnamerr (NULL, yytokenName (*yytokenp));
-	  size_t yysize = yysize0;
-	  size_t yysize1;
-	  yybool yysize_overflow = yyfalse;
-	  char* yymsg = NULL;
-	  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
-	  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
-	  int yyx;
-	  char *yyfmt;
-	  char const *yyf;
-	  static char const yyunexpected[] = "syntax error, unexpected %s";
-	  static char const yyexpecting[] = ", expecting %s";
-	  static char const yyor[] = " or %s";
-	  char yyformat[sizeof yyunexpected
-			+ sizeof yyexpecting - 1
-			+ ((YYERROR_VERBOSE_ARGS_MAXIMUM - 2)
-			   * (sizeof yyor - 1))];
-	  char const *yyprefix = yyexpecting;
-
-	  /* Start YYX at -YYN if negative to avoid negative indexes in
-	     YYCHECK.  */
-	  int yyxbegin = yyn < 0 ? -yyn : 0;
-
-	  /* Stay within bounds of both yycheck and yytname.  */
-	  int yychecklim = YYLAST - yyn;
-	  int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-	  int yycount = 1;
-
-	  yyarg[0] = yytokenName (*yytokenp);
-	  yyfmt = yystpcpy (yyformat, yyunexpected);
-
-	  for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-	    if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
-	      {
-		if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-		  {
-		    yycount = 1;
-		    yysize = yysize0;
-		    yyformat[sizeof yyunexpected - 1] = '\0';
-		    break;
-		  }
-		yyarg[yycount++] = yytokenName (yyx);
-		yysize1 = yysize + yytnamerr (NULL, yytokenName (yyx));
-		yysize_overflow |= yysize1 < yysize;
-		yysize = yysize1;
-		yyfmt = yystpcpy (yyfmt, yyprefix);
-		yyprefix = yyor;
-	      }
-
-	  yyf = YY_(yyformat);
-	  yysize1 = yysize + strlen (yyf);
-	  yysize_overflow |= yysize1 < yysize;
-	  yysize = yysize1;
-
-	  if (!yysize_overflow)
-	    yymsg = (char *) YYMALLOC (yysize);
-
-	  if (yymsg)
-	    {
-	      char *yyp = yymsg;
-	      int yyi = 0;
-	      while ((*yyp = *yyf))
-		{
-		  if (*yyp == '%' && yyf[1] == 's' && yyi < yycount)
-		    {
-		      yyp += yytnamerr (yyp, yyarg[yyi++]);
-		      yyf += 2;
-		    }
-		  else
-		    {
-		      yyp++;
-		      yyf++;
-		    }
-		}
-	      yyerror (yymsg);
-	      YYFREE (yymsg);
-	    }
-	  else
-	    {
-	      yyerror (YY_("syntax error"));
-	      yyMemoryExhausted (yystack);
-	    }
-	}
-      else
-#endif /* YYERROR_VERBOSE */
-	yyerror (YY_("syntax error"));
-      yynerrs += 1;
+      int yyn = yypact[yystackp->yytops.yystates[0]->yylrState];
+      yyarg[yycount++] = yytokenName (yytoken);
+      if (!yypact_value_is_default (yyn))
+        {
+          /* Start YYX at -YYN if negative to avoid negative indexes in
+             YYCHECK.  In other words, skip the first -YYN actions for this
+             state because they are default actions.  */
+          int yyxbegin = yyn < 0 ? -yyn : 0;
+          /* Stay within bounds of both yycheck and yytname.  */
+          int yychecklim = YYLAST - yyn + 1;
+          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+          int yyx;
+          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
+                && !yytable_value_is_error (yytable[yyx + yyn]))
+              {
+                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+                  {
+                    yycount = 1;
+                    yysize = yysize0;
+                    break;
+                  }
+                yyarg[yycount++] = yytokenName (yyx);
+                {
+                  size_t yysz = yysize + yytnamerr (YY_NULL, yytokenName (yyx));
+                  yysize_overflow |= yysz < yysize;
+                  yysize = yysz;
+                }
+              }
+        }
     }
+
+  switch (yycount)
+    {
+#define YYCASE_(N, S)                   \
+      case N:                           \
+        yyformat = S;                   \
+      break
+      YYCASE_(0, YY_("syntax error"));
+      YYCASE_(1, YY_("syntax error, unexpected %s"));
+      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
+      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+#undef YYCASE_
+    }
+
+  {
+    size_t yysz = yysize + strlen (yyformat);
+    yysize_overflow |= yysz < yysize;
+    yysize = yysz;
+  }
+
+  if (!yysize_overflow)
+    yymsg = (char *) YYMALLOC (yysize);
+
+  if (yymsg)
+    {
+      char *yyp = yymsg;
+      int yyi = 0;
+      while ((*yyp = *yyformat))
+        {
+          if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
+            {
+              yyp += yytnamerr (yyp, yyarg[yyi++]);
+              yyformat += 2;
+            }
+          else
+            {
+              yyp++;
+              yyformat++;
+            }
+        }
+      yyerror (yymsg);
+      YYFREE (yymsg);
+    }
+  else
+    {
+      yyerror (YY_("syntax error"));
+      yyMemoryExhausted (yystackp);
+    }
+  }
+#endif /* YYERROR_VERBOSE */
+  yynerrs += 1;
 }
 
-/* Recover from a syntax error on YYSTACK, assuming that YYTOKENP,
-   YYLVALP, and YYLLOCP point to the syntactic category, semantic
-   value, and location of the look-ahead.  */
-static void
-yyrecoverSyntaxError (yyGLRStack* yystack,
-		      YYSTYPE* yylvalp,
-		      YYLTYPE* YYOPTIONAL_LOC (yyllocp)
-		      )
+/* Recover from a syntax error on *YYSTACKP, assuming that *YYSTACKP->YYTOKENP,
+   yylval, and yylloc are the syntactic category, semantic value, and location
+   of the lookahead.  */
+/*ARGSUSED*/ static void
+yyrecoverSyntaxError (yyGLRStack* yystackp)
 {
-  yySymbol* const yytokenp = yystack->yytokenp;
   size_t yyk;
   int yyj;
 
-  if (yystack->yyerrState == 3)
+  if (yystackp->yyerrState == 3)
     /* We just shifted the error token and (perhaps) took some
        reductions.  Skip tokens until we can proceed.  */
-    while (yytrue)
+    while (YYID (yytrue))
       {
-	if (*yytokenp == YYEOF)
-	  yyFail (yystack, NULL);
-	if (*yytokenp != YYEMPTY)
-	  {
-	    yydestruct ("Error: discarding",
-			*yytokenp, yylvalp);
-	  }
-	YYDPRINTF ((stderr, "Reading a token: "));
-	yychar = YYLEX;
-	*yytokenp = YYTRANSLATE (yychar);
-	YY_SYMBOL_PRINT ("Next token is", *yytokenp, yylvalp, yyllocp);
-	yyj = yypact[yystack->yytops.yystates[0]->yylrState];
-	if (yyis_pact_ninf (yyj))
-	  return;
-	yyj += *yytokenp;
-	if (yyj < 0 || YYLAST < yyj || yycheck[yyj] != *yytokenp)
-	  {
-	    if (yydefact[yystack->yytops.yystates[0]->yylrState] != 0)
-	      return;
-	  }
-	else if (yytable[yyj] != 0 && ! yyis_table_ninf (yytable[yyj]))
-	  return;
+        yySymbol yytoken;
+        if (yychar == YYEOF)
+          yyFail (yystackp, YY_NULL);
+        if (yychar != YYEMPTY)
+          {
+            yytoken = YYTRANSLATE (yychar);
+            yydestruct ("Error: discarding",
+                        yytoken, &yylval);
+          }
+        YYDPRINTF ((stderr, "Reading a token: "));
+        yychar = YYLEX;
+        if (yychar <= YYEOF)
+          {
+            yychar = yytoken = YYEOF;
+            YYDPRINTF ((stderr, "Now at end of input.\n"));
+          }
+        else
+          {
+            yytoken = YYTRANSLATE (yychar);
+            YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
+          }
+        yyj = yypact[yystackp->yytops.yystates[0]->yylrState];
+        if (yypact_value_is_default (yyj))
+          return;
+        yyj += yytoken;
+        if (yyj < 0 || YYLAST < yyj || yycheck[yyj] != yytoken)
+          {
+            if (yydefact[yystackp->yytops.yystates[0]->yylrState] != 0)
+              return;
+          }
+        else if (! yytable_value_is_error (yytable[yyj]))
+          return;
       }
 
   /* Reduce to one stack.  */
-  for (yyk = 0; yyk < yystack->yytops.yysize; yyk += 1)
-    if (yystack->yytops.yystates[yyk] != NULL)
+  for (yyk = 0; yyk < yystackp->yytops.yysize; yyk += 1)
+    if (yystackp->yytops.yystates[yyk] != YY_NULL)
       break;
-  if (yyk >= yystack->yytops.yysize)
-    yyFail (yystack, NULL);
-  for (yyk += 1; yyk < yystack->yytops.yysize; yyk += 1)
-    yymarkStackDeleted (yystack, yyk);
-  yyremoveDeletes (yystack);
-  yycompressStack (yystack);
+  if (yyk >= yystackp->yytops.yysize)
+    yyFail (yystackp, YY_NULL);
+  for (yyk += 1; yyk < yystackp->yytops.yysize; yyk += 1)
+    yymarkStackDeleted (yystackp, yyk);
+  yyremoveDeletes (yystackp);
+  yycompressStack (yystackp);
 
-  /* Now pop stack until we find a state that shifts the error token. */
-  yystack->yyerrState = 3;
-  while (yystack->yytops.yystates[0] != NULL)
+  /* Now pop stack until we find a state that shifts the error token.  */
+  yystackp->yyerrState = 3;
+  while (yystackp->yytops.yystates[0] != YY_NULL)
     {
-      yyGLRState *yys = yystack->yytops.yystates[0];
+      yyGLRState *yys = yystackp->yytops.yystates[0];
       yyj = yypact[yys->yylrState];
-      if (! yyis_pact_ninf (yyj))
-	{
-	  yyj += YYTERROR;
-	  if (0 <= yyj && yyj <= YYLAST && yycheck[yyj] == YYTERROR
-	      && yyisShiftAction (yytable[yyj]))
-	    {
-	      /* Shift the error token having adjusted its location.  */
-	      YYLTYPE yyerrloc;
-	      YY_SYMBOL_PRINT ("Shifting", yystos[yytable[yyj]],
-			       yylvalp, &yyerrloc);
-	      yyglrShift (yystack, 0, yytable[yyj],
-			  yys->yyposn, *yylvalp, &yyerrloc);
-	      yys = yystack->yytops.yystates[0];
-	      break;
-	    }
-	}
-
-      yydestroyGLRState ("Error: popping", yys);
-      yystack->yytops.yystates[0] = yys->yypred;
-      yystack->yynextFree -= 1;
-      yystack->yyspaceLeft += 1;
+      if (! yypact_value_is_default (yyj))
+        {
+          yyj += YYTERROR;
+          if (0 <= yyj && yyj <= YYLAST && yycheck[yyj] == YYTERROR
+              && yyisShiftAction (yytable[yyj]))
+            {
+              /* Shift the error token.  */
+              YY_SYMBOL_PRINT ("Shifting", yystos[yytable[yyj]],
+                               &yylval, &yyerrloc);
+              yyglrShift (yystackp, 0, yytable[yyj],
+                          yys->yyposn, &yylval);
+              yys = yystackp->yytops.yystates[0];
+              break;
+            }
+        }
+      if (yys->yypred != YY_NULL)
+        yydestroyGLRState ("Error: popping", yys);
+      yystackp->yytops.yystates[0] = yys->yypred;
+      yystackp->yynextFree -= 1;
+      yystackp->yyspaceLeft += 1;
     }
-  if (yystack->yytops.yystates[0] == NULL)
-    yyFail (yystack, NULL);
+  if (yystackp->yytops.yystates[0] == YY_NULL)
+    yyFail (yystackp, YY_NULL);
 }
 
-#define YYCHK1(YYE)							     \
-  do {									     \
-    switch (YYE) {							     \
-    case yyok:								     \
-      break;								     \
-    case yyabort:							     \
-      goto yyabortlab;							     \
-    case yyaccept:							     \
-      goto yyacceptlab;							     \
-    case yyerr:								     \
-      goto yyuser_error;						     \
-    default:								     \
-      goto yybuglab;							     \
-    }									     \
-  } while (0)
+#define YYCHK1(YYE)                                                          \
+  do {                                                                       \
+    switch (YYE) {                                                           \
+    case yyok:                                                               \
+      break;                                                                 \
+    case yyabort:                                                            \
+      goto yyabortlab;                                                       \
+    case yyaccept:                                                           \
+      goto yyacceptlab;                                                      \
+    case yyerr:                                                              \
+      goto yyuser_error;                                                     \
+    default:                                                                 \
+      goto yybuglab;                                                         \
+    }                                                                        \
+  } while (YYID (0))
 
 
 /*----------.
@@ -6037,21 +6438,16 @@ int
 yyparse (void)
 {
   int yyresult;
-  yySymbol yytoken;
   yyGLRStack yystack;
+  yyGLRStack* const yystackp = &yystack;
   size_t yyposn;
-
-
-  YYSTYPE* const yylvalp = &yylval;
-  YYLTYPE* const yyllocp = &yylloc;
 
   YYDPRINTF ((stderr, "Starting parse\n"));
 
-  yytoken = YYEMPTY;
+  yychar = YYEMPTY;
   yylval = yyval_default;
 
-
-  if (! yyinitGLRStack (&yystack, YYINITDEPTH))
+  if (! yyinitGLRStack (yystackp, YYINITDEPTH))
     goto yyexhaustedlab;
   switch (YYSETJMP (yystack.yyexception_buffer))
     {
@@ -6060,102 +6456,157 @@ yyparse (void)
     case 2: goto yyexhaustedlab;
     default: goto yybuglab;
     }
-  yystack.yytokenp = &yytoken;
-  yyglrShift (&yystack, 0, 0, 0, yylval, &yylloc);
+  yyglrShift (&yystack, 0, 0, 0, &yylval);
   yyposn = 0;
 
-  while (yytrue)
+  while (YYID (yytrue))
     {
       /* For efficiency, we have two loops, the first of which is
-	 specialized to deterministic operation (single stack, no
-	 potential ambiguity).  */
+         specialized to deterministic operation (single stack, no
+         potential ambiguity).  */
       /* Standard mode */
-      while (yytrue)
-	{
-	  yyRuleNum yyrule;
-	  int yyaction;
-	  const short int* yyconflicts;
+      while (YYID (yytrue))
+        {
+          yyRuleNum yyrule;
+          int yyaction;
+          const short int* yyconflicts;
 
-	  yyStateNum yystate = yystack.yytops.yystates[0]->yylrState;
+          yyStateNum yystate = yystack.yytops.yystates[0]->yylrState;
           YYDPRINTF ((stderr, "Entering state %d\n", yystate));
-	  if (yystate == YYFINAL)
-	    goto yyacceptlab;
-	  if (yyisDefaultedState (yystate))
-	    {
-	      yyrule = yydefaultAction (yystate);
-	      if (yyrule == 0)
-		{
+          if (yystate == YYFINAL)
+            goto yyacceptlab;
+          if (yyisDefaultedState (yystate))
+            {
+              yyrule = yydefaultAction (yystate);
+              if (yyrule == 0)
+                {
 
-		  yyreportSyntaxError (&yystack, yylvalp, yyllocp);
-		  goto yyuser_error;
-		}
-	      YYCHK1 (yyglrReduce (&yystack, 0, yyrule, yytrue));
-	    }
-	  else
-	    {
-	      if (yytoken == YYEMPTY)
-		{
-		  YYDPRINTF ((stderr, "Reading a token: "));
-		  yychar = YYLEX;
-		  yytoken = YYTRANSLATE (yychar);
-                  YY_SYMBOL_PRINT ("Next token is", yytoken, yylvalp, yyllocp);
-		}
-	      yygetLRActions (yystate, yytoken, &yyaction, &yyconflicts);
-	      if (*yyconflicts != 0)
-		break;
-	      if (yyisShiftAction (yyaction))
-		{
-		  YY_SYMBOL_PRINT ("Shifting", yytoken, yylvalp, yyllocp);
-		  if (yytoken != YYEOF)
-		    yytoken = YYEMPTY;
-		  yyposn += 1;
-		  yyglrShift (&yystack, 0, yyaction, yyposn, yylval, yyllocp);
-		  if (0 < yystack.yyerrState)
-		    yystack.yyerrState -= 1;
-		}
-	      else if (yyisErrorAction (yyaction))
-		{
+                  yyreportSyntaxError (&yystack);
+                  goto yyuser_error;
+                }
+              YYCHK1 (yyglrReduce (&yystack, 0, yyrule, yytrue));
+            }
+          else
+            {
+              yySymbol yytoken;
+              if (yychar == YYEMPTY)
+                {
+                  YYDPRINTF ((stderr, "Reading a token: "));
+                  yychar = YYLEX;
+                }
 
-		  yyreportSyntaxError (&yystack, yylvalp, yyllocp);
-		  goto yyuser_error;
-		}
-	      else
-		YYCHK1 (yyglrReduce (&yystack, 0, -yyaction, yytrue));
-	    }
-	}
+              if (yychar <= YYEOF)
+                {
+                  yychar = yytoken = YYEOF;
+                  YYDPRINTF ((stderr, "Now at end of input.\n"));
+                }
+              else
+                {
+                  yytoken = YYTRANSLATE (yychar);
+                  YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
+                }
 
-      while (yytrue)
-	{
-	  size_t yys;
-	  size_t yyn = yystack.yytops.yysize;
-	  for (yys = 0; yys < yyn; yys += 1)
-	    YYCHK1 (yyprocessOneStack (&yystack, yys, yyposn,
-				       yylvalp, yyllocp));
-	  yytoken = YYEMPTY;
-	  yyposn += 1;
-	  yyremoveDeletes (&yystack);
-	  if (yystack.yytops.yysize == 0)
-	    {
-	      yyundeleteLastStack (&yystack);
-	      if (yystack.yytops.yysize == 0)
-		yyFail (&yystack, YY_("syntax error"));
-	      YYCHK1 (yyresolveStack (&yystack));
-	      YYDPRINTF ((stderr, "Returning to deterministic operation.\n"));
+              yygetLRActions (yystate, yytoken, &yyaction, &yyconflicts);
+              if (*yyconflicts != 0)
+                break;
+              if (yyisShiftAction (yyaction))
+                {
+                  YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
+                  yychar = YYEMPTY;
+                  yyposn += 1;
+                  yyglrShift (&yystack, 0, yyaction, yyposn, &yylval);
+                  if (0 < yystack.yyerrState)
+                    yystack.yyerrState -= 1;
+                }
+              else if (yyisErrorAction (yyaction))
+                {
 
-	      yyreportSyntaxError (&yystack, yylvalp, yyllocp);
-	      goto yyuser_error;
-	    }
-	  else if (yystack.yytops.yysize == 1)
-	    {
-	      YYCHK1 (yyresolveStack (&yystack));
-	      YYDPRINTF ((stderr, "Returning to deterministic operation.\n"));
-	      yycompressStack (&yystack);
-	      break;
-	    }
-	}
+                  yyreportSyntaxError (&yystack);
+                  goto yyuser_error;
+                }
+              else
+                YYCHK1 (yyglrReduce (&yystack, 0, -yyaction, yytrue));
+            }
+        }
+
+      while (YYID (yytrue))
+        {
+          yySymbol yytoken_to_shift;
+          size_t yys;
+
+          for (yys = 0; yys < yystack.yytops.yysize; yys += 1)
+            yystackp->yytops.yylookaheadNeeds[yys] = yychar != YYEMPTY;
+
+          /* yyprocessOneStack returns one of three things:
+
+              - An error flag.  If the caller is yyprocessOneStack, it
+                immediately returns as well.  When the caller is finally
+                yyparse, it jumps to an error label via YYCHK1.
+
+              - yyok, but yyprocessOneStack has invoked yymarkStackDeleted
+                (&yystack, yys), which sets the top state of yys to NULL.  Thus,
+                yyparse's following invocation of yyremoveDeletes will remove
+                the stack.
+
+              - yyok, when ready to shift a token.
+
+             Except in the first case, yyparse will invoke yyremoveDeletes and
+             then shift the next token onto all remaining stacks.  This
+             synchronization of the shift (that is, after all preceding
+             reductions on all stacks) helps prevent double destructor calls
+             on yylval in the event of memory exhaustion.  */
+
+          for (yys = 0; yys < yystack.yytops.yysize; yys += 1)
+            YYCHK1 (yyprocessOneStack (&yystack, yys, yyposn));
+          yyremoveDeletes (&yystack);
+          if (yystack.yytops.yysize == 0)
+            {
+              yyundeleteLastStack (&yystack);
+              if (yystack.yytops.yysize == 0)
+                yyFail (&yystack, YY_("syntax error"));
+              YYCHK1 (yyresolveStack (&yystack));
+              YYDPRINTF ((stderr, "Returning to deterministic operation.\n"));
+
+              yyreportSyntaxError (&yystack);
+              goto yyuser_error;
+            }
+
+          /* If any yyglrShift call fails, it will fail after shifting.  Thus,
+             a copy of yylval will already be on stack 0 in the event of a
+             failure in the following loop.  Thus, yychar is set to YYEMPTY
+             before the loop to make sure the user destructor for yylval isn't
+             called twice.  */
+          yytoken_to_shift = YYTRANSLATE (yychar);
+          yychar = YYEMPTY;
+          yyposn += 1;
+          for (yys = 0; yys < yystack.yytops.yysize; yys += 1)
+            {
+              int yyaction;
+              const short int* yyconflicts;
+              yyStateNum yystate = yystack.yytops.yystates[yys]->yylrState;
+              yygetLRActions (yystate, yytoken_to_shift, &yyaction,
+                              &yyconflicts);
+              /* Note that yyconflicts were handled by yyprocessOneStack.  */
+              YYDPRINTF ((stderr, "On stack %lu, ", (unsigned long int) yys));
+              YY_SYMBOL_PRINT ("shifting", yytoken_to_shift, &yylval, &yylloc);
+              yyglrShift (&yystack, yys, yyaction, yyposn,
+                          &yylval);
+              YYDPRINTF ((stderr, "Stack %lu now in state #%d\n",
+                          (unsigned long int) yys,
+                          yystack.yytops.yystates[yys]->yylrState));
+            }
+
+          if (yystack.yytops.yysize == 1)
+            {
+              YYCHK1 (yyresolveStack (&yystack));
+              YYDPRINTF ((stderr, "Returning to deterministic operation.\n"));
+              yycompressStack (&yystack);
+              break;
+            }
+        }
       continue;
     yyuser_error:
-      yyrecoverSyntaxError (&yystack, yylvalp, yyllocp);
+      yyrecoverSyntaxError (&yystack);
       yyposn = yystack.yytops.yystates[0]->yyposn;
     }
 
@@ -6165,7 +6616,7 @@ yyparse (void)
 
  yybuglab:
   YYASSERT (yyfalse);
-  /* Fall through.  */
+  goto yyabortlab;
 
  yyabortlab:
   yyresult = 1;
@@ -6174,12 +6625,12 @@ yyparse (void)
  yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  /* Fall through.  */
+  goto yyreturn;
 
  yyreturn:
-  if (yytoken != YYEOF && yytoken != YYEMPTY)
+  if (yychar != YYEMPTY)
     yydestruct ("Cleanup: discarding lookahead",
-                yytoken, yylvalp);
+                YYTRANSLATE (yychar), &yylval);
 
   /* If the stack is well-formed, pop the stack until it is empty,
      destroying its entries as we go.  But free the stack regardless
@@ -6188,25 +6639,36 @@ yyparse (void)
     {
       yyGLRState** yystates = yystack.yytops.yystates;
       if (yystates)
-	while (yystates[0])
-	  {
-	    yyGLRState *yys = yystates[0];
-	    yydestroyGLRState ("Cleanup: popping", yys);
-	    yystates[0] = yys->yypred;
-	    yystack.yynextFree -= 1;
-	    yystack.yyspaceLeft += 1;
-	  }
+        {
+          size_t yysize = yystack.yytops.yysize;
+          size_t yyk;
+          for (yyk = 0; yyk < yysize; yyk += 1)
+            if (yystates[yyk])
+              {
+                while (yystates[yyk])
+                  {
+                    yyGLRState *yys = yystates[yyk];
+                  if (yys->yypred != YY_NULL)
+                      yydestroyGLRState ("Cleanup: popping", yys);
+                    yystates[yyk] = yys->yypred;
+                    yystack.yynextFree -= 1;
+                    yystack.yyspaceLeft += 1;
+                  }
+                break;
+              }
+        }
       yyfreeGLRStack (&yystack);
     }
 
-  return yyresult;
+  /* Make sure YYID is used.  */
+  return YYID (yyresult);
 }
 
 /* DEBUGGING ONLY */
-#ifdef YYDEBUG
-static void yypstack (yyGLRStack* yystack, size_t yyk)
+#if YYDEBUG
+static void yypstack (yyGLRStack* yystackp, size_t yyk)
   __attribute__ ((__unused__));
-static void yypdumpstack (yyGLRStack* yystack) __attribute__ ((__unused__));
+static void yypdumpstack (yyGLRStack* yystackp) __attribute__ ((__unused__));
 
 static void
 yy_yypstack (yyGLRState* yys)
@@ -6214,68 +6676,70 @@ yy_yypstack (yyGLRState* yys)
   if (yys->yypred)
     {
       yy_yypstack (yys->yypred);
-      fprintf (stderr, " -> ");
+      YYFPRINTF (stderr, " -> ");
     }
-  fprintf (stderr, "%d@%lu", yys->yylrState, (unsigned long int) yys->yyposn);
+  YYFPRINTF (stderr, "%d@%lu", yys->yylrState,
+             (unsigned long int) yys->yyposn);
 }
 
 static void
 yypstates (yyGLRState* yyst)
 {
-  if (yyst == NULL)
-    fprintf (stderr, "<null>");
+  if (yyst == YY_NULL)
+    YYFPRINTF (stderr, "<null>");
   else
     yy_yypstack (yyst);
-  fprintf (stderr, "\n");
+  YYFPRINTF (stderr, "\n");
 }
 
 static void
-yypstack (yyGLRStack* yystack, size_t yyk)
+yypstack (yyGLRStack* yystackp, size_t yyk)
 {
-  yypstates (yystack->yytops.yystates[yyk]);
+  yypstates (yystackp->yytops.yystates[yyk]);
 }
 
-#define YYINDEX(YYX)							     \
-    ((YYX) == NULL ? -1 : (yyGLRStackItem*) (YYX) - yystack->yyitems)
+#define YYINDEX(YYX)                                                         \
+    ((YYX) == YY_NULL ? -1 : (yyGLRStackItem*) (YYX) - yystackp->yyitems)
 
 
 static void
-yypdumpstack (yyGLRStack* yystack)
+yypdumpstack (yyGLRStack* yystackp)
 {
   yyGLRStackItem* yyp;
   size_t yyi;
-  for (yyp = yystack->yyitems; yyp < yystack->yynextFree; yyp += 1)
+  for (yyp = yystackp->yyitems; yyp < yystackp->yynextFree; yyp += 1)
     {
-      fprintf (stderr, "%3lu. ", (unsigned long int) (yyp - yystack->yyitems));
+      YYFPRINTF (stderr, "%3lu. ",
+                 (unsigned long int) (yyp - yystackp->yyitems));
       if (*(yybool *) yyp)
-	{
-	  fprintf (stderr, "Res: %d, LR State: %d, posn: %lu, pred: %ld",
-		   yyp->yystate.yyresolved, yyp->yystate.yylrState,
-		   (unsigned long int) yyp->yystate.yyposn,
-		   (long int) YYINDEX (yyp->yystate.yypred));
-	  if (! yyp->yystate.yyresolved)
-	    fprintf (stderr, ", firstVal: %ld",
-		     (long int) YYINDEX (yyp->yystate.yysemantics.yyfirstVal));
-	}
+        {
+          YYFPRINTF (stderr, "Res: %d, LR State: %d, posn: %lu, pred: %ld",
+                     yyp->yystate.yyresolved, yyp->yystate.yylrState,
+                     (unsigned long int) yyp->yystate.yyposn,
+                     (long int) YYINDEX (yyp->yystate.yypred));
+          if (! yyp->yystate.yyresolved)
+            YYFPRINTF (stderr, ", firstVal: %ld",
+                       (long int) YYINDEX (yyp->yystate
+                                             .yysemantics.yyfirstVal));
+        }
       else
-	{
-	  fprintf (stderr, "Option. rule: %d, state: %ld, next: %ld",
-		   yyp->yyoption.yyrule,
-		   (long int) YYINDEX (yyp->yyoption.yystate),
-		   (long int) YYINDEX (yyp->yyoption.yynext));
-	}
-      fprintf (stderr, "\n");
+        {
+          YYFPRINTF (stderr, "Option. rule: %d, state: %ld, next: %ld",
+                     yyp->yyoption.yyrule - 1,
+                     (long int) YYINDEX (yyp->yyoption.yystate),
+                     (long int) YYINDEX (yyp->yyoption.yynext));
+        }
+      YYFPRINTF (stderr, "\n");
     }
-  fprintf (stderr, "Tops:");
-  for (yyi = 0; yyi < yystack->yytops.yysize; yyi += 1)
-    fprintf (stderr, "%lu: %ld; ", (unsigned long int) yyi,
-	     (long int) YYINDEX (yystack->yytops.yystates[yyi]));
-  fprintf (stderr, "\n");
+  YYFPRINTF (stderr, "Tops:");
+  for (yyi = 0; yyi < yystackp->yytops.yysize; yyi += 1)
+    YYFPRINTF (stderr, "%lu: %ld; ", (unsigned long int) yyi,
+               (long int) YYINDEX (yystackp->yytops.yystates[yyi]));
+  YYFPRINTF (stderr, "\n");
 }
 #endif
-
-
-#line 1428 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+/* Line 2575 of glr.c  */
+#line 1446 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
 
 void yyerror(const char *s) 
 {

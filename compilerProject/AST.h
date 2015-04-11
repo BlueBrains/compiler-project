@@ -9,11 +9,20 @@
 #include"AssignmentNode.h"
 #include"ValueNode.h"
 #include"functionNode.h"
+#include"CallVariableNode.h"
+#include"CallTypeNode.h"
+#include"callFunctionNode.h"
 char* arr[] =
-{ "rootNode","valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode", "moreThanNode", "lessThanNode", "exprListNode",
+{ "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
+
+//statements
 "ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
-"functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode",
-"idTypeNode", "intTypeNode", "stringTypeNode","classNode" };
+
+//function
+"functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
+
+//type: Here AST is used as temporoy data structure to hold type to upper grammars
+"idTypeNode", "intTypeNode", "stringTypeNode", "classNode", "TypeCall", "VariableCall" };
 
 class AST
 {
@@ -59,7 +68,15 @@ public:
 
 	ValueNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
 	{
+		
+		cout << "value is amer " << (*(int*)v1) << endl;
 		ValueNode* temp = new ValueNode(v1, t, son, next);
+		return temp;
+	}
+
+	CallVariableNode * createCallVarNode(string id, Node * son, Node* next)
+	{
+		CallVariableNode *temp = new CallVariableNode(id, NULL, son, next);
 		return temp;
 	}
 	
@@ -95,8 +112,15 @@ public:
 			else if (arr[tn->type] == "valueNode")
 			{
 				ValueNode* v = static_cast<ValueNode*>(tn);
-				cout << "value is " << v->get_value()<<endl;
+				if (v->get_types() == 0)
+				{
+					void * g = v->get_value();
+					int x = *((int*)(&g));
+					cout << "value is " << x << endl;
+				}
 			}
+				
+
 			print(tn->Son, lvl + 1);
 			print(tn->Next, lvl + 1);
 		}

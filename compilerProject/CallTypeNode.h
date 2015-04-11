@@ -6,7 +6,7 @@
 #include"ST\Function.h"
 #include<string>
 using namespace std;
-class CallNode :public Node
+class CallTypeNode :public Node
 {
 private:
 	string ID;
@@ -15,11 +15,11 @@ private:
 	Function* f = NULL;
 public:
 	
-	CallNode() :ID(NULL), Node(NULL, NULL, idNode)
+	CallTypeNode() :ID(NULL), Node(NULL, NULL, TypeCall)
 	{
 
 	}
-	CallNode(string id,vector<string>arg, Node* son, Node*next) :ID(id),argument(arg), Node(son, next, idNode)
+	CallTypeNode(string id, vector<string>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next, TypeCall)
 	{
 
 	}
@@ -31,7 +31,7 @@ public:
 	{
 		return t;
 	}
-	void detFunction(Function* f)
+	void getFunction(Function* f)
 	{
 		this->f = f;
 	}

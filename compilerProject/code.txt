@@ -1,16 +1,26 @@
 class u:
 	def final coco():
+		x=3+3;
 	end
 	def soso():
 	end
 end
+
 class C(v):
+
 	def coco1(self):
+
 	end
 end
+
 class k:
-def class d:
-end
-def class e:
-end
+
+	def class d:
+
+	end
+
+	def class e:
+
+	end
+
 end

@@ -23,6 +23,7 @@
     <None Include="..\yacc.output" />
     <None Include="khaled.y" />
     <None Include="..\yaccFinal.y" />
+    <None Include="..\yaccTemp.y" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
@@ -153,11 +154,20 @@
     <ClInclude Include="ValueNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CallNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AssignmentNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CallVariableNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallTypeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="callFunctionNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="code.txt" />
   </ItemGroup>
 </Project>

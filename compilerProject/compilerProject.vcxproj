@@ -94,6 +94,7 @@
     <None Include="..\yacc.output" />
     <None Include="..\yacc.y" />
     <None Include="..\yaccFinal.y" />
+    <None Include="..\yaccTemp.y" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +125,9 @@
     <ClInclude Include="..\yacc.hpp" />
     <ClInclude Include="AssignmentNode.h" />
     <ClInclude Include="AST.h" />
-    <ClInclude Include="CallNode.h" />
+    <ClInclude Include="callFunctionNode.h" />
+    <ClInclude Include="CallTypeNode.h" />
+    <ClInclude Include="CallVariableNode.h" />
     <ClInclude Include="ClassNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="expressionNode.h" />
@@ -143,6 +146,9 @@
     <ClInclude Include="ST\Variable.h" />
     <ClInclude Include="ValueNode.h" />
     <ClInclude Include="WhileNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="code.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

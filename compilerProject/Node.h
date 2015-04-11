@@ -8,10 +8,10 @@ enum NodeType {//Expressions
 	ifNode, stmtListNode, whileNode, declrationStmtNode, expressionNode,
 
 	//function
-	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,
+	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,FunctionCall,
 
 	//type: Here AST is used as temporoy data structure to hold type to upper grammars
-	idTypeNode, intTypeNode, stringTypeNode,classNode
+	idTypeNode, intTypeNode, stringTypeNode,classNode,TypeCall,VariableCall
 };
 class Node
 {
