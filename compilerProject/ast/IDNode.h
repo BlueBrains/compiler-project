@@ -2,7 +2,7 @@
 #ifndef __IDNODE__
 #define __IDNODE__
 #include"Node.h"
-#include"ST\Variable.h"
+#include"..\ST\Variable.h"
 class IDNode :public Node
 {
 private:

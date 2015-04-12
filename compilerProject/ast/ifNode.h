@@ -10,7 +10,7 @@ protected:
 
 public:
 	static	int 	if_label;
-	IfNode(Node* condition, Node* scoop, Node* son, Node* next) :Node(son,next,ifNode), _condtion(condition),_scoop(scoop)
+	IfNode(Node* son, Node* next, Node* condition, Node* scoop) :Node(son,next,ifNode), _condtion(condition),_scoop(scoop)
 	{
 
 

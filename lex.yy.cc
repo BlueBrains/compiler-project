@@ -24,7 +24,6 @@
 #include <unistd.h>
 #include <iostream>
 using namespace std;
-
 /* Use prototypes in function declarations. */
 #define YY_USE_PROTOS
 
@@ -648,7 +647,9 @@ YY_DECL
 
 #line 40 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 
-#line 651 "lex.yy.cc"
+				//<<EOF>>     {return ENDMARKER; 
+				//}
+#line 653 "lex.yy.cc"
 
 	if ( yy_init )
 		{
@@ -731,14 +732,6 @@ do_action:	/* This label is used only to access EOF actions. */
 			yy_current_state = yy_last_accepting_state;
 			goto yy_find_action;
 
-case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(multilinecomment):
-case YY_STATE_EOF(import):
-case YY_STATE_EOF(String):
-#line 41 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
-{return ENDMARKER; 
-				}
-	YY_BREAK
 case 1:
 YY_RULE_SETUP
 #line 43 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
@@ -1073,7 +1066,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	EXPECT;
+				return	EXCEPT;
 			}
 	YY_BREAK
 case 27:
@@ -2023,7 +2016,12 @@ YY_RULE_SETUP
 #line 913 "C:\\Users\\Molham\\documents\\visual studio 2012\\Projects\\compilerProject\\lex.l"
 ECHO;
 	YY_BREAK
-#line 2026 "lex.yy.cc"
+#line 2020 "lex.yy.cc"
+case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(multilinecomment):
+case YY_STATE_EOF(import):
+case YY_STATE_EOF(String):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{

@@ -1,12 +1,13 @@
 #pragma once
 #ifndef __WHILENODE__
 #define __WHILENODE__
-#include"Node.h"
-#include"ST\Type.h"
+#include"ast\Node.h"
+#include"..\ST\Type.h"
 class WhileNode :public Node
 {
 private:
 	Node* conditionNode;
+	Node* _scoop;
 public:
 	Node* get_condition()
 	{
@@ -16,7 +17,7 @@ public:
 	{
 
 	}
-	WhileNode(Node* t, Node* son, Node*next) :conditionNode(t), Node(son, next, whileNode)
+	WhileNode(Node* son, Node* next, Node* condition, Node* scoop) :conditionNode(condition), _scoop(scoop), Node(son, next, whileNode)
 	{
 
 	}

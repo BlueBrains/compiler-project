@@ -74,9 +74,6 @@
     <ClCompile Include="myvector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="functionNode.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -115,9 +112,6 @@
     <ClInclude Include="ST\MyVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Error.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\ErrorRevovery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -127,46 +121,64 @@
     <ClInclude Include="..\Streams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SyntaxError.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="myvector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassNode.h">
+    <ClInclude Include="ast\AssignmentNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="ast\callFunctionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WhileNode.h">
+    <ClInclude Include="ast\CallTypeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="expressionNode.h">
+    <ClInclude Include="ast\CallVariableNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDNode.h">
+    <ClInclude Include="ast\ClassNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ValueNode.h">
+    <ClInclude Include="ast\ElseIfNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AssignmentNode.h">
+    <ClInclude Include="ast\ElseNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CallVariableNode.h">
+    <ClInclude Include="ast\expressionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CallTypeNode.h">
+    <ClInclude Include="ast\functionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="callFunctionNode.h">
+    <ClInclude Include="ast\IDNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ifNode.h">
+    <ClInclude Include="ast\ifNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\ValueNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\WhileNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\ForNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\TryNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\ExceptNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\FinallyNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

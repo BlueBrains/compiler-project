@@ -1,12 +1,24 @@
-def fun():
-end
-class :
+class u:
 	def final coco():
-		if 1 > 2:
-			print x;
+		if 1 > 2:		
+		end
+		elif 1<2:
+		end
+		for x in [1,3,4,5]:
+			if x>2:
+			end
 		end
 	end
 	def soso():
+		try:
+			x = x + 1;
+		end
+		except t:
+		end
+		except:
+		end
+		finally:
+		end
 	end
 end
 

@@ -95,7 +95,7 @@
 %token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
-%token	EXPECT WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
+%token	WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
 %token	RAISE PRIVATE PUBLIC PROTECTED YIELD MORE_THAN_2 STRING NONE IS DIV_2 
 %token	LESS_OR_EQUAL MORE_OR_EQUAL EXCEPT PASS CHAR_VALUE BREAK CONTINUE
 
@@ -112,7 +112,7 @@
 
 
 
-file_input: program ENDMARKER {Streams::verbose() <<"file_input: program ENDMARKER\n";
+file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 										p->check_inhertance_list();
 						if(!p->errRecovery->errQ->isEmpty())
 								p->errRecovery->printErrQueue();
@@ -454,12 +454,20 @@ nonlocal_stmt:	NONLOCAL NAME {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME
 				|NONLOCAL NAME comma_name_seq {Streams::verbose() <<"nonlocal_stmt: NONLOCAL NAME comma_name_seq \n";}
 				;
 
-compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
+compound_stmt:  if_stmt {
+							Streams::verbose() <<"compound_stmt:  if_stmt \n";
+							$<tn>$=$<tn>1;
+						}
 				| while_stmt {Streams::verbose() <<"compound_stmt: while_stmt\n";}
-				| for_stmt {Streams::verbose() <<"compound_stmt: for_stmt\n";}
-				| try_stmt {Streams::verbose() <<"compound_stmt: try_stmt\n";}
+				| for_stmt {
+								Streams::verbose() <<"compound_stmt: for_stmt\n";
+								$<tn>$=$<tn>1;
+						   }
+				| try_stmt {
+								Streams::verbose() <<"compound_stmt: try_stmt\n";
+								$<tn>$=$<tn>1;
+						   }
 				| with_stmt {Streams::verbose() <<"compound_stmt: with_stmt\n";}
-				//| DEF expr_stmt ';' {Streams::verbose() <<"compound_stmt: DEF expr_stmt ';'\n";}
 				| funcdef  {	
 								Streams::verbose() <<"compound_stmt: funcdef\n";
 								$<tn>$=$<tn>1;
@@ -470,35 +478,107 @@ compound_stmt:  if_stmt {Streams::verbose() <<"compound_stmt:  if_stmt \n";}
 								}
 				;
 
-elif_seq :  ELIF test ':' suite {Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";}
-			|elif_seq ELIF test ':' suite {Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";}
+elif_seq :  ELIF test ':' suite {
+									Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";
+									$<tn>$ = ast->createElseIfNode($<tn>4,NULL,$<tn>2,NULL);								
+								}
+			|elif_seq ELIF test ':' suite {
+											Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";
+											Node* elseIfNode = $<tn>1;
+											elseIfNode->Next = ast->createElseIfNode($<tn>5,NULL,$<tn>3,NULL);
+											$<tn>$ = elseIfNode;											
+										  }
 			;
 				
 if_stmt:	IF test ':' suite {
 								Streams::verbose() <<"if_stmt:	IF test ':' suite \n";
-								$<tn>$ = ast->createIfNode($<tn>4,null,$<tn>2,null);
+								$<tn>$ = ast->createIfNode($<tn>4,NULL,$<tn>2,NULL);
 							  }
-			|IF test ':' suite elif_seq {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";}
-			|IF test ':' suite ELSE ':' suite {Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";}
-			|IF test ':' suite elif_seq ELSE ':' suite {Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";}
+			|IF test ':' suite elif_seq {
+											Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";
+											$<tn>$ = ast->createIfNode($<tn>4, $<tn>5, $<tn>2, NULL);
+										}
+			|IF test ':' suite ELSE ':' suite {
+												Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";
+												Node* elseNode = ast->createElseNode($<tn>7,NULL,NULL);
+												$<tn>$ = ast->createIfNode($<tn>4,elseNode,$<tn>2,NULL);
+											  }
+			|IF test ':' suite elif_seq ELSE ':' suite {
+														Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";
+														Node* elseIfNode = $<tn>5;
+														Node* elseNode = ast->createElseNode($<tn>8,NULL,NULL);
+														elseIfNode->Next = elseNode;
+														$<tn>$ = ast->createIfNode($<tn>4,elseIfNode,$<tn>2,NULL);
+													   }
 			;
 
-while_stmt: WHILE test ':' suite {Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";}
-			|WHILE test ':' suite ELSE ':' suite {Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";}
+while_stmt: WHILE test ':' suite {
+									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
+									$<tn>$ = ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL);
+								 }
+			|WHILE test ':' suite ELSE ':' suite {
+													Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";
+													Node* whileNode= ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL);
+													whileNode->Next = ast->createElseNode($<tn>7,NULL,NULL);
+													$<tn>$ = whileNode;
+												 }
 			;
 
-for_stmt:   FOR exprlist IN testlist ':' suite {Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";}
-			|FOR exprlist IN testlist ':' suite ELSE ':' suite {Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";}
+for_stmt:   FOR exprlist IN testlist ':' suite {
+												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";
+												$<tn>$ = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL);
+											   }
+			|FOR exprlist IN testlist ':' suite ELSE ':' suite {
+																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";
+																Node* forNode = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL);
+																forNode->Next = ast->createElseNode($<tn>9, NULL, NULL);
+																$<tn>$ = forNode;															
+															   }
 			;
 
-try_stmt:   TRY ':' suite try_except_cla_seq {Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";}
-			|TRY ':' suite try_except_cla_seq ELSE ':' suite {Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";}
-			|TRY ':' suite try_except_cla_seq FINALLY ':' suite {Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";}
-			|TRY ':' suite FINALLY ':' suite {Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";}
+try_stmt:   TRY ':' suite try_except_cla_seq {
+												Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";
+												$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+											 }
+			|TRY ':' suite try_except_cla_seq ELSE ':' suite {
+																Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";
+																Node* except = $<tn>4;
+																while(except->Next!=NULL)
+																	except = except->Next;
+																except->Next = ast->createElseNode($<tn>7, NULL, NULL);
+																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+															 }
+			|TRY ':' suite try_except_cla_seq FINALLY ':' suite {
+																	Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";
+																Node* except = $<tn>4;
+																while(except->Next!=NULL)
+																	except = except->Next;
+																except->Next = ast->createFinallyNode($<tn>7, NULL, NULL);
+																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+																}
+			|TRY ':' suite FINALLY ':' suite {
+												Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";
+												Node* finally = ast->createFinallyNode($<tn>6, NULL, NULL);
+												$<tn>$ = ast->createTryNode($<tn>3, finally, NULL);
+											 }
 			;
 
-try_except_cla_seq: except_clause ':' suite	{Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";}
-					|try_except_cla_seq except_clause ':' suite {Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";}
+try_except_cla_seq: except_clause ':' suite	{
+												Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";
+												Node* except = $<tn>1;
+												except->Son = $<tn>3;
+												$<tn>$ = except;
+											}
+					|try_except_cla_seq except_clause ':' suite {
+																	Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";
+																	Node* except_a = $<tn>1;
+																	Node* except_b = $<tn>2;
+																	while(except_a->Next!=NULL)
+																		except_a = except_a->Next;
+																	except_a->Next = except_b;
+																	except_b->Son = $<tn>4;
+																	$<tn>$ = $<tn>1;
+																}
 					;
 
 with_seq:	',' with_item {Streams::verbose() <<"with_seq:	',' with_item \n";}
@@ -513,16 +593,31 @@ with_item:  test {Streams::verbose() <<" with_item:  test\n";}
 			|test AS expr {Streams::verbose() <<"with_item: test AS expr\n";}
 			;
 
-except_clause:  EXCEPT {Streams::verbose() <<"except_clause:  EXCEPT \n";}
-				|EXCEPT test {Streams::verbose() <<"except_clause:  EXCEPT test\n";}
+except_clause:  EXCEPT {
+						Streams::verbose() <<"except_clause:  EXCEPT \n";
+						$<tn>$ = ast->createExceptNode(NULL, NULL, NULL, NULL);
+					   }
+				|EXCEPT test {
+								Streams::verbose() <<"except_clause:  EXCEPT test\n";
+								$<tn>$ = ast->createExceptNode(NULL, NULL, $<tn>2, NULL);
+							 }
 				|EXCEPT test AS NAME {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";}
 				;
 
-list_stmt: stmt {	$<tn>$=$<tn>1;	Streams:: verbose() <<"list_stmt : stmt\n";}
-			|stmt list_stmt {Streams:: verbose() <<"list_stmt : stmt list_stmt\n";
-						ast->addNext($<tn>1,$<tn>2);
-						$<tn>$=$<tn>1;	
-			}
+list_stmt: stmt {	
+						$<tn>$=$<tn>1;	Streams:: verbose() <<"list_stmt : stmt\n";
+				}
+			|list_stmt stmt {
+								Streams:: verbose() <<"list_stmt : stmt list_stmt\n";
+								Node* node = $<tn>1;
+								if(node->Next!=NULL){
+									while(node->Next != NULL)
+										node = node->Next;
+									ast->addNext(node,$<tn>2);
+								}else
+									ast->addNext($<tn>1,$<tn>2);
+								$<tn>$=$<tn>1;	
+							}
 			;
 
 suite:	list_stmt END {

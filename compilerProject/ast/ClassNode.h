@@ -2,7 +2,7 @@
 #ifndef __CLASSNODE__
 #define __CLASSNODE__
 #include"Node.h"
-#include"ST\Type.h"
+#include"..\ST\Type.h"
 class ClassNode:public Node
 {
 private:

@@ -1,23 +1,30 @@
 #pragma once
 #ifndef __AST__
 #define __AST__
-#include"Node.h"
-#include"ClassNode.h"
-#include"WhileNode.h"
-#include"expressionNode.h"
-#include"IDNode.h"
-#include"AssignmentNode.h"
-#include"ValueNode.h"
-#include"functionNode.h"
-#include"CallVariableNode.h"
-#include"CallTypeNode.h"
-#include"callFunctionNode.h"
-#include"ifNode.h"
+#include"ast\Node.h"
+#include"ast\ClassNode.h"
+#include"ast\expressionNode.h"
+#include"ast\IDNode.h"
+#include"ast\AssignmentNode.h"
+#include"ast\ValueNode.h"
+#include"ast\functionNode.h"
+#include"ast\CallVariableNode.h"
+#include"ast\CallTypeNode.h"
+#include"ast\callFunctionNode.h"
+#include"ast\WhileNode.h"
+#include"ast\ifNode.h"
+#include"ast\ElseIfNode.h"
+#include"ast\ElseNode.h"
+#include"ast\ForNode.h"
+#include"ast\TryNode.h"
+#include"ast\ExceptNode.h"
+#include"ast\FinallyNode.h"
+
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
 //statements
-"ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
+"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode",
 
 //function
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
@@ -46,9 +53,29 @@ public:
 		FunctionNode* temp = new FunctionNode(f, son, next);
 		return temp;
 	}
-	WhileNode * createWhileNode(Node* cond, Node * son, Node* next)
+	WhileNode * createWhileNode(Node * son, Node* next, Node* cond, Node* scoop)
 	{
-		WhileNode* temp = new WhileNode(cond, son, next);
+		WhileNode* temp = new WhileNode(son, next, cond, scoop);
+		return temp;
+	}
+	ForNode* createForNode(Node * son, Node* next, Node* expr, Node* range, Node* scoop)
+	{
+		ForNode* temp = new ForNode(son, next, expr, range, scoop);
+		return temp;
+	}
+	TryNode* createTryNode(Node * son, Node* next, Node* scoop)
+	{
+		TryNode* temp = new TryNode(son, next, scoop);
+		return temp;
+	}
+	ExceptNode* createExceptNode(Node * son, Node* next, Node* exception, Node* scoop)
+	{
+		ExceptNode* temp = new ExceptNode(son, next, exception, scoop);
+		return temp;
+	}
+	FinallyNode* createFinallyNode(Node* son, Node* next, Node* scoop)
+	{
+		FinallyNode* temp = new FinallyNode(son, next, scoop);
 		return temp;
 	}
 	ExpressionNode * createExprNode(Node * son, Node* next,operand op)
@@ -82,7 +109,18 @@ public:
 	}
 	IfNode* createIfNode(Node* son, Node* next, Node* condition, Node* scoop)
 	{
-		IfNode* temp = new IfNode(condition, scoop, son, next);
+		IfNode* temp = new IfNode(son, next, condition, scoop);
+		return temp;
+	}
+	ElseIfNode* createElseIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	{
+		ElseIfNode* temp = new ElseIfNode(son, next, condition, scoop);
+		return temp;
+	}
+	ElseNode* createElseNode(Node* son, Node* next, Node* scoop)
+	{
+		ElseNode* temp = new ElseNode(son, next, scoop);
+		return temp;
 	}
 	Node * addNext(Node* base,Node* next)
 	{
@@ -122,17 +160,53 @@ public:
 					int x = *((int*)(&g));
 					cout << "value is " << x << endl;
 				}
-			}
-				
-
+			}				
 			else if (arr[tn->type] == "ifNode")
 			{
 				IfNode* test = static_cast<IfNode*>(tn);
 				cout << "IF NODE !" << endl;
 
 			}
+			else if (arr[tn->type] == "elseIfNode")
+			{
+				ElseIfNode* test = static_cast<ElseIfNode*>(tn);
+				cout << "ElseIf NODE !" << endl;
+
+			}
+			else if (arr[tn->type] == "elseNode")
+			{
+				ElseNode* test = static_cast<ElseNode*>(tn);
+				cout << "ELSE NODE !" << endl;
+
+			}
+			else if (arr[tn->type] == "whileNode")
+			{
+				WhileNode* test = static_cast<WhileNode*>(tn);
+				cout << "WHILE NODE !" << endl;
+
+			}
+			else if (arr[tn->type] == "forNode")
+			{
+				ForNode* test = static_cast<ForNode*>(tn);
+				cout << "FOR NODE !" << endl;
+			}
+			else if (arr[tn->type] == "tryNode")
+			{
+				TryNode* test = static_cast<TryNode*>(tn);
+				cout << "TRY NODE !" << endl;
+			}
+			else if (arr[tn->type] == "exceptNode")
+			{
+				ExceptNode* test = static_cast<ExceptNode*>(tn);
+				cout << "Except NODE !" << endl;
+			}
+			else if (arr[tn->type] == "finallyNode")
+			{
+				FinallyNode* test = static_cast<FinallyNode*>(tn);
+				cout << "Finally NODE !" << endl;
+			}
 			print(tn->Son, lvl + 1);
-			print(tn->Next, lvl + 1);
+			print(tn->Next, lvl);
 		}
 	}
 };
