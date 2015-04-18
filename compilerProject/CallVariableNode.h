@@ -13,13 +13,30 @@ public:
 	{
 		return variable_node;
 	}
-	CallVariableNode() :variable_node(NULL), Node(NULL, NULL, VariableCall)
+	string getID()
+	{
+		return ID;
+	}
+	CallVariableNode() :variable_node(NULL), Node(NULL, NULL)
 	{
 
 	}
-	CallVariableNode(string id, Variable* v, Node* son, Node*next) :ID(id), variable_node(v), Node(son, next, VariableCall)
+	CallVariableNode(string id, Variable* v, Node* son, Node*next) :ID(id), variable_node(v), Node(son, next)
 	{
 
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << "  " << ID;
+		if (variable_node)
+		{
+			cout << "   variable name "<<variable_node->get_name();
+		}
+		cout << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "CallVariableNode";
 	}
 };
 #endif

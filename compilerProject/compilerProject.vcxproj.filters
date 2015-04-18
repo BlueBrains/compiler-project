@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ST">
       <UniqueIdentifier>{140fc3ad-468c-495b-b571-9e587d90225c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AST">
+      <UniqueIdentifier>{c07e0904-1ed8-429d-823e-004df9547598}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\lex.l" />
@@ -75,7 +78,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="functionNode.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AST</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,35 +139,44 @@
     <ClInclude Include="AST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassNode.h">
+    <ClInclude Include="getString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WhileNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="expressionNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ValueNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssignmentNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CallVariableNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CallTypeNode.h">
+    <ClInclude Include="unkowncallnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="callFunctionNode.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="CallTypeNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignmentNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="CallVariableNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="dotNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="expressionNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="IDNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="WhileNode.h">
+      <Filter>Header Files\AST</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

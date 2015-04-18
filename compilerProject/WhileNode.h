@@ -12,13 +12,21 @@ public:
 	{
 		return conditionNode;
 	}
-	WhileNode() :conditionNode(NULL), Node(NULL, NULL, whileNode)
+	WhileNode() :conditionNode(NULL), Node(NULL, NULL)
 	{
 
 	}
-	WhileNode(Node* t, Node* son, Node*next) :conditionNode(t), Node(son, next, whileNode)
+	WhileNode(Node* t, Node* son, Node*next) :conditionNode(t), Node(son, next)
 	{
 
+	}
+	virtual void print()
+	{
+		cout << getNodeType()<<endl;
+	}
+	virtual string getNodeType()
+	{
+		return "WhileNode";
 	}
 };
 #endif

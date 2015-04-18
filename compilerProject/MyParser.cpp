@@ -93,12 +93,17 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 		{
 			v->by_self = false;
 			v->setAccessModifier(acc_mod);
+			return 0;
 			//v->set_static(is_static);
 		}
 		else if (!v)
 		{
 		v = new Variable();
-			v->set_name(n);
+
+		char* name2 = new char[50];
+		name2 = strcpy(name2, n);
+
+			v->set_name(name2);
 			v->setAccessModifier(acc_mod);
 			v->by_self = self;
 			v->set_isdic(is_dic);
@@ -157,7 +162,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	{
 		if (from_right)
 		{
-			v = this->addVariableToCurrentScope(name, "", false, false, lineNo, colNo, is_array, is_dic);
+			v = this->addVariableToCurrentScope(name, "", false, false, lineNo, colNo, is_array, is_dic,self);
 		}
 		else
 		{
@@ -675,6 +680,7 @@ Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mo
 		{
 			constraction* c = new constraction(t, undeclarated_type, true, lineno, colno);
 		constraction_type.push_back(c);
+		
 	}
 	
 	}
@@ -838,6 +844,7 @@ Type * MyParser::finishTypeDeclaration(Type* t){
 		//remove t from  current scope
 		this->st->currScope->m->remove(outer_type.back()->get_name());
 	}
+	
 	outer_type.pop_back();
 	/*
 	for (int i = 0; i < constraction_type.size(); i++)

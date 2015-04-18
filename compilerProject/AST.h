@@ -12,6 +12,7 @@
 #include"CallVariableNode.h"
 #include"CallTypeNode.h"
 #include"callFunctionNode.h"
+#include"dotNode.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
@@ -22,7 +23,7 @@ char* arr[] =
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
 
 //type: Here AST is used as temporoy data structure to hold type to upper grammars
-"idTypeNode", "intTypeNode", "stringTypeNode", "classNode", "TypeCall", "VariableCall" };
+"idTypeNode", "intTypeNode", "stringTypeNode", "classNode", "TypeCall", "VariableCall","Unkown","DotNode" };
 
 class AST
 {
@@ -65,7 +66,11 @@ public:
 		AssignmentNode* temp = new AssignmentNode(son, next);
 		return temp;
 	}
-
+	 DotNode* createDotNode(Node * son, Node* next)
+	 {
+		 DotNode* temp = new DotNode(son, next);
+		 return temp;
+	 }
 	ValueNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
 	{
 		
@@ -74,16 +79,22 @@ public:
 		return temp;
 	}
 
-	CallVariableNode * createCallVarNode(string id, Node * son, Node* next)
+	CallVariableNode * createCallVarNode(string id,Variable* v, Node * son, Node* next)
 	{
-		CallVariableNode *temp = new CallVariableNode(id, NULL, son, next);
+		CallVariableNode *temp = new CallVariableNode(id, v, son, next);
 		return temp;
 	}
-	
+	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next)
+	{
+		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next);
+		return temp;
+	}
 	Node * addNext(Node* base,Node* next)
 	{
+		while (base->Next != NULL)
+			base = base->Next;
 		base->Next = next;
-		return base->Next;
+		return base;
 	}
 	Node * addSon(Node* base, Node* Son)
 	{
@@ -94,33 +105,7 @@ public:
 	void print(Node * tn, int lvl)
 	{
 		if (tn){
-			for (int i = 0; i<lvl; i++)
-				cout << "  ";
-			cout << arr[tn->type] << "\t";
-			if (arr[tn->type]=="classNode")
-			{
-				ClassNode* test = static_cast<ClassNode*>(tn);
-				cout <<"class name is "<< test->get_type()->get_name() << endl;
-
-			}
-			else if (arr[tn->type] == "functionNode")
-			{
-				FunctionNode* test = static_cast<FunctionNode*>(tn);
-				cout << "function name is " << test->get_function()->get_name() << endl;
-
-			}
-			else if (arr[tn->type] == "valueNode")
-			{
-				ValueNode* v = static_cast<ValueNode*>(tn);
-				if (v->get_types() == 0)
-				{
-					void * g = v->get_value();
-					int x = *((int*)(&g));
-					cout << "value is " << x << endl;
-				}
-			}
-				
-
+				tn->print();
 			print(tn->Son, lvl + 1);
 			print(tn->Next, lvl + 1);
 		}

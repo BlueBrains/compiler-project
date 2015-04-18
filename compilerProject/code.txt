@@ -1,26 +1,10 @@
 class u:
 	def final coco():
-		x=3+3;
+		x=5+9-7+2;
+		y=8+p;
+	end	
+	def x():
 	end
-	def soso():
-	end
+def g():
 end
-
-class C(v):
-
-	def coco1(self):
-
-	end
-end
-
-class k:
-
-	def class d:
-
-	end
-
-	def class e:
-
-	end
-
 end

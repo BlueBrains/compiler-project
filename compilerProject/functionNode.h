@@ -12,13 +12,21 @@ public:
 	{
 		return function_node;
 	}
-	FunctionNode() :function_node(NULL), Node(NULL, NULL, functionNode)
+	FunctionNode() :function_node(NULL), Node(NULL, NULL)
 	{
 
 	}
-	FunctionNode(Function* f, Node* son, Node*next) :function_node(f), Node(son, next, functionNode)
+	FunctionNode(Function* f, Node* son, Node*next) :function_node(f), Node(son, next)
 	{
 
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << function_node->get_name() << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "FunctionNode";
 	}
 };
 #endif

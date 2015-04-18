@@ -1,35 +1,31 @@
 #pragma once
 #ifndef __NODE__
 #define __NODE__
-enum NodeType {//Expressions
-	rootNode = 0, valueNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
-
-	//statements
-	ifNode, stmtListNode, whileNode, declrationStmtNode, expressionNode,
-
-	//function
-	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,FunctionCall,
-
-	//type: Here AST is used as temporoy data structure to hold type to upper grammars
-	idTypeNode, intTypeNode, stringTypeNode,classNode,TypeCall,VariableCall
-};
+#include<string>
+using namespace std;
 class Node
 {
 public :
 	Node* Next;
 	Node* Son;
-	NodeType type;
-	Node(Node* son, Node* next, NodeType t) :Next(next), Son(son), type(t)
+	Node(Node* son, Node* next) :Next(next), Son(son)
 	{}
 	Node()
 	{
 		Next = nullptr;
 		Son = nullptr;
-		type = rootNode;
 	}
 	~Node()
 	{
+		
+	}
+	virtual void print()
+	{
 
+	}
+	virtual string getNodeType()
+	{
+		return "Node";
 	}
 };
 #endif

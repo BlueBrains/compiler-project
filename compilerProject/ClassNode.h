@@ -12,13 +12,21 @@ public:
 	{
 		return type_node;
 	}
-	ClassNode() :type_node(NULL), Node(NULL,NULL,classNode)
+	ClassNode() :type_node(NULL), Node(NULL,NULL)
 	{
 		
 	}
-	ClassNode(Type* t,Node* son,Node*next) :type_node(t), Node(son,next,classNode)
+	ClassNode(Type* t,Node* son,Node*next) :type_node(t), Node(son,next)
 	{
 		
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << "  and type name  " << type_node->get_name() << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "ClassNode";
 	}
 };
 #endif

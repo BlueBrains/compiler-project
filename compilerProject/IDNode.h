@@ -12,13 +12,21 @@ public:
 	{
 		return variable_node;
 	}
-	IDNode() :variable_node(NULL), Node(NULL, NULL, idNode)
+	IDNode() :variable_node(NULL), Node(NULL, NULL)
 	{
 
 	}
-	IDNode(Variable* v, Node* son, Node*next) :variable_node(v), Node(son, next, idNode)
+	IDNode(Variable* v, Node* son, Node*next) :variable_node(v), Node(son, next)
 	{
 
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << "   " << variable_node->get_name() << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "IDNode";
 	}
 };
 #endif

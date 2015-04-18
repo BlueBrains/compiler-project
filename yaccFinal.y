@@ -13,6 +13,7 @@
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
 	#include "compilerProject/AST.h"
+	#include "compilerProject/getString.h"
 	#include <set>
 	#include "compilerProject/MyParser.h"
 	using namespace std;
@@ -34,6 +35,8 @@
 	string dir_path="";
 	string temp_id="";
 	stack<string> temp_id1;
+	vector<string> temp_id2;
+	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
 	Node* k;
 	char* t_id=new char[10];
@@ -43,10 +46,13 @@
 	bool ff=false;
 	bool pro= false;
 	bool pp=true;
+	bool self=false;
 	bool is_list=false;
 	bool is_dic=false;
 	int linefunc=0;
 	int colmfunc=0;
+	bool constant =false;
+	Node* lastNode;
 	operand op;
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
@@ -85,6 +91,9 @@
 		class Function * function;
 		class Type * type;
 		class Node * tn;
+		enum operand operands;
+		class getString * ops;
+		
 }
 
 
@@ -309,10 +318,14 @@ parameters: '(' arglist ')' {Streams::verbose() <<"parameters:'(' arglist ')'\n"
 			|'(' ')' {Streams::verbose() <<"parameters:'(' ')'\n";}
 			;
 
-stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";}
+stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";
+						
+					}
 		| compound_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt: compound_stmt\n";}
 		;
-simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
+simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
+								$<tn>$=$<tn>1;
+							}
 			 ;
 small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";
 							$<tn>$=$<tn>1;
@@ -329,8 +342,25 @@ small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
 			|testlist_star_expr right_testlist {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";
-													ast->addNext($<tn>1,$<tn>2);
-													$<tn>$=ast->createAssignNode($<tn>1,NULL);
+													//$<amerstr>1;
+													visit_num=0;
+													Node *il=new Node();
+													il=ast->addNext($<tn>1,$<tn>2);
+													Node* p=new Node();
+													p=ast->createAssignNode($<tn>1,NULL);
+													if(lastNode)
+													{
+														cout<<"enter heree amer \n";
+														$<tn>$=ast->addNext(lastNode,p);
+														
+														lastNode=NULL;
+														cout<<"print in expr_stmt if";
+														$<tn>$->print();cout<<endl;
+													}
+													else
+														$<tn>$=p;
+													
+													
 												}
 			;
 					
@@ -618,55 +648,74 @@ shift_expr: arith_expr {
 
 term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 						op=PLUS;
+						cout<<"op1= "<<op<<endl;
+						$<operands>$=op;
+						cout<<"op = "<<$<operands>$<<endl;
 						$<tn>$=$<tn>2;
 						}
 			|'-' term {Streams::verbose() <<"term_seq : '-' term \n";
+			/**
 							op=MINUS;
-							$<tn>$=$<tn>2;
+							cout<<"amer = "<<op<<endl;
+							$<operands>$=op;
+							$<tn>$=$<tn>2;**/
+							int* xx = new int (0);
+						k = ast->createTypeNode((void*)xx,0,0,INT);
+						k=ast->addNext(k,$<tn>2);
+						$<tn>$ = ast->createExprNode(k,NULL,MINUS);
 						}
-			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";op=PLUS;
-									k=ast->addNext($<tn>1,$<tn>2);
-									//ValueNode* v = static_cast<ValueNode*>(k);
-									//cout << "value is in term_seq " << v->get_value()<<endl;
-									$<tn>$ = ast->createExprNode($<tn>1,NULL,op);
+			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";//op=PLUS;
+									k=ast->addNext($<tn>1,$<tn>3);
+									$<operands>$=PLUS;
+									//op=$<operands>$;
+									$<tn>$ = ast->createExprNode(k,NULL,PLUS);
 								}
-			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";op=MINUS;
-									k=ast->addNext($<tn>1,$<tn>2);
-									$<tn>$ = ast->createExprNode(k,NULL,op);
+			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";//op=MINUS;
+									k=ast->addNext($<tn>1,$<tn>3);
+									$<operands>$=MINUS;
+									//op=$<operands>$;
+									$<tn>$ = ast->createExprNode(k,NULL,MINUS);
 								}
 			;
 
-arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";$<tn>$=$<tn>1;} 
+arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";$<tn>$=$<tn>1;
+									$<operands>$=$<operands>1;
+							} 
 			|term term_seq %prec stmt_13 {
 											Streams::verbose() <<"arith_expr: term term_seq\n";
 											k=ast->addNext($<tn>1,$<tn>2);
-											//cout<<"op= "<<op<<endl;
-											$<tn>$ = ast->createExprNode($<tn>1,NULL,op);
+											cout<<"the value of op is "<<op<<endl;
+											$<tn>$ = ast->createExprNode(k,NULL,PLUS/**op**/);
 											
 										}
 											 
 			;
 
 factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
-							op=MULT;
+							$<operands>$=MULT;
+							op=$<operands>$;
 							$<tn>$=$<tn>2;
 						}
 			|'/' factor {Streams::verbose() <<"factor_seq: '/' factor \n";
-								op=DIV;
+								$<operands>$=DIV;
+								op=$<operands>$;
 							$<tn>$=$<tn>2;
 							}
 			|'%' factor {Streams::verbose() <<"factor_seq: '%' factor \n";
-								op=MOD;
+								$<operands>$=MOD;
+								op=$<operands>$;
 							$<tn>$=$<tn>2;
 							}
 			|DIV_2 factor %prec stmt_8 {Streams::verbose() <<"factor_seq: DIV_2 factor \n";}
 			|factor_seq '*' factor {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";
+									k=ast->addNext($<tn>1,$<tn>3);
 									op=MULT;
-									$<tn>$ = ast->createExprNode(NULL,NULL,op);
+									$<tn>$ = ast->createExprNode(k,NULL,op);
 									}
 			|factor_seq '/' factor {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";
+									k=ast->addNext($<tn>1,$<tn>3);
 									op=DIV;
-									$<tn>$ = ast->createExprNode(NULL,NULL,op);
+									$<tn>$ = ast->createExprNode(k,NULL,op);
 									}
 			|factor_seq '%' factor {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";
 									op=MOD;
@@ -677,25 +726,81 @@ factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
 
 term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n";$<tn>$=$<tn>1;} 
 		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n";
-								$<tn>$ = ast->createExprNode(NULL,NULL,op);
+								k=ast->addNext($<tn>1,$<tn>2);
+								$<tn>$ = ast->createExprNode(k,NULL,op);
 							} 
 		;
 
-factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";}
-		|'-' factor {Streams::verbose() <<"factor: '-' factor \n";}
+factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
+						int* xx = new int (0);
+						k = ast->createTypeNode((void*)xx,0,0,INT);
+						k=ast->addNext(k,$<tn>2);
+						$<tn>$ = ast->createExprNode(k,NULL,PLUS);
+						
+					}
+		|'-' factor {Streams::verbose() <<"factor: '-' factor \n";
+						int* xx = new int (0);
+						k = ast->createTypeNode((void*)xx,0,0,INT);
+						k=ast->addNext(k,$<tn>2);
+						$<tn>$ = ast->createExprNode(k,NULL,MINUS);
+						
+						}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
 		| power {
+					visit_num++;
 					Streams::verbose() <<"factor: power\n";
-					$<tn>$=$<tn>1;
+					
+					if(visit_num==1)
+					{
+						//$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
+						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
+						v=$<var>$;
+						if(v!=NULL)
+						{
+							//cout<<"hellow world  "<<v->get_name()<<endl;
+							lastNode=ast->createIDNode(v,0,0);
+									
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL);	
+						}
+						else
+						{
+							$<tn>$=$<tn>1;
+						}
+					}
+					else if(!constant)
+					{
+						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
+						v=$<var>$;
+						if(v!=NULL)
+						{
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL);	
+						}
+						else
+						{
+							$<tn>$=$<tn>1;
+						}
+					}
 				} 
 		;
 
-trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";}
-			 |trailer_seq trailer {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";}
+trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";
+										$<tn>$=$<tn>1;
+									}
+			 |trailer_seq trailer {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";
+										$<tn>$=ast->addNext($<tn>1,$<tn>2);
+									}
 			 ;
 			
-power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";$<tn>$=$<tn>1;} 
-		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";}
+power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
+							//$<tn>$=ast->createCallVarNode(temp_id2.back(),NULL,NULL,NULL);
+							$<tn>$=$<tn>1;
+							
+							} 
+		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
+											cout<<"the top is "<<temp_id2.back()<<endl;
+											$<tn>$=ast->addNext($<tn>1,$<tn>2);
+											$<tn>$=ast->createDotNode($<tn>$,NULL);
+										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
 		;
@@ -711,8 +816,20 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
-							$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL);
+									temp_id2.push_back($<r.strVal>1);
+									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL);
 					} 
+		| NAME '(' ')' %prec stmt_13{ Streams::verbose() <<"atom: NAME\n";
+									temp_id2.push_back($<r.strVal>1);
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>1,NULL,NULL,NULL,NULL);
+					} 
+		| NAME '(' arglist ')' { Streams::verbose() <<"atom: NAME\n";
+									temp_id2.push_back($<r.strVal>1);
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>1,NULL,NULL,NULL,NULL);
+					}
+		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
+											
+										}
 		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";
 											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 										v=$<var>$;
@@ -809,21 +926,27 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 														acc_mod="";
 														$<tn>$ = ast->createIDNode(v,0,0);
 													} 
-		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT\n";
-						int xx=$<r.intVal>1;
-						cout<<"yhe number is"<<xx<<endl;
-						$<tn>$ = ast->createTypeNode(&xx,0,0,INT);
+		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT "<<$<r.intVal>1<<endl;;
+						int* xx = new int ($<r.intVal>1);
+						//cout<<"yhe number is"<<*xx<<endl;
+						//cout<<"reference"<<xx<<endl;
+						constant=true;
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,INT);
+						visit_num++;
 						} 
 		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							float x=$<r.floatVal>1;
-							$<tn>$ = ast->createTypeNode(&x,0,0,FLOAT);
+							constant=true;
+							float* x=new float($<r.floatVal>1);
+							$<tn>$ = ast->createTypeNode((void*)x,0,0,FLOAT);
 						} 
 		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
-							long xxx=$<r.longVal>1;
+							long *xxx=new long($<r.longVal>1);
+							constant=true;
 							$<tn>$ = ast->createTypeNode(&xxx,0,0,LONG);
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
+									
 									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,STRINGS);
 								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n";} 
@@ -854,10 +977,21 @@ testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for
 			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
 			   ;
 
-trailer:	'('  ')' {Streams::verbose() <<"trailer:	'('  ')'\n";} 
-			|'(' arglist ')' {Streams::verbose() <<"trailer:	'(' arglist ')'\n";} 
-			|'[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";} 
-			|'.' NAME {Streams::verbose() <<"trailer:	'.' NAME\n";} 
+trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
+							temp_id=temp_id2.back();
+							temp_id=temp_id+"."+$<r.strVal>2;
+						temp_id2.pop_back();
+						temp_id2.push_back(temp_id);	
+						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL);
+						} 
+			|'.' NAME '(' ')' {
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,NULL,NULL,NULL,NULL);
+								}
+			|'.' NAME '(' arglist ')' {
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,NULL,NULL,NULL,NULL);
+								}
+			|'.' NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";} ;
+
 			;
 
 comma_subscript_seq: ',' subscript {Streams::verbose() <<"comma_subscript_seq: ',' subscript\n";} 

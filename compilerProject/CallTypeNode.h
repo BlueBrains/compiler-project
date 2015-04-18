@@ -15,11 +15,11 @@ private:
 	Function* f = NULL;
 public:
 	
-	CallTypeNode() :ID(NULL), Node(NULL, NULL, TypeCall)
+	CallTypeNode() :ID(NULL), Node(NULL, NULL)
 	{
 
 	}
-	CallTypeNode(string id, vector<string>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next, TypeCall)
+	CallTypeNode(string id, vector<string>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next)
 	{
 
 	}
@@ -38,6 +38,19 @@ public:
 	Function* getFunction()
 	{
 		return f;
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << " type name is " << ID;
+		if (t)
+		{
+			cout << " real " << t->get_name();
+		}
+		cout << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "CallTypeNode";
 	}
 
 };

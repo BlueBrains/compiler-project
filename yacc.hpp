@@ -138,7 +138,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2579 of glr.c  */
-#line 73 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project - Copy - Copy\\yaccFinal.y"
+#line 79 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\yaccFinal.y"
 
 	struct R{
 		int intVal;
@@ -154,10 +154,13 @@ typedef union YYSTYPE
 		class Function * function;
 		class Type * type;
 		class Node * tn;
+		enum operand operands;
+		class getString * ops;
+		
 
 
 /* Line 2579 of glr.c  */
-#line 161 "yacc.hpp"
+#line 164 "yacc.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

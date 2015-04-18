@@ -9,13 +9,21 @@ private:
 	
 public:
 
-	AssignmentNode() : Node(NULL, NULL, assignNode)
+	AssignmentNode() : Node(NULL, NULL)
 	{
 
 	}
-	AssignmentNode( Node* son, Node*next) : Node(son, next, assignNode)
+	AssignmentNode( Node* son, Node*next) : Node(son, next)
 	{
 
+	}
+	virtual void print()
+	{
+		cout << getNodeType() << endl;
+	}
+	virtual string getNodeType()
+	{
+		return "AssignmentNode";
 	}
 };
 #endif
