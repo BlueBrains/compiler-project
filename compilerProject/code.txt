@@ -1,6 +1,6 @@
 class u:
 	def final coco():
-		x=5+9-7+2;
+		x=(5+9)*7-7+2;
 		y=8+p;
 	end	
 	def x():

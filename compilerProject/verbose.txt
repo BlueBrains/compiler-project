@@ -16,21 +16,40 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-atom: NUMBER_INT 5
+atom: NUMBER_INT
 power:	atom
 factor: power
 term: 	factor
-atom: NUMBER_INT 9
+atom: NUMBER_INT
 power:	atom
 factor: power
 term: 	factor
 term_seq : '+' term 
-atom: NUMBER_INT 7
+arith_expr: term term_seq
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_comp: test
+atom:	'(' testlist_comp ')' 
+power:	atom
+factor: power
+atom: NUMBER_INT
+power:	atom
+factor: power
+factor_seq: '*' factor 
+term: 	factor factor_seq
+atom: NUMBER_INT
 power:	atom
 factor: power
 term: 	factor
-term_seq : term_seq '-' term 
-atom: NUMBER_INT 2
+term_seq : '-' term 
+atom: NUMBER_INT
 power:	atom
 factor: power
 term: 	factor
@@ -66,7 +85,7 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-atom: NUMBER_INT 8
+atom: NUMBER_INT
 power:	atom
 factor: power
 term: 	factor
