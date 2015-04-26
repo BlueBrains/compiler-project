@@ -29,7 +29,7 @@ char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
 //statements
-"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode", "flowStmtNode", "printNode", "delNode", "importNode", "globalNode",
+"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode", "flowStmtNode", "printNode", "delNode", "importNode", "globalNode", "passNode",
 
 //function
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
@@ -88,7 +88,7 @@ public:
 		return temp;
 	}	
 	DelNode * createDelNode(Node* son, Node* next,Node* scoop){
-		DelNode* temp = new PrintNode(son,next,scoop);
+		DelNode* temp = new DelNode(son,next,scoop);
 		return temp;
 	}
 	PassNode * createPassNode(Node* son, Node* next,Node* scoop){

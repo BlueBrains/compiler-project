@@ -5,7 +5,7 @@ enum NodeType {//Expressions
 	rootNode = 0, valueNode, stringValNode, idNode, callNode, assignNode, minusNode, plusNode, moreThanNode, lessThanNode, exprListNode,
 
 	//statements
-	ifNode, elseIfNode, elseNode, stmtListNode, whileNode, declrationStmtNode, expressionNode, forNode, tryNode, exceptNode, finallyNode, flowStmtNode, printNode, delNode, importNode, globalNode,
+	ifNode, elseIfNode, elseNode, stmtListNode, whileNode, declrationStmtNode, expressionNode, forNode, tryNode, exceptNode, finallyNode, flowStmtNode, printNode, delNode, importNode, globalNode, passNode,
 
 	//function
 	functionListNode, functionNode, functionHeaderNode, paramNode, paramListNode,FunctionCall,
