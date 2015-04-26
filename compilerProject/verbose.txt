@@ -1,310 +1,42 @@
+dotted_name: NAME 
 class_h: CLASS ID 
-parameters:'(' ')'
-funcheader: DEF FINAL NAME parameters ':' 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: '>' 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
 suite:	END
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: '<' 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-suite:	END
-elif_seq :  ELIF test ':' suite 
-if_stmt:	IF test ':' suite elif_seq 
-compound_stmt:  if_stmt 
-stmt: compound_stmt
-list_stmt : stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-exprlist: 	expr 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: ',' test
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
-testlist_comp: test   comma_test_star_seq
-atom: '{' '}' 
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist:	test 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: '>' 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-suite:	END
-if_stmt:	IF test ':' suite 
-compound_stmt:  if_stmt 
-stmt: compound_stmt
-list_stmt : stmt
-suite:	list_stmt END
-for_stmt:   FOR exprlist IN testlist ':' suite 
-compound_stmt: for_stmt
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-suite:	list_stmt END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt
-parameters:'(' ')'
-funcheader: DEF NAME parameters ':' 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-except_clause:  EXCEPT test
-suite:	END
-try_except_cla_seq: except_clause ':' suite 
-except_clause:  EXCEPT 
-suite:	END
-try_except_cla_seq: try_except_cla_seq except_clause ':' suite
-suite:	END
-try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite
-compound_stmt: try_stmt
-stmt: compound_stmt
-list_stmt : stmt
-suite:	list_stmt END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-suite:	list_stmt END
 classdef: classheader suite
+temp2: classdef 
+program : temp2 
+file_input: program ENDMARKER
+dotted_name: NAME 
+dotted_as_name: dotted_name 
+dotted_name: NAME 
+dotted_name: NAME 
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+temp2: classdef 
+program : temp2 
+file_input: program ENDMARKER
 dotted_name: NAME 
 dotted_as_name: dotted_name 
 comma_dotted_as_name_seq: dotted_as_names: dotted_as_name 
-class_h: CLASS ID OPEN_S unit_list CLOSE_S 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-argument: 	test
-arglist: argument
-parameters:'(' arglist ')'
-funcheader: DEF NAME parameters ':' 
-suite:	END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt
-suite:	list_stmt END
-classdef: classheader suite
-class_h: CLASS ID 
+import_name: IMPORT dotted_as_names 
+import_stmt: import_name 
 class_h: CLASS ID 
 suite:	END
-classdef: classheader suite
-compound_stmt: DEF classdef
-stmt: compound_stmt
-list_stmt : stmt
-class_h: CLASS ID 
-suite:	END
-classdef: classheader suite
-compound_stmt: DEF classdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-suite:	list_stmt END
 classdef: classheader suite
 temp2: classdef 
-temp2: classdef temp2
-temp2: classdef temp2
-program : temp2 
+program : import_stmt ';' temp2 
+file_input: program ENDMARKER
+dotted_name: NAME 
+dotted_as_name: dotted_name 
+dotted_name: NAME 
+dotted_as_name: dotted_name 
+comma_dotted_as_name_seq: ',' dotted_as_name 
+comma_dotted_as_name_seq: dotted_as_name comma_dotted_as_name_seq 
+import_name: IMPORT dotted_as_names 
+import_stmt: import_name 
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
+temp2: classdef 
+program : import_stmt ';' temp2 
 file_input: program ENDMARKER

@@ -4,7 +4,7 @@
 #include"Node.h"
 #include"..\ST\Type.h"
 enum Types {
-	INT, FLOAT, CHAR, LONG,STRINGS,True,False
+	INT, FLOAT, CHAR, LONG, STRINGS, True, False
 };
 class ValueNode :public Node
 {

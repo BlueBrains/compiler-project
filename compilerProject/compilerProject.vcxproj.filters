@@ -74,6 +74,9 @@
     <ClCompile Include="myvector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ast\GlobalNode.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -179,6 +182,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ast\FinallyNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\flowStmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\PrintNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\DelNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\PassNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

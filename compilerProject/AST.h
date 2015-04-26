@@ -19,12 +19,17 @@
 #include"ast\TryNode.h"
 #include"ast\ExceptNode.h"
 #include"ast\FinallyNode.h"
+#include"ast\flowStmt.h"
+#include"ast\PrintNode.h"
+#include"ast\GlobalNode.h"
+#include"ast\DelNode.h"
+#include"ast\PassNode.h"
 
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
 //statements
-"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode",
+"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode", "flowStmtNode", "printNode", "delNode", "importNode", "globalNode",
 
 //function
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
@@ -76,6 +81,26 @@ public:
 	FinallyNode* createFinallyNode(Node* son, Node* next, Node* scoop)
 	{
 		FinallyNode* temp = new FinallyNode(son, next, scoop);
+		return temp;
+	}
+	FlowStmtNode* createFlowStmtNode(Node* son, Node* next, flowType type, Node* scoop){
+		FlowStmtNode* temp = new FlowStmtNode(son, next, type, scoop);
+		return temp;
+	}	
+	DelNode * createDelNode(Node* son, Node* next,Node* scoop){
+		DelNode* temp = new PrintNode(son,next,scoop);
+		return temp;
+	}
+	PassNode * createPassNode(Node* son, Node* next,Node* scoop){
+		PassNode* temp = new PassNode(son,next,scoop);
+		return temp;
+	}
+	PrintNode * createPrintNode(Node* son, Node* next,Node* scoop){
+		PrintNode* temp = new PrintNode(son,next,scoop);
+		return temp;
+	}
+	GlobalNode * createGlobalNode(Node* son, Node* next,Node* scoop){
+		GlobalNode* temp = new GlobalNode(son,next,scoop);
 		return temp;
 	}
 	ExpressionNode * createExprNode(Node * son, Node* next,operand op)
@@ -204,6 +229,11 @@ public:
 			{
 				FinallyNode* test = static_cast<FinallyNode*>(tn);
 				cout << "Finally NODE !" << endl;
+			}
+			else if (arr[tn->type] == "flowStmtNode")
+			{
+				FlowStmtNode* test = static_cast<FlowStmtNode*>(tn);
+				cout << "FlowStmtNode NODE ! " << test->getFlowType() << endl;
 			}
 			print(tn->Son, lvl + 1);
 			print(tn->Next, lvl);

@@ -3,11 +3,16 @@
 		#include <iostream>
 		#include <istream>
 		#include <ostream>		
-		#include <FlexLexer.h>		
+		#include <fstream>
+		#include <stdlib.h>
+		#include <stack>
+		#include <FlexLexer.h>			
 		extern int lineNum=1;
 		extern int colNum=0;
 		extern char* str = 0;
-		int index;
+		int index;		
+		using namespace std;
+		extern FlexLexer* lexer ;
 %}
 identifier		({letter}|"_")({letter}|{digit}|"_")*
 letter			{lowercase}|{uppercase}
@@ -33,13 +38,10 @@ integer			[1-9][0-9]*|0
 float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option c++
 %x multilinecomment
-%x import
 %x String
 %option noyywrap
 
 %%
-				//<<EOF>>     {return ENDMARKER; 
-				//}
 "import"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;

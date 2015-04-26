@@ -10,6 +10,7 @@
 	#include "Program.h"
 	#include "SyntaxError.h"
 	#include <fstream>
+	#include <stdlib.h>
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
 	#include "compilerProject/AST.h"
@@ -22,6 +23,9 @@
 		ColonStack(int line, int col){colNum = col; lineNum = line;}
 		int colNum,lineNum;
 	};
+
+	#include <set>
+	using namespace std;
 	stack<ColonStack*>colonStack;
 	int yylex(void);
 	int yyparse();
@@ -29,13 +33,16 @@
 	void yyerror(const char *);
 	int lineno=0,colnumber=0;
 	ErrorRecovery* err=new ErrorRecovery();
-	FlexLexer* lexer = new yyFlexLexer();
+	extern FlexLexer* lexer = new yyFlexLexer();
 	extern string sourceFile="";
 	string dir_path="";
 	string temp_id="";
 	stack<string> temp_id1;
+	stack<string> fileStack;
+	vector<string> parsedFile;
 	char* i_type;
 	Node* k;
+	Node* root;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
 	vector<char*> sto_mod;
@@ -51,7 +58,8 @@
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
 
-
+	extern int lineNum;
+	extern int colNum;
 	vector<char *>ID_list;
 	Variable* v;
 	Type* t;
@@ -115,9 +123,12 @@
 file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 										p->check_inhertance_list();
 						if(!p->errRecovery->errQ->isEmpty())
-								p->errRecovery->printErrQueue();
-						p->print_symbol();
-						ast->print($<tn>1, 0);
+								p->errRecovery->printErrQueue();						
+						root = $<tn>1;		
+						if(fileStack.size()==1){
+							ast->print(root, 0);
+							p->print_symbol();
+						}
 						Streams::verbose().flush();	
 								}
 			;
@@ -312,18 +323,40 @@ parameters: '(' arglist ')' {Streams::verbose() <<"parameters:'(' arglist ')'\n"
 stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";}
 		| compound_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt: compound_stmt\n";}
 		;
-simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";}
+simple_stmt: small_stmt ';' {
+								Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
+								$<tn>$=$<tn>1;
+							}
 			 ;
-small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";
+small_stmt: expr_stmt	{
+							Streams::verbose() <<"small_stmt: expr_stmt \n";
 							$<tn>$=$<tn>1;
 						}
-			|del_stmt {Streams::verbose() <<"small_stmt: del_stmt \n";}
-			|pass_stmt {Streams::verbose() <<"small_stmt: pass_stmt \n";}
-			|flow_stmt {Streams::verbose() <<"small_stmt: flow_stmt \n";}
-			|import_stmt {Streams::verbose() <<"small_stmt: import_stmt \n";}
-			|global_stmt {Streams::verbose() <<"small_stmt: global_stmt \n";}
+			|del_stmt {
+						Streams::verbose() <<"small_stmt: del_stmt \n";
+						$<tn>$=$<tn>1;
+					  }
+			|pass_stmt {
+							Streams::verbose() <<"small_stmt: pass_stmt \n";
+							$<tn>$=$<tn>1;
+					   }
+			|flow_stmt {
+							Streams::verbose() <<"small_stmt: flow_stmt \n";
+							$<tn>$=$<tn>1;
+					   }
+			|import_stmt {
+							Streams::verbose() <<"small_stmt: import_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
+			|global_stmt {
+							Streams::verbose() <<"small_stmt: global_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
 			|nonlocal_stmt {Streams::verbose() <<"small_stmt: nonlocal_stmt \n";}
-			|print_stmt  {Streams::verbose() <<"small_stmt: print_stmt \n";}
+			|print_stmt  {
+							Streams::verbose() <<"small_stmt: print_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
 			;
 
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
@@ -345,7 +378,7 @@ testlist_star_expr: comma_test_star_seqJ {Streams::verbose() <<"testlist_star_ex
 					|test {
 								Streams::verbose() <<"testlist_star_expr: test \n"; 
 								$<tn>$=$<tn>1;
-							}
+						  }
 					|star_expr comma_test_star_seqJ ',' {Streams::verbose() <<"testlist_star_expr: star_expr comma_test_star_seqJ ',' \n";}
 					|star_expr ',' {Streams::verbose() <<"testlist_star_expr: star_expr ',' \n";}
 					;
@@ -375,33 +408,64 @@ access:		 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="priv
 				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
 				|PROTECTED	{pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				;
-print_stmt: PRINT exprlist {Streams::verbose() <<"print_stmt: PRINT exprlist \n";}
-del_stmt:   DEL exprlist {Streams::verbose() <<"del_stmt:   DEL exprlist \n";}
+print_stmt: PRINT exprlist {
+							Streams::verbose() <<"print_stmt: PRINT exprlist \n";
+							$<tn>$ = ast->createPrintNode($<tn>2, NULL, NULL);
+						   }
+del_stmt:   DEL exprlist {
+							Streams::verbose() <<"del_stmt:   DEL exprlist \n";
+							$<tn>$ = ast->createDelNode($<tn>2, NULL, NULL);
+						 }
 			;
 
-pass_stmt:	PASS {Streams::verbose() <<"pass_stmt:	PASS \n";}
+pass_stmt:	PASS {
+					Streams::verbose() <<"pass_stmt:	PASS \n";
+					$<tn>$ = ast->createPassNode(NULL, NULL, NULL);
+				 }
 			;
 
-flow_stmt:	break_stmt {Streams::verbose() <<"flow_stmt:	break_stmt \n";}
-			| continue_stmt {Streams::verbose() <<"flow_stmt: continue_stmt\n";}
-			| return_stmt {Streams::verbose() <<"flow_stmt: return_stmt\n";}
+flow_stmt:	break_stmt {
+						Streams::verbose() <<"flow_stmt:	break_stmt \n";
+						$<tn>$ = $<tn>1;
+					   }
+			| continue_stmt {
+								Streams::verbose() <<"flow_stmt: continue_stmt\n";
+								$<tn>$ = $<tn>1;
+							}
+			| return_stmt {
+							Streams::verbose() <<"flow_stmt: return_stmt\n";
+							$<tn>$ = $<tn>1;
+						  }
 			;
 
-break_stmt: BREAK {Streams::verbose() <<"break_stmt: BREAK \n";}
+break_stmt: BREAK {
+					Streams::verbose() <<"break_stmt: BREAK \n";
+					$<tn>$ = ast->createFlowStmtNode(NULL, NULL, breakNode, NULL);
+				  }
 			;
 
-continue_stmt:	CONTINUE {Streams::verbose() <<"continue_stmt:	CONTINUE \n";}
+continue_stmt:	CONTINUE {
+							Streams::verbose() <<"continue_stmt:	CONTINUE \n";
+							$<tn>$ = ast->createFlowStmtNode(NULL, NULL, continueNode, NULL);
+						 }
 				;
 
-return_stmt:	RETURN testlist {Streams::verbose() <<"return_stmt:	RETURN testlist \n";}
-				|RETURN {Streams::verbose() <<"return_stmt:	RETURN \n";}
+return_stmt:	RETURN testlist {
+									Streams::verbose() <<"return_stmt:	RETURN testlist \n";
+									$<tn>$ = ast->createFlowStmtNode($<tn>2, NULL, returnNode, NULL);
+								}
+				|RETURN {
+							Streams::verbose() <<"return_stmt:	RETURN \n";
+							$<tn>$ = ast->createFlowStmtNode(NULL, NULL, returnNode, NULL);
+						}
 				;
 
 
 import_stmt: import_name {Streams::verbose() <<"import_stmt: import_name \n";}
 			 ;
 
-import_name: IMPORT dotted_as_names {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";}
+import_name: IMPORT dotted_as_names {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";
+										inhertance_list.clear();}
 			 ;
 
 comma_dotted_as_name_seq: ',' dotted_as_name {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";}
@@ -428,7 +492,30 @@ dotted_as_name: dotted_name {Streams::verbose() <<"dotted_as_name: dotted_name \
 				|dotted_name AS NAME {Streams::verbose() <<"dotted_as_name: dotted_name AS NAME\n";}
 				;
 
-dotted_name: NAME {Streams::verbose() <<"dotted_name: NAME \n"; temp_id=temp_id+$<r.strVal>1;}
+dotted_name: NAME {
+					 Streams::verbose() <<"dotted_name: NAME \n";
+					 temp_id=temp_id+$<r.strVal>1;
+					 string sf=$<r.strVal>1;
+					 cout<<sf;
+					 lineNum=colNum=1;					 
+					 sf.append(".txt");
+					 if(find(parsedFile.begin(),parsedFile.end(),sf)==parsedFile.end())
+						fileStack.push(sf);
+					 while(!fileStack.empty()&&sourceFile!=fileStack.top()){
+						 sf=fileStack.top();
+						 sourceFile=sf;
+						 ifstream inf(sf);
+						 lexer->yyrestart(&inf);
+						 Parser* p = new Parser();
+						 p->parse();						 
+						 lineNum=colNum=1;
+						 parsedFile.push_back(sf);
+						 if(fileStack.size()>0)
+							fileStack.pop();
+						 if(fileStack.size()==0)
+							YYABORT;
+					 }
+				  }
 			|NAME dotted_name_seq {Streams::verbose() <<"dotted_name: NAME dotted_name_seq \n";}
 			;
 			
@@ -442,12 +529,36 @@ dotted_name_seq: '.' NAME {
 				 }
 				 ;
 					
-comma_name_seq :	',' NAME {Streams::verbose() <<"comma_name_seq :	',' NAME \n";}
-					|comma_name_seq ',' NAME {Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";}
+comma_name_seq :	',' NAME {
+								Streams::verbose() <<"comma_name_seq :	',' NAME \n";
+								$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);
+								v = $<var>$;
+								$<tn>$ = ast->createIDNode(v,0,0);
+							 }
+					|comma_name_seq ',' NAME {
+												Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";
+												$<var>$=p->addVariableToGlobalScope($<r.strVal>3, yylval.r.lineNum, yylval.r.colNum);
+												v = $<var>$;
+												Node* temp = ast->createIDNode(v,0,0);
+												Node* seq = $<tn>1;
+												seq->Next = temp;
+											 }
 					;
 
-global_stmt: GLOBAL NAME {Streams::verbose() <<"global_stmt: GLOBAL NAME \n";}
-			 |GLOBAL NAME comma_name_seq {Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";}
+global_stmt: GLOBAL NAME {
+							Streams::verbose() <<"global_stmt: GLOBAL NAME \n";
+							$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);
+							v = $<var>$;
+							Node* temp = ast->createIDNode(v,0,0);
+							$<tn>$ = ast->createGlobalNode(temp,NULL,NULL);
+						 }
+			 |GLOBAL NAME comma_name_seq {
+											Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";
+											$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);											
+											v = $<var>$;
+											Node* temp = ast->createIDNode(v,0,$<tn>3);
+											$<tn>$ = ast->createGlobalNode(temp,NULL,NULL);
+										 }
 			 ;
 
 nonlocal_stmt:	NONLOCAL NAME {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME \n";}
@@ -1566,13 +1677,30 @@ void main(void)
 {
 	string input = "code.txt";
 	dir_path="";
+	//bool f = true;
+	//if (f)
+	//{
+	//	addFile(input);
+	//}
+	
+	//for(int i=0;i<sfiles.size();i++)
+	//{
+	//    string sf=sfiles[i];
+	//	lineNum=colNum=1;
+	//	sourceFile=sf;
+	//	ifstream inf(sf);
+	//	lexer = new yyFlexLexer(&inf);
+	//	Parser* p = new Parser();
+	//	p->parse();
+	//}
 	//addFile(input);
 	sourceFile=input;
+	fileStack.push(input);
 	ifstream inf(input);
 	lexer = new yyFlexLexer(&inf);
 	Parser* p = new Parser();
 	p->parse();
-	//Program::printErrors();
-	err->printErrQueue();
+	Program::printErrors();
+	//err->printErrQueue();
 	system("pause");
 }
