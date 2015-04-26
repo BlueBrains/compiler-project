@@ -2,13 +2,17 @@
 #ifndef __VARIABLENODE__
 #define __VARIABLENODE__
 #include"Node.h"
-#include"ST\Variable.h"
+#include"..\ST\Variable.h"
 class CallVariableNode :public Node
 {
 private:
 	string ID;
-	Variable* variable_node=NULL;
+	Variable* variable_node;
 public:
+	void set_variable(Variable* v)
+	{
+		variable_node = v;
+	}
 	Variable* get_variable()
 	{
 		return variable_node;
@@ -19,7 +23,7 @@ public:
 	}
 	CallVariableNode() :variable_node(NULL), Node(NULL, NULL)
 	{
-
+		variable_node = NULL;
 	}
 	CallVariableNode(string id, Variable* v, Node* son, Node*next) :ID(id), variable_node(v), Node(son, next)
 	{

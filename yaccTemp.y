@@ -1,5 +1,6 @@
 %output ="yacc.cpp"
-
+%error-verbose
+%glr-parser
 %{
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
@@ -623,7 +624,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'(' testlist_comp ')'  {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";}
 		|'[' ']' {Streams::verbose() <<"atom:	'[' ']' \n";}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
-		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";}
+		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '[' testlist_comp ']' \n";}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";} 
 		| DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";} 
@@ -1288,7 +1289,7 @@ void main(void)
 	lexer = new yyFlexLexer(&inf);
 	Parser* p = new Parser();
 	p->parse();
-	//Program::printErrors();
+	Program::printErrors();
 	err->printErrQueue();
 	system("pause");
 }

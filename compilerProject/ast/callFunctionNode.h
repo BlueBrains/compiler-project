@@ -2,7 +2,7 @@
 #ifndef __CALLFUNCTIONNODE__
 #define __CALLFUNCTIONNODE__
 #include"Node.h"
-#include"ST\Function.h"
+#include"..\ST\Function.h"
 class CallFunctionNode :public Node
 {
 private:
@@ -10,9 +10,39 @@ private:
 	Node* arguments;
 	Function* Function_call = NULL;
 public:
+	void set_function(Function* f)
+	{
+		this->Function_call = f;
+	}
+
+	int arg_len(){
+		int i = 0;
+		while (arguments->Next)
+		{
+			i++;
+		}
+		return i;
+	}
+
+	bool check_para(Function*f)
+	{
+
+		for (int i = 0; i < f->getparameters().size(); i++)
+		{
+			if (arguments->getNodeType() == "CallVariableNode")
+			{
+				if (f->getparameters().at(i)->get_isarray() != static_cast<CallVariableNode*>(arguments)->get_variable()->get_isarray())
+					return false;
+			}
+		}
+	}
 	Function* get_function()
 	{
 		return Function_call;
+	}
+	string getID()
+	{
+		return ID;
 	}
 	CallFunctionNode() :Function_call(NULL), Node(NULL, NULL)
 	{

@@ -2,7 +2,7 @@
 #ifndef __EXPRESSIONNODE__
 #define __EXPRESSIONNODE__
 #include"Node.h"
-#include"ST\Type.h"
+#include"..\ST\Type.h"
 enum operand {
 	PLUS, MINUS, MULT, DIV,MOD,GREATHER,LESS,EQUALGREATHER,EQUALLESS
 };

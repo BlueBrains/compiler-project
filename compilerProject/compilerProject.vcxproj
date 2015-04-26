@@ -104,7 +104,6 @@
     <ClCompile Include="..\Streams.cpp" />
     <ClCompile Include="..\SyntaxError.cpp" />
     <ClCompile Include="..\yacc.cpp" />
-    <ClCompile Include="functionNode.h" />
     <ClCompile Include="MyMap.cpp" />
     <ClCompile Include="MyParser.cpp" />
     <ClCompile Include="myvector.cpp" />
@@ -123,8 +122,10 @@
     <ClInclude Include="..\Streams.h" />
     <ClInclude Include="..\SyntaxError.h" />
     <ClInclude Include="..\yacc.hpp" />
+    <ClInclude Include="ArrayNode.h" />
     <ClInclude Include="AssignmentNode.h" />
     <ClInclude Include="AST.h" />
+    <ClInclude Include="ast\ArrayElementNode.h" />
     <ClInclude Include="callFunctionNode.h" />
     <ClInclude Include="CallTypeNode.h" />
     <ClInclude Include="CallVariableNode.h" />
@@ -148,7 +149,6 @@
     <ClInclude Include="ST\Variable.h" />
     <ClInclude Include="unkowncallnode.h" />
     <ClInclude Include="ValueNode.h" />
-    <ClInclude Include="WhileNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />

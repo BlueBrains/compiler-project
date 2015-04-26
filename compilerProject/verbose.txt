@@ -1,4 +1,8 @@
 class_h: CLASS ID 
+atom: DEF NAME
+compound_stmt: vardef
+stmt: compound_stmt
+list_stmt : stmt
 parameters:'(' ')'
 funcheader: DEF FINAL NAME parameters ':' 
 atom: NAME
@@ -16,16 +20,11 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-atom: NUMBER_INT
+atom:	'[' ']' 
 power:	atom
 factor: power
 term: 	factor
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
+arith_expr: term
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
@@ -35,22 +34,187 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-testlist_comp: test
-atom:	'(' testlist_comp ')' 
-power:	atom
-factor: power
-atom: NUMBER_INT
-power:	atom
-factor: power
-factor_seq: '*' factor 
-term: 	factor factor_seq
-atom: NUMBER_INT
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+atom: NAME
 power:	atom
 factor: power
 term: 	factor
-term_seq : '-' term 
-atom: NUMBER_INT
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
 power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_INT 8
+power:	atom
+factor: power
+term: 	factor
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+term_seq : '+' term 
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
 factor: power
 term: 	factor
 term_seq : term_seq '+' term 
@@ -70,69 +234,32 @@ expr_stmt: testlist_star_expr right_testlist
 small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT
-power:	atom
-factor: power
-term: 	factor
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
-parameters:'(' ')'
-funcheader: DEF NAME parameters ':' 
-suite:	END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-parameters:'(' ')'
-funcheader: DEF NAME parameters ':' 
-suite:	END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt
 list_stmt : stmt list_stmt
+parameters:'(' ')'
+funcheader: DEF NAME parameters ':' 
+suite:	END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt list_stmt
+parameters:'(' ')'
+funcheader: DEF NAME parameters ':' 
+suite:	END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
 list_stmt : stmt list_stmt
 suite:	list_stmt END
 classdef: classheader suite
+class_h: CLASS ID 
+suite:	END
+classdef: classheader suite
 temp2: classdef 
+temp2: classdef temp2
 program : temp2 
 file_input: program ENDMARKER

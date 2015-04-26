@@ -2,7 +2,7 @@
 #ifndef __TYPENODE__
 #define __TYPENODE__
 #include"Node.h"
-#include"ST\Type.h"
+#include"..\ST\Type.h"
 enum Types {
 	INT, FLOAT, CHAR, LONG,STRINGS,True,False
 };

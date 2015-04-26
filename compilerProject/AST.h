@@ -1,32 +1,44 @@
 #pragma once
 #ifndef __AST__
 #define __AST__
-#include"Node.h"
-#include"ClassNode.h"
-#include"WhileNode.h"
-#include"expressionNode.h"
-#include"IDNode.h"
-#include"AssignmentNode.h"
-#include"ValueNode.h"
-#include"functionNode.h"
-#include"CallVariableNode.h"
-#include"CallTypeNode.h"
-#include"callFunctionNode.h"
+#include"ast\Node.h"
 #include"dotNode.h"
+#include"ast\ClassNode.h"
+#include"ast\expressionNode.h"
+#include"ast\IDNode.h"
+#include"ast\AssignmentNode.h"
+#include"ast\ValueNode.h"
+#include"ast\functionNode.h"
+#include"ast\CallVariableNode.h"
+#include"ast\CallTypeNode.h"
+#include"ast\callFunctionNode.h"
+#include"ast\WhileNode.h"
+#include"ast\ifNode.h"
+#include"ast\ElseIfNode.h"
+#include"ast\ElseNode.h"
+#include"ast\ForNode.h"
+#include"ast\TryNode.h"
+#include"ast\ExceptNode.h"
+#include"ast\FinallyNode.h"
+#include"ast\ArrayElementNode.h"
+#include"ArrayNode.h"
+#include"../compilerProject/MyParser.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
 //statements
-"ifNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode",
+"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode",
 
 //function
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
 
 //type: Here AST is used as temporoy data structure to hold type to upper grammars
 "idTypeNode", "intTypeNode", "stringTypeNode", "classNode", "TypeCall", "VariableCall","Unkown","DotNode" };
-
+bool by_self = false;
 class AST
 {
+private:
+	Type* t=NULL;
 public:
 	AST(void)
 	{
@@ -36,6 +48,7 @@ public:
 	{
 
 	}
+	vector<Node*>outer_node;
 	ClassNode * createClassNode(Type* t,Node * son, Node* next)
 	{
 		ClassNode* temp = new ClassNode(t, son, next);
@@ -46,9 +59,29 @@ public:
 		FunctionNode* temp = new FunctionNode(f, son, next);
 		return temp;
 	}
-	WhileNode * createWhileNode(Node* cond, Node * son, Node* next)
+	WhileNode * createWhileNode(Node * son, Node* next, Node* cond, Node* scoop)
 	{
-		WhileNode* temp = new WhileNode(cond, son, next);
+		WhileNode* temp = new WhileNode(son, next, cond, scoop);
+		return temp;
+	}
+	ForNode* createForNode(Node * son, Node* next, Node* expr, Node* range, Node* scoop)
+	{
+		ForNode* temp = new ForNode(son, next, expr, range, scoop);
+		return temp;
+	}
+	TryNode* createTryNode(Node * son, Node* next, Node* scoop)
+	{
+		TryNode* temp = new TryNode(son, next, scoop);
+		return temp;
+	}
+	ExceptNode* createExceptNode(Node * son, Node* next, Node* exception, Node* scoop)
+	{
+		ExceptNode* temp = new ExceptNode(son, next, exception, scoop);
+		return temp;
+	}
+	FinallyNode* createFinallyNode(Node* son, Node* next, Node* scoop)
+	{
+		FinallyNode* temp = new FinallyNode(son, next, scoop);
 		return temp;
 	}
 	ExpressionNode * createExprNode(Node * son, Node* next,operand op)
@@ -84,9 +117,48 @@ public:
 		CallVariableNode *temp = new CallVariableNode(id, v, son, next);
 		return temp;
 	}
+	CallTypeNode * createCallTypeNode(string id, vector<char*>args, Node * son, Node* next)
+	{
+		CallTypeNode *temp = new CallTypeNode(id, args, son, next);
+		return temp;
+	}
+	IfNode* createIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	{
+		IfNode* temp = new IfNode(son, next, condition, scoop);
+		return temp;
+	}
+	ElseIfNode* createElseIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	{
+		ElseIfNode* temp = new ElseIfNode(son, next, condition, scoop);
+		return temp;
+	}
+	ElseNode* createElseNode(Node* son, Node* next, Node* scoop)
+	{
+		ElseNode* temp = new ElseNode(son, next, scoop);
+		return temp;
+	}
 	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next)
 	{
 		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next);
+		//Node* i = temp;
+		return temp;
+	}
+	ArrayNode* createArrayNode(vector<Node*>elem, Node * son, Node* next)
+	{
+		ArrayNode* temp = new ArrayNode(elem, son, next);
+		//Node* u = temp;
+		return temp;
+	}
+	ArrayElementNode* createArrayElementNode(Variable* v, Node* index, Node * son, Node* next,  int line_no, int col_no,string x = "")
+	{
+		ArrayElementNode* temp;
+		if (x != "")
+		{
+			 temp = new ArrayElementNode(x,v, index, son, next);
+		}
+		else
+			 temp = new ArrayElementNode(v,index, son, next);
+		//Node* u = temp;
 		return temp;
 	}
 	Node * addNext(Node* base,Node* next)
@@ -105,10 +177,296 @@ public:
 	void print(Node * tn, int lvl)
 	{
 		if (tn){
+			cout << "my id is " << tn->getId() << "   ";
 				tn->print();
 			print(tn->Son, lvl + 1);
-			print(tn->Next, lvl + 1);
+			print(tn->Next, lvl);
 		}
+	}
+	void tree(Node* n)
+	{
+		Type  * t1=new Type();
+		Function* f=new Function();
+		Variable * v=new Variable();
+		bool is_dot = false;
+		MyParser* p = new MyParser();
+		if (n)
+		{
+			if ((outer_node.size() > 0) && (outer_node.back()->getId() < n->getId()))
+			{
+				outer_node.pop_back();
+			}
+			if (n->getNodeType() == "ClassNode")
+			{
+				ClassNode* test = static_cast<ClassNode*>(n);
+				//cout << "class name is " << test->get_type()->get_name() << endl;
+				t = test->get_type();
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "FunctionNode")
+			{
+				FunctionNode* test = static_cast<FunctionNode*>(n);
+				f = test->get_function();
+				outer_node.push_back(n);
+				
+			}
+			else if (n->getNodeType() == "ForNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "WhileNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "CallTypeNode")
+			{
+				CallTypeNode* test = static_cast<CallTypeNode*>(n);
+				string x = test->getID();
+				char* p = const_cast<char *>(x.c_str());
+				t1=checkType(t,p);
+				if (!t1)
+					cout <<"Type not found "<<x<<endl ;
+				else
+				{
+					static_cast<CallTypeNode*>(n)->setType(t1);
+					
+				}
+			}
+			else if (n->getNodeType() == "DotNode")
+			{
+				t1 = t;
+				Node* temp = n->Son;
+				while (temp)
+				{
+					if (temp->getNodeType() == "CallVariableNode")
+					{
+						CallVariableNode* test = static_cast<CallVariableNode*>(temp);
+						string x = test->getID();
+						if (x == "self")
+						{
+							by_self = true;
+							
+						}
+						else
+						{
+							if ((by_self))
+							{
+								if (temp->Next == NULL)
+								{
+									char* p = const_cast<char *>(x.c_str());
+									v=checkVariable(t, p);
+									if (v)
+									{
+										//cout << "v name is " << v->get_name() << endl;
+										static_cast<CallVariableNode*>(temp)->set_variable(v);
+									}
+								}
+								else
+								{
+									//on generating code (self.x.y)
+								}
+								by_self = false;
+							}
+							else
+							{
+								if (temp->Next == NULL)
+								{
+									char* p = const_cast<char *>(x.c_str());
+									if (t1)
+									{
+										v = checkVariable(t1, p);
+										if (v)
+										{
+											test->set_variable(v);
+										}
+									}
+										
+								}
+								else{
+									t1 = NULL;
+									//on generating code (x.y)
+								}
+									
+							}
+						}
+					}
+					else if (temp->getNodeType() == "callFunctionNode")
+					{
+						CallFunctionNode* test = static_cast<CallFunctionNode*>(temp);
+						string x = test->getID();
+						char* p = const_cast<char *>(x.c_str());
+						if ((by_self))
+						{
+							f = checkFunction(t1, p);
+							if (f)
+							{
+								static_cast<CallFunctionNode*>(temp)->set_function(f);
+								if (f->getparameters().size() !=0)
+								{
+
+								}
+							}
+							by_self = false;
+						}
+					}
+					else if (temp->getNodeType() == "ArrayElementNode")
+					{
+						ArrayElementNode* test = static_cast<ArrayElementNode*>(temp);
+						string x = test->getID();
+						char* p = const_cast<char *>(x.c_str());
+						if ((by_self))
+						{
+							v = checkVariable(t, p);
+							if ((v)&&(v->get_isarray()))
+							{
+								//cout << "v name is " << v->get_name() << endl;
+								static_cast<ArrayElementNode*>(temp)->set_variable(v);
+							}
+							else if (! v->get_isarray())
+							{
+								cout << "Error: variable is not array" << endl;
+							}
+							by_self = false;
+						}
+					}
+					temp = temp->Next;
+					
+				}
+			}
+			if (!is_dot)
+			{
+				tree(n->Son);
+			}
+			else
+				is_dot = false;
+			tree(n->Next);
+				
+		}
+	}
+	void checkFromCurrentNode(Node* n)
+	{
+
+	}
+	
+	Variable* checkVariableFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num)
+	{
+		Variable* v=NULL;
+		int j = 0;
+		vector<Type*>i_t = t->getInheritedType();
+		string s = "";
+		for (int i = 0; i < i_t.size(); i++)
+		{
+			v = (Variable*)i_t.at(i)->getScope()->m->get(name, "Variable");
+			if (v)
+			{
+				toto = toto + v->get_name() + " ";
+				t_num++;
+			}
+			else
+			{
+				checkVariableFromInhertanceLoop(i_t.at(i), name, toto, t_num);
+			}
+
+		}
+		return v;
+	}
+	Variable* checkVariable(Type* t, char* name)
+	{
+		Variable* v = (Variable*)t->getScope()->m->get(name, "Variable");
+		if (!v){
+			int j = 0;
+			string s;
+			v = checkVariableFromInhertanceLoop(t, name, s, j);
+			if (v)
+			{
+				if (j > 1)
+					cout << "ambigious variable in parents types " << s << endl;
+			}
+			else
+			{
+				cout << "Error :variable Not found "<<name<<endl;
+			}
+		}
+		return v;
+	}
+	Function* checkFunction(Type* t, char* name)
+	{
+		Function * f = (Function*)t->getScope()->m->get(name, "Function");
+		if (!f){
+			int j = 0;
+			vector<Type*>i_t = t->getInheritedType();
+			for (int i = 0; i < i_t.size(); i++)
+			{
+				f = (Function*)i_t.at(i)->getScope()->m->get(name, "Function");
+				j++;
+			}
+			if (!f)
+			{
+				cout << "error";
+			}
+			else
+			{
+				if (j > 1)
+					cout << "ambigious function in parents types";
+			}
+		}
+		return f;
+	}
+	Type* checkTypeFromInhertanceLoop(Type* t, char* name,string& toto,int& t_num)
+	{
+		Type* v=NULL;
+		int j = 0;
+		vector<Type*>i_t = t->getInheritedType();
+		string s="";
+		for (int i = 0; i < i_t.size(); i++)
+		{
+			v = (Type*)i_t.at(i)->getScope()->m->get(name, "Class");
+			if (v)
+			{
+				toto = toto + v->get_name()+" ";
+				t_num++;
+			}
+			else
+			{
+				checkTypeFromInhertanceLoop(i_t.at(i), name, toto, t_num);
+			}
+
+		}
+		return v;
+	}
+	Type* checkType(Type* t, char* name)
+	{
+		Type * v = (Type*)t->getScope()->m->get(name, "Class");
+		string s;
+		int x = 0;
+		if (!v){
+			v = checkTypeFromInhertanceLoop(t, name, s, x);
+			if (v)
+			{
+				if (x > 1)
+					cout << "ambigious type in parents types " << s << endl;
+			}
+			else
+			{
+				Scope * temp = t->getScope()->parent;
+				while (temp && !v){
+					v = (Type*)temp->m->get(name, "Class");
+					temp = temp->parent;
+				}
+			}
+		}
+		return v;
+	}
+	Variable* checkVarForScope(char* x)
+	{
+		int i = 1;
+		do
+		{
+			if (outer_node.at(outer_node.size() - i))
+			{
+
+			}
+		} while (true);
 	}
 };
 #endif

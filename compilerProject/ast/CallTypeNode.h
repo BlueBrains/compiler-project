@@ -2,24 +2,29 @@
 #ifndef __CALLNODE__
 #define __CALLNODE__
 #include"Node.h"
-#include"ST\Type.h"
-#include"ST\Function.h"
+#include"..\ST\Type.h"
+#include"..\ST\Function.h"
 #include<string>
 using namespace std;
 class CallTypeNode :public Node
 {
 private:
 	string ID;
-	vector<string>argument;
-	Type* t = NULL;
-	Function* f = NULL;
+	vector<char*>argument;
+	Type* t;
+	Function* f;
 public:
 	
 	CallTypeNode() :ID(NULL), Node(NULL, NULL)
 	{
-
+		t = NULL;
+		f = NULL;
 	}
-	CallTypeNode(string id, vector<string>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next)
+	string getID()
+	{
+		return ID;
+	}
+	CallTypeNode(string id, vector<char*>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next)
 	{
 
 	}

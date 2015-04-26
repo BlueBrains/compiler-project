@@ -23,13 +23,14 @@ Variable::Variable(char* name, bool is_array, bool is_dic, char* accessModifier)
 	this->is_array = is_array;
 	this->is_dic = is_dic;
 	this->setAccessModifier(accessModifier);
+	this->set_lastTypes();
 }
 Variable::Variable(){
 	this->type = NULL;
 	this->isConst = false;
 	this->is_array = false;
 	this->is_dic = false;
-
+	this->set_lastTypes();
 	this->setAccessModifier("private");
 	//this->setAccessModifier(accessModifier);
 }
@@ -37,7 +38,43 @@ Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->type = type;
 	this->isConst = isConst;
 	this->setAccessModifier("private");
+	this->set_lastTypes();
+}
+void Variable::set_lastTypes(int val)
+{
+	int* xx = new int(val);
+	lastType=make_pair("int" ,(void*)xx);
+}
+void Variable::set_lastTypes(float val)
+{
+	float* xx = new float(val);
+	lastType = make_pair("float", (void*)xx);
 
+}
+void Variable::set_lastTypes(char val)
+{
+	char* xx = new char(val);
+	lastType = make_pair("char", (void*)xx);
+}
+void Variable::set_lastTypes(string val)
+{
+	string* xx = new string(val);
+	lastType = make_pair("string", (void*)xx);
+}
+void Variable::set_lastTypes(Type* val)
+{
+	//lastType["ID"] = val;
+	lastType = make_pair("ID", val);
+}
+void Variable::set_lastTypes()
+{
+	int* xx = new int(NULL);
+	lastType = make_pair("NULL", (void*)xx);
+}
+void Variable::set_lastTypes(long val)
+{
+	long* xx = new long(val);
+	lastType = make_pair("long", (void*)xx);
 }
 void Variable::set_static(bool s)
 {

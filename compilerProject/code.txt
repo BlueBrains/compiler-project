@@ -1,10 +1,18 @@
 class u:
+	def l;
 	def final coco():
-		x=(5+9)*7-7+2;
-		y=8+p;
+	y=[];
+	m=g();
+	n=ui();
+	u=o;
+		n=self.l;
+		y=8+p+self.x;
+	#	z=[1,2,3];
 	end	
 	def x():
 	end
 def g():
 end
+end
+class g:
 end

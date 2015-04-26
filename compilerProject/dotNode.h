@@ -1,7 +1,7 @@
 #pragma once
 #ifndef __DOTEDNODE__
 #define __DOTEDNODE__
-#include"Node.h"
+#include"AST/Node.h"
 #include<string>
 using namespace std;
 class DotNode :public Node
@@ -12,7 +12,7 @@ public:
 	
 	DotNode() : Node(NULL, NULL)
 	{
-
+		
 	}
 	DotNode( Node* son, Node*next) : Node(son, next)
 	{
@@ -26,5 +26,6 @@ public:
 	{
 		return "DotNode";
 	}
+
 };
 #endif

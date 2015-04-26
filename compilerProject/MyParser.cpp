@@ -152,10 +152,21 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	if (self)
 	{
 		v = (Variable*)t->getScope()->m->get(name, "Variable");
+		
+
 	}
 	else
 	{
-		 v = this->st->getVariableFromCurrentScope(name, t);
+		 v = this->st->getVariableFromCurrentScopeToTyp(name, t);
+		 if ((is_array)&&(v))
+		 {
+			 if (!v->get_isarray())
+			 {
+				 this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted array Variable ", name);
+				 Streams::verbose() << "Error: variable is not array at Line No:" << lineNo << " Column No:" << colNo << endl;
+				 return NULL;
+			 }
+		 }
 	}
 
 	if (!v)

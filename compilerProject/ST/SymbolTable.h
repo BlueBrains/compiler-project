@@ -28,6 +28,7 @@ public:
 	void add_declareted_type(Type* type);
 	Scope * getrootscope();
 	bool checkInhertanceLoop();
+	Variable* getVariableFromCurrentScopeToTyp(char* name, Type* t);
 	SymbolTable(void);
 	~SymbolTable(void);
 };

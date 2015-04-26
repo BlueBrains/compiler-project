@@ -77,9 +77,6 @@
     <ClCompile Include="myvector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="functionNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\yacc.hpp">
@@ -157,9 +154,6 @@
     <ClInclude Include="CallVariableNode.h">
       <Filter>Header Files\AST</Filter>
     </ClInclude>
-    <ClInclude Include="dotNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
     <ClInclude Include="ClassNode.h">
       <Filter>Header Files\AST</Filter>
     </ClInclude>
@@ -175,8 +169,14 @@
     <ClInclude Include="ValueNode.h">
       <Filter>Header Files\AST</Filter>
     </ClInclude>
-    <ClInclude Include="WhileNode.h">
+    <ClInclude Include="dotNode.h">
       <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\ArrayElementNode.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

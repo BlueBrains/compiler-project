@@ -38,8 +38,8 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option noyywrap
 
 %%
-<<EOF>>     {return ENDMARKER; 
-				}
+				//<<EOF>>     {return ENDMARKER; 
+				//}
 "import"	{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -272,7 +272,7 @@ float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	EXPECT;
+				return	EXCEPT;
 			}
 "with"		{
 				colNum += strlen(yytext);

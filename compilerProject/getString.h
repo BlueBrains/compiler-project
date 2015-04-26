@@ -2,7 +2,7 @@
 #ifndef __GETSTRING__
 #define __GETSTRING__
 #include<string>
-#include"expressionNode.h"
+#include"AST/expressionNode.h"
 using namespace std;
 class getString
 {

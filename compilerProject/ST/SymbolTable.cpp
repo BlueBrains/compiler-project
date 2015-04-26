@@ -68,6 +68,24 @@ Function *  SymbolTable::getFunctionFromCurrentScope(char* name, Type* t, vector
 	return f;
 
 }
+Variable* SymbolTable::getVariableFromCurrentScopeToTyp(char* name, Type* t)
+{
+	Variable * v = (Variable*)this->currScope->m->get(name, "Variable");
+	if (t == NULL)
+	{
+		return NULL;
+	}
+	if (!v)
+	{
+		Scope * temp = this->currScope->parent;
+		while (!v &&(temp!=t->getScope()))
+		{
+			v = (Variable*)temp->m->get(name, "Variable");
+			temp = temp->parent;
+		}
+	}
+	return v;
+}
 Variable * SymbolTable::getVariableFromCurrentScope(char* name, Type* t){
 	Variable * v = (Variable*)this->currScope->m->get(name, "Variable");
 	if (t == NULL)

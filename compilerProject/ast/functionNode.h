@@ -2,7 +2,7 @@
 #ifndef __FUNCTIONNODE__
 #define __FUNCTIONNODE__
 #include"Node.h"
-#include"ST\Function.h"
+#include"..\ST\Function.h"
 class FunctionNode :public Node
 {
 private:
