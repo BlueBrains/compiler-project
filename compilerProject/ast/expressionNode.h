@@ -4,7 +4,7 @@
 #include"Node.h"
 #include"..\ST\Type.h"
 enum operand {
-	PLUS, MINUS, MULT, DIV,MOD,GREATHER,LESS,EQUALGREATHER,EQUALLESS
+	PLUS, MINUS, MULT, DIV,MOD,GREATHER,LESS,EQUALGREATHER,EQUALLESS,EQUAL,NOT_EQUAL
 };
 class ExpressionNode :public Node
 {

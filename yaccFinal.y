@@ -62,6 +62,7 @@
 	bool constant =false;
 	Node* lastNode;
 	operand op;
+	operand comp_op;
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
 	vector<Node*>arrayvec;
@@ -946,21 +947,33 @@ not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";}
 			| comparison {Streams::verbose() <<"not_test:	comparison\n";$<tn>$=$<tn>1;}
 			;
 
-comp_op_seq: comp_op expr %prec stmt_7 {Streams::verbose() <<"comp_op_seq: comp_op expr \n";}
-			 |comp_op_seq comp_op expr {Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";}
+comp_op_seq: comp_op expr %prec stmt_7 {
+											Streams::verbose() <<"comp_op_seq: comp_op expr \n";
+											$<tn>$=$<tn>2;
+										}
+			 |comp_op_seq comp_op expr {
+											Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";
+											$<tn>$=ast->createExprNode($<tn>1,$<tn>2,NULL,comp_op,yylval.r.lineNum,yylval.r.colNum);	
+										}
 			 ;
 				
 comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;}
-			|expr comp_op_seq %prec stmt_12 {Streams::verbose() <<"comparison: expr comp_op_seq\n";$<tn>$=$<tn>1;}
+			|expr comp_op_seq %prec stmt_12 {
+					Streams::verbose() <<"comparison: expr comp_op_seq\n";$<tn>$=$<tn>1;
+						$<tn>$=ast->createExprNode($<tn>1,$<tn>2,NULL,comp_op,yylval.r.lineNum,yylval.r.colNum);
+				}
 			;
 
-comp_op: '<' {Streams::verbose() <<"comp_op: '<' \n";}
-		|'>'{Streams::verbose() <<"comp_op: '>' \n";}
-		|EQUAL {Streams::verbose() <<"comp_op: EQUAL \n";}
-		|MORE_OR_EQUAL {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";}
-		|LESS_OR_EQUAL {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";}
+comp_op: '<' {	
+				Streams::verbose() <<"comp_op: '<' \n";
+				comp_op=LESS;
+			}
+		|'>'{Streams::verbose() <<"comp_op: '>' \n";comp_op=GREATHER;}
+		|EQUAL {Streams::verbose() <<"comp_op: EQUAL \n";comp_op=EQUAL;}
+		|MORE_OR_EQUAL {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";comp_op=EQUALGREATHER;}
+		|LESS_OR_EQUAL {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";comp_op=EQUALLESS;}
 		|MORE_LESS {Streams::verbose() <<"comp_op: MORE_LESS \n";}
-		|NOT_EQUAL {Streams::verbose() <<"comp_op: NOT_EQUAL \n";}
+		|NOT_EQUAL {Streams::verbose() <<"comp_op: NOT_EQUAL \n";comp_op=NOT_EQUAL;}
 		|IN {Streams::verbose() <<"comp_op: IN \n";}
 		|NOT IN {Streams::verbose() <<"comp_op: NOT IN \n";}
 		|IS {Streams::verbose() <<"comp_op: IS \n";}
