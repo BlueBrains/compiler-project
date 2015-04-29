@@ -20,12 +20,13 @@ private:
 	bool is_dic;
 	bool is_static;
 public:
-
+	bool init = false;
 	bool by_self;
 	Variable(char* name, bool is_array = false, bool is_dic = false, char* = "private");
 	Variable(Variable*);
 	Variable();
 	Variable(char* name, Type* type, bool);
+	
 	void set_lastTypes(int val);
 	void set_lastTypes();
 	void set_lastTypes(float val);

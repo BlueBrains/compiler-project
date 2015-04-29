@@ -22,5 +22,9 @@ public:
 	{
 		return "FinallyNode";
 	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		return pi;
+	}
 
 };

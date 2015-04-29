@@ -1,7 +1,6 @@
 #pragma once
 #ifndef __AST__
 #define __AST__
-#include"ast\Node.h"
 #include"dotNode.h"
 #include"ast\ClassNode.h"
 #include"ast\expressionNode.h"
@@ -22,12 +21,17 @@
 #include"ast\FinallyNode.h"
 #include"ast\ArrayElementNode.h"
 #include"ArrayNode.h"
-#include"../compilerProject/MyParser.h"
+#include"ast\flowStmt.h"
+#include"ast\PrintNode.h"
+#include"ast\GlobalNode.h"
+#include"ast\DelNode.h"
+#include"ast\PassNode.h"
+
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
 //statements
-"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode",
+"ifNode", "elseIfNode", "elseNode", "stmtListNode", "whileNode", "declrationStmtNode", "expressionNode", "forNode", "tryNode", "exceptNode", "finallyNode", "flowStmtNode", "printNode", "delNode", "importNode", "globalNode", "passNode",
 
 //function
 "functionListNode", "functionNode", "functionHeaderNode", "paramNode", "paramListNode", "FunctionCall",
@@ -39,6 +43,9 @@ class AST
 {
 private:
 	Type* t=NULL;
+	Function* f = NULL;
+	Variable * v = new Variable();
+	bool right_assign=false;
 public:
 	AST(void)
 	{
@@ -49,103 +56,140 @@ public:
 
 	}
 	vector<Node*>outer_node;
-	ClassNode * createClassNode(Type* t,Node * son, Node* next)
+	ClassNode * createClassNode(Type* t, Node * son, Node* next, int line_no, int col_no)
 	{
-		ClassNode* temp = new ClassNode(t, son, next);
+		ClassNode* temp = new ClassNode(t, son, next,line_no,col_no);
 		return temp;
 	}
-	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next)
+	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next,  int line_no, int col_no)
 	{
-		FunctionNode* temp = new FunctionNode(f, son, next);
+		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no);
+		//f->set_FunctionNode(temp);
+		f->set_label(f->get_name()+temp->getId());
 		return temp;
 	}
-	WhileNode * createWhileNode(Node * son, Node* next, Node* cond, Node* scoop)
+	WhileNode * createWhileNode(Node * son, Node* next, Node* cond, Node* scoop,  int line_no, int col_no)
 	{
 		WhileNode* temp = new WhileNode(son, next, cond, scoop);
 		return temp;
 	}
-	ForNode* createForNode(Node * son, Node* next, Node* expr, Node* range, Node* scoop)
+	ForNode* createForNode(Node * son, Node* next, Node* expr, Node* range, Node* scoop,  int line_no, int col_no)
 	{
 		ForNode* temp = new ForNode(son, next, expr, range, scoop);
 		return temp;
 	}
-	TryNode* createTryNode(Node * son, Node* next, Node* scoop)
+	TryNode* createTryNode(Node * son, Node* next, Node* scoop,  int line_no, int col_no)
 	{
 		TryNode* temp = new TryNode(son, next, scoop);
 		return temp;
 	}
-	ExceptNode* createExceptNode(Node * son, Node* next, Node* exception, Node* scoop)
+	ExceptNode* createExceptNode(Node * son, Node* next, Node* exception, Node* scoop,  int line_no, int col_no)
 	{
 		ExceptNode* temp = new ExceptNode(son, next, exception, scoop);
 		return temp;
 	}
-	FinallyNode* createFinallyNode(Node* son, Node* next, Node* scoop)
+	FinallyNode* createFinallyNode(Node* son, Node* next, Node* scoop, int line_no, int col_no)
 	{
 		FinallyNode* temp = new FinallyNode(son, next, scoop);
 		return temp;
 	}
-	ExpressionNode * createExprNode(Node * son, Node* next,operand op)
-	{
-		ExpressionNode* temp = new ExpressionNode(op, son, next);
+	FlowStmtNode* createFlowStmtNode(Node* son, Node* next, flowType type, Node* scoop, int line_no, int col_no){
+		FlowStmtNode* temp = new FlowStmtNode(son, next, type, scoop);
+		return temp;
+	}	
+	DelNode * createDelNode(Node* son, Node* next, Node* scoop, int line_no, int col_no){
+		DelNode* temp = new DelNode(son,next,scoop);
 		return temp;
 	}
-	IDNode * createIDNode(Variable* v1, Node * son, Node* next)
-	{
-		IDNode* temp = new IDNode(v1, son, next);
+	PassNode * createPassNode(Node* son, Node* next, Node* scoop, int line_no, int col_no){
+		PassNode* temp = new PassNode(son,next,scoop);
 		return temp;
 	}
-	 AssignmentNode* createAssignNode(Node * son, Node* next)
-	{
-		AssignmentNode* temp = new AssignmentNode(son, next);
+	PrintNode * createPrintNode(Node* son, Node* next, Node* scoop, int line_no, int col_no){
+		PrintNode* temp = new PrintNode(son,next,scoop,line_no,col_no);
 		return temp;
 	}
-	 DotNode* createDotNode(Node * son, Node* next)
+	GlobalNode * createGlobalNode(Node* son, Node* next, Node* scoop, int line_no, int col_no){
+		GlobalNode* temp = new GlobalNode(son,next,scoop);
+		return temp;
+	}
+	ExpressionNode * createExprNode(Node * son, Node* next, operand op, int line_no, int col_no)
+	{
+		ExpressionNode* temp = new ExpressionNode(op, son, next,line_no,col_no);
+		return temp;
+	}
+	ExpressionNode * createExprNode(Node*First,Node* second, Node* next, operand op, int line_no, int col_no)
+	{
+		ExpressionNode* temp = new ExpressionNode(First,second,op, NULL, next, line_no, col_no);
+		return temp;
+	}
+	IDNode * createIDNode(Variable* v1, Node * son, Node* next,  int line_no, int col_no)
+	{
+		IDNode* temp = new IDNode(v1, son, next,line_no,col_no);
+		return temp;
+	}
+	AssignmentNode* createAssignNode(Node * son, Node* next, int line_no, int col_no)
+	{
+		AssignmentNode* temp = new AssignmentNode(son, next,line_no,col_no);
+		return temp;
+	}
+	AssignmentNode* createAssignNode(Node* left_side,Node*right_side,Node * son, Node* next, int line_no, int col_no)
+	{
+		AssignmentNode* temp = new AssignmentNode(left_side, right_side, son, next, line_no, col_no);
+		return temp;
+	}
+	DotNode* createDotNode(Node * son, Node* next, int line_no, int col_no)
 	 {
-		 DotNode* temp = new DotNode(son, next);
+		 DotNode* temp = new DotNode(son, next,line_no,col_no);
 		 return temp;
 	 }
-	ValueNode * createTypeNode(void* v1, Node * son, Node* next, Types t)
+	DotNode* createDotNode(vector<Node*>v,Node * son, Node* next, int line_no, int col_no)
+	{
+		DotNode* temp = new DotNode(v,son, next, line_no, col_no);
+		return temp;
+	}
+	ValueNode * createTypeNode(void* v1, Node * son, Node* next,  int line_no, int col_no, Types t)
 	{
 		
 		//cout << "value is amer " << (*(int*)v1) << endl;
-		ValueNode* temp = new ValueNode(v1, t, son, next);
+		ValueNode* temp = new ValueNode(v1, t, son, next,line_no,col_no);
 		return temp;
 	}
 
-	CallVariableNode * createCallVarNode(string id,Variable* v, Node * son, Node* next)
+	CallVariableNode * createCallVarNode(string id,Variable* v, Node * son, Node* next,  int line_no, int col_no)
 	{
-		CallVariableNode *temp = new CallVariableNode(id, v, son, next);
+		CallVariableNode *temp = new CallVariableNode(id, v, son, next,line_no,col_no);
 		return temp;
 	}
-	CallTypeNode * createCallTypeNode(string id, vector<char*>args, Node * son, Node* next)
+	CallTypeNode * createCallTypeNode(string id, vector<char*>args, Node * son, Node* next,  int line_no, int col_no)
 	{
-		CallTypeNode *temp = new CallTypeNode(id, args, son, next);
+		CallTypeNode *temp = new CallTypeNode(id, args, son, next,line_no,col_no);
 		return temp;
 	}
-	IfNode* createIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	IfNode* createIfNode(Node* son, Node* next, Node* condition, Node* scoop,  int line_no, int col_no)
 	{
-		IfNode* temp = new IfNode(son, next, condition, scoop);
+		IfNode* temp = new IfNode(son, next, condition, scoop,line_no,col_no);
 		return temp;
 	}
-	ElseIfNode* createElseIfNode(Node* son, Node* next, Node* condition, Node* scoop)
+	ElseIfNode* createElseIfNode(Node* son, Node* next, Node* condition, Node* scoop, int line_no, int col_no)
 	{
-		ElseIfNode* temp = new ElseIfNode(son, next, condition, scoop);
+		ElseIfNode* temp = new ElseIfNode(son, next, condition, scoop,line_no,col_no);
 		return temp;
 	}
-	ElseNode* createElseNode(Node* son, Node* next, Node* scoop)
+	ElseNode* createElseNode(Node* son, Node* next, Node* scoop, int line_no, int col_no)
 	{
-		ElseNode* temp = new ElseNode(son, next, scoop);
+		ElseNode* temp = new ElseNode(son, next, scoop,line_no,col_no);
 		return temp;
 	}
-	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next)
+	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next,  int line_no, int col_no)
 	{
-		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next);
+		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next,line_no,col_no);
 		//Node* i = temp;
 		return temp;
 	}
-	ArrayNode* createArrayNode(vector<Node*>elem, Node * son, Node* next)
+	ArrayNode* createArrayNode(vector<Node*>elem, Node * son, Node* next,  int line_no, int col_no)
 	{
-		ArrayNode* temp = new ArrayNode(elem, son, next);
+		ArrayNode* temp = new ArrayNode(elem, son, next,line_no,col_no);
 		//Node* u = temp;
 		return temp;
 	}
@@ -154,10 +198,10 @@ public:
 		ArrayElementNode* temp;
 		if (x != "")
 		{
-			 temp = new ArrayElementNode(x,v, index, son, next);
+			 temp = new ArrayElementNode(x,v, index, son, next,line_no,col_no);
 		}
 		else
-			 temp = new ArrayElementNode(v,index, son, next);
+			temp = new ArrayElementNode(v, index, son, next, line_no, col_no);
 		//Node* u = temp;
 		return temp;
 	}
@@ -184,12 +228,11 @@ public:
 		}
 	}
 	void tree(Node* n)
-	{
+			{
 		Type  * t1=new Type();
-		Function* f=new Function();
-		Variable * v=new Variable();
+		
 		bool is_dot = false;
-		MyParser* p = new MyParser();
+		//MyParser* p = new MyParser();
 		if (n)
 		{
 			if ((outer_node.size() > 0) && (outer_node.back()->getId() < n->getId()))
@@ -208,130 +251,43 @@ public:
 				FunctionNode* test = static_cast<FunctionNode*>(n);
 				f = test->get_function();
 				outer_node.push_back(n);
-				
 			}
 			else if (n->getNodeType() == "ForNode")
 			{
 				outer_node.push_back(n);
 			}
+			else if (n->getNodeType() == "AssignmentNode")
+			{
+				//outer_node.push_back(n);
+				n->check(outer_node);
+				right_assign = true;
+			}
 			else if (n->getNodeType() == "WhileNode")
 			{
 				outer_node.push_back(n);
 			}
+			else if (n->getNodeType() == "CallVariableNode")
+			{
+				string h = static_cast<CallVariableNode*>(n)->getID();
+				v=checkVarFromCurrentNode(h);
+				if (!v)
+					cout << "Error :variable Not found " << h << " at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+
+			}
 			else if (n->getNodeType() == "CallTypeNode")
 			{
-				CallTypeNode* test = static_cast<CallTypeNode*>(n);
-				string x = test->getID();
-				char* p = const_cast<char *>(x.c_str());
-				t1=checkType(t,p);
-				if (!t1)
-					cout <<"Type not found "<<x<<endl ;
-				else
-				{
-					static_cast<CallTypeNode*>(n)->setType(t1);
-					
-				}
+				n->check(outer_node);
 			}
 			else if (n->getNodeType() == "DotNode")
 			{
-				t1 = t;
-				Node* temp = n->Son;
-				while (temp)
-				{
-					if (temp->getNodeType() == "CallVariableNode")
-					{
-						CallVariableNode* test = static_cast<CallVariableNode*>(temp);
-						string x = test->getID();
-						if (x == "self")
-						{
-							by_self = true;
-							
-						}
-						else
-						{
-							if ((by_self))
-							{
-								if (temp->Next == NULL)
-								{
-									char* p = const_cast<char *>(x.c_str());
-									v=checkVariable(t, p);
-									if (v)
-									{
-										//cout << "v name is " << v->get_name() << endl;
-										static_cast<CallVariableNode*>(temp)->set_variable(v);
-									}
-								}
-								else
-								{
-									//on generating code (self.x.y)
-								}
-								by_self = false;
-							}
-							else
-							{
-								if (temp->Next == NULL)
-								{
-									char* p = const_cast<char *>(x.c_str());
-									if (t1)
-									{
-										v = checkVariable(t1, p);
-										if (v)
-										{
-											test->set_variable(v);
-										}
-									}
-										
-								}
-								else{
-									t1 = NULL;
-									//on generating code (x.y)
-								}
-									
-							}
-						}
-					}
-					else if (temp->getNodeType() == "callFunctionNode")
-					{
-						CallFunctionNode* test = static_cast<CallFunctionNode*>(temp);
-						string x = test->getID();
-						char* p = const_cast<char *>(x.c_str());
-						if ((by_self))
-						{
-							f = checkFunction(t1, p);
-							if (f)
-							{
-								static_cast<CallFunctionNode*>(temp)->set_function(f);
-								if (f->getparameters().size() !=0)
-								{
-
-								}
-							}
-							by_self = false;
-						}
-					}
-					else if (temp->getNodeType() == "ArrayElementNode")
-					{
-						ArrayElementNode* test = static_cast<ArrayElementNode*>(temp);
-						string x = test->getID();
-						char* p = const_cast<char *>(x.c_str());
-						if ((by_self))
-						{
-							v = checkVariable(t, p);
-							if ((v)&&(v->get_isarray()))
-							{
-								//cout << "v name is " << v->get_name() << endl;
-								static_cast<ArrayElementNode*>(temp)->set_variable(v);
-							}
-							else if (! v->get_isarray())
-							{
-								cout << "Error: variable is not array" << endl;
-							}
-							by_self = false;
-						}
-					}
-					temp = temp->Next;
-					
-				}
+				//check_dotNode(n);
+				n->check(outer_node);
+				is_dot = true;
+			}
+			else if (n->getNodeType() == "BinaryNODE")
+			{
+				//check_dotNode(n);
+				n->check(outer_node);
 			}
 			if (!is_dot)
 			{
@@ -340,14 +296,190 @@ public:
 			else
 				is_dot = false;
 			tree(n->Next);
-				
-		}
+			//checkFromCurrentNode();
+			}
 	}
-	void checkFromCurrentNode(Node* n)
+	Variable* checkVarFromCurrentNode(string id)
 	{
+		int i = outer_node.size() - 1;
+		Node* temp = outer_node.back();
+		Node* temp2;
+		Variable* v=NULL;
+		if (outer_node.at(i)->getNodeType() == "ClassNode")
+		{
+			Type* tt = static_cast<ClassNode*>(outer_node.at(i))->get_type();
+			temp2 = outer_node.at(i)->Son;
+			while (temp2->Next)
+			{
+				if ((temp2->getNodeType() == "IDNode"))
+				{
+					if (strcmp(id.c_str(), static_cast<IDNode*>(temp2)->get_variable()->get_name()) == 0)
+					{
+						v = static_cast<IDNode*>(temp2)->get_variable();
+						break;
+					}
+				}
+				temp2 = temp2->Next;
+			}
+		}
+		else
+		{
+			bool found = false;
+			while (outer_node.at(i)->getNodeType() != "ClassNode")
+			{
+				temp2 = outer_node.at(i)->Son;
+				while (temp2->Next)
+				{
+					if ((temp2->getNodeType() == "IDNode"))
+					{
+						if (strcmp(id.c_str(), static_cast<IDNode*>(temp2)->get_variable()->get_name()) == 0)
+						{
+							v = static_cast<IDNode*>(temp2)->get_variable();
+							found = true;
+							break;
+						}
+					}
+					temp2 = temp2->Next;
+					if (found)
+						break;
+				}
+				i--;
+			}
+		}
+		
+		return v;
 
 	}
-	
+	void check_dotNode(Node *n){
+		Type* t1 = NULL;
+		t1 = t;
+		Node* temp = n->Son;
+		while (temp)
+		{
+			if (temp->getNodeType() == "CallVariableNode")
+			{
+				CallVariableNode* test = static_cast<CallVariableNode*>(temp);
+				string x = test->getID();
+				if (x == "self")
+				{
+					by_self = true;
+
+				}
+				else
+				{
+					if ((by_self))
+					{
+						if (temp->Next == NULL)
+						{
+							if (x=="self")
+								cout << "Error :not a statement self at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+							char* p = const_cast<char *>(x.c_str());
+							v = checkVariable(t, p,temp->_lineNo,temp->_colNo);
+							if (v)
+							{
+								Function* fo;
+								if (right_assign)
+									v->init = true;
+								int i = outer_node.size()-1;
+								if (outer_node.at(i)->getNodeType() != "ClassNode")
+								{
+									Node* temp2 = outer_node.at(i);
+									while (outer_node.at(i)->getNodeType() != "FunctionNode")
+									{
+										i--;
+										temp2 = outer_node.at(i);
+									}
+									fo = static_cast<FunctionNode*>(temp2)->get_function();
+									if (fo->get_static() && !v->get_static())
+									{
+										cout << "Error: non-static variable " << x << " cannot be referenced from a static context at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+									}
+									else if (!v->init)
+									{
+										cout << "Error: non-initialized variable " << x << " at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+									}
+								}
+								
+								//cout << "v name is " << v->get_name() << endl;
+								static_cast<CallVariableNode*>(temp)->set_variable(v);
+							}
+						}
+						else
+						{
+							//on generating code (self.x.y)
+						}
+						by_self = false;
+					}
+					else
+					{
+						if (temp->Next == NULL)
+						{
+
+							if (x == "self")
+								cout << "Error :not a statement self at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+							char* p = const_cast<char *>(x.c_str());
+							if (t1)
+							{
+								v = checkVariable(t1, p, temp->_lineNo, temp->_colNo);
+								if (v)
+								{
+									test->set_variable(v);
+								}
+							}
+
+						}
+						else{
+							t1 = NULL;
+							//on generating code (x.y)
+						}
+
+					}
+				}
+			}
+			else if (temp->getNodeType() == "callFunctionNode")
+			{
+				CallFunctionNode* test = static_cast<CallFunctionNode*>(temp);
+				string x = test->getID();
+				char* p = const_cast<char *>(x.c_str());
+				if ((by_self))
+				{
+					f = checkFunction(t1, p, temp->_lineNo, temp->_colNo);
+					if (f)
+					{
+						static_cast<CallFunctionNode*>(temp)->set_function(f);
+						if (f->getparameters().size() != 0)
+						{
+
+						}
+					}
+					by_self = false;
+				}
+			}
+			else if (temp->getNodeType() == "ArrayElementNode")
+			{
+				ArrayElementNode* test = static_cast<ArrayElementNode*>(temp);
+				string x = test->getID();
+				char* p = const_cast<char *>(x.c_str());
+				if ((by_self))
+				{
+					v = checkVariable(t, p, temp->_lineNo, temp->_colNo);
+					if ((v) && (v->get_isarray()))
+					{
+						//cout << "v name is " << v->get_name() << endl;
+						static_cast<ArrayElementNode*>(temp)->set_variable(v);
+					}
+					else if (!v->get_isarray())
+					{
+						cout << "Error: variable is not array" << x << " at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
+					}
+					by_self = false;
+				}
+			}
+			temp = temp->Next;
+
+		}
+
+	}
 	Variable* checkVariableFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num)
 	{
 		Variable* v=NULL;
@@ -367,10 +499,10 @@ public:
 				checkVariableFromInhertanceLoop(i_t.at(i), name, toto, t_num);
 			}
 
-		}
+			}
 		return v;
 	}
-	Variable* checkVariable(Type* t, char* name)
+	Variable* checkVariable(Type* t, char* name,int lineNo,int colNo)
 	{
 		Variable* v = (Variable*)t->getScope()->m->get(name, "Variable");
 		if (!v){
@@ -384,12 +516,12 @@ public:
 			}
 			else
 			{
-				cout << "Error :variable Not found "<<name<<endl;
+				cout << "Error :variable Not found " << name << " at Line No:" << lineNo << " Column No:" << colNo << endl;
 			}
 		}
 		return v;
 	}
-	Function* checkFunction(Type* t, char* name)
+	Function* checkFunction(Type* t, char* name,int lineNo,int colNo)
 	{
 		Function * f = (Function*)t->getScope()->m->get(name, "Function");
 		if (!f){
@@ -402,7 +534,7 @@ public:
 			}
 			if (!f)
 			{
-				cout << "error";
+				cout << "Error :Function Not found " << name << " at Line No:" << lineNo << " Column No:" << colNo << endl;
 			}
 			else
 			{
@@ -433,7 +565,7 @@ public:
 
 		}
 		return v;
-	}
+			}
 	Type* checkType(Type* t, char* name)
 	{
 		Type * v = (Type*)t->getScope()->m->get(name, "Class");
@@ -456,7 +588,7 @@ public:
 			}
 		}
 		return v;
-	}
+			}
 	Variable* checkVarForScope(char* x)
 	{
 		int i = 1;
@@ -465,7 +597,7 @@ public:
 			if (outer_node.at(outer_node.size() - i))
 			{
 
-			}
+		}
 		} while (true);
 	}
 };

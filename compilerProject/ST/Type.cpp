@@ -1,5 +1,4 @@
 #include "Type.h"
-#include "Function.h"
 int Type::classesCount = 0;
 Type::Type(void)
 {

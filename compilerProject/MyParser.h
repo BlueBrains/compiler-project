@@ -4,7 +4,7 @@
 #include "ST\SymbolTable.h"
 #include"ErrorRevovery.h"
 #include<vector>
-
+using namespace std;
 //===================== Data Structures From Help in Yacc ==============
 struct Comparator_char {
 	char* expected_char;
@@ -267,7 +267,7 @@ public:
 	Type* check_if_in_inner(constraction* t, char*x);
 	void check_inhertance_list();
 	void remove_vatiable(Variable* v);
-	Variable* checkVariable(char* v,Type* t, int lineNo, int colNo,bool from_right,bool is_array,bool is_dic,bool self=false);
+	Variable* checkVariable(char* v, Type* t, bool&exist, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self = false);
 	bool check_function(char*name,Function* f);
 	void print_symbol();
 	void check_functions();
@@ -277,5 +277,6 @@ public:
 	void recrusive_up_caller(Type* t, int j);
 	void check_static(Type* t, int lineno, int colno);
 	void check_func_Call();
+	Variable* addVariableToGlobalScope(string id, int line_no, int col_no);
 };
 #endif

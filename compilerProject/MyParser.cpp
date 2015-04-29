@@ -1,7 +1,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "MyParser.h"
-#include "ErrorRevovery.h"
 #include <algorithm>
 #include <cstring>
 #include "../Streams.h"
@@ -137,7 +136,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 }
 
 
-Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self){
+Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self){
 	char* tokenPtr;
 	char buffer[15];
 	bool found = false;
@@ -173,15 +172,17 @@ Variable* MyParser::checkVariable(char* name, Type* t, int lineNo, int colNo, bo
 	{
 		if (from_right)
 		{
-			v = this->addVariableToCurrentScope(name, "", false, false, lineNo, colNo, is_array, is_dic,self);
+			v = this->addVariableToCurrentScope(name, "", false, false, lineNo, colNo, is_array, is_dic, self);
 		}
 		else
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Undeclareted Variable", name);
 			Streams::verbose() << "Error: Undeclareted Variable at Line No:" << lineNo << " Column No:" << colNo << endl;
 		}
-		
+
 	}
+	else
+		exist = true;
 	return v;
 }
 
@@ -1153,4 +1154,11 @@ void MyParser::check_func_Call()
 			}
 		}
 	}
+	
+}
+Variable* MyParser:: addVariableToGlobalScope(string id,int line_no,int col_no)
+{
+	Variable * v = new Variable();
+	this->st->rootScope->m->put(const_cast<char*>(id.c_str()), v, "Variable");
+	return v;
 }

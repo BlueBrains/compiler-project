@@ -16,6 +16,12 @@ public:
 
 
 	}
+	ElseIfNode(Node* son, Node* next, Node* condition, Node* scoop,int l,int c) :Node(son, next,l,c), _condtion(condition), _scoop(scoop)
+	{
+
+
+
+	}
 	virtual void print()
 	{
 		cout << "elseif node" << endl;

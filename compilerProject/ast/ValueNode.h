@@ -4,7 +4,7 @@
 #include"Node.h"
 #include"..\ST\Type.h"
 enum Types {
-	INT, FLOAT, CHAR, LONG,STRINGS,True,False
+	INT, FLOAT, CHAR, LONG, STRINGS, True, False
 };
 class ValueNode :public Node
 {
@@ -27,6 +27,48 @@ public:
 	ValueNode(void* v1, Types type, Node* son, Node*next) :VarValue(v1), varType(type), Node(son, next)
 	{
 
+	}
+	ValueNode(void* v1, Types type, Node* son, Node*next,int l_no,int c_no) :VarValue(v1), varType(type), Node(son, next,l_no,c_no)
+	{
+
+	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		void * g = get_value();
+		string x;
+		//cout << getNodeType() << "     ";
+		if (get_types() == 0)
+		{
+			x = "int";
+		}
+		else if (get_types() == 1)
+		{
+			x = "float";
+		}
+		else if (get_types() == 2)
+		{
+			x = "char";
+		}
+		else if (get_types() == 3)
+		{
+			x = "long";
+		}
+		else if (get_types() == 4)
+		{
+			x = "string";
+		}
+		else if (get_types() == 5)
+		{
+			x = "true";
+		}
+		else if (get_types() == 6)
+		{
+			//string x = *(string*)(g);
+			x = "false";
+		}
+		pi = make_pair(VarValue,x);
+		//pi here is the output of symbol table for types
+		return pi;
 	}
 	virtual void print()
 	{

@@ -1,8 +1,10 @@
 #pragma once
 #ifndef __CALLFUNCTIONNODE__
 #define __CALLFUNCTIONNODE__
-#include"Node.h"
 #include"..\ST\Function.h"
+//#include"ast/CallVariableNode.h"
+//#include"ast/callVariableNode.h"
+#include"CallVariableNode.h"
 class CallFunctionNode :public Node
 {
 private:
@@ -29,12 +31,14 @@ public:
 
 		for (int i = 0; i < f->getparameters().size(); i++)
 		{
+			/*
 			if (arguments->getNodeType() == "CallVariableNode")
 			{
 				if (f->getparameters().at(i)->get_isarray() != static_cast<CallVariableNode*>(arguments)->get_variable()->get_isarray())
 					return false;
-			}
+			}*/
 		}
+		return false;
 	}
 	Function* get_function()
 	{
@@ -49,6 +53,10 @@ public:
 
 	}
 	CallFunctionNode(string id,Node*args, Function* f, Node* son, Node*next) :ID(id), Function_call(f), arguments(args), Node(son, next)
+	{
+
+	}
+	CallFunctionNode(string id, Node*args, Function* f, Node* son, Node*next,int l,int c) :ID(id), Function_call(f), arguments(args), Node(son, next,l,c)
 	{
 
 	}

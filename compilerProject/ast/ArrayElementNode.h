@@ -29,6 +29,10 @@ void set_variable(Variable* v)
 	{
 
 	}
+	ArrayElementNode(Variable*v, Node* index, Node* son, Node* next, int line_no, int col_no) :ID(""), v(v), index(index), Node(son, next,line_no,col_no)
+	{
+
+	}
 	ArrayElementNode(string id,Variable*v, Node* index, Node* son, Node* next) :ID(id),v(v), index(index), Node(son, next)
 	{
 
@@ -43,6 +47,10 @@ void set_variable(Variable* v)
 		cout << "array name is " << v->get_name() << endl;
 		index->print();
 
+	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		return pi;
 	}
 	virtual string getNodeType()
 	{

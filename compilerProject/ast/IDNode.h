@@ -31,6 +31,10 @@ public:
 	{
 
 	}
+	IDNode(Variable* v, Node* son, Node*next,int l,int c) :variable_node(v), Node(son, next,l,c)
+	{
+
+	}
 	virtual void print()
 	{
 		cout << getNodeType() << "   " << variable_node->get_name() << endl;

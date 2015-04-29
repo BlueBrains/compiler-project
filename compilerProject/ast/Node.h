@@ -2,8 +2,9 @@
 #ifndef __NODE__
 #define __NODE__
 #include<string>
-#include<string>
+#include<vector>
 using namespace std;
+pair<void*, string>pi;
 class Node
 {
 private:
@@ -34,6 +35,12 @@ public :
 	virtual void print()
 	{
 
+	}
+	virtual pair<void*, string> check(vector<Node*>n,bool from_right=false)
+	{
+		int* o = NULL;
+		pi = make_pair(o, "NULL");
+		return pi;
 	}
 	virtual string getNodeType()
 	{

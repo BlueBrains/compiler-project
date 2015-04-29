@@ -14,13 +14,31 @@ Function::Function(char* name) :Symbol(name)
 	this->is_static = false;
 	this->is_virtual = false;**/
 	this->is_final = false;
+	//this->FunctionNode = NULL;
 	//this->is_override = false;
 }
 Function::Function(char* name, char* access_modifier) :Symbol(name)
 {
-
+	//this->FunctionNode = NULL;
 	this->is_final = false;
 	//this->is_override = false;
+}/*
+void Function::set_FunctionNode(Node* n)
+{
+	this->FunctionNode = n;
+}
+
+Node* Function::get_FunctionNode()
+{
+	return FunctionNode;
+}*/
+void Function::set_label(string l)
+{
+	this->_label=l;
+}
+string Function::get_label()
+{
+	return this->_label;
 }
 void Function::setScope(Scope* m){
 	this->scope = m;

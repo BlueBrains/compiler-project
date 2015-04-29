@@ -1,18 +1,22 @@
 class u:
 	def l;
+	def koko=9;
+	def static lolo=9;
 	def final coco():
 	y=[];
 	m=g();
 	n=ui();
 	u=o;
+	p=7;
 		n=self.l;
-		y=8+p+self.x;
+		self.l=8+pop+amora.self;
+		y=8+p+self.x+self.l;
 	#	z=[1,2,3];
 	end	
-	def x():
+	def static amer():
+		n=self.koko;
+		m=self.lolo;
 	end
-def g():
-end
 end
 class g:
 end

@@ -114,6 +114,7 @@
     <ClCompile Include="ST\SymbolTable.cpp" />
     <ClCompile Include="ST\Type.cpp" />
     <ClCompile Include="ST\Variable.cpp" />
+    <ClCompile Include="testing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Error.h" />

@@ -20,6 +20,10 @@ public:
 	{
 		
 	}
+	ClassNode(Type* t, Node* son, Node*next,int l,int c) :type_node(t), Node(son, next,l,c)
+	{
+
+	}
 	virtual void print()
 	{
 		cout << getNodeType() << "  and type name  " << type_node->get_name() << endl;

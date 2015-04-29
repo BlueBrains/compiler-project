@@ -1,0 +1,3 @@
+import x;
+class test2:
+end

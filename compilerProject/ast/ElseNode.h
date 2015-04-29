@@ -14,6 +14,11 @@ public:
 
 
 	}
+	ElseNode(Node* son, Node* next, Node* scoop,int l,int c) :Node(son, next,l,c), _scoop(scoop)
+	{
+
+
+	}
 	virtual void print()
 	{
 		cout << "else node" << endl;

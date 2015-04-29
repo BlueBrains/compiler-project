@@ -2,6 +2,9 @@
 %error-verbose
 %glr-parser
 %{
+	#pragma once
+	#ifndef __YACCF__
+	#define __YACCF__
 	#define _CRT_SECURE_NO_WARNINGS
 	#include <iostream>
 	#include <FlexLexer.h>
@@ -10,12 +13,12 @@
 	#include "Program.h"
 	#include "SyntaxError.h"
 	#include <fstream>
+	#include <stdlib.h>
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
 	#include "compilerProject/AST.h"
-	#include "compilerProject/getString.h"
+	#include"compilerProject/MyParser.h"
 	#include <set>
-	#include "compilerProject/MyParser.h"
 	using namespace std;
 	class ColonStack
 	{
@@ -30,15 +33,19 @@
 	void yyerror(const char *);
 	int lineno=0,colnumber=0;
 	ErrorRecovery* err=new ErrorRecovery();
-	FlexLexer* lexer = new yyFlexLexer();
+	extern FlexLexer* lexer = new yyFlexLexer();
 	extern string sourceFile="";
 	string dir_path="";
 	string temp_id="";
 	stack<string> temp_id1;
+	stack<string> fileStack;
+	vector<string> parsedFile;
 	vector<string> temp_id2;
 	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
+	bool exist;
 	Node* k;
+	Node* root;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
 	vector<char*> sto_mod;
@@ -58,9 +65,12 @@
 	bool v_static,v_final;
 	vector<char *>inhertance_list;
 	vector<Node*>arrayvec;
-
+	vector<Node*>dotvec;
+	extern int lineNum;
+	extern int colNum;
 	vector<char *>ID_list;
 	Variable* v;
+	Variable* v1=new Variable();
 	Type* t;
 	class Function * testfunction;
 	vector<char *> parameters;
@@ -93,7 +103,6 @@
 		class Type * type;
 		class Node * tn;
 		enum operand operands;
-		class getString * ops;
 		
 }
 
@@ -126,9 +135,13 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 										p->check_inhertance_list();
 						if(!p->errRecovery->errQ->isEmpty())
 								p->errRecovery->printErrQueue();
+						root = $<tn>1;		
+						if(fileStack.size()==1){
+							//ast->print(root, 0);
+							
 						p->print_symbol();
 						ast->tree($<tn>1);
-						ast->print($<tn>1, 0);
+						ast->print($<tn>1, 0);}
 						Streams::verbose().flush();	
 								}
 			;
@@ -161,7 +174,7 @@ temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
 
 funcdef: funcheader suite {
 							testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);
-							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL);
+							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 							parameters.clear();
 							linefunc=0;colmfunc=0;
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
@@ -329,35 +342,74 @@ simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \
 								$<tn>$=$<tn>1;
 							}
 			 ;
-small_stmt: expr_stmt {Streams::verbose() <<"small_stmt: expr_stmt \n";
+small_stmt: expr_stmt	{
+							Streams::verbose() <<"small_stmt: expr_stmt \n";
 							$<tn>$=$<tn>1;
 						}
-			|del_stmt {Streams::verbose() <<"small_stmt: del_stmt \n";}
-			|pass_stmt {Streams::verbose() <<"small_stmt: pass_stmt \n";}
-			|flow_stmt {Streams::verbose() <<"small_stmt: flow_stmt \n";}
-			|import_stmt {Streams::verbose() <<"small_stmt: import_stmt \n";}
-			|global_stmt {Streams::verbose() <<"small_stmt: global_stmt \n";}
+			|del_stmt {
+						Streams::verbose() <<"small_stmt: del_stmt \n";
+						$<tn>$=$<tn>1;
+					  }
+			|pass_stmt {
+							Streams::verbose() <<"small_stmt: pass_stmt \n";
+							$<tn>$=$<tn>1;
+					   }
+			|flow_stmt {
+							Streams::verbose() <<"small_stmt: flow_stmt \n";
+							$<tn>$=$<tn>1;
+					   }
+			|import_stmt {
+							Streams::verbose() <<"small_stmt: import_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
+			|global_stmt {
+							Streams::verbose() <<"small_stmt: global_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
 			|nonlocal_stmt {Streams::verbose() <<"small_stmt: nonlocal_stmt \n";}
-			|print_stmt  {Streams::verbose() <<"small_stmt: print_stmt \n";}
+			|print_stmt  {
+							Streams::verbose() <<"small_stmt: print_stmt \n";
+							$<tn>$=$<tn>1;
+						 }
 			;
 
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
+			| vardef {
+								Streams::verbose() <<"compound_stmt: vardef\n";
+								$<tn>$=$<tn>1;
+								visit_num=0;
+							}
+			| vardef right_testlist{
+								Streams::verbose() <<"compound_stmt: vardef\n";
+								//$<tn>$=$<tn>1;
+								visit_num=0;
+								Node *il=new Node();
+								v1->init=true;
+								cout<<"var name in yacc "<<v1->get_name()<<endl;
+								il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+								//il=ast->addNext(il,$<tn>2);
+								v1=NULL;
+								Node *il2=new Node();
+								il2=ast->createAssignNode(il,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								$<tn>$=ast->addNext($<tn>1,il2);
+							}
+
 			|testlist_star_expr right_testlist {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";
 													//$<amerstr>1;
 													visit_num=0;
 													Node *il=new Node();
 													il=ast->addNext($<tn>1,$<tn>2);
 													Node* p=new Node();
-													p=ast->createAssignNode($<tn>1,NULL);
+													p=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 													if(lastNode)
 													{
-														cout<<"enter heree amer \n";
+														//cout<<"enter heree amer \n";
 														$<tn>$=ast->addNext(lastNode,p);
 														
 														lastNode=NULL;
-														cout<<"print in expr_stmt if";
-														$<tn>$->print();cout<<endl;
+														//cout<<"print in expr_stmt if";
+														//$<tn>$->print();cout<<endl;
 													}
 													if((v)&&(array_right))
 													{
@@ -411,33 +463,64 @@ access:		 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="priv
 				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
 				|PROTECTED	{pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				;
-print_stmt: PRINT exprlist {Streams::verbose() <<"print_stmt: PRINT exprlist \n";}
-del_stmt:   DEL exprlist {Streams::verbose() <<"del_stmt:   DEL exprlist \n";}
+print_stmt: PRINT exprlist {
+							Streams::verbose() <<"print_stmt: PRINT exprlist \n";
+							$<tn>$ = ast->createPrintNode($<tn>2, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+						   }
+del_stmt:   DEL exprlist {
+							Streams::verbose() <<"del_stmt:   DEL exprlist \n";
+							$<tn>$ = ast->createDelNode($<tn>2, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+						 }
 			;
 
-pass_stmt:	PASS {Streams::verbose() <<"pass_stmt:	PASS \n";}
+pass_stmt:	PASS {
+					Streams::verbose() <<"pass_stmt:	PASS \n";
+					$<tn>$ = ast->createPassNode(NULL, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+				 }
 			;
 
-flow_stmt:	break_stmt {Streams::verbose() <<"flow_stmt:	break_stmt \n";}
-			| continue_stmt {Streams::verbose() <<"flow_stmt: continue_stmt\n";}
-			| return_stmt {Streams::verbose() <<"flow_stmt: return_stmt\n";}
+flow_stmt:	break_stmt {
+						Streams::verbose() <<"flow_stmt:	break_stmt \n";
+						$<tn>$ = $<tn>1;
+					   }
+			| continue_stmt {
+								Streams::verbose() <<"flow_stmt: continue_stmt\n";
+								$<tn>$ = $<tn>1;
+							}
+			| return_stmt {
+							Streams::verbose() <<"flow_stmt: return_stmt\n";
+							$<tn>$ = $<tn>1;
+						  }
 			;
 
-break_stmt: BREAK {Streams::verbose() <<"break_stmt: BREAK \n";}
+break_stmt: BREAK {
+					Streams::verbose() <<"break_stmt: BREAK \n";
+					$<tn>$ = ast->createFlowStmtNode(NULL, NULL, breakNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+				  }
 			;
 
-continue_stmt:	CONTINUE {Streams::verbose() <<"continue_stmt:	CONTINUE \n";}
+continue_stmt:	CONTINUE {
+							Streams::verbose() <<"continue_stmt:	CONTINUE \n";
+							$<tn>$ = ast->createFlowStmtNode(NULL, NULL, continueNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+						 }
 				;
 
-return_stmt:	RETURN testlist {Streams::verbose() <<"return_stmt:	RETURN testlist \n";}
-				|RETURN {Streams::verbose() <<"return_stmt:	RETURN \n";}
+return_stmt:	RETURN testlist {
+									Streams::verbose() <<"return_stmt:	RETURN testlist \n";
+									$<tn>$ = ast->createFlowStmtNode($<tn>2, NULL, returnNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
+				|RETURN {
+							Streams::verbose() <<"return_stmt:	RETURN \n";
+							$<tn>$ = ast->createFlowStmtNode(NULL, NULL, returnNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
 				;
 
 
 import_stmt: import_name {Streams::verbose() <<"import_stmt: import_name \n";}
 			 ;
 
-import_name: IMPORT dotted_as_names {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";}
+import_name: IMPORT dotted_as_names {Streams::verbose() <<"import_name: IMPORT dotted_as_names \n";
+										inhertance_list.clear();}
 			 ;
 
 comma_dotted_as_name_seq: ',' dotted_as_name {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";}
@@ -464,7 +547,30 @@ dotted_as_name: dotted_name {Streams::verbose() <<"dotted_as_name: dotted_name \
 				|dotted_name AS NAME {Streams::verbose() <<"dotted_as_name: dotted_name AS NAME\n";}
 				;
 
-dotted_name: NAME {Streams::verbose() <<"dotted_name: NAME \n"; temp_id=temp_id+$<r.strVal>1;}
+dotted_name: NAME {
+					 Streams::verbose() <<"dotted_name: NAME \n";
+					 temp_id=temp_id+$<r.strVal>1;
+					 string sf=$<r.strVal>1;
+					 cout<<sf;
+					 lineNum=colNum=1;					 
+					 sf.append(".txt");
+					 if(find(parsedFile.begin(),parsedFile.end(),sf)==parsedFile.end())
+						fileStack.push(sf);
+					 while(!fileStack.empty()&&sourceFile!=fileStack.top()){
+						 sf=fileStack.top();
+						 sourceFile=sf;
+						 ifstream inf(sf);
+						 lexer->yyrestart(&inf);
+						 Parser* p = new Parser();
+						 p->parse();						 
+						 lineNum=colNum=1;
+						 parsedFile.push_back(sf);
+						 if(fileStack.size()>0)
+							fileStack.pop();
+						 if(fileStack.size()==0)
+							YYABORT;
+					 }
+				  }
 			|NAME dotted_name_seq {Streams::verbose() <<"dotted_name: NAME dotted_name_seq \n";}
 			;
 			
@@ -478,12 +584,36 @@ dotted_name_seq: '.' NAME {
 				 }
 				 ;
 					
-comma_name_seq :	',' NAME {Streams::verbose() <<"comma_name_seq :	',' NAME \n";}
-					|comma_name_seq ',' NAME {Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";}
+comma_name_seq :	',' NAME {
+								Streams::verbose() <<"comma_name_seq :	',' NAME \n";
+								$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);
+								v = $<var>$;
+								$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
+							 }
+					|comma_name_seq ',' NAME {
+												Streams::verbose() <<"comma_name_seq :	comma_name_seq ',' NAME \n";
+												$<var>$=p->addVariableToGlobalScope($<r.strVal>3, yylval.r.lineNum, yylval.r.colNum);
+												v = $<var>$;
+												Node* temp = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
+												Node* seq = $<tn>1;
+												seq->Next = temp;
+											 }
 					;
 
-global_stmt: GLOBAL NAME {Streams::verbose() <<"global_stmt: GLOBAL NAME \n";}
-			 |GLOBAL NAME comma_name_seq {Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";}
+global_stmt: GLOBAL NAME {
+							Streams::verbose() <<"global_stmt: GLOBAL NAME \n";
+							$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);
+							v = $<var>$;
+							Node* temp = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
+							$<tn>$ = ast->createGlobalNode(temp,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						 }
+			 |GLOBAL NAME comma_name_seq {
+											Streams::verbose() <<"global_stmt: GLOBAL NAME comma_name_seq\n";
+											$<var>$=p->addVariableToGlobalScope($<r.strVal>2, yylval.r.lineNum, yylval.r.colNum);											
+											v = $<var>$;
+											Node* temp = ast->createIDNode(v,0,$<tn>3,yylval.r.lineNum,yylval.r.colNum);
+											$<tn>$ = ast->createGlobalNode(temp,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										 }
 			 ;
 
 nonlocal_stmt:	NONLOCAL NAME {Streams::verbose() <<"nonlocal_stmt:	NONLOCAL NAME \n";}
@@ -508,10 +638,6 @@ compound_stmt:  if_stmt {
 								Streams::verbose() <<"compound_stmt: funcdef\n";
 								$<tn>$=$<tn>1;
 							}
-				| vardef ';'{
-								Streams::verbose() <<"compound_stmt: vardef\n";
-								$<tn>$=$<tn>1;
-							}
 				| DEF classdef {
 									Streams::verbose() <<"compound_stmt: DEF classdef\n";
 									$<tn>$=$<tn>2;
@@ -520,182 +646,215 @@ compound_stmt:  if_stmt {
 vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF NAME\n";
 											$<var>$=p->addVariableToCurrentScope($<r.strVal>2,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,0,0);
 											v=$<var>$;
-										$<tn>$ = ast->createIDNode(v,0,0);
+											v1=new Variable();
+											v1=v;
+										$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
+										visit_num++;
 									} 
 		| DEF access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access NAME\n";
 											Streams::verbose()<<"var_declaration: access_modef ID\n";
 									$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
+									visit_num++;
 									acc_mod="";
-									$<tn>$ = ast->createIDNode(v,0,0);
+									v1=v;
+									$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 											} 
 		| DEF STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC NAME\n";
 											Streams::verbose()<<"var_declaration: STATIC ID\n";
 											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 											v=$<var>$;
-											$<tn>$ = ast->createIDNode(v,0,0);
+											v1=v;
+											visit_num++;
+											$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 										} 
 		| DEF FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL NAME\n";
 												Streams::verbose()<<"var_declaration: FINAL ID\n";
 												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
-													$<tn>$ = ast->createIDNode(v,0,0);
+													v1=v;
+													visit_num++;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 										} 
 		| DEF STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL NAME\n";
 													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
-													$<tn>$ = ast->createIDNode(v,0,0);
+													visit_num++;
+													v1=v;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC NAME\n";
 													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
-													$<tn>$ = ast->createIDNode(v,0,0);
+													v1=v;
+													visit_num++;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													acc_mod="";
-													$<tn>$ = ast->createIDNode(v,0,0);
+													visit_num++;
+													v1=v;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													acc_mod="";
-													$<tn>$ = ast->createIDNode(v,0,0);
+													v1=v;
+													visit_num++;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF STATIC FINAL access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC FINAL access NAME\n";
 															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=$<var>$;
 															acc_mod="";
-															$<tn>$ = ast->createIDNode(v,0,0);
+															visit_num++;
+															v1=v;
+															$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 														} 
 		| DEF FINAL STATIC access NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL STATIC access NAME\n";
 															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=$<var>$;
 															acc_mod="";
-															$<tn>$ = ast->createIDNode(v,0,0);
+															visit_num++;
+															v1=v;
+															$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 														} 
 		| DEF access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
+													visit_num++;
 													acc_mod="";
-													$<tn>$ = ast->createIDNode(v,0,0);
+													v1=v;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													acc_mod="";
-													$<tn>$ = ast->createIDNode(v,0,0);
+													visit_num++;
+													v1=v;
+													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 											} 
 		| DEF access STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access STATIC FINAL NAME\n";
 														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=$<var>$;
+														visit_num++;
 														acc_mod="";
-														$<tn>$ = ast->createIDNode(v,0,0);
+														v1=v;
+														$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 													} 
 		| DEF access FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF access FINAL STATIC NAME\n";
 														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=$<var>$;
 														acc_mod="";
-														$<tn>$ = ast->createIDNode(v,0,0);
+														visit_num++;
+														v1=v;
+														$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 													} 
 		| DEF STATIC access FINAL NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF STATIC access FINAL NAME\n";
 															$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 															v=$<var>$;
 															acc_mod="";
-															$<tn>$ = ast->createIDNode(v,0,0);
+															visit_num++;
+															v1=v;
+															$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 														} 
 		| DEF FINAL access STATIC NAME %prec stmt_14 {Streams::verbose() <<"atom: DEF FINAL access STATIC NAME\n";
 														$<var>$=p->addVariableToCurrentScope($<r.strVal>5,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 														v=$<var>$;
 														acc_mod="";
-														$<tn>$ = ast->createIDNode(v,0,0);
+														visit_num++;
+														v1=v;
+														$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 													} 
-		;
+				;
 elif_seq :  ELIF test ':' suite {
 									Streams::verbose() <<"elif_seq :  ELIF test ':' suite \n";
-									$<tn>$ = ast->createElseIfNode($<tn>4,NULL,$<tn>2,NULL);								
+									$<tn>$ = ast->createElseIfNode($<tn>4,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);								
 								}
 			|elif_seq ELIF test ':' suite {
 											Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";
 											Node* elseIfNode = $<tn>1;
-											elseIfNode->Next = ast->createElseIfNode($<tn>5,NULL,$<tn>3,NULL);
+											elseIfNode->Next = ast->createElseIfNode($<tn>5,NULL,$<tn>3,NULL,yylval.r.lineNum,yylval.r.colNum);
 											$<tn>$ = elseIfNode;											
 										  }
 			;
 				
 if_stmt:	IF test ':' suite {
 								Streams::verbose() <<"if_stmt:	IF test ':' suite \n";
-								$<tn>$ = ast->createIfNode($<tn>4,NULL,$<tn>2,NULL);
+								$<tn>$ = ast->createIfNode($<tn>4,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 							  }
 			|IF test ':' suite elif_seq {
 											Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq \n";
-											$<tn>$ = ast->createIfNode($<tn>4, $<tn>5, $<tn>2, NULL);
+											$<tn>$ = ast->createIfNode($<tn>4, $<tn>5, $<tn>2, NULL,yylval.r.lineNum,yylval.r.colNum);
 										}
 			|IF test ':' suite ELSE ':' suite {
 												Streams::verbose() <<"if_stmt:	IF test ':' suite ELSE ':' suite \n";
-												Node* elseNode = ast->createElseNode($<tn>7,NULL,NULL);
-												$<tn>$ = ast->createIfNode($<tn>4,elseNode,$<tn>2,NULL);
+												Node* elseNode = ast->createElseNode($<tn>7,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+												$<tn>$ = ast->createIfNode($<tn>4,elseNode,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 											  }
 			|IF test ':' suite elif_seq ELSE ':' suite {
 														Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";
 														Node* elseIfNode = $<tn>5;
-														Node* elseNode = ast->createElseNode($<tn>8,NULL,NULL);
+														Node* elseNode = ast->createElseNode($<tn>8,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 														elseIfNode->Next = elseNode;
-														$<tn>$ = ast->createIfNode($<tn>4,elseIfNode,$<tn>2,NULL);
+														$<tn>$ = ast->createIfNode($<tn>4,elseIfNode,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 													   }
 			;
 
 while_stmt: WHILE test ':' suite {
 									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
-									$<tn>$ = ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL);
+									$<tn>$ = ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 								 }
 			|WHILE test ':' suite ELSE ':' suite {
 													Streams::verbose() <<"while_stmt:  WHILE test ':' suite ELSE ':' suite \n";
-													Node* whileNode= ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL);
-													whileNode->Next = ast->createElseNode($<tn>7,NULL,NULL);
+													Node* whileNode= ast->createWhileNode($<tn>4,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+													whileNode->Next = ast->createElseNode($<tn>7,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 													$<tn>$ = whileNode;
 												 }
 			;
 
 for_stmt:   FOR exprlist IN testlist ':' suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";
-												$<tn>$ = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL);
+												$<tn>$ = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 											   }
 			|FOR exprlist IN testlist ':' suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";
-																Node* forNode = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL);
-																forNode->Next = ast->createElseNode($<tn>9, NULL, NULL);
+																Node* forNode = ast->createForNode($<tn>6, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+																forNode->Next = ast->createElseNode($<tn>9, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
 			;
 
 try_stmt:   TRY ':' suite try_except_cla_seq {
 												Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";
-												$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+												$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 											 }
 			|TRY ':' suite try_except_cla_seq ELSE ':' suite {
 																Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";
 																Node* except = $<tn>4;
 																while(except->Next!=NULL)
 																	except = except->Next;
-																except->Next = ast->createElseNode($<tn>7, NULL, NULL);
-																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+																except->Next = ast->createElseNode($<tn>7, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 															 }
 			|TRY ':' suite try_except_cla_seq FINALLY ':' suite {
 																	Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";
 																Node* except = $<tn>4;
 																while(except->Next!=NULL)
 																	except = except->Next;
-																except->Next = ast->createFinallyNode($<tn>7, NULL, NULL);
-																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL);
+																except->Next = ast->createFinallyNode($<tn>7, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																$<tn>$ = ast->createTryNode($<tn>3, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 																}
 			|TRY ':' suite FINALLY ':' suite {
 												Streams::verbose() <<"try_stmt:  TRY ':' suite FINALLY ':' suite\n";
-												Node* finally = ast->createFinallyNode($<tn>6, NULL, NULL);
-												$<tn>$ = ast->createTryNode($<tn>3, finally, NULL);
+												Node* finally = ast->createFinallyNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+												$<tn>$ = ast->createTryNode($<tn>3, finally, NULL,yylval.r.lineNum,yylval.r.colNum);
 											 }
 			;
 
@@ -731,11 +890,11 @@ with_item:  test {Streams::verbose() <<" with_item:  test\n";}
 
 except_clause:  EXCEPT {
 						Streams::verbose() <<"except_clause:  EXCEPT \n";
-						$<tn>$ = ast->createExceptNode(NULL, NULL, NULL, NULL);
+						$<tn>$ = ast->createExceptNode(NULL, NULL, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 					   }
 				|EXCEPT test {
 								Streams::verbose() <<"except_clause:  EXCEPT test\n";
-								$<tn>$ = ast->createExceptNode(NULL, NULL, $<tn>2, NULL);
+								$<tn>$ = ast->createExceptNode(NULL, NULL, $<tn>2, NULL,yylval.r.lineNum,yylval.r.colNum);
 							 }
 				|EXCEPT test AS NAME {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";}
 				;
@@ -864,32 +1023,33 @@ term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 							$<operands>$=op;
 							$<tn>$=$<tn>2;**/
 							int* xx = new int (0);
-						k = ast->createTypeNode((void*)xx,0,0,INT);
-						k=ast->addNext(k,$<tn>2);
-						$<tn>$ = ast->createExprNode(k,NULL,MINUS);
+						k = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
+						//k=ast->addNext(k,$<tn>2);
+						$<tn>$ = ast->createExprNode(k,$<tn>2,MINUS,yylval.r.lineNum,yylval.r.colNum);
 						}
 			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";//op=PLUS;
 									k=ast->addNext($<tn>1,$<tn>3);
 									$<operands>$=PLUS;
 									//op=$<operands>$;
-									$<tn>$ = ast->createExprNode(k,NULL,PLUS);
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,PLUS,yylval.r.lineNum,yylval.r.colNum);
 								}
 			|term_seq '-' term {Streams::verbose() <<"term_seq : term_seq '-' term \n";//op=MINUS;
 									k=ast->addNext($<tn>1,$<tn>3);
 									$<operands>$=MINUS;
 									//op=$<operands>$;
-									$<tn>$ = ast->createExprNode(k,NULL,MINUS);
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,MINUS,yylval.r.lineNum,yylval.r.colNum);
 								}
 			;
 
-arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";$<tn>$=$<tn>1;
+arith_expr: term %prec stmt_3 {Streams::verbose() <<"arith_expr: term\n";
+								$<tn>$=$<tn>1;
 									$<operands>$=$<operands>1;
 							} 
 			|term term_seq %prec stmt_13 {
 											Streams::verbose() <<"arith_expr: term term_seq\n";
 											k=ast->addNext($<tn>1,$<tn>2);
-											cout<<"the value of op is "<<op<<endl;
-											$<tn>$ = ast->createExprNode(k,NULL,PLUS/**op**/);
+											//cout<<"the value of op is "<<op<<endl;
+											$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,PLUS/**op**/,yylval.r.lineNum,yylval.r.colNum);
 											
 										}
 											 
@@ -914,16 +1074,16 @@ factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
 			|factor_seq '*' factor {Streams::verbose() <<"factor_seq: factor_seq '*' factor \n";
 									k=ast->addNext($<tn>1,$<tn>3);
 									op=MULT;
-									$<tn>$ = ast->createExprNode(k,NULL,op);
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,op,yylval.r.lineNum,yylval.r.colNum);
 									}
 			|factor_seq '/' factor {Streams::verbose() <<"factor_seq: factor_seq '/' factor \n";
 									k=ast->addNext($<tn>1,$<tn>3);
 									op=DIV;
-									$<tn>$ = ast->createExprNode(k,NULL,op);
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,op,yylval.r.lineNum,yylval.r.colNum);
 									}
 			|factor_seq '%' factor {Streams::verbose() <<"factor_seq: factor_seq '%' factor \n";
 									op=MOD;
-									$<tn>$ = ast->createExprNode(NULL,NULL,op);
+									$<tn>$ = ast->createExprNode($<tn>1,$<tn>3,NULL,op,yylval.r.lineNum,yylval.r.colNum);
 									}
 			|factor_seq DIV_2 factor {Streams::verbose() <<"factor_seq: factor_seq DIV_2 factor \n";}
 			;
@@ -931,54 +1091,56 @@ factor_seq: '*' factor {Streams::verbose() <<"factor_seq: '*' factor \n";
 term: 	factor %prec stmt_4 {Streams::verbose() <<"term: 	factor\n";$<tn>$=$<tn>1;} 
 		|factor factor_seq {Streams::verbose() <<"term: 	factor factor_seq\n";
 								k=ast->addNext($<tn>1,$<tn>2);
-								$<tn>$ = ast->createExprNode(k,NULL,op);
+								$<tn>$ = ast->createExprNode($<tn>1,$<tn>2,NULL,PLUS,yylval.r.lineNum,yylval.r.colNum);
 							} 
 		;
 
 factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
-						int* xx = new int (0);
-						k = ast->createTypeNode((void*)xx,0,0,INT);
-						k=ast->addNext(k,$<tn>2);
-						$<tn>$ = ast->createExprNode(k,NULL,PLUS);
+						$<tn>$=$<tn>2;
 						
 					}
 		|'-' factor {Streams::verbose() <<"factor: '-' factor \n";
 						int* xx = new int (0);
-						k = ast->createTypeNode((void*)xx,0,0,INT);
-						k=ast->addNext(k,$<tn>2);
-						$<tn>$ = ast->createExprNode(k,NULL,MINUS);
+						k = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
+						//k=ast->addNext(k,$<tn>2);
+						$<tn>$ = ast->createExprNode(k,$<tn>2,NULL,MINUS,yylval.r.lineNum,yylval.r.colNum);
 						
 						}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
 		| power {
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
-					
+					exist=false;
 					if(visit_num==1)
 					{
 						//$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,is_list,is_dic);
-						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
+						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
 						v=$<var>$;
-						if(v!=NULL)
+						v1=v;
+						if((!exist)&&(v!=NULL))
 						{
 							//cout<<"hellow world  "<<v->get_name()<<endl;
-							lastNode=ast->createIDNode(v,0,0);
+							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 									
-							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL);	
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 						}
 						else
 						{
 							$<tn>$=$<tn>1;
-						}
+						} 
 					}
 					else if((!constant)&&(!is_list))
 					{
-						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
+						if(v1)
+						{
+							v1->init=true;
+						}
+						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
 						v=$<var>$;
 						is_list=false;
 						if(v!=NULL)
 						{
-							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL);	
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 						}
 						else
 						{
@@ -986,7 +1148,14 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						}
 					}
 					else
+					{
+						if(v1)
+						{
+							v1->init=true;
+						}
 						$<tn>$=$<tn>1;
+					}
+						
 				} 
 		;
 
@@ -1006,7 +1175,9 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
 											cout<<"the top is "<<temp_id2.back()<<endl;
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
-											$<tn>$=ast->createDotNode($<tn>$,NULL);
+											dotvec.insert(dotvec.begin(),$<tn>1);
+											$<tn>$=ast->createDotNode(dotvec,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+											dotvec.clear();
 										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
@@ -1022,65 +1193,65 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						arrayvec.clear();
 						array_right=true;
 						is_list=true;
-						$<tn>$=ast->createArrayNode(arrayvec,0,0);
+						$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 				}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";
-									$<tn>$=ast->createArrayNode(arrayvec,0,0);
+									$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 									array_right=true;
 									arrayvec.clear();
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
 									temp_id2.push_back($<r.strVal>1);
-									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL);
+									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 					} 
 		| NAME '(' ')' %prec stmt_13{ Streams::verbose() <<"atom: NAME\n";
 									temp_id2.push_back($<r.strVal>1);
 									parameters.clear();
-									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL);
-					} 
+									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									} 
 		| NAME '(' arglist ')' { Streams::verbose() <<"atom: NAME\n";
 									temp_id2.push_back($<r.strVal>1);
-									$<tn>$=ast->createCallTypeNode($<r.strVal>1,$<tn>3,NULL,NULL);
+									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters/*$<tn>3*/,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									parameters.clear();
-					}
+												} 
 		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
-											$<var>$=p->checkVariable($<r.strVal>1,t, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
+											$<var>$=p->checkVariable($<r.strVal>1,t,exist, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
 											is_list=true;
 											if($<var>$)
-												$<tn>$=ast->createArrayElementNode($<var>$,$<tn>3,NULL,NULL,$<r.strVal>1);
-										}
+												$<tn>$=ast->createArrayElementNode($<var>$,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum,$<r.strVal>1);
+												} 
 		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT "<<$<r.intVal>1<<endl;;
 						int* xx = new int ($<r.intVal>1);
 						//cout<<"yhe number is"<<*xx<<endl;
 						//cout<<"reference"<<xx<<endl;
 						constant=true;
-						$<tn>$ = ast->createTypeNode((void*)xx,0,0,INT);
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 						visit_num++;
-						} 
+														} 
 		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
 							constant=true;
 							float* x=new float($<r.floatVal>1);
-							$<tn>$ = ast->createTypeNode((void*)x,0,0,FLOAT);
+							$<tn>$ = ast->createTypeNode((void*)x,0,0,yylval.r.lineNum,yylval.r.colNum,FLOAT);
 						} 
 		| NUMBER_LONG {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
 							long *xxx=new long($<r.longVal>1);
 							constant=true;
-							$<tn>$ = ast->createTypeNode(&xxx,0,0,LONG);
+							$<tn>$ = ast->createTypeNode(&xxx,0,0,yylval.r.lineNum,yylval.r.colNum,LONG);
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
 									
-									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,STRINGS);
+									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n";} 
 		| NONE {Streams::verbose() <<"atom: NONE\n";} 
 		| TRUE {Streams::verbose() <<"atom: TRUE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,True);
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,True);
 				} 
 		| FALSE {Streams::verbose() <<"atom: FALSE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,False);
+					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,False);
 				} 
 		;
 
@@ -1119,16 +1290,20 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 							temp_id=temp_id+"."+$<r.strVal>2;
 						temp_id2.pop_back();
 						temp_id2.push_back(temp_id);	
-						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL);
+						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						dotvec.push_back($<tn>$);
 						} 
 			|'.' NAME '(' ')' {
-									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,NULL,NULL,NULL,NULL);
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,NULL,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									dotvec.push_back($<tn>$);
 								}
 			|'.' NAME '(' arglist ')' {
-									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,$<tn>4,NULL,NULL,NULL);
+									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,$<tn>4,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									dotvec.push_back($<tn>$);
 								}
 			|'.' NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
-												$<tn>$=ast->createArrayElementNode(NULL,$<tn>4,NULL,NULL);
+												$<tn>$=ast->createArrayElementNode(NULL,$<tn>4,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+												dotvec.push_back($<tn>$);
 											} ;
 
 			;
@@ -1205,7 +1380,7 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 classdef: classheader suite {
 								Streams::verbose() <<"classdef: classheader suite\n";
 								$<type>$=p->finishTypeDeclaration(t);
-								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL);
+								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 							}
 
 classheader: CLASS NAME ':'  {
@@ -1747,13 +1922,31 @@ void main(void)
 {
 	string input = "code.txt";
 	dir_path="";
+	//bool f = true;
+	//if (f)
+	//{
+	//	addFile(input);
+	//}
+	
+	//for(int i=0;i<sfiles.size();i++)
+	//{
+	//    string sf=sfiles[i];
+	//	lineNum=colNum=1;
+	//	sourceFile=sf;
+	//	ifstream inf(sf);
+	//	lexer = new yyFlexLexer(&inf);
+	//	Parser* p = new Parser();
+	//	p->parse();
+	//}
 	//addFile(input);
 	sourceFile=input;
+	fileStack.push(input);
 	ifstream inf(input);
 	lexer = new yyFlexLexer(&inf);
 	Parser* p = new Parser();
 	p->parse();
-	//Program::printErrors();
-	err->printErrQueue();
+	Program::printErrors();
+	//err->printErrQueue();
 	system("pause");
 }
+#endif;
