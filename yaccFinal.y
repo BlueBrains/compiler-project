@@ -1325,7 +1325,7 @@ comma_subscript_seq: ',' subscript {Streams::verbose() <<"comma_subscript_seq: '
 					 |comma_subscript_seq ',' subscript {Streams::verbose() <<"comma_subscript_seq: comma_subscript_seq ',' subscript\n";} 
 					 ;
 
-subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";} 
+subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";$<tn>$=$<tn>1;} 
 				|subscript comma_subscript_seq {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";} 
 				|subscript  ',' {Streams::verbose() <<"subscriptlist:	subscript  ','\n";} 
 				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";} 
@@ -1333,11 +1333,17 @@ subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";}
 
 subscript:  test {Streams::verbose() <<"subscript:  test\n";$<tn>$=$<tn>1;}
 			|':' {Streams::verbose() <<"subscript:  ':'\n";}
-			| test ':' {Streams::verbose() <<"subscript: test ':'\n";$<tn>$=$<tn>$=$<tn>1;}
-			| test ':' test {Streams::verbose() <<"subscript:  test ':' test\n";}
+			| test ':' {Streams::verbose() <<"subscript: test ':'\n";
+							$<tn>$=ast->createSubscriptNode($<tn>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
+			| test ':' test {Streams::verbose() <<"subscript:  test ':' test\n";
+								$<tn>$=ast->createSubscriptNode($<tn>1,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							}
 			| test ':' sliceop {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
 			| test ':' test sliceop {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}
-			|':' test {Streams::verbose() <<"subscript:  ':' test\n";}
+			|':' test {Streams::verbose() <<"subscript:  ':' test\n";
+								$<tn>$=ast->createSubscriptNode(NULL,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
 			|':' sliceop {Streams::verbose() <<"subscript:  ':' sliceop\n";}
 			|':' test sliceop {Streams::verbose() <<"subscript:  ':' test sliceop\n";}
 			;

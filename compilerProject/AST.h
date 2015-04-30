@@ -26,7 +26,7 @@
 #include"ast\GlobalNode.h"
 #include"ast\DelNode.h"
 #include"ast\PassNode.h"
-
+#include"ast\subscriptNode.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
@@ -202,6 +202,12 @@ public:
 		}
 		else
 			temp = new ArrayElementNode(v, index, son, next, line_no, col_no);
+		//Node* u = temp;
+		return temp;
+	}
+	SubscriptNode* createSubscriptNode(Node* first,Node* second, Node * son, Node* next, int line_no, int col_no)
+	{
+		SubscriptNode* temp = new SubscriptNode(first,second, son, next, line_no, col_no);
 		//Node* u = temp;
 		return temp;
 	}
