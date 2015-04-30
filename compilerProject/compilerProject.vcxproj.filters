@@ -184,6 +184,12 @@
     <ClInclude Include="ast\ArrayElementNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\subscriptNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\BooleanNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />

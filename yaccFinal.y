@@ -927,23 +927,33 @@ test:	or_test {Streams::verbose() <<"test:	or_test\n";$<tn>$=$<tn>1;}
 		|or_test IF or_test ELSE test {Streams::verbose() <<"or_test IF or_test ELSE test\n";}
 		;
 
-or_seq:	OR and_test {Streams::verbose() <<"or_seq:	OR and_test \n";}
-		|or_seq OR and_test {Streams::verbose() <<"or_seq: or_seq OR and_test \n";}
+or_seq:	OR and_test {Streams::verbose() <<"or_seq:	OR and_test \n";$<tn>$=$<tn>2;}
+		|or_seq OR and_test {Streams::verbose() <<"or_seq: or_seq OR and_test \n";
+								$<tn>$=ast->createBooleanNode($<tn>1,$<tn>3,OR_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							}
 		;
 
 or_test: and_test {Streams::verbose() <<"or_test:	and_test\n";$<tn>$=$<tn>1;}
-		|and_test or_seq {Streams::verbose() <<"or_test:	and_test or_seq\n";}
+		|and_test or_seq {Streams::verbose() <<"or_test:	and_test or_seq\n";
+							$<tn>$=ast->createBooleanNode($<tn>1,$<tn>2,OR_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							}
 		;
 
-and_seq: AND not_test {Streams::verbose() <<"and_seq: AND not_test \n";}
-		|and_seq AND not_test {Streams::verbose() <<"and_seq: and_seq AND not_test \n";}
+and_seq: AND not_test {Streams::verbose() <<"and_seq: AND not_test \n";$<tn>$=$<tn>2;}
+		|and_seq AND not_test {Streams::verbose() <<"and_seq: and_seq AND not_test \n";
+									$<tn>$=ast->createBooleanNode($<tn>1,$<tn>3,AND_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
 		;
 
 and_test: not_test {Streams::verbose() <<"and_test:	not_test\n";$<tn>$=$<tn>1;}
-		  |not_test and_seq {Streams::verbose() <<"and_test: not_test and_seq \n";}
+		  |not_test and_seq {Streams::verbose() <<"and_test: not_test and_seq \n";
+								$<tn>$=ast->createBooleanNode($<tn>1,$<tn>2,AND_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+		  }
 		  ;
 
-not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";}
+not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";
+							$<tn>$=ast->createBooleanNode(NULL,$<tn>2,NOT_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							}
 			| comparison {Streams::verbose() <<"not_test:	comparison\n";$<tn>$=$<tn>1;}
 			;
 
@@ -1326,9 +1336,13 @@ comma_subscript_seq: ',' subscript {Streams::verbose() <<"comma_subscript_seq: '
 					 ;
 
 subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";$<tn>$=$<tn>1;} 
-				|subscript comma_subscript_seq {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";} 
+				|subscript comma_subscript_seq {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq\n";
+													$<tn>$=ast->addNext($<tn>1,$<tn>2);
+												} 
 				|subscript  ',' {Streams::verbose() <<"subscriptlist:	subscript  ','\n";} 
-				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";} 
+				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";
+															$<tn>$=ast->addNext($<tn>1,$<tn>2);
+														} 
 				;
 
 subscript:  test {Streams::verbose() <<"subscript:  test\n";$<tn>$=$<tn>1;}
@@ -1342,7 +1356,7 @@ subscript:  test {Streams::verbose() <<"subscript:  test\n";$<tn>$=$<tn>1;}
 			| test ':' sliceop {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
 			| test ':' test sliceop {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}
 			|':' test {Streams::verbose() <<"subscript:  ':' test\n";
-								$<tn>$=ast->createSubscriptNode(NULL,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								$<tn>$=ast->createSubscriptNode(NULL,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 						}
 			|':' sliceop {Streams::verbose() <<"subscript:  ':' sliceop\n";}
 			|':' test sliceop {Streams::verbose() <<"subscript:  ':' test sliceop\n";}

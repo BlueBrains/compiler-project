@@ -27,6 +27,7 @@
 #include"ast\DelNode.h"
 #include"ast\PassNode.h"
 #include"ast\subscriptNode.h"
+#include"ast\BooleanNode.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
@@ -116,6 +117,11 @@ public:
 	ExpressionNode * createExprNode(Node * son, Node* next, operand op, int line_no, int col_no)
 	{
 		ExpressionNode* temp = new ExpressionNode(op, son, next,line_no,col_no);
+		return temp;
+	}
+	BooleanNode * createBooleanNode(Node*First, Node* second, Node * son, Node* next, boolean_operand op, int line_no, int col_no)
+	{
+		BooleanNode* temp = new BooleanNode(First, second, op, NULL, next, line_no, col_no);
 		return temp;
 	}
 	ExpressionNode * createExprNode(Node*First,Node* second, Node* next, operand op, int line_no, int col_no)
