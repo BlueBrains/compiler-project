@@ -158,5 +158,9 @@ void Variable::setType(Type * type){
 bool Variable::compare(Variable* var1, Variable* var2){
 	return var1->type->get_name() == var2->type->get_name();
 }
+void Variable::set_arrayNode(ArrayNode* v)
+{
+	this->array_node = v;
+}
 
 //=======================================

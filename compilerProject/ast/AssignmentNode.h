@@ -38,14 +38,25 @@ public:
 	{
 		pair<void*, string> p1;
 		pair<void*, string> p2;
-		p1=left_side->check(n,true);
-		p2=right_side->check(n);
+		p1=left_side->check(n);
+		p2=right_side->check(n,true);
 		if (p1.second == "Variable")
 		{
 			if ((Variable*)p1.first)
 			{
 				((Variable*)p1.first)->init = true;
+				if (right_side->getNodeType() == "ArrayNode")
+				{
+					((Variable*)p1.first)->set_arrayNode(static_cast<ArrayNode*>(this->right_side));
+					((Variable*)p1.first)->set_isarray(true);
+				}
+				else
+				{
+					((Variable*)p1.first)->set_isarray(false);
+					((Variable*)p1.first)->set_arrayNode(NULL);
+				}
 			}
+			
 		}
 		return p1;
 	}

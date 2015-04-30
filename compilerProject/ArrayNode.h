@@ -3,6 +3,7 @@
 #define __ARRAYNODE__
 #include<string>
 #include<vector>
+#include<iostream>
 #include"ast/Node.h"
 using namespace std;
 class ArrayNode:public Node
@@ -33,6 +34,12 @@ public:
 		cout << getNodeType()<<" and the element is  :"<<endl;
 		for (int i = 0; i < element.size(); i++)
 			element.at(i)->print();
+	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		for (int i = 0; i < element.size(); i++)
+			element.at(i)->check(n,true);
+		return pi;
 	}
 	virtual string getNodeType()
 	{

@@ -4,17 +4,20 @@
 #include<string>
 #include<vector>
 using namespace std;
-pair<void*, string>pi;
+extern pair<void*, string>pi;
+
 class Node
 {
 private:
-	int _id=-1;
+
+	static int NodeCount;
+	int _id = -1;
 public :
 	Node* Next;
 	Node* Son;
 	int _lineNo = 0;
 	int _colNo = 0;
-	static int NodeCount;
+
 	Node(Node* son, Node* next) :Next(next), Son(son)
 	{
 		getId();
@@ -52,7 +55,6 @@ public :
 		}
 		return _id;
 	}
-	
 };
-int Node::NodeCount = 0;
+
 #endif

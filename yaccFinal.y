@@ -402,7 +402,8 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 													Node *il=new Node();
 													il=ast->addNext($<tn>1,$<tn>2);
 													Node* p=new Node();
-													p=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+													$<tn>$=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+													p=$<tn>$;
 													if(lastNode)
 													{
 														//cout<<"enter heree amer \n";
@@ -416,8 +417,7 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 													{
 														v->set_isarray(true);
 													}
-													else
-														$<tn>$=p;
+													
 													
 													
 												}
@@ -969,11 +969,11 @@ comp_op: '<' {
 				comp_op=LESS;
 			}
 		|'>'{Streams::verbose() <<"comp_op: '>' \n";comp_op=GREATHER;}
-		|EQUAL {Streams::verbose() <<"comp_op: EQUAL \n";comp_op=EQUAL;}
+		|EQUAL {Streams::verbose() <<"comp_op: EQUAL \n";comp_op=EQUALS;}
 		|MORE_OR_EQUAL {Streams::verbose() <<"comp_op: MORE_OR_EQUAL \n";comp_op=EQUALGREATHER;}
 		|LESS_OR_EQUAL {Streams::verbose() <<"comp_op: LESS_OR_EQUAL \n";comp_op=EQUALLESS;}
 		|MORE_LESS {Streams::verbose() <<"comp_op: MORE_LESS \n";}
-		|NOT_EQUAL {Streams::verbose() <<"comp_op: NOT_EQUAL \n";comp_op=NOT_EQUAL;}
+		|NOT_EQUAL {Streams::verbose() <<"comp_op: NOT_EQUAL \n";comp_op=NOTEQUAL;}
 		|IN {Streams::verbose() <<"comp_op: IN \n";}
 		|NOT IN {Streams::verbose() <<"comp_op: NOT IN \n";}
 		|IS {Streams::verbose() <<"comp_op: IS \n";}
@@ -1331,9 +1331,9 @@ subscriptlist:	subscript {Streams::verbose() <<"subscriptlist:	subscript\n";}
 				|subscript comma_subscript_seq ',' {Streams::verbose() <<"subscriptlist:	subscript comma_subscript_seq ','\n";} 
 				;
 
-subscript:  test {Streams::verbose() <<"subscript:  test\n";}
+subscript:  test {Streams::verbose() <<"subscript:  test\n";$<tn>$=$<tn>1;}
 			|':' {Streams::verbose() <<"subscript:  ':'\n";}
-			| test ':' {Streams::verbose() <<"subscript: test ':'\n";}
+			| test ':' {Streams::verbose() <<"subscript: test ':'\n";$<tn>$=$<tn>$=$<tn>1;}
 			| test ':' test {Streams::verbose() <<"subscript:  test ':' test\n";}
 			| test ':' sliceop {Streams::verbose() <<"subscript:  test ':' sliceop\n";}
 			| test ':' test sliceop {Streams::verbose() <<"subscript:  test ':' test sliceop\n";}

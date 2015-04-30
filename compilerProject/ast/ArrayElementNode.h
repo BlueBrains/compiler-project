@@ -50,6 +50,11 @@ void set_variable(Variable* v)
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
+		if (!v->get_isarray())
+		{
+			cout << "Error: variable is not array" << v->get_name() << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+		}
+		pi = make_pair(v, "Variable");
 		return pi;
 	}
 	virtual string getNodeType()

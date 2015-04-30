@@ -2,6 +2,7 @@
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
 //#include"../ast/Node.h"
+#include"../ast/Node.h"
 #include"Scope.h"
 #include"Variable.h"
 #include"Symbol.h"

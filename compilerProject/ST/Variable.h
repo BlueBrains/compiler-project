@@ -5,8 +5,9 @@
 #include <map>
 #include "Type.h"
 #include "Symbol.h"
+//#include "../AST.h"
+#include "../ArrayNode.h"
 using namespace std;
-class Type;
 typedef pair<string, void*> TypesMap;
 class Variable :public Symbol{
 private:
@@ -19,6 +20,7 @@ private:
 	bool is_array;
 	bool is_dic;
 	bool is_static;
+	ArrayNode* array_node=NULL;
 public:
 	bool init = false;
 	bool by_self;
@@ -26,7 +28,7 @@ public:
 	Variable(Variable*);
 	Variable();
 	Variable(char* name, Type* type, bool);
-	
+	void set_arrayNode(ArrayNode* v);
 	void set_lastTypes(int val);
 	void set_lastTypes();
 	void set_lastTypes(float val);
