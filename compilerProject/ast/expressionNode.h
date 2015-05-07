@@ -101,15 +101,25 @@ public:
 		}
 		else if (op == 3)
 			x = "/";
-		else
-			x = "ANOTHER ";
+		else if (op==5)
+			x = "> ";
+		else if (op == 6)
+			x = "< ";
+		else if (op ==7)
+			x = ">= ";
+		else if (op == 8)
+			x = "<= ";
+		else if (op == 9)
+			x = "== ";
+		else if (op == 10)
+			x = "!= ";
 		cout << getNodeType() << x<<endl;
 		first->print();
 		second->print();
 	}
 	virtual string getNodeType()
 	{
-		return "BinaryNODE";
+		return "BinaryNODE ";
 	}
 
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)

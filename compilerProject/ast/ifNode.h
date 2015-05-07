@@ -10,7 +10,7 @@ protected:
 
 public:
 	static	int 	if_label;
-	IfNode(Node* son, Node* next, Node* condition, Node* scoop) :Node(son,next), _condtion(condition),_scoop(scoop)
+	IfNode(Node* son, Node* next, Node* condition, Node* scoop) :Node(son,next), _condtion(condition),_scoop(scoop) 
 	{
 
 
@@ -23,7 +23,7 @@ public:
 	virtual void print()
 	{
 		cout << "IF NODE !" << endl;
-
+		_condtion->print();
 	}
 	virtual string getNodeType()
 	{

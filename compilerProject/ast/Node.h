@@ -3,6 +3,8 @@
 #define __NODE__
 #include<string>
 #include<vector>
+#include<iostream>
+#include "../mips_asm.h"
 using namespace std;
 extern pair<void*, string>pi;
 
@@ -44,6 +46,9 @@ public :
 		int* o = NULL;
 		pi = make_pair(o, "NULL");
 		return pi;
+	}
+	virtual void generateCode(){
+		cout << "Not implmented yet!!!!!!!!!!\n";
 	}
 	virtual string getNodeType()
 	{

@@ -278,5 +278,7 @@ public:
 	void check_static(Type* t, int lineno, int colno);
 	void check_func_Call();
 	Variable* addVariableToGlobalScope(string id, int line_no, int col_no);
+	Scope* createNewScope();
+	Scope* CloseScope();
 };
 #endif

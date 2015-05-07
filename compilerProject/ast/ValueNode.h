@@ -32,9 +32,49 @@ public:
 	{
 
 	}
+	virtual void generateCode(){
+		void * g = get_value();
+		if (get_types() == 0)
+		{
+			MIPS_ASM::li("t9", *(int*)(g));
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 1)
+		{
+			MIPS_ASM::li("t9", *(int*)(void*)&(*(float*)(g)));
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 2)
+		{
+			MIPS_ASM::li("t9", *(char*)(g));
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 3)
+		{
+			MIPS_ASM::li("t9", *(long*)(g));
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 4)
+		{
+			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(*(string*)(g)));
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 5)
+		{
+			MIPS_ASM::li("t9", true);
+			MIPS_ASM::push("t9");
+		}
+		else if (get_types() == 6)
+		{
+			//string x = *(string*)(g);
+			MIPS_ASM::li("t9", false);
+			MIPS_ASM::push("t9");
+		}
+	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
 		void * g = get_value();
+		
 		string x;
 		//cout << getNodeType() << "     ";
 		if (get_types() == 0)
@@ -110,7 +150,7 @@ public:
 			//string x = *(string*)(g);
 			cout << "value is false" << endl;
 		}
-
+		this->generateCode();
 	}
 	virtual string getNodeType()
 	{

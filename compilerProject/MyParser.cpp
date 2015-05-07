@@ -490,6 +490,20 @@ int findTypeByName(vector<Type*>Mylist, Type* t)
 	}
 	return -1;
 }
+
+Scope* MyParser::createNewScope()
+{
+	Scope* t = new Scope();
+	t->parent = this->st->currScope;
+	this->st->currScope = t;
+	return t;
+}
+Scope* MyParser::CloseScope()
+{
+	Scope* y = this->st->currScope;
+	this->st->currScope = this->st->currScope->parent;
+	return y;
+}
 Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
 {
 	//cout << "enter" << endl;

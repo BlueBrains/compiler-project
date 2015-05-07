@@ -28,6 +28,7 @@
 #include"ast\PassNode.h"
 #include"ast\subscriptNode.h"
 #include"ast\BooleanNode.h"
+#include"ast\shortIfNode.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
@@ -119,7 +120,7 @@ public:
 		ExpressionNode* temp = new ExpressionNode(op, son, next,line_no,col_no);
 		return temp;
 	}
-	BooleanNode * createBooleanNode(Node*First, Node* second, Node * son, Node* next, boolean_operand op, int line_no, int col_no)
+	BooleanNode * createBooleanNode(Node*First, Node* second,  boolean_operand op,Node * son, Node* next, int line_no, int col_no)
 	{
 		BooleanNode* temp = new BooleanNode(First, second, op, NULL, next, line_no, col_no);
 		return temp;
@@ -190,6 +191,12 @@ public:
 	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next,  int line_no, int col_no)
 	{
 		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next,line_no,col_no);
+		//Node* i = temp;
+		return temp;
+	}
+	shortIfNode* createShortIfNode(Node* first,Node* cond, Node* second, Node * son, Node* next, int line_no, int col_no)
+	{
+		shortIfNode *temp = new shortIfNode( first,cond,second, son, next, line_no, col_no);
 		//Node* i = temp;
 		return temp;
 	}
@@ -264,7 +271,12 @@ public:
 				f = test->get_function();
 				outer_node.push_back(n);
 			}
+			
 			else if (n->getNodeType() == "ForNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "IfNode")
 			{
 				outer_node.push_back(n);
 			}
@@ -278,29 +290,11 @@ public:
 			{
 				outer_node.push_back(n);
 			}
-			else if (n->getNodeType() == "CallVariableNode")
-			{
-				string h = static_cast<CallVariableNode*>(n)->getID();
-				v=checkVarFromCurrentNode(h);
-				if (!v)
-					cout << "Error :variable Not found " << h << " at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
-
-			}
-			else if (n->getNodeType() == "CallTypeNode")
+			else
 			{
 				n->check(outer_node);
 			}
-			else if (n->getNodeType() == "DotNode")
-			{
-				//check_dotNode(n);
-				n->check(outer_node);
-				is_dot = true;
-			}
-			else if (n->getNodeType() == "BinaryNODE")
-			{
-				//check_dotNode(n);
-				n->check(outer_node);
-			}
+			
 			if (!is_dot)
 			{
 				tree(n->Son);
