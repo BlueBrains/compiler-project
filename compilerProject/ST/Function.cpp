@@ -22,7 +22,7 @@ Function::Function(char* name, char* access_modifier) :Symbol(name)
 	//this->FunctionNode = NULL;
 	this->is_final = false;
 	//this->is_override = false;
-}/*
+}
 void Function::set_FunctionNode(Node* n)
 {
 	this->FunctionNode = n;
@@ -31,7 +31,7 @@ void Function::set_FunctionNode(Node* n)
 Node* Function::get_FunctionNode()
 {
 	return FunctionNode;
-}*/
+}
 void Function::set_label(string l)
 {
 	this->_label=l;

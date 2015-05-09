@@ -1,7 +1,7 @@
 #pragma once
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
-//#include"../ast/Node.h"
+#include"../ast/Node.h"
 #include"../ast/Node.h"
 #include"Scope.h"
 #include"Variable.h"
@@ -14,7 +14,7 @@ private:
 	bool is_static;
 	bool is_private;
 	bool is_protected;
-	//Node* FunctionNode;
+	Node* FunctionNode;
 	//bool is_override;
 	bool is_final;
 	string _label;
@@ -25,9 +25,8 @@ public:
 	Function(char* name);
 	//Method(char* name, Type* return_type);
 	Function(char* name, char* access_modifier);
-	/*
 	void set_FunctionNode(Node* fn);
-	Node* get_FunctionNode();*/
+	Node* get_FunctionNode();
 	void set_label(string id);
 	string get_label();
 	void setScope(Scope* m);

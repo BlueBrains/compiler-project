@@ -66,7 +66,7 @@ public:
 	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next,  int line_no, int col_no)
 	{
 		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no);
-		//f->set_FunctionNode(temp);
+		f->set_FunctionNode(temp);
 		f->set_label(f->get_name()+temp->getId());
 		return temp;
 	}
