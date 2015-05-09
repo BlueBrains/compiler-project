@@ -16,8 +16,12 @@
 	#include <stdlib.h>
 	#include "Streams.h"
 	#include "ErrorRevovery.h"
+	//#include "compilerProject/common.h"
+	//#define p  c->p
+	//#define ast c->ast
 	#include "compilerProject/AST.h"
 	#include"compilerProject/MyParser.h"
+
 	#include <set>
 	using namespace std;
 	class ColonStack
@@ -86,8 +90,10 @@
 			return yyparse();
 		}
 	};
+	
 	MyParser * p = new MyParser();
 	AST * ast = new AST();
+	//common *c=new common();
 %}		
 
 
@@ -405,13 +411,13 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 													visit_num=0;
 													Node *il=new Node();
 													il=ast->addNext($<tn>1,$<tn>2);
-													Node* p=new Node();
+													Node* pp=new Node();
 													$<tn>$=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
-													p=$<tn>$;
+													pp=$<tn>$;
 													if(lastNode)
 													{
 														//cout<<"enter heree amer \n";
-														$<tn>$=ast->addNext(lastNode,p);
+														$<tn>$=ast->addNext(lastNode,pp);
 														
 														lastNode=NULL;
 														//cout<<"print in expr_stmt if";
@@ -2063,8 +2069,8 @@ void main(void)
 	fileStack.push(input);
 	ifstream inf(input);
 	lexer = new yyFlexLexer(&inf);
-	Parser* p = new Parser();
-	p->parse();
+	Parser* pp = new Parser();
+	pp->parse();
 	MIPS_ASM::writeData();
 		ofs<<"\n.text\n";
 

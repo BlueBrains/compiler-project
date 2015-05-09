@@ -105,6 +105,7 @@
     <ClCompile Include="..\SyntaxError.cpp" />
     <ClCompile Include="..\yacc.cpp" />
     <ClCompile Include="ast\Node.cpp" />
+    <ClCompile Include="common.cpp" />
     <ClCompile Include="mips_asm.cpp" />
     <ClCompile Include="MyMap.cpp" />
     <ClCompile Include="MyParser.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="CallTypeNode.h" />
     <ClInclude Include="CallVariableNode.h" />
     <ClInclude Include="ClassNode.h" />
+    <ClInclude Include="common.h" />
     <ClInclude Include="dotNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
     <ClInclude Include="expressionNode.h" />

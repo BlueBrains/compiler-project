@@ -16,6 +16,7 @@ private:
 	int _id = -1;
 public :
 	Node* Next;
+
 	Node* Son;
 	int _lineNo = 0;
 	int _colNo = 0;
@@ -23,6 +24,7 @@ public :
 	Node(Node* son, Node* next) :Next(next), Son(son)
 	{
 		getId();
+		
 	}
 	Node(Node* son, Node* next, int line_no, int col_no) :Next(next), Son(son), _lineNo(line_no), _colNo(col_no)
 	{
