@@ -1,4 +1,4 @@
-class u(l,j,o):
+class u(l,o,p):
 	def l;
 	def koko=9;
 	def static lolo=9;
@@ -10,15 +10,21 @@ class u(l,j,o):
 	p=7;
 	p=3 if m==2 else 5;
 	if x==2:
-		self.amer=9;
-		oo=9;
+		self.amer=9+y[0];
 		v=oo;
 	end
-	elif x==5:
+	elif x==9:
 		op=9;
 	end
 	else:
-		p=8;
+		oop=8;
+	end
+	try :
+		amer_try=9;
+		vf=amer_try;
+	end
+	except :
+		ko=vv;
 	end
 		n=self.l;
 		self.l=8+pop+amora.self;

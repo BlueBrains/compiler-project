@@ -17,6 +17,8 @@ public:
 	virtual void print()
 	{
 		cout << "except node " << endl;
+		if (_exception)
+			_exception->print();
 	}
 	virtual string getNodeType()
 	{

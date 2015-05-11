@@ -111,7 +111,7 @@ void MIPS_ASM::writeData()
 	//	fputs(MIPS_ASM::data,MIPS_ASM::file);
 	//fputs("\nnewline: .asciiz \"\\n\"",MIPS_ASM::file);	
 	//fclose(MIPS_ASM::file);
-	ofs << "amer   "<<data.str();
+	ofs <<data.str();
 	data = stringstream();
 }
 

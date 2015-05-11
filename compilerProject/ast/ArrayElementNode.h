@@ -44,9 +44,12 @@ void set_variable(Variable* v)
 	virtual void print()
 	{
 		cout << "ARRAY Enelment NODE !" << endl;
-		cout << "array name is " << v->get_name() << endl;
-		index->print();
-
+		if (v)
+		{
+			cout << "array name is " << v->get_name() << endl;
+			index->print();
+		}
+	
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{

@@ -83,7 +83,7 @@ public:
 	}
 	TryNode* createTryNode(Node * son, Node* next, Node* scoop,  int line_no, int col_no)
 	{
-		TryNode* temp = new TryNode(son, next, scoop);
+		TryNode* temp = new TryNode(son, next, scoop,line_no,col_no);
 		return temp;
 	}
 	ExceptNode* createExceptNode(Node * son, Node* next, Node* exception, Node* scoop,  int line_no, int col_no)
@@ -255,10 +255,6 @@ public:
 		//MyParser* p = new MyParser();
 		if (n)
 		{
-			if ((outer_node.size() > 0) && (outer_node.back()->getId() < n->getId()))
-			{
-				outer_node.pop_back();
-			}
 			if (n->getNodeType() == "ClassNode")
 			{
 				ClassNode* test = static_cast<ClassNode*>(n);
@@ -281,6 +277,23 @@ public:
 			{
 				outer_node.push_back(n);
 			}
+			else if (n->getNodeType() == "ElseIfNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "ElseNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "TryNode")
+			{
+				outer_node.push_back(n);
+			}
+			else if (n->getNodeType() == "ExceptNode")
+			{
+				outer_node.push_back(n);
+			}
+			
 			else if (n->getNodeType() == "AssignmentNode")
 			{
 				//outer_node.push_back(n);
@@ -291,14 +304,21 @@ public:
 			{
 				outer_node.push_back(n);
 			}
+
 			else
 			{
 				n->check(outer_node);
+				
 			}
 			
 			if (!is_dot)
 			{
 				tree(n->Son);
+				if ((n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
+					|| (n->getNodeType() == "ElseIfNode") || (n->getNodeType() == "IfNode") || (n->getNodeType() == "ForNode") || (n->getNodeType() == "FunctionNode"))
+				{
+					outer_node.pop_back();
+				}
 			}
 			else
 				is_dot = false;
