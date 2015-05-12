@@ -107,6 +107,7 @@
     <ClCompile Include="ast\Node.cpp" />
     <ClCompile Include="common.cpp" />
     <ClCompile Include="mips_asm.cpp" />
+    <ClCompile Include="mips_code.cpp" />
     <ClCompile Include="MyMap.cpp" />
     <ClCompile Include="MyParser.cpp" />
     <ClCompile Include="myvector.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="getString.h" />
     <ClInclude Include="IDNode.h" />
     <ClInclude Include="mips_asm.h" />
+    <ClInclude Include="mips_code.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyParser.h" />
     <ClInclude Include="myvector.h" />

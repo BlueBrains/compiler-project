@@ -1,7 +1,7 @@
 class u(l,o,p):
 	def l;
-	def koko=9;
-	def static lolo=9;
+	def koko=9.9;
+	def static lolo="am";
 	def final coco():
 	y=[];
 	m=g();

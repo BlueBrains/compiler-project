@@ -1328,7 +1328,7 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
 		;
 
-str_seq:	STRING %prec stmt_10 {Streams::verbose() <<"str_seq:	STRING \n";}
+str_seq:	STRING %prec stmt_10 {Streams::verbose() <<"str_seq:	STRING \n"; cout<<"string is"<<$<r.strVal>$<<endl;}
 			|str_seq STRING {Streams::verbose() <<"str_seq:	str_seq STRING \n";}
 			;
 
@@ -1373,7 +1373,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						//cout<<"reference"<<xx<<endl;
 						constant=true;
 						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
-						visit_num++;
+						//visit_num++;
 														} 
 		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
 							constant=true;
@@ -1387,16 +1387,25 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
-									
-									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									string * xl=new string($<r.strVal>1);
+									constant=true;
+									$<tn>$ = ast->createTypeNode(&xl,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n";} 
 		| NONE {Streams::verbose() <<"atom: NONE\n";} 
 		| TRUE {Streams::verbose() <<"atom: TRUE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,True);
+					int* xx = new int (1);
+						//cout<<"yhe number is"<<*xx<<endl;
+						//cout<<"reference"<<xx<<endl;
+						constant=true;
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 				} 
 		| FALSE {Streams::verbose() <<"atom: FALSE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,False);
+						int* xx = new int (0);
+						//cout<<"yhe number is"<<*xx<<endl;
+						//cout<<"reference"<<xx<<endl;
+						constant=true;
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 				} 
 		;
 

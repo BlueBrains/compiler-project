@@ -280,5 +280,6 @@ public:
 	Variable* addVariableToGlobalScope(string id, int line_no, int col_no);
 	Scope* createNewScope();
 	Scope* CloseScope();
+	Function* getMainFunction();
 };
 #endif

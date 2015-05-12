@@ -15,7 +15,7 @@ int MIPS_ASM::static_size = 4;
 stringstream MIPS_ASM::code;
 stringstream MIPS_ASM::data;
 stringstream MIPS_ASM::main;
-ofstream ofs;
+ofstream ofs("AssemblyCode.asm", std::ofstream::out);
 FILE * MIPS_ASM::file = fopen("AssemblyCode.asm", "w");
 int MIPS_ASM::strings_count = 0;
 map<string, int> strings;

@@ -56,11 +56,12 @@ public:
 		}
 		else if (get_types() == 4)
 		{
-			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(*(string*)(g)));
+			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel("amer"));
 			MIPS_ASM::push("t9");
 		}
 		else if (get_types() == 5)
 		{
+
 			MIPS_ASM::li("t9", true);
 			MIPS_ASM::push("t9");
 		}
@@ -137,7 +138,11 @@ public:
 		}
 		else if (get_types() == 4)
 		{
-			string x = *(string*)(g);
+			//char* x = new char[100];
+			//string x = *(static_cast<string*>(g));//(char*)(g);//
+
+			//strcpy(x, (*(static_cast<string*>(g))).c_str());
+			string x = "amer";
 			cout << "value is " << x << endl;
 		}
 		else if (get_types() == 5)

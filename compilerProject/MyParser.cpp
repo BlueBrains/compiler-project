@@ -504,6 +504,10 @@ Scope* MyParser::CloseScope()
 	this->st->currScope = this->st->currScope->parent;
 	return y;
 }
+Function*MyParser::getMainFunction()
+{
+	return this->st->mainfunc;
+}
 Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
 {
 	//cout << "enter" << endl;

@@ -15,7 +15,7 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt
 atom: DEF NAME
-atom: NUMBER_INT 9
+atom: NUMBER_FLOAT
 power:	atom
 factor: power
 term: 	factor
@@ -38,7 +38,8 @@ stmt:	simple_stmt
 list_stmt : stmt list_stmt
 atom: DEF STATIC NAME
 var_declaration: STATIC ID
-atom: NUMBER_INT 9
+str_seq:	STRING 
+atom: str_seq
 power:	atom
 factor: power
 term: 	factor
@@ -895,4 +896,3 @@ classdef: classheader suite
 temp2: classdef 
 temp2: classdef temp2
 program : temp2 
-file_input: program ENDMARKER
