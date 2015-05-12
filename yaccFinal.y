@@ -158,7 +158,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 								}
 			;
 
-program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';' temp2 \n";}
+program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';' temp2 \n";$<tn>$=$<tn>3;}
           |temp2 {Streams::verbose() <<"program : temp2 \n";}
 		  ;
 
@@ -406,8 +406,8 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 								Node *il2=new Node();
 								il2=ast->createAssignNode(il,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 								$<tn>$=ast->addNext($<tn>1,il2);
-							}
 
+							}
 			|testlist_star_expr right_testlist {Streams::verbose() <<"expr_stmt: testlist_star_expr right_testlist \n";
 													//$<amerstr>1;
 													visit_num=0;
@@ -543,11 +543,31 @@ import_name: IMPORT dotted_as_names {Streams::verbose() <<"import_name: IMPORT d
 											sprintf(buffer, xx);
 											tokenPtr = strtok(buffer, ".");
 											string fg=tokenPtr;
-											cout<<fg<<"   "<<endl;
+											 string sf=tokenPtr;
+											 cout<<"sf ="<<sf<<endl;
+												lineNum=colNum=1;					 
+											 sf.append(".txt");
+											 if(find(parsedFile.begin(),parsedFile.end(),sf)==parsedFile.end())
+												fileStack.push(sf);
+											 while(!fileStack.empty()&&sourceFile!=fileStack.top()){
+												 sf=fileStack.top();
+												 sourceFile=sf;
+												 ifstream inf(sf);
+												 lexer->yyrestart(&inf);
+												 Parser* p = new Parser();
+												 p->parse();						 
+												 lineNum=colNum=1;
+												 parsedFile.push_back(sf);
+												 if(fileStack.size()>0)
+													fileStack.pop();
+												 if(fileStack.size()==0)
+													YYABORT;
+											 }
+											 inhertance_list.erase(inhertance_list.begin() + i);
 											i++;
 										}
-										
-										inhertance_list.clear();}
+										inhertance_list.clear();
+				}
 			 ;
 
 comma_dotted_as_name_seq: ',' dotted_as_name {Streams::verbose() <<"comma_dotted_as_name_seq: ',' dotted_as_name \n";
@@ -587,7 +607,7 @@ dotted_name: NAME {
 					 Streams::verbose() <<"dotted_name: NAME \n";
 					 temp_id=$<r.strVal>1;
 					
-					
+					/*
 					  string sf=$<r.strVal>1;
 					 cout<<"sf ="<<sf<<endl;
 						 lineNum=colNum=1;					 
@@ -607,7 +627,7 @@ dotted_name: NAME {
 							fileStack.pop();
 						 if(fileStack.size()==0)
 							YYABORT;
-					 }
+					 }*/
 					 
 					
 
@@ -833,10 +853,12 @@ elif_header:	ELIF test ':'{
 									p->CloseScope();
 									p->createNewScope();
 									$<tn>$=$<tn>2;
+									visit_num=0;
 							};
 else_stmt:		ELSE ':'{
 							p->CloseScope();
 							p->createNewScope();
+							visit_num=0;
 						}
 if_stmt:	 if_header suite {
 								Streams::verbose() <<"if_stmt:	IF test ':' suite \n";
@@ -866,6 +888,7 @@ if_stmt:	 if_header suite {
 if_header: IF test ':'  {
 							p->createNewScope();
 							$<tn>$=$<tn>2;
+							visit_num=0;
 						}
 while_stmt: while_header suite {
 									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
@@ -882,6 +905,7 @@ while_stmt: while_header suite {
 while_header: WHILE test ':' {
 								$<tn>$=$<tn>2;
 								p->createNewScope();
+								visit_num=0;
 }
 for_stmt:   for_header IN testlist ':' suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";
@@ -987,10 +1011,14 @@ except_clause:  EXCEPT {
 								p->createNewScope();
 								Streams::verbose() <<"except_clause:  EXCEPT test\n";
 								$<tn>$ = ast->createExceptNode(NULL, NULL, $<tn>2, NULL,yylval.r.lineNum,yylval.r.colNum);
+								visit_num=0;
+								lastNode=NULL;
 							 }
 				|EXCEPT test AS NAME {Streams::verbose() <<"except_clause:  EXCEPT test AS NAME\n";
 												p->CloseScope();
 												p->createNewScope();
+												visit_num=0;
+												lastNode=NULL;
 										}
 				;
 
@@ -1055,6 +1083,7 @@ not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";
 comp_op_seq: comp_op expr %prec stmt_7 {
 											Streams::verbose() <<"comp_op_seq: comp_op expr \n";
 											$<tn>$=$<tn>2;
+											lastNode=NULL;
 										}
 			 |comp_op_seq comp_op expr {
 											Streams::verbose() <<"comp_op_seq: comp_op_seq comp_op expr \n";
@@ -1235,6 +1264,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
 						v=$<var>$;
 						v1=v;
+						cout<<"exist is "<<exist<<yylval.r.lineNum<<endl;
 						if((!exist)&&(v!=NULL))
 						{
 							//cout<<"hellow world  "<<v->get_name()<<endl;
@@ -1288,7 +1318,6 @@ trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \
 power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 							//$<tn>$=ast->createCallVarNode(temp_id2.back(),NULL,NULL,NULL);
 							$<tn>$=$<tn>1;
-							
 							} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
 											cout<<"the top is "<<temp_id2.back()<<endl;
@@ -1301,7 +1330,7 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
 		;
 
-str_seq:	STRING %prec stmt_10 {Streams::verbose() <<"str_seq:	STRING \n";}
+str_seq:	STRING %prec stmt_10 {Streams::verbose() <<"str_seq:	STRING \n"; cout<<"string is"<<$<r.strVal>$<<endl;}
 			|str_seq STRING {Streams::verbose() <<"str_seq:	str_seq STRING \n";}
 			;
 
@@ -1346,7 +1375,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						//cout<<"reference"<<xx<<endl;
 						constant=true;
 						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
-						visit_num++;
+						//visit_num++;
 														} 
 		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
 							constant=true;
@@ -1360,16 +1389,25 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
-									
-									$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									string * xl=new string($<r.strVal>1);
+									constant=true;
+									$<tn>$ = ast->createTypeNode(&xl,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n";} 
 		| NONE {Streams::verbose() <<"atom: NONE\n";} 
 		| TRUE {Streams::verbose() <<"atom: TRUE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,True);
+					int* xx = new int (1);
+						//cout<<"yhe number is"<<*xx<<endl;
+						//cout<<"reference"<<xx<<endl;
+						constant=true;
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 				} 
 		| FALSE {Streams::verbose() <<"atom: FALSE\n";
-					$<tn>$ = ast->createTypeNode($<r.strVal>1,0,0,yylval.r.lineNum,yylval.r.colNum,False);
+						int* xx = new int (0);
+						//cout<<"yhe number is"<<*xx<<endl;
+						//cout<<"reference"<<xx<<endl;
+						constant=true;
+						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 				} 
 		;
 
@@ -1986,9 +2024,9 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										if($<tn>$->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>$->get_variable()->set_isarray(true);
-										}
+												 }
 										_par.push_back($<tn>$);
-										
+		
 										if($<tn>6->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>6->get_variable()->set_isdic(true);
@@ -2006,7 +2044,7 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										if($<tn>3->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-										}
+											   }
 										_par.push_back($<tn>3);
 											   }
 		
@@ -2034,7 +2072,7 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
 										}
 										_par.push_back($<tn>3);
-										}
+																	 }
 		
 		 |arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test {
 																std::string tempstr($<r.strVal>3);
@@ -2050,9 +2088,9 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 									if($<tn>3->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-										}
+															   }
 										_par.push_back($<tn>3);
-
+        
 									if($<tn>7->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>7->get_variable()->set_isdic(true);
@@ -2068,7 +2106,7 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										if($<tn>3->getNodeType()=="IDNode")
 										{
 											static_cast< IDNode* > $<tn>3->get_variable()->set_isdic(true);
-										}
+								    }
 										_par.push_back($<tn>3);
 								    }
 		
@@ -2160,6 +2198,15 @@ void main(void)
 	lexer = new yyFlexLexer(&inf);
 	Parser* pp = new Parser();
 	pp->parse();
+MIPS_ASM::add_data("\nblock_head:    .byte   0:8\n");
+			MIPS_ASM::add_data("\nglob_tmp:    .byte   0:4\n");
+	MIPS_ASM::add_data("\nalign_to:  .word 4\n");
+		//symbolTable->generateStatics();
+		//symbolTable->generateCode();
+	ofs<<".data\n";
+	MIPS_ASM::add_data("\nnewline: .asciiz \"\\n\"\n");
+
+	
 	MIPS_ASM::writeData();
 		ofs<<"\n.text\n";
 
@@ -2172,8 +2219,25 @@ void main(void)
 std::string str_common((std::istreambuf_iterator<char>(t_common)),
                  std::istreambuf_iterator<char>());
 	ofs<<str_common<<"\n";
+/*
+	Iskernal=1;
+	symbolTable->generateKernalCode();
+*/
+		ofs<<".ktext 0x80000180\n";
+
+ t_common =	std::ifstream("exception.asm");
+ str_common=string((std::istreambuf_iterator<char>(t_common)),
+                 std::istreambuf_iterator<char>());
+	ofs<<str_common<<"\n";
+	MIPS_ASM::writeCode();
+
+	MIPS_ASM::add_data("msg:   .asciiz \"Trap generated \\n\"\n");
+	MIPS_ASM::add_data("ure_msg:   .asciiz \"unhandled runtime error \\n\"\n");
+	ofs<<".kdata\n";
+	MIPS_ASM::writeData();
 	Program::printErrors();
 	//err->printErrQueue();
 	system("pause");
+
 }
 #endif;

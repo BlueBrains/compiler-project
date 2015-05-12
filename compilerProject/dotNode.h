@@ -127,6 +127,7 @@ public:
 		cout << getNodeType() << endl;
 		for (int i = 0; i < dot_vector.size(); i++)
 			dot_vector.at(i)->print();
+		
 	}
 	virtual string getNodeType()
 	{

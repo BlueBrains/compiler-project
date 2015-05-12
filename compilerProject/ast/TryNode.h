@@ -9,7 +9,7 @@ protected:
 
 public:
 	static	int 	try_label;
-	TryNode(Node* son, Node* next, Node* scoop) :Node(son,next), _scoop(scoop)
+	TryNode(Node* son, Node* next, Node* scoop, int l, int c) :Node(son, next,l,c), _scoop(scoop)
 	{
 
 

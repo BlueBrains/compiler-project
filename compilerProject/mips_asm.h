@@ -92,6 +92,7 @@ public:
 
 	static void printComment(string comment);
 
+	static void test_amer();
 };
 
 #endif

@@ -18,14 +18,13 @@ private:
 	Variable* checkVarFromCurrentNode(string id, vector<Node*>outer_node)
 	{
 		int i = outer_node.size() - 1;
-		Node* temp = outer_node.back();
 		Node* temp2;
 		Variable* v = NULL;
 		if (outer_node.at(i)->getNodeType() == "ClassNode")
 		{
 			Type* tt = static_cast<ClassNode*>(outer_node.at(i))->get_type();
 			temp2 = outer_node.at(i)->Son;
-			while (temp2->Next)
+			while ((temp2->Next)&&(this->getId()>temp2->getId()))
 			{
 				if ((temp2->getNodeType() == "IDNode"))
 				{
@@ -44,7 +43,7 @@ private:
 			while (outer_node.at(i)->getNodeType() != "ClassNode")
 			{
 				temp2 = outer_node.at(i)->Son;
-				while (temp2->Next)
+				while ((temp2->Next) && (this->getId()>temp2->getId()))
 				{
 					if ((temp2->getNodeType() == "IDNode"))
 					{
