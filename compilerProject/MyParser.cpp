@@ -198,7 +198,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add static function to not static inner class", name);
 		}
 	}
-   
+
 	bool nullclass = false;
 	if (check_class_in(tname, constraction_type))
 	{
@@ -224,25 +224,41 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
+		/*if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
 		{
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
 		}
 
 		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
 		{
-			this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
-		
-
+		*/
+		/*
+		bool selflast = false;
+		for (int i = 0; i < parameter.size(); i++) {
+		if ('*' == parameter.at(i)[0])
+		{
+		selflast = true;
+		}
+		}
+		*/
+		//if (!selflast){
 		vector<char*>::iterator it = find_if(parameter.begin() + 1, parameter.end(), Comparator_char("self"));
 		if (it != parameter.end()){
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
 		}
-
+		//}
+		/*
+		else
+		{
+		vector<char*>::iterator it = find_if(parameter.begin(), parameter.end()-1, Comparator_char("self"));
+		if (it != (parameter.end()-1)){
+		this->errRecovery->errQ->enqueue(lineNo, colNo, "Unexpected Self here , should be first parameter", name);
+		}
+		}
+		*/
 	}
-
-	//vector <char *> tempvec = parameter;
 	vector <char *> cleanp = parameter;
 	vector <char *> clean2p = parameter;
 	vector <char *> clean3p = parameter;
@@ -263,7 +279,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			dontdo1 = true;
 		}
 	}
-	
+
 	if (dontdo1){
 		for (int i = 0; i < cleanp.size(); i++) {
 			if ((strlen(parameter.at(i)) > 1) && ('*' == parameter.at(i)[0]) && ('*' != parameter.at(i)[1]))
@@ -294,7 +310,6 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			}
 		}
 	}
-
 	vector <char *> tempvec = cleanp;
 	for (int i = 0; i < parameter.size(); i++) {
 		tempvec.at(i) = "!";
@@ -365,6 +380,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 	}
 
+
 	f = new Function();
 	f->set_name(name);
 	f->set_final(fi);
@@ -377,15 +393,16 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	this->st->currScope = f->getScope();
 
 	for (int i = 0; i < parameter.size(); i++) {
+
 		f->setparameters(parameter[i]);
 	}
-	
+
 	for (int i = 0; i < f->getparameters().size(); i++) {
-		
-		f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
+		if (strcmp(f->getparameters().at(i)->get_name(), "self") != 0)
+			f->getScope()->m->put(f->getparameters().at(i)->get_name(), f->getparameters().at(i), "Variable");
 	}
 
-	if ((outer_type.back() == NULL) && (strcmp(tname->getAccessModifier(), "PUBLIC") == 0) && (strcmp(name, "main") == 0))
+	if ((outer_type.size() == 1) && (strcmp(tname->getAccessModifier(), "public") == 0) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -395,7 +412,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		else
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
 	}
-	if ((outer_type.back() != NULL) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
+	if ((outer_type.size() >1) && (tname->getIs_static()) && (strcmp(name, "main") == 0))
 	{
 		if (st->mainfunc == NULL)
 		{
@@ -406,7 +423,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r allowed to put only one static main method", name);
 	}
 
-	if ((outer_type.back() != NULL) && (!tname->getIs_static()) && f->get_static())
+	if ((outer_type.size() >1) && (!tname->getIs_static()) && f->get_static())
 	{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "you'r not allowed to put static method in non static class", name);
 	}

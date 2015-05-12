@@ -6,6 +6,8 @@ class FunctionNode :public Node
 {
 private:
 	Function* function_node;
+	vector<Node*> df_par;
+	vector<Node*> _par;
 public:
 	Function* get_function()
 	{
@@ -19,9 +21,11 @@ public:
 	{
 
 	}
-	FunctionNode(Function* f, Node* son, Node*next,int l,int c) :function_node(f), Node(son, next,l,c)
+	FunctionNode(Function* f, Node* son, Node*next, int l, int c, vector<Node*> dfpar, vector<Node*> par) :function_node(f), Node(son, next, l, c)
 	{
-
+		this->function_node = f;
+		this->df_par = dfpar;
+		this->_par = par;
 	}
 	virtual void print()
 	{
