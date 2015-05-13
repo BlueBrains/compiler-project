@@ -33,6 +33,7 @@ public:
 		left_side->print();
 		cout << "right side :";
 		right_side->print();
+		right_side->generateCode();
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{

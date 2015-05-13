@@ -29,6 +29,7 @@
 #include"ast\subscriptNode.h"
 #include"ast\BooleanNode.h"
 #include"ast\shortIfNode.h"
+#include"ast\ErrorNode.h"
 char* arr[] =
 { "rootNode" , "valueNode", "stringValNode", "idNode", "callNode", "assignNode", "minusNode", "plusNode","moreThanNode", "lessThanNode", "exprListNode",
 
@@ -154,6 +155,11 @@ public:
 	DotNode* createDotNode(vector<Node*>v,Node * son, Node* next, int line_no, int col_no)
 	{
 		DotNode* temp = new DotNode(v,son, next, line_no, col_no);
+		return temp;
+	}
+	ErrorNode * createErrorNode(string s, Node * son, Node* next, int line_no, int col_no)
+	{
+		ErrorNode* temp = new ErrorNode(s, son, next, line_no, col_no);
 		return temp;
 	}
 	ValueNode * createTypeNode(void* v1, Node * son, Node* next,  int line_no, int col_no, Types t)
@@ -308,7 +314,7 @@ public:
 			else
 			{
 				n->check(outer_node);
-				
+				n->generateCode();
 			}
 			
 			if (!is_dot)

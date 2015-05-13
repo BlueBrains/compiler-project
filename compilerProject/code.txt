@@ -1,40 +1,6 @@
 class u(l,o,p):
-	def l;
-	def koko=9.9;
-	def static lolo="am";
-	def final coco():
-	y=[];
-	m=g();
-	n=ui();
-	u=o;
-	p=7;
-	p=3 if m==2 else 5;
-	if x==2:
-		self.amer=9+y[0];
-		v=oo;
-	end
-	elif x==9:
-		op=9;
-	end
-	else:
-		oop=8;
-	end
-	try :
-		amer_try=9;
-		vf=amer_try;
-	end
-	except :
-		ko=vv;
-	end
-		n=self.l;
-		self.l=8+pop+amora.self;
-		y=8+p+self.x+self.l;
-	#	z=[1,2,3];
-	end	
-	def static amer():
-		n=self.koko;
-		m=self.lolo;
-	end
+	def static lolo=1+3+9+8;
+	
 end
 class g:
 end

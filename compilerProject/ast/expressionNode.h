@@ -101,6 +101,8 @@ public:
 		}
 		else if (op == 3)
 			x = "/";
+		else if (op == 4)
+			x = "%";
 		else if (op==5)
 			x = "> ";
 		else if (op == 6)
@@ -116,6 +118,7 @@ public:
 		cout << getNodeType() << x<<endl;
 		first->print();
 		second->print();
+		//this->generateCode();
 	}
 	virtual string getNodeType()
 	{
@@ -130,6 +133,43 @@ public:
 		p2=second->check(n,from_right);
 		//pi here is the output of symbol table for types
 		return pi;
+	}
+	virtual void generateCode()
+	{
+		string t0 = "t0";
+		string t1 = "t1";
+		first->generateCode();
+		second->generateCode();
+		MIPS_ASM::pop(t1);
+		MIPS_ASM::pop(t0);
+		if (op == 0)
+		{
+			MIPS_ASM::operation(t0, t0, t1, 1);
+			MIPS_ASM::push(t0);
+		}
+		else if (op == 1)
+		{
+			MIPS_ASM::operation(t0, t0, t1, 2);
+			MIPS_ASM::push(t0);
+		}
+		else if (op == 2)
+		{
+			MIPS_ASM::operation(t0, t0, t1, 3);
+			MIPS_ASM::push(t0);
+		}
+		else if (op == 3)
+		{
+			MIPS_ASM::operation(t0, t0, t1, 4);
+			MIPS_ASM::push(t0);
+		}
+		else if (op == 4)
+		{
+			MIPS_ASM::operation(t0, t0, t1, 5);
+			MIPS_ASM::push(t0);
+		}
+	
+		
+			
 	}
 };
 #endif
