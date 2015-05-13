@@ -40,6 +40,7 @@ public:
 	static void writeMain();
 
 	static void add_data(string);
+
 	static void addMainInstruction(string);
 
 	static void add_instruction(string c);
