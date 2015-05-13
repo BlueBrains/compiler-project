@@ -64,9 +64,9 @@ public:
 		ClassNode* temp = new ClassNode(t, son, next,line_no,col_no);
 		return temp;
 	}
-	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next,  int line_no, int col_no)
+	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next, int line_no, int col_no, vector<Node*> dp, vector<Node*> p)
 	{
-		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no);
+		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no,dp,p);
 		
 		f->set_FunctionNode(temp);
 		f->set_label(f->get_name()+temp->getId());

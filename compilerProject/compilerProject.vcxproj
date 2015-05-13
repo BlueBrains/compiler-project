@@ -44,7 +44,7 @@
     <IncludePath>$(WindowsSdkDir)\lib;$(IncludePath)</IncludePath>
     <ReferencePath>$(VC_ReferencesPath_x86)</ReferencePath>
     <LibraryWPath>$(WindowsSDK_MetadataPath)</LibraryWPath>
-    <SourcePath>$(VC_SourcePath);C:\Users\AMER-HY\Source\Repos\compiler-project\compilerProject</SourcePath>
+    <SourcePath>$(VC_SourcePath);</SourcePath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86)</ExcludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>

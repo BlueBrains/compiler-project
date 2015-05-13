@@ -77,6 +77,8 @@
 	extern int lineNum;
 	extern int colNum;
 	vector<char *>ID_list;
+	vector<Node *>_par;
+	vector<Node *>df_par;
 	Variable* v;
 	Variable* v1=new Variable();
 	Type* t;
@@ -185,8 +187,8 @@ temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
 
 funcdef: funcheader suite {
 							testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);
-							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
-							parameters.clear();
+							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum,df_par,_par);
+							parameters.clear();df_par.clear();_par.clear();
 							linefunc=0;colmfunc=0;
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
 						  }
@@ -1900,18 +1902,24 @@ comma_arg_seq:	',' argument {Streams::verbose() <<"comma_arg_seq:	',' argument\n
 												}
 				;
 
-arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
-							
+arglist: argument {Streams::verbose() <<"arglist: argument\n";
+					$<tn>$=$<tn>1;
 					}
-		 |default_arg {Streams::verbose() <<"arglist: default_arg\n";$<tn>$=$<tn>1;}
+		 |default_arg {Streams::verbose() <<"arglist: default_arg\n";$<tn>$=$<tn>1;_par.push_back($<tn>$);}
 		
-		 |argument ',' {Streams::verbose() <<"arglist: argument ','\n";$<tn>$=$<tn>1;}
+		 |argument ',' {Streams::verbose() <<"arglist: argument ','\n";$<tn>$=$<tn>1;_par.push_back($<tn>$);}
         
 		 |'*' test {    
 						std::string tempstr($<r.strVal>2);
 						std::string erro("*" + tempstr);
 						char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+						$<tn>$=$<tn>2;
+						if($<tn>$->getNodeType()=="IDNode")
+						{
+							static_cast< IDNode* > $<tn>$->get_variable()->set_isarray(true);
+						}
+						_par.push_back($<tn>$);
 						Streams::verbose() <<"arglist: '*' test\n";
 				   }
 		
@@ -1924,7 +1932,18 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
+										$<tn>$=$<tn>2;
+										if($<tn>$->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* >$<tn>$->get_variable()->set_isarray(true);
+										}
+										_par.push_back($<tn>$);
 										
+										if($<tn>5->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* >$<tn>5->get_variable()->set_isdic(true);
+										}
+										_par.push_back($<tn>5);
 										Streams::verbose() <<"arglist: '*' test ',' STAR_2 test\n";
 									}
 		
@@ -1933,7 +1952,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-									    
+									    if($<tn>2->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* >$<tn>2->get_variable()->set_isarray(true);
+										}
+										_par.push_back($<tn>2);
 										Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
 								 }
 		
@@ -1971,6 +1994,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);Streams::verbose() <<"arglist: STAR_2 test\n";
+						if($<tn>2->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>2->get_variable()->set_isdic(true);
+										}
+										_par.push_back($<tn>2);
 					  }
 		
 		 |arg_comma_seq argument {Streams::verbose() <<"arglist: arg_comma_seq argument\n";
@@ -1985,6 +2013,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+										if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isdic(true);
+										}
+										_par.push_back($<tn>3);
 									Streams::verbose() <<"arglist: arg_comma_seq '*' test\n";
 								  }
 		
@@ -1999,6 +2032,19 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 													Streams::verbose() <<"arglist: arg_comma_seq '*' test ',' STAR_2 test\n";
+												 $<tn>$=$<tn>3;
+										if($<tn>$->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>$->get_variable()->set_isarray(true);
+												 }
+										_par.push_back($<tn>$);
+		
+										if($<tn>6->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>6->get_variable()->set_isdic(true);
+										}
+										_par.push_back($<tn>6);
+												 
 												 }
 		
 		 |arg_comma_seq '*' test comma_arg_seq {
@@ -2007,6 +2053,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 												Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq\n";
+										if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
+											   }
+										_par.push_back($<tn>3);
 											   }
 		
 		 |arg_comma_seq '*' test comma_default_arg_seq {
@@ -2015,6 +2066,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 														Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_default_arg_seq\n";
+									if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
+										}
+										_par.push_back($<tn>3);
 													   }
 		
 		 |arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq {
@@ -2023,6 +2079,11 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 																		Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq\n";
+										if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
+										}
+										_par.push_back($<tn>3);
 																	 }
 		
 		 |arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test {
@@ -2036,13 +2097,29 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";$<tn>$=$<tn>1;
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 																Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test\n";
+									if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
 															   }
+										_par.push_back($<tn>3);
+        
+									if($<tn>7->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>7->get_variable()->set_isdic(true);
+										}
+										_par.push_back($<tn>7);
+									   }
         
 		 |arg_comma_seq STAR_2 test {	std::string tempstr($<r.strVal>3);
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										Streams::verbose() <<"arglist: arg_comma_seq STAR_2 test\n";
+										if($<tn>3->getNodeType()=="IDNode")
+										{
+											static_cast< IDNode* > $<tn>3->get_variable()->set_isdic(true);
+								    }
+										_par.push_back($<tn>3);
 								    }
 		
 		 ;
@@ -2056,10 +2133,20 @@ default_arg_comma_seq: default_arg ',' {Streams::verbose() <<"default_arg_comma_
 					   |default_arg_comma_seq default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";}
 					   ;
 
-default_arg: test '=' test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test '=' test\n";}
+default_arg: test '=' test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test '=' test\n";
+							
+							$<tn>$=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							df_par.push_back($<tn>$);
+							}
 
-argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";$<tn>$=$<tn>1;}
-			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";}
+argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
+					$<tn>$=$<tn>1; 
+					_par.push_back($<tn>$);
+					}
+			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
+					$<tn>$=$<tn>1; 
+					_par.push_back($<tn>$);
+			}
 			//|test '=' test {Streams::verbose() <<"argument: test '=' test\n";}
 			;
 
