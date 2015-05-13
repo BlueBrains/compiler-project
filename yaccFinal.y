@@ -398,9 +398,17 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 								//$<tn>$=$<tn>1;
 								visit_num=0;
 								Node *il=new Node();
-								v1->init=true;
-								cout<<"var name in yacc "<<v1->get_name()<<endl;
-								il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+								if(v1)
+								{
+									v1->init=true;
+									il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);			
+								}
+								else
+								{
+									il=ast->createErrorNode("Variable is already declared",NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
+								//cout<<"var name in yacc "<<v1->get_name()<<endl;
+								//il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 								//il=ast->addNext(il,$<tn>2);
 								v1=NULL;
 								Node *il2=new Node();
@@ -1389,9 +1397,13 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						} 
 		| CHAR_VALUE {Streams::verbose() <<"atom: CHAR_VALUE\n";} 
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
-									string * xl=new string($<r.strVal>1);
+									char* x = new char[100];
+									strcpy(x,$<r.strVal>1);
+									cout<<"x=   "<<x<<endl;
+									string sd(x);
+									cout<<"sd=== "<<sd<<endl;
 									constant=true;
-									$<tn>$ = ast->createTypeNode(&xl,0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									$<tn>$ = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 								} 
 		| DOT_3 {Streams::verbose() <<"atom: DOT_3\n";} 
 		| NONE {Streams::verbose() <<"atom: NONE\n";} 

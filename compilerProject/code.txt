@@ -1,9 +1,6 @@
-class A(B):
-       def func1():
-           end
-       def final func2(): end
+class u(l,o,p):
+	def static lolo=1+3+9+8;
+	
 end
-class B:
-	def func1(self):end
-	def func2():end
+class g:
 end

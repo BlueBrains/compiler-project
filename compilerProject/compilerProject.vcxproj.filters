@@ -211,6 +211,9 @@
     <ClInclude Include="mips_code.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ast\ErrorNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />

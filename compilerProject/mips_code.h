@@ -2,17 +2,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef CODE_GENERATORs_H
 #define CODE_GENERATORs_H
-#include <fstream>
-#include <iostream>
-#include <cstring>
-#include <fstream>
-#include <sstream>
-using namespace std;
-
-extern int lineNumber;
-extern int colNumber;
-extern string sourceFiles;
-extern ofstream ofs;
 class mips_code
 {
 public:/*

@@ -3,6 +3,7 @@
 #define __TYPENODE__
 #include"Node.h"
 #include"..\ST\Type.h"
+#include<sstream>
 enum Types {
 	INT, FLOAT, CHAR, LONG, STRINGS, True, False
 };
@@ -56,7 +57,10 @@ public:
 		}
 		else if (get_types() == 4)
 		{
-			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel("amer"));
+			std::ostringstream ss;
+			char* s = reinterpret_cast<char*>(g);
+			ss << s;
+			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(ss.str()));
 			MIPS_ASM::push("t9");
 		}
 		else if (get_types() == 5)
@@ -143,7 +147,10 @@ public:
 
 			//strcpy(x, (*(static_cast<string*>(g))).c_str());
 			string x = "amer";
-			cout << "value is " << x << endl;
+			std::ostringstream ss;
+			char* s = reinterpret_cast<char*>(g);
+			ss << s;
+			cout << "value is " << ss.str() << endl;
 		}
 		else if (get_types() == 5)
 		{
@@ -155,7 +162,7 @@ public:
 			//string x = *(string*)(g);
 			cout << "value is false" << endl;
 		}
-		this->generateCode();
+		//this->generateCode();
 	}
 	virtual string getNodeType()
 	{

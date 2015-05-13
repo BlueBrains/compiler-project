@@ -92,7 +92,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 		{
 			v->by_self = false;
 			v->setAccessModifier(acc_mod);
-			return 0;
+			return v;
 			//v->set_static(is_static);
 		}
 		else if (!v)

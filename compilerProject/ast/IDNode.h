@@ -37,7 +37,8 @@ public:
 	}
 	virtual void print()
 	{
-		cout << getNodeType() << "   " << variable_node->get_name() << endl;
+		if (variable_node)
+			cout << getNodeType() << "   " << variable_node->get_name() << endl;
 	}
 	virtual string getNodeType()
 	{
