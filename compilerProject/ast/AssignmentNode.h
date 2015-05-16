@@ -9,7 +9,14 @@ private:
 	Node* right_side;
 	Node* left_side;
 public:
-
+	Node* get_right()
+	{
+		return right_side;
+	}
+	Node* get_left()
+	{
+		return left_side;
+	}
 	AssignmentNode() : Node(NULL, NULL)
 	{
 

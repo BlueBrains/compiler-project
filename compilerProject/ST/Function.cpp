@@ -153,7 +153,7 @@ char* Function::getfirstpara()
 
 	else if (parameters.size()>0 && !is_star)
 	{*/
-	if (this->parameters.size()>1)
+	if (this->parameters.size()>=1)
 		return this->parameters.at(0)->get_name();
 	//}
 	return NULL;

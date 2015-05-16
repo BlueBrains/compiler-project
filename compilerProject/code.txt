@@ -1,6 +1,7 @@
-class u(l,o,p):
-	def static lolo=1+3+9+8;
-	
+class u:
+	def func2(x,y):end
+        def static func3(self,x,c):end 
 end
-class g:
+class k:
 end
+
