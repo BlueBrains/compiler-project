@@ -3,11 +3,39 @@
 #define __ASSIGNNODE__
 #include"Node.h"
 #include"..\ST\Variable.h"
+#include<string>
+using namespace std;
 class AssignmentNode :public Node
 {
 private:
 	Node* right_side;
 	Node* left_side;
+	void set_types(Variable* v,pair<void*,string>p)
+	{
+		if (p.second == "int")
+		{
+			v->set_lastTypes(*(int*)p.first);
+		}
+		else if (p.second == "float")
+		{
+			v->set_lastTypes(*(float*)p.first);
+		}
+		else if (p.second == "char")
+		{
+			v->set_lastTypes(*(char*)p.first);
+		}
+		else if (p.second == "long")
+		{
+			v->set_lastTypes(*(long*)p.first);
+		}
+		else if (p.second == "string")
+		{
+			std::ostringstream ss;
+			char* s = reinterpret_cast<char*>(p.first);
+			ss << s;
+			v->set_lastTypes(ss.str());
+		}
+	}
 public:
 
 	AssignmentNode() : Node(NULL, NULL)
@@ -25,6 +53,53 @@ public:
 	AssignmentNode(Node* first,Node* second,Node* son, Node*next, int line_no, int col_no) :left_side(first),right_side(second), Node(son, next, line_no, col_no)
 	{
 
+	}
+	virtual void generateCode()
+	{
+		string t1 = "t1";
+		string t0 = "t0";
+		string mem_addr = "sp";
+		MIPS_ASM::printComment("Assign node");
+		MIPS_ASM::printComment("LHS:");
+		left_side->generateCode();
+
+		MIPS_ASM::printComment("Assign node RHS:");
+
+		right_side->generateCode();
+
+		MIPS_ASM::printComment("Assign node poping old val:");
+
+		MIPS_ASM::pop("t1");
+		MIPS_ASM::printComment("Assign node getting RHS val:");
+
+		MIPS_ASM::top(t0);// not poping in order to keep value in stack
+		//khaled
+		// todo check if v0 isnot null in run time
+		// todo check if we can assign 
+		MIPS_ASM::printComment("Assign node storing in position val:");
+
+		left_side->my_type = right_side->my_type;
+		if (left_side->my_type == "float")
+		{
+			//MIPS_ASM::pop(t0);// not poping in order to keep value in stack
+			MIPS_ASM::popf("f0");// not poping in order to keep value in stack
+
+			MIPS_ASM::add_instruction("cvt.w.s $f0,$f0\n");
+			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
+			MIPS_ASM::top(t0);
+		}
+		if (left_side->my_type == "int")
+		{
+			//MIPS_ASM::pop(t0);// not poping in order to keep value in stack
+			MIPS_ASM::popf("f0");// not poping in order to keep value in stack
+
+			MIPS_ASM::add_instruction("cvt.s.w $f0,$f0\n");
+			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
+			MIPS_ASM::top(t0);
+
+
+		}
+		MIPS_ASM::sw(t0, 0, "v0");
 	}
 	virtual void print()
 	{
@@ -55,6 +130,22 @@ public:
 				{
 					((Variable*)p1.first)->set_isarray(false);
 					((Variable*)p1.first)->set_arrayNode(NULL);
+				}
+				if (right_side->getNodeType() == "ValueNode")
+				{
+					this->set_types((Variable*)p1.first,p2);
+				}
+				else if (right_side->getNodeType() == "CallVariableNode")
+				{
+					Variable* t = static_cast<CallVariableNode*>(this->right_side)->get_variable();
+					if (t)
+					{
+						((Variable*)p1.first)->set_lastTypes(t->get_lastType(), true);
+					}
+				}
+				else
+				{
+					((Variable*)p1.first)->set_lastTypes();
 				}
 			}
 			

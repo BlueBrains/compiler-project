@@ -2,6 +2,7 @@
 #ifndef __EXPRESSIONNODE__
 #define __EXPRESSIONNODE__
 #include"Node.h"
+#include"ValueNode.h"
 #include"..\ST\Type.h"
 enum operand {
 	PLUS, MINUS, MULT, DIV,MOD,GREATHER,LESS,EQUALGREATHER,EQUALLESS,EQUALS,NOTEQUAL
@@ -12,6 +13,7 @@ private:
 	Node* first;
 	operand op;
 	Node* second;
+	static int labelCount;
 	Variable* checkVarFromCurrentNode(string id, vector<Node*>outer_node)
 	{
 		int i = outer_node.size() - 1;
@@ -134,42 +136,496 @@ public:
 		//pi here is the output of symbol table for types
 		return pi;
 	}
+	void generateValue(ValueNode* v1,ValueNode* v2)
+	{
+		string t0 = "t0";
+		string t1 = "t1";
+		string typ[5] = { "int", "float", "char", "long", "string" };
+		char operands[5] = { '+', '-', '*', '/', '%' };/*
+		if ((v1->get_types() == 6 && v1->get_types() == 7) || (v1->get_types() == 7 && v1->get_types() == 6))
+		{
+			this->my_type = "bool";
+			int x = *(int*)v1->get_value();
+			int y = *(int*)v2->get_value();
+		}*/
+		if ((v1->get_types() == 0 && v2->get_types() == 0) || (v1->get_types() == 0 && (v2->get_types() == 6 || v2->get_types() == 7))||
+			(v2->get_types() == 0 && (v1->get_types() == 6 || v1->get_types() == 7)))
+		{
+			this->my_type = "int";
+			int x = *(int*)v1->get_value();
+			int y = *(int*)v2->get_value();
+			if (op == PLUS)
+			{
+				MIPS_ASM::li("t0", (x + y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == MINUS)
+			{
+				MIPS_ASM::li("t0", (x - y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == MULT)
+			{
+				MIPS_ASM::li("t0", (x * y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == DIV)
+			{
+				MIPS_ASM::lif("t0", (x / y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == MOD)
+			{
+				MIPS_ASM::li("t0", (x % y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == EQUALS || op == NOTEQUAL)
+			{
+				this->my_type = "bool";
+				if (op == EQUALS)
+				{
+
+					if (x == y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					if (x != y)
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
+				else{
+					if (x == y)
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+					if (x != y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+
+				}
+			}
+			else if (op == LESS)
+			{
+				this->my_type = "bool";
+				if (x < y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == GREATHER)
+			{
+				this->my_type = "bool";
+				if (x > y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == EQUALLESS)
+			{
+				this->my_type = "bool";
+				if (x <= y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == EQUALGREATHER)
+			{
+				this->my_type = "bool";
+				if (x >= y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+		}
+		else if ((v1->get_types() == 1 && v2->get_types() == 0) || (v1->get_types() == 0 && v2->get_types() == 1) || (v1->get_types() == 1 && v2->get_types() == 1) ||
+			(v1->get_types() == 1 && (v2->get_types() == 6 || v2->get_types() == 7)) || (v2->get_types() == 1 && (v1->get_types() == 6 || v1->get_types() == 7)))
+		{
+			this->my_type = "float";
+			int x = *(float*)v1->get_value();
+			int y = *(float*)v2->get_value();
+			if (op == 0)
+			{
+				MIPS_ASM::lif("t0", (x + y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == 1)
+			{
+				MIPS_ASM::lif("t0", (x - y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == 2)
+			{
+				MIPS_ASM::lif("t0", (x * y));
+				MIPS_ASM::push("t0");
+			}
+			else if (op == 3)
+			{
+				if (y != 0)
+				{
+					MIPS_ASM::lif("t0", (x / y));
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					cout << "ZeroDivisionError" << endl;
+				}
+				
+			}
+			else if (op == 4)
+			{
+				MIPS_ASM::li("t0", (x % y));
+				MIPS_ASM::push("t0");
+			}
+		}
+		else
+		{
+			if ((v1->get_types() == 2 && v2->get_types() == 2))
+			{
+				this->my_type = "char";
+				string x = (char*)v1->get_value();
+				string y = (char*)v2->get_value();
+				if (op == 0)
+				{
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(x + y));
+					MIPS_ASM::push("t0");
+				}
+				else if (op == 1)
+				{
+					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+				}
+				else if (op == 2)
+				{
+					cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+				}
+				else if (op == 3)
+				{
+					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+				}
+				else
+				{
+					cout << "TypeError: not all arguments converted during string formatting" << endl;
+				}
+			}
+			else if (((v1->get_types() == 2 && v2->get_types() != 2) || ((v1->get_types() != 2 && v2->get_types() == 2))))
+			{
+				string h = "";
+				if (((v1->get_types() == 2 && v2->get_types() == 0)) && (op == 2))
+				{
+					this->my_type = "string";
+					for (int i = 0; i < *(int*)v2->get_value(); i++)
+					{
+						h += (char*)v1->get_value();
+					}
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+					MIPS_ASM::push("t0");
+				}
+				else if (((v1->get_types() == 0 && v2->get_types() == 2)) && (op == 2))
+				{
+					this->my_type = "string";
+					for (int i = 0; i < *(int*)v1->get_value(); i++)
+					{
+						h += (char*)v2->get_value();
+					}
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+					MIPS_ASM::push("t0");
+				}
+				else
+					cout << "unsupported operand type(s) for " << operands[op] << " : '" << typ[v1->get_types()] << "' and '" << typ[v2->get_types()] << "'";
+			}
+			if ((v1->get_types() == 4 && v2->get_types() == 4))
+			{
+				string x = (char*)v1->get_value();
+				string y = (char*)v2->get_value();
+				this->my_type = "string";
+				if (op == 0)
+				{
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(x + y));
+					MIPS_ASM::push("t0");
+					this->string_val = x + y;
+				}
+				else if (op == 1)
+				{
+					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+				}
+				else if (op == 2)
+				{
+					cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+				}
+				else if (op == 3)
+				{
+					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+				}
+				else
+				{
+					cout << "TypeError: not all arguments converted during string formatting" << endl;
+				}
+			}
+			else
+			{
+				string h = "";
+				if (((v1->get_types() == 4 && v2->get_types() == 0)) && (op == 2))
+				{
+					this->my_type = "string";
+					for (int i = 0; i < *(int*)v2->get_value(); i++)
+					{
+						h += (char*)v1->get_value();
+					}
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+					MIPS_ASM::push("t0");
+					this->string_val = h;
+				}
+				else if (((v1->get_types() == 0 && v2->get_types() == 4)) && (op == 2))
+				{
+					this->my_type = "string";
+					for (int i = 0; i < *(int*)v1->get_value(); i++)
+					{
+						h += (char*)v2->get_value();
+					}
+					MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+					MIPS_ASM::push("t0");
+					this->string_val = h;
+				}
+				else
+					cout << "unsupported operand type(s) for " << operands[op] << " : '" << typ[v1->get_types()] << "' and '" << typ[v2->get_types()] << "'";
+			}
+		}
+		
+	}
 	virtual void generateCode()
 	{
 		string t0 = "t0";
 		string t1 = "t1";
-		first->generateCode();
-		second->generateCode();
-		MIPS_ASM::pop(t1);
-		MIPS_ASM::pop(t0);
-		if (op == 0)
+		if ((first->getNodeType() == "ValueNode") && (second->getNodeType() == "ValueNode"))
 		{
-			MIPS_ASM::operation(t0, t0, t1, 1);
-			MIPS_ASM::push(t0);
+			ValueNode* v1 = static_cast<ValueNode*>(first);
+			ValueNode* v2 = static_cast<ValueNode*>(second);
+			this->generateValue(v1, v2);
 		}
-		else if (op == 1)
+		else
 		{
-			MIPS_ASM::operation(t0, t0, t1, 2);
-			MIPS_ASM::push(t0);
+			first->generateCode();
+			second->generateCode();
+			++labelCount;
+			/*
+			MIPS_ASM::pop(t1);
+			MIPS_ASM::pop(t0);*/
+			if ((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
+				|| (first->my_type == "bool"&& second->my_type == "int"))
+			{
+				this->my_type = "int";
+				MIPS_ASM::pop(t1);
+				MIPS_ASM::pop(t0);
+				if (op == 0)
+				{
+
+					//this->my_type = "int";
+					MIPS_ASM::operation(t0, t0, t1, 1);
+					MIPS_ASM::push(t0);
+
+				}
+				else if (op == 1)
+				{
+					MIPS_ASM::operation(t0, t0, t1, 2);
+					MIPS_ASM::push(t0);
+				}
+				else if (op == 2)
+				{
+					MIPS_ASM::operation(t0, t0, t1, 3);
+					MIPS_ASM::push(t0);
+				}
+				else if (op == 3)
+				{
+					MIPS_ASM::operation(t0, t0, t1, 4);
+					MIPS_ASM::push(t0);
+				}
+				else if (op == 4)
+				{
+					MIPS_ASM::operation(t0, t0, t1, 5);
+					MIPS_ASM::push(t0);
+				}
+				else if (op == EQUALS || op == NOTEQUAL)
+				{
+					this->my_type = "bool";
+					if (op == EQUALS)
+					{
+
+						MIPS_ASM::printComment("equal op");
+						MIPS_ASM::add_instruction("li $t2,0\n");
+						MIPS_ASM::add_instruction(string("bne $t0,$t1,") + "eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $t2,1\n");
+						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					}
+					else{
+						MIPS_ASM::printComment("not equal op");
+						MIPS_ASM::add_instruction("li $t2,1\n");
+						MIPS_ASM::add_instruction(string("bne $t0,$t1,") + "eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $t2,0\n");
+						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+
+					}
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					MIPS_ASM::add_instruction("sw $t2, 0($sp)\n");
+				}
+				else if (op == LESS)
+				{
+					MIPS_ASM::slt("t2", "t0", "t1");
+					MIPS_ASM::push("t2");
+				}
+				else if (op == GREATHER)
+				{
+					MIPS_ASM::slt("t2", "t1", "t0");
+					MIPS_ASM::push("t2");
+				}
+				else if (op == EQUALLESS)
+				{
+					MIPS_ASM::operation("t2", "t1", "t0", 2);
+					MIPS_ASM::beq("t2", "0", "equalLabel");
+					MIPS_ASM::slt("t2", "t2", "0");
+					MIPS_ASM::bne("t2", "0", "trueLabel");
+					MIPS_ASM::label("equalLabel");
+					MIPS_ASM::add_instruction("addi $t2,$0,1\n");
+					MIPS_ASM::jump("saveLabel");
+					MIPS_ASM::label("trueLabel");
+					MIPS_ASM::operation("t2", "0", "0", 1);
+					MIPS_ASM::label("saveLabel");
+					MIPS_ASM::push("t2");
+				}
+				else if (op == EQUALGREATHER)
+				{
+					MIPS_ASM::operation("t2", "t0", "t1", 2);
+					MIPS_ASM::beq("t2", "0", "equalLabel");
+					MIPS_ASM::slt("t2", "t2", "0");
+					MIPS_ASM::bne("t2", "0", "trueLabel");
+					MIPS_ASM::label("equalLabel");
+					MIPS_ASM::add_instruction("addi $t2,$0,1\n");
+					MIPS_ASM::jump("saveLabel");
+					MIPS_ASM::label("trueLabel");
+					MIPS_ASM::operation("t2", "0", "0", 1);
+					MIPS_ASM::label("saveLabel");
+					MIPS_ASM::push("t2");
+				}
+			}
+			else if ((first->my_type == "float"&& second->my_type == "int") || (first->my_type == "float"&& second->my_type == "bool")
+				|| (first->my_type == "bool"&& second->my_type == "float") || (first->my_type == "float"&& second->my_type == "float")
+				|| (first->my_type == "int"&& second->my_type == "float"))
+			{
+				string f0 = "f0";
+				string f1 = "f1";
+				MIPS_ASM::popf(f1);
+				MIPS_ASM::popf(f0);
+
+				if (first->my_type == "int" || first->my_type == "bool")
+				{
+					MIPS_ASM::add_instruction("cvt.s.w $f1,$f1\n");
+
+				}
+				if (second->my_type == "int"||second->my_type=="bool")
+				{
+					MIPS_ASM::add_instruction("cvt.s.w $f0,$f0\n");
+
+				}
+				if (op == 0)
+				{
+
+					//this->my_type = "int";
+					MIPS_ASM::operationf(f0, f0, f1, 1);
+					MIPS_ASM::pushf(f0);
+
+				}
+				else if (op == 1)
+				{
+					MIPS_ASM::operationf(f0, f0, f1, 2);
+					MIPS_ASM::pushf(f0);
+				}
+				else if (op == 2)
+				{
+					MIPS_ASM::operationf(f0, f0, f1, 3);
+					MIPS_ASM::pushf(f0);
+				}
+				else if (op == 3)
+				{
+					MIPS_ASM::operationf(f0, f0, f1, 4);
+					MIPS_ASM::pushf(f0);
+				}
+				else if (op == 4)
+				{
+					MIPS_ASM::operationf(f0, f0, f1, 5);
+					MIPS_ASM::pushf(f0);
+				}
+
+			}
+			else
+			{
+				if (first->my_type == "string" && second->my_type == "string")
+				{
+					string x = first->string_val;
+					string y =second->string_val;
+					this->my_type = "string";
+					if (op == 0)
+					{
+						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(x + y));
+						MIPS_ASM::push("t0");
+						this->string_val = x + y;
+					}
+					else if (op == 1)
+					{
+						cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+					}
+					else if (op == 2)
+					{
+						cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+					}
+					else if (op == 3)
+					{
+						cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+					}
+					else
+					{
+						cout << "TypeError: not all arguments converted during string formatting" << endl;
+					}
+				}
+				if (first->my_type == "type" || second->my_type == "type")
+				{
+					cout << "TypeError: unsupported operand type(s)" << endl;
+				}
+			}
+		
 		}
-		else if (op == 2)
-		{
-			MIPS_ASM::operation(t0, t0, t1, 3);
-			MIPS_ASM::push(t0);
-		}
-		else if (op == 3)
-		{
-			MIPS_ASM::operation(t0, t0, t1, 4);
-			MIPS_ASM::push(t0);
-		}
-		else if (op == 4)
-		{
-			MIPS_ASM::operation(t0, t0, t1, 5);
-			MIPS_ASM::push(t0);
-		}
+	
 	
 		
 			
 	}
 };
-#endif
+int ExpressionNode::labelCount = 0;
+#endif;

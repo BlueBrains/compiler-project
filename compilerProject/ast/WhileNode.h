@@ -21,6 +21,18 @@ public:
 	{
 
 	}
+		virtual void generateCode()
+	{
+		Node* temp = this->Son;
+		while (temp)
+		{
+			if (temp->getNodeType() == "IDNode")
+			{
+				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
+			}
+			temp = temp->Next;
+		}
+	}
 	virtual void print()
 	{
 		cout << "WHILE NODE !" << endl;

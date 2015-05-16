@@ -62,6 +62,7 @@ public:
 			ss << s;
 			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(ss.str()));
 			MIPS_ASM::push("t9");
+			this->string_val = ss.str();
 		}
 		else if (get_types() == 5)
 		{
@@ -111,6 +112,7 @@ public:
 			//string x = *(string*)(g);
 			x = "false";
 		}
+		this->my_type = x;
 		pi = make_pair(VarValue,x);
 		//pi here is the output of symbol table for types
 		return pi;

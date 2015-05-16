@@ -24,6 +24,7 @@ Variable::Variable(char* name, bool is_array, bool is_dic, char* accessModifier)
 	this->is_dic = is_dic;
 	this->setAccessModifier(accessModifier);
 	this->set_lastTypes();
+	_offset = -1;
 }
 Variable::Variable(){
 	this->type = NULL;
@@ -32,6 +33,7 @@ Variable::Variable(){
 	this->is_dic = false;
 	this->set_lastTypes();
 	this->setAccessModifier("private");
+	_offset = -1;
 	//this->setAccessModifier(accessModifier);
 }
 Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
@@ -39,6 +41,7 @@ Variable::Variable(char* name, Type* type, bool isConst) : Symbol(name){
 	this->isConst = isConst;
 	this->setAccessModifier("private");
 	this->set_lastTypes();
+	_offset = -1;
 }
 void Variable::set_lastTypes(int val)
 {
@@ -70,6 +73,11 @@ void Variable::set_lastTypes()
 {
 	int* xx = new int(NULL);
 	lastType = make_pair("NULL", (void*)xx);
+}
+void Variable::set_lastTypes(string type,bool f)
+{
+	int* xx = new int(NULL);
+	lastType = make_pair(type, (void*)xx);
 }
 void Variable::set_lastTypes(long val)
 {

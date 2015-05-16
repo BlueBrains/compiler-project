@@ -1,6 +1,5 @@
 class u(l,o,p):
-	def static lolo=1+3+9+8;
-	
+def s=2.2+3;
 end
 class g:
 end

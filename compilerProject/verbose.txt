@@ -8,9 +8,8 @@ dotted_as_name: dotted_name
 comma_dotted_as_name_seq: comma_dotted_as_name_seq ',' dotted_as_name 
 comma_dotted_as_name_seq: dotted_as_name comma_dotted_as_name_seq 
 class_h: CLASS ID OPEN_S unit_list CLOSE_S 
-atom: DEF STATIC NAME
-var_declaration: STATIC ID
-atom: NUMBER_INT 1
+atom: DEF NAME
+atom: NUMBER_FLOAT
 power:	atom
 factor: power
 term: 	factor
@@ -19,16 +18,6 @@ power:	atom
 factor: power
 term: 	factor
 term_seq : '+' term 
-atom: NUMBER_INT 9
-power:	atom
-factor: power
-term: 	factor
-term_seq : term_seq '+' term 
-atom: NUMBER_INT 8
-power:	atom
-factor: power
-term: 	factor
-term_seq : term_seq '+' term 
 arith_expr: term term_seq
 shift_expr: arith_expr
 and_expr: shift_expr

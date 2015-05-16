@@ -259,7 +259,7 @@ void MIPS_ASM::reserveStack(int size)
 	MIPS_ASM::add_instruction(string("sub $sp,$sp,") + to_string(size) + string("\n"));
 }
 
-void MIPS_ASM::releaseStack(int size)
+void MIPS_ASM::releaseStack(int size) 
 {
 	MIPS_ASM::printComment("releasing space in stack for scope variables");
 	MIPS_ASM::add_instruction(string("add $sp,$sp,") + to_string(size) + string("\n"));
@@ -275,7 +275,7 @@ void MIPS_ASM::pop(string dest)
 	MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 
 }
-
+ 
 void MIPS_ASM::top(string dest)
 {
 	string c = "lw $";

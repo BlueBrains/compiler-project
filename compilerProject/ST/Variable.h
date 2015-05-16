@@ -21,6 +21,7 @@ private:
 	bool is_dic;
 	bool is_static;
 	ArrayNode* array_node=NULL;
+	int _offset;// offset of the function frame for code generation
 public:
 	bool init = false;
 	bool by_self;
@@ -28,6 +29,11 @@ public:
 	Variable(Variable*);
 	Variable();
 	Variable(char* name, Type* type, bool);
+	void setOffset(int o)
+	{
+		_offset = o;
+	}
+	int getOffset(){ return _offset; }
 	void set_arrayNode(ArrayNode* v);
 	void set_lastTypes(int val);
 	void set_lastTypes();
@@ -35,7 +41,12 @@ public:
 	void set_lastTypes(long val);
 	void set_lastTypes(char val);
 	void set_lastTypes(string val);
+	void set_lastTypes(string type,bool ValueNotset);//this for set the var type with out value
 	void set_lastTypes(Type* val);
+	string get_lastType()
+	{
+		return lastType.first;
+	}
 	static bool compare(Variable *, Variable*);
 	char* getAccessModifier();
 	void setAccessModifier(char*);

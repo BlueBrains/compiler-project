@@ -68,5 +68,25 @@ public:
 		//pi here is the output of symbol table for types
 		return pi;
 	}
+	virtual void generateCode()
+	{
+		first->generateCode();
+		second->generateCode();
+		string t1 = "t1",t0="t0";
+		if ((first->my_type == "bool") && (second->my_type == "bool"))
+		{
+			if (op == AND_OP || op == OR_OP)
+			{
+				MIPS_ASM::pop(t1);
+				MIPS_ASM::pop(t0);
+				if (op == AND_OP)
+					MIPS_ASM::add_instruction("and $t0,$t0,$t1\n");
+				else
+					MIPS_ASM::add_instruction("or $t0,$t0,$t1\n");
+				MIPS_ASM::push(t0);
+			}
+		}
+		
+	}
 };
 #endif
