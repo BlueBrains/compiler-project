@@ -59,6 +59,10 @@ public:
 
 	}
 	vector<Node*>outer_node;
+	void generate_main(Function* main)
+	{
+		main->get_FunctionNode()->generateCode();
+	}
 	ClassNode * createClassNode(Type* t, Node * son, Node* next, int line_no, int col_no)
 	{
 		ClassNode* temp = new ClassNode(t, son, next,line_no,col_no);
@@ -310,11 +314,14 @@ public:
 			{
 				outer_node.push_back(n);
 			}
-
+			else if (n->getNodeType() == "PrintNode")
+			{
+				//cout << "enterr herre print node in ast " << endl;
+			}
 			else
 			{
 				n->check(outer_node);
-				n->generateCode();
+				//n->generateCode();
 			}
 			
 			if (!is_dot)

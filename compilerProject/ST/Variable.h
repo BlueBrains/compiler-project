@@ -14,16 +14,17 @@ private:
 	Type * type;
 	TypesMap lastType;
 	//void* lastType;
-	string strLasttype;
+	
 	enum	AccessModifier accessModifier;
 	bool isConst;
 	bool is_array;
 	bool is_dic;
 	bool is_static;
 	ArrayNode* array_node=NULL;
-	int _offset;// offset of the function frame for code generation
+	int _varoffset=0;// offset of the function frame for code generation
 public:
 	bool init = false;
+	string strLasttype;
 	bool by_self;
 	Variable(char* name, bool is_array = false, bool is_dic = false, char* = "private");
 	Variable(Variable*);
@@ -31,9 +32,11 @@ public:
 	Variable(char* name, Type* type, bool);
 	void setOffset(int o)
 	{
-		_offset = o;
+		this->_varoffset = o;
 	}
-	int getOffset(){ return _offset; }
+	int getOffset(){ 
+		return this->_varoffset; 
+	}
 	void set_arrayNode(ArrayNode* v);
 	void set_lastTypes(int val);
 	void set_lastTypes();
@@ -44,6 +47,7 @@ public:
 	void set_lastTypes(string type,bool ValueNotset);//this for set the var type with out value
 	void set_lastTypes(Type* val);
 	string get_lastType()
+
 	{
 		return lastType.first;
 	}

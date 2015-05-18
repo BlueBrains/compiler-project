@@ -154,6 +154,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						p->print_symbol();
 						ast->tree($<tn>1);
 						ast->print($<tn>1, 0);
+						ast->generate_main(p->getMainFunction());
 						}
 						Streams::verbose().flush();	
 								}
@@ -1298,7 +1299,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						}
 						if(!temp_id2.empty())
 						{
-						cout<<"enter amora alhosary"<<endl;
+						//cout<<"enter amora alhosary"<<endl;
 								$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
 							v=$<var>$;
 						}
@@ -1400,7 +1401,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						$<tn>$ = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 						//visit_num++;
 														} 
-		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n";
+		| NUMBER_FLOAT {Streams::verbose() <<"atom: NUMBER_FLOAT\n"<<$<r.floatVal>1<<endl;
 							constant=true;
 							float* x=new float($<r.floatVal>1);
 							$<tn>$ = ast->createTypeNode((void*)x,0,0,yylval.r.lineNum,yylval.r.colNum,FLOAT);
@@ -1526,18 +1527,29 @@ sliceop: ':' {Streams::verbose() <<"sliceop: ':'\n";}
 		 |':' test {Streams::verbose() <<"sliceop: ':' test\n";}
 		 ;
 
-comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";}
+comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";
+										$<tn>$=$<tn>2;
+									}
 						|',' star_expr {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";}
-						|comma_expr_star_seq ',' expr {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";}
+						|comma_expr_star_seq ',' expr {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";
+															$<tn>$=ast->addNext($<tn>1,$<tn>3);
+														}
 						|comma_expr_star_seq ',' star_expr  {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";}
 						;
 		
-exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";}
-			|expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";}
+exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";$<tn>$=$<tn>1;}
+			|expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";
+											$<tn>$=$<tn>1;
+											$<tn>$=ast->addNext($<tn>1,$<tn>2);
+										}
 			|star_expr {Streams::verbose() <<"exprlist: 	star_expr \n";}
 			|star_expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";}
-			|expr ',' {Streams::verbose() <<"exprlist: 	expr ',' \n";}
-			|expr comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";}
+			|expr ',' {Streams::verbose() <<"exprlist: 	expr ',' \n";
+							$<tn>$=$<tn>1;
+						}
+			|expr comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";
+												$<tn>$=ast->addNext($<tn>1,$<tn>2);
+											}
 			|star_expr ',' {Streams::verbose() <<"exprlist: 	star_expr ',' \n";}
 			|star_expr  comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";}
 			;

@@ -14,6 +14,8 @@ private:
 
 	static int NodeCount;
 	int _id = -1;
+	int _currentInnerOffset;
+	int frame_size = 0;
 public :
 	Node* Next;
 
@@ -22,7 +24,7 @@ public :
 	int _colNo = 0;
 	string my_type="NULL";
 	string _offsetReg = "fp";
-	int _currentInnerOffset;
+	
 	string string_val="";
 	Node(Node* son, Node* next) :Next(next), Son(son)
 	{
@@ -40,13 +42,18 @@ public :
 		Son = nullptr;
 		_currentInnerOffset = 0;
 	}
+	void setOffset(int offset)
+	{
+		this->_currentInnerOffset = offset;
+	}
 	int getNextOffset(int newSize){
 		int t = _currentInnerOffset;
 		_currentInnerOffset += newSize;
+		frame_size += newSize;
 		return t;
 	}
 	int getFrameSize(){
-		return _currentInnerOffset;
+		return frame_size;
 	}
 	virtual string getOffsetRegister()
 	{
@@ -68,6 +75,7 @@ public :
 	}
 	virtual void generateCode(){
 	}
+
 	virtual string getNodeType()
 	{
 		return "Node";

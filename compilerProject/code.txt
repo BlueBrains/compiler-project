@@ -1,5 +1,15 @@
 class u(l,o,p):
-def s=2.2+3;
+#def s="amer"+"ppp"+"ooo";
+#def g="amer"+3;
+#def g=-9+9.9;
+def main():
+	#s="amer"+" and "+"molham";
+	#p="amer "*3;
+	#koko=1+2+3+5;
+	s="amer";
+	print s;
+	# g="amer"*3;
+end
 end
 class g:
 end

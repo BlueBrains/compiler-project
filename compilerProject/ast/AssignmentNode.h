@@ -60,12 +60,13 @@ public:
 		string t0 = "t0";
 		string mem_addr = "sp";
 		MIPS_ASM::printComment("Assign node");
-		MIPS_ASM::printComment("LHS:");
-		left_side->generateCode();
-
+		
 		MIPS_ASM::printComment("Assign node RHS:");
 
 		right_side->generateCode();
+
+		MIPS_ASM::printComment("LHS:");
+		left_side->generateCode();
 
 		MIPS_ASM::printComment("Assign node poping old val:");
 
@@ -79,6 +80,10 @@ public:
 		MIPS_ASM::printComment("Assign node storing in position val:");
 
 		left_side->my_type = right_side->my_type;
+		if (left_side->getNodeType() == "CallVariableNode")
+		{
+			static_cast<CallVariableNode*>(left_side)->get_variable()->strLasttype = right_side->my_type;
+		}
 		if (left_side->my_type == "float")
 		{
 			//MIPS_ASM::pop(t0);// not poping in order to keep value in stack
@@ -108,7 +113,7 @@ public:
 		left_side->print();
 		cout << "right side :";
 		right_side->print();
-		right_side->generateCode();
+//		right_side->generateCode();
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{

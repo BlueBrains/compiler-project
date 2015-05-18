@@ -35,7 +35,7 @@ intpart			{digit}+
 fraction		"."{digit}+
 exp				("e"|"E")("+"|"-"){digit}+
 integer			[1-9][0-9]*|0		
-float			([+-]?[0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
+float			([0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 %option c++
 %x multilinecomment
 %x String

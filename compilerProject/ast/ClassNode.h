@@ -34,6 +34,18 @@ public:
 	}
 	virtual void generateCode()
 	{
+		Node* temp = this->Son;
+		while (temp)
+		{
+			if (temp->getNodeType() == "IDNode")
+			{
+				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
+			}
+			temp = temp->Next;
+		}
+		MIPS_ASM::reserveStack(getFrameSize());
+
+		/*
 		MIPS_ASM::push("ra");// this is added by amer
 		Node* temp = this->Son;
 		while (temp)
@@ -44,9 +56,10 @@ public:
 			}
 			temp = temp->Next;
 		}
+		MIPS_ASM::pop("ra");
+		*/
 		//this is instruction added by amer :)
-		MIPS_ASM::reserveStack(this->getFrameSize());
-		MIPS_ASM::pop("ra");//this is added by amer
+		MIPS_ASM::releaseStack(getFrameSize());
 	}
 	void gcVars()
 	{

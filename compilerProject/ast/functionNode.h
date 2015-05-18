@@ -46,6 +46,18 @@ public:
 			}
 			temp = temp->Next;
 		}
+		MIPS_ASM::reserveStack(getFrameSize());
+		temp = this->Son;
+		//here generate code
+		while (temp)
+		{
+			temp->setOffset(this->getFrameSize());
+			temp->generateCode();
+			temp = temp->Next;
+		}
+		//
+		MIPS_ASM::releaseStack(getFrameSize());
+
 	}
 	void gcVars()
 	 {

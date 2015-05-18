@@ -9,6 +9,7 @@ private:
 	Node* conditionNode;
 	Node* _scoop;
 public:
+	static	int 	while_label;
 	Node* get_condition()
 	{
 		return conditionNode;
@@ -32,6 +33,43 @@ public:
 			}
 			temp = temp->Next;
 		}
+		
+		if ((conditionNode->getNodeType() == "ValueNode") && ((static_cast<ValueNode*>(conditionNode)->get_types() != 5) || (static_cast<ValueNode*>(conditionNode)->get_types() != 6)))
+		{
+			
+			return;
+		}
+		string cc = "";
+		cc = std::to_string(WhileNode::while_label++);
+
+		string ccc = "While";
+		ccc += cc;
+
+		string ccc2 = "endWhile";
+		ccc2 += cc;
+
+		/*Break::set_label(ccc2);
+
+		strcpy(this->loop_end,ccc2);*/
+
+
+		MIPS_ASM::label(ccc);
+
+
+		conditionNode->generateCode();
+		MIPS_ASM::pop("t0");
+
+
+		MIPS_ASM::beq("t0", "0", ccc2);
+		Node* temp = this->Son;
+		while (temp)
+		{
+			temp->generateCode();
+			temp = temp->Next;
+		}
+
+		MIPS_ASM::jump(ccc);
+		MIPS_ASM::label(ccc2);
 	}
 	virtual void print()
 	{

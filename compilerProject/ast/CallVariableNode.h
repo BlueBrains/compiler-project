@@ -102,15 +102,34 @@ public:
 	}
 	virtual  void generateCode()
 	{
-
+		if (variable_node)
+		{
+			if (this->my_type == "NULL")
+			{
+				this->my_type = variable_node->strLasttype;
+			}
+			MIPS_ASM::lw("t0", -variable_node->getOffset(), this->getOffsetRegister());
+			//v0 contains the address in memorry to be used later in assignment
+			MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+				+ "," + std::to_string(-variable_node->getOffset()) + "\n");
+			MIPS_ASM::push("t0");
+		}
+		
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
 		Variable*v;
 			string h = this->getID();
-			v = checkVarFromCurrentNode(h, n);
-			if (!v)
-				cout << "Error :variable Not found " << h << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+			if (!this->variable_node)
+			{
+				v = checkVarFromCurrentNode(h, n);
+				if (!v)
+					cout << "Error :variable Not found " << h << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+				else
+					this->variable_node = v;
+			}
+			else
+				v = this->variable_node;
 			pi = make_pair(v, "Variable");
 
 		return pi;

@@ -25,7 +25,11 @@ public:
 		}
 		return i;
 	}
-
+	virtual void generateCode()
+	{
+		this->Function_call->get_FunctionNode()->setOffset(this->getFrameSize());
+		this->Function_call->get_FunctionNode()->generateCode();
+	}
 	bool check_para(Function*f)
 	{
 

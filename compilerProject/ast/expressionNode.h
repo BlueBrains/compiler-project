@@ -303,8 +303,94 @@ public:
 			}
 			else if (op == 4)
 			{
-				MIPS_ASM::li("t0", (x % y));
-				MIPS_ASM::push("t0");
+				cout << "Operation % undefined for floats" << endl;
+			}
+			else if (op == EQUALS || op == NOTEQUAL)
+			{
+				this->my_type = "bool";
+				if (op == EQUALS)
+				{
+
+					if (x == y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					if (x != y)
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
+				else{
+					if (x == y)
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+					if (x != y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+
+				}
+			}
+			else if (op == LESS)
+			{
+				this->my_type = "bool";
+				if (x < y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == GREATHER)
+			{
+				this->my_type = "bool";
+				if (x > y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == EQUALLESS)
+			{
+				this->my_type = "bool";
+				if (x <= y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
+			}
+			else if (op == EQUALGREATHER)
+			{
+				this->my_type = "bool";
+				if (x >= y)
+				{
+					MIPS_ASM::li("t0", 1);
+					MIPS_ASM::push("t0");
+				}
+				else
+				{
+					MIPS_ASM::li("t0", 0);
+					MIPS_ASM::push("t0");
+				}
 			}
 		}
 		else
@@ -385,6 +471,93 @@ public:
 				{
 					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
 				}
+				else if (op == EQUALS || op == NOTEQUAL)
+				{
+					this->my_type = "bool";
+					if (op == EQUALS)
+					{
+
+						if (x == y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+						if (x != y)
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
+					}
+					else{
+						if (x == y)
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
+						if (x != y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+
+					}
+				}
+				else if (op == LESS)
+				{
+					this->my_type = "bool";
+					if (x < y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					else
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
+				else if (op == GREATHER)
+				{
+					this->my_type = "bool";
+					if (x > y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					else
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
+				else if (op == EQUALLESS)
+				{
+					this->my_type = "bool";
+					if (x <= y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					else
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
+				else if (op == EQUALGREATHER)
+				{
+					this->my_type = "bool";
+					if (x >= y)
+					{
+						MIPS_ASM::li("t0", 1);
+						MIPS_ASM::push("t0");
+					}
+					else
+					{
+						MIPS_ASM::li("t0", 0);
+						MIPS_ASM::push("t0");
+					}
+				}
 				else
 				{
 					cout << "TypeError: not all arguments converted during string formatting" << endl;
@@ -395,6 +568,9 @@ public:
 				string h = "";
 				if (((v1->get_types() == 4 && v2->get_types() == 0)) && (op == 2))
 				{
+					if (op == 2)
+					{
+					}
 					this->my_type = "string";
 					for (int i = 0; i < *(int*)v2->get_value(); i++)
 					{
@@ -582,6 +758,92 @@ public:
 					MIPS_ASM::operationf(f0, f0, f1, 5);
 					MIPS_ASM::pushf(f0);
 				}
+				if (op == EQUALS || op == NOTEQUAL)
+				{
+
+
+					if (op == EQUALS)
+					{
+						MIPS_ASM::printComment("equal opf");
+						MIPS_ASM::add_instruction("li $t0,0\n");
+						MIPS_ASM::add_instruction(string("c.eq.s $f0,$f1 \n"));
+						MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $t0,1\n");
+						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					}
+					else{
+						MIPS_ASM::printComment("not equal opf");
+						MIPS_ASM::add_instruction("li $t0,1\n");
+						MIPS_ASM::add_instruction(string("c.eq.s $f0,$f1 \n"));
+						MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $t0,0\n");
+						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+
+					}
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					MIPS_ASM::add_instruction("sw $t0, 0($sp)\n");
+					//MIPS_ASM::add_instruction("move $t0,$t2\n");
+				}
+
+				if (op == LESS)
+				{
+					//MIPS_ASM::slt("t2", "t0", "t1");
+
+
+
+					MIPS_ASM::printComment("LESS_THAN opf");
+					MIPS_ASM::add_instruction("li $t0,0\n");
+					MIPS_ASM::add_instruction(string("c.lt.s $f0,$f1 \n"));
+					MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+					MIPS_ASM::add_instruction("li $t0,1\n");
+					MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					MIPS_ASM::push("t0");
+					/*MIPS_ASM::add_instruction("slt $t2,$t0,$t1\n");
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					MIPS_ASM::add_instruction("sw $t2, 0($sp)\n");*/
+				}
+
+				if (op == GREATHER)
+				{
+
+
+					MIPS_ASM::printComment("MORE_THAN opf");
+					MIPS_ASM::add_instruction("li $t0,1\n");
+					MIPS_ASM::add_instruction(string("c.le.s $f0,$f1 \n"));
+					MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+					MIPS_ASM::add_instruction("li $t0,0\n");
+					MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					MIPS_ASM::push("t0");
+					//MIPS_ASM::operation("t0","0","t2",1);
+					/*MIPS_ASM::add_instruction("slt $t2,$t1,$t0\n");
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					MIPS_ASM::add_instruction("sw $t2, 0($sp)\n");*/
+				}
+
+
+				if (op == EQUALLESS)
+				{
+
+
+					MIPS_ASM::printComment("LESS_THAN opf");
+					MIPS_ASM::add_instruction("li $t0,0\n");
+					MIPS_ASM::add_instruction(string("c.le.s $f0,$f1 \n"));
+					MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+					MIPS_ASM::add_instruction("li $t0,1\n");
+					MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					MIPS_ASM::push("t0");
+				}
+
+				if (op == EQUALGREATHER)
+				{
+					MIPS_ASM::printComment("Equal_THAN or equal opf");
+					MIPS_ASM::add_instruction("li $t0,1\n");
+					MIPS_ASM::add_instruction(string("c.lt.s $f0,$f1 \n"));
+					MIPS_ASM::add_instruction("bc1f eqop_temp" + std::to_string(labelCount) + "\n");
+					MIPS_ASM::add_instruction("li $t0,0\n");
+					MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
+					MIPS_ASM::push("t0");
+				}
 
 			}
 			else
@@ -608,6 +870,93 @@ public:
 					else if (op == 3)
 					{
 						cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+					}
+					else if (op == EQUALS || op == NOTEQUAL)
+					{
+						this->my_type = "bool";
+						if (op == EQUALS)
+						{
+
+							if (x == y)
+							{
+								MIPS_ASM::li("t0", 1);
+								MIPS_ASM::push("t0");
+							}
+							if (x != y)
+							{
+								MIPS_ASM::li("t0", 0);
+								MIPS_ASM::push("t0");
+							}
+						}
+						else{
+							if (x == y)
+							{
+								MIPS_ASM::li("t0", 0);
+								MIPS_ASM::push("t0");
+							}
+							if (x != y)
+							{
+								MIPS_ASM::li("t0", 1);
+								MIPS_ASM::push("t0");
+							}
+
+						}
+					}
+					else if (op == LESS)
+					{
+						this->my_type = "bool";
+						if (x < y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+						else
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
+					}
+					else if (op == GREATHER)
+					{
+						this->my_type = "bool";
+						if (x > y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+						else
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
+					}
+					else if (op == EQUALLESS)
+					{
+						this->my_type = "bool";
+						if (x <= y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+						else
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
+					}
+					else if (op == EQUALGREATHER)
+					{
+						this->my_type = "bool";
+						if (x >= y)
+						{
+							MIPS_ASM::li("t0", 1);
+							MIPS_ASM::push("t0");
+						}
+						else
+						{
+							MIPS_ASM::li("t0", 0);
+							MIPS_ASM::push("t0");
+						}
 					}
 					else
 					{
