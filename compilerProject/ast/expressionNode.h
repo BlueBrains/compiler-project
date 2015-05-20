@@ -995,7 +995,7 @@ public:
 					else
 						cout << "unsupported operand type(s) for " << operands[op] << " : '" << typ[v1->get_types()] << "' and '" << typ[v2->get_types()] << "'";
 				}*/
-				if (first->my_type == "type" || second->my_type == "type")
+				if (first->my_type == "type" || second->my_type == "type" )
 				{
 					cout << "TypeError: unsupported operand type(s)" << endl;
 				}
