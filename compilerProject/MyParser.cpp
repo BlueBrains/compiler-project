@@ -224,16 +224,11 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		/*if ((strcmp(parameter.at(0), "self") == 0) && (s || fi))
-		{
-		this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
-		}
-
 		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
 		{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
-		*/
+		
 		/*
 		bool selflast = false;
 		for (int i = 0; i < parameter.size(); i++) {
@@ -392,9 +387,10 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	f->getScope()->parent = type->getScope();
 	this->st->currScope = f->getScope();
 
+	
 	for (int i = 0; i < parameter.size(); i++) {
-
-		f->setparameters(parameter[i]);
+		if (strcmp(parameter.at(i), "self") != 0)
+			f->setparameters(parameter[i]);
 	}
 
 	for (int i = 0; i < f->getparameters().size(); i++) {
@@ -456,13 +452,15 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 					if (strcmp("self", first) == 0)
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
+			/*
 			if (!f->get_final() && !f->get_static())
 			{
 
 				char* first = f->getfirstpara();
-				if ((first != NULL) && (strcmp("self", first) != 0))
+				if ((first == NULL) || (strcmp("self", first) != 0))
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
+			*/
 
 	}
 	else 
@@ -1124,7 +1122,8 @@ void MyParser::check_functions()
 		Type* t = unfinishfunction.at(j)->get_type();
 		recrusive_up_parnet(t, j);
 	}
-
+	if (this->st->mainfunc == NULL)
+		this->errRecovery->errQ->enqueue(0, 0, "Can't find main function in the Program","Main");
 }
 void MyParser::print_symbol()
 {

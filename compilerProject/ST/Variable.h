@@ -47,9 +47,12 @@ public:
 	void set_lastTypes(string type,bool ValueNotset);//this for set the var type with out value
 	void set_lastTypes(Type* val);
 	string get_lastType()
-
 	{
 		return lastType.first;
+	}
+	TypesMap get_lastTypes()
+	{
+		return lastType;
 	}
 	static bool compare(Variable *, Variable*);
 	char* getAccessModifier();

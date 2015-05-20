@@ -37,7 +37,14 @@ private:
 		}
 	}
 public:
-
+	Node* get_right()
+	{
+		return right_side;
+	}
+	Node* get_left()
+	{
+		return left_side;
+	}
 	AssignmentNode() : Node(NULL, NULL)
 	{
 
@@ -83,6 +90,14 @@ public:
 		if (left_side->getNodeType() == "CallVariableNode")
 		{
 			static_cast<CallVariableNode*>(left_side)->get_variable()->strLasttype = right_side->my_type;
+			if (left_side->my_type == "string")
+			{
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+			}
+			else if (left_side->my_type == "type")
+			{
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+			}
 		}
 		if (left_side->my_type == "float")
 		{
@@ -93,17 +108,7 @@ public:
 			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
 			MIPS_ASM::top(t0);
 		}
-		if (left_side->my_type == "int")
-		{
-			//MIPS_ASM::pop(t0);// not poping in order to keep value in stack
-			MIPS_ASM::popf("f0");// not poping in order to keep value in stack
-
-			MIPS_ASM::add_instruction("cvt.s.w $f0,$f0\n");
-			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
-			MIPS_ASM::top(t0);
-
-
-		}
+	
 		MIPS_ASM::sw(t0, 0, "v0");
 	}
 	virtual void print()

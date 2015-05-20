@@ -963,6 +963,38 @@ public:
 						cout << "TypeError: not all arguments converted during string formatting" << endl;
 					}
 				}
+				/*
+				else
+				{
+					string h = "";
+					if (((first->my_type == "string" && second->my_type == "int")) && (op == 2))
+					{
+						if (op == 2)
+						{
+						}
+						this->my_type = "string";
+						for (int i = 0; i < *(int*)v2->get_value(); i++)
+						{
+							h += (char*)v1->get_value();
+						}
+						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+						MIPS_ASM::push("t0");
+						this->string_val = h;
+					}
+					else if (((first->my_type == "int" && second->my_type == "string")) && (op == 2))
+					{
+						this->my_type = "string";
+						for (int i = 0; i < *(int*)v1->get_value(); i++)
+						{
+							h += (char*)v2->get_value();
+						}
+						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
+						MIPS_ASM::push("t0");
+						this->string_val = h;
+					}
+					else
+						cout << "unsupported operand type(s) for " << operands[op] << " : '" << typ[v1->get_types()] << "' and '" << typ[v2->get_types()] << "'";
+				}*/
 				if (first->my_type == "type" || second->my_type == "type")
 				{
 					cout << "TypeError: unsupported operand type(s)" << endl;

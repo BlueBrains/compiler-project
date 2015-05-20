@@ -237,7 +237,7 @@ public:
 					}
 				}
 			}
-			else if (temp->getNodeType() == "callFunctionNode")
+			else if (temp->getNodeType() == "CallFunctionNode")
 			{
 				CallFunctionNode* test = static_cast<CallFunctionNode*>(temp);
 				string x = test->getID();
@@ -283,6 +283,33 @@ public:
 
 		}
 		return pi;
+	}
+	virtual void generateCode()
+	{
+		Node* temp;
+		for (int i = 0; i < dot_vector.size(); i++)
+		{
+			temp = dot_vector.at(i);
+			if (temp->getNodeType() == "CallVariableNode")
+			{
+				CallVariableNode* test = static_cast<CallVariableNode*>(temp);
+				string x = test->getID();
+				if (x == "self")
+				{
+					continue;
+
+				}
+				else
+					temp->generateCode();
+			}
+			else
+				temp->generateCode();
+			this->my_type = temp->my_type;
+			if (temp->my_type == "string")
+			{
+				this->string_val = temp->string_val;
+			}
+		}
 	}
 };
 #endif

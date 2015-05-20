@@ -3,6 +3,7 @@
 #define __VARIABLENODE__
 #include"Node.h"
 #include"..\ST\Variable.h"
+#include<sstream>
 //#include"ast\CallVariableNode.h"
 #include"callFunctionNode.h"
 #include"ArrayElementNode.h"
@@ -107,6 +108,17 @@ public:
 			if (this->my_type == "NULL")
 			{
 				this->my_type = variable_node->strLasttype;
+			}
+			if (this->my_type == "string")
+			{
+				std::ostringstream ss;
+				char* s = reinterpret_cast<char*>(variable_node->get_lastTypes().second);
+				ss << s;
+				this->string_val = ss.str();				
+			}
+			else if (this->my_type == "type")
+			{
+
 			}
 			MIPS_ASM::lw("t0", -variable_node->getOffset(), this->getOffsetRegister());
 			//v0 contains the address in memorry to be used later in assignment

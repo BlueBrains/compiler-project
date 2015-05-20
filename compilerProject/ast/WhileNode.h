@@ -9,7 +9,7 @@ private:
 	Node* conditionNode;
 	Node* _scoop;
 public:
-	static	int 	while_label;
+	static	int while_label;
 	Node* get_condition()
 	{
 		return conditionNode;
@@ -61,7 +61,7 @@ public:
 
 
 		MIPS_ASM::beq("t0", "0", ccc2);
-		Node* temp = this->Son;
+		temp = this->Son;
 		while (temp)
 		{
 			temp->generateCode();
@@ -82,4 +82,5 @@ public:
 	}
 
 };
+int WhileNode::while_label = 0;
 #endif

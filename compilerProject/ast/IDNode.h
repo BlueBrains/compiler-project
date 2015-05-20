@@ -15,6 +15,10 @@ public:
 	{
 		return variable_node;
 	}
+	void set_variable(Variable* v)
+	{
+		this->variable_node = v;
+	}
 	void* get_var()
 	{
 		return var_node;

@@ -29,6 +29,12 @@ public:
 	{
 		this->Function_call->get_FunctionNode()->setOffset(this->getFrameSize());
 		this->Function_call->get_FunctionNode()->generateCode();
+		this->my_type = this->Function_call->get_FunctionNode()->my_type;
+		if (this->my_type == "string")
+		{
+			this->string_val = this->Function_call->get_FunctionNode()->string_val;
+		}
+		MIPS_ASM::printComment(((this->Function_call->get_name())+ this->my_type));
 	}
 	bool check_para(Function*f)
 	{

@@ -50,6 +50,7 @@
 	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
 	bool exist;
+	bool inside_func=false;
 	Node* k;
 	Node* root;
 	char* t_id=new char[10];
@@ -62,6 +63,8 @@
 	bool pp=true;
 	bool self=false;
 	bool is_list=false;
+	bool in_def=false;
+	Node* my_node;
 	bool is_dic=false;
 	bool array_right=false;
 	int linefunc=0;
@@ -74,10 +77,11 @@
 	vector<char *>inhertance_list;
 	vector<Node*>arrayvec;
 	vector<Node*>dotvec;
+	vector<Node*>amer_par;
 	extern int lineNum;
 	extern int colNum;
 	vector<char *>ID_list;
-	vector<Node *>_par;
+	//vector<Node *>_par;
 	vector<Node *>df_par;
 	Variable* v;
 	Variable* v1=new Variable();
@@ -150,7 +154,6 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						root = $<tn>1;		
 						if(fileStack.size()==1){
 							//ast->print(root, 0);
-							
 						p->print_symbol();
 						ast->tree($<tn>1);
 						ast->print($<tn>1, 0);
@@ -189,9 +192,11 @@ temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
 
 funcdef: funcheader suite {
 							testfunction = p->finishFunctionDeclaration(testfunction,linefunc,colmfunc);
-							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum,df_par,_par);
-							parameters.clear();df_par.clear();_par.clear();
+							$<tn>$=ast->createFunctionNode(testfunction,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum,amer_par);
+							parameters.clear();df_par.clear();amer_par.clear();
 							linefunc=0;colmfunc=0;
+							visit_num=0;
+							constant=false;
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
 						  }
 	
@@ -203,6 +208,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
+											inside_func=false;
 											Streams::verbose() <<"funcheader: DEF NAME parameters ':' \n";
 											
 									   }
@@ -210,6 +216,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 												testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,ff, $<r.strVal>3,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF access NAME parameters ':' \n";
@@ -220,6 +227,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 												testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, $<r.strVal>3,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF STATIC NAME parameters ':' \n";
@@ -228,6 +236,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, $<r.strVal>3,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 												Streams::verbose() <<"funcheader: DEF FINAL NAME parameters ':' \n";
@@ -240,6 +249,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
+											inside_func=false;
 														Streams::verbose() <<"funcheader: DEF STATIC FINAL NAME parameters ':'  \n";
 												    }
 			|DEF FINAL STATIC NAME parameters ':'  {
@@ -248,6 +258,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
+											inside_func=false;
 													Streams::verbose() <<"funcheader: DEF FINAL STATIC NAME parameters ':'  \n";
 													}
 			|DEF FINAL access NAME parameters ARROW test ':'  {
@@ -256,6 +267,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											parameters.clear();
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
+											inside_func=false;
 																Streams::verbose() <<"funcheader: DEF FINAL access NAME parameters ARROW test ':'  \n";
 															  }
 			|DEF STATIC access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ARROW test ':'  \n";}
@@ -263,6 +275,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, $<r.strVal>4,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 														colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':'  \n";
 													}
@@ -270,6 +283,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, $<r.strVal>4,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF STATIC access NAME parameters ':' ";
@@ -280,6 +294,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 											testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 															Streams::verbose() <<"funcheader: DEF STATIC FINAL access NAME parameters ':'  \n";
@@ -288,6 +303,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF FINAL STATIC access NAME parameters ':'  \n";
 														  }
@@ -297,6 +313,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 														testfunction = p->createTypeFunctionHeader(t,true,pp,pro,ff, $<r.strVal>4,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF access STATIC NAME parameters ':'  \n";
@@ -305,6 +322,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 														testfunction = p->createTypeFunctionHeader(t,ss,pp,pro,true, $<r.strVal>4,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 														Streams::verbose() <<"funcheader: DEF access FINAL NAME parameters ':'  \n";
@@ -315,6 +333,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 											colmfunc=yylval.r.colNum;
 															Streams::verbose() <<"funcheader: DEF access STATIC FINAL NAME parameters ':'  \n";
@@ -323,6 +342,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF access FINAL STATIC NAME parameters ':'  \n";
 			  											  }
@@ -332,6 +352,7 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF STATIC access FINAL NAME parameters ':'  \n";
 			  											  }
@@ -339,12 +360,16 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 															testfunction = p->createTypeFunctionHeader(t,true,pp,pro,true, $<r.strVal>5,parameters,yylval.r.lineNum, yylval.r.colNum);
 											pp=true;ff=false;ss=false;pro=false;
 											parameters.clear();
+											inside_func=false;
 											linefunc=yylval.r.lineNum;
 															colmfunc=yylval.r.colNum;Streams::verbose() <<"funcheader: DEF FINAL access STATIC NAME parameters ':'  \n";
 														  }
 			;
 
-parameters: '(' arglist ')' {Streams::verbose() <<"parameters:'(' arglist ')'\n";}
+inside_func: '(' { inside_func=true; Streams::verbose() <<"parameters:'(' ";}
+
+
+parameters: inside_func arglist ')' {Streams::verbose() <<"arglist ')'\n";}
 			|'(' ')' {Streams::verbose() <<"parameters:'(' ')'\n";}
 			;
 
@@ -530,11 +555,11 @@ continue_stmt:	CONTINUE {
 
 return_stmt:	RETURN testlist {
 									Streams::verbose() <<"return_stmt:	RETURN testlist \n";
-									$<tn>$ = ast->createFlowStmtNode($<tn>2, NULL, returnNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+									$<tn>$ = ast->createReturnNode(testfunction,$<tn>2, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 								}
 				|RETURN {
 							Streams::verbose() <<"return_stmt:	RETURN \n";
-							$<tn>$ = ast->createFlowStmtNode(NULL, NULL, returnNode, NULL,yylval.r.lineNum,yylval.r.colNum);
+							$<tn>$ = ast->createReturnNode(testfunction,NULL, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 						}
 				;
 
@@ -1268,7 +1293,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
 		| power {
-					cout<<"enter"<<endl;
+		         if(!inside_func){
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
@@ -1283,7 +1308,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						{
 							//cout<<"hellow world  "<<v->get_name()<<endl;
 							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
-									
+							cout<<"last node"<<endl;	
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 						}
 						else
@@ -1300,8 +1325,8 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						if(!temp_id2.empty())
 						{
 						//cout<<"enter amora alhosary"<<endl;
-								$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
-							v=$<var>$;
+						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,false,is_list,is_dic);
+						v=$<var>$;
 						}
 						else
 						{
@@ -1327,6 +1352,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					}
 					constant=false;
 				} 
+			}
 		;
 
 trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";
@@ -1372,7 +1398,20 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
+		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
+									
+									my_node=NULL;
+									}
+									else{
+											if(!in_def)
+											{
+												my_node = ast->createIDNode(NULL,0,0,yylval.r.lineNum,yylval.r.colNum);
+											}
+											else
+												in_def=false;
+										
+										}
 									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 					} 
 		| NAME '(' ')' %prec stmt_13{ Streams::verbose() <<"atom: NAME()\n";
@@ -1919,7 +1958,7 @@ classheader: CLASS NAME ':'  {
 
 arg_comma_seq : argument ',' {Streams::verbose() <<"arg_comma_seq : argument ','\n";$<tn>$=$<tn>1;}
 				|arg_comma_seq argument ',' {Streams::verbose() <<"arg_comma_seq : argument ',' arg_comma_seq\n";
-													$<tn>$=ast->addNext($<tn>1,$<tn>2);
+													//$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											}
 				;
 
@@ -1932,21 +1971,15 @@ comma_arg_seq:	',' argument {Streams::verbose() <<"comma_arg_seq:	',' argument\n
 arglist: argument {Streams::verbose() <<"arglist: argument\n";
 					$<tn>$=$<tn>1;
 					}
-		 |default_arg {Streams::verbose() <<"arglist: default_arg\n";$<tn>$=$<tn>1;_par.push_back($<tn>$);}
+		 |default_arg {Streams::verbose() <<"arglist: default_arg\n";$<tn>$=$<tn>1;}
 		
-		 |argument ',' {Streams::verbose() <<"arglist: argument ','\n";$<tn>$=$<tn>1;_par.push_back($<tn>$);}
+		 |argument ',' {Streams::verbose() <<"arglist: argument ','\n";$<tn>$=$<tn>1;}
         
 		 |'*' test {    
 						std::string tempstr($<r.strVal>2);
 						std::string erro("*" + tempstr);
 						char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-						$<tn>$=$<tn>2;
-						if($<tn>$->getNodeType()=="IDNode")
-						{
-							static_cast< IDNode* > $<tn>$->get_variable()->set_isarray(true);
-						}
-						_par.push_back($<tn>$);
 						Streams::verbose() <<"arglist: '*' test\n";
 				   }
 		
@@ -1959,18 +1992,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
-										$<tn>$=$<tn>2;
-										if($<tn>$->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* >$<tn>$->get_variable()->set_isarray(true);
-										}
-										_par.push_back($<tn>$);
-										
-										if($<tn>5->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* >$<tn>5->get_variable()->set_isdic(true);
-										}
-										_par.push_back($<tn>5);
 										Streams::verbose() <<"arglist: '*' test ',' STAR_2 test\n";
 									}
 		
@@ -1979,11 +2000,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-									    if($<tn>2->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* >$<tn>2->get_variable()->set_isarray(true);
-										}
-										_par.push_back($<tn>2);
 										Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
 								 }
 		
@@ -2021,15 +2037,10 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										std::string erro("**" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);Streams::verbose() <<"arglist: STAR_2 test\n";
-						if($<tn>2->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>2->get_variable()->set_isdic(true);
-										}
-										_par.push_back($<tn>2);
 					  }
 		
 		 |arg_comma_seq argument {Streams::verbose() <<"arglist: arg_comma_seq argument\n";
-												$<tn>$=ast->addNext($<tn>1,$<tn>2);
+												//$<tn>$=ast->addNext($<tn>1,$<tn>2);
 								}
 		 |arg_comma_seq default_arg {Streams::verbose() <<"arglist: arg_comma_seq default_arg\n";}
 		 |arg_comma_seq default_arg_comma_seq default_arg {Streams::verbose() <<"arglist: arg_comma_seq default_arg_comma_seq default_arg\n";}
@@ -2040,11 +2051,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										std::string erro("*" + tempstr);
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-										if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isdic(true);
-										}
-										_par.push_back($<tn>3);
 									Streams::verbose() <<"arglist: arg_comma_seq '*' test\n";
 								  }
 		
@@ -2059,18 +2065,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 													Streams::verbose() <<"arglist: arg_comma_seq '*' test ',' STAR_2 test\n";
-												 $<tn>$=$<tn>3;
-										if($<tn>$->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>$->get_variable()->set_isarray(true);
-												 }
-										_par.push_back($<tn>$);
-		
-										if($<tn>6->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>6->get_variable()->set_isdic(true);
-										}
-										_par.push_back($<tn>6);
 												 
 												 }
 		
@@ -2080,11 +2074,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 												Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq\n";
-										if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-											   }
-										_par.push_back($<tn>3);
 											   }
 		
 		 |arg_comma_seq '*' test comma_default_arg_seq {
@@ -2093,11 +2082,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 														Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_default_arg_seq\n";
-									if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-										}
-										_par.push_back($<tn>3);
 													   }
 		
 		 |arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq {
@@ -2106,11 +2090,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 																		Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq\n";
-										if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-										}
-										_par.push_back($<tn>3);
 																	 }
 		
 		 |arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test {
@@ -2124,17 +2103,7 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr1 = new char[erro1.length() + 1];
 										strcpy(cstr1, erro1.c_str()); parameters.push_back(cstr1);
 																Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test\n";
-									if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isarray(true);
-															   }
-										_par.push_back($<tn>3);
         
-									if($<tn>7->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>7->get_variable()->set_isdic(true);
-										}
-										_par.push_back($<tn>7);
 									   }
         
 		 |arg_comma_seq STAR_2 test {	std::string tempstr($<r.strVal>3);
@@ -2142,11 +2111,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 										char *cstr = new char[erro.length() + 1];
 										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 										Streams::verbose() <<"arglist: arg_comma_seq STAR_2 test\n";
-										if($<tn>3->getNodeType()=="IDNode")
-										{
-											static_cast< IDNode* > $<tn>3->get_variable()->set_isdic(true);
-								    }
-										_par.push_back($<tn>3);
 								    }
 		
 		 ;
@@ -2159,20 +2123,22 @@ comma_default_arg_seq: ',' default_arg {Streams::verbose() <<"comma_default_arg_
 default_arg_comma_seq: default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";}
 					   |default_arg_comma_seq default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";}
 					   ;
-
-default_arg: test '=' test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test '=' test\n";
-							
-							$<tn>$=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+in_default: '=' {
+					in_def=true;
+				}
+default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test '=' test\n";
+							Node* o=ast->createAssignNode($<tn>1,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							$<tn>$=ast->addNext(my_node,o);
+							amer_par.push_back($<tn>$);
 							df_par.push_back($<tn>$);
 							};
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					_par.push_back($<tn>$);
+					amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
 					$<tn>$=$<tn>1; 
-					_par.push_back($<tn>$);
 			}
 			//|test '=' test {Streams::verbose() <<"argument: test '=' test\n";}
 			;
@@ -2262,6 +2228,7 @@ std::string str_common((std::istreambuf_iterator<char>(t_common)),
 	Iskernal=1;
 	symbolTable->generateKernalCode();
 */
+		ofs<<"li $v0,10 \n syscall \n";
 		ofs<<".ktext 0x80000180\n";
 
  t_common =	std::ifstream("exception.asm");

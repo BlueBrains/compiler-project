@@ -42,6 +42,7 @@ public:
 	}
 	virtual void generateCode()
 	{
+		MIPS_ASM::printComment("\n Print values:");
 		string t0 = "t0";
 		Node* temp = this->Son;
 		bool checked = true;// check_type();
@@ -73,9 +74,11 @@ public:
 				return;
 			}
 			MIPS_ASM::add_instruction("syscall\n");
-
 			temp = temp->Next;
 		}
+		MIPS_ASM::la("a0", "newline");
+		MIPS_ASM::li("v0", 4);
+		MIPS_ASM::add_instruction("syscall\n");
 		
 	}
 };

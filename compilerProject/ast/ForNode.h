@@ -160,3 +160,4 @@ public:
 		
 	}*/
 };
+int ForNode::for_label = 0;

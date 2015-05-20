@@ -37,11 +37,13 @@ public:
 		void * g = get_value();
 		if (get_types() == 0)
 		{
+			this->my_type = "int";
 			MIPS_ASM::li("t9", *(int*)(g));
 			MIPS_ASM::push("t9");
 		}
 		else if (get_types() == 1)
 		{
+			this->my_type = "float";
 			MIPS_ASM::li("t9", *(int*)(void*)&(*(float*)(g)));
 			MIPS_ASM::push("t9");
 		}
@@ -57,6 +59,7 @@ public:
 		}
 		else if (get_types() == 4)
 		{
+			this->my_type = "string";
 			std::ostringstream ss;
 			char* s = reinterpret_cast<char*>(g);
 			ss << s;

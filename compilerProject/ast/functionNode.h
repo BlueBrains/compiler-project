@@ -7,11 +7,19 @@ class FunctionNode :public Node
 private:
 	Function* function_node;
 	vector<Node*> df_par;
-	vector<Node*> _par;
+	bool has_return=false;
 public:
 	Function* get_function()
 	{
 		return function_node;
+	}
+	void set_hasReturn(bool r)
+	{
+		this->has_return = true;
+	}
+	bool get_hasReturn()
+	{
+		return this->has_return;
 	}
 	FunctionNode() :function_node(NULL), Node(NULL, NULL)
 	{
@@ -21,11 +29,10 @@ public:
 	{
 
 	}
-	FunctionNode(Function* f, Node* son, Node*next, int l, int c, vector<Node*> dfpar, vector<Node*> par) :function_node(f), Node(son, next, l, c)
+	FunctionNode(Function* f, Node* son, Node*next, int l, int c, vector<Node*> dfpar) :function_node(f), Node(son, next, l, c)
 	{
 		this->function_node = f;
 		this->df_par = dfpar;
-		this->_par = par;
 	}
 	virtual void print()
 	{
@@ -46,7 +53,17 @@ public:
 			}
 			temp = temp->Next;
 		}
+		/*
+		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+		MIPS_ASM::add_instruction("sw $fp, 0($sp)\n");
+		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+		MIPS_ASM::add_instruction("sw $ra, 0($sp)\n");*/
+		MIPS_ASM::printComment("begin function call");
+		MIPS_ASM::push("ra");
+		MIPS_ASM::push("fp");
 		MIPS_ASM::reserveStack(getFrameSize());
+		//MIPS_ASM::add_instruction("move $fp, $sp\n");
+		MIPS_ASM::move("fp", "sp");
 		temp = this->Son;
 		//here generate code
 		while (temp)
@@ -57,7 +74,16 @@ public:
 		}
 		//
 		MIPS_ASM::releaseStack(getFrameSize());
-
+		/*
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $ra,0($sp)\n");
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
+		MIPS_ASM::pop("fp");
+		MIPS_ASM::pop("ra");
+		MIPS_ASM::push("v0");
+		MIPS_ASM::printComment("end function call");
+		//MIPS_ASM::push("v0");
 	}
 	void gcVars()
 	 {

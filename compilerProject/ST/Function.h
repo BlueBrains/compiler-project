@@ -20,6 +20,7 @@ private:
 	string _label;
 	vector<Variable *> parameters;
 public:
+	bool has_return = false;
 	Function();
 	~Function();
 	Function(char* name);

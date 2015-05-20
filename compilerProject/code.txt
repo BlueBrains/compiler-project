@@ -2,12 +2,25 @@ class u(l,o,p):
 #def s="amer"+"ppp"+"ooo";
 #def g="amer"+3;
 #def g=-9+9.9;
+def koko():
+print "welcom koko";
+end
+def soso():
+return 2;
+end
 def main():
+#	testing="amer";
+#	print testing*3;
 	#s="amer"+" and "+"molham";
 	#p="amer "*3;
 	#koko=1+2+3+5;
-	s="amer";
-	print s;
+	s=self.soso();
+#	s=2+2; 
+	print "s= ",s;
+	self.koko();
+	
+	print 1+2+3+5;
+	print "amer "*3;
 	# g="amer"*3;
 end
 end

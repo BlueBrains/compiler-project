@@ -2,6 +2,7 @@
 #ifndef __AST__
 #define __AST__
 #include"dotNode.h"
+#include"ast\returnNode.h"
 #include"ast\ClassNode.h"
 #include"ast\expressionNode.h"
 #include"ast\IDNode.h"
@@ -68,12 +69,77 @@ public:
 		ClassNode* temp = new ClassNode(t, son, next,line_no,col_no);
 		return temp;
 	}
-	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next, int line_no, int col_no, vector<Node*> dp, vector<Node*> p)
+	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next, int line_no, int col_no, vector<Node*> dp)
 	{
-		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no,dp,p);
 		
+		if (f->getparameters().size() > 0){
+			for (int i = 0; i < f->getparameters().size(); i++)
+			{
+				static_cast<IDNode*>(dp.at(i))->set_variable(f->getparameters().at(i));
+				if (dp.at(i)->Next != NULL)
+				{
+					static_cast<CallVariableNode*>(dp.at(i)->Next)->set_variable(f->getparameters().at(i));
+				}
+			}
+			Node* temp_par = dp.at(0);
+			for (int i = 1; i < dp.size(); i++)
+			{
+				this->addNext2(temp_par, dp.at(i));
+			}
+			son = this->addNext2(temp_par, son);
+		}
+		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no, dp);
+
 		f->set_FunctionNode(temp);
-		f->set_label(f->get_name()+temp->getId());
+		f->set_label(f->get_name() + temp->getId());
+			/*
+			CallVariableNode *toto = new CallVariableNode();
+
+			string h;
+			if (dp.size() > 0){
+				toto= static_cast<CallVariableNode*>(static_cast<AssignmentNode*>(dp.at(0))->get_left());
+			    h = toto->getID();
+			}
+			bool enter = true;
+			bool start = false;
+			int i = 1;
+			Node* temp_w= new Node();
+			temp->Son = temp_w;
+			if ((dp.size()>0) && (strcmp(f->getparameters().at(0)->get_name(), h.c_str()) == 0))
+			{
+				temp_w = createIDNode(f->getparameters().at(0), NULL, NULL, line_no, col_no);
+				temp_w->Next = dp.at(0);
+				temp_w = temp_w->Next;
+				start = true;
+			}
+			else
+				temp_w = createIDNode(f->getparameters().at(0), NULL, NULL, line_no, col_no);
+
+			while (enter && (i<f->getparameters().size())){
+
+				if ((strcmp(f->getparameters().at(i)->get_name(), h.c_str()) == 0) || start)
+				{
+					for (int j = 0; j < dp.size(); j++)
+					{
+						temp_w->Next = createIDNode(f->getparameters().at(i), NULL, NULL, line_no, col_no);
+						temp_w = temp_w->Next;
+						temp_w->Next = dp.at(j);
+						temp_w = temp_w->Next;
+					}
+					enter = false;
+					break;
+				}
+				if (!enter)
+					break;
+				temp_w->Next = createIDNode(f->getparameters().at(i), NULL, NULL, line_no, col_no);
+				temp_w = temp_w->Next;
+				i++;
+			}
+			temp_w->Next = son;
+		}
+		else
+			temp->Son = son;
+			*/
 		return temp;
 	}
 	WhileNode * createWhileNode(Node * son, Node* next, Node* cond, Node* scoop,  int line_no, int col_no)
@@ -235,12 +301,25 @@ public:
 		//Node* u = temp;
 		return temp;
 	}
+	returnNode* createReturnNode(Function* f, Node* scoop, Node* son, Node*next, int l_no, int c_no)
+	{
+		returnNode* temp = new returnNode( f,scoop,son,next, l_no, c_no);
+		return temp;
+	}
 	Node * addNext(Node* base,Node* next)
 	{
 		while (base->Next != NULL)
 			base = base->Next;
 		base->Next = next;
 		return base;
+	}
+	Node * addNext2(Node* base, Node* next)
+	{
+		Node* root = base;
+		while (base->Next != NULL)
+			base = base->Next;
+		base->Next = next;
+		return root;
 	}
 	Node * addSon(Node* base, Node* Son)
 	{
