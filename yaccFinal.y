@@ -374,9 +374,11 @@ parameters: inside_func arglist ')' {Streams::verbose() <<"arglist ')'\n";}
 			;
 
 stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";
-						
+						visit_num=0;
 					}
-		| compound_stmt {	$<tn>$=$<tn>1;cout<<"line num"<<yylval.r.lineNum<<endl;	Streams::verbose() <<"stmt: compound_stmt\n";}
+		| compound_stmt {	$<tn>$=$<tn>1;cout<<"line num"<<yylval.r.lineNum<<endl;	Streams::verbose() <<"stmt: compound_stmt\n";
+							visit_num=0;
+						}
 		;
 simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
 								$<tn>$=$<tn>1;
@@ -410,6 +412,7 @@ small_stmt: expr_stmt	{
 			|print_stmt  {
 							Streams::verbose() <<"small_stmt: print_stmt \n";
 							$<tn>$=$<tn>1;
+							visit_num=0;
 						 }
 			;
 
@@ -938,7 +941,8 @@ while_stmt: while_header suite {
 												 }
 			;
 while_header: WHILE test ':' {
-								$<tn>$=$<tn>2;
+									Streams::verbose() <<"while_header:  WHILE test ':' \n";
+								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
 }
@@ -1357,9 +1361,11 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 
 trailer_seq: trailer %prec stmt_6  {Streams::verbose() <<"trailer_seq: trailer \n";
 										$<tn>$=$<tn>1;
+										visit_num++;
 									}
 			 |trailer_seq trailer {Streams::verbose() <<"trailer_seq: trailer_seq trailer \n";
 										$<tn>$=ast->addNext($<tn>1,$<tn>2);
+										visit_num++;
 									}
 			 ;
 			
@@ -1517,6 +1523,7 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 						dotvec.push_back($<tn>$);
 						} 
 			|'.' NAME '(' ')' {
+									Streams::verbose() <<"trailer:	'.' NAME()\n";
 									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,NULL,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									dotvec.push_back($<tn>$);
 								}
@@ -2220,6 +2227,7 @@ MIPS_ASM::add_data("\nblock_head:    .byte   0:8\n");
 	
 	
 	MIPS_ASM::writeCode();
+	//MIPS_ASM::writeMain();
 	std::ifstream t_common("common.asm");
 std::string str_common((std::istreambuf_iterator<char>(t_common)),
                  std::istreambuf_iterator<char>());
@@ -2228,7 +2236,7 @@ std::string str_common((std::istreambuf_iterator<char>(t_common)),
 	Iskernal=1;
 	symbolTable->generateKernalCode();
 */
-		ofs<<"li $v0,10 \n syscall \n";
+		//ofs<<"li $v0,10 \n syscall \n";
 		ofs<<".ktext 0x80000180\n";
 
  t_common =	std::ifstream("exception.asm");

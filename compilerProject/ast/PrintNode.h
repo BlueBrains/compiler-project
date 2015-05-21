@@ -33,12 +33,14 @@ public:
 	}
 	virtual void print()
 	{
+		cout << this->getNodeType()<<"  ";
 		Node* temp = _scoop;
 		while (temp)
 		{
 			temp->print();
 			temp = temp->Next;
 		}
+		cout << endl;
 	}
 	virtual void generateCode()
 	{

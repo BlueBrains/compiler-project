@@ -7,6 +7,8 @@
 #include <cstring>
 #include <fstream>
 #include <sstream>
+#include "ast\Node.h"
+#include<vector>
 using namespace std;
 
 extern int lineNumber;
@@ -23,7 +25,6 @@ public:
 	// static char data[1000];
 	static int lines;
 	static int cols;
-
 	static int static_size;
 	static char current_chars[1000];
 	static int o;

@@ -9,19 +9,11 @@ def soso():
 return 2;
 end
 def main():
-#	testing="amer";
-#	print testing*3;
-	#s="amer"+" and "+"molham";
-	#p="amer "*3;
-	#koko=1+2+3+5;
-	s=self.soso();
-#	s=2+2; 
-	print "s= ",s;
+	kl=2+5;
+	print "kl= ",kl;
 	self.koko();
-	
-	print 1+2+3+5;
-	print "amer "*3;
-	# g="amer"*3;
+	s=self.soso();
+	print "s= ",s;
 end
 end
 class g:

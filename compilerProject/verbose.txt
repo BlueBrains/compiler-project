@@ -76,12 +76,16 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-str_seq:	STRING 
-atom: str_seq
+atom: NUMBER_INT 2
 power:	atom
 factor: power
 term: 	factor
-arith_expr: term
+atom: NUMBER_INT 5
+power:	atom
+factor: power
+term: 	factor
+term_seq : '+' term 
+arith_expr: term term_seq
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
@@ -98,64 +102,6 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
-atom: NAME
-power:	atom
-factor: power
-atom: NUMBER_INT 3
-power:	atom
-factor: power
-factor_seq: '*' factor 
-term: 	factor factor_seq
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-exprlist: 	expr 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-Error: Undeclareted Variable at Line No:17 Column No:3
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-Error: Undeclareted Variable at Line No:17 Column No:15
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
 str_seq:	STRING 
 atom: str_seq
 power:	atom
@@ -169,7 +115,6 @@ expr: xor_expr
 atom: NAME
 power:	atom
 factor: power
-Error: Undeclareted Variable at Line No:19 Column No:13
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -184,10 +129,11 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
 atom: NAME
+trailer:	'.' NAME()
 trailer_seq: trailer 
 power: atom trailer_seq 
 factor: power
-Error: Undeclareted Variable at Line No:20 Column No:13
+Error: Undeclareted Variable at Line No:14 Column No:13
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -205,33 +151,42 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
-atom: NUMBER_INT 1
+atom: NAME
 power:	atom
 factor: power
 term: 	factor
-atom: NUMBER_INT 2
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-atom: NUMBER_INT 3
-power:	atom
-factor: power
-term: 	factor
-term_seq : term_seq '+' term 
-atom: NUMBER_INT 5
-power:	atom
-factor: power
-term: 	factor
-term_seq : term_seq '+' term 
-arith_expr: term term_seq
+arith_expr: term
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-exprlist: 	expr 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+trailer:	'.' NAME()
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+Error: Undeclareted Variable at Line No:15 Column No:15
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
@@ -239,17 +194,23 @@ str_seq:	STRING
 atom: str_seq
 power:	atom
 factor: power
-atom: NUMBER_INT 3
-power:	atom
-factor: power
-factor_seq: '*' factor 
-term: 	factor factor_seq
+term: 	factor
 arith_expr: term
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-exprlist: 	expr 
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comma_expr_star_seq : 	',' expr 
+exprlist: 	expr comma_expr_star_seq 
 print_stmt: PRINT exprlist 
 small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
@@ -268,3 +229,4 @@ classdef: classheader suite
 temp2: classdef 
 temp2: classdef temp2
 program : temp2 
+file_input: program ENDMARKER

@@ -63,6 +63,13 @@ public:
 	void generate_main(Function* main)
 	{
 		main->get_FunctionNode()->generateCode();
+		MIPS_ASM::add_instruction("li $v0, 10 \n");
+		MIPS_ASM::add_instruction("syscall \n");
+		for (int i = 0; i < func_vec.size(); i++)
+		{
+			MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
+			func_vec.at(i)->generateCode();
+		}
 	}
 	ClassNode * createClassNode(Type* t, Node * son, Node* next, int line_no, int col_no)
 	{
@@ -91,7 +98,9 @@ public:
 		FunctionNode* temp = new FunctionNode(f, son, next, line_no, col_no, dp);
 
 		f->set_FunctionNode(temp);
-		f->set_label(f->get_name() + temp->getId());
+		stringstream ss;
+		ss << f->get_name() << temp->getId();
+		f->set_label(ss.str());
 			/*
 			CallVariableNode *toto = new CallVariableNode();
 
@@ -391,11 +400,8 @@ public:
 			}
 			else if (n->getNodeType() == "WhileNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
-			}
-			else if (n->getNodeType() == "PrintNode")
-			{
-				//cout << "enterr herre print node in ast " << endl;
 			}
 			else
 			{

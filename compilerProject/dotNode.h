@@ -140,6 +140,7 @@ public:
 		Type* t1 = NULL;
 		Type* t = NULL;
 		Function *f = NULL;
+		Function *outer_f = NULL;
 		Variable* v = NULL;
 		void* temp_void;
 		int i = outer_node.size() - 1;
@@ -150,6 +151,10 @@ public:
 			{
 				i--;
 				temp2 = outer_node.at(i);
+				if (outer_node.at(i)->getNodeType() == "FunctionNode")
+				{
+					outer_f = static_cast<FunctionNode*>(temp2)->get_function();
+				}
 			}
 			t = static_cast<ClassNode*>(temp2)->get_type();
 		}

@@ -68,7 +68,7 @@ public:
 		//here generate code
 		while (temp)
 		{
-			temp->setOffset(this->getFrameSize());
+			//temp->setOffset(this->getFrameSize());
 			temp->generateCode();
 			temp = temp->Next;
 		}

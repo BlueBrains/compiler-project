@@ -74,13 +74,22 @@ public:
 	virtual void print()
 	{
 		cout << "WHILE NODE !" << endl;
-
+		if (conditionNode)
+		{
+			cout << "condition is" << conditionNode->getNodeType()<< endl;
+			conditionNode->print();
+		}
+			
 	}
 	virtual string getNodeType()
 	{
 		return "WhileNode";
 	}
-
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		pi = conditionNode->check(n);
+		return pi;
+	}
 };
 int WhileNode::while_label = 0;
 #endif

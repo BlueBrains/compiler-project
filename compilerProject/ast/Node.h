@@ -6,8 +6,9 @@
 #include<iostream>
 #include "../mips_asm.h"
 using namespace std;
+class Node;
 extern pair<void*, string>pi;
-
+extern vector<Node*>func_vec;
 class Node
 {
 private:
