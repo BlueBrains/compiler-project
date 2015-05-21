@@ -61,6 +61,23 @@ public:
 	{
 
 	}
+	virtual void before_generateCode(){
+		right_side->before_generateCode();
+		left_side->before_generateCode();
+		left_side->my_type = right_side->my_type;
+		if (left_side->getNodeType() == "CallVariableNode")
+		{
+			static_cast<CallVariableNode*>(left_side)->get_variable()->strLasttype = right_side->my_type;
+			if (left_side->my_type == "string")
+			{
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+			}
+			else if (left_side->my_type == "type")
+			{
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+			}
+		}
+	}
 	virtual void generateCode()
 	{
 		string t1 = "t1";

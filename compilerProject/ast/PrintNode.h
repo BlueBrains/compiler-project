@@ -42,6 +42,16 @@ public:
 		}
 		cout << endl;
 	}
+	virtual void before_generateCode(){
+		Node* temp = this->Son;
+		bool checked = true;// check_type();
+		while ((checked)&&(temp))
+		{
+			temp->before_generateCode();
+			temp->getNodeType();
+			temp = temp->Next;
+		}
+	}
 	virtual void generateCode()
 	{
 		MIPS_ASM::printComment("\n Print values:");

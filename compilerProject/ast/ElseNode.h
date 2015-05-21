@@ -38,6 +38,9 @@ public:
 			}
 			temp = temp->Next;
 		}
+		
 	}
-
+	virtual void before_generateCode(){
+		
+	}
 };

@@ -33,6 +33,41 @@ public:
 	{
 
 	}
+	virtual void before_generateCode(){
+		void * g = get_value();
+		if (get_types() == 0)
+		{
+			this->my_type = "int";
+			
+		}
+		else if (get_types() == 1)
+		{
+			this->my_type = "float";
+		
+		}
+		else if (get_types() == 2)
+		{
+			this->my_type = "char";
+		}
+		else if (get_types() == 3)
+		{
+			this->my_type = "long";
+		}
+		else if (get_types() == 4)
+		{
+			this->my_type = "string";
+		}
+		else if (get_types() == 5)
+		{
+
+			this->my_type = "bool";
+		}
+		else if (get_types() == 6)
+		{
+
+			this->my_type = "bool";
+		}
+	}
 	virtual void generateCode(){
 		void * g = get_value();
 		if (get_types() == 0)

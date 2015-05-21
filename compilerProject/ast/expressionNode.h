@@ -597,6 +597,9 @@ public:
 		}
 		
 	}
+	virtual void before_generateCode(){
+		
+	}
 	virtual void generateCode()
 	{
 		string t0 = "t0";

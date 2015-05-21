@@ -1132,7 +1132,7 @@ comp_op_seq: comp_op expr %prec stmt_7 {
 				
 comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;}
 			|expr comp_op_seq %prec stmt_12 {
-					Streams::verbose() <<"comparison: expr comp_op_seq\n";$<tn>$=$<tn>1;
+					Streams::verbose() <<"comparison: expr comp_op_seq\n";
 						$<tn>$=ast->createExprNode($<tn>1,$<tn>2,NULL,comp_op,yylval.r.lineNum,yylval.r.colNum);
 				}
 			;
@@ -1212,9 +1212,9 @@ term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 							$<operands>$=op;
 							$<tn>$=$<tn>2;**/
 							int* xx = new int (0);
-						k = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
+						Node* kl = ast->createTypeNode((void*)xx,0,0,yylval.r.lineNum,yylval.r.colNum,INT);
 						//k=ast->addNext(k,$<tn>2);
-						$<tn>$ = ast->createExprNode(k,$<tn>2,MINUS,yylval.r.lineNum,yylval.r.colNum);
+						$<tn>$ = ast->createExprNode(kl,$<tn>2,NULL,MINUS,yylval.r.lineNum,yylval.r.colNum);
 						}
 			|term_seq '+' term {Streams::verbose() <<"term_seq : term_seq '+' term \n";//op=PLUS;
 									k=ast->addNext($<tn>1,$<tn>3);

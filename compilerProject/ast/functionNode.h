@@ -82,8 +82,20 @@ public:
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
 		MIPS_ASM::push("v0");
+		MIPS_ASM::jr();
 		MIPS_ASM::printComment("end function call");
 		//MIPS_ASM::push("v0");
+	}
+	virtual void before_generateCode(){
+		Node* temp = this->Son;
+		//here generate code
+		while (temp)
+		{
+			//temp->setOffset(this->getFrameSize());
+			temp->before_generateCode();
+			temp = temp->Next;
+		}
+		//
 	}
 	void gcVars()
 	 {

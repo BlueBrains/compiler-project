@@ -68,6 +68,14 @@ public:
 		//pi here is the output of symbol table for types
 		return pi;
 	}
+	virtual void before_generateCode(){
+		first->before_generateCode();
+		second->before_generateCode();
+		if ((first->my_type == "bool") && (second->my_type == "bool"))
+		{
+			this->my_type="bool";
+		}
+	}
 	virtual void generateCode()
 	{
 		first->generateCode();
@@ -75,6 +83,7 @@ public:
 		string t1 = "t1",t0="t0";
 		if ((first->my_type == "bool") && (second->my_type == "bool"))
 		{
+			this->my_type="bool";
 			if (op == AND_OP || op == OR_OP)
 			{
 				MIPS_ASM::pop(t1);

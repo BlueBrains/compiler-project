@@ -20,6 +20,9 @@ public:
 	{
 		cout << "for node !" << endl;
 	}
+	virtual void before_generateCode(){
+		
+	}
 	virtual string getNodeType()
 	{
 		return "ForNode";
