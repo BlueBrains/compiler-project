@@ -70,6 +70,9 @@ public:
 			MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
 			func_vec.at(i)->generateCode();
 		}
+		MIPS_ASM::add_instruction("\n \n");
+		MIPS_ASM::printComment("this function for string*number");
+		MIPS_ASM::mult_string();
 	}
 	ClassNode * createClassNode(Type* t, Node * son, Node* next, int line_no, int col_no)
 	{

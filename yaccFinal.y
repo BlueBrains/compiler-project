@@ -2142,7 +2142,8 @@ default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::v
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					amer_par.push_back(my_node);
+					if(strcmp($<r.strVal>1),"self")!=0)
+						amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
 					$<tn>$=$<tn>1; 

@@ -10,8 +10,8 @@ return 2;
 print "helo amer ";
 end
 def main():
+/*
 	i=10;
-	x=0;
 	while i>5:
 		print "i= ",i;
 		x=i+3;
@@ -20,7 +20,9 @@ def main():
 	end
 	kl=2+5;
 	print "kl= ",kl;
-	self.koko();
+	self.koko();*/
+	lolo="a";
+	print "lolo= ",lolo*3;
 	s=self.soso();
 	print "s= ",s;
 end

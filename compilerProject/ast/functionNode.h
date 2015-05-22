@@ -42,17 +42,25 @@ public:
 	{
 		return "FunctionNode";
 	}
+	void researve_var(Node* node)
+	{
+		if (node->getNodeType() == "IDNode")
+		{
+			static_cast<IDNode*>(node)->get_variable()->setOffset(this->getNextOffset(4));
+		}
+		if (node->Next)
+		{
+			researve_var(node->Next);
+		}
+		if (node->Son)
+		{
+			researve_var(node->Son);
+		}
+	}
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;
-		while (temp)
-		{
-			if (temp->getNodeType() == "IDNode")
-			{
-				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
-			}
-			temp = temp->Next;
-		}
+		this->researve_var(temp);
 		/*
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $fp, 0($sp)\n");
