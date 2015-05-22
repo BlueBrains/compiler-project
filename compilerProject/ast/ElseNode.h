@@ -8,7 +8,7 @@ protected:
 	Node* _scoop;
 
 public:
-	static	int 	else_label;
+	int 	else_label;
 	ElseNode(Node* son, Node* next, Node* scoop) :Node(son,next), _scoop(scoop)
 	{
 
@@ -29,16 +29,16 @@ public:
 	}
 	virtual void generateCode()
 	{
+		string end = "endif_";
+		end += std::to_string(else_label);
 		Node* temp = this->Son;
 		while (temp)
 		{
-			if (temp->getNodeType() == "IDNode")
-			{
-				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
-			}
+			temp->generateCode();
 			temp = temp->Next;
 		}
-		
+		//after generating
+		MIPS_ASM::label(end);
 	}
 	virtual void before_generateCode(){
 		

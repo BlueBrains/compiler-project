@@ -32,6 +32,7 @@ public:
 	}
 	virtual void generateCode()
 	{
+		/*
 		Node* temp = this->Son;
 		while (temp)
 		{
@@ -40,7 +41,7 @@ public:
 				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
 			}
 			temp = temp->Next;
-		}
+		}*/
 		
 		if ((conditionNode->getNodeType() == "ValueNode") && ((static_cast<ValueNode*>(conditionNode)->get_types() != 5) || (static_cast<ValueNode*>(conditionNode)->get_types() != 6)))
 		{
@@ -75,7 +76,7 @@ public:
 
 
 		MIPS_ASM::beq("t0", "0", ccc2);
-		temp = this->Son;
+		Node* temp = this->Son;
 		while (temp)
 		{
 			temp->generateCode();
