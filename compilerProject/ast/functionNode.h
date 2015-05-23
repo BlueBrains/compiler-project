@@ -11,7 +11,7 @@ private:
 public:
 	Function* get_function()
 	{
-		return function_node;
+		return this->function_node;
 	}
 	void set_hasReturn(bool r)
 	{

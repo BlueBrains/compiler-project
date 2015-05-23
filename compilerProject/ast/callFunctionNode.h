@@ -9,7 +9,7 @@ class CallFunctionNode :public Node
 {
 private:
 	string ID;
-	Node* arguments;
+	vector <Node*> arguments;
 	Function* Function_call = NULL;
 public:
 	void set_function(Function* f)
@@ -17,13 +17,8 @@ public:
 		this->Function_call = f;
 	}
 
-	int arg_len(){
-		int i = 0;
-		while (arguments->Next)
-		{
-			i++;
-		}
-		return i;
+	int arg_len(){	
+		return this->arguments.size();
 	}
 	virtual void before_generateCode(){
 		this->Function_call->get_FunctionNode()->before_generateCode();
@@ -80,11 +75,11 @@ public:
 	{
 
 	}
-	CallFunctionNode(string id,Node*args, Function* f, Node* son, Node*next) :ID(id), Function_call(f), arguments(args), Node(son, next)
+	CallFunctionNode(string id, vector <Node*> args, Function* f, Node* son, Node*next) :ID(id), Function_call(f), arguments(args), Node(son, next)
 	{
 
 	}
-	CallFunctionNode(string id, Node*args, Function* f, Node* son, Node*next,int l,int c) :ID(id), Function_call(f), arguments(args), Node(son, next,l,c)
+	CallFunctionNode(string id, vector <Node*> args, Function* f, Node* son, Node*next, int l, int c) :ID(id), Function_call(f), arguments(args), Node(son, next, l, c)
 	{
 
 	}
