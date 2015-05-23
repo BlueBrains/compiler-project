@@ -274,7 +274,7 @@ public:
 		ElseNode* temp = new ElseNode(son, next, scoop,line_no,col_no);
 		return temp;
 	}
-	CallFunctionNode* createCallFunctionNode(string id,Node* args, Function* v, Node * son, Node* next,  int line_no, int col_no)
+	CallFunctionNode* createCallFunctionNode(string id,vector <Node*> args, Function* v, Node * son, Node* next,  int line_no, int col_no)
 	{
 		CallFunctionNode *temp = new CallFunctionNode(id, args, v, son, next,line_no,col_no);
 		//Node* i = temp;
