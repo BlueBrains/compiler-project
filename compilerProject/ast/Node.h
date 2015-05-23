@@ -76,6 +76,8 @@ public :
 	}
 	virtual void generateCode(){
 	}
+	virtual void before_generateCode(){
+	}
 
 	virtual string getNodeType()
 	{

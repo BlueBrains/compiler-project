@@ -22,6 +22,9 @@ public:
 	{
 		return "TryNode";
 	}
+	virtual void before_generateCode(){
+		
+	}
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;

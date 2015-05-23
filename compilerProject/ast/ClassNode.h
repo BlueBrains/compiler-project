@@ -32,6 +32,8 @@ public:
 	{
 		return "ClassNode";
 	}
+	virtual void before_generateCode(){
+	}
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;

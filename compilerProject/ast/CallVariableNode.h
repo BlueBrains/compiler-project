@@ -101,6 +101,23 @@ public:
 		
 		cout << endl;
 	}
+	virtual void before_generateCode(){
+		if (this->my_type == "NULL")
+			{
+				this->my_type = variable_node->strLasttype;
+			}
+			if (this->my_type == "string")
+			{
+				std::ostringstream ss;
+				char* s = reinterpret_cast<char*>(variable_node->get_lastTypes().second);
+				ss << s;
+				this->string_val = ss.str();				
+			}
+			else if (this->my_type == "type")
+			{
+
+			}
+	}
 	virtual  void generateCode()
 	{
 		if (variable_node)

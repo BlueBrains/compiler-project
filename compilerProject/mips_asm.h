@@ -32,10 +32,11 @@ public:
 	static stringstream code;
 	static stringstream data;
 	static stringstream main;
-
+	//string v = addStringAdressLabel();
 	static	FILE * file;
 	static string getStringAdressLabel(string str);
-
+	static string addStringAdressLabel();
+	static void mult_string();
 	static void writeData();
 	static void writeCode();
 	static void writeMain();

@@ -22,8 +22,17 @@ public:
 	{
 
 	}
-		virtual void generateCode()
+	virtual void before_generateCode(){
+			 Node* temp = this->Son;
+		while (temp)
+		{
+			temp->generateCode();
+			temp = temp->Next;
+		}
+	}
+	virtual void generateCode()
 	{
+		/*
 		Node* temp = this->Son;
 		while (temp)
 		{
@@ -32,7 +41,7 @@ public:
 				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
 			}
 			temp = temp->Next;
-		}
+		}*/
 		
 		if ((conditionNode->getNodeType() == "ValueNode") && ((static_cast<ValueNode*>(conditionNode)->get_types() != 5) || (static_cast<ValueNode*>(conditionNode)->get_types() != 6)))
 		{
@@ -51,8 +60,14 @@ public:
 		/*Break::set_label(ccc2);
 
 		strcpy(this->loop_end,ccc2);*/
-
-
+		/*
+		MIPS_ASM::printComment("begin while statment");
+		MIPS_ASM::push("ra");
+		MIPS_ASM::push("fp");
+		MIPS_ASM::reserveStack(getFrameSize());
+		//MIPS_ASM::add_instruction("move $fp, $sp\n");
+		MIPS_ASM::move("fp", "sp");
+		*/
 		MIPS_ASM::label(ccc);
 
 
@@ -61,7 +76,7 @@ public:
 
 
 		MIPS_ASM::beq("t0", "0", ccc2);
-		temp = this->Son;
+		Node* temp = this->Son;
 		while (temp)
 		{
 			temp->generateCode();
@@ -70,6 +85,17 @@ public:
 
 		MIPS_ASM::jump(ccc);
 		MIPS_ASM::label(ccc2);
+		/*
+		MIPS_ASM::releaseStack(getFrameSize());
+	
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $ra,0($sp)\n");
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");
+		MIPS_ASM::pop("fp");
+		MIPS_ASM::pop("ra");
+		MIPS_ASM::push("v0");*/
+		MIPS_ASM::printComment("end while statment");
 	}
 	virtual void print()
 	{

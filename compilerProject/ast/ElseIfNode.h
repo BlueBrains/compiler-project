@@ -34,6 +34,8 @@ public:
 			temp = temp->Next;
 		}
 	}
+	virtual void before_generateCode(){
+	}
 	virtual void print()
 	{
 		cout << "elseif node" << endl;
