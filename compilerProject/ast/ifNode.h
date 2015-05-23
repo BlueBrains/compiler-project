@@ -49,6 +49,11 @@ public:
 			static_cast<ElseNode*>(this->Next)->else_label = x;
 			MIPS_ASM::beq("t0", "0", endif);
 		}
+		else if (this->Next->getNodeType() == "ElseIfNode")
+		{
+			static_cast<ElseIfNode*>(this->Next)->elseIf_label = x;
+			MIPS_ASM::beq("t0", "0", endif);
+		}
 		else
 			MIPS_ASM::beq("t0", "0", end);
 		Node* temp = this->Son;
@@ -59,7 +64,7 @@ public:
 		}
 		MIPS_ASM::jump(end);
 		MIPS_ASM::label(endif);
-		if (this->Next->getNodeType() != "ElseNode")
+		if ((this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
 		{
 			MIPS_ASM::label(end);
 		}

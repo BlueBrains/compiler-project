@@ -9,7 +9,8 @@ protected:
 	Node* _scoop;
 
 public:
-	static	int 	elseIf_label;
+	int 	elseIf_label;
+	int 	elseIf_label2=0;
 	ElseIfNode(Node* son, Node* next, Node* condition, Node* scoop) :Node(son,next), _condtion(condition),_scoop(scoop)
 	{
 
@@ -24,15 +25,34 @@ public:
 	}
 		virtual void generateCode()
 	{
-		Node* temp = this->Son;
-		while (temp)
-		{
-			if (temp->getNodeType() == "IDNode")
+			MIPS_ASM::printComment("elifNode");
+			string i = "";
+			string end = "endif_";
+			end += std::to_string(elseIf_label);
+			string endif = "else_";
+			endif += std::to_string(elseIf_label);
+			_condtion->generateCode();
+			MIPS_ASM::pop("t0");
+
+			if (this->Next->getNodeType() == "ElseNode")
 			{
-				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
+				static_cast<ElseNode*>(this->Next)->else_label = elseIf_label;
+				MIPS_ASM::beq("t0", "0", endif);
 			}
-			temp = temp->Next;
-		}
+			else if (this->Next->getNodeType() == "ElseIfNode")
+			{
+				static_cast<ElseIfNode*>(this->Next)->elseIf_label = elseIf_label;
+				static_cast<ElseIfNode*>(this->Next)->elseIf_label2 = elseIf_label2++;
+				MIPS_ASM::beq("t0", "0", endif);
+			}
+			else
+				MIPS_ASM::beq("t0", "0", end);
+			Node* temp = this->Son;
+			while (temp)
+			{
+				temp->generateCode();
+				temp = temp->Next;
+			}
 	}
 	virtual void before_generateCode(){
 	}
