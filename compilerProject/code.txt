@@ -1,3 +1,4 @@
 class x:
 	def func(x): end
+	def main():end
 end

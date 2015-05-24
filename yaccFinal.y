@@ -1532,7 +1532,7 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 									dotvec.push_back($<tn>$);
 									call_func=false;
 								}
-			|'.' NAME '(' exprlist ')' {
+			|'.' NAME inside_func exprlist ')' {
 									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									dotvec.push_back($<tn>$);
 									call_func=false;
