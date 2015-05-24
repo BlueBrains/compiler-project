@@ -14,3 +14,15 @@ or_test:	and_test
 test:	or_test
 argument: 	test
 arglist: argument
+arglist ')'
+funcheader: DEF NAME parameters ':' 
+suite:	END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt
+suite:	list_stmt END
+classdef: classheader suite
+temp2: classdef 
+program : temp2 
+file_input: program ENDMARKER

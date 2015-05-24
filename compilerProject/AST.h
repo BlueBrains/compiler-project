@@ -62,21 +62,27 @@ public:
 	vector<Node*>outer_node;
 	void generate_main(Function* main)
 	{
-		main->get_FunctionNode()->generateCode();
-		MIPS_ASM::add_instruction("li $v0, 10 \n");
-		MIPS_ASM::add_instruction("syscall \n");
-		for (int i = 0; i < func_vec.size(); i++)
+		if (main)
 		{
-			MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
-			func_vec.at(i)->generateCode();
+			main->get_FunctionNode()->generateCode();
+			MIPS_ASM::add_instruction("li $v0, 10 \n");
+			MIPS_ASM::add_instruction("syscall \n");
+			for (int i = 0; i < func_vec.size(); i++)
+			{
+				MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
+				func_vec.at(i)->generateCode();
+			}
+			MIPS_ASM::add_instruction("\n \n");
+			MIPS_ASM::printComment("this function for string*number");
+			MIPS_ASM::mult_string();
 		}
-		MIPS_ASM::add_instruction("\n \n");
-		MIPS_ASM::printComment("this function for string*number");
-		MIPS_ASM::mult_string();
+		
 	}
 	ClassNode * createClassNode(Type* t, Node * son, Node* next, int line_no, int col_no)
 	{
 		ClassNode* temp = new ClassNode(t, son, next,line_no,col_no);
+		if (t)
+			t->type_node = temp;
 		return temp;
 	}
 	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next, int line_no, int col_no, vector<Node*> dp)
