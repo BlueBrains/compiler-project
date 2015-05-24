@@ -72,7 +72,6 @@ private:
 		return v;
 	}
 public:
-	
 	CallTypeNode() :ID(NULL), Node(NULL, NULL)
 	{
 		t = NULL;
@@ -105,6 +104,27 @@ public:
 	Function* getFunction()
 	{
 		return f;
+	}
+	virtual void generateCode()
+	{
+		t->type_node->getNextOffset(4);
+		t->type_node->generateCode();
+		MIPS_ASM::li("v0", 9);
+		MIPS_ASM::li("a0", t->type_node->getFrameSize());
+		MIPS_ASM::move("t0", "v0");
+		Node* temp = this->Son;
+		while (temp)
+		{
+			 if (temp->getNodeType() == "AssignmentNode")
+			{
+				 if (static_cast<AssignmentNode*>( temp)->get_left()->getNodeType() == "CallVariableNode")
+				 {
+					 static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "t0";
+				 }
+				temp->generateCode();
+			}
+		}
+		MIPS_ASM::push("t0");
 	}
 	virtual void print()
 	{

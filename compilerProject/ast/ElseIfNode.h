@@ -1,6 +1,6 @@
 #pragma once
 #include "node.h"
-
+#include"ElseNode.h"
 class ElseIfNode :
 	public Node
 {
@@ -26,11 +26,12 @@ public:
 		virtual void generateCode()
 	{
 			MIPS_ASM::printComment("elifNode");
+			elseIf_label2++;
 			string i = "";
 			string end = "endif_";
 			end += std::to_string(elseIf_label);
 			string endif = "else_";
-			endif += std::to_string(elseIf_label);
+			endif += std::to_string(elseIf_label) + "_" + std::to_string(elseIf_label2);
 			_condtion->generateCode();
 			MIPS_ASM::pop("t0");
 
@@ -42,7 +43,7 @@ public:
 			else if (this->Next->getNodeType() == "ElseIfNode")
 			{
 				static_cast<ElseIfNode*>(this->Next)->elseIf_label = elseIf_label;
-				static_cast<ElseIfNode*>(this->Next)->elseIf_label2 = elseIf_label2++;
+				static_cast<ElseIfNode*>(this->Next)->elseIf_label2 = elseIf_label2;
 				MIPS_ASM::beq("t0", "0", endif);
 			}
 			else
@@ -52,6 +53,12 @@ public:
 			{
 				temp->generateCode();
 				temp = temp->Next;
+			}
+			MIPS_ASM::jump(end);
+			MIPS_ASM::label(endif);
+			if ((this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
+			{
+				MIPS_ASM::label(end);
 			}
 	}
 	virtual void before_generateCode(){

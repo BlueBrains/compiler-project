@@ -3,7 +3,7 @@
 #define __TYPE__
 #include"Symbol.h"
 #include"Scope.h"
-
+#include "../ast/Node.h"
 enum AccessModifier{
 	Private = 0,
 	Public,
@@ -29,7 +29,7 @@ public:
 	Type* getouter_class();
 	void setScope(Scope * m);
 	Scope * getScope();
-
+	Node* type_node=NULL;
 	bool addChild(vector<int> s){
 		/*
 		for (auto i : s){

@@ -1,6 +1,10 @@
 #pragma once
+#ifndef __IFNODE__
+#define __IFNODE__
 #include "node.h"
-
+#include"ElseNode.h"
+#include"ElseIfNode.h"
+using namespace std;
 class IfNode :
 	public Node
 {
@@ -93,3 +97,5 @@ public:
 	 }
 
 };
+int IfNode :: if_label = 0;
+#endif;

@@ -98,11 +98,9 @@ public:
 		MIPS_ASM::printComment("Assign node getting RHS val:");
 
 		MIPS_ASM::top(t0);// not poping in order to keep value in stack
-		//khaled
 		// todo check if v0 isnot null in run time
 		// todo check if we can assign 
 		MIPS_ASM::printComment("Assign node storing in position val:");
-
 		left_side->my_type = right_side->my_type;
 		if (left_side->getNodeType() == "CallVariableNode")
 		{
