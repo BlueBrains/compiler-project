@@ -107,6 +107,7 @@ public:
 	}
 	virtual void generateCode()
 	{
+		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		t->type_node->getNextOffset(4);
 		t->type_node->generateCode();
 		MIPS_ASM::li("v0", 9);
@@ -124,6 +125,8 @@ public:
 				temp->generateCode();
 			}
 		}
+		MIPS_ASM::jal(f->get_label());
+		func_vec.push_back(this->f->get_FunctionNode());
 		MIPS_ASM::push("t0");
 	}
 	virtual void print()

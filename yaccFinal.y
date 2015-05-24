@@ -1527,13 +1527,30 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 						dotvec.push_back($<tn>$);
 						} 
 			|'.' NAME '(' ')' {
+									parameters.clear();
+									if(temp_id2.back()=="self")
+									{
+										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+									}
+									else
+									{
+										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
-									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									
 									dotvec.push_back($<tn>$);
 									call_func=false;
 								}
 			|'.' NAME '(' exprlist ')' {
-									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									Streams::verbose() <<"trailer:	'.' NAME(exprlist)\n";
+									if(strcmp($<r.strVal>2,"self")==0)
+									{
+										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									}
+									else
+									{
+										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									}
 									dotvec.push_back($<tn>$);
 									call_func=false;
 									func_call.clear();
