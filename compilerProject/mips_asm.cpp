@@ -33,8 +33,46 @@ string MIPS_ASM::getStringAdressLabel(string str){
 	}
 	return stringsLabelPrefix + std::to_string(strings[str]);
 }
-
-
+string  MIPS_ASM::addStringAdressLabel()
+{
+	//strings[str] = ++strings_count;
+	int x = ++strings_count;
+	add_data(stringsLabelPrefix + std::to_string(x) + ": .space 1024 \n");
+	return stringsLabelPrefix + std::to_string(x);
+}
+void  MIPS_ASM::mult_string()
+{
+	label("concatenate_string");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $ra, 0($sp)\n");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $fp, 0($sp)\n");
+	move("t2","t1");
+	li("t3", 0);
+	move("a2","t0");
+	label("con_loop");
+	move("a0", "a2");
+	slt("t4", "t3", "t2");
+	beq("t4", "0", "end_con_loop");
+	add_instruction("addi $t3,$t3,1\n");
+	label("start_con");
+	add_instruction("lb $t0,0($a0)\n");
+	beq("t0", "0", "end_str");
+	add_instruction("sb $t0,0($a1)\n");
+	add_instruction("addi $a0,$a0,1\n");
+	add_instruction("addi $a1,$a1,1\n");
+	add_instruction("b start_con\n");
+	label("end_str");
+	jump("con_loop");
+	label("end_con_loop");
+	add_instruction("sb $zero 0($a1) #null terminate string\n");
+	add_instruction("add $sp, $sp, 0\n");
+	add_instruction("lw $fp, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	add_instruction("lw $ra, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	jr();
+}
 void MIPS_ASM::add_data(string c)
 {
 	data << c;

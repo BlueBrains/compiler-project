@@ -1,6 +1,10 @@
 #pragma once
+#ifndef __IFNODE__
+#define __IFNODE__
 #include "node.h"
-
+#include"ElseNode.h"
+#include"ElseIfNode.h"
+using namespace std;
 class IfNode :
 	public Node
 {
@@ -32,16 +36,44 @@ public:
 	}
 	virtual void generateCode()
 	{
+		MIPS_ASM::printComment("ifNode");
+		string i = "";
+		int x = if_label++;
+		i = std::to_string(x);
+
+		string endif = "else_";
+		string end = "endif_";
+		endif += i;
+		end += i;
 		_condtion->generateCode();
+		MIPS_ASM::pop("t0");
+		
+		if (this->Next->getNodeType() == "ElseNode")
+		{
+			static_cast<ElseNode*>(this->Next)->else_label = x;
+			MIPS_ASM::beq("t0", "0", endif);
+		}
+		else if (this->Next->getNodeType() == "ElseIfNode")
+		{
+			static_cast<ElseIfNode*>(this->Next)->elseIf_label = x;
+			MIPS_ASM::beq("t0", "0", endif);
+		}
+		else
+			MIPS_ASM::beq("t0", "0", end);
 		Node* temp = this->Son;
 		while (temp)
 		{
-			if (temp->getNodeType() == "IDNode")
-			{
-				static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
-			}
+			temp->generateCode();
 			temp = temp->Next;
 		}
+		MIPS_ASM::jump(end);
+		MIPS_ASM::label(endif);
+		if ((this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
+		{
+			MIPS_ASM::label(end);
+		}
+		
+		
 	}
 	void gcVars()
 	 {
@@ -65,3 +97,5 @@ public:
 	 }
 
 };
+int IfNode :: if_label = 0;
+#endif;

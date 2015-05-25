@@ -151,8 +151,6 @@ Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, i
 	if (self)
 	{
 		v = (Variable*)t->getScope()->m->get(name, "Variable");
-		
-
 	}
 	else
 	{

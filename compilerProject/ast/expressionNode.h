@@ -597,6 +597,19 @@ public:
 		}
 		
 	}
+	virtual void before_generateCode(){
+		first->before_generateCode();
+		second->before_generateCode();
+		/*
+		MIPS_ASM::pop(t1);
+		MIPS_ASM::pop(t0);*/
+		if ((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
+			|| (first->my_type == "bool"&& second->my_type == "int"))
+		{
+			this->my_type = "int";
+		}
+
+	}
 	virtual void generateCode()
 	{
 		string t0 = "t0";
@@ -719,7 +732,7 @@ public:
 				string f1 = "f1";
 				MIPS_ASM::popf(f1);
 				MIPS_ASM::popf(f0);
-
+				this->my_type = "float";
 				if (first->my_type == "int" || first->my_type == "bool")
 				{
 					MIPS_ASM::add_instruction("cvt.s.w $f1,$f1\n");
@@ -963,38 +976,34 @@ public:
 						cout << "TypeError: not all arguments converted during string formatting" << endl;
 					}
 				}
-				/*
 				else
 				{
 					string h = "";
 					if (((first->my_type == "string" && second->my_type == "int")) && (op == 2))
 					{
-						if (op == 2)
-						{
-						}
 						this->my_type = "string";
-						for (int i = 0; i < *(int*)v2->get_value(); i++)
-						{
-							h += (char*)v1->get_value();
-						}
-						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
-						MIPS_ASM::push("t0");
-						this->string_val = h;
+						MIPS_ASM::pop(t1);
+						MIPS_ASM::pop(t0);
+						MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+							 string ip=MIPS_ASM::addStringAdressLabel();
+							 MIPS_ASM::la("a1", ip);
+							 MIPS_ASM::jal("concatenate_string");
+							 MIPS_ASM::la("a0", ip);
+							 MIPS_ASM::sw("a0", 0, "sp");
 					}
 					else if (((first->my_type == "int" && second->my_type == "string")) && (op == 2))
 					{
 						this->my_type = "string";
-						for (int i = 0; i < *(int*)v1->get_value(); i++)
-						{
-							h += (char*)v2->get_value();
-						}
-						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(h));
-						MIPS_ASM::push("t0");
-						this->string_val = h;
+						MIPS_ASM::pop(t0);
+						MIPS_ASM::pop(t1);
+						string ip = MIPS_ASM::addStringAdressLabel();
+						MIPS_ASM::la("a1", ip);
+						MIPS_ASM::jal("concatenate_string");
+
 					}
 					else
-						cout << "unsupported operand type(s) for " << operands[op] << " : '" << typ[v1->get_types()] << "' and '" << typ[v2->get_types()] << "'";
-				}*/
+						cout << "unsupported operand type(s) for  string" << endl;;
+				}
 				if (first->my_type == "type" || second->my_type == "type" )
 				{
 					cout << "TypeError: unsupported operand type(s)" << endl;

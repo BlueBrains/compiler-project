@@ -32,6 +32,8 @@ public:
 	{
 		return "ClassNode";
 	}
+	virtual void before_generateCode(){
+	}
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;
@@ -43,7 +45,8 @@ public:
 			}
 			temp = temp->Next;
 		}
-		MIPS_ASM::reserveStack(getFrameSize());
+
+		//MIPS_ASM::reserveStack(getFrameSize());
 
 		/*
 		MIPS_ASM::push("ra");// this is added by amer

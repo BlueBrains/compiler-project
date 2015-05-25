@@ -9,7 +9,7 @@ class CallFunctionNode :public Node
 {
 private:
 	string ID;
-	Node* arguments;
+	vector <Node*> arguments;
 	Function* Function_call = NULL;
 public:
 	void set_function(Function* f)
@@ -17,19 +17,29 @@ public:
 		this->Function_call = f;
 	}
 
-	int arg_len(){
-		int i = 0;
-		while (arguments->Next)
+	int arg_len(){	
+		return this->arguments.size();
+	}
+	virtual void before_generateCode(){
+		this->Function_call->get_FunctionNode()->before_generateCode();
+		this->my_type = this->Function_call->get_FunctionNode()->my_type;
+		if (this->my_type == "string")
 		{
-			i++;
+			this->string_val = this->Function_call->get_FunctionNode()->string_val;
 		}
-		return i;
 	}
 	virtual void generateCode()
 	{
 		//this->Function_call->get_FunctionNode()->setOffset(this->getFrameSize());
+		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::jal(this->Function_call->get_label());
 		func_vec.push_back(this->Function_call->get_FunctionNode());
+		this->Function_call->get_FunctionNode()->before_generateCode();
+		this->my_type = this->Function_call->get_FunctionNode()->my_type;
+		if (this->my_type == "string")
+		{
+			this->string_val = this->Function_call->get_FunctionNode()->string_val;
+		}
 		/*
 		this->Function_call->get_FunctionNode()->generateCode();
 		this->my_type = this->Function_call->get_FunctionNode()->my_type;
@@ -65,11 +75,11 @@ public:
 	{
 
 	}
-	CallFunctionNode(string id,Node*args, Function* f, Node* son, Node*next) :ID(id), Function_call(f), arguments(args), Node(son, next)
+	CallFunctionNode(string id, vector <Node*> args, Function* f, Node* son, Node*next) :ID(id), Function_call(f), arguments(args), Node(son, next)
 	{
 
 	}
-	CallFunctionNode(string id, Node*args, Function* f, Node* son, Node*next,int l,int c) :ID(id), Function_call(f), arguments(args), Node(son, next,l,c)
+	CallFunctionNode(string id, vector <Node*> args, Function* f, Node* son, Node*next, int l, int c) :ID(id), Function_call(f), arguments(args), Node(son, next, l, c)
 	{
 
 	}

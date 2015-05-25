@@ -33,6 +33,19 @@ public:
 	{
 		return "returnNode";
 	}
+	virtual void before_generateCode(){
+		f->has_return = true;
+		if (_scoop)
+		{
+			this->_scoop->before_generateCode();
+			static_cast<FunctionNode*>(f->get_FunctionNode())->set_hasReturn(true);
+			f->get_FunctionNode()->my_type = _scoop->my_type;
+			if (_scoop->my_type == "string")
+			{
+				f->get_FunctionNode()->string_val = _scoop->string_val;
+			}
+		}
+	}
 	virtual  void  generateCode(){
 		f->has_return = true;
 		
@@ -48,7 +61,17 @@ public:
 			}
 			MIPS_ASM::pop("v0");
 		}
-		MIPS_ASM::move("sp", "fp");
+		//MIPS_ASM::move("sp", "fp");
+		MIPS_ASM::releaseStack(getFrameSize());
+		/*
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $ra,0($sp)\n");
+		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
+		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
+		MIPS_ASM::pop("fp");
+		MIPS_ASM::pop("ra");
+		MIPS_ASM::push("v0");
+		MIPS_ASM::printComment("end function call");
 		MIPS_ASM::jr();
 		MIPS_ASM::printComment("end return node");
 

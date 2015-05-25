@@ -30,7 +30,7 @@ void Function::set_FunctionNode(Node* n)
 
 Node* Function::get_FunctionNode()
 {
-	return FunctionNode;
+	return this->FunctionNode;
 }
 void Function::set_label(string l)
 {
