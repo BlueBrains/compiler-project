@@ -1538,7 +1538,7 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 									}
 									else
 									{
-										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
 									
@@ -1553,7 +1553,7 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 									}
 									else
 									{
-										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									dotvec.push_back($<tn>$);
 									call_func=false;
@@ -2215,12 +2215,13 @@ comma_default_arg_seq: ',' default_arg {Streams::verbose() <<"comma_default_arg_
 default_arg_comma_seq: default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";}
 					   |default_arg_comma_seq default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";}
 					   ;
-in_default: '=' {
+in_default: test '=' {
 					Streams::verbose() <<"in_default: '='\n";
-					in_def=true;
+					//in_def=true;
+					$<tn>$ = $<tn>1;
 				}
-default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test in_default test\n";
-							Node* o=ast->createAssignNode($<tn>1,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+default_arg: in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test in_default test\n";
+							Node* o=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 							$<tn>$=ast->addNext(my_node,o);
 							amer_par.push_back($<tn>$);
 							df_par.push_back($<tn>$);
@@ -2228,7 +2229,7 @@ default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::v
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					if(strcmp($<r.strVal>1),"self")!=0)
+					if(strcmp(($<r.strVal>1),"self")!=0)
 					amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
