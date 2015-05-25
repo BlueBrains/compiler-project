@@ -45,7 +45,7 @@ public:
 		
 		if ((conditionNode->getNodeType() == "ValueNode") && ((static_cast<ValueNode*>(conditionNode)->get_types() != 5) || (static_cast<ValueNode*>(conditionNode)->get_types() != 6)))
 		{
-			
+			//TODO Add handling error for un boolean Condition
 			return;
 		}
 		string cc = "";
