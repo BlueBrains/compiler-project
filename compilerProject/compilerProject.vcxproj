@@ -133,6 +133,7 @@
     <ClInclude Include="ast\ArrayElementNode.h" />
     <ClInclude Include="ast\BooleanNode.h" />
     <ClInclude Include="ast\ErrorNode.h" />
+    <ClInclude Include="ast\inputNode.h" />
     <ClInclude Include="ast\returnNode.h" />
     <ClInclude Include="ast\shortIfNode.h" />
     <ClInclude Include="ast\subscriptNode.h" />

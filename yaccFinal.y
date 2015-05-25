@@ -47,6 +47,7 @@
 	vector<string> parsedFile;
 	vector<string> temp_id2;
 	bool out_of_import=false;
+	input_Types my_input;
 	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
 	bool exist;
@@ -59,6 +60,7 @@
 	vector<char*> sto_mod;
 	bool ss=false;
 	bool ff=false;
+	bool a_self=false;//this for self.x()
 	bool pro= false;
 	bool from_except=false;
 	bool pp=true;
@@ -132,7 +134,7 @@
 %token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
-%token	WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
+%token	WITH AS ASSERT EQUAL DEL RETURN PRINT INPUT_INT INPUT_FLOAT INPUT_STRING GLOBAL STAR_EQUAL LESS_THAN_2 
 %token	RAISE PRIVATE PUBLIC PROTECTED YIELD MORE_THAN_2 STRING NONE IS DIV_2 
 %token	LESS_OR_EQUAL MORE_OR_EQUAL EXCEPT PASS CHAR_VALUE BREAK CONTINUE
 
@@ -419,7 +421,33 @@ small_stmt: expr_stmt	{
 							visit_num=0;
 						 }
 			;
-
+input_stmt: input_choise '(' str_seq ')'
+						 {Streams::verbose() <<"atom: str_seq\n";
+									char* x = new char[100];
+									strcpy(x,$<r.strVal>3);
+									cout<<"x=   "<<x<<endl;
+									string sd(x);
+									cout<<"sd=== "<<sd<<endl;
+									constant=true;
+									Node* string_now;
+									
+									string_now = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									$<tn>$=ast->createinputNode(string_now,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
+			|input_choise '(' ')'{
+									$<tn>$=ast->createinputNode(NULL,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
+								;
+input_choise:	INPUT_INT{
+							my_input=INT_input;
+						}
+				|INPUT_FLOAT{
+							my_input=FLOAT_input;
+						}
+				|INPUT_STRING{
+							my_input=STRING_input;
+						}
+						;
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
 			| vardef {
@@ -479,6 +507,9 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 					
 right_testlist : '=' testlist_star_expr right_testlist {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
 				|'=' testlist_star_expr {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";$<tn>$=$<tn>2;}
+				|'=' input_stmt	{
+							$<tn>$=$<tn>2;
+						}
 				;
 
 testlist_star_expr: comma_test_star_seqJ {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";}
@@ -1408,6 +1439,10 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
+									if(strcmp($<r.strVal>1,"self")==0)
+									{
+										a_self=true;
+									}
 		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
 									
@@ -1518,23 +1553,29 @@ testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for
 			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
 			   ;
 
-trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
+trailer:	'.' NAME  %prec stmt_14
+						{Streams::verbose() <<"trailer:	'.' NAME\n";
 							temp_id=temp_id2.back();
 							temp_id=temp_id+"."+$<r.strVal>2;
 						temp_id2.pop_back();
 						temp_id2.push_back(temp_id);	
 						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 						dotvec.push_back($<tn>$);
-						} 
+						if(strcmp($<r.strVal>2,"self")==0)
+						{
+							a_self=true;
+						}
+					} 
 			|'.' NAME '(' ')' {
 									parameters.clear();
-									if(temp_id2.back()=="self")
+									if(a_self)
 									{
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+										a_self=false;
 									}
 									else
 									{
-										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
 									
@@ -1543,13 +1584,14 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 								}
 			|'.' NAME '(' exprlist ')' {
 									Streams::verbose() <<"trailer:	'.' NAME(exprlist)\n";
-									if(strcmp($<r.strVal>2,"self")==0)
+									if(a_self)
 									{
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										a_self=false;
 									}
 									else
 									{
-										$<tn>$=ast->$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									dotvec.push_back($<tn>$);
 									call_func=false;
@@ -2221,7 +2263,7 @@ default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::v
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					if(strcmp($<r.strVal>1),"self")!=0)
+					if(strcmp($<r.strVal>1,"self")!=0)
 						amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";

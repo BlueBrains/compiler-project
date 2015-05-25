@@ -60,7 +60,8 @@ public:
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;
-		this->researve_var(temp);
+		if (temp)
+			this->researve_var(temp);
 		/*
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $fp, 0($sp)\n");

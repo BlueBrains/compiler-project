@@ -1,3 +1,18 @@
 class x:
-	def func(x): end
+	def public func(x): 
+		print "welcome amer in func";
+	end
+	def main():
+		self.func();
+		a.self.xo();
+		x=input_int("enter your number");
+		print x;
+	end
+
+	def class a:
+		def public static g=10;
+		def public static xo():
+			print "welcome amer";
+		end
+	end
 end

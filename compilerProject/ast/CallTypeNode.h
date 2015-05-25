@@ -3,6 +3,7 @@
 #define __CALLNODE__
 #include"..\ST\Type.h"
 #include"..\ST\Function.h"
+#include "AssignmentNode.h"
 #include<string>
 using namespace std;
 class CallTypeNode :public Node
@@ -107,12 +108,16 @@ public:
 	}
 	virtual void generateCode()
 	{
+		this->my_type = "type";
+		this->type_val = t;
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		t->type_node->getNextOffset(4);
 		t->type_node->generateCode();
 		MIPS_ASM::li("v0", 9);
 		MIPS_ASM::li("a0", t->type_node->getFrameSize());
 		MIPS_ASM::move("t0", "v0");
+		MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(t->get_name()));
+		MIPS_ASM::sw("t9", 0, "t0");
 		Node* temp = this->Son;
 		while (temp)
 		{

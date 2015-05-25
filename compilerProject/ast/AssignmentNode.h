@@ -74,7 +74,7 @@ public:
 			}
 			else if (left_side->my_type == "type")
 			{
-				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->type_val);
 			}
 		}
 	}

@@ -1,10 +1,11 @@
 #pragma once
 #ifndef __CALLFUNCTIONNODE__
 #define __CALLFUNCTIONNODE__
+#include"CallVariableNode.h"
 #include"..\ST\Function.h"
 //#include"ast/CallVariableNode.h"
 //#include"ast/callVariableNode.h"
-#include"CallVariableNode.h"
+
 class CallFunctionNode :public Node
 {
 private:
@@ -21,24 +22,36 @@ public:
 		return this->arguments.size();
 	}
 	virtual void before_generateCode(){
-		this->Function_call->get_FunctionNode()->before_generateCode();
-		this->my_type = this->Function_call->get_FunctionNode()->my_type;
-		if (this->my_type == "string")
+
+		if (Function_call)
 		{
-			this->string_val = this->Function_call->get_FunctionNode()->string_val;
+			this->Function_call->get_FunctionNode()->before_generateCode();
+			this->my_type = this->Function_call->get_FunctionNode()->my_type;
+			if (this->my_type == "string")
+			{
+				this->string_val = this->Function_call->get_FunctionNode()->string_val;
+			}
 		}
+		
 	}
 	virtual void generateCode()
 	{
 		//this->Function_call->get_FunctionNode()->setOffset(this->getFrameSize());
-		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
-		MIPS_ASM::jal(this->Function_call->get_label());
-		func_vec.push_back(this->Function_call->get_FunctionNode());
-		this->Function_call->get_FunctionNode()->before_generateCode();
-		this->my_type = this->Function_call->get_FunctionNode()->my_type;
-		if (this->my_type == "string")
+		if (Function_call)
 		{
-			this->string_val = this->Function_call->get_FunctionNode()->string_val;
+			MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			MIPS_ASM::jal(this->Function_call->get_label());
+			func_vec.push_back(this->Function_call->get_FunctionNode());
+			this->Function_call->get_FunctionNode()->before_generateCode();
+			this->my_type = this->Function_call->get_FunctionNode()->my_type;
+			if (this->my_type == "string")
+			{
+				this->string_val = this->Function_call->get_FunctionNode()->string_val;
+			}
+		}
+		else
+		{
+
 		}
 		/*
 		this->Function_call->get_FunctionNode()->generateCode();

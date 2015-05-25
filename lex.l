@@ -321,7 +321,16 @@ float			([0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	DEL;
 			}
-"print"	{
+"input_int"	{
+					colNum += strlen(yytext);
+					yylval.r.colNum = colNum;
+					yylval.r.lineNum = lineNum;
+					yylval.r.strVal=new char[265];
+					yylval.r.strVal[0]='\0';
+					strcpy_s(yylval.r.strVal,255,yytext);
+					return INPUT_INT;
+			}
+"print"		{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;
@@ -329,6 +338,24 @@ float			([0-9]+"."[0-9]+["f"]?)|[0-9]["f"]?
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
 				return PRINT;
+			}
+"input_float"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return INPUT_FLOAT;
+			}
+"input_string"	{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return INPUT_STRING;
 			}
 "final"		{
 				colNum += strlen(yytext);

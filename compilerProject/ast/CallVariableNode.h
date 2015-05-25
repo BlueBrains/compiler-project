@@ -16,6 +16,7 @@ private:
 	string ID;
 
 	Variable* variable_node;
+	bool is_class=false;
 	Variable* checkVarFromCurrentNode(string id, vector<Node*>outer_node)
 	{
 		int i = outer_node.size() - 1;
@@ -135,7 +136,7 @@ public:
 			}
 			else if (this->my_type == "type")
 			{
-
+				this->type_val = variable_node->get_lastTypes().second;
 			}
 			MIPS_ASM::lw("t0", -variable_node->getOffset(), this->getOffsetRegister());
 			//v0 contains the address in memorry to be used later in assignment

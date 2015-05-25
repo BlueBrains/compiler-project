@@ -3,6 +3,7 @@
 #define __AST__
 #include"dotNode.h"
 #include"ast\returnNode.h"
+#include"ast\inputNode.h"
 #include"ast\ClassNode.h"
 #include"ast\expressionNode.h"
 #include"ast\IDNode.h"
@@ -322,6 +323,11 @@ public:
 	returnNode* createReturnNode(Function* f, Node* scoop, Node* son, Node*next, int l_no, int c_no)
 	{
 		returnNode* temp = new returnNode( f,scoop,son,next, l_no, c_no);
+		return temp;
+	}
+	inputNode* createinputNode(Node* v1, input_Types type, Node* son, Node*next, int l_no, int c_no)
+	{
+		inputNode* temp = new inputNode(v1, type, son, next, l_no, c_no);
 		return temp;
 	}
 	Node * addNext(Node* base,Node* next)
