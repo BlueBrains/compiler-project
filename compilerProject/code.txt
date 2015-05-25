@@ -1,20 +1,4 @@
-class u(l,o,p):
-#def s="amer"+"ppp"+"ooo";
-#def g="amer"+3;
-#def g=-9+9.9;
-def koko():
-print "welcom koko";
-end
-def soso():
-return 2;
-end
-def main():
-	kl=2+5;
-	print "kl= ",kl;
-	self.koko();
-	s=self.soso();
-	print "s= ",s;
-end
-end
-class g:
+class u:
+	def main(y,f=2,e=1):
+	end
 end
