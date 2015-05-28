@@ -5,6 +5,7 @@
 #include<vector>
 #include<iostream>
 #include "../mips_asm.h"
+//#include"../ST/Type.h"
 using namespace std;
 class Node;
 extern pair<void*, string>pi;
@@ -27,6 +28,7 @@ public :
 	string _offsetReg = "fp";
 	
 	string string_val="";
+	void* type_val = NULL;
 	Node(Node* son, Node* next) :Next(next), Son(son)
 	{
 		getId();

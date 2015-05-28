@@ -46,6 +46,7 @@ public:
 	void set_lastTypes(string val);
 	void set_lastTypes(string type,bool ValueNotset);//this for set the var type with out value
 	void set_lastTypes(Type* val);
+	void set_lastTypes(void* val);
 	string get_lastType()
 	{
 		return lastType.first;

@@ -36,6 +36,7 @@ public:
 	}
 	virtual void generateCode()
 	{
+		
 		Node* temp = this->Son;
 		while (temp)
 		{

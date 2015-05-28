@@ -47,10 +47,12 @@
 	vector<string> parsedFile;
 	vector<string> temp_id2;
 	bool out_of_import=false;
+	input_Types my_input;
 	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
 	bool exist;
 	bool inside_func=false;
+	bool inside_while_cond = false;
 	bool call_func=false;
 	Node* k;
 	Node* root;
@@ -59,6 +61,7 @@
 	vector<char*> sto_mod;
 	bool ss=false;
 	bool ff=false;
+	bool a_self=false;//this for self.x()
 	bool pro= false;
 	bool from_except=false;
 	bool pp=true;
@@ -133,7 +136,7 @@
 %token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
-%token	WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
+%token	WITH AS ASSERT EQUAL DEL RETURN PRINT INPUT_INT INPUT_FLOAT INPUT_STRING GLOBAL STAR_EQUAL LESS_THAN_2 
 %token	RAISE PRIVATE PUBLIC PROTECTED YIELD MORE_THAN_2 STRING NONE IS DIV_2 
 %token	LESS_OR_EQUAL MORE_OR_EQUAL EXCEPT PASS CHAR_VALUE BREAK CONTINUE
 
@@ -372,10 +375,10 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 														  }
 			;
 
-inside_func: '(' { inside_func=true;call_func=true; Streams::verbose() <<"parameters:'(' ";}
+inside_func: '(' { inside_func=true;call_func=true; Streams::verbose() <<"inside_func:'(' ";}
 
 
-parameters: inside_func arglist ')' {Streams::verbose() <<"arglist ')'\n";}
+parameters: inside_func arglist ')' {Streams::verbose() <<"inside_func arglist ')'\n";}
 			|'(' ')' {Streams::verbose() <<"parameters:'(' ')'\n";}
 			;
 
@@ -421,7 +424,33 @@ small_stmt: expr_stmt	{
 							visit_num=0;
 						 }
 			;
+input_stmt: input_choise '(' str_seq ')'
+						 {Streams::verbose() <<"atom: str_seq\n";
+									char* x = new char[100];
+									strcpy(x,$<r.strVal>3);
+									cout<<"x=   "<<x<<endl;
+									string sd(x);
+									cout<<"sd=== "<<sd<<endl;
+									constant=true;
+									Node* string_now;
 
+									string_now = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									$<tn>$=ast->createinputNode(string_now,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
+			|input_choise '(' ')'{
+									$<tn>$=ast->createinputNode(NULL,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
+								;
+input_choise:	INPUT_INT{
+							my_input=INT_input;
+						}
+				|INPUT_FLOAT{
+							my_input=FLOAT_input;
+						}
+				|INPUT_STRING{
+							my_input=STRING_input;
+						}
+						;
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
 			| vardef {
@@ -481,6 +510,9 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 					
 right_testlist : '=' testlist_star_expr right_testlist {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
 				|'=' testlist_star_expr {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";$<tn>$=$<tn>2;}
+				|'=' input_stmt	{
+							$<tn>$=$<tn>2;
+						}
 				;
 
 testlist_star_expr: comma_test_star_seqJ {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";}
@@ -1122,7 +1154,7 @@ and_test: not_test {Streams::verbose() <<"and_test:	not_test\n";$<tn>$=$<tn>1;}
 not_test:	NOT not_test {Streams::verbose() <<"not_test:	NOT not_test\n";
 							$<tn>$=ast->createBooleanNode(NULL,$<tn>2,NOT_OP,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 							}
-			| comparison {Streams::verbose() <<"not_test:	comparison\n";$<tn>$=$<tn>1;}
+			| comparison {Streams::verbose() <<"not_test:	comparison\n";$<tn>$=$<tn>1;cout<<($<tn>1)->getNodeType()<<endl;}
 			;
 
 comp_op_seq: comp_op expr %prec stmt_7 {
@@ -1136,7 +1168,7 @@ comp_op_seq: comp_op expr %prec stmt_7 {
 										}
 			 ;
 				
-comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;}
+comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;cout<<($<tn>1)->getNodeType()<<" Comp"<<endl;}
 			|expr comp_op_seq %prec stmt_12 {
 					Streams::verbose() <<"comparison: expr comp_op_seq\n";
 						$<tn>$=ast->createExprNode($<tn>1,$<tn>2,NULL,comp_op,yylval.r.lineNum,yylval.r.colNum);
@@ -1303,7 +1335,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
 		| power {
-		         if(!inside_func){
+		         if(!inside_func&&!inside_while_cond){
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
@@ -1361,6 +1393,9 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						$<tn>$=$<tn>1;
 					}
 					constant=false;
+				}else {
+					$<tn>$=$<tn>1;
+					inside_while_cond = false;
 				} 
 			}
 		;
@@ -1395,7 +1430,7 @@ str_seq:	STRING %prec stmt_10 {Streams::verbose() <<"str_seq:	STRING \n"; cout<<
 			;
 
 atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
-		|'(' testlist_comp ')'  {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";$<tn>$=$<tn>2;arrayvec.clear();}
+		|'(' testlist_comp ')'  {Streams::verbose() <<"atom:	'(' testlist_comp ')' \n";$<tn>$=$<tn>2;cout<<($<tn>2)->getNodeType()<<endl; inside_while_cond = true; arrayvec.clear();}
 		|'[' ']' {Streams::verbose() <<"atom:	'[' ']' \n";
 						arrayvec.clear();
 						array_right=true;
@@ -1410,6 +1445,10 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
+									if(strcmp($<r.strVal>1,"self")==0)
+									{
+										a_self=true;
+									}
 		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
 									cout <<"hello molham "<<$<r.strVal>1;
@@ -1525,23 +1564,44 @@ testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for
 			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
 			   ;
 
-trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
+trailer:	'.' NAME  %prec stmt_14
+						{Streams::verbose() <<"trailer:	'.' NAME\n";
 							temp_id=temp_id2.back();
 							temp_id=temp_id+"."+$<r.strVal>2;
 						temp_id2.pop_back();
 						temp_id2.push_back(temp_id);	
 						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 						dotvec.push_back($<tn>$);
+						if(strcmp($<r.strVal>2,"self")==0)
+						{
+							a_self=true;
+						}
 						} 
 			|'.' NAME '(' ')' {
+									parameters.clear();
+									if(a_self)
+									{
+										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+										a_self=false;
+									}
+									else
+									{
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
-									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									
 									dotvec.push_back($<tn>$);
 									call_func=false;
 								}
 			|'.' NAME inside_func exprlist ')' {
 									cout<<"Toslamly khyoo Amooooora"<<endl;
 									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										a_self=false;
+									}
+									else
+									{
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									}
 									dotvec.push_back($<tn>$);
 									cout<<"the size is "<<func_call.size()<<endl;
 									call_func=false;
@@ -1551,6 +1611,7 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 												$<tn>$=ast->createArrayElementNode(NULL,$<tn>4,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 												dotvec.push_back($<tn>$);
 											} ;
+			//|'.' NAME '(' exprlist ')' {;}
 
 			;
 
@@ -1604,7 +1665,7 @@ comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',
 												func_call.push_back($<tn>3);
 												//expnode=NULL;
 											}
-											$<tn>$=ast->addNext($<tn>1,$<tn>3);
+															$<tn>$=ast->addNext($<tn>1,$<tn>3);
 														}
 						|comma_expr_star_seq ',' star_expr  {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";}
 						;
@@ -1634,7 +1695,7 @@ exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 							
 							$<tn>$=$<tn>1;
 							cout<<"out here2"<<endl;
-						if(call_func){	
+						if(call_func){
 						cout<<"here2"<<endl;
 								func_call.push_back($<tn>1);	
 								//expnode=NULL;
@@ -1648,7 +1709,7 @@ exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 								func_call.push_back($<tn>1);
 								//expnode=NULL;	
 						}
-						$<tn>$=ast->addNext($<tn>1,$<tn>2);
+												$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											}
 			|star_expr ',' {Streams::verbose() <<"exprlist: 	star_expr ',' \n";}
 			|star_expr  comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";}
@@ -2018,7 +2079,7 @@ classheader: CLASS NAME ':'  {
 		  ;
 
 arg_comma_seq : argument ',' {Streams::verbose() <<"arg_comma_seq : argument ','\n";$<tn>$=$<tn>1;}
-				|arg_comma_seq argument ',' {Streams::verbose() <<"arg_comma_seq : argument ',' arg_comma_seq\n";
+				|arg_comma_seq argument ',' {Streams::verbose() <<"arg_comma_seq : arg_comma_seq argument ',' \n";
 													//$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											}
 				;
@@ -2202,6 +2263,7 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 											amer_par.push_back(my_node);
 										Streams::verbose() <<"arglist: arg_comma_seq STAR_2 test\n";
 								    }
+		 |default_arg_comma_seq default_arg {Streams::verbose() <<"arglist: default_arg_comma_seq default_arg\n";}
 		
 		 ;
 		/*
@@ -2221,11 +2283,13 @@ comma_default_arg_seq: ',' default_arg {Streams::verbose() <<"comma_default_arg_
 default_arg_comma_seq: default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg ','\n";}
 					   |default_arg_comma_seq default_arg ',' {Streams::verbose() <<"default_arg_comma_seq: default_arg_comma_seq default_arg ','\n";}
 					   ;
-in_default: '=' {
-					in_def=true;
+in_default: test '=' {
+					Streams::verbose() <<"in_default: '='\n";
+					//in_def=true;
+					$<tn>$ = $<tn>1;
 				}
-default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test '=' test\n";
-							Node* o=ast->createAssignNode($<tn>1,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+default_arg: in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test in_default test\n";
+							Node* o=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 							$<tn>$=ast->addNext(my_node,o);
 							amer_par.push_back($<tn>$);
 							df_par.push_back($<tn>$);
