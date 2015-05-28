@@ -1,4 +1,7 @@
 class x:
-	def func(x): end
-	def main():end
+	def func(x,u=0,i=0,f=0):end
+	def main():
+		kk=[1,7];
+		self.func(x);
+	end
 end

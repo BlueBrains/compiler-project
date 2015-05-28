@@ -13,6 +13,10 @@ public:
 	{
 		return this->function_node;
 	}
+	vector<Node*> get_parameter()
+	{
+		return this->df_par;
+	}
 	void set_hasReturn(bool r)
 	{
 		this->has_return = true;
@@ -60,7 +64,8 @@ public:
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;
-		this->researve_var(temp);
+		if (temp)
+			this->researve_var(temp);
 		/*
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $fp, 0($sp)\n");

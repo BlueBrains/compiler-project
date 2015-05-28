@@ -13,7 +13,91 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 argument: 	test
-arglist: argument
+arg_comma_seq : argument ','
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 0
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+default_arg: test '=' test
+default_arg_comma_seq: default_arg ','
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 0
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+default_arg: test '=' test
+default_arg_comma_seq: default_arg_comma_seq default_arg ','
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 0
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+default_arg: test '=' test
+arglist: arg_comma_seq default_arg_comma_seq default_arg
 arglist ')'
 funcheader: DEF NAME parameters ':' 
 suite:	END
@@ -21,6 +105,108 @@ funcdef:	funcheader suite
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt
+parameters:'(' ')'
+funcheader: DEF NAME parameters ':' 
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_INT 1
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 7
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '{' '}' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+atom: NAME
+parameters:'(' atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+trailer_seq: trailer 
+power: atom trailer_seq 
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+expr_stmt: testlist_star_expr 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+suite:	list_stmt END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 classdef: classheader suite
 temp2: classdef 

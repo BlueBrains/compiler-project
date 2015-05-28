@@ -88,6 +88,7 @@
 	Variable* v;
 	Variable* v1=new Variable();
 	Type* t;
+	Node* expnode;
 	class Function * testfunction;
 	vector<char *> parameters;
 	class Parser
@@ -199,6 +200,7 @@ funcdef: funcheader suite {
 							linefunc=0;colmfunc=0;
 							visit_num=0;
 							constant=false;
+							
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
 						  }
 	
@@ -1410,7 +1412,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
 		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
-									
+									cout <<"hello molham "<<$<r.strVal>1;
 									my_node=NULL;
 									}
 									else{
@@ -1422,7 +1424,12 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 												in_def=false;
 										
 										}
+									
+									/*Node* temp = ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									$<tn>$=temp;
+									expnode= new Node(temp);*/
 									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									//expnode=$<tn>$;
 					} 
 		| NAME '(' ')' %prec stmt_13{ Streams::verbose() <<"atom: NAME()\n";
 									//temp_id2.push_back($<r.strVal>1);
@@ -1533,8 +1540,10 @@ trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
 									call_func=false;
 								}
 			|'.' NAME inside_func exprlist ')' {
+									cout<<"Toslamly khyoo Amooooora"<<endl;
 									$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									dotvec.push_back($<tn>$);
+									cout<<"the size is "<<func_call.size()<<endl;
 									call_func=false;
 									func_call.clear();
 								}
@@ -1582,10 +1591,20 @@ sliceop: ':' {Streams::verbose() <<"sliceop: ':'\n";}
 
 comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";
 										$<tn>$=$<tn>2;
+										if(call_func){
+												func_call.push_back($<tn>2);	
+												//expnode=NULL;
+											}
 									}
 						|',' star_expr {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";}
 						|comma_expr_star_seq ',' expr {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";
-															$<tn>$=ast->addNext($<tn>1,$<tn>3);
+															
+															if(call_func){
+												cout<<"here1"<<endl;
+												func_call.push_back($<tn>3);
+												//expnode=NULL;
+											}
+											$<tn>$=ast->addNext($<tn>1,$<tn>3);
 														}
 						|comma_expr_star_seq ',' star_expr  {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";}
 						;
@@ -1593,33 +1612,43 @@ comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',
 exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 						$<tn>$=$<tn>1;
 						if(call_func){
-							if($<tn>$->getNodeType()=="CallVariableNode" || $<tn>$->getNodeType()=="ValueNode")
-							{
-								func_call.push_back(my_node);	
-							}
-							else
-								cout<<"ERROR : using Unintialaized variable "<<$<r.strVal>1<<"Line "<<yylval.r.lineNum<<" column"<<yylval.r.colNum<<endl; 
+								
+								func_call.push_back($<tn>1);	
+								//expnode=NULL;
 						}
 					}
 			|expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";
 											$<tn>$=$<tn>1;
+											
+											cout<<"out here1"<<endl;
+											if(call_func){
+												cout<<"here1"<<endl;
+												func_call.insert(func_call.begin(),$<tn>1);	
+												//expnode=NULL;
+											}
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
 										}
 			|star_expr {Streams::verbose() <<"exprlist: 	star_expr \n";}
 			|star_expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";}
 			|expr ',' {Streams::verbose() <<"exprlist: 	expr ',' \n";
+							
 							$<tn>$=$<tn>1;
-						if(call_func){
-							if($<tn>$->getNodeType()=="CallVariableNode" || $<tn>$->getNodeType()=="ValueNode")
-							{
-								func_call.push_back(my_node);	
-							}
-							else
-								cout<<"ERROR : using Unintialaized variable "<<$<r.strVal>1<<"Line "<<yylval.r.lineNum<<" column"<<yylval.r.colNum<<endl; 
+							cout<<"out here2"<<endl;
+						if(call_func){	
+						cout<<"here2"<<endl;
+								func_call.push_back($<tn>1);	
+								//expnode=NULL;
 						}
 						}
 			|expr comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";
-												$<tn>$=ast->addNext($<tn>1,$<tn>2);
+												
+												cout<<"out here3"<<endl;
+												if(call_func){
+							cout<<"here3"<<endl;
+								func_call.push_back($<tn>1);
+								//expnode=NULL;	
+						}
+						$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											}
 			|star_expr ',' {Streams::verbose() <<"exprlist: 	star_expr ',' \n";}
 			|star_expr  comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	star_expr  comma_expr_star_seq ',' \n";}
@@ -2200,11 +2229,12 @@ default_arg: test in_default test {parameters.push_back($<r.strVal>1);Streams::v
 							$<tn>$=ast->addNext(my_node,o);
 							amer_par.push_back($<tn>$);
 							df_par.push_back($<tn>$);
+							in_def=false;
 							};
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					if(strcmp($<r.strVal>1),"self")!=0)
+					if(strcmp($<r.strVal>1,"self")!=0)
 						amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";

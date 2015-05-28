@@ -4,7 +4,11 @@
 #include"..\ST\Function.h"
 //#include"ast/CallVariableNode.h"
 //#include"ast/callVariableNode.h"
+#include"IDNode.h"
 #include"CallVariableNode.h"
+#include"FunctionNode.h"
+
+
 class CallFunctionNode :public Node
 {
 private:
@@ -95,6 +99,93 @@ public:
 	virtual string getNodeType()
 	{
 		return "CallFunctionNode";
+	}
+
+	void parameter_Matched(Function* function)
+	{
+		FunctionNode * fn = static_cast<FunctionNode *> (function->get_FunctionNode());
+		int inner = 0;
+		bool out = false;
+		bool def = false;
+		bool err_def = false;
+		if (fn->get_parameter().size() == 0 && this->arguments.size() != 0)
+		{
+			cout << "Error :" << this->arguments.at(inner)->_lineNo << "," << this->arguments.at(inner)->_colNo << " Not Matching function parameter" << endl;
+			err_def = true;
+		}
+		else
+		for (int i = 0; i < fn->get_parameter().size(); i++)
+		{
+			if ((fn->get_parameter().at(i)->Next == NULL) || (fn->get_parameter().at(i)->Next->getNodeType() == "IDNode")){
+				IDNode * te = static_cast <IDNode *> (fn->get_parameter().at(i));
+				if (te->get_variable()->get_isarray() == false)
+				{
+					{
+						if (this->arguments.size()>inner ){
+							if (((this->arguments.at(inner)->getNodeType() == "CallVariableNode")/* && (static_cast<CallVariableNode*> (this->arguments.at(inner))->get_variable() != NULL)*/) || (this->arguments.at(inner)->getNodeType() == "ValueNode"))
+							{
+								inner++;
+							}
+							else
+							{
+								cout << "Error :" << this->arguments.at(inner)->_lineNo << "," << this->arguments.at(inner)->_colNo << " Not Matching function parameter " << endl;
+								err_def = true;
+								break;
+							}
+						}
+						else
+						{
+							cout << "Error :" << fn->_lineNo << "," << fn->_colNo << " Not Matching function parameter" << endl;
+							err_def = true;
+							break;
+						}
+					}
+				}
+				else
+				{
+					out = true;
+					if (this->arguments.size() > inner){
+						for (int s_i = inner; s_i < this->arguments.size(); s_i++)
+						{
+							if ((this->arguments.at(s_i)->getNodeType() == "CallVariableNode") && (static_cast<CallVariableNode *> (this->arguments.at(s_i))->get_variable()!=NULL) && (static_cast<CallVariableNode *> (this->arguments.at(s_i))->get_variable()->get_isarray()))
+							{
+								cout << "Error :" << this->arguments.at(inner)->_lineNo << "," << this->arguments.at(inner)->_colNo << " Not Matching function parameter" << endl;
+								err_def = true;
+								break;
+							}
+						}
+					}
+					else
+					{
+						cout << "Error :" << fn->_lineNo << "," << fn->_colNo << " Not Matching function parameter" << endl;
+						err_def = true;
+						break;
+					}
+
+
+					if (err_def)
+						break;
+				}
+
+			}
+			else if (fn->get_parameter().at(i)->Next->getNodeType() == "AssignmentNode")
+			{
+				def = true;
+				/* edit to be accepted with array and default value*/
+				if ((this->arguments.size() - inner) > (fn->get_parameter().size() - i))
+				{
+					cout << "Error :" << this->arguments.at(inner)->_lineNo << "," << this->arguments.at(inner)->_colNo << " Not Matching function parameter" << endl;
+					err_def = true;
+					break;
+				}
+				break;
+			}
+			else
+				inner++;
+		}
+		if (!out && !def && (this->arguments.size() != fn->get_parameter().size())&&!err_def)
+			cout << "Error :" << fn->_lineNo << "," << fn->_colNo << " Not Matching function parameter" << endl;
+
 	}
 };
 #endif

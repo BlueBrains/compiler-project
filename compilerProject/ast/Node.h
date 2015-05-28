@@ -32,6 +32,13 @@ public :
 		getId();
 		_currentInnerOffset = 0;
 	}
+	Node(Node* other)
+	{
+		this->Next = NULL;
+		_lineNo = other->_lineNo;
+		_colNo = other->_colNo;
+		my_type = other->my_type;
+	}
 	Node(Node* son, Node* next, int line_no, int col_no) :Next(next), Son(son), _lineNo(line_no), _colNo(col_no)
 	{
 		getId();
