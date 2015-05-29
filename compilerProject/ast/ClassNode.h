@@ -63,7 +63,7 @@ public:
 		MIPS_ASM::pop("ra");
 		*/
 		//this is instruction added by amer :)
-		MIPS_ASM::releaseStack(getFrameSize());
+		//MIPS_ASM::releaseStack(getFrameSize());
 	}
 	void gcVars()
 	{

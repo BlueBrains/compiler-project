@@ -1,7 +1,7 @@
 .data
-string_1: .asciiz "enter your number"
-string_2: .asciiz "welcome amer in func"
-string_3: .asciiz "welcome amer"
+string_1: .asciiz "koko"
+string_2: .asciiz "welcom "
+string_3: .asciiz "in constructor "
 
 block_head:    .byte   0:8
 
@@ -20,28 +20,41 @@ sw $ra, 0($sp)
 sub $sp,$sp,4
 sw $fp, 0($sp)
  #reserving space in stack for scope variables
-sub $sp,$sp,4
+sub $sp,$sp,8
  #movesp to fp
 move $fp,$sp
-sub $sp,$sp,4
-jal func5
-sub $sp,$sp,4
-jal xo28
  #Assign node
  #Assign node RHS:
-sub $sp,$sp,4
+li $v0,9
+li $a0,8
+syscall
+ #movev0 to s1
+move $s1,$v0
 la $t9,string_1
+sw $t9,0($s1) 
+ #Assign node
+ #Assign node RHS:
+li $t9,10
 sub $sp,$sp,4
 sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-li $v0,5
-syscall
+ #LHS:
+lw $t0,4($s1)
+addi $v0,$s1,4
 sub $sp,$sp,4
-sw $v0, 0($sp)
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+ #moves1 to a0
+move $a0,$s1
+jal __init__10
+sub $sp,$sp,4
+sw $s1, 0($sp)
  #LHS:
 lw $t0,0($fp)
 addi $v0,$fp,0
@@ -54,10 +67,40 @@ add $sp,$sp,4
 lw $t0, 0($sp)
  #Assign node storing in position val:
 sw $t0,0($v0)
+add $sp,$sp,4
+ #Assign node
+ #Assign node RHS:
+ #LHS:
+lw $t0,4($fp)
+addi $v0,$fp,4
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
  #
  # Print values:
+la $t9,string_2
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
 lw $t0,0($fp)
 addi $v0,$fp,0
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $s1, 0($sp)
+add $sp,$sp,4
+lw $t0,4($s1)
+addi $v0,$s1,4
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t0, 0($sp)
@@ -69,18 +112,18 @@ la $a0,newline
 li $v0,4
 syscall
  #releasing space in stack for scope variables
-add $sp,$sp,4
+add $sp,$sp,8
 lw $fp, 0($sp)
 add $sp,$sp,4
 lw $ra, 0($sp)
 add $sp,$sp,4
-sub $sp,$sp,4
-sw $v0, 0($sp)
 jr $ra
  #end function call
 li $v0, 10 
 syscall 
-func5:
+
+ 
+__init__10:
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
@@ -90,39 +133,7 @@ sw $fp, 0($sp)
 sub $sp,$sp,4
  #movesp to fp
 move $fp,$sp
- #
- # Print values:
-la $t9,string_2
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
- #releasing space in stack for scope variables
-add $sp,$sp,4
-lw $fp, 0($sp)
-add $sp,$sp,4
-lw $ra, 0($sp)
-add $sp,$sp,4
-sub $sp,$sp,4
-sw $v0, 0($sp)
-jr $ra
- #end function call
-xo28:
- #begin function call
-sub $sp,$sp,4
-sw $ra, 0($sp)
-sub $sp,$sp,4
-sw $fp, 0($sp)
- #reserving space in stack for scope variables
-sub $sp,$sp,0
- #movesp to fp
-move $fp,$sp
+sw $a0,0($fp)
  #
  # Print values:
 la $t9,string_3
@@ -133,19 +144,29 @@ add $sp,$sp,4
 li $v0,4
 move $a0,$t0
 syscall
+lw $t0,4($s1)
+addi $v0,$s1,4
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,1
+move $a0,$t0
+syscall
 la $a0,newline
 li $v0,4
 syscall
+lw $s1,0($fp)
  #releasing space in stack for scope variables
-add $sp,$sp,0
+add $sp,$sp,4
 lw $fp, 0($sp)
 add $sp,$sp,4
 lw $ra, 0($sp)
 add $sp,$sp,4
-sub $sp,$sp,4
-sw $v0, 0($sp)
 jr $ra
  #end function call
+
+ 
 
  
  #this function for string*number
@@ -176,6 +197,36 @@ end_str:
 j con_loop
 end_con_loop:
 sb $zero 0($a1) #null terminate string
+add $sp, $sp, 0
+lw $fp, 0($sp)
+add $sp, $sp, 4
+lw $ra, 0($sp)
+add $sp, $sp, 4
+jr $ra
+
+ 
+ #this function for string+string
+concatenate_2strings:
+sub $sp, $sp, 4
+sw $ra, 0($sp)
+sub $sp, $sp, 4
+sw $fp, 0($sp)
+sCopyFirst:
+lb $t0,0($a0)
+beq $t0,$0,sCopySecond
+sb $t0,0($a2)
+addi $a0,$a0,1
+addi $a2,$a2,1
+b sCopyFirst
+sCopySecond:
+lb $t0,0($a1)
+beq $t0,$0,sDone
+sb $t0,0($a2)
+addi $a1,$a1,1
+addi $a2,$a2,1
+b sCopySecond
+sDone:
+sb $zero 0($a2) #null terminate string
 add $sp, $sp, 0
 lw $fp, 0($sp)
 add $sp, $sp, 4

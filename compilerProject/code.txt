@@ -1,18 +1,12 @@
-class x:
-	def public func(x): 
-		print "welcome amer in func";
+class koko :
+	def public x=10;
+	def __init__():
+		print "in constructor ",self.x;
 	end
 	def main():
-		self.func();
-		a.self.xo();
-		x=input_int("enter your number");
-		print x;
+		k=koko();
+		t=[1,1+2,3,k];
+		print "welcom ",k.x;
 	end
 
-	def class a:
-		def public static g=10;
-		def public static xo():
-			print "welcome amer";
-		end
-	end
 end

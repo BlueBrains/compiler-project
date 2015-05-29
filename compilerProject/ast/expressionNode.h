@@ -868,9 +868,20 @@ public:
 					this->my_type = "string";
 					if (op == 0)
 					{
+						/*
 						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(x + y));
 						MIPS_ASM::push("t0");
-						this->string_val = x + y;
+						this->string_val = x + y;*/
+						MIPS_ASM::pop(t1);
+						MIPS_ASM::pop(t0);
+						MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+						string ip = MIPS_ASM::addStringAdressLabel();
+						MIPS_ASM::move("a0", "t0");
+						MIPS_ASM::move("a1", "t1");
+						MIPS_ASM::la("a2", ip);
+						MIPS_ASM::jal("concatenate_2strings");
+						MIPS_ASM::la("a0", ip);
+						MIPS_ASM::sw("a0", 0, "sp");
 					}
 					else if (op == 1)
 					{

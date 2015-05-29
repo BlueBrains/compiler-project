@@ -44,6 +44,7 @@ public:
 	}
 	void researve_var(Node* node)
 	{
+		
 		if (node->getNodeType() == "IDNode")
 		{
 			static_cast<IDNode*>(node)->get_variable()->setOffset(this->getNextOffset(4));
@@ -60,8 +61,14 @@ public:
 	virtual void generateCode()
 	{
 		Node* temp = this->Son;
+		if (!function_node->get_static())
+		{
+			//for self 
+			this->getNextOffset(4);
+		}
 		if (temp)
 			this->researve_var(temp);
+		
 		/*
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $fp, 0($sp)\n");
@@ -70,9 +77,15 @@ public:
 		MIPS_ASM::printComment("begin function call");
 		MIPS_ASM::push("ra");
 		MIPS_ASM::push("fp");
+
 		MIPS_ASM::reserveStack(getFrameSize());
 		//MIPS_ASM::add_instruction("move $fp, $sp\n");
 		MIPS_ASM::move("fp", "sp");
+		if (!function_node->get_static())
+		{
+			//for self 
+			MIPS_ASM::sw("a0", 0, "fp");
+		}
 		temp = this->Son;
 		//here generate code
 		while (temp)
@@ -82,6 +95,10 @@ public:
 			temp = temp->Next;
 		}
 		//
+		if (strcmp(function_node->get_name(), "__init__") == 0)
+		{
+			MIPS_ASM::lw("s1", 0, "fp");
+		}
 		MIPS_ASM::releaseStack(getFrameSize());
 		/*
 		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
@@ -90,7 +107,8 @@ public:
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
-		MIPS_ASM::push("v0");
+		//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+		//MIPS_ASM::push("v0");
 		MIPS_ASM::jr();
 		MIPS_ASM::printComment("end function call");
 		//MIPS_ASM::push("v0");
@@ -101,6 +119,7 @@ public:
 		while (temp)
 		{
 			//temp->setOffset(this->getFrameSize());
+			//cout << temp->getNodeType() << endl;
 			temp->before_generateCode();
 			temp = temp->Next;
 		}

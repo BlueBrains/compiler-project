@@ -47,7 +47,7 @@ public:
 		}
 	}
 	virtual  void  generateCode(){
-		f->has_return = true;
+		
 		
 		MIPS_ASM::printComment("return node");
 		if (_scoop)
@@ -59,6 +59,7 @@ public:
 			{
 				f->get_FunctionNode()->string_val = _scoop->string_val;
 			}
+			f->has_return = true;
 			MIPS_ASM::pop("v0");
 		}
 		//MIPS_ASM::move("sp", "fp");
@@ -70,7 +71,8 @@ public:
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
-		MIPS_ASM::push("v0");
+		//MIPS_ASM::push("v0");
+		MIPS_ASM::add_instruction("sw $v0, 0($sp)\n");
 		MIPS_ASM::printComment("end function call");
 		MIPS_ASM::jr();
 		MIPS_ASM::printComment("end return node");

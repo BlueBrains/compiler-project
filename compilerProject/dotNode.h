@@ -124,6 +124,56 @@ private:
 		}
 		return v;
 	}
+	Variable* checkVarFromCurrentNode(string id, vector<Node*>outer_node)
+	{
+		int i = outer_node.size() - 1;
+		Node* temp2;
+		Variable* v = NULL;
+		if (outer_node.at(i)->getNodeType() == "ClassNode")
+		{
+			Type* tt = static_cast<ClassNode*>(outer_node.at(i))->get_type();
+			temp2 = outer_node.at(i)->Son;
+			while ((temp2->Next) && (this->getId()>temp2->getId()))
+			{
+				if ((temp2->getNodeType() == "IDNode"))
+				{
+					if (strcmp(id.c_str(), static_cast<IDNode*>(temp2)->get_variable()->get_name()) == 0)
+					{
+						v = static_cast<IDNode*>(temp2)->get_variable();
+						break;
+					}
+				}
+				temp2 = temp2->Next;
+			}
+		}
+		else
+		{
+			bool found = false;
+			while (outer_node.at(i)->getNodeType() != "ClassNode")
+			{
+				temp2 = outer_node.at(i)->Son;
+				while ((temp2->Next) && (this->getId()>temp2->getId()))
+				{
+					if ((temp2->getNodeType() == "IDNode"))
+					{
+						if (strcmp(id.c_str(), static_cast<IDNode*>(temp2)->get_variable()->get_name()) == 0)
+						{
+							v = static_cast<IDNode*>(temp2)->get_variable();
+							found = true;
+							break;
+						}
+					}
+					temp2 = temp2->Next;
+					if (found)
+						break;
+				}
+				i--;
+			}
+		}
+
+		return v;
+
+	}
 	vector<Node*>my_outer;
 	bool myfrom_right = false;
 public:
@@ -279,7 +329,8 @@ public:
 						else{
 							//on generating code (x.y.z)
 							char* p = const_cast<char *>(x.c_str());
-							v = checkVariable(t1, p, temp->_lineNo, temp->_colNo);
+							v = checkVarFromCurrentNode(x, outer_node); 
+							//v = checkVariable(t1, p, temp->_lineNo, temp->_colNo);
 							if (!v)
 							{
 								t1=this->checkType(p, t1);
@@ -302,6 +353,8 @@ public:
 								if (v->get_lastType() == "type")
 								{
 									t1 = (Type*)(v->get_lastTypes().second);
+									static_cast<CallVariableNode*>(temp)->set_variable(v);
+
 								}
 								else
 									cout << "Error: variable must have class type" << x << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
@@ -383,7 +436,7 @@ public:
 	{
 
 	}
-	virtual void generateCode()
+	virtual void before_generateCode()
 	{
 		Node* temp;
 		this->check2(my_outer, myfrom_right);
@@ -403,7 +456,47 @@ public:
 				{
 					if (i > 0)
 						temp->_offsetReg = "t0";
+					temp->before_generateCode();
+				}
+
+			}
+			else
+			if (temp)
+				temp->before_generateCode();
+			this->my_type = temp->my_type;
+			if (temp->my_type == "string")
+			{
+				this->string_val = temp->string_val;
+			}
+		}
+	}
+	virtual void generateCode()
+	{
+		Node* temp;
+		bool by_sef = false;
+		this->check2(my_outer, myfrom_right);
+		for (int i = 0; i < dot_vector.size(); i++)
+		{
+			temp = dot_vector.at(i);
+			if (temp->getNodeType() == "CallVariableNode")
+			{
+				CallVariableNode* test = static_cast<CallVariableNode*>(temp);
+				string x = test->getID();
+				if (x == "self")
+				{
+					continue;
+					by_sef = true;
+					MIPS_ASM::lw("s1", 0,this->getOffsetRegister());
+				}
+				else
+				{
+					if (i > 0)
+					{
+						temp->_offsetReg = "s1";
+					}
 					temp->generateCode();
+					if (i==0)
+						MIPS_ASM::pop("s1");
 				}
 					
 			}

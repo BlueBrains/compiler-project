@@ -73,6 +73,37 @@ void  MIPS_ASM::mult_string()
 	add_instruction("add $sp, $sp, 4\n");
 	jr();
 }
+
+void  MIPS_ASM::sum_string()
+{
+	label("concatenate_2strings");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $ra, 0($sp)\n");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $fp, 0($sp)\n");
+	label("sCopyFirst");
+	add_instruction("lb $t0,0($a0)\n");
+	beq("t0", "0", "sCopySecond");
+	add_instruction("sb $t0,0($a2)\n");
+	add_instruction("addi $a0,$a0,1\n");
+	add_instruction("addi $a2,$a2,1\n");
+	add_instruction("b sCopyFirst\n");
+	label("sCopySecond");
+	add_instruction("lb $t0,0($a1)\n");
+	beq("t0", "0", "sDone");
+	add_instruction("sb $t0,0($a2)\n");
+	add_instruction("addi $a1,$a1,1\n");
+	add_instruction("addi $a2,$a2,1\n");
+	add_instruction("b sCopySecond\n");
+	label("sDone");
+	add_instruction("sb $zero 0($a2) #null terminate string\n");
+	add_instruction("add $sp, $sp, 0\n");
+	add_instruction("lw $fp, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	add_instruction("lw $ra, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	jr();
+}
 void MIPS_ASM::add_data(string c)
 {
 	data << c;

@@ -1,6 +1,7 @@
 #pragma once
 #ifndef __AST__
 #define __AST__
+#include<set>
 #include"dotNode.h"
 #include"ast\returnNode.h"
 #include"ast\inputNode.h"
@@ -61,6 +62,28 @@ public:
 
 	}
 	vector<Node*>outer_node;
+	int global_num = 0;
+	void generate_static(Node* n)
+	{
+		bool enter = false;
+		if (n)
+		{
+			if (n->getNodeType() == "IDNode")
+			{
+				if (static_cast<IDNode*>(n)->get_variable()->get_static())
+				{
+					static_cast<IDNode*>(n)->get_variable()->setOffset(global_num);
+					global_num++;
+					if (n->Next->getNodeType() == "AssignmentNode")
+					{
+						n->generateCode();
+					}
+				}
+			}
+			generate_static(n->Next);
+			generate_static(n->Son);
+		}
+	}
 	void generate_main(Function* main)
 	{
 		if (main)
@@ -68,14 +91,29 @@ public:
 			main->get_FunctionNode()->generateCode();
 			MIPS_ASM::add_instruction("li $v0, 10 \n");
 			MIPS_ASM::add_instruction("syscall \n");
+			set<Node*>s;
+			s.insert(func_vec.begin(), func_vec.end());
+			/*
 			for (int i = 0; i < func_vec.size(); i++)
 			{
 				MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
 				func_vec.at(i)->generateCode();
+			}*/
+
+			int oo=s.size();
+			MIPS_ASM::add_instruction("\n \n");
+			for (set<Node*>::iterator i = s.begin(); i != s.end(); i++) {
+				MIPS_ASM::label(static_cast<FunctionNode*>(*i)->get_function()->get_label());
+				(*i)->generateCode();
+				MIPS_ASM::add_instruction("\n \n");
 			}
 			MIPS_ASM::add_instruction("\n \n");
 			MIPS_ASM::printComment("this function for string*number");
 			MIPS_ASM::mult_string();
+
+			MIPS_ASM::add_instruction("\n \n");
+			MIPS_ASM::printComment("this function for string+string");
+			MIPS_ASM::sum_string();
 		}
 		
 	}

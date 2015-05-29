@@ -37,6 +37,7 @@ public:
 	static string getStringAdressLabel(string str);
 	static string addStringAdressLabel();
 	static void mult_string();
+	static void sum_string();
 	static void writeData();
 	static void writeCode();
 	static void writeMain();

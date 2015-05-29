@@ -111,7 +111,7 @@ public:
 			}
 			else if (left_side->my_type == "type")
 			{
-				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->type_val);
 			}
 		}
 		if (left_side->my_type == "float")
@@ -125,6 +125,7 @@ public:
 		}
 	
 		MIPS_ASM::sw(t0, 0, "v0");
+		MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 	}
 	virtual void print()
 	{

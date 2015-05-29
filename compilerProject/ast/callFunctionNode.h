@@ -25,6 +25,7 @@ public:
 
 		if (Function_call)
 		{
+			func_vec.push_back(this->Function_call->get_FunctionNode());
 			this->Function_call->get_FunctionNode()->before_generateCode();
 			this->my_type = this->Function_call->get_FunctionNode()->my_type;
 			if (this->my_type == "string")
@@ -39,11 +40,17 @@ public:
 		//this->Function_call->get_FunctionNode()->setOffset(this->getFrameSize());
 		if (Function_call)
 		{
-			MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 			MIPS_ASM::jal(this->Function_call->get_label());
+
+			
 			func_vec.push_back(this->Function_call->get_FunctionNode());
 			this->Function_call->get_FunctionNode()->before_generateCode();
 			this->my_type = this->Function_call->get_FunctionNode()->my_type;
+			if (this->Function_call->has_return)
+				MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			else
+				MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			if (this->my_type == "string")
 			{
 				this->string_val = this->Function_call->get_FunctionNode()->string_val;

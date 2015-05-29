@@ -1337,7 +1337,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
-					cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<endl;
+					cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
 					if((visit_num==1)&&(!constant))
 					{
 						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
@@ -1349,12 +1349,14 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 							//cout<<"hellow world  "<<v->get_name()<<endl;
 							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 							cout<<"last node"<<endl;	
-							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							
 						}
 						else
 						{
 							$<tn>$=$<tn>1;
 						} 
+						temp_id2.pop_back();	
 					}
 					else if((!constant)&&(!is_list))
 					{
@@ -1375,7 +1377,8 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						is_list=false;
 						if(v!=NULL)
 						{
-							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+							temp_id2.pop_back();		
 						}
 						else
 						{
@@ -1467,6 +1470,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									//temp_id2.push_back($<r.strVal>1);
 									visit_num++;
 									parameters.clear();
+									cout<<"enter in name()"<<endl;
 									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									} 
 		| NAME '(' exprlist ')' { Streams::verbose() <<"atom: NAME\n";
@@ -2271,7 +2275,7 @@ default_arg: in_default test {parameters.push_back($<r.strVal>1);Streams::verbos
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					if(strcmp($<r.strVal>1),"self")!=0)
+					if(strcmp($<r.strVal>1,"self")!=0)
 						amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
