@@ -381,10 +381,10 @@ public:
 							cout << "Error: Function should by public" << x << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
 						}
 						static_cast<CallFunctionNode*>(temp)->set_function(f);
-						if (f->getparameters().size() != 0)
-						{
-
-						}
+						//if (f->getparameters().size() != 0)
+						//{
+							static_cast<CallFunctionNode*>(temp)->parameter_Matched(f);
+						//}
 					}
 					by_self = false;
 				}

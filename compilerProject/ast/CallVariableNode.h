@@ -5,7 +5,7 @@
 #include"..\ST\Variable.h"
 #include<sstream>
 //#include"ast\CallVariableNode.h"
-#include"callFunctionNode.h"
+//#include"callFunctionNode.h"
 #include"ArrayElementNode.h"
 #include"IDNode.h"
 #include"ClassNode.h"

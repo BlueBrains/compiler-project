@@ -13,6 +13,10 @@ public:
 	{
 		return this->function_node;
 	}
+	vector<Node*> get_parameter()
+	{
+		return this->df_par;
+	}
 	void set_hasReturn(bool r)
 	{
 		this->has_return = true;
