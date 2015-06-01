@@ -18,8 +18,10 @@ stringstream MIPS_ASM::main;
 ofstream ofs("AssemblyCode.asm", std::ofstream::out);
 FILE * MIPS_ASM::file = fopen("AssemblyCode.asm", "w");
 int MIPS_ASM::strings_count = 0;
+int MIPS_ASM::arrays_count = 0;
 map<string, int> strings;
 const string stringsLabelPrefix = "string_";
+const string arrayLabelPrefix = "array_";
 void MIPS_ASM::add_instruction(string c)
 {
 
@@ -39,6 +41,12 @@ string  MIPS_ASM::addStringAdressLabel()
 	int x = ++strings_count;
 	add_data(stringsLabelPrefix + std::to_string(x) + ": .space 1024 \n");
 	return stringsLabelPrefix + std::to_string(x);
+}
+string  MIPS_ASM::addArrayAdressLabel(int size)
+{
+	int x = ++arrays_count;
+	add_Arraydata(arrayLabelPrefix + std::to_string(x) + ": .space "+std::to_string(size)+" \n");
+	return arrayLabelPrefix + std::to_string(x);
 }
 void  MIPS_ASM::mult_string()
 {
@@ -109,6 +117,15 @@ void MIPS_ASM::add_data(string c)
 	data << c;
 
 }
+void MIPS_ASM::add_Arraydata(string c)
+{
+	string ss = data.str();
+	c += ss;
+	data = stringstream();
+	data << c;
+
+}
+
 void MIPS_ASM::addMainInstruction(string c)
 {
 	main << c;

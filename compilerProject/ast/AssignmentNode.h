@@ -62,6 +62,10 @@ public:
 
 	}
 	virtual void before_generateCode(){
+		if (left_side->getNodeType() == "ArrayElementNode")
+		{
+			static_cast<ArrayElementNode*>(left_side)->from_left = true;
+		}
 		right_side->before_generateCode();
 		left_side->before_generateCode();
 		left_side->my_type = right_side->my_type;
@@ -77,12 +81,17 @@ public:
 				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->type_val);
 			}
 		}
+		
 	}
 	virtual void generateCode()
 	{
 		string t1 = "t1";
 		string t0 = "t0";
 		string mem_addr = "sp";
+		if (left_side->getNodeType() == "ArrayElementNode")
+		{
+			static_cast<ArrayElementNode*>(left_side)->from_left = true;
+		}
 		MIPS_ASM::printComment("Assign node");
 		
 		MIPS_ASM::printComment("Assign node RHS:");

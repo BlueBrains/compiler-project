@@ -385,7 +385,7 @@ Grammar
 
   286 trailer: '.' NAME
   287        | '.' NAME '(' ')'
-  288        | '.' NAME '(' exprlist ')'
+  288        | '.' NAME inside_func exprlist ')'
   289        | '.' NAME '[' subscriptlist ']'
 
   290 comma_subscript_seq: ',' subscript
@@ -556,9 +556,9 @@ Terminals, with rules where they appear
 $end (0) 0
 '%' (37) 233 237
 '&' (38) 215 216
-'(' (40) 39 41 53 54 253 254 260 261 287 288 356 357 358 359 360 361
-    362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377
-    378 379 380 381 382 383 384 385 386 387
+'(' (40) 39 41 53 54 253 254 260 261 287 356 357 358 359 360 361 362
+    363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378
+    379 380 381 382 383 384 385 386 387
 ')' (41) 40 41 53 54 253 254 260 261 287 288 356 357 358 359 360 361
     362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377
     378 379 380 381 382 383 384 385 386 387
@@ -712,7 +712,7 @@ funcheader (117)
     on left: 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
     26 27 28 29 30 31 32 33 34 35 36 37 38, on right: 6
 inside_func (118)
-    on left: 39, on right: 40
+    on left: 39, on right: 40 288
 parameters (119)
     on left: 40 41, on right: 7 8 9 10 11 12 13 14 15 16 17 18 19 20
     21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
@@ -4960,7 +4960,7 @@ State 241
 
   286 trailer: '.' . NAME
   287        | '.' . NAME '(' ')'
-  288        | '.' . NAME '(' exprlist ')'
+  288        | '.' . NAME inside_func exprlist ')'
   289        | '.' . NAME '[' subscriptlist ']'
 
     NAME  shift, and go to state 368
@@ -7275,13 +7275,15 @@ State 368
 
   286 trailer: '.' NAME .
   287        | '.' NAME . '(' ')'
-  288        | '.' NAME . '(' exprlist ')'
+  288        | '.' NAME . inside_func exprlist ')'
   289        | '.' NAME . '[' subscriptlist ']'
 
     '('  shift, and go to state 487
     '['  shift, and go to state 488
 
     $default  reduce using rule 286 (trailer)
+
+    inside_func  go to state 489
 
 
 State 369
@@ -7305,7 +7307,7 @@ State 369
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    factor   go to state 489
+    factor   go to state 490
     power    go to state 112
     str_seq  go to state 113
     atom     go to state 114
@@ -7343,21 +7345,21 @@ State 374
 
   372 classheader: CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 490
+    ':'  shift, and go to state 491
 
 
 State 375
 
   359 classheader: FINAL CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 491
+    ':'  shift, and go to state 492
 
 
 State 376
 
   375 classheader: FINAL CLASS NAME '(' dotted_as_names . ')' ':'
 
-    ')'  shift, and go to state 492
+    ')'  shift, and go to state 493
 
 
 State 377
@@ -7366,9 +7368,9 @@ State 377
   377            | FINAL STATIC CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 493
+    ')'   shift, and go to state 494
 
-    dotted_as_names  go to state 494
+    dotted_as_names  go to state 495
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7386,8 +7388,8 @@ State 379
   365            | FINAL STATIC access CLASS NAME . '(' ')' ':'
   381            | FINAL STATIC access CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 495
-    ':'  shift, and go to state 496
+    '('  shift, and go to state 496
+    ':'  shift, and go to state 497
 
 
 State 380
@@ -7396,9 +7398,9 @@ State 380
   379            | FINAL access CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 497
+    ')'   shift, and go to state 498
 
-    dotted_as_names  go to state 498
+    dotted_as_names  go to state 499
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7416,22 +7418,22 @@ State 382
   371            | FINAL access STATIC CLASS NAME . '(' ')' ':'
   387            | FINAL access STATIC CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 499
-    ':'  shift, and go to state 500
+    '('  shift, and go to state 500
+    ':'  shift, and go to state 501
 
 
 State 383
 
   358 classheader: STATIC CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 501
+    ':'  shift, and go to state 502
 
 
 State 384
 
   374 classheader: STATIC CLASS NAME '(' dotted_as_names . ')' ':'
 
-    ')'  shift, and go to state 502
+    ')'  shift, and go to state 503
 
 
 State 385
@@ -7440,9 +7442,9 @@ State 385
   376            | STATIC FINAL CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 503
+    ')'   shift, and go to state 504
 
-    dotted_as_names  go to state 504
+    dotted_as_names  go to state 505
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7460,8 +7462,8 @@ State 387
   364            | STATIC FINAL access CLASS NAME . '(' ')' ':'
   380            | STATIC FINAL access CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 505
-    ':'  shift, and go to state 506
+    '('  shift, and go to state 506
+    ':'  shift, and go to state 507
 
 
 State 388
@@ -7470,9 +7472,9 @@ State 388
   378            | STATIC access CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 507
+    ')'   shift, and go to state 508
 
-    dotted_as_names  go to state 508
+    dotted_as_names  go to state 509
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7490,22 +7492,22 @@ State 390
   370            | STATIC access FINAL CLASS NAME . '(' ')' ':'
   386            | STATIC access FINAL CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 509
-    ':'  shift, and go to state 510
+    '('  shift, and go to state 510
+    ':'  shift, and go to state 511
 
 
 State 391
 
   357 classheader: access CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 511
+    ':'  shift, and go to state 512
 
 
 State 392
 
   373 classheader: access CLASS NAME '(' dotted_as_names . ')' ':'
 
-    ')'  shift, and go to state 512
+    ')'  shift, and go to state 513
 
 
 State 393
@@ -7514,9 +7516,9 @@ State 393
   383            | access FINAL CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 513
+    ')'   shift, and go to state 514
 
-    dotted_as_names  go to state 514
+    dotted_as_names  go to state 515
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7534,8 +7536,8 @@ State 395
   369            | access FINAL STATIC CLASS NAME . '(' ')' ':'
   385            | access FINAL STATIC CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 515
-    ':'  shift, and go to state 516
+    '('  shift, and go to state 516
+    ':'  shift, and go to state 517
 
 
 State 396
@@ -7544,9 +7546,9 @@ State 396
   382            | access STATIC CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 517
+    ')'   shift, and go to state 518
 
-    dotted_as_names  go to state 518
+    dotted_as_names  go to state 519
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
@@ -7564,8 +7566,8 @@ State 398
   368            | access STATIC FINAL CLASS NAME . '(' ')' ':'
   384            | access STATIC FINAL CLASS NAME . '(' dotted_as_names ')' ':'
 
-    '('  shift, and go to state 519
-    ':'  shift, and go to state 520
+    '('  shift, and go to state 520
+    ':'  shift, and go to state 521
 
 
 State 399
@@ -7579,7 +7581,7 @@ State 399
     $default  reduce using rule 132 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 521
+    parameters   go to state 522
 
 
 State 400
@@ -7592,7 +7594,7 @@ State 400
   381            | FINAL STATIC access . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 254
-    NAME   shift, and go to state 522
+    NAME   shift, and go to state 523
 
 
 State 401
@@ -7600,8 +7602,8 @@ State 401
    12 funcheader: DEF FINAL NAME parameters . ARROW test ':'
    14           | DEF FINAL NAME parameters . ':'
 
-    ARROW  shift, and go to state 523
-    ':'    shift, and go to state 524
+    ARROW  shift, and go to state 524
+    ':'    shift, and go to state 525
 
 
 State 402
@@ -7614,7 +7616,7 @@ State 402
   387            | FINAL access STATIC . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 256
-    NAME   shift, and go to state 525
+    NAME   shift, and go to state 526
 
 
 State 403
@@ -7628,7 +7630,7 @@ State 403
     $default  reduce using rule 134 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 526
+    parameters   go to state 527
 
 
 State 404
@@ -7642,7 +7644,7 @@ State 404
     $default  reduce using rule 131 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 527
+    parameters   go to state 528
 
 
 State 405
@@ -7655,7 +7657,7 @@ State 405
   380            | STATIC FINAL access . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 260
-    NAME   shift, and go to state 528
+    NAME   shift, and go to state 529
 
 
 State 406
@@ -7663,8 +7665,8 @@ State 406
    11 funcheader: DEF STATIC NAME parameters . ARROW test ':'
    13           | DEF STATIC NAME parameters . ':'
 
-    ARROW  shift, and go to state 529
-    ':'    shift, and go to state 530
+    ARROW  shift, and go to state 530
+    ':'    shift, and go to state 531
 
 
 State 407
@@ -7677,7 +7679,7 @@ State 407
   386            | STATIC access FINAL . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 262
-    NAME   shift, and go to state 531
+    NAME   shift, and go to state 532
 
 
 State 408
@@ -7691,7 +7693,7 @@ State 408
     $default  reduce using rule 133 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 532
+    parameters   go to state 533
 
 
 State 409
@@ -7723,7 +7725,7 @@ State 410
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 533
+    test        go to state 534
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -7767,7 +7769,7 @@ State 411
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 534
+    test        go to state 535
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -7791,11 +7793,11 @@ State 412
   421         | test . comp_for
 
     FOR  shift, and go to state 302
-    '='  shift, and go to state 535
+    '='  shift, and go to state 536
 
     $default  reduce using rule 420 (argument)
 
-    comp_for  go to state 536
+    comp_for  go to state 537
 
 
 State 413
@@ -7816,7 +7818,7 @@ State 413
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
     TRUE          shift, and go to state 42
-    STAR_2        shift, and go to state 537
+    STAR_2        shift, and go to state 538
     NUMBER_INT    shift, and go to state 43
     NUMBER_LONG   shift, and go to state 44
     NUMBER_FLOAT  shift, and go to state 45
@@ -7829,7 +7831,7 @@ State 413
     '['           shift, and go to state 61
     '+'           shift, and go to state 62
     '-'           shift, and go to state 63
-    '*'           shift, and go to state 538
+    '*'           shift, and go to state 539
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
@@ -7848,17 +7850,17 @@ State 413
     power                  go to state 112
     str_seq                go to state 113
     atom                   go to state 114
-    default_arg_comma_seq  go to state 539
+    default_arg_comma_seq  go to state 540
     in_default             go to state 416
-    default_arg            go to state 540
-    argument               go to state 541
+    default_arg            go to state 541
+    argument               go to state 542
 
 
 State 414
 
    40 parameters: inside_func arglist . ')'
 
-    ')'  shift, and go to state 542
+    ')'  shift, and go to state 543
 
 
 State 415
@@ -7884,7 +7886,7 @@ State 415
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test         go to state 543
+    test         go to state 544
     or_test      go to state 100
     and_test     go to state 101
     not_test     go to state 102
@@ -7900,7 +7902,7 @@ State 415
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 544
+    default_arg  go to state 545
 
 
 State 416
@@ -7925,7 +7927,7 @@ State 416
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 545
+    test        go to state 546
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -7947,7 +7949,7 @@ State 417
   393 arglist: default_arg .
   416 default_arg_comma_seq: default_arg . ','
 
-    ','  shift, and go to state 546
+    ','  shift, and go to state 547
 
     $default  reduce using rule 393 (arglist)
 
@@ -7958,7 +7960,7 @@ State 418
   392 arglist: argument .
   394        | argument . ','
 
-    ','  shift, and go to state 547
+    ','  shift, and go to state 548
 
     $default  reduce using rule 392 (arglist)
 
@@ -7985,7 +7987,7 @@ State 419
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 548
+    test        go to state 549
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -8019,7 +8021,7 @@ State 421
   385            | access FINAL STATIC . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 266
-    NAME   shift, and go to state 549
+    NAME   shift, and go to state 550
 
 
 State 422
@@ -8033,7 +8035,7 @@ State 422
     $default  reduce using rule 138 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 550
+    parameters   go to state 551
 
 
 State 423
@@ -8046,7 +8048,7 @@ State 423
   384            | access STATIC FINAL . CLASS NAME '(' dotted_as_names ')' ':'
 
     CLASS  shift, and go to state 268
-    NAME   shift, and go to state 551
+    NAME   shift, and go to state 552
 
 
 State 424
@@ -8060,7 +8062,7 @@ State 424
     $default  reduce using rule 137 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 552
+    parameters   go to state 553
 
 
 State 425
@@ -8068,8 +8070,8 @@ State 425
     8 funcheader: DEF access NAME parameters . ARROW test ':'
    10           | DEF access NAME parameters . ':'
 
-    ARROW  shift, and go to state 553
-    ':'    shift, and go to state 554
+    ARROW  shift, and go to state 554
+    ':'    shift, and go to state 555
 
 
 State 426
@@ -8112,8 +8114,8 @@ State 428
 
     $default  reduce using rule 318 (exprlist)
 
-    star_expr   go to state 555
-    expr        go to state 556
+    star_expr   go to state 556
+    expr        go to state 557
     xor_expr    go to state 106
     and_expr    go to state 107
     shift_expr  go to state 108
@@ -8151,8 +8153,8 @@ State 429
 
     $default  reduce using rule 316 (exprlist)
 
-    star_expr   go to state 555
-    expr        go to state 556
+    star_expr   go to state 556
+    expr        go to state 557
     xor_expr    go to state 106
     and_expr    go to state 107
     shift_expr  go to state 108
@@ -8175,7 +8177,7 @@ State 431
 
   115 comma_name_seq: comma_name_seq ',' . NAME
 
-    NAME  shift, and go to state 557
+    NAME  shift, and go to state 558
 
 
 State 432
@@ -8210,7 +8212,7 @@ State 433
 
     $default  reduce using rule 305 (sliceop)
 
-    test        go to state 558
+    test        go to state 559
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -8236,7 +8238,7 @@ State 434
 
     $default  reduce using rule 302 (subscript)
 
-    sliceop  go to state 559
+    sliceop  go to state 560
 
 
 State 435
@@ -8274,7 +8276,7 @@ State 436
 
     $default  reduce using rule 298 (subscript)
 
-    test        go to state 560
+    test        go to state 561
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -8289,7 +8291,7 @@ State 436
     power       go to state 112
     str_seq     go to state 113
     atom        go to state 114
-    sliceop     go to state 561
+    sliceop     go to state 562
 
 
 State 437
@@ -8340,7 +8342,7 @@ State 438
     power       go to state 112
     str_seq     go to state 113
     atom        go to state 114
-    subscript   go to state 562
+    subscript   go to state 563
 
 
 State 439
@@ -8349,7 +8351,7 @@ State 439
   293 subscriptlist: subscript comma_subscript_seq .
   295              | subscript comma_subscript_seq . ','
 
-    ','  shift, and go to state 563
+    ','  shift, and go to state 564
 
     $default  reduce using rule 293 (subscriptlist)
 
@@ -8390,7 +8392,7 @@ State 442
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    with_item   go to state 564
+    with_item   go to state 565
     test        go to state 154
     or_test     go to state 100
     and_test    go to state 101
@@ -8480,7 +8482,7 @@ State 443
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 565
+    suite                 go to state 566
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -8515,7 +8517,7 @@ State 445
 
     $default  reduce using rule 319 (comma_test)
 
-    comma_test  go to state 566
+    comma_test  go to state 567
 
 
 State 446
@@ -8530,7 +8532,7 @@ State 447
   424 comp_for: FOR exprlist . IN or_test
   425         | FOR exprlist . IN or_test comp_iter
 
-    IN  shift, and go to state 567
+    IN  shift, and go to state 568
 
 
 State 448
@@ -8574,12 +8576,12 @@ State 450
 
     $default  reduce using rule 280 (testlist_comp)
 
-    test        go to state 568
+    test        go to state 569
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
     comparison  go to state 103
-    star_expr   go to state 569
+    star_expr   go to state 570
     expr        go to state 105
     xor_expr    go to state 106
     and_expr    go to state 107
@@ -8619,12 +8621,12 @@ State 451
 
     $default  reduce using rule 285 (testlist_comp)
 
-    test        go to state 568
+    test        go to state 569
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
     comparison  go to state 103
-    star_expr   go to state 569
+    star_expr   go to state 570
     expr        go to state 105
     xor_expr    go to state 106
     and_expr    go to state 107
@@ -8653,12 +8655,12 @@ State 453
   333               | test ':' test . comma_test_colon_test_seq ','
 
     FOR  shift, and go to state 302
-    ','  shift, and go to state 570
+    ','  shift, and go to state 571
 
     $default  reduce using rule 330 (dictorsetmaker)
 
-    comma_test_colon_test_seq  go to state 571
-    comp_for                   go to state 572
+    comma_test_colon_test_seq  go to state 572
+    comp_for                   go to state 573
 
 
 State 454
@@ -8686,7 +8688,7 @@ State 454
 
     $default  reduce using rule 338 (dictorsetmaker)
 
-    test        go to state 573
+    test        go to state 574
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -8709,9 +8711,9 @@ State 455
    54           | input_choise '(' . ')'
 
     STRING  shift, and go to state 53
-    ')'     shift, and go to state 574
+    ')'     shift, and go to state 575
 
-    str_seq  go to state 575
+    str_seq  go to state 576
 
 
 State 456
@@ -8732,7 +8734,7 @@ State 458
 
   145 elif_header: ELIF test . ':'
 
-    ':'  shift, and go to state 576
+    ':'  shift, and go to state 577
 
 
 State 459
@@ -8807,7 +8809,7 @@ State 459
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 577
+    suite                 go to state 578
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -8898,7 +8900,7 @@ State 460
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 578
+    suite                 go to state 579
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -9003,7 +9005,7 @@ State 463
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 579
+    suite                 go to state 580
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -9095,7 +9097,7 @@ State 464
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 580
+    suite                 go to state 581
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -9126,7 +9128,7 @@ State 466
   173 except_clause: EXCEPT test .
   174              | EXCEPT test . AS NAME
 
-    AS  shift, and go to state 581
+    AS  shift, and go to state 582
 
     $default  reduce using rule 173 (except_clause)
 
@@ -9142,7 +9144,7 @@ State 468
 
   160 try_stmt: try_header suite try_except_cla_seq ELSE . ':' suite
 
-    ':'  shift, and go to state 582
+    ':'  shift, and go to state 583
 
 
 State 469
@@ -9217,7 +9219,7 @@ State 469
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 583
+    suite                 go to state 584
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -9240,7 +9242,7 @@ State 470
 
   165 try_except_cla_seq: try_except_cla_seq except_clause . ':' suite
 
-    ':'  shift, and go to state 584
+    ':'  shift, and go to state 585
 
 
 State 471
@@ -9315,7 +9317,7 @@ State 471
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 585
+    suite                 go to state 586
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -9356,7 +9358,7 @@ State 472
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 586
+    test        go to state 587
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -9473,40 +9475,12 @@ State 486
 
 State 487
 
+   39 inside_func: '(' .
   287 trailer: '.' NAME '(' . ')'
-  288        | '.' NAME '(' . exprlist ')'
 
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '*'           shift, and go to state 64
-    ')'           shift, and go to state 587
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
+    ')'  shift, and go to state 588
 
-    star_expr   go to state 146
-    expr        go to state 147
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
-    exprlist    go to state 588
+    $default  reduce using rule 39 (inside_func)
 
 
 State 488
@@ -9553,274 +9527,310 @@ State 488
 
 State 489
 
+  288 trailer: '.' NAME inside_func . exprlist ')'
+
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '*'           shift, and go to state 64
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    star_expr   go to state 146
+    expr        go to state 147
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+    exprlist    go to state 590
+
+
+State 490
+
   249 power: atom trailer_seq STAR_2 factor .
 
     $default  reduce using rule 249 (power)
 
 
-State 490
+State 491
 
   372 classheader: CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 372 (classheader)
 
 
-State 491
+State 492
 
   359 classheader: FINAL CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 359 (classheader)
 
 
-State 492
-
-  375 classheader: FINAL CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 590
-
-
 State 493
 
-  361 classheader: FINAL STATIC CLASS NAME '(' ')' . ':'
+  375 classheader: FINAL CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 591
 
 
 State 494
 
-  377 classheader: FINAL STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+  361 classheader: FINAL STATIC CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 592
+    ':'  shift, and go to state 592
 
 
 State 495
+
+  377 classheader: FINAL STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 593
+
+
+State 496
 
   365 classheader: FINAL STATIC access CLASS NAME '(' . ')' ':'
   381            | FINAL STATIC access CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 593
+    ')'   shift, and go to state 594
 
-    dotted_as_names  go to state 594
+    dotted_as_names  go to state 595
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 496
+State 497
 
   349 classheader: FINAL STATIC access CLASS NAME ':' .
 
     $default  reduce using rule 349 (classheader)
 
 
-State 497
+State 498
 
   363 classheader: FINAL access CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 595
-
-
-State 498
-
-  379 classheader: FINAL access CLASS NAME '(' dotted_as_names . ')' ':'
-
-    ')'  shift, and go to state 596
+    ':'  shift, and go to state 596
 
 
 State 499
+
+  379 classheader: FINAL access CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 597
+
+
+State 500
 
   371 classheader: FINAL access STATIC CLASS NAME '(' . ')' ':'
   387            | FINAL access STATIC CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 597
+    ')'   shift, and go to state 598
 
-    dotted_as_names  go to state 598
+    dotted_as_names  go to state 599
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 500
+State 501
 
   355 classheader: FINAL access STATIC CLASS NAME ':' .
 
     $default  reduce using rule 355 (classheader)
 
 
-State 501
+State 502
 
   358 classheader: STATIC CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 358 (classheader)
 
 
-State 502
-
-  374 classheader: STATIC CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 599
-
-
 State 503
 
-  360 classheader: STATIC FINAL CLASS NAME '(' ')' . ':'
+  374 classheader: STATIC CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 600
 
 
 State 504
 
-  376 classheader: STATIC FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+  360 classheader: STATIC FINAL CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 601
+    ':'  shift, and go to state 601
 
 
 State 505
+
+  376 classheader: STATIC FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 602
+
+
+State 506
 
   364 classheader: STATIC FINAL access CLASS NAME '(' . ')' ':'
   380            | STATIC FINAL access CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 602
+    ')'   shift, and go to state 603
 
-    dotted_as_names  go to state 603
+    dotted_as_names  go to state 604
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 506
+State 507
 
   348 classheader: STATIC FINAL access CLASS NAME ':' .
 
     $default  reduce using rule 348 (classheader)
 
 
-State 507
+State 508
 
   362 classheader: STATIC access CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 604
-
-
-State 508
-
-  378 classheader: STATIC access CLASS NAME '(' dotted_as_names . ')' ':'
-
-    ')'  shift, and go to state 605
+    ':'  shift, and go to state 605
 
 
 State 509
+
+  378 classheader: STATIC access CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 606
+
+
+State 510
 
   370 classheader: STATIC access FINAL CLASS NAME '(' . ')' ':'
   386            | STATIC access FINAL CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 606
+    ')'   shift, and go to state 607
 
-    dotted_as_names  go to state 607
+    dotted_as_names  go to state 608
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 510
+State 511
 
   354 classheader: STATIC access FINAL CLASS NAME ':' .
 
     $default  reduce using rule 354 (classheader)
 
 
-State 511
+State 512
 
   357 classheader: access CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 357 (classheader)
 
 
-State 512
-
-  373 classheader: access CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 608
-
-
 State 513
 
-  367 classheader: access FINAL CLASS NAME '(' ')' . ':'
+  373 classheader: access CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 609
 
 
 State 514
 
-  383 classheader: access FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+  367 classheader: access FINAL CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 610
+    ':'  shift, and go to state 610
 
 
 State 515
+
+  383 classheader: access FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 611
+
+
+State 516
 
   369 classheader: access FINAL STATIC CLASS NAME '(' . ')' ':'
   385            | access FINAL STATIC CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 611
+    ')'   shift, and go to state 612
 
-    dotted_as_names  go to state 612
+    dotted_as_names  go to state 613
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 516
+State 517
 
   353 classheader: access FINAL STATIC CLASS NAME ':' .
 
     $default  reduce using rule 353 (classheader)
 
 
-State 517
+State 518
 
   366 classheader: access STATIC CLASS NAME '(' ')' . ':'
 
-    ':'  shift, and go to state 613
-
-
-State 518
-
-  382 classheader: access STATIC CLASS NAME '(' dotted_as_names . ')' ':'
-
-    ')'  shift, and go to state 614
+    ':'  shift, and go to state 614
 
 
 State 519
+
+  382 classheader: access STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 615
+
+
+State 520
 
   368 classheader: access STATIC FINAL CLASS NAME '(' . ')' ':'
   384            | access STATIC FINAL CLASS NAME '(' . dotted_as_names ')' ':'
 
     NAME  shift, and go to state 16
-    ')'   shift, and go to state 615
+    ')'   shift, and go to state 616
 
-    dotted_as_names  go to state 616
+    dotted_as_names  go to state 617
     dotted_as_name   go to state 18
     dotted_name      go to state 19
 
 
-State 520
+State 521
 
   352 classheader: access STATIC FINAL CLASS NAME ':' .
 
     $default  reduce using rule 352 (classheader)
 
 
-State 521
+State 522
 
    16 funcheader: DEF FINAL STATIC NAME parameters . ARROW test ':'
    18           | DEF FINAL STATIC NAME parameters . ':'
 
-    ARROW  shift, and go to state 617
-    ':'    shift, and go to state 618
+    ARROW  shift, and go to state 618
+    ':'    shift, and go to state 619
 
 
-State 522
+State 523
 
    24 funcheader: DEF FINAL STATIC access NAME . parameters ARROW test ':'
    26           | DEF FINAL STATIC access NAME . parameters ':'
@@ -9831,10 +9841,10 @@ State 522
     $default  reduce using rule 136 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 619
+    parameters   go to state 620
 
 
-State 523
+State 524
 
    12 funcheader: DEF FINAL NAME parameters ARROW . test ':'
 
@@ -9856,7 +9866,7 @@ State 523
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 620
+    test        go to state 621
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -9873,14 +9883,14 @@ State 523
     atom        go to state 114
 
 
-State 524
+State 525
 
    14 funcheader: DEF FINAL NAME parameters ':' .
 
     $default  reduce using rule 14 (funcheader)
 
 
-State 525
+State 526
 
    36 funcheader: DEF FINAL access STATIC NAME . parameters ARROW test ':'
    38           | DEF FINAL access STATIC NAME . parameters ':'
@@ -9891,28 +9901,28 @@ State 525
     $default  reduce using rule 142 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 621
-
-
-State 526
-
-   19 funcheader: DEF FINAL access NAME parameters . ARROW test ':'
-   22           | DEF FINAL access NAME parameters . ':'
-
-    ARROW  shift, and go to state 622
-    ':'    shift, and go to state 623
+    parameters   go to state 622
 
 
 State 527
 
-   15 funcheader: DEF STATIC FINAL NAME parameters . ARROW test ':'
-   17           | DEF STATIC FINAL NAME parameters . ':'
+   19 funcheader: DEF FINAL access NAME parameters . ARROW test ':'
+   22           | DEF FINAL access NAME parameters . ':'
 
-    ARROW  shift, and go to state 624
-    ':'    shift, and go to state 625
+    ARROW  shift, and go to state 623
+    ':'    shift, and go to state 624
 
 
 State 528
+
+   15 funcheader: DEF STATIC FINAL NAME parameters . ARROW test ':'
+   17           | DEF STATIC FINAL NAME parameters . ':'
+
+    ARROW  shift, and go to state 625
+    ':'    shift, and go to state 626
+
+
+State 529
 
    23 funcheader: DEF STATIC FINAL access NAME . parameters ARROW test ':'
    25           | DEF STATIC FINAL access NAME . parameters ':'
@@ -9923,10 +9933,10 @@ State 528
     $default  reduce using rule 135 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 626
+    parameters   go to state 627
 
 
-State 529
+State 530
 
    11 funcheader: DEF STATIC NAME parameters ARROW . test ':'
 
@@ -9948,7 +9958,7 @@ State 529
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 627
+    test        go to state 628
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -9965,14 +9975,14 @@ State 529
     atom        go to state 114
 
 
-State 530
+State 531
 
    13 funcheader: DEF STATIC NAME parameters ':' .
 
     $default  reduce using rule 13 (funcheader)
 
 
-State 531
+State 532
 
    35 funcheader: DEF STATIC access FINAL NAME . parameters ARROW test ':'
    37           | DEF STATIC access FINAL NAME . parameters ':'
@@ -9983,26 +9993,26 @@ State 531
     $default  reduce using rule 141 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 628
+    parameters   go to state 629
 
 
-State 532
+State 533
 
    20 funcheader: DEF STATIC access NAME parameters . ARROW test ':'
    21           | DEF STATIC access NAME parameters . ':'
 
-    ARROW  shift, and go to state 629
-    ':'    shift, and go to state 630
+    ARROW  shift, and go to state 630
+    ':'    shift, and go to state 631
 
 
-State 533
+State 534
 
   401 arglist: STAR_2 test .
 
     $default  reduce using rule 401 (arglist)
 
 
-State 534
+State 535
 
   395 arglist: '*' test .
   396        | '*' test . ',' STAR_2 test
@@ -10011,75 +10021,31 @@ State 534
   399        | '*' test . comma_arg_seq comma_default_arg_seq
   400        | '*' test . comma_arg_seq ',' STAR_2 test
 
-    ','  shift, and go to state 631
+    ','  shift, and go to state 632
 
     $default  reduce using rule 395 (arglist)
 
-    comma_arg_seq          go to state 632
-    comma_default_arg_seq  go to state 633
+    comma_arg_seq          go to state 633
+    comma_default_arg_seq  go to state 634
 
 
-State 535
+State 536
 
   418 in_default: test '=' .
 
     $default  reduce using rule 418 (in_default)
 
 
-State 536
+State 537
 
   421 argument: test comp_for .
 
     $default  reduce using rule 421 (argument)
 
 
-State 537
-
-  412 arglist: arg_comma_seq STAR_2 . test
-
-    NOT           shift, and go to state 34
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    test        go to state 634
-    or_test     go to state 100
-    and_test    go to state 101
-    not_test    go to state 102
-    comparison  go to state 103
-    expr        go to state 105
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
-
-
 State 538
 
-  406 arglist: arg_comma_seq '*' . test
-  407        | arg_comma_seq '*' . test ',' STAR_2 test
-  408        | arg_comma_seq '*' . test comma_arg_seq
-  409        | arg_comma_seq '*' . test comma_default_arg_seq
-  410        | arg_comma_seq '*' . test comma_arg_seq comma_default_arg_seq
-  411        | arg_comma_seq '*' . test comma_arg_seq ',' STAR_2 test
+  412 arglist: arg_comma_seq STAR_2 . test
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -10118,6 +10084,50 @@ State 538
 
 State 539
 
+  406 arglist: arg_comma_seq '*' . test
+  407        | arg_comma_seq '*' . test ',' STAR_2 test
+  408        | arg_comma_seq '*' . test comma_arg_seq
+  409        | arg_comma_seq '*' . test comma_default_arg_seq
+  410        | arg_comma_seq '*' . test comma_arg_seq comma_default_arg_seq
+  411        | arg_comma_seq '*' . test comma_arg_seq ',' STAR_2 test
+
+    NOT           shift, and go to state 34
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    test        go to state 636
+    or_test     go to state 100
+    and_test    go to state 101
+    not_test    go to state 102
+    comparison  go to state 103
+    expr        go to state 105
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+
+
+State 540
+
   404 arglist: arg_comma_seq default_arg_comma_seq . default_arg
   417 default_arg_comma_seq: default_arg_comma_seq . default_arg ','
 
@@ -10139,7 +10149,7 @@ State 539
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test         go to state 543
+    test         go to state 544
     or_test      go to state 100
     and_test     go to state 101
     not_test     go to state 102
@@ -10155,69 +10165,69 @@ State 539
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 636
+    default_arg  go to state 637
 
 
-State 540
+State 541
 
   403 arglist: arg_comma_seq default_arg .
   416 default_arg_comma_seq: default_arg . ','
 
-    ','  shift, and go to state 546
+    ','  shift, and go to state 547
 
     $default  reduce using rule 403 (arglist)
 
 
-State 541
+State 542
 
   389 arg_comma_seq: arg_comma_seq argument . ','
   402 arglist: arg_comma_seq argument .
   405        | arg_comma_seq argument . ','
 
-    ','  shift, and go to state 637
+    ','  shift, and go to state 638
 
     $default  reduce using rule 402 (arglist)
 
 
-State 542
+State 543
 
    40 parameters: inside_func arglist ')' .
 
     $default  reduce using rule 40 (parameters)
 
 
-State 543
+State 544
 
   418 in_default: test . '='
 
-    '='  shift, and go to state 535
+    '='  shift, and go to state 536
 
 
-State 544
+State 545
 
   413 arglist: default_arg_comma_seq default_arg .
   417 default_arg_comma_seq: default_arg_comma_seq default_arg . ','
 
-    ','  shift, and go to state 638
+    ','  shift, and go to state 639
 
     $default  reduce using rule 413 (arglist)
 
 
-State 545
+State 546
 
   419 default_arg: in_default test .
 
     $default  reduce using rule 419 (default_arg)
 
 
-State 546
+State 547
 
   416 default_arg_comma_seq: default_arg ',' .
 
     $default  reduce using rule 416 (default_arg_comma_seq)
 
 
-State 547
+State 548
 
   388 arg_comma_seq: argument ',' .
   394 arglist: argument ',' .
@@ -10226,14 +10236,14 @@ State 547
     $default  reduce using rule 388 (arg_comma_seq)
 
 
-State 548
+State 549
 
     7 funcheader: DEF NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 639
+    ':'  shift, and go to state 640
 
 
-State 549
+State 550
 
    32 funcheader: DEF access FINAL STATIC NAME . parameters ARROW test ':'
    34           | DEF access FINAL STATIC NAME . parameters ':'
@@ -10244,19 +10254,19 @@ State 549
     $default  reduce using rule 140 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 640
+    parameters   go to state 641
 
 
-State 550
+State 551
 
    28 funcheader: DEF access FINAL NAME parameters . ARROW test ':'
    30           | DEF access FINAL NAME parameters . ':'
 
-    ARROW  shift, and go to state 641
-    ':'    shift, and go to state 642
+    ARROW  shift, and go to state 642
+    ':'    shift, and go to state 643
 
 
-State 551
+State 552
 
    31 funcheader: DEF access STATIC FINAL NAME . parameters ARROW test ':'
    33           | DEF access STATIC FINAL NAME . parameters ':'
@@ -10267,19 +10277,19 @@ State 551
     $default  reduce using rule 139 (vardef)
 
     inside_func  go to state 276
-    parameters   go to state 643
+    parameters   go to state 644
 
 
-State 552
+State 553
 
    27 funcheader: DEF access STATIC NAME parameters . ARROW test ':'
    29           | DEF access STATIC NAME parameters . ':'
 
-    ARROW  shift, and go to state 644
-    ':'    shift, and go to state 645
+    ARROW  shift, and go to state 645
+    ':'    shift, and go to state 646
 
 
-State 553
+State 554
 
     8 funcheader: DEF access NAME parameters ARROW . test ':'
 
@@ -10301,7 +10311,7 @@ State 553
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 646
+    test        go to state 647
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -10318,49 +10328,49 @@ State 553
     atom        go to state 114
 
 
-State 554
+State 555
 
    10 funcheader: DEF access NAME parameters ':' .
 
     $default  reduce using rule 10 (funcheader)
 
 
-State 555
+State 556
 
   310 comma_expr_star_seq: comma_expr_star_seq ',' star_expr .
 
     $default  reduce using rule 310 (comma_expr_star_seq)
 
 
-State 556
+State 557
 
   309 comma_expr_star_seq: comma_expr_star_seq ',' expr .
 
     $default  reduce using rule 309 (comma_expr_star_seq)
 
 
-State 557
+State 558
 
   115 comma_name_seq: comma_name_seq ',' NAME .
 
     $default  reduce using rule 115 (comma_name_seq)
 
 
-State 558
+State 559
 
   306 sliceop: ':' test .
 
     $default  reduce using rule 306 (sliceop)
 
 
-State 559
+State 560
 
   304 subscript: ':' test sliceop .
 
     $default  reduce using rule 304 (subscript)
 
 
-State 560
+State 561
 
   299 subscript: test ':' test .
   301          | test ':' test . sliceop
@@ -10369,24 +10379,24 @@ State 560
 
     $default  reduce using rule 299 (subscript)
 
-    sliceop  go to state 647
+    sliceop  go to state 648
 
 
-State 561
+State 562
 
   300 subscript: test ':' sliceop .
 
     $default  reduce using rule 300 (subscript)
 
 
-State 562
+State 563
 
   290 comma_subscript_seq: ',' subscript .
 
     $default  reduce using rule 290 (comma_subscript_seq)
 
 
-State 563
+State 564
 
   291 comma_subscript_seq: comma_subscript_seq ',' . subscript
   295 subscriptlist: subscript comma_subscript_seq ',' .
@@ -10427,31 +10437,31 @@ State 563
     power       go to state 112
     str_seq     go to state 113
     atom        go to state 114
-    subscript   go to state 648
+    subscript   go to state 649
 
 
-State 564
+State 565
 
   167 with_seq: with_seq ',' with_item .
 
     $default  reduce using rule 167 (with_seq)
 
 
-State 565
+State 566
 
   169 with_stmt: WITH with_item with_seq ':' suite .
 
     $default  reduce using rule 169 (with_stmt)
 
 
-State 566
+State 567
 
   320 comma_test: ',' test comma_test .
 
     $default  reduce using rule 320 (comma_test)
 
 
-State 567
+State 568
 
   424 comp_for: FOR exprlist IN . or_test
   425         | FOR exprlist IN . or_test comp_iter
@@ -10474,7 +10484,7 @@ State 567
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    or_test     go to state 649
+    or_test     go to state 650
     and_test    go to state 101
     not_test    go to state 102
     comparison  go to state 103
@@ -10490,21 +10500,21 @@ State 567
     atom        go to state 114
 
 
-State 568
+State 569
 
   274 comma_test_star_seq: comma_test_star_seq ',' test .
 
     $default  reduce using rule 274 (comma_test_star_seq)
 
 
-State 569
+State 570
 
   275 comma_test_star_seq: comma_test_star_seq ',' star_expr .
 
     $default  reduce using rule 275 (comma_test_star_seq)
 
 
-State 570
+State 571
 
   325 comma_test_colon_test_seq: ',' . test ':' test
   331 dictorsetmaker: test ':' test ',' .
@@ -10529,7 +10539,7 @@ State 570
 
     $default  reduce using rule 331 (dictorsetmaker)
 
-    test        go to state 650
+    test        go to state 651
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -10546,193 +10556,95 @@ State 570
     atom        go to state 114
 
 
-State 571
+State 572
 
   326 comma_test_colon_test_seq: comma_test_colon_test_seq . ',' test ':' test
   332 dictorsetmaker: test ':' test comma_test_colon_test_seq .
   333               | test ':' test comma_test_colon_test_seq . ','
 
-    ','  shift, and go to state 651
+    ','  shift, and go to state 652
 
     $default  reduce using rule 332 (dictorsetmaker)
 
 
-State 572
+State 573
 
   329 dictorsetmaker: test ':' test comp_for .
 
     $default  reduce using rule 329 (dictorsetmaker)
 
 
-State 573
+State 574
 
   328 comma_test_seq: comma_test_seq ',' test .
 
     $default  reduce using rule 328 (comma_test_seq)
 
 
-State 574
+State 575
 
    54 input_stmt: input_choise '(' ')' .
 
     $default  reduce using rule 54 (input_stmt)
 
 
-State 575
+State 576
 
    53 input_stmt: input_choise '(' str_seq . ')'
   252 str_seq: str_seq . STRING
 
     STRING  shift, and go to state 239
-    ')'     shift, and go to state 652
+    ')'     shift, and go to state 653
 
 
-State 576
+State 577
 
   145 elif_header: ELIF test ':' .
 
     $default  reduce using rule 145 (elif_header)
 
 
-State 577
+State 578
 
   144 elif_seq: elif_seq elif_header suite .
 
     $default  reduce using rule 144 (elif_seq)
 
 
-State 578
+State 579
 
   150 if_stmt: if_header suite elif_seq else_stmt suite .
 
     $default  reduce using rule 150 (if_stmt)
 
 
-State 579
+State 580
 
   153 while_stmt: while_header suite ELSE ':' suite .
 
     $default  reduce using rule 153 (while_stmt)
 
 
-State 580
+State 581
 
   155 for_stmt: for_header IN testlist ':' suite .
   156         | for_header IN testlist ':' suite . ELSE ':' suite
 
-    ELSE  shift, and go to state 653
+    ELSE  shift, and go to state 654
 
     $default  reduce using rule 155 (for_stmt)
 
 
-State 581
+State 582
 
   174 except_clause: EXCEPT test AS . NAME
 
-    NAME  shift, and go to state 654
-
-
-State 582
-
-  160 try_stmt: try_header suite try_except_cla_seq ELSE ':' . suite
-
-    IMPORT        shift, and go to state 1
-    END           shift, and go to state 33
-    NOT           shift, and go to state 34
-    DEF           shift, and go to state 35
-    IF            shift, and go to state 36
-    WHILE         shift, and go to state 37
-    FOR           shift, and go to state 38
-    TRY           shift, and go to state 39
-    NONLOCAL      shift, and go to state 40
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    WITH          shift, and go to state 48
-    DEL           shift, and go to state 49
-    RETURN        shift, and go to state 50
-    PRINT         shift, and go to state 51
-    GLOBAL        shift, and go to state 52
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    PASS          shift, and go to state 55
-    CHAR_VALUE    shift, and go to state 56
-    BREAK         shift, and go to state 57
-    CONTINUE      shift, and go to state 58
-    ','           shift, and go to state 59
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '*'           shift, and go to state 64
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    funcdef               go to state 67
-    funcheader            go to state 68
-    stmt                  go to state 69
-    simple_stmt           go to state 70
-    small_stmt            go to state 71
-    expr_stmt             go to state 72
-    testlist_star_expr    go to state 73
-    comma_test_star       go to state 74
-    comma_test_star_seqJ  go to state 75
-    print_stmt            go to state 76
-    del_stmt              go to state 77
-    pass_stmt             go to state 78
-    flow_stmt             go to state 79
-    break_stmt            go to state 80
-    continue_stmt         go to state 81
-    return_stmt           go to state 82
-    import_stmt           go to state 83
-    import_name           go to state 13
-    global_stmt           go to state 84
-    nonlocal_stmt         go to state 85
-    compound_stmt         go to state 86
-    vardef                go to state 87
-    if_stmt               go to state 88
-    if_header             go to state 89
-    while_stmt            go to state 90
-    while_header          go to state 91
-    for_stmt              go to state 92
-    for_header            go to state 93
-    try_header            go to state 94
-    try_stmt              go to state 95
-    with_stmt             go to state 96
-    list_stmt             go to state 97
-    suite                 go to state 655
-    test                  go to state 99
-    or_test               go to state 100
-    and_test              go to state 101
-    not_test              go to state 102
-    comparison            go to state 103
-    star_expr             go to state 104
-    expr                  go to state 105
-    xor_expr              go to state 106
-    and_expr              go to state 107
-    shift_expr            go to state 108
-    arith_expr            go to state 109
-    term                  go to state 110
-    factor                go to state 111
-    power                 go to state 112
-    str_seq               go to state 113
-    atom                  go to state 114
+    NAME  shift, and go to state 655
 
 
 State 583
 
-  161 try_stmt: try_header suite try_except_cla_seq finally_stmt suite .
-
-    $default  reduce using rule 161 (try_stmt)
-
-
-State 584
-
-  165 try_except_cla_seq: try_except_cla_seq except_clause ':' . suite
+  160 try_stmt: try_header suite try_except_cla_seq ELSE ':' . suite
 
     IMPORT        shift, and go to state 1
     END           shift, and go to state 33
@@ -10821,32 +10733,123 @@ State 584
     atom                  go to state 114
 
 
+State 584
+
+  161 try_stmt: try_header suite try_except_cla_seq finally_stmt suite .
+
+    $default  reduce using rule 161 (try_stmt)
+
+
 State 585
+
+  165 try_except_cla_seq: try_except_cla_seq except_clause ':' . suite
+
+    IMPORT        shift, and go to state 1
+    END           shift, and go to state 33
+    NOT           shift, and go to state 34
+    DEF           shift, and go to state 35
+    IF            shift, and go to state 36
+    WHILE         shift, and go to state 37
+    FOR           shift, and go to state 38
+    TRY           shift, and go to state 39
+    NONLOCAL      shift, and go to state 40
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    WITH          shift, and go to state 48
+    DEL           shift, and go to state 49
+    RETURN        shift, and go to state 50
+    PRINT         shift, and go to state 51
+    GLOBAL        shift, and go to state 52
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    PASS          shift, and go to state 55
+    CHAR_VALUE    shift, and go to state 56
+    BREAK         shift, and go to state 57
+    CONTINUE      shift, and go to state 58
+    ','           shift, and go to state 59
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '*'           shift, and go to state 64
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    funcdef               go to state 67
+    funcheader            go to state 68
+    stmt                  go to state 69
+    simple_stmt           go to state 70
+    small_stmt            go to state 71
+    expr_stmt             go to state 72
+    testlist_star_expr    go to state 73
+    comma_test_star       go to state 74
+    comma_test_star_seqJ  go to state 75
+    print_stmt            go to state 76
+    del_stmt              go to state 77
+    pass_stmt             go to state 78
+    flow_stmt             go to state 79
+    break_stmt            go to state 80
+    continue_stmt         go to state 81
+    return_stmt           go to state 82
+    import_stmt           go to state 83
+    import_name           go to state 13
+    global_stmt           go to state 84
+    nonlocal_stmt         go to state 85
+    compound_stmt         go to state 86
+    vardef                go to state 87
+    if_stmt               go to state 88
+    if_header             go to state 89
+    while_stmt            go to state 90
+    while_header          go to state 91
+    for_stmt              go to state 92
+    for_header            go to state 93
+    try_header            go to state 94
+    try_stmt              go to state 95
+    with_stmt             go to state 96
+    list_stmt             go to state 97
+    suite                 go to state 657
+    test                  go to state 99
+    or_test               go to state 100
+    and_test              go to state 101
+    not_test              go to state 102
+    comparison            go to state 103
+    star_expr             go to state 104
+    expr                  go to state 105
+    xor_expr              go to state 106
+    and_expr              go to state 107
+    shift_expr            go to state 108
+    arith_expr            go to state 109
+    term                  go to state 110
+    factor                go to state 111
+    power                 go to state 112
+    str_seq               go to state 113
+    atom                  go to state 114
+
+
+State 586
 
   164 try_except_cla_seq: except_clause ':' suite .
 
     $default  reduce using rule 164 (try_except_cla_seq)
 
 
-State 586
+State 587
 
   180 test: or_test IF or_test ELSE test .
 
     $default  reduce using rule 180 (test)
 
 
-State 587
+State 588
 
   287 trailer: '.' NAME '(' ')' .
 
     $default  reduce using rule 287 (trailer)
-
-
-State 588
-
-  288 trailer: '.' NAME '(' exprlist . ')'
-
-    ')'  shift, and go to state 657
 
 
 State 589
@@ -10858,194 +10861,201 @@ State 589
 
 State 590
 
+  288 trailer: '.' NAME inside_func exprlist . ')'
+
+    ')'  shift, and go to state 659
+
+
+State 591
+
   375 classheader: FINAL CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 375 (classheader)
 
 
-State 591
+State 592
 
   361 classheader: FINAL STATIC CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 361 (classheader)
 
 
-State 592
-
-  377 classheader: FINAL STATIC CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 659
-
-
 State 593
 
-  365 classheader: FINAL STATIC access CLASS NAME '(' ')' . ':'
+  377 classheader: FINAL STATIC CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 660
 
 
 State 594
 
-  381 classheader: FINAL STATIC access CLASS NAME '(' dotted_as_names . ')' ':'
+  365 classheader: FINAL STATIC access CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 661
+    ':'  shift, and go to state 661
 
 
 State 595
+
+  381 classheader: FINAL STATIC access CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 662
+
+
+State 596
 
   363 classheader: FINAL access CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 363 (classheader)
 
 
-State 596
-
-  379 classheader: FINAL access CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 662
-
-
 State 597
 
-  371 classheader: FINAL access STATIC CLASS NAME '(' ')' . ':'
+  379 classheader: FINAL access CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 663
 
 
 State 598
 
-  387 classheader: FINAL access STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+  371 classheader: FINAL access STATIC CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 664
+    ':'  shift, and go to state 664
 
 
 State 599
+
+  387 classheader: FINAL access STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 665
+
+
+State 600
 
   374 classheader: STATIC CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 374 (classheader)
 
 
-State 600
+State 601
 
   360 classheader: STATIC FINAL CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 360 (classheader)
 
 
-State 601
-
-  376 classheader: STATIC FINAL CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 665
-
-
 State 602
 
-  364 classheader: STATIC FINAL access CLASS NAME '(' ')' . ':'
+  376 classheader: STATIC FINAL CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 666
 
 
 State 603
 
-  380 classheader: STATIC FINAL access CLASS NAME '(' dotted_as_names . ')' ':'
+  364 classheader: STATIC FINAL access CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 667
+    ':'  shift, and go to state 667
 
 
 State 604
+
+  380 classheader: STATIC FINAL access CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 668
+
+
+State 605
 
   362 classheader: STATIC access CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 362 (classheader)
 
 
-State 605
-
-  378 classheader: STATIC access CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 668
-
-
 State 606
 
-  370 classheader: STATIC access FINAL CLASS NAME '(' ')' . ':'
+  378 classheader: STATIC access CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 669
 
 
 State 607
 
-  386 classheader: STATIC access FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+  370 classheader: STATIC access FINAL CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 670
+    ':'  shift, and go to state 670
 
 
 State 608
+
+  386 classheader: STATIC access FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 671
+
+
+State 609
 
   373 classheader: access CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 373 (classheader)
 
 
-State 609
+State 610
 
   367 classheader: access FINAL CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 367 (classheader)
 
 
-State 610
-
-  383 classheader: access FINAL CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 671
-
-
 State 611
 
-  369 classheader: access FINAL STATIC CLASS NAME '(' ')' . ':'
+  383 classheader: access FINAL CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 672
 
 
 State 612
 
-  385 classheader: access FINAL STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+  369 classheader: access FINAL STATIC CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 673
+    ':'  shift, and go to state 673
 
 
 State 613
+
+  385 classheader: access FINAL STATIC CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 674
+
+
+State 614
 
   366 classheader: access STATIC CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 366 (classheader)
 
 
-State 614
-
-  382 classheader: access STATIC CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 674
-
-
 State 615
 
-  368 classheader: access STATIC FINAL CLASS NAME '(' ')' . ':'
+  382 classheader: access STATIC CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 675
 
 
 State 616
 
-  384 classheader: access STATIC FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+  368 classheader: access STATIC FINAL CLASS NAME '(' ')' . ':'
 
-    ')'  shift, and go to state 676
+    ':'  shift, and go to state 676
 
 
 State 617
+
+  384 classheader: access STATIC FINAL CLASS NAME '(' dotted_as_names . ')' ':'
+
+    ')'  shift, and go to state 677
+
+
+State 618
 
    16 funcheader: DEF FINAL STATIC NAME parameters ARROW . test ':'
 
@@ -11067,7 +11077,7 @@ State 617
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 677
+    test        go to state 678
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11084,87 +11094,41 @@ State 617
     atom        go to state 114
 
 
-State 618
+State 619
 
    18 funcheader: DEF FINAL STATIC NAME parameters ':' .
 
     $default  reduce using rule 18 (funcheader)
 
 
-State 619
+State 620
 
    24 funcheader: DEF FINAL STATIC access NAME parameters . ARROW test ':'
    26           | DEF FINAL STATIC access NAME parameters . ':'
 
-    ARROW  shift, and go to state 678
-    ':'    shift, and go to state 679
-
-
-State 620
-
-   12 funcheader: DEF FINAL NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 680
+    ARROW  shift, and go to state 679
+    ':'    shift, and go to state 680
 
 
 State 621
 
-   36 funcheader: DEF FINAL access STATIC NAME parameters . ARROW test ':'
-   38           | DEF FINAL access STATIC NAME parameters . ':'
+   12 funcheader: DEF FINAL NAME parameters ARROW test . ':'
 
-    ARROW  shift, and go to state 681
-    ':'    shift, and go to state 682
+    ':'  shift, and go to state 681
 
 
 State 622
 
-   19 funcheader: DEF FINAL access NAME parameters ARROW . test ':'
+   36 funcheader: DEF FINAL access STATIC NAME parameters . ARROW test ':'
+   38           | DEF FINAL access STATIC NAME parameters . ':'
 
-    NOT           shift, and go to state 34
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    test        go to state 683
-    or_test     go to state 100
-    and_test    go to state 101
-    not_test    go to state 102
-    comparison  go to state 103
-    expr        go to state 105
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
+    ARROW  shift, and go to state 682
+    ':'    shift, and go to state 683
 
 
 State 623
 
-   22 funcheader: DEF FINAL access NAME parameters ':' .
-
-    $default  reduce using rule 22 (funcheader)
-
-
-State 624
-
-   15 funcheader: DEF STATIC FINAL NAME parameters ARROW . test ':'
+   19 funcheader: DEF FINAL access NAME parameters ARROW . test ':'
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -11201,39 +11165,85 @@ State 624
     atom        go to state 114
 
 
+State 624
+
+   22 funcheader: DEF FINAL access NAME parameters ':' .
+
+    $default  reduce using rule 22 (funcheader)
+
+
 State 625
+
+   15 funcheader: DEF STATIC FINAL NAME parameters ARROW . test ':'
+
+    NOT           shift, and go to state 34
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    test        go to state 685
+    or_test     go to state 100
+    and_test    go to state 101
+    not_test    go to state 102
+    comparison  go to state 103
+    expr        go to state 105
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+
+
+State 626
 
    17 funcheader: DEF STATIC FINAL NAME parameters ':' .
 
     $default  reduce using rule 17 (funcheader)
 
 
-State 626
+State 627
 
    23 funcheader: DEF STATIC FINAL access NAME parameters . ARROW test ':'
    25           | DEF STATIC FINAL access NAME parameters . ':'
 
-    ARROW  shift, and go to state 685
-    ':'    shift, and go to state 686
-
-
-State 627
-
-   11 funcheader: DEF STATIC NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 687
+    ARROW  shift, and go to state 686
+    ':'    shift, and go to state 687
 
 
 State 628
 
-   35 funcheader: DEF STATIC access FINAL NAME parameters . ARROW test ':'
-   37           | DEF STATIC access FINAL NAME parameters . ':'
+   11 funcheader: DEF STATIC NAME parameters ARROW test . ':'
 
-    ARROW  shift, and go to state 688
-    ':'    shift, and go to state 689
+    ':'  shift, and go to state 688
 
 
 State 629
+
+   35 funcheader: DEF STATIC access FINAL NAME parameters . ARROW test ':'
+   37           | DEF STATIC access FINAL NAME parameters . ':'
+
+    ARROW  shift, and go to state 689
+    ':'    shift, and go to state 690
+
+
+State 630
 
    20 funcheader: DEF STATIC access NAME parameters ARROW . test ':'
 
@@ -11255,7 +11265,7 @@ State 629
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 690
+    test        go to state 691
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11272,14 +11282,14 @@ State 629
     atom        go to state 114
 
 
-State 630
+State 631
 
    21 funcheader: DEF STATIC access NAME parameters ':' .
 
     $default  reduce using rule 21 (funcheader)
 
 
-State 631
+State 632
 
   390 comma_arg_seq: ',' . argument
   396 arglist: '*' test ',' . STAR_2 test
@@ -11288,7 +11298,7 @@ State 631
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
     TRUE          shift, and go to state 42
-    STAR_2        shift, and go to state 691
+    STAR_2        shift, and go to state 692
     NUMBER_INT    shift, and go to state 43
     NUMBER_LONG   shift, and go to state 44
     NUMBER_FLOAT  shift, and go to state 45
@@ -11320,42 +11330,42 @@ State 631
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 692
-    argument     go to state 693
+    default_arg  go to state 693
+    argument     go to state 694
 
 
-State 632
+State 633
 
   391 comma_arg_seq: comma_arg_seq . ',' argument
   397 arglist: '*' test comma_arg_seq .
   399        | '*' test comma_arg_seq . comma_default_arg_seq
   400        | '*' test comma_arg_seq . ',' STAR_2 test
 
-    ','  shift, and go to state 694
+    ','  shift, and go to state 695
 
     $default  reduce using rule 397 (arglist)
 
-    comma_default_arg_seq  go to state 695
+    comma_default_arg_seq  go to state 696
 
 
-State 633
+State 634
 
   398 arglist: '*' test comma_default_arg_seq .
   415 comma_default_arg_seq: comma_default_arg_seq . ',' default_arg
 
-    ','  shift, and go to state 696
+    ','  shift, and go to state 697
 
     $default  reduce using rule 398 (arglist)
 
 
-State 634
+State 635
 
   412 arglist: arg_comma_seq STAR_2 test .
 
     $default  reduce using rule 412 (arglist)
 
 
-State 635
+State 636
 
   406 arglist: arg_comma_seq '*' test .
   407        | arg_comma_seq '*' test . ',' STAR_2 test
@@ -11364,25 +11374,25 @@ State 635
   410        | arg_comma_seq '*' test . comma_arg_seq comma_default_arg_seq
   411        | arg_comma_seq '*' test . comma_arg_seq ',' STAR_2 test
 
-    ','  shift, and go to state 697
+    ','  shift, and go to state 698
 
     $default  reduce using rule 406 (arglist)
 
-    comma_arg_seq          go to state 698
-    comma_default_arg_seq  go to state 699
+    comma_arg_seq          go to state 699
+    comma_default_arg_seq  go to state 700
 
 
-State 636
+State 637
 
   404 arglist: arg_comma_seq default_arg_comma_seq default_arg .
   417 default_arg_comma_seq: default_arg_comma_seq default_arg . ','
 
-    ','  shift, and go to state 638
+    ','  shift, and go to state 639
 
     $default  reduce using rule 404 (arglist)
 
 
-State 637
+State 638
 
   389 arg_comma_seq: arg_comma_seq argument ',' .
   405 arglist: arg_comma_seq argument ',' .
@@ -11391,30 +11401,30 @@ State 637
     $default  reduce using rule 389 (arg_comma_seq)
 
 
-State 638
+State 639
 
   417 default_arg_comma_seq: default_arg_comma_seq default_arg ',' .
 
     $default  reduce using rule 417 (default_arg_comma_seq)
 
 
-State 639
+State 640
 
     7 funcheader: DEF NAME parameters ARROW test ':' .
 
     $default  reduce using rule 7 (funcheader)
 
 
-State 640
+State 641
 
    32 funcheader: DEF access FINAL STATIC NAME parameters . ARROW test ':'
    34           | DEF access FINAL STATIC NAME parameters . ':'
 
-    ARROW  shift, and go to state 700
-    ':'    shift, and go to state 701
+    ARROW  shift, and go to state 701
+    ':'    shift, and go to state 702
 
 
-State 641
+State 642
 
    28 funcheader: DEF access FINAL NAME parameters ARROW . test ':'
 
@@ -11436,7 +11446,7 @@ State 641
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 702
+    test        go to state 703
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11453,23 +11463,23 @@ State 641
     atom        go to state 114
 
 
-State 642
+State 643
 
    30 funcheader: DEF access FINAL NAME parameters ':' .
 
     $default  reduce using rule 30 (funcheader)
 
 
-State 643
+State 644
 
    31 funcheader: DEF access STATIC FINAL NAME parameters . ARROW test ':'
    33           | DEF access STATIC FINAL NAME parameters . ':'
 
-    ARROW  shift, and go to state 703
-    ':'    shift, and go to state 704
+    ARROW  shift, and go to state 704
+    ':'    shift, and go to state 705
 
 
-State 644
+State 645
 
    27 funcheader: DEF access STATIC NAME parameters ARROW . test ':'
 
@@ -11491,7 +11501,7 @@ State 644
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 705
+    test        go to state 706
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11508,57 +11518,57 @@ State 644
     atom        go to state 114
 
 
-State 645
+State 646
 
    29 funcheader: DEF access STATIC NAME parameters ':' .
 
     $default  reduce using rule 29 (funcheader)
 
 
-State 646
+State 647
 
     8 funcheader: DEF access NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 706
+    ':'  shift, and go to state 707
 
 
-State 647
+State 648
 
   301 subscript: test ':' test sliceop .
 
     $default  reduce using rule 301 (subscript)
 
 
-State 648
+State 649
 
   291 comma_subscript_seq: comma_subscript_seq ',' subscript .
 
     $default  reduce using rule 291 (comma_subscript_seq)
 
 
-State 649
+State 650
 
   424 comp_for: FOR exprlist IN or_test .
   425         | FOR exprlist IN or_test . comp_iter
 
-    IF   shift, and go to state 707
+    IF   shift, and go to state 708
     FOR  shift, and go to state 302
 
     $default  reduce using rule 424 (comp_for)
 
-    comp_iter  go to state 708
-    comp_for   go to state 709
-    comp_if    go to state 710
-
-
-State 650
-
-  325 comma_test_colon_test_seq: ',' test . ':' test
-
-    ':'  shift, and go to state 711
+    comp_iter  go to state 709
+    comp_for   go to state 710
+    comp_if    go to state 711
 
 
 State 651
+
+  325 comma_test_colon_test_seq: ',' test . ':' test
+
+    ':'  shift, and go to state 712
+
+
+State 652
 
   326 comma_test_colon_test_seq: comma_test_colon_test_seq ',' . test ':' test
   333 dictorsetmaker: test ':' test comma_test_colon_test_seq ',' .
@@ -11583,7 +11593,7 @@ State 651
 
     $default  reduce using rule 333 (dictorsetmaker)
 
-    test        go to state 712
+    test        go to state 713
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11600,46 +11610,39 @@ State 651
     atom        go to state 114
 
 
-State 652
+State 653
 
    53 input_stmt: input_choise '(' str_seq ')' .
 
     $default  reduce using rule 53 (input_stmt)
 
 
-State 653
+State 654
 
   156 for_stmt: for_header IN testlist ':' suite ELSE . ':' suite
 
-    ':'  shift, and go to state 713
+    ':'  shift, and go to state 714
 
 
-State 654
+State 655
 
   174 except_clause: EXCEPT test AS NAME .
 
     $default  reduce using rule 174 (except_clause)
 
 
-State 655
+State 656
 
   160 try_stmt: try_header suite try_except_cla_seq ELSE ':' suite .
 
     $default  reduce using rule 160 (try_stmt)
 
 
-State 656
+State 657
 
   165 try_except_cla_seq: try_except_cla_seq except_clause ':' suite .
 
     $default  reduce using rule 165 (try_except_cla_seq)
-
-
-State 657
-
-  288 trailer: '.' NAME '(' exprlist ')' .
-
-    $default  reduce using rule 288 (trailer)
 
 
 State 658
@@ -11651,193 +11654,147 @@ State 658
 
 State 659
 
+  288 trailer: '.' NAME inside_func exprlist ')' .
+
+    $default  reduce using rule 288 (trailer)
+
+
+State 660
+
   377 classheader: FINAL STATIC CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 377 (classheader)
 
 
-State 660
+State 661
 
   365 classheader: FINAL STATIC access CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 365 (classheader)
 
 
-State 661
+State 662
 
   381 classheader: FINAL STATIC access CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 714
+    ':'  shift, and go to state 715
 
 
-State 662
+State 663
 
   379 classheader: FINAL access CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 379 (classheader)
 
 
-State 663
+State 664
 
   371 classheader: FINAL access STATIC CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 371 (classheader)
 
 
-State 664
+State 665
 
   387 classheader: FINAL access STATIC CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 715
+    ':'  shift, and go to state 716
 
 
-State 665
+State 666
 
   376 classheader: STATIC FINAL CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 376 (classheader)
 
 
-State 666
+State 667
 
   364 classheader: STATIC FINAL access CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 364 (classheader)
 
 
-State 667
+State 668
 
   380 classheader: STATIC FINAL access CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 716
+    ':'  shift, and go to state 717
 
 
-State 668
+State 669
 
   378 classheader: STATIC access CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 378 (classheader)
 
 
-State 669
+State 670
 
   370 classheader: STATIC access FINAL CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 370 (classheader)
 
 
-State 670
+State 671
 
   386 classheader: STATIC access FINAL CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 717
+    ':'  shift, and go to state 718
 
 
-State 671
+State 672
 
   383 classheader: access FINAL CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 383 (classheader)
 
 
-State 672
+State 673
 
   369 classheader: access FINAL STATIC CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 369 (classheader)
 
 
-State 673
+State 674
 
   385 classheader: access FINAL STATIC CLASS NAME '(' dotted_as_names ')' . ':'
 
-    ':'  shift, and go to state 718
+    ':'  shift, and go to state 719
 
 
-State 674
+State 675
 
   382 classheader: access STATIC CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 382 (classheader)
 
 
-State 675
+State 676
 
   368 classheader: access STATIC FINAL CLASS NAME '(' ')' ':' .
 
     $default  reduce using rule 368 (classheader)
 
 
-State 676
-
-  384 classheader: access STATIC FINAL CLASS NAME '(' dotted_as_names ')' . ':'
-
-    ':'  shift, and go to state 719
-
-
 State 677
 
-   16 funcheader: DEF FINAL STATIC NAME parameters ARROW test . ':'
+  384 classheader: access STATIC FINAL CLASS NAME '(' dotted_as_names ')' . ':'
 
     ':'  shift, and go to state 720
 
 
 State 678
 
-   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW . test ':'
+   16 funcheader: DEF FINAL STATIC NAME parameters ARROW test . ':'
 
-    NOT           shift, and go to state 34
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    test        go to state 721
-    or_test     go to state 100
-    and_test    go to state 101
-    not_test    go to state 102
-    comparison  go to state 103
-    expr        go to state 105
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
+    ':'  shift, and go to state 721
 
 
 State 679
 
-   26 funcheader: DEF FINAL STATIC access NAME parameters ':' .
-
-    $default  reduce using rule 26 (funcheader)
-
-
-State 680
-
-   12 funcheader: DEF FINAL NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 12 (funcheader)
-
-
-State 681
-
-   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW . test ':'
+   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW . test ':'
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -11874,30 +11831,23 @@ State 681
     atom        go to state 114
 
 
+State 680
+
+   26 funcheader: DEF FINAL STATIC access NAME parameters ':' .
+
+    $default  reduce using rule 26 (funcheader)
+
+
+State 681
+
+   12 funcheader: DEF FINAL NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 12 (funcheader)
+
+
 State 682
 
-   38 funcheader: DEF FINAL access STATIC NAME parameters ':' .
-
-    $default  reduce using rule 38 (funcheader)
-
-
-State 683
-
-   19 funcheader: DEF FINAL access NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 723
-
-
-State 684
-
-   15 funcheader: DEF STATIC FINAL NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 724
-
-
-State 685
-
-   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW . test ':'
+   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW . test ':'
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -11917,7 +11867,7 @@ State 685
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 725
+    test        go to state 723
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -11934,23 +11884,30 @@ State 685
     atom        go to state 114
 
 
+State 683
+
+   38 funcheader: DEF FINAL access STATIC NAME parameters ':' .
+
+    $default  reduce using rule 38 (funcheader)
+
+
+State 684
+
+   19 funcheader: DEF FINAL access NAME parameters ARROW test . ':'
+
+    ':'  shift, and go to state 724
+
+
+State 685
+
+   15 funcheader: DEF STATIC FINAL NAME parameters ARROW test . ':'
+
+    ':'  shift, and go to state 725
+
+
 State 686
 
-   25 funcheader: DEF STATIC FINAL access NAME parameters ':' .
-
-    $default  reduce using rule 25 (funcheader)
-
-
-State 687
-
-   11 funcheader: DEF STATIC NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 11 (funcheader)
-
-
-State 688
-
-   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW . test ':'
+   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW . test ':'
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -11987,21 +11944,74 @@ State 688
     atom        go to state 114
 
 
+State 687
+
+   25 funcheader: DEF STATIC FINAL access NAME parameters ':' .
+
+    $default  reduce using rule 25 (funcheader)
+
+
+State 688
+
+   11 funcheader: DEF STATIC NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 11 (funcheader)
+
+
 State 689
+
+   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW . test ':'
+
+    NOT           shift, and go to state 34
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    test        go to state 727
+    or_test     go to state 100
+    and_test    go to state 101
+    not_test    go to state 102
+    comparison  go to state 103
+    expr        go to state 105
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+
+
+State 690
 
    37 funcheader: DEF STATIC access FINAL NAME parameters ':' .
 
     $default  reduce using rule 37 (funcheader)
 
 
-State 690
+State 691
 
    20 funcheader: DEF STATIC access NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 727
+    ':'  shift, and go to state 728
 
 
-State 691
+State 692
 
   396 arglist: '*' test ',' STAR_2 . test
 
@@ -12023,7 +12033,7 @@ State 691
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 728
+    test        go to state 729
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -12040,21 +12050,21 @@ State 691
     atom        go to state 114
 
 
-State 692
+State 693
 
   414 comma_default_arg_seq: ',' default_arg .
 
     $default  reduce using rule 414 (comma_default_arg_seq)
 
 
-State 693
+State 694
 
   390 comma_arg_seq: ',' argument .
 
     $default  reduce using rule 390 (comma_arg_seq)
 
 
-State 694
+State 695
 
   391 comma_arg_seq: comma_arg_seq ',' . argument
   400 arglist: '*' test comma_arg_seq ',' . STAR_2 test
@@ -12063,7 +12073,7 @@ State 694
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
     TRUE          shift, and go to state 42
-    STAR_2        shift, and go to state 729
+    STAR_2        shift, and go to state 730
     NUMBER_INT    shift, and go to state 43
     NUMBER_LONG   shift, and go to state 44
     NUMBER_FLOAT  shift, and go to state 45
@@ -12095,21 +12105,21 @@ State 694
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 692
-    argument     go to state 730
+    default_arg  go to state 693
+    argument     go to state 731
 
 
-State 695
+State 696
 
   399 arglist: '*' test comma_arg_seq comma_default_arg_seq .
   415 comma_default_arg_seq: comma_default_arg_seq . ',' default_arg
 
-    ','  shift, and go to state 696
+    ','  shift, and go to state 697
 
     $default  reduce using rule 399 (arglist)
 
 
-State 696
+State 697
 
   415 comma_default_arg_seq: comma_default_arg_seq ',' . default_arg
 
@@ -12131,7 +12141,7 @@ State 696
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test         go to state 543
+    test         go to state 544
     or_test      go to state 100
     and_test     go to state 101
     not_test     go to state 102
@@ -12147,10 +12157,10 @@ State 696
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 731
+    default_arg  go to state 732
 
 
-State 697
+State 698
 
   390 comma_arg_seq: ',' . argument
   407 arglist: arg_comma_seq '*' test ',' . STAR_2 test
@@ -12159,7 +12169,7 @@ State 697
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
     TRUE          shift, and go to state 42
-    STAR_2        shift, and go to state 732
+    STAR_2        shift, and go to state 733
     NUMBER_INT    shift, and go to state 43
     NUMBER_LONG   shift, and go to state 44
     NUMBER_FLOAT  shift, and go to state 45
@@ -12191,35 +12201,35 @@ State 697
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 692
-    argument     go to state 693
+    default_arg  go to state 693
+    argument     go to state 694
 
 
-State 698
+State 699
 
   391 comma_arg_seq: comma_arg_seq . ',' argument
   408 arglist: arg_comma_seq '*' test comma_arg_seq .
   410        | arg_comma_seq '*' test comma_arg_seq . comma_default_arg_seq
   411        | arg_comma_seq '*' test comma_arg_seq . ',' STAR_2 test
 
-    ','  shift, and go to state 733
+    ','  shift, and go to state 734
 
     $default  reduce using rule 408 (arglist)
 
-    comma_default_arg_seq  go to state 734
+    comma_default_arg_seq  go to state 735
 
 
-State 699
+State 700
 
   409 arglist: arg_comma_seq '*' test comma_default_arg_seq .
   415 comma_default_arg_seq: comma_default_arg_seq . ',' default_arg
 
-    ','  shift, and go to state 696
+    ','  shift, and go to state 697
 
     $default  reduce using rule 409 (arglist)
 
 
-State 700
+State 701
 
    32 funcheader: DEF access FINAL STATIC NAME parameters ARROW . test ':'
 
@@ -12241,7 +12251,7 @@ State 700
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 735
+    test        go to state 736
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -12258,21 +12268,21 @@ State 700
     atom        go to state 114
 
 
-State 701
+State 702
 
    34 funcheader: DEF access FINAL STATIC NAME parameters ':' .
 
     $default  reduce using rule 34 (funcheader)
 
 
-State 702
+State 703
 
    28 funcheader: DEF access FINAL NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 736
+    ':'  shift, and go to state 737
 
 
-State 703
+State 704
 
    31 funcheader: DEF access STATIC FINAL NAME parameters ARROW . test ':'
 
@@ -12294,7 +12304,7 @@ State 703
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 737
+    test        go to state 738
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -12311,28 +12321,28 @@ State 703
     atom        go to state 114
 
 
-State 704
+State 705
 
    33 funcheader: DEF access STATIC FINAL NAME parameters ':' .
 
     $default  reduce using rule 33 (funcheader)
 
 
-State 705
+State 706
 
    27 funcheader: DEF access STATIC NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 738
+    ':'  shift, and go to state 739
 
 
-State 706
+State 707
 
     8 funcheader: DEF access NAME parameters ARROW test ':' .
 
     $default  reduce using rule 8 (funcheader)
 
 
-State 707
+State 708
 
   426 comp_if: IF . or_test
   427        | IF . or_test comp_iter
@@ -12355,7 +12365,7 @@ State 707
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    or_test     go to state 739
+    or_test     go to state 740
     and_test    go to state 101
     not_test    go to state 102
     comparison  go to state 103
@@ -12371,28 +12381,28 @@ State 707
     atom        go to state 114
 
 
-State 708
+State 709
 
   425 comp_for: FOR exprlist IN or_test comp_iter .
 
     $default  reduce using rule 425 (comp_for)
 
 
-State 709
+State 710
 
   422 comp_iter: comp_for .
 
     $default  reduce using rule 422 (comp_iter)
 
 
-State 710
+State 711
 
   423 comp_iter: comp_if .
 
     $default  reduce using rule 423 (comp_iter)
 
 
-State 711
+State 712
 
   325 comma_test_colon_test_seq: ',' test ':' . test
 
@@ -12414,7 +12424,7 @@ State 711
     '~'           shift, and go to state 65
     '{'           shift, and go to state 66
 
-    test        go to state 740
+    test        go to state 741
     or_test     go to state 100
     and_test    go to state 101
     not_test    go to state 102
@@ -12431,14 +12441,14 @@ State 711
     atom        go to state 114
 
 
-State 712
+State 713
 
   326 comma_test_colon_test_seq: comma_test_colon_test_seq ',' test . ':' test
 
-    ':'  shift, and go to state 741
+    ':'  shift, and go to state 742
 
 
-State 713
+State 714
 
   156 for_stmt: for_header IN testlist ':' suite ELSE ':' . suite
 
@@ -12510,7 +12520,7 @@ State 713
     try_stmt              go to state 95
     with_stmt             go to state 96
     list_stmt             go to state 97
-    suite                 go to state 742
+    suite                 go to state 743
     test                  go to state 99
     or_test               go to state 100
     and_test              go to state 101
@@ -12529,167 +12539,114 @@ State 713
     atom                  go to state 114
 
 
-State 714
+State 715
 
   381 classheader: FINAL STATIC access CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 381 (classheader)
 
 
-State 715
+State 716
 
   387 classheader: FINAL access STATIC CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 387 (classheader)
 
 
-State 716
+State 717
 
   380 classheader: STATIC FINAL access CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 380 (classheader)
 
 
-State 717
+State 718
 
   386 classheader: STATIC access FINAL CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 386 (classheader)
 
 
-State 718
+State 719
 
   385 classheader: access FINAL STATIC CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 385 (classheader)
 
 
-State 719
+State 720
 
   384 classheader: access STATIC FINAL CLASS NAME '(' dotted_as_names ')' ':' .
 
     $default  reduce using rule 384 (classheader)
 
 
-State 720
+State 721
 
    16 funcheader: DEF FINAL STATIC NAME parameters ARROW test ':' .
 
     $default  reduce using rule 16 (funcheader)
 
 
-State 721
-
-   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 743
-
-
 State 722
 
-   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW test . ':'
+   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW test . ':'
 
     ':'  shift, and go to state 744
 
 
 State 723
 
+   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW test . ':'
+
+    ':'  shift, and go to state 745
+
+
+State 724
+
    19 funcheader: DEF FINAL access NAME parameters ARROW test ':' .
 
     $default  reduce using rule 19 (funcheader)
 
 
-State 724
+State 725
 
    15 funcheader: DEF STATIC FINAL NAME parameters ARROW test ':' .
 
     $default  reduce using rule 15 (funcheader)
 
 
-State 725
-
-   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW test . ':'
-
-    ':'  shift, and go to state 745
-
-
 State 726
 
-   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW test . ':'
+   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW test . ':'
 
     ':'  shift, and go to state 746
 
 
 State 727
 
+   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW test . ':'
+
+    ':'  shift, and go to state 747
+
+
+State 728
+
    20 funcheader: DEF STATIC access NAME parameters ARROW test ':' .
 
     $default  reduce using rule 20 (funcheader)
 
 
-State 728
+State 729
 
   396 arglist: '*' test ',' STAR_2 test .
 
     $default  reduce using rule 396 (arglist)
 
 
-State 729
-
-  400 arglist: '*' test comma_arg_seq ',' STAR_2 . test
-
-    NOT           shift, and go to state 34
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    test        go to state 747
-    or_test     go to state 100
-    and_test    go to state 101
-    not_test    go to state 102
-    comparison  go to state 103
-    expr        go to state 105
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
-
-
 State 730
 
-  391 comma_arg_seq: comma_arg_seq ',' argument .
-
-    $default  reduce using rule 391 (comma_arg_seq)
-
-
-State 731
-
-  415 comma_default_arg_seq: comma_default_arg_seq ',' default_arg .
-
-    $default  reduce using rule 415 (comma_default_arg_seq)
-
-
-State 732
-
-  407 arglist: arg_comma_seq '*' test ',' STAR_2 . test
+  400 arglist: '*' test comma_arg_seq ',' STAR_2 . test
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -12726,7 +12683,60 @@ State 732
     atom        go to state 114
 
 
+State 731
+
+  391 comma_arg_seq: comma_arg_seq ',' argument .
+
+    $default  reduce using rule 391 (comma_arg_seq)
+
+
+State 732
+
+  415 comma_default_arg_seq: comma_default_arg_seq ',' default_arg .
+
+    $default  reduce using rule 415 (comma_default_arg_seq)
+
+
 State 733
+
+  407 arglist: arg_comma_seq '*' test ',' STAR_2 . test
+
+    NOT           shift, and go to state 34
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    test        go to state 749
+    or_test     go to state 100
+    and_test    go to state 101
+    not_test    go to state 102
+    comparison  go to state 103
+    expr        go to state 105
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+
+
+State 734
 
   391 comma_arg_seq: comma_arg_seq ',' . argument
   411 arglist: arg_comma_seq '*' test comma_arg_seq ',' . STAR_2 test
@@ -12735,7 +12745,7 @@ State 733
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
     TRUE          shift, and go to state 42
-    STAR_2        shift, and go to state 749
+    STAR_2        shift, and go to state 750
     NUMBER_INT    shift, and go to state 43
     NUMBER_LONG   shift, and go to state 44
     NUMBER_FLOAT  shift, and go to state 45
@@ -12767,161 +12777,73 @@ State 733
     str_seq      go to state 113
     atom         go to state 114
     in_default   go to state 416
-    default_arg  go to state 692
-    argument     go to state 730
-
-
-State 734
-
-  410 arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq .
-  415 comma_default_arg_seq: comma_default_arg_seq . ',' default_arg
-
-    ','  shift, and go to state 696
-
-    $default  reduce using rule 410 (arglist)
+    default_arg  go to state 693
+    argument     go to state 731
 
 
 State 735
 
-   32 funcheader: DEF access FINAL STATIC NAME parameters ARROW test . ':'
+  410 arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq .
+  415 comma_default_arg_seq: comma_default_arg_seq . ',' default_arg
 
-    ':'  shift, and go to state 750
+    ','  shift, and go to state 697
+
+    $default  reduce using rule 410 (arglist)
 
 
 State 736
+
+   32 funcheader: DEF access FINAL STATIC NAME parameters ARROW test . ':'
+
+    ':'  shift, and go to state 751
+
+
+State 737
 
    28 funcheader: DEF access FINAL NAME parameters ARROW test ':' .
 
     $default  reduce using rule 28 (funcheader)
 
 
-State 737
+State 738
 
    31 funcheader: DEF access STATIC FINAL NAME parameters ARROW test . ':'
 
-    ':'  shift, and go to state 751
+    ':'  shift, and go to state 752
 
 
-State 738
+State 739
 
    27 funcheader: DEF access STATIC NAME parameters ARROW test ':' .
 
     $default  reduce using rule 27 (funcheader)
 
 
-State 739
+State 740
 
   426 comp_if: IF or_test .
   427        | IF or_test . comp_iter
 
-    IF   shift, and go to state 707
+    IF   shift, and go to state 708
     FOR  shift, and go to state 302
 
     $default  reduce using rule 426 (comp_if)
 
-    comp_iter  go to state 752
-    comp_for   go to state 709
-    comp_if    go to state 710
+    comp_iter  go to state 753
+    comp_for   go to state 710
+    comp_if    go to state 711
 
 
-State 740
+State 741
 
   325 comma_test_colon_test_seq: ',' test ':' test .
 
     $default  reduce using rule 325 (comma_test_colon_test_seq)
 
 
-State 741
-
-  326 comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' . test
-
-    NOT           shift, and go to state 34
-    FALSE         shift, and go to state 41
-    TRUE          shift, and go to state 42
-    NUMBER_INT    shift, and go to state 43
-    NUMBER_LONG   shift, and go to state 44
-    NUMBER_FLOAT  shift, and go to state 45
-    NAME          shift, and go to state 46
-    DOT_3         shift, and go to state 47
-    STRING        shift, and go to state 53
-    NONE          shift, and go to state 54
-    CHAR_VALUE    shift, and go to state 56
-    '('           shift, and go to state 60
-    '['           shift, and go to state 61
-    '+'           shift, and go to state 62
-    '-'           shift, and go to state 63
-    '~'           shift, and go to state 65
-    '{'           shift, and go to state 66
-
-    test        go to state 753
-    or_test     go to state 100
-    and_test    go to state 101
-    not_test    go to state 102
-    comparison  go to state 103
-    expr        go to state 105
-    xor_expr    go to state 106
-    and_expr    go to state 107
-    shift_expr  go to state 108
-    arith_expr  go to state 109
-    term        go to state 110
-    factor      go to state 111
-    power       go to state 112
-    str_seq     go to state 113
-    atom        go to state 114
-
-
 State 742
 
-  156 for_stmt: for_header IN testlist ':' suite ELSE ':' suite .
-
-    $default  reduce using rule 156 (for_stmt)
-
-
-State 743
-
-   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 24 (funcheader)
-
-
-State 744
-
-   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 36 (funcheader)
-
-
-State 745
-
-   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 23 (funcheader)
-
-
-State 746
-
-   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':' .
-
-    $default  reduce using rule 35 (funcheader)
-
-
-State 747
-
-  400 arglist: '*' test comma_arg_seq ',' STAR_2 test .
-
-    $default  reduce using rule 400 (arglist)
-
-
-State 748
-
-  407 arglist: arg_comma_seq '*' test ',' STAR_2 test .
-
-    $default  reduce using rule 407 (arglist)
-
-
-State 749
-
-  411 arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 . test
+  326 comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' . test
 
     NOT           shift, and go to state 34
     FALSE         shift, and go to state 41
@@ -12958,35 +12880,123 @@ State 749
     atom        go to state 114
 
 
+State 743
+
+  156 for_stmt: for_header IN testlist ':' suite ELSE ':' suite .
+
+    $default  reduce using rule 156 (for_stmt)
+
+
+State 744
+
+   24 funcheader: DEF FINAL STATIC access NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 24 (funcheader)
+
+
+State 745
+
+   36 funcheader: DEF FINAL access STATIC NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 36 (funcheader)
+
+
+State 746
+
+   23 funcheader: DEF STATIC FINAL access NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 23 (funcheader)
+
+
+State 747
+
+   35 funcheader: DEF STATIC access FINAL NAME parameters ARROW test ':' .
+
+    $default  reduce using rule 35 (funcheader)
+
+
+State 748
+
+  400 arglist: '*' test comma_arg_seq ',' STAR_2 test .
+
+    $default  reduce using rule 400 (arglist)
+
+
+State 749
+
+  407 arglist: arg_comma_seq '*' test ',' STAR_2 test .
+
+    $default  reduce using rule 407 (arglist)
+
+
 State 750
+
+  411 arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 . test
+
+    NOT           shift, and go to state 34
+    FALSE         shift, and go to state 41
+    TRUE          shift, and go to state 42
+    NUMBER_INT    shift, and go to state 43
+    NUMBER_LONG   shift, and go to state 44
+    NUMBER_FLOAT  shift, and go to state 45
+    NAME          shift, and go to state 46
+    DOT_3         shift, and go to state 47
+    STRING        shift, and go to state 53
+    NONE          shift, and go to state 54
+    CHAR_VALUE    shift, and go to state 56
+    '('           shift, and go to state 60
+    '['           shift, and go to state 61
+    '+'           shift, and go to state 62
+    '-'           shift, and go to state 63
+    '~'           shift, and go to state 65
+    '{'           shift, and go to state 66
+
+    test        go to state 755
+    or_test     go to state 100
+    and_test    go to state 101
+    not_test    go to state 102
+    comparison  go to state 103
+    expr        go to state 105
+    xor_expr    go to state 106
+    and_expr    go to state 107
+    shift_expr  go to state 108
+    arith_expr  go to state 109
+    term        go to state 110
+    factor      go to state 111
+    power       go to state 112
+    str_seq     go to state 113
+    atom        go to state 114
+
+
+State 751
 
    32 funcheader: DEF access FINAL STATIC NAME parameters ARROW test ':' .
 
     $default  reduce using rule 32 (funcheader)
 
 
-State 751
+State 752
 
    31 funcheader: DEF access STATIC FINAL NAME parameters ARROW test ':' .
 
     $default  reduce using rule 31 (funcheader)
 
 
-State 752
+State 753
 
   427 comp_if: IF or_test comp_iter .
 
     $default  reduce using rule 427 (comp_if)
 
 
-State 753
+State 754
 
   326 comma_test_colon_test_seq: comma_test_colon_test_seq ',' test ':' test .
 
     $default  reduce using rule 326 (comma_test_colon_test_seq)
 
 
-State 754
+State 755
 
   411 arglist: arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test .
 

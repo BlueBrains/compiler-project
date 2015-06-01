@@ -21,6 +21,7 @@ private:
 
 public:
 	static int strings_count;
+	static int arrays_count;
 	static char alltext2[20000];
 	// static char data[1000];
 	static int lines;
@@ -36,6 +37,7 @@ public:
 	static	FILE * file;
 	static string getStringAdressLabel(string str);
 	static string addStringAdressLabel();
+	static string addArrayAdressLabel(int size);
 	static void mult_string();
 	static void sum_string();
 	static void writeData();
@@ -43,7 +45,7 @@ public:
 	static void writeMain();
 
 	static void add_data(string);
-
+	static void add_Arraydata(string);
 	static void addMainInstruction(string);
 
 	static void add_instruction(string c);

@@ -38,6 +38,10 @@ public:
 		return this->_varoffset; 
 	}
 	void set_arrayNode(ArrayNode* v);
+	ArrayNode* get_arrayNode()
+	{
+		return this->array_node;
+	}
 	void set_lastTypes(int val);
 	void set_lastTypes();
 	void set_lastTypes(float val);

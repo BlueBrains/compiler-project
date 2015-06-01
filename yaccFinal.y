@@ -498,14 +498,18 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 														//cout<<"print in expr_stmt if";
 														//$<tn>$->print();cout<<endl;
 													}
-													if((v)&&(array_right))
+													cout<<"array right is "<<array_right<<endl;
+													if((v1)&&(array_right))
 													{
-														v->set_isarray(true);
+														v1->set_isarray(true);
+														cout<<"enter here for array "<<v1->get_name()<<endl;
 													}
-													
+													array_right=false;
+													is_list=false;
 													
 													
 												}
+												
 			;
 					
 right_testlist : '=' testlist_star_expr right_testlist {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
@@ -1437,13 +1441,14 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'[' ']' {Streams::verbose() <<"atom:	'[' ']' \n";
 						arrayvec.clear();
 						array_right=true;
-						is_list=true;
+						//is_list=true;
 						$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 				}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";
 									$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 									array_right=true;
+									//is_list=true;
 									arrayvec.clear();
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
@@ -1488,10 +1493,15 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 												} 
 		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 											$<var>$=p->checkVariable($<r.strVal>1,t,exist, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
+											cout<<"enter to arrayelem"<<endl;
 											is_list=true;
 											if($<var>$)
+											{
 												$<tn>$=ast->createArrayElementNode($<var>$,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum,$<r.strVal>1);
-												} 
+												cout<<"enter if in arrsay ggyhg\n";
+											}
+												
+										} 
 		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT "<<$<r.intVal>1<<endl;;
 						int* xx = new int ($<r.intVal>1);
 						//cout<<"yhe number is"<<*xx<<endl;
@@ -1598,6 +1608,8 @@ trailer:	'.' NAME  %prec stmt_14
 									call_func=false;
 								}
 			|'.' NAME inside_func exprlist ')' {
+									if(a_self)
+									{
 									cout<<"Toslamly khyoo Amooooora"<<endl;
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 										a_self=false;
@@ -1611,7 +1623,8 @@ trailer:	'.' NAME  %prec stmt_14
 									call_func=false;
 									func_call.clear();
 								}
-			|'.' NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
+			|'.' NAME '[' subscriptlist ']' {
+												Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 												$<tn>$=ast->createArrayElementNode(NULL,$<tn>4,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 												dotvec.push_back($<tn>$);
 											} ;
