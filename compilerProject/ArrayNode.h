@@ -53,6 +53,7 @@ public:
 			MIPS_ASM::sw("t1", 0, "s3");
 			MIPS_ASM::add_instruction("addi $s3,$s3,4\n");
 		}
+		this->my_type = element.at(0)->my_type;
 		MIPS_ASM::la("t0", arrayName);
 		MIPS_ASM::push("t0");
 	}

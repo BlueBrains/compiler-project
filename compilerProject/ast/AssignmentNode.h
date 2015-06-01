@@ -158,10 +158,10 @@ public:
 				((Variable*)p1.first)->init = true;
 				if (right_side->getNodeType() == "ArrayNode")
 				{
-					((Variable*)p1.first)->set_arrayNode(static_cast<ArrayNode*>(this->right_side));
-					((Variable*)p1.first)->set_isarray(true);
+					//((Variable*)p1.first)->set_arrayNode(static_cast<ArrayNode*>(this->right_side));
+					//((Variable*)p1.first)->set_isarray(true);
 				}
-				else
+				else if (left_side->getNodeType() != "ArrayElementNode")
 				{
 					((Variable*)p1.first)->set_isarray(false);
 					((Variable*)p1.first)->set_arrayNode(NULL);

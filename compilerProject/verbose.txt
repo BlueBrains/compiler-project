@@ -75,42 +75,6 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-atom: NAME()
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
 atom: NUMBER_INT 1
 power:	atom
 factor: power
@@ -196,7 +160,7 @@ expr_stmt: testlist_star_expr right_testlist
 small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
-list_stmt : stmt list_stmt
+list_stmt : stmt
 atom: NUMBER_INT 2
 power:	atom
 factor: power

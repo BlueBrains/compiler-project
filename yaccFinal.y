@@ -502,6 +502,8 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 													if((v1)&&(array_right))
 													{
 														v1->set_isarray(true);
+														ArrayNode* jo=static_cast<ArrayNode*>($<tn>2);
+														v1->set_arrayNode(jo);
 														cout<<"enter here for array "<<v1->get_name()<<endl;
 													}
 													array_right=false;
@@ -1366,6 +1368,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					}
 					else if((!constant)&&(!is_list))
 					{
+						v=NULL;
 						if(v1)
 						{
 							v1->init=true;
@@ -1384,12 +1387,16 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						if(v!=NULL)
 						{
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
-							temp_id2.pop_back();		
+							//temp_id2.pop_back();		
 						}
 						else
 						{
 							$<tn>$=$<tn>1;
 						}
+							if(!temp_id2.empty())
+							{
+								temp_id2.pop_back();
+							}
 					}
 					else
 					{
@@ -1427,6 +1434,7 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 											dotvec.insert(dotvec.begin(),$<tn>1);
 											$<tn>$=ast->createDotNode(dotvec,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 											dotvec.clear();
+											//temp_id2.pop_back();
 										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}

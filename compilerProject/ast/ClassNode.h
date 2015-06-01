@@ -34,6 +34,24 @@ public:
 	}
 	virtual void before_generateCode(){
 	}
+	void alloc_inhertance(Type* t)
+	{
+		Node* temp_class;
+		for (int i = 0; i < t->getInheritedType().size(); i++)
+		{
+			temp_class = t->getInheritedType().at(i)->type_node;
+			Node* temp = temp_class->Son;
+			while (temp)
+			{
+				if (temp->getNodeType() == "IDNode")
+				{
+					static_cast<IDNode*>(temp)->get_variable()->setOffset(this->getNextOffset(4));
+				}
+				temp = temp->Next;
+			}
+			alloc_inhertance(t->getInheritedType().at(i));
+		}
+	}
 	virtual void generateCode()
 	{
 		
@@ -46,7 +64,7 @@ public:
 			}
 			temp = temp->Next;
 		}
-
+		this->alloc_inhertance(type_node);
 		//MIPS_ASM::reserveStack(getFrameSize());
 
 		/*

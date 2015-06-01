@@ -72,7 +72,9 @@ void set_variable(Variable* v)
 			MIPS_ASM::add_instruction("add $t2,$t0,$t1\n");
 			MIPS_ASM::lw("t3", 0, "t2");
 			MIPS_ASM::push("t3");
-			this->my_type = "int";
+			
+			this->my_type = v->get_arrayNode()->my_type;//"int";//v->get_arrayNode()->my_type;
+			
 		}
 		
 	}

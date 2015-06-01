@@ -137,7 +137,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 
 
 Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self){
-	char* tokenPtr;
+	char* tokenPtr; 
 	char buffer[15];
 	bool found = false;
 	sprintf(buffer, name);

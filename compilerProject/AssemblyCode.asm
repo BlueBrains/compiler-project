@@ -1,9 +1,7 @@
 .data
 array_1: .space 16 
-string_1: .asciiz "koko"
-string_2: .asciiz "j= "
-string_3: .asciiz "  "
-string_4: .asciiz "in constructor "
+string_1: .asciiz "j= "
+string_2: .asciiz "  "
 
 block_head:    .byte   0:8
 
@@ -22,54 +20,9 @@ sw $ra, 0($sp)
 sub $sp,$sp,4
 sw $fp, 0($sp)
  #reserving space in stack for scope variables
-sub $sp,$sp,16
+sub $sp,$sp,12
  #movesp to fp
 move $fp,$sp
- #Assign node
- #Assign node RHS:
-li $v0,9
-li $a0,8
-syscall
- #movev0 to s1
-move $s1,$v0
-la $t9,string_1
-sw $t9,0($s1) 
- #Assign node
- #Assign node RHS:
-li $t9,10
-sub $sp,$sp,4
-sw $t9, 0($sp)
- #LHS:
-lw $t0,4($s1)
-addi $v0,$s1,4
-sub $sp,$sp,4
-sw $t0, 0($sp)
- #Assign node poping old val:
-lw $t1, 0($sp)
-add $sp,$sp,4
- #Assign node getting RHS val:
-lw $t0, 0($sp)
- #Assign node storing in position val:
-sw $t0,0($v0)
-add $sp,$sp,4
- #moves1 to a0
-move $a0,$s1
-jal __init__10
-sub $sp,$sp,4
-sw $s1, 0($sp)
- #LHS:
-lw $t0,0($fp)
-addi $v0,$fp,0
-sub $sp,$sp,4
-sw $t0, 0($sp)
- #Assign node poping old val:
-lw $t1, 0($sp)
-add $sp,$sp,4
- #Assign node getting RHS val:
-lw $t0, 0($sp)
- #Assign node storing in position val:
-sw $t0,0($v0)
-add $sp,$sp,4
  #Assign node
  #Assign node RHS:
 la $s3,array_1
@@ -105,8 +58,8 @@ la $t0,array_1
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #LHS:
-lw $t0,4($fp)
-addi $v0,$fp,4
+lw $t0,0($fp)
+addi $v0,$fp,0
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #Assign node poping old val:
@@ -123,7 +76,7 @@ li $t9,9
 sub $sp,$sp,4
 sw $t9, 0($sp)
  #LHS:
-lw $t0,4($fp)
+lw $t0,0($fp)
 sub $sp,$sp,4
 sw $t0, 0($sp)
 li $t9,2
@@ -152,8 +105,8 @@ li $t9,2
 sub $sp,$sp,4
 sw $t9, 0($sp)
  #LHS:
-lw $t0,8($fp)
-addi $v0,$fp,8
+lw $t0,4($fp)
+addi $v0,$fp,4
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #Assign node poping old val:
@@ -166,7 +119,7 @@ sw $t0,0($v0)
 add $sp,$sp,4
  #
  # Print values:
-la $t9,string_2
+la $t9,string_1
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -174,8 +127,8 @@ add $sp,$sp,4
 li $v0,4
 move $a0,$t0
 syscall
-lw $t0,8($fp)
-addi $v0,$fp,8
+lw $t0,4($fp)
+addi $v0,$fp,4
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t0, 0($sp)
@@ -183,12 +136,12 @@ add $sp,$sp,4
 li $v0,1
 move $a0,$t0
 syscall
-lw $t0,4($fp)
-addi $v0,$fp,4
+lw $t0,0($fp)
+addi $v0,$fp,0
 sub $sp,$sp,4
 sw $t0, 0($sp)
-lw $t0,8($fp)
-addi $v0,$fp,8
+lw $t0,4($fp)
+addi $v0,$fp,4
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t1, 0($sp)
@@ -214,8 +167,8 @@ li $t9,0
 sub $sp,$sp,4
 sw $t9, 0($sp)
  #LHS:
-lw $t0,12($fp)
-addi $v0,$fp,12
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #Assign node poping old val:
@@ -226,63 +179,17 @@ lw $t0, 0($sp)
  #Assign node storing in position val:
 sw $t0,0($v0)
 add $sp,$sp,4
-
-
+addi $v0,$sp,0
 While0:
-
-li $v0,1
-move $a0,$sp
-syscall
-la $a0,newline
-li $v0,4
-syscall
-
-
-lw $t0,12($fp)
-addi $v0,$fp,12
+ #movev0 to sp
+move $sp,$v0
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
 li $t9,4
 sub $sp,$sp,4
-
-lw $t0,4($fp)
-
-li $v0,1
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-
-
-li $v0,1
-move $a0,$sp
-syscall
-la $a0,newline
-li $v0,4
-syscall
-
-
-li $v0,1
-move $a0,$fp
-syscall
-la $a0,newline
-li $v0,4
-syscall
-
-
 sw $t9, 0($sp)
-
-lw $t0,4($fp)
-
-li $v0,1
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-
-
 lw $t1, 0($sp)
 add $sp,$sp,4
 lw $t0, 0($sp)
@@ -295,8 +202,8 @@ add $sp,$sp,4
 beq $t0,$0,endWhile0
  #
  # Print values:
-lw $t0,12($fp)
-addi $v0,$fp,12
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t0, 0($sp)
@@ -304,7 +211,7 @@ add $sp,$sp,4
 li $v0,1
 move $a0,$t0
 syscall
-la $t9,string_3
+la $t9,string_2
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -312,12 +219,12 @@ add $sp,$sp,4
 li $v0,4
 move $a0,$t0
 syscall
-lw $t0,4($fp)
-addi $v0,$fp,4
+lw $t0,0($fp)
+addi $v0,$fp,0
 sub $sp,$sp,4
 sw $t0, 0($sp)
-lw $t0,12($fp)
-addi $v0,$fp,12
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t1, 0($sp)
@@ -339,8 +246,8 @@ li $v0,4
 syscall
  #Assign node
  #Assign node RHS:
-lw $t0,12($fp)
-addi $v0,$fp,12
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
 li $t9,1
@@ -354,8 +261,8 @@ add $t0,$t0,$t1
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #LHS:
-lw $t0,12($fp)
-addi $v0,$fp,12
+lw $t0,8($fp)
+addi $v0,$fp,8
 sub $sp,$sp,4
 sw $t0, 0($sp)
  #Assign node poping old val:
@@ -366,19 +273,12 @@ lw $t0, 0($sp)
  #Assign node storing in position val:
 sw $t0,0($v0)
 add $sp,$sp,4
-
-li $v0,1
-move $a0,$sp
-syscall
-la $a0,newline
-li $v0,4
-syscall
-#sub $sp,$sp,4
+addi $v0,$sp,0
 j While0
 endWhile0:
  #end while statment
  #releasing space in stack for scope variables
-add $sp,$sp,16
+add $sp,$sp,12
 lw $fp, 0($sp)
 add $sp,$sp,4
 lw $ra, 0($sp)
@@ -387,50 +287,6 @@ jr $ra
  #end function call
 li $v0, 10 
 syscall 
-
- 
-__init__10:
- #begin function call
-sub $sp,$sp,4
-sw $ra, 0($sp)
-sub $sp,$sp,4
-sw $fp, 0($sp)
- #reserving space in stack for scope variables
-sub $sp,$sp,4
- #movesp to fp
-move $fp,$sp
-sw $a0,0($fp)
- #
- # Print values:
-la $t9,string_4
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-lw $t0,4($s1)
-addi $v0,$s1,4
-sub $sp,$sp,4
-sw $t0, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,1
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-lw $s1,0($fp)
- #releasing space in stack for scope variables
-add $sp,$sp,4
-lw $fp, 0($sp)
-add $sp,$sp,4
-lw $ra, 0($sp)
-add $sp,$sp,4
-jr $ra
- #end function call
 
  
 
