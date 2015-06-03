@@ -151,38 +151,45 @@ public:
 	}
 	virtual void generateCode()
 	{
-		this->my_type = "type";
-		this->type_val = t;
-		//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
-		t->type_node->getNextOffset(4);
-		t->type_node->generateCode();
-		MIPS_ASM::li("v0", 9);
-		MIPS_ASM::li("a0", t->type_node->getFrameSize());
-		MIPS_ASM::add_instruction("syscall\n");
-		MIPS_ASM::move("s1", "v0");
-		MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(t->get_name()));
-		//MIPS_ASM::push("t9");
-		MIPS_ASM::add_instruction("sw $t9,0($s1) \n");
-		
+		if (is_object)
+		{
+			this->my_type = "type";
+			this->type_val = t;
+			//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			t->type_node->getNextOffset(4);
+			t->type_node->generateCode();
+			MIPS_ASM::li("v0", 9);
+			MIPS_ASM::li("a0", t->type_node->getFrameSize());
+			MIPS_ASM::add_instruction("syscall\n");
+			MIPS_ASM::move("s1", "v0");
+			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(t->get_name()));
+			//MIPS_ASM::push("t9");
+			MIPS_ASM::add_instruction("sw $t9,0($s1) \n");
 
-		Node* temp = t->type_node->Son;
-		while (temp)
-		{
-			 if (temp->getNodeType() == "AssignmentNode")
-		{
-				 if (static_cast<AssignmentNode*>( temp)->get_left()->getNodeType() == "CallVariableNode")
-				 {
-					 static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
-				 }
-				temp->generateCode();
+
+			Node* temp = t->type_node->Son;
+			while (temp)
+			{
+				if (temp->getNodeType() == "AssignmentNode")
+				{
+					if (static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode")
+					{
+						static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
+					}
+					temp->generateCode();
+				}
+				temp = temp->Next;
 			}
-			 temp = temp->Next;
+			MIPS_ASM::move("a0", "s1");
+			MIPS_ASM::jal(f->get_label());
+			func_vec.push_back(this->f->get_FunctionNode());
+			//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
+			MIPS_ASM::push("s1");
 		}
-		MIPS_ASM::move("a0", "s1");
-		MIPS_ASM::jal(f->get_label());
-		func_vec.push_back(this->f->get_FunctionNode());
-		//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
-		MIPS_ASM::push("s1");
+		else
+		{
+
+		}
 	}
 	virtual void print()
 	{
@@ -219,7 +226,7 @@ public:
 		{
 			int i = n.size() - 1;
 			char* gh = static_cast<FunctionNode*>(n.at(i))->get_function()->get_name();
-			if ((n.at(i)->getNodeType() != "FunctionNode") || ((n.at(i)->getNodeType() == "FunctionNode")&&(n.at(i)->Son!=this))
+			if ((n.at(i)->getNodeType() != "FunctionNode") || ((n.at(i)->getNodeType() == "FunctionNode") && (checkSuper(n.at(i)->Son)))
 				|| ((n.at(i)->getNodeType() == "FunctionNode") && (strcmp(gh, "__init__")!=0)))
 			{
 				cout << "ERROR : call to super must be first statement in constructor at line:" << _lineNo << endl;
@@ -236,6 +243,16 @@ public:
 
 		return pi;
 	}
-
+	bool checkSuper(Node* t)
+	{
+		bool found = false;
+		while (t != this && (t->getNodeType() == "CallTypeNode"))
+		{
+			t = t->Next;
+		}
+		if (t == this)
+			found = true;
+		return found;
+	}
 };
 #endif

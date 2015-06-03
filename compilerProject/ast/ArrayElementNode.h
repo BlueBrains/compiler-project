@@ -94,6 +94,8 @@ void set_variable(Variable* v)
 		{
 			cout << "Error: variable is not array" << v->get_name() << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
 		}
+		else
+			index->check(n,from_right);
 		pi = make_pair(v, "Variable");
 		//this->from_right = from_right;
 		return pi;

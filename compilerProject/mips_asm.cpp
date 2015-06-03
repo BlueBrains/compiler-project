@@ -81,7 +81,39 @@ void  MIPS_ASM::mult_string()
 	add_instruction("add $sp, $sp, 4\n");
 	jr();
 }
-
+void  MIPS_ASM::mult_array()
+{
+	label("concatenate_array");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $ra, 0($sp)\n");
+	add_instruction("sub $sp, $sp, 4\n");
+	add_instruction("sw $fp, 0($sp)\n");
+	move("t2", "t1");
+	li("t3", 0);
+	move("a2", "t0");
+	label("conArray_loop");
+	move("a0", "a2");
+	slt("t4", "t3", "t2");
+	beq("t4", "0", "end_conArray_loop");
+	add_instruction("addi $t3,$t3,1\n");
+	label("start_conArray");
+	add_instruction("lw $t0,0($a0)\n");
+	beq("t0", "0", "end_arr");
+	add_instruction("sw $t0,0($a1)\n");
+	add_instruction("addi $a0,$a0,1\n");
+	add_instruction("addi $a1,$a1,1\n");
+	add_instruction("b start_conArray\n");
+	label("end_arr");
+	jump("conArray_loop");
+	label("end_conArray_loop");
+	add_instruction("sw $zero 0($a1) #null terminate string\n");
+	add_instruction("add $sp, $sp, 0\n");
+	add_instruction("lw $fp, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	add_instruction("lw $ra, 0($sp)\n");
+	add_instruction("add $sp, $sp, 4\n");
+	jr();
+}
 void  MIPS_ASM::sum_string()
 {
 	label("concatenate_2strings");

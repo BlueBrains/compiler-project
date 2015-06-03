@@ -39,6 +39,7 @@ public:
 	static string addStringAdressLabel();
 	static string addArrayAdressLabel(int size);
 	static void mult_string();
+	static void mult_array();
 	static void sum_string();
 	static void writeData();
 	static void writeCode();

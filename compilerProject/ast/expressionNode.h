@@ -628,8 +628,8 @@ public:
 			/*
 			MIPS_ASM::pop(t1);
 			MIPS_ASM::pop(t0);*/
-			if ((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
-				|| (first->my_type == "bool"&& second->my_type == "int"))
+			if (((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
+				|| (first->my_type == "bool"&& second->my_type == "int"))&&(first->getNodeType()!="ArrayNode"))
 			{
 				this->my_type = "int";
 				MIPS_ASM::pop(t1);
@@ -1014,6 +1014,33 @@ public:
 					}
 					else
 						cout << "unsupported operand type(s) for  string" << endl;;
+				}
+				if (((first->getNodeType() == "ArrayNode" && second->my_type == "int")) && (op == 2))
+				{
+					this->my_type = "Array";
+					MIPS_ASM::pop(t1);
+					MIPS_ASM::pop(t0);
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					string arrayName;
+					arrayName = MIPS_ASM::addArrayAdressLabel(15 * 4);
+					MIPS_ASM::la("a1", arrayName);
+					MIPS_ASM::jal("concatenate_array");
+					MIPS_ASM::la("a0", arrayName);
+					MIPS_ASM::sw("a0", 0, "sp");
+				}
+				else if (((first->my_type == "int" && second->getNodeType() == "ArrayNode")) && (op == 2))
+				{
+					this->my_type = "Array";
+					MIPS_ASM::pop(t0);
+					MIPS_ASM::pop(t1);
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					string arrayName;
+					arrayName = MIPS_ASM::addArrayAdressLabel(15 * 4);
+					MIPS_ASM::la("a1", arrayName);
+					MIPS_ASM::jal("concatenate_array");
+					MIPS_ASM::la("a0", arrayName);
+					MIPS_ASM::sw("a0", 0, "sp");
+
 				}
 				if (first->my_type == "type" || second->my_type == "type" )
 				{

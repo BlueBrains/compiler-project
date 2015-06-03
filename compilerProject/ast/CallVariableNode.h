@@ -126,6 +126,7 @@ public:
 	}
 	virtual  void generateCode()
 	{
+		
 		if (variable_node)
 		{
 			if (variable_node->get_static())

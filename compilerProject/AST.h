@@ -114,6 +114,10 @@ public:
 			MIPS_ASM::add_instruction("\n \n");
 			MIPS_ASM::printComment("this function for string+string");
 			MIPS_ASM::sum_string();
+
+			MIPS_ASM::add_instruction("\n \n");
+			MIPS_ASM::printComment("this function for Array*number");
+			MIPS_ASM::mult_array();
 		}
 		
 	}
