@@ -24,7 +24,7 @@ private:
 			Node* temp = temp_class->Son;
 			while (temp)
 			{
-				if (temp->getNodeType() == "AssignmentNode")
+				if (temp->getNodeType() == "AssignmentNode" && (!static_cast<AssignmentNode*>(temp)->coded))
 				{
 					if (static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode")
 					{
@@ -171,6 +171,16 @@ public:
 	{
 		return f;
 	}
+	virtual void before_generateCode(){
+
+		if (f)
+		{
+			func_vec.push_back(this->f->get_FunctionNode());
+			this->f->get_FunctionNode()->before_generateCode();
+			//this->my_type = this->Function_call->get_FunctionNode()->my_type;
+		}
+
+	}
 	virtual void generateCode()
 	{
 		if (is_object)
@@ -206,12 +216,21 @@ public:
 			MIPS_ASM::move("a0", "s1");
 			MIPS_ASM::jal(f->get_label());
 			func_vec.push_back(this->f->get_FunctionNode());
+			this->f->get_FunctionNode()->before_generateCode();
 			//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			MIPS_ASM::push("s1");
 		}
 		else
 		{
-
+			//MIPS_ASM::move("a0", "s1");
+			MIPS_ASM::lw("a0", 0, "fp");
+			MIPS_ASM::jal(f->get_label());
+			MIPS_ASM::li("v0", 0);
+			MIPS_ASM::add_instruction("add $sp,$sp,4\n");
+			func_vec.push_back(this->f->get_FunctionNode());
+			this->f->get_FunctionNode()->before_generateCode();
+			//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
+			//MIPS_ASM::push("s1");
 		}
 	}
 	virtual void print()
@@ -249,16 +268,24 @@ public:
 		{
 			int i = n.size() - 1;
 			char* gh = static_cast<FunctionNode*>(n.at(i))->get_function()->get_name();
-			if ((n.at(i)->getNodeType() != "FunctionNode") || ((n.at(i)->getNodeType() == "FunctionNode") && (checkSuper(n.at(i)->Son)))
+			//((n.at(i)->getNodeType() == "FunctionNode") && (checkSuper(n.at(i)->Son)))
+			if ((n.at(i)->getNodeType() != "FunctionNode") 
 				|| ((n.at(i)->getNodeType() == "FunctionNode") && (strcmp(gh, "__init__")!=0)))
 			{
-				cout << "ERROR : call to super must be first statement in constructor at line:" << _lineNo << endl;
+				cout << "ERROR : call to super must be in constructor at line:" << _lineNo << endl;
 				is_object = false;
 			}
 			else
 			{
 				is_object = false;
 				t1 = checkTypeforinhertance(p, n);
+				if (!t1)
+					cout << "Error: Type not found " << x << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+				else
+				{
+					this->setType(t1);
+					f = (Function*)t1->getScope()->m->get("__init__", "Function");
+				}
 			}
 		}
 

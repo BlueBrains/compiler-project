@@ -1,4 +1,7 @@
-class_h: CLASS ID 
+dotted_name: NAME 
+dotted_as_name: dotted_name 
+comma_dotted_as_name_seq: dotted_as_names: dotted_as_name 
+class_h: CLASS ID OPEN_S unit_list CLOSE_S 
 access_modef:	PUBLIC
 atoms: DEF access NAME
 var_declaration: access_modef ID
@@ -46,8 +49,43 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
-parameters:'(' ')'
+inside_func:'(' atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arglist: argument
+inside_func arglist ')'
 funcheader: DEF NAME parameters ':' 
+atom: NAME()
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+expr_stmt: testlist_star_expr 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
 str_seq:	STRING 
 atom: str_seq
 power:	atom
@@ -75,7 +113,23 @@ print_stmt: PRINT exprlist
 small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
-list_stmt : stmt
+list_stmt : stmt list_stmt
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
@@ -97,6 +151,21 @@ or_test:	and_test
 test:	or_test
 argument: 	test
 arg_comma_seq : argument ','
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arg_comma_seq : arg_comma_seq argument ',' 
 atom: NAME
 power:	atom
 term: 	factor
@@ -949,6 +1018,91 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
+access_modef:	PUBLIC
+atoms: DEF access NAME
+var_declaration: access_modef ID
+atom: NUMBER_INT 9
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+compound_stmt: vardef
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+access_modef:	PUBLIC
+inside_func:'(' atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arglist: argument
+inside_func arglist ')'
+funcheader: DEF access NAME parameters ':' 
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_INT 90
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 classdef: classheader suite
 temp2: classdef 
