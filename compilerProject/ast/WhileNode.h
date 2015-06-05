@@ -68,8 +68,9 @@ public:
 		//MIPS_ASM::add_instruction("move $fp, $sp\n");
 		MIPS_ASM::move("fp", "sp");
 		*/
+		MIPS_ASM::add_instruction("addi $v0,$sp,0\n");
 		MIPS_ASM::label(ccc);
-
+		MIPS_ASM::move("sp", "v0");
 
 		conditionNode->generateCode();
 		MIPS_ASM::pop("t0");
@@ -82,7 +83,7 @@ public:
 			temp->generateCode();
 			temp = temp->Next;
 		}
-
+		MIPS_ASM::add_instruction("addi $v0,$sp,0\n");
 		MIPS_ASM::jump(ccc);
 		MIPS_ASM::label(ccc2);
 		/*

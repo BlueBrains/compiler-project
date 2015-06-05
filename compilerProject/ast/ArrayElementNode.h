@@ -9,7 +9,9 @@ private:
 	string ID;
 	Variable* v;
 	Node* index;
+	
 public:
+	bool from_left = false;
 Node* get_index()	{
 		return index;
 	}
@@ -23,7 +25,7 @@ void set_variable(Variable* v)
 }
 	ArrayElementNode() :v(NULL),index(NULL), Node(NULL, NULL)
 	{
-
+		//v->set_arrayNode
 	}
 	ArrayElementNode(Variable*v,Node* index, Node* son, Node* next) :ID(""),v(v), index(index), Node(son, next)
 	{
@@ -41,6 +43,41 @@ void set_variable(Variable* v)
 	{
 
 	}
+	virtual void generateCode()
+	{
+		if (from_left)
+		{
+			MIPS_ASM::lw("t0", v->getOffset(), this->getOffsetRegister());
+			//v0 contains the address in memorry to be used later in assignment
+			MIPS_ASM::push("t0");
+			index->generateCode();
+			MIPS_ASM::pop("t1");
+			MIPS_ASM::pop("t0");
+			MIPS_ASM::add_instruction("sll $t1,$t1,2\n");
+			MIPS_ASM::add_instruction("add $t2,$t0,$t1\n");
+			MIPS_ASM::add_instruction("addi $v0, $t2, 0\n");
+			MIPS_ASM::push("t2");
+		}
+		else
+		{
+			MIPS_ASM::lw("t0", v->getOffset(), this->getOffsetRegister());
+			//v0 contains the address in memorry to be used later in assignment
+			MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+				+ "," + std::to_string(v->getOffset()) + "\n");
+			MIPS_ASM::push("t0");
+			index->generateCode();
+			MIPS_ASM::pop("t1");
+			MIPS_ASM::pop("t0");
+			MIPS_ASM::add_instruction("sll $t1,$t1,2\n");
+			MIPS_ASM::add_instruction("add $t2,$t0,$t1\n");
+			MIPS_ASM::lw("t3", 0, "t2");
+			MIPS_ASM::push("t3");
+			
+			this->my_type = v->get_arrayNode()->my_type;//"int";//v->get_arrayNode()->my_type;
+			
+		}
+		
+	}
 	virtual void print()
 	{
 		cout << "ARRAY Enelment NODE !" << endl;
@@ -57,7 +94,10 @@ void set_variable(Variable* v)
 		{
 			cout << "Error: variable is not array" << v->get_name() << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
 		}
+		else
+			index->check(n,from_right);
 		pi = make_pair(v, "Variable");
+		//this->from_right = from_right;
 		return pi;
 	}
 	virtual string getNodeType()

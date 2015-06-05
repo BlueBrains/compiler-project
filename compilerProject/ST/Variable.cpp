@@ -48,6 +48,10 @@ void Variable::set_lastTypes(int val)
 	int* xx = new int(val);
 	lastType=make_pair("int" ,(void*)xx);
 }
+void Variable::set_lastTypes(void* val)
+{
+	lastType = make_pair("type", (Type*)val);
+}
 void Variable::set_lastTypes(float val)
 {
 	float* xx = new float(val);
@@ -67,7 +71,7 @@ void Variable::set_lastTypes(string val)
 void Variable::set_lastTypes(Type* val)
 {
 	//lastType["ID"] = val;
-	lastType = make_pair("ID", val);
+	lastType = make_pair("type", val);
 }
 void Variable::set_lastTypes()
 {

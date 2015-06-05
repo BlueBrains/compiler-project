@@ -628,8 +628,8 @@ public:
 			/*
 			MIPS_ASM::pop(t1);
 			MIPS_ASM::pop(t0);*/
-			if ((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
-				|| (first->my_type == "bool"&& second->my_type == "int"))
+			if (((first->my_type == "int"&& second->my_type == "int") || (first->my_type == "int"&& second->my_type == "bool")
+				|| (first->my_type == "bool"&& second->my_type == "int"))&&(first->getNodeType()!="ArrayNode"))
 			{
 				this->my_type = "int";
 				MIPS_ASM::pop(t1);
@@ -868,9 +868,20 @@ public:
 					this->my_type = "string";
 					if (op == 0)
 					{
+						/*
 						MIPS_ASM::la("t0", MIPS_ASM::getStringAdressLabel(x + y));
 						MIPS_ASM::push("t0");
-						this->string_val = x + y;
+						this->string_val = x + y;*/
+						MIPS_ASM::pop(t1);
+						MIPS_ASM::pop(t0);
+						MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+						string ip = MIPS_ASM::addStringAdressLabel();
+						MIPS_ASM::move("a0", "t0");
+						MIPS_ASM::move("a1", "t1");
+						MIPS_ASM::la("a2", ip);
+						MIPS_ASM::jal("concatenate_2strings");
+						MIPS_ASM::la("a0", ip);
+						MIPS_ASM::sw("a0", 0, "sp");
 					}
 					else if (op == 1)
 					{
@@ -1003,6 +1014,33 @@ public:
 					}
 					else
 						cout << "unsupported operand type(s) for  string" << endl;;
+				}
+				if (((first->getNodeType() == "ArrayNode" && second->my_type == "int")) && (op == 2))
+				{
+					this->my_type = "Array";
+					MIPS_ASM::pop(t1);
+					MIPS_ASM::pop(t0);
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					string arrayName;
+					arrayName = MIPS_ASM::addArrayAdressLabel(15 * 4);
+					MIPS_ASM::la("a1", arrayName);
+					MIPS_ASM::jal("concatenate_array");
+					MIPS_ASM::la("a0", arrayName);
+					MIPS_ASM::sw("a0", 0, "sp");
+				}
+				else if (((first->my_type == "int" && second->getNodeType() == "ArrayNode")) && (op == 2))
+				{
+					this->my_type = "Array";
+					MIPS_ASM::pop(t0);
+					MIPS_ASM::pop(t1);
+					MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+					string arrayName;
+					arrayName = MIPS_ASM::addArrayAdressLabel(15 * 4);
+					MIPS_ASM::la("a1", arrayName);
+					MIPS_ASM::jal("concatenate_array");
+					MIPS_ASM::la("a0", arrayName);
+					MIPS_ASM::sw("a0", 0, "sp");
+
 				}
 				if (first->my_type == "type" || second->my_type == "type" )
 				{

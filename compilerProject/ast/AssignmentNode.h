@@ -37,6 +37,7 @@ private:
 		}
 	}
 public:
+	bool coded=false;
 	Node* get_right()
 	{
 		return right_side;
@@ -62,6 +63,10 @@ public:
 
 	}
 	virtual void before_generateCode(){
+		if (left_side->getNodeType() == "ArrayElementNode")
+		{
+			static_cast<ArrayElementNode*>(left_side)->from_left = true;
+		}
 		right_side->before_generateCode();
 		left_side->before_generateCode();
 		left_side->my_type = right_side->my_type;
@@ -74,15 +79,20 @@ public:
 			}
 			else if (left_side->my_type == "type")
 			{
-				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->type_val);
 			}
 		}
+		
 	}
 	virtual void generateCode()
 	{
 		string t1 = "t1";
 		string t0 = "t0";
 		string mem_addr = "sp";
+		if (left_side->getNodeType() == "ArrayElementNode")
+		{
+			static_cast<ArrayElementNode*>(left_side)->from_left = true;
+		}
 		MIPS_ASM::printComment("Assign node");
 		
 		MIPS_ASM::printComment("Assign node RHS:");
@@ -111,7 +121,7 @@ public:
 			}
 			else if (left_side->my_type == "type")
 			{
-				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->string_val);
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_lastTypes(right_side->type_val);
 			}
 		}
 		if (left_side->my_type == "float")
@@ -125,6 +135,7 @@ public:
 		}
 	
 		MIPS_ASM::sw(t0, 0, "v0");
+		MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 	}
 	virtual void print()
 	{
@@ -146,16 +157,12 @@ public:
 			if ((Variable*)p1.first)
 			{
 				((Variable*)p1.first)->init = true;
-				if (right_side->getNodeType() == "ArrayNode")
-				{
-					((Variable*)p1.first)->set_arrayNode(static_cast<ArrayNode*>(this->right_side));
-					((Variable*)p1.first)->set_isarray(true);
-				}
-				else
+				/*
+				if (left_side->getNodeType() != "ArrayElementNode")
 				{
 					((Variable*)p1.first)->set_isarray(false);
 					((Variable*)p1.first)->set_arrayNode(NULL);
-				}
+				}*/
 				if (right_side->getNodeType() == "ValueNode")
 				{
 					this->set_types((Variable*)p1.first,p2);

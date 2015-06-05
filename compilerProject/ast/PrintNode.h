@@ -34,7 +34,7 @@ public:
 	virtual void print()
 	{
 		cout << this->getNodeType()<<"  ";
-		Node* temp = _scoop;
+		Node* temp = this->Son;
 		while (temp)
 		{
 			temp->print();

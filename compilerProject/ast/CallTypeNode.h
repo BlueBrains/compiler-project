@@ -2,7 +2,9 @@
 #ifndef __CALLNODE__
 #define __CALLNODE__
 #include"..\ST\Type.h"
-#include"..\ST\Function.h"
+//#include"..\ST\Function.h"
+#include "functionNode.h"
+#include "AssignmentNode.h"
 #include<string>
 using namespace std;
 class CallTypeNode :public Node
@@ -12,6 +14,29 @@ private:
 	vector<char*>argument;
 	Type* t;
 	Function* f;
+	bool is_object = false;
+	void init_inhertance(Type* t)
+	{
+		Node* temp_class;
+		for (int i = 0; i < t->getInheritedType().size(); i++)
+		{
+			temp_class = t->getInheritedType().at(i)->type_node;
+			Node* temp = temp_class->Son;
+			while (temp)
+			{
+				if (temp->getNodeType() == "AssignmentNode")
+				{
+					if (static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode")
+					{
+						static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
+					}
+					temp->generateCode();
+				}
+				temp = temp->Next;
+			}
+			init_inhertance(t->getInheritedType().at(i));
+		}
+	}
 	Type* checkTypeFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num)
 	{
 		Type* v = NULL;
@@ -33,6 +58,47 @@ private:
 
 		}
 		return v;
+	}
+	Type* checkTypeforinhertance(char* name, vector<Node*>outer_node)
+	{
+		Type*t, *t1=NULL;
+		int i = outer_node.size() - 1;
+		if (outer_node.at(i)->getNodeType() != "ClassNode")
+		{
+			Node* temp2 = outer_node.at(i);
+			while (outer_node.at(i)->getNodeType() != "ClassNode")
+			{
+				i--;
+				temp2 = outer_node.at(i);
+			}
+			t = static_cast<ClassNode*>(temp2)->get_type();
+		}
+		else
+			t = static_cast<ClassNode*>(outer_node.back())->get_type();
+		if (t->getInheritedType().size() == 0)
+		{
+			cout << "ERROR: there no inhertance types to call in line: " << _lineNo << endl;
+		}
+		else
+		{
+			int i;
+
+			for ( i = 0; i < t->getInheritedType().size(); i++)
+			{
+				if (strcmp(t->getInheritedType().at(i)->get_name(), name) == 0)
+				{
+					t1 = t->getInheritedType().at(i);
+					//check for argument
+					break;
+
+				}
+			}
+			if (i == t->getInheritedType().size())
+			{
+				cout << "ERROR: There no type name is " << name << "in inheratance list" << endl;
+			}
+		}
+		return t1;
 	}
 	Type* checkType(char* name, vector<Node*>outer_node)
 	{
@@ -107,27 +173,46 @@ public:
 	}
 	virtual void generateCode()
 	{
-		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
-		t->type_node->getNextOffset(4);
-		t->type_node->generateCode();
-		MIPS_ASM::li("v0", 9);
-		MIPS_ASM::li("a0", t->type_node->getFrameSize());
-		MIPS_ASM::move("t0", "v0");
-		Node* temp = this->Son;
-		while (temp)
+		if (is_object)
 		{
-			 if (temp->getNodeType() == "AssignmentNode")
+			this->my_type = "type";
+			this->type_val = t;
+			//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			t->type_node->getNextOffset(4);
+			t->type_node->generateCode();
+			MIPS_ASM::li("v0", 9);
+			MIPS_ASM::li("a0", t->type_node->getFrameSize());
+			MIPS_ASM::add_instruction("syscall\n");
+			MIPS_ASM::move("s1", "v0");
+			MIPS_ASM::la("t9", MIPS_ASM::getStringAdressLabel(t->get_name()));
+			//MIPS_ASM::push("t9");
+			MIPS_ASM::add_instruction("sw $t9,0($s1) \n");
+
+
+			Node* temp = t->type_node->Son;
+			while (temp)
 			{
-				 if (static_cast<AssignmentNode*>( temp)->get_left()->getNodeType() == "CallVariableNode")
-				 {
-					 static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "t0";
-				 }
-				temp->generateCode();
+				if (temp->getNodeType() == "AssignmentNode" && (!static_cast<AssignmentNode*>(temp)->coded))
+				{
+					if ((static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode"))
+					{
+						static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
+					}
+					temp->generateCode();
+				}
+				temp = temp->Next;
 			}
+			this->init_inhertance(t);
+			MIPS_ASM::move("a0", "s1");
+			MIPS_ASM::jal(f->get_label());
+			func_vec.push_back(this->f->get_FunctionNode());
+			//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
+			MIPS_ASM::push("s1");
 		}
-		MIPS_ASM::jal(f->get_label());
-		func_vec.push_back(this->f->get_FunctionNode());
-		MIPS_ASM::push("t0");
+		else
+		{
+
+		}
 	}
 	virtual void print()
 	{
@@ -144,20 +229,53 @@ public:
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
+		Type* t1;
 		string x = this->getID();
 		char* p = const_cast<char *>(x.c_str());
-		Type* t1 = checkType(p,n);
-		if (!t1)
-			cout << "Error: Type not found " << x << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+		if (from_right)
+		{
+			
+			 t1 = checkType(p, n);
+			if (!t1)
+				cout << "Error: Type not found " << x << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+			else
+			{
+				this->setType(t1);
+				f = (Function*)t1->getScope()->m->get("__init__", "Function");
+			}
+			is_object = true;
+		}
 		else
 		{
-			this->setType(t1);
-
+			int i = n.size() - 1;
+			char* gh = static_cast<FunctionNode*>(n.at(i))->get_function()->get_name();
+			if ((n.at(i)->getNodeType() != "FunctionNode") || ((n.at(i)->getNodeType() == "FunctionNode") && (checkSuper(n.at(i)->Son)))
+				|| ((n.at(i)->getNodeType() == "FunctionNode") && (strcmp(gh, "__init__")!=0)))
+			{
+				cout << "ERROR : call to super must be first statement in constructor at line:" << _lineNo << endl;
+				is_object = false;
+			}
+			else
+			{
+				is_object = false;
+				t1 = checkTypeforinhertance(p, n);
+			}
 		}
+
 		pi = make_pair(t1,"type");
 
 		return pi;
 	}
-
+	bool checkSuper(Node* t)
+	{
+		bool found = false;
+		while (t != this && (t->getNodeType() == "CallTypeNode"))
+		{
+			t = t->Next;
+		}
+		if (t == this)
+			found = true;
+		return found;
+	}
 };
 #endif

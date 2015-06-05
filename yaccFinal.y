@@ -47,6 +47,7 @@
 	vector<string> parsedFile;
 	vector<string> temp_id2;
 	bool out_of_import=false;
+	input_Types my_input;
 	int visit_num=0;//this variable for detected that if in right side in expretion
 	char* i_type;
 	bool exist;
@@ -60,6 +61,7 @@
 	vector<char*> sto_mod;
 	bool ss=false;
 	bool ff=false;
+	bool a_self=false;//this for self.x()
 	bool pro= false;
 	bool from_except=false;
 	bool pp=true;
@@ -89,6 +91,7 @@
 	Variable* v;
 	Variable* v1=new Variable();
 	Type* t;
+	Node* expnode;
 	class Function * testfunction;
 	vector<char *> parameters;
 	class Parser
@@ -133,7 +136,7 @@
 %token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
-%token	WITH AS ASSERT EQUAL DEL RETURN PRINT GLOBAL STAR_EQUAL LESS_THAN_2 
+%token	WITH AS ASSERT EQUAL DEL RETURN PRINT INPUT_INT INPUT_FLOAT INPUT_STRING GLOBAL STAR_EQUAL LESS_THAN_2 
 %token	RAISE PRIVATE PUBLIC PROTECTED YIELD MORE_THAN_2 STRING NONE IS DIV_2 
 %token	LESS_OR_EQUAL MORE_OR_EQUAL EXCEPT PASS CHAR_VALUE BREAK CONTINUE
 
@@ -160,6 +163,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						p->print_symbol();
 						ast->tree($<tn>1);
 						ast->print($<tn>1, 0);
+						ast->generate_static($<tn>1);
 						ast->generate_main(p->getMainFunction());
 						}
 						Streams::verbose().flush();	
@@ -201,6 +205,7 @@ funcdef: funcheader suite {
 							linefunc=0;colmfunc=0;
 							visit_num=0;
 							constant=false;
+							
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
 						  }
 	
@@ -425,7 +430,33 @@ small_stmt: expr_stmt	{
 							visit_num=0;
 						 }
 			;
+input_stmt: input_choise '(' str_seq ')'
+						 {Streams::verbose() <<"atom: str_seq\n";
+									char* x = new char[100];
+									strcpy(x,$<r.strVal>3);
+									cout<<"x=   "<<x<<endl;
+									string sd(x);
+									cout<<"sd=== "<<sd<<endl;
+									constant=true;
+									Node* string_now;
 
+									string_now = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
+									$<tn>$=ast->createinputNode(string_now,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+						}
+			|input_choise '(' ')'{
+									$<tn>$=ast->createinputNode(NULL,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+								}
+								;
+input_choise:	INPUT_INT{
+							my_input=INT_input;
+						}
+				|INPUT_FLOAT{
+							my_input=FLOAT_input;
+						}
+				|INPUT_STRING{
+							my_input=STRING_input;
+						}
+						;
 expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stmt:	testlist_star_expr augassign testlist \n";}
 			|testlist_star_expr {Streams::verbose() <<"expr_stmt: testlist_star_expr \n";}
 			| vardef {
@@ -473,18 +504,27 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 														//cout<<"print in expr_stmt if";
 														//$<tn>$->print();cout<<endl;
 													}
-													if((v)&&(array_right))
+													cout<<"array right is "<<array_right<<endl;
+													if((v1)&&(array_right))
 													{
-														v->set_isarray(true);
+														v1->set_isarray(true);
+														ArrayNode* jo=static_cast<ArrayNode*>($<tn>2);
+														v1->set_arrayNode(jo);
+														cout<<"enter here for array "<<v1->get_name()<<endl;
 													}
-													
+													array_right=false;
+													is_list=false;
 													
 													
 												}
+												
 			;
 					
 right_testlist : '=' testlist_star_expr right_testlist {Streams::verbose() <<"right_testlist: '=' testlist_star_expr right_testlist \n";}
 				|'=' testlist_star_expr {Streams::verbose() <<"right_testlist: '=' testlist_star_expr \n";$<tn>$=$<tn>2;}
+				|'=' input_stmt	{
+							$<tn>$=$<tn>2;
+						}
 				;
 
 testlist_star_expr: comma_test_star_seqJ {Streams::verbose() <<"testlist_star_expr: comma_test_star_seqJ \n";}
@@ -1390,7 +1430,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
-					cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<endl;
+					cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
 					if((visit_num==1)&&(!constant))
 					{
 						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
@@ -1403,14 +1443,17 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 							cout<<"last node"<<endl;	
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+							
 						}
 						else
 						{
 							$<tn>$=$<tn>1;
 						} 
+						temp_id2.pop_back();	
 					}
 					else if((!constant)&&(!is_list))
 					{
+						v=NULL;
 						if(v1)
 						{
 							v1->init=true;
@@ -1429,11 +1472,16 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						if(v!=NULL)
 						{
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+							//temp_id2.pop_back();		
 						}
 						else
 						{
 							$<tn>$=$<tn>1;
 						}
+							if(!temp_id2.empty())
+							{
+								temp_id2.pop_back();
+							}
 					}
 					else
 					{
@@ -1466,11 +1514,14 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 							$<tn>$=$<tn>1;
 							} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
-											cout<<"the top is "<<temp_id2.back()<<endl;
+											cout<<"the top is "<<temp_id2.back()<<"   "<<temp_id2.size()<<endl;
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											dotvec.insert(dotvec.begin(),$<tn>1);
 											$<tn>$=ast->createDotNode(dotvec,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 											dotvec.clear();
+											inside_func=false;
+											//cout <<"insite func "<<inside_func<<endl;
+											//temp_id2.pop_back();
 										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
@@ -1485,20 +1536,25 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		|'[' ']' {Streams::verbose() <<"atom:	'[' ']' \n";
 						arrayvec.clear();
 						array_right=true;
-						is_list=true;
+						//is_list=true;
 						$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 				}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";
 									$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 									array_right=true;
+									//is_list=true;
 									arrayvec.clear();
 									}
 		|'{' dictorsetmaker '}'		{Streams::verbose() <<"atom: '{' dictorsetmaker '}' \n";}
 		| NAME { Streams::verbose() <<"atom: NAME\n";
+									if(strcmp($<r.strVal>1,"self")==0)
+									{
+										a_self=true;
+									}
 		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
-									
+									cout <<"hello molham "<<$<r.strVal>1;
 									my_node=NULL;
 									}
 									else{
@@ -1510,12 +1566,18 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 												in_def=false;
 										
 										}
+									
+									/*Node* temp = ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									$<tn>$=temp;
+									expnode= new Node(temp);*/
 									$<tn>$=ast->createCallVarNode($<r.strVal>1,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									//expnode=$<tn>$;
 					} 
 		| NAME '(' ')' %prec stmt_13{ Streams::verbose() <<"atom: NAME()\n";
 									//temp_id2.push_back($<r.strVal>1);
 									visit_num++;
 									parameters.clear();
+									cout<<"enter in name()"<<endl;
 									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									} 
 		| NAME '(' exprlist ')' { Streams::verbose() <<"atom: NAME\n";
@@ -1526,10 +1588,15 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 												} 
 		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 											$<var>$=p->checkVariable($<r.strVal>1,t,exist, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
+											cout<<"enter to arrayelem"<<endl;
 											is_list=true;
 											if($<var>$)
+											{
 												$<tn>$=ast->createArrayElementNode($<var>$,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum,$<r.strVal>1);
-												} 
+												cout<<"enter if in arrsay ggyhg\n";
+											}
+												
+										} 
 		| NUMBER_INT {Streams::verbose() <<"atom: NUMBER_INT "<<$<r.intVal>1<<endl;;
 						int* xx = new int ($<r.intVal>1);
 						//cout<<"yhe number is"<<*xx<<endl;
@@ -1606,44 +1673,60 @@ testlist_comp: test comp_for {Streams::verbose() <<"testlist_comp: test comp_for
 			   |star_expr   comma_test_star_seq ','	{Streams::verbose() <<"testlist_comp: comma_test_star_seq ',' star_expr\n";} 
 			   ;
 
-trailer:	'.' NAME  %prec stmt_14{Streams::verbose() <<"trailer:	'.' NAME\n";
+trailer:	'.' NAME  %prec stmt_14
+						{Streams::verbose() <<"trailer:	'.' NAME\n";
 							temp_id=temp_id2.back();
 							temp_id=temp_id+"."+$<r.strVal>2;
 						temp_id2.pop_back();
 						temp_id2.push_back(temp_id);	
 						$<tn>$=ast->createCallVarNode($<r.strVal>2,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 						dotvec.push_back($<tn>$);
+						if(strcmp($<r.strVal>2,"self")==0)
+						{
+							a_self=true;
+						}
 						} 
 			|'.' NAME '(' ')' {
 									parameters.clear();
-									if(temp_id2.back()=="self")
+									if(a_self)
 									{
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
+										a_self=false;
 									}
 									else
 									{
-										$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
-									
+									temp_id=temp_id2.back();
+									temp_id=temp_id+"."+$<r.strVal>2;
+								temp_id2.pop_back();
+								temp_id2.push_back(temp_id);
 									dotvec.push_back($<tn>$);
 									call_func=false;
 								}
-			|'.' NAME '(' exprlist ')' {
-									Streams::verbose() <<"trailer:	'.' NAME(exprlist)\n";
-									if(strcmp($<r.strVal>2,"self")==0)
+			|'.' NAME inside_func exprlist ')' {
+									if(a_self)
 									{
+									cout<<"Toslamly khyoo Amooooora"<<endl;
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										a_self=false;
 									}
 									else
 									{
-										$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									dotvec.push_back($<tn>$);
+									cout<<"the size is "<<func_call.size()<<endl;
+									temp_id=temp_id2.back();
+									temp_id=temp_id+"."+$<r.strVal>2;
+									temp_id2.pop_back();
+									temp_id2.push_back(temp_id);
 									call_func=false;
 									func_call.clear();
 								}
-			|'.' NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
+			|'.' NAME '[' subscriptlist ']' {
+												Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 												$<tn>$=ast->createArrayElementNode(NULL,$<tn>4,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 												dotvec.push_back($<tn>$);
 											} ;
@@ -1688,9 +1771,19 @@ sliceop: ':' {Streams::verbose() <<"sliceop: ':'\n";}
 
 comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',' expr \n";
 										$<tn>$=$<tn>2;
+										if(call_func){
+												func_call.push_back($<tn>2);	
+												//expnode=NULL;
+									}
 									}
 						|',' star_expr {Streams::verbose() <<"comma_expr_star_seq : 	',' star_expr \n";}
 						|comma_expr_star_seq ',' expr {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";
+															
+															if(call_func){
+												cout<<"here1"<<endl;
+												func_call.push_back($<tn>3);
+												//expnode=NULL;
+											}
 															$<tn>$=ast->addNext($<tn>1,$<tn>3);
 														}
 						|comma_expr_star_seq ',' star_expr  {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' star_expr \n";}
@@ -1699,32 +1792,42 @@ comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',
 exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 						$<tn>$=$<tn>1;
 						if(call_func){
-							if($<tn>$->getNodeType()=="CallVariableNode" || $<tn>$->getNodeType()=="ValueNode")
-							{
-								func_call.push_back(my_node);	
-							}
-							else
-								cout<<"ERROR : using Unintialaized variable "<<$<r.strVal>1<<"Line "<<yylval.r.lineNum<<" column"<<yylval.r.colNum<<endl; 
+								
+								func_call.push_back($<tn>1);	
+								//expnode=NULL;
 						}
 					}
 			|expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";
 											$<tn>$=$<tn>1;
+											
+											cout<<"out here1"<<endl;
+											if(call_func){
+												cout<<"here1"<<endl;
+												func_call.insert(func_call.begin(),$<tn>1);	
+												//expnode=NULL;
+											}
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
 										}
 			|star_expr {Streams::verbose() <<"exprlist: 	star_expr \n";}
 			|star_expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	star_expr comma_expr_star_seq \n";}
 			|expr ',' {Streams::verbose() <<"exprlist: 	expr ',' \n";
+							
 							$<tn>$=$<tn>1;
+							cout<<"out here2"<<endl;
 						if(call_func){
-							if($<tn>$->getNodeType()=="CallVariableNode" || $<tn>$->getNodeType()=="ValueNode")
-							{
-								func_call.push_back(my_node);	
-							}
-							else
-								cout<<"ERROR : using Unintialaized variable "<<$<r.strVal>1<<"Line "<<yylval.r.lineNum<<" column"<<yylval.r.colNum<<endl; 
+						cout<<"here2"<<endl;
+								func_call.push_back($<tn>1);	
+								//expnode=NULL;
 						}
 						}
 			|expr comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";
+												
+												cout<<"out here3"<<endl;
+												if(call_func){
+							cout<<"here3"<<endl;
+								func_call.push_back($<tn>1);
+								//expnode=NULL;	
+						}
 												$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											}
 			|star_expr ',' {Streams::verbose() <<"exprlist: 	star_expr ',' \n";}
@@ -2122,19 +2225,19 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
         
 		 |'*' test {    
 						std::string tempstr($<r.strVal>2);
-						std::string erro("*" + tempstr);
-						char *cstr = new char[erro.length() + 1];
-						strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 						
 						Streams::verbose() <<"arglist: '*' test\n";
 				   }
 		
 		 |'*' test ',' STAR_2 test {
-										std::string tempstr($<r.strVal>2);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+		 std::string tempstr($<r.strVal>2);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 
 										std::string tempstr1($<r.strVal>4);
@@ -2146,10 +2249,10 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 									}
 		
 		 |'*' test comma_arg_seq {
-		 					   		    std::string tempstr($<r.strVal>2);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+		 								std::string tempstr($<r.strVal>2);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 										
 										Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
@@ -2157,31 +2260,31 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 		
 		 |'*' test comma_default_arg_seq {
 											
-										std::string tempstr($<r.strVal>2);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+											std::string tempstr($<r.strVal>2);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 											Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
 										 }
 		
 		 |'*' test comma_arg_seq comma_default_arg_seq {
-		 										std::string tempstr($<r.strVal>2);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+		 													std::string tempstr($<r.strVal>2);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 															Streams::verbose() <<"arglist: '*' test comma_arg_seq\n";
 													   }
 		
 		 |'*' test comma_arg_seq ',' STAR_2 test  {
 
-													std::string tempstr($<r.strVal>2);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+										std::string tempstr($<r.strVal>2);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
-										
+
 										std::string tempstr1($<r.strVal>5);
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
@@ -2208,21 +2311,21 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
         
 		 |arg_comma_seq '*' test  {		
 									std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 									Streams::verbose() <<"arglist: arg_comma_seq '*' test\n";
 								  }
 		
 		 |arg_comma_seq '*' test ',' STAR_2 test {
 
-											std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+		 std::string tempstr($<r.strVal>3);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
-										
+
 										std::string tempstr1($<r.strVal>6);
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
@@ -2235,39 +2338,39 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 		 |arg_comma_seq '*' test comma_arg_seq {
 												
 												std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 												Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq\n";
 											   }
 		
 		 |arg_comma_seq '*' test comma_default_arg_seq {
 														std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 														Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_default_arg_seq\n";
 													   }
 		
 		 |arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq {
 																		std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
 																		Streams::verbose() <<"arglist: arg_comma_seq '*' test comma_arg_seq comma_default_arg_seq\n";
 																	 }
 		
 		 |arg_comma_seq '*' test comma_arg_seq ',' STAR_2 test {
 										
-																std::string tempstr($<r.strVal>3);
-										std::string erro("*" + tempstr);
-										char *cstr = new char[erro.length() + 1];
-										strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
+										std::string tempstr($<r.strVal>3);
+							std::string erro("*" + tempstr);
+							char *cstr = new char[erro.length() + 1];
+							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
 								amer_par.push_back(my_node);
-										
+
 										std::string tempstr1($<r.strVal>7);
 										std::string erro1("**" + tempstr1);
 										char *cstr1 = new char[erro1.length() + 1];
@@ -2296,7 +2399,7 @@ one_star: '*' test {
 								amer_par.push_back(my_node);
 					}
 */
- 
+
 comma_default_arg_seq: ',' default_arg {Streams::verbose() <<"comma_default_arg_seq: ',' default_arg\n";}
 					   |comma_default_arg_seq ',' default_arg {Streams::verbose() <<"comma_default_arg_seq: comma_default_arg_seq ',' default_arg\n";}
 					   ;
@@ -2314,12 +2417,13 @@ default_arg: in_default test {parameters.push_back($<r.strVal>1);Streams::verbos
 							$<tn>$=ast->addNext(my_node,o);
 							amer_par.push_back($<tn>$);
 							df_par.push_back($<tn>$);
+							in_def=false;
 							};
 
 argument: 	test {parameters.push_back($<r.strVal>1); Streams::verbose() <<"argument: 	test\n";
 					$<tn>$=$<tn>1; 
-					if(strcmp(($<r.strVal>1),"self")!=0)
-					amer_par.push_back(my_node);
+					if(strcmp($<r.strVal>1,"self")!=0)
+						amer_par.push_back(my_node);
 					}
 			|test comp_for {parameters.push_back($<r.strVal>1);Streams::verbose() <<"argument: 	test comp_for\n";
 					$<tn>$=$<tn>1; 

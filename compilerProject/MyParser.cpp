@@ -137,7 +137,7 @@ Variable* MyParser::addVariableToCurrentScope(char* n, char* acc_mod, bool is_st
 
 
 Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, int colNo, bool from_right, bool is_array, bool is_dic, bool self){
-	char* tokenPtr;
+	char* tokenPtr; 
 	char buffer[15];
 	bool found = false;
 	sprintf(buffer, name);
@@ -252,6 +252,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		*/
 	}
+
 	vector <char *> cleanp = parameter;
 	vector <char *> clean2p = parameter;
 	vector <char *> clean3p = parameter;
@@ -450,15 +451,15 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 					if (strcmp("self", first) == 0)
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
-			/*
+			
 			if (!f->get_final() && !f->get_static())
 			{
 
 				char* first = f->getfirstpara();
-				if ((first == NULL) || (strcmp("self", first) != 0))
+				if (first == NULL)
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
-			*/
+			
 
 	}
 	else 

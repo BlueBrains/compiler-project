@@ -5,7 +5,7 @@
 #include"..\ST\Variable.h"
 #include<sstream>
 //#include"ast\CallVariableNode.h"
-#include"callFunctionNode.h"
+//#include"callFunctionNode.h"
 #include"ArrayElementNode.h"
 #include"IDNode.h"
 #include"ClassNode.h"
@@ -16,6 +16,7 @@ private:
 	string ID;
 
 	Variable* variable_node;
+	
 	Variable* checkVarFromCurrentNode(string id, vector<Node*>outer_node)
 	{
 		int i = outer_node.size() - 1;
@@ -67,6 +68,7 @@ private:
 
 	}
 public:
+	bool is_class = false;
 	void set_variable(Variable* v)
 	{
 		variable_node = v;
@@ -102,7 +104,9 @@ public:
 		cout << endl;
 	}
 	virtual void before_generateCode(){
-		if (this->my_type == "NULL")
+		if (variable_node)
+		{
+			if (this->my_type == "NULL")
 			{
 				this->my_type = variable_node->strLasttype;
 			}
@@ -111,17 +115,24 @@ public:
 				std::ostringstream ss;
 				char* s = reinterpret_cast<char*>(variable_node->get_lastTypes().second);
 				ss << s;
-				this->string_val = ss.str();				
+				this->string_val = ss.str();
 			}
 			else if (this->my_type == "type")
 			{
 
 			}
+		}
+		
 	}
 	virtual  void generateCode()
 	{
+		
 		if (variable_node)
 		{
+			if (variable_node->get_static())
+			{
+				this->_offsetReg = "gp";
+			}
 			if (this->my_type == "NULL")
 			{
 				this->my_type = variable_node->strLasttype;
@@ -135,13 +146,32 @@ public:
 			}
 			else if (this->my_type == "type")
 			{
-
+				this->type_val = (Type*)variable_node->get_lastTypes().second;
 			}
-			MIPS_ASM::lw("t0", -variable_node->getOffset(), this->getOffsetRegister());
-			//v0 contains the address in memorry to be used later in assignment
-			MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
-				+ "," + std::to_string(-variable_node->getOffset()) + "\n");
-			MIPS_ASM::push("t0");
+			if (variable_node->get_static())
+			{
+				string ff = variable_node->get_name() + std::to_string(variable_node->getOffset());
+				MIPS_ASM::la("t9",ff);
+
+				MIPS_ASM::lw("t0", 0, "t9");
+				//v0 contains the address in memorry to be used later in assignment
+				/*
+				MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+					+ "," + variable_node->get_name() +std::to_string(variable_node->getOffset()) + "\n");*/
+				MIPS_ASM::add_instruction(string("addi $v0,$") + "t9"
+					+ ",0 \n");
+				//MIPS_ASM::la("v0", ff);
+				MIPS_ASM::push("t0");
+			}
+			else
+			{
+				MIPS_ASM::lw("t0", variable_node->getOffset(), this->getOffsetRegister());
+				//v0 contains the address in memorry to be used later in assignment
+				MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+					+ "," + std::to_string(variable_node->getOffset()) + "\n");
+				MIPS_ASM::push("t0");
+			}
+			
 		}
 		
 	}

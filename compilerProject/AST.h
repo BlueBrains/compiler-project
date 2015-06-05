@@ -1,8 +1,10 @@
 #pragma once
 #ifndef __AST__
 #define __AST__
+#include<set>
 #include"dotNode.h"
 #include"ast\returnNode.h"
+#include"ast\inputNode.h"
 #include"ast\ClassNode.h"
 #include"ast\expressionNode.h"
 #include"ast\IDNode.h"
@@ -60,21 +62,75 @@ public:
 
 	}
 	vector<Node*>outer_node;
+	int global_num = 0;
+	void generate_static(Node* n)
+	{
+		bool enter = false;
+		if (n)
+		{
+			if (n->getNodeType() == "IDNode")
+			{
+				if (static_cast<IDNode*>(n)->get_variable()->get_static())
+				{
+					static_cast<IDNode*>(n)->get_variable()->setOffset(global_num);
+					string off = static_cast<IDNode*>(n)->get_variable()->get_name() + std::to_string(global_num);
+					MIPS_ASM::add_data(off + ": .word 4\n");
+					
+					if (n->Next->getNodeType() == "AssignmentNode")
+					{
+						//n->Next->generateCode();
+						static_cast<AssignmentNode*>(n->Next)->get_right()->generateCode();
+						static_cast<IDNode*>(n)->get_variable()->strLasttype = static_cast<AssignmentNode*>(n->Next)->get_right()->my_type;
+						MIPS_ASM::pop("t0");
+						//MIPS_ASM::sw("t0", off, "gp");
+						MIPS_ASM::la("t1", off);
+						MIPS_ASM::sw("t0", 0, "t1");
+
+						static_cast<AssignmentNode*>(n->Next)->coded = true;
+					}
+					global_num += 4;
+				}
+			}
+			generate_static(n->Next);
+			generate_static(n->Son);
+		}
+	}
 	void generate_main(Function* main)
 	{
+		//MIPS_ASM::add_instruction("add $gp,$gp,"+std::to_string(global_num)+" \n");
 		if (main)
 		{
+			
 			main->get_FunctionNode()->generateCode();
 			MIPS_ASM::add_instruction("li $v0, 10 \n");
 			MIPS_ASM::add_instruction("syscall \n");
+			set<Node*>s;
+			s.insert(func_vec.begin(), func_vec.end());
+			/*
 			for (int i = 0; i < func_vec.size(); i++)
 			{
 				MIPS_ASM::label(static_cast<FunctionNode*>(func_vec.at(i))->get_function()->get_label());
 				func_vec.at(i)->generateCode();
+			}*/
+
+			int oo=s.size();
+			MIPS_ASM::add_instruction("\n \n");
+			for (set<Node*>::iterator i = s.begin(); i != s.end(); i++) {
+				MIPS_ASM::label(static_cast<FunctionNode*>(*i)->get_function()->get_label());
+				(*i)->generateCode();
+				MIPS_ASM::add_instruction("\n \n");
 			}
 			MIPS_ASM::add_instruction("\n \n");
 			MIPS_ASM::printComment("this function for string*number");
 			MIPS_ASM::mult_string();
+
+			MIPS_ASM::add_instruction("\n \n");
+			MIPS_ASM::printComment("this function for string+string");
+			MIPS_ASM::sum_string();
+
+			MIPS_ASM::add_instruction("\n \n");
+			MIPS_ASM::printComment("this function for Array*number");
+			MIPS_ASM::mult_array();
 		}
 		
 	}
@@ -322,6 +378,11 @@ public:
 	returnNode* createReturnNode(Function* f, Node* scoop, Node* son, Node*next, int l_no, int c_no)
 	{
 		returnNode* temp = new returnNode( f,scoop,son,next, l_no, c_no);
+		return temp;
+	}
+	inputNode* createinputNode(Node* v1, input_Types type, Node* son, Node*next, int l_no, int c_no)
+	{
+		inputNode* temp = new inputNode(v1, type, son, next, l_no, c_no);
 		return temp;
 	}
 	Node * addNext(Node* base,Node* next)

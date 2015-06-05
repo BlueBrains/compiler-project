@@ -4,6 +4,7 @@
 #include "ST\SymbolTable.h"
 #include"ErrorRevovery.h"
 #include<vector>
+#include<set>
 using namespace std;
 //===================== Data Structures From Help in Yacc ==============
 struct Comparator_char {
