@@ -167,6 +167,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 			;
 
 program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';' temp2 \n";$<tn>$=$<tn>3;}
+		  |import_stmt error temp2 {Streams::verbose() <<"program : import_stmt error temp2 \n";$<tn>$=$<tn>3;}
           |temp2 {Streams::verbose() <<"program : temp2 \n";}
 		  ;
 
@@ -388,6 +389,10 @@ stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";
 simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
 								$<tn>$=$<tn>1;
 							}
+			|small_stmt error {
+								Streams::verbose() <<"simple_stmt: small_stmt error \n";
+													$<tn>$=$<tn>1;
+							  }
 			 ;
 small_stmt: expr_stmt	{
 							Streams::verbose() <<"small_stmt: expr_stmt \n";
@@ -758,7 +763,7 @@ vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF NAME\n";
 										visit_num++;
 									} 
 		| DEF access NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF access NAME\n";
-											Streams::verbose()<<"var_declaration: access_modef ID\n";
+											Streams::verbose()<<"var_declaration: access_modef NAME\n";
 									$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 									v=$<var>$;
 									visit_num++;
@@ -767,7 +772,7 @@ vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF NAME\n";
 									$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 											} 
 		| DEF STATIC NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF STATIC NAME\n";
-											Streams::verbose()<<"var_declaration: STATIC ID\n";
+											Streams::verbose()<<"var_declaration: STATIC NAME\n";
 											$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false,false);
 											v=$<var>$;
 											v1=v;
@@ -775,7 +780,7 @@ vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF NAME\n";
 											$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 										} 
 		| DEF FINAL NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF FINAL NAME\n";
-												Streams::verbose()<<"var_declaration: FINAL ID\n";
+												Streams::verbose()<<"var_declaration: FINAL NAME\n";
 												$<var>$=p->addVariableToCurrentScope($<r.strVal>3,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													v1=v;
@@ -783,7 +788,7 @@ vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF NAME\n";
 													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 										} 
 		| DEF STATIC FINAL NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF STATIC FINAL NAME\n";
-													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
+													Streams::verbose()<<"var_declaration: STATIC FINAL NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													visit_num++;
@@ -791,7 +796,7 @@ vardef :DEF NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF NAME\n";
 													$<tn>$ = ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 												} 
 		| DEF FINAL STATIC NAME %prec stmt_14 {Streams::verbose() <<"atoms: DEF FINAL STATIC NAME\n";
-													Streams::verbose()<<"var_declaration: STATIC FINAL ID\n";
+													Streams::verbose()<<"var_declaration: STATIC FINAL NAME\n";
 													$<var>$=p->addVariableToCurrentScope($<r.strVal>4,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false,false);
 													v=$<var>$;
 													v1=v;
@@ -933,6 +938,11 @@ if_header: IF test ':'  {
 							$<tn>$=$<tn>2;
 							visit_num=0;
 						}
+		   |IF test error  {
+							p->createNewScope();
+							$<tn>$=$<tn>2;
+							visit_num=0;
+						}
 while_stmt: while_header suite {
 									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
 									$<tn>$ = ast->createWhileNode($<tn>2,NULL,$<tn>1,NULL,yylval.r.lineNum,yylval.r.colNum);
@@ -946,18 +956,52 @@ while_stmt: while_header suite {
 												 }
 			;
 while_header: WHILE test ':' {
-									Streams::verbose() <<"while_header:  WHILE test ':' \n";
+								Streams::verbose() <<"while_header:  WHILE test ':' \n";
 								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
-}
+							 }
+			 |WHILE test error {
+								Streams::verbose() <<"while_header:  WHILE test error \n";
+								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
+								p->createNewScope();
+								visit_num=0;
+							 }
 for_stmt:   for_header IN testlist ':' suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";
 												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
 												p->CloseScope();
 											   }
+			|for_header IN testlist error suite {
+												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist error suite \n";
+												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+												p->CloseScope();
+											   }
+			|for_header error testlist ':' suite {
+												Streams::verbose() <<"for_stmt:   FOR exprlist error testlist ':' suite \n";
+												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+												p->CloseScope();
+											   }
 			|for_header IN testlist ':' suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";
+																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																$<tn>$ = forNode;															
+															   }
+			|for_header IN testlist error suite ELSE ':' suite {
+																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist error suite ELSE ':' suite\n";
+																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																$<tn>$ = forNode;															
+															   }
+			|for_header IN testlist ':' suite ELSE error suite {
+																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE error suite\n";
+																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																$<tn>$ = forNode;															
+															   }
+			|for_header error testlist ':' suite ELSE ':' suite {
+																Streams::verbose() <<"for_stmt:  FOR exprlist error testlist ':' suite ELSE ':' suite\n";
 																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
 																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
@@ -969,7 +1013,11 @@ for_header: FOR exprlist {
 											};
 try_header:	TRY ':'  {
 										p->createNewScope();
-}
+					 }
+			|TRY error  {
+										p->createNewScope();
+					 }
+			;
 try_stmt:   try_header suite try_except_cla_seq {
 												Streams::verbose() <<" try_stmt:   TRY ':' suite try_except_cla_seq\n";
 												p->CloseScope();
@@ -1007,7 +1055,16 @@ finally_stmt:	FINALLY ':'{
 									p->createNewScope();
 								}
 								from_except=false;
-};
+							}
+				|FINALLY error{
+								if(!from_except)
+								{
+									p->CloseScope();
+									p->createNewScope();
+								}
+								from_except=false;
+							}
+		 ;
 try_except_cla_seq: except_clause ':' suite	{
 												Streams::verbose() <<"try_except_cla_seq: except_clause ':' suite \n";
 												Node* except = $<tn>1;
@@ -1017,8 +1074,30 @@ try_except_cla_seq: except_clause ':' suite	{
 												$<tn>$ = except;
 												from_except=true;
 											}
+					|except_clause error suite	{
+												Streams::verbose() <<"try_except_cla_seq: except_clause error suite \n";
+												Node* except = $<tn>1;
+												except->Son = $<tn>3;
+												p->CloseScope();
+												p->createNewScope();
+												$<tn>$ = except;
+												from_except=true;
+											}
 					|try_except_cla_seq except_clause ':' suite {
 																	Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";
+																	Node* except_a = $<tn>1;
+																	Node* except_b = $<tn>2;
+																	while(except_a->Next!=NULL)
+																		except_a = except_a->Next;
+																	except_a->Next = except_b;
+																	p->CloseScope();
+																	p->createNewScope();
+																	except_b->Son = $<tn>4;
+																	$<tn>$ = $<tn>1;
+																	from_except=true;
+																}
+					|try_except_cla_seq except_clause error suite {
+																	Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause error suite\n";
 																	Node* except_a = $<tn>1;
 																	Node* except_b = $<tn>2;
 																	while(except_a->Next!=NULL)
@@ -1086,7 +1165,12 @@ suite:	list_stmt END {
 							Streams::verbose() <<"suite:	list_stmt END\n";
 							$<tn>$=$<tn>1;	
 						}
+		|list_stmt error {
+							Streams::verbose() <<"suite:	list_stmt error\n";
+							$<tn>$=$<tn>1;	
+						}
 		|END {	$<tn>$=NULL;	Streams::verbose() <<"suite:	END\n"; $<tn>$=NULL;}
+		|error {	$<tn>$=NULL;	Streams::verbose() <<"suite:	error\n"; $<tn>$=NULL;}
 		;
 
 test:	or_test {Streams::verbose() <<"test:	or_test\n";$<tn>$=$<tn>1;}
@@ -1675,333 +1759,338 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 				|test comma_test_seq {Streams::verbose() <<"dictorsetmaker: test ','\n";}
 				|test comma_test_seq ',' {Streams::verbose() <<"dictorsetmaker: test comma_test_seq ','\n";}
 				;
-classdef: classheader suite {
-								Streams::verbose() <<"classdef: classheader suite\n";
+classdef: classheader ':' suite {
+								Streams::verbose() <<"classdef: classheader ':' suite\n";
+								$<type>$=p->finishTypeDeclaration(t);
+								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+							}
+		  |classheader error suite {
+								Streams::verbose() <<"classdef: classheader error suite\n";
 								$<type>$=p->finishTypeDeclaration(t);
 								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
 							}
 
-classheader: CLASS NAME ':'  {
-								Streams::verbose() << "class_h: CLASS ID \n";
+classheader: CLASS NAME   {
+								Streams::verbose() << "class_h: CLASS NAME \n";
 								colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 
 								inhertance_list.clear();
 					}
-		  |access CLASS NAME ':'  {
-									Streams::verbose() << "class_h: access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |access CLASS NAME   {
+									Streams::verbose() << "class_h: access_modef CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |STATIC CLASS NAME ':'  {
-									Streams::verbose() << "class_h: STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |STATIC CLASS NAME   {
+									Streams::verbose() << "class_h: STATIC CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |FINAL CLASS NAME ':'  {
-									Streams::verbose() << "class_h: FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |FINAL CLASS NAME   {
+									Streams::verbose() << "class_h: FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |STATIC FINAL CLASS  NAME ':'  {
-											Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |STATIC FINAL CLASS  NAME   {
+											Streams::verbose() << "class_h: STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |FINAL STATIC CLASS NAME ':'  	{
-												Streams::verbose() << "class_h: STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |FINAL STATIC CLASS NAME   	{
+												Streams::verbose() << "class_h: STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |FINAL access CLASS NAME ':'  {
-											Streams::verbose() << "class_h: FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |FINAL access CLASS NAME   {
+											Streams::verbose() << "class_h: FINAL access_modef CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |STATIC access CLASS NAME ':'  {
-											Streams::verbose() << "class_h: STATIC access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |STATIC access CLASS NAME   {
+											Streams::verbose() << "class_h: STATIC access_modef CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |STATIC FINAL access CLASS NAME ':'  {
-													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |STATIC FINAL access CLASS NAME   {
+													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |FINAL STATIC access CLASS NAME ':'  {
-													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |FINAL STATIC access CLASS NAME   {
+													Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |access STATIC CLASS NAME ':'  {
-											Streams::verbose() << "class_h: access_modef STATIC CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |access STATIC CLASS NAME   {
+											Streams::verbose() << "class_h: access_modef STATIC CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |access FINAL CLASS NAME ':'  {
-											Streams::verbose() << "class_h: access_modef FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |access FINAL CLASS NAME   {
+											Streams::verbose() << "class_h: access_modef FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 							$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |access STATIC FINAL CLASS NAME ':'  {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |access STATIC FINAL CLASS NAME   {
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 							$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |access FINAL STATIC CLASS NAME ':'  {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |access FINAL STATIC CLASS NAME   {
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 							$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |STATIC access FINAL CLASS NAME ':'  {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |STATIC access FINAL CLASS NAME   {
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 							$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |FINAL access STATIC CLASS NAME ':'  {
-													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
+		  |FINAL access STATIC CLASS NAME   {
+													Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
 							$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 					}
-		  |CLASS NAME '(' ')' ':'  {
-										Streams::verbose() << "class_h: CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |CLASS NAME '(' ')'   {
+										Streams::verbose() << "class_h: CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 									t=$<type>$;
 									inhertance_list.clear();
 									temp_id="";
 									acc_mod="";
 								}     
-		  |access CLASS NAME '(' ')' ':'  {
-											Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |access CLASS NAME '(' ')'   {
+											Streams::verbose() << "class_h: access_modef CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}              
-		  |STATIC CLASS NAME '(' ')' ':'  {
-											Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |STATIC CLASS NAME '(' ')'   {
+											Streams::verbose() << "class_h: STATIC CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}        
-		  |FINAL CLASS NAME '(' ')' ':'  {
-											Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |FINAL CLASS NAME '(' ')'   {
+											Streams::verbose() << "class_h: FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |STATIC FINAL CLASS NAME '(' ')' ':'  {
-													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |STATIC FINAL CLASS NAME '(' ')'   {
+													Streams::verbose() << "class_h: STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}
-		  |FINAL STATIC CLASS NAME '(' ')' ':'  {
-													Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |FINAL STATIC CLASS NAME '(' ')'   {
+													Streams::verbose() << "class_h: STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}
-		  |STATIC access CLASS NAME '(' ')' ':'   {
-													Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |STATIC access CLASS NAME '(' ')'    {
+													Streams::verbose() << "class_h: STATIC access_modef CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}
-		  |FINAL access CLASS NAME '(' ')' ':'  {
-													Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |FINAL access CLASS NAME '(' ')'   {
+													Streams::verbose() << "class_h: FINAL access_modef CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}
-		  |STATIC FINAL access CLASS NAME '(' ')' ':'   {
-															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |STATIC FINAL access CLASS NAME '(' ')'    {
+															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |FINAL STATIC access CLASS NAME '(' ')' ':'   {
-															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |FINAL STATIC access CLASS NAME '(' ')'    {
+															Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |access STATIC CLASS NAME '(' ')' ':' {
-													Streams::verbose() << "class_h: access_modef STATIC CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |access STATIC CLASS NAME '(' ')'  {
+													Streams::verbose() << "class_h: access_modef STATIC CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 								$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								}
-		  |access FINAL  CLASS NAME '(' ')' ':'   {
-													Streams::verbose() << "class_h: access_modef FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |access FINAL  CLASS NAME '(' ')'    {
+													Streams::verbose() << "class_h: access_modef FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |access STATIC FINAL  CLASS NAME '(' ')' ':'   {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |access STATIC FINAL  CLASS NAME '(' ')'    {
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |access FINAL STATIC  CLASS NAME '(' ')' ':'  {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |access FINAL STATIC  CLASS NAME '(' ')'   {
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |STATIC access FINAL  CLASS NAME '(' ')' ':'   {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |STATIC access FINAL  CLASS NAME '(' ')'    {
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |FINAL access STATIC  CLASS NAME '(' ')' ':'   {
-															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS ID OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
+		  |FINAL access STATIC  CLASS NAME '(' ')'    {
+															Streams::verbose() << "class_h: access_modef STATIC FINAL CLASS NAME OPEN_S CLOSE_S \n"; colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>4+1)); 
 									$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 								t=$<type>$;
 								inhertance_list.clear();
 								acc_mod="";
 								} 
-		  |CLASS NAME '(' dotted_as_names ')' ':'  {
-														Streams::verbose() << "class_h: CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |CLASS NAME '(' dotted_as_names ')'   {
+														Streams::verbose() << "class_h: CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 												$<type>$=p->createType($<r.strVal>2,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 												acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |access CLASS NAME '(' dotted_as_names ')' ':'   {
-																Streams::verbose() << "class_h: access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |access CLASS NAME '(' dotted_as_names ')'    {
+																Streams::verbose() << "class_h: access_modef CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |STATIC CLASS NAME '(' dotted_as_names ')' ':'  {
-															Streams::verbose() << "class_h: STATIC CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |STATIC CLASS NAME '(' dotted_as_names ')'   {
+															Streams::verbose() << "class_h: STATIC CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |FINAL CLASS NAME '(' dotted_as_names ')' ':'  {
-															Streams::verbose() << "class_h: FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |FINAL CLASS NAME '(' dotted_as_names ')'   {
+															Streams::verbose() << "class_h: FINAL CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>3,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |STATIC FINAL CLASS NAME '(' dotted_as_names ')' ':' {
-																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |STATIC FINAL CLASS NAME '(' dotted_as_names ')'  {
+																	Streams::verbose() << "class_h: STATIC FINAL CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |FINAL STATIC CLASS NAME '(' dotted_as_names ')' ':' {
-																	Streams::verbose() << "class_h: STATIC FINAL CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |FINAL STATIC CLASS NAME '(' dotted_as_names ')'  {
+																	Streams::verbose() << "class_h: STATIC FINAL CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													inhertance_list.clear();
 													acc_mod="";
 											} //class X (A,B,T) OR class X(A)
-		  |STATIC access CLASS NAME '(' dotted_as_names ')' ':'   {
-																		Streams::verbose() << "class_h: STATIC access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |STATIC access CLASS NAME '(' dotted_as_names ')'    {
+																		Streams::verbose() << "class_h: STATIC access_modef CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,1,0, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |FINAL access CLASS NAME '(' dotted_as_names ')' ':'   {
-																	Streams::verbose() << "class_h: FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |FINAL access CLASS NAME '(' dotted_as_names ')'    {
+																	Streams::verbose() << "class_h: FINAL access_modef CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>4,inhertance_list,acc_mod,0,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |STATIC FINAL access CLASS NAME '(' dotted_as_names ')' ':'   {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |STATIC FINAL access CLASS NAME '(' dotted_as_names ')'    {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |FINAL STATIC access CLASS NAME '(' dotted_as_names ')' ':'   {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |FINAL STATIC access CLASS NAME '(' dotted_as_names ')'    {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S unit_list CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |access STATIC CLASS NAME '(' dotted_as_names ')' ':'  {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
-		  |access FINAL CLASS NAME '(' dotted_as_names ')' ':'  {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
-		  |access STATIC FINAL CLASS NAME '(' dotted_as_names ')' ':'   {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |access STATIC CLASS NAME '(' dotted_as_names ')'   {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
+		  |access FINAL CLASS NAME '(' dotted_as_names ')'   {Streams::verbose() <<"classheader: CLASS NAME '(' arglist ')' ':' \n";}
+		  |access STATIC FINAL CLASS NAME '(' dotted_as_names ')'    {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |access FINAL STATIC CLASS NAME '(' dotted_as_names ')' ':'   {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |access FINAL STATIC CLASS NAME '(' dotted_as_names ')'    {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |STATIC access FINAL CLASS NAME '(' dotted_as_names ')' ':'  {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |STATIC access FINAL CLASS NAME '(' dotted_as_names ')'   {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";
 													inhertance_list.clear();
 											} //class X (A,B,T) OR class X(A)
-		  |FINAL access STATIC CLASS NAME '(' dotted_as_names ')' ':'  {
-																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS ID OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
+		  |FINAL access STATIC CLASS NAME '(' dotted_as_names ')'   {
+																			Streams::verbose() << "class_h: STATIC FINAL access_modef CLASS NAME OPEN_S dotted_as_names CLOSE_S \n";colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>5+1));
 													$<type>$=p->createType($<r.strVal>5,inhertance_list,acc_mod,1,1, yylval.r.lineNum, yylval.r.colNum,false);
 													t=$<type>$;
 													acc_mod="";

@@ -89,9 +89,9 @@ public:
 		MIPS_ASM::label(ccc2);*/
 	}
 	void gcVars()
-	 {
-		 Node* temp = this->Son;
-		 MIPS_ASM::printComment("gc vars");
+	{
+		Node* temp = this->Son;
+		MIPS_ASM::printComment("gc vars");
 		while (temp)
 		{
 			if (temp->getNodeType() == "IDNode")

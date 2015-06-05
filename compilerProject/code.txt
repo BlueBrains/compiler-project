@@ -1,4 +1,5 @@
 class u:
 	def main(y,f=2,e=1):
-	end
+		x=3;
+
 end
