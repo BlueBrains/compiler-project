@@ -99,6 +99,25 @@ lw $t0, 0($sp)
  #Assign node storing in position val:
 sw $t0,0($v0)
 add $sp,$sp,4
+ #Assign node
+ #Assign node RHS:
+li $t9,69
+sub $sp,$sp,4
+sw $t9, 0($sp)
+ #LHS:
+la $t9,o0
+lw $t0,0($t9)
+addi $v0,$t9,0 
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
  #
  # Print values:
 la $t9,string_2
@@ -109,8 +128,6 @@ add $sp,$sp,4
 li $v0,4
 move $a0,$t0
 syscall
-lw $s1, 0($sp)
-add $sp,$sp,4
 la $t9,o0
 lw $t0,0($t9)
 addi $v0,$t9,0 
@@ -128,8 +145,6 @@ lw $t0,0($fp)
 addi $v0,$fp,0
 sub $sp,$sp,4
 sw $t0, 0($sp)
-lw $s1, 0($sp)
-add $sp,$sp,4
 li $t9,5
 sub $sp,$sp,4
 sw $t9, 0($sp)

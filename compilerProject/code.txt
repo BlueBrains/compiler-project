@@ -9,6 +9,7 @@ class koko :
 	end
 	def main():
 		k=koko();
+		soso.o=69;
 		print "welcome: ",soso.o;
 		k.self.kl(5,2,3);
 		t=[1,1+2,3,5];

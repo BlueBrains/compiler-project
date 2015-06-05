@@ -495,8 +495,9 @@ public:
 						temp->_offsetReg = "s1";
 					}
 					temp->generateCode();
+					/*
 					if (i==0)
-						MIPS_ASM::pop("s1");
+						MIPS_ASM::pop("s1");*/
 				}
 					
 			}
