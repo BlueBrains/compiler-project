@@ -73,11 +73,22 @@ public:
 				if (static_cast<IDNode*>(n)->get_variable()->get_static())
 				{
 					static_cast<IDNode*>(n)->get_variable()->setOffset(global_num);
-					global_num++;
+					string off = static_cast<IDNode*>(n)->get_variable()->get_name() + std::to_string(global_num);
+					MIPS_ASM::add_data(off + ": .word 4\n");
+					
 					if (n->Next->getNodeType() == "AssignmentNode")
 					{
-						n->generateCode();
+						//n->Next->generateCode();
+						static_cast<AssignmentNode*>(n->Next)->get_right()->generateCode();
+						static_cast<IDNode*>(n)->get_variable()->strLasttype = static_cast<AssignmentNode*>(n->Next)->get_right()->my_type;
+						MIPS_ASM::pop("t0");
+						//MIPS_ASM::sw("t0", off, "gp");
+						MIPS_ASM::la("t1", off);
+						MIPS_ASM::sw("t0", 0, "t1");
+
+						static_cast<AssignmentNode*>(n->Next)->coded = true;
 					}
+					global_num += 4;
 				}
 			}
 			generate_static(n->Next);
@@ -86,8 +97,10 @@ public:
 	}
 	void generate_main(Function* main)
 	{
+		//MIPS_ASM::add_instruction("add $gp,$gp,"+std::to_string(global_num)+" \n");
 		if (main)
 		{
+			
 			main->get_FunctionNode()->generateCode();
 			MIPS_ASM::add_instruction("li $v0, 10 \n");
 			MIPS_ASM::add_instruction("syscall \n");

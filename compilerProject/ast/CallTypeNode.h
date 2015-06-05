@@ -15,6 +15,28 @@ private:
 	Type* t;
 	Function* f;
 	bool is_object = false;
+	void init_inhertance(Type* t)
+	{
+		Node* temp_class;
+		for (int i = 0; i < t->getInheritedType().size(); i++)
+		{
+			temp_class = t->getInheritedType().at(i)->type_node;
+			Node* temp = temp_class->Son;
+			while (temp)
+			{
+				if (temp->getNodeType() == "AssignmentNode")
+				{
+					if (static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode")
+					{
+						static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
+					}
+					temp->generateCode();
+				}
+				temp = temp->Next;
+			}
+			init_inhertance(t->getInheritedType().at(i));
+		}
+	}
 	Type* checkTypeFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num)
 	{
 		Type* v = NULL;
@@ -170,9 +192,9 @@ public:
 			Node* temp = t->type_node->Son;
 			while (temp)
 			{
-				if (temp->getNodeType() == "AssignmentNode")
+				if (temp->getNodeType() == "AssignmentNode" && (!static_cast<AssignmentNode*>(temp)->coded))
 				{
-					if (static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode")
+					if ((static_cast<AssignmentNode*>(temp)->get_left()->getNodeType() == "CallVariableNode"))
 					{
 						static_cast<AssignmentNode*>(temp)->get_left()->_offsetReg = "s1";
 					}
@@ -180,6 +202,7 @@ public:
 				}
 				temp = temp->Next;
 			}
+			this->init_inhertance(t);
 			MIPS_ASM::move("a0", "s1");
 			MIPS_ASM::jal(f->get_label());
 			func_vec.push_back(this->f->get_FunctionNode());

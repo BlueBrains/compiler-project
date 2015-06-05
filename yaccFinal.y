@@ -163,6 +163,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						p->print_symbol();
 						ast->tree($<tn>1);
 						ast->print($<tn>1, 0);
+						ast->generate_static($<tn>1);
 						ast->generate_main(p->getMainFunction());
 						}
 						Streams::verbose().flush();	
@@ -1429,11 +1430,13 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 							$<tn>$=$<tn>1;
 							} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
-											cout<<"the top is "<<temp_id2.back()<<endl;
+											cout<<"the top is "<<temp_id2.back()<<"   "<<temp_id2.size()<<endl;
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											dotvec.insert(dotvec.begin(),$<tn>1);
 											$<tn>$=ast->createDotNode(dotvec,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 											dotvec.clear();
+											inside_func=false;
+											//cout <<"insite func "<<inside_func<<endl;
 											//temp_id2.pop_back();
 										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
@@ -1611,7 +1614,10 @@ trailer:	'.' NAME  %prec stmt_14
 										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
-									
+									temp_id=temp_id2.back();
+									temp_id=temp_id+"."+$<r.strVal>2;
+								temp_id2.pop_back();
+								temp_id2.push_back(temp_id);
 									dotvec.push_back($<tn>$);
 									call_func=false;
 								}
@@ -1628,6 +1634,10 @@ trailer:	'.' NAME  %prec stmt_14
 									}
 									dotvec.push_back($<tn>$);
 									cout<<"the size is "<<func_call.size()<<endl;
+									temp_id=temp_id2.back();
+									temp_id=temp_id+"."+$<r.strVal>2;
+									temp_id2.pop_back();
+									temp_id2.push_back(temp_id);
 									call_func=false;
 									func_call.clear();
 								}

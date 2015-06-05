@@ -148,11 +148,30 @@ public:
 			{
 				this->type_val = (Type*)variable_node->get_lastTypes().second;
 			}
-			MIPS_ASM::lw("t0", variable_node->getOffset(), this->getOffsetRegister());
-			//v0 contains the address in memorry to be used later in assignment
-			MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
-				+ "," + std::to_string(variable_node->getOffset()) + "\n");
-			MIPS_ASM::push("t0");
+			if (variable_node->get_static())
+			{
+				string ff = variable_node->get_name() + std::to_string(variable_node->getOffset());
+				MIPS_ASM::la("t9",ff);
+
+				MIPS_ASM::lw("t0", 0, "t9");
+				//v0 contains the address in memorry to be used later in assignment
+				/*
+				MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+					+ "," + variable_node->get_name() +std::to_string(variable_node->getOffset()) + "\n");*/
+				MIPS_ASM::add_instruction(string("addi $v0,$") + "t9"
+					+ ",0 \n");
+				//MIPS_ASM::la("v0", ff);
+				MIPS_ASM::push("t0");
+			}
+			else
+			{
+				MIPS_ASM::lw("t0", variable_node->getOffset(), this->getOffsetRegister());
+				//v0 contains the address in memorry to be used later in assignment
+				MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
+					+ "," + std::to_string(variable_node->getOffset()) + "\n");
+				MIPS_ASM::push("t0");
+			}
+			
 		}
 		
 	}

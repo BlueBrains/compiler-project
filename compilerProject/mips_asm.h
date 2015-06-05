@@ -93,7 +93,9 @@ public:
 	static void sw_gp(string, int);
 
 	static void lw(string dest_reg, int offset, string mem_adress);
+	static void lw(string dest_reg, string offset, string mem_adress);
 	static void sw(string source_reg, int offset, string mem_adress);
+	static void sw(string source_reg, string offset, string mem_adress);
 
 	static void move(string dest_reg, string from_reg);
 

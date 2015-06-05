@@ -157,7 +157,6 @@ void MIPS_ASM::add_Arraydata(string c)
 	data << c;
 
 }
-
 void MIPS_ASM::addMainInstruction(string c)
 {
 	main << c;
@@ -571,6 +570,17 @@ void MIPS_ASM::lw(string dest_reg, int offset, string mem_adress)
 	MIPS_ASM::add_instruction(c);
 }
 
+void MIPS_ASM::lw(string dest_reg, string offset, string mem_adress)
+{
+	string  c = "lw $";
+	c += dest_reg;
+	c += ",";
+	c += offset;
+	c += "($";
+	c += mem_adress;
+	c += ")\n";
+	MIPS_ASM::add_instruction(c);
+}
 void MIPS_ASM::sw(string source_reg, int offset, string mem_adress)
 {
 	string c = "sw $";
@@ -582,7 +592,17 @@ void MIPS_ASM::sw(string source_reg, int offset, string mem_adress)
 	c += ")\n";
 	MIPS_ASM::add_instruction(c);
 }
-
+void MIPS_ASM::sw(string source_reg, string offset, string mem_adress)
+{
+	string c = "sw $";
+	c += source_reg;
+	c += ",";
+	c += offset;
+	c += "($";
+	c += mem_adress;
+	c += ")\n";
+	MIPS_ASM::add_instruction(c);
+}
 void MIPS_ASM::move(string dest_reg, string from_reg)
 {
 	string c = "move $";

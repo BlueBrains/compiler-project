@@ -37,6 +37,7 @@ private:
 		}
 	}
 public:
+	bool coded=false;
 	Node* get_right()
 	{
 		return right_side;

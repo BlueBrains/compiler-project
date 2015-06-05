@@ -83,8 +83,21 @@ public:
 		MIPS_ASM::push("fp");
 
 		MIPS_ASM::reserveStack(getFrameSize());
-		//MIPS_ASM::add_instruction("move $fp, $sp\n");
 		MIPS_ASM::move("fp", "sp");
+		int off_set = 0;
+		for (int i = 0; i < function_node->getparameters().size(); i++)
+		{
+			if (!function_node->get_static())
+			{
+				off_set = 4;
+			}
+			//off_set += -function_node->getparameters().at(i)->getOffset() + 2 * function_node->getparameters().size() * 4 + 8;
+			MIPS_ASM::lw("t0", off_set - function_node->getparameters().at(i)->getOffset(), "s5");
+			MIPS_ASM::sw("t0", function_node->getparameters().at(i)->getOffset(), "fp");
+			off_set = 0;
+		}
+		//MIPS_ASM::add_instruction("move $fp, $sp\n");
+		
 		if (!function_node->get_static())
 		{
 			//for self 

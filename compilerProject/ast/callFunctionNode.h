@@ -45,8 +45,28 @@ public:
 		if (Function_call)
 		{
 			//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			for (int i = 0; i < arguments.size(); i++)
+			{
+				arguments.at(i)->generateCode();
+				if (i == 0)
+				{
+					MIPS_ASM::move("s5", "sp");
+				}
+				Function_call->getparameters().at(i)->strLasttype = arguments.at(i)->my_type;
+				if (arguments.at(i)->my_type == "string")
+				{
+					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->string_val);
+				}
+				else if (arguments.at(i)->my_type == "type")
+				{
+					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->type_val);
+				}
+			}
 			MIPS_ASM::jal(this->Function_call->get_label());
-
+			for (int i = 0; i < arguments.size(); i++)
+			{
+				MIPS_ASM::pop("t0");
+			}
 			
 			func_vec.push_back(this->Function_call->get_FunctionNode());
 			this->Function_call->get_FunctionNode()->before_generateCode();
