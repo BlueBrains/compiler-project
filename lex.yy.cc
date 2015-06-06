@@ -249,39 +249,39 @@ typedef unsigned char YY_CHAR;
 	*yy_cp = '\0'; \
 	yy_c_buf_p = yy_cp;
 
-#define YY_NUM_RULES 107
-#define YY_END_OF_BUFFER 108
+#define YY_NUM_RULES 108
+#define YY_END_OF_BUFFER 109
 static yyconst short int yy_accept[264] =
     {   0,
-        0,    0,  101,  101,    0,    0,  108,  107,  106,    4,
-       61,   92,   97,   71,  107,  107,    5,    6,   17,   63,
-        7,   65,   10,   69,   89,   89,    3,    8,   79,   13,
-       84,  105,  105,  105,  105,   50,   51,   73,   54,  105,
-      105,  105,  105,  105,  105,  105,  105,  105,  105,  105,
-      105,  105,  105,  105,   52,  107,   53,  100,   99,  100,
-      101,   94,   93,   93,   74,   91,   97,   97,   70,   60,
-       59,    0,  104,   16,   15,   62,   64,   75,    0,   98,
-       67,   68,   90,    0,   86,    0,    0,    0,    0,   89,
-       78,   80,   76,   30,   82,   83,  105,  105,  105,  105,
+        0,    0,  102,  102,    0,    0,  109,  108,  107,    4,
+       62,   93,   98,   72,  108,  108,    5,    6,   17,   64,
+        7,   66,   10,   70,   90,   90,    3,    8,   80,   13,
+       85,  106,  106,  106,  106,   51,   52,   74,   55,  106,
+      106,  106,  106,  106,  106,  106,  106,  106,  106,  106,
+      106,  106,  106,  106,   53,  108,   54,  101,  100,  101,
+      102,   95,   94,   94,   75,   92,   98,   98,   71,   61,
+       60,    0,  105,   16,   15,   63,   65,   76,    0,   99,
+       68,   69,   91,    0,   87,    0,    0,    0,    0,   90,
+       79,   81,   77,   30,   83,   84,  106,  106,  106,  106,
 
-       72,   28,  105,  105,  105,  105,  105,  105,  105,  105,
-      105,  105,   19,  105,   23,  105,  105,  105,  105,  105,
-      105,  105,  105,  105,  105,  105,   57,   58,  101,  100,
-      100,  102,   96,    0,  103,   14,    9,   66,   90,   87,
-       86,   88,   77,   81,  105,  105,  105,  105,  105,  105,
-      105,   12,   31,  105,  105,   11,  105,  105,   22,  105,
-      105,  105,  105,  105,  105,  105,  105,  105,  105,  105,
-       24,  105,  105,  105,   95,   90,  105,   49,   45,  105,
-      105,  105,  105,   20,   18,  105,  105,  105,  105,  105,
-      105,   85,  105,  105,  105,  105,  105,  105,  105,  105,
+       73,   28,  106,  106,  106,  106,  106,  106,  106,  106,
+      106,  106,   19,  106,   23,  106,  106,  106,  106,  106,
+      106,  106,  106,  106,  106,  106,   58,   59,  102,  101,
+      101,  103,   97,    0,  104,   14,    9,   67,   91,   88,
+       87,   89,   78,   82,  106,  106,  106,  106,  106,  106,
+      106,   12,   31,  106,  106,   11,  106,  106,   22,  106,
+      106,  106,  106,  106,  106,  106,  106,  106,  106,  106,
+       24,  106,  106,  106,   96,   91,  106,   50,   46,  106,
+      106,  106,  106,   20,   18,  106,  106,  106,  106,  106,
+      106,   86,  106,  106,  106,  106,  106,  106,  106,  106,
 
-      105,   27,  105,   46,  105,   47,    2,  105,  105,   36,
-      105,  105,  105,  105,  105,   33,  105,  105,  105,   41,
-      105,  105,   21,   55,   29,  105,   26,  105,   40,    1,
-      105,  105,  105,  105,  105,   43,   38,   37,  105,   25,
-      105,  105,  105,  105,   56,   42,  105,   48,  105,  105,
-      105,   39,  105,  105,   32,  105,   44,  105,  105,   34,
-      105,   35,    0
+      106,   27,  106,   47,  106,   48,    2,  106,  106,   37,
+      106,  106,   36,  106,  106,   33,  106,  106,  106,   42,
+      106,  106,   21,   56,   29,  106,   26,  106,   41,    1,
+      106,  106,  106,  106,  106,   44,   39,   38,  106,   25,
+      106,  106,  106,  106,   57,   43,  106,   49,  106,  106,
+      106,   40,  106,  106,   32,  106,   45,  106,  106,   34,
+      106,   35,    0
     } ;
 
 static yyconst int yy_ec[256] =
@@ -1200,11 +1200,11 @@ YY_RULE_SETUP
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;				
+				yylval.r.lineNum = lineNum;
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	FINAL;
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return INPUT;
 			}
 	YY_BREAK
 case 37:
@@ -1217,7 +1217,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	STATIC;
+				return	FINAL;
 			}
 	YY_BREAK
 case 38:
@@ -1230,7 +1230,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	RETURN;
+				return	STATIC;
 			}
 	YY_BREAK
 case 39:
@@ -1243,7 +1243,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	NONLOCAL;
+				return	RETURN;
 			}
 	YY_BREAK
 case 40:
@@ -1256,7 +1256,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	GLOBAL;
+				return	NONLOCAL;
 			}
 	YY_BREAK
 case 41:
@@ -1269,7 +1269,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	RAISE;
+				return	GLOBAL;
 			}
 	YY_BREAK
 case 42:
@@ -1282,7 +1282,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	PRIVATE;
+				return	RAISE;
 			}
 	YY_BREAK
 case 43:
@@ -1295,7 +1295,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	PUBLIC;
+				return	PRIVATE;
 			}
 	YY_BREAK
 case 44:
@@ -1308,7 +1308,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	PROTECTED;
+				return	PUBLIC;
 			}
 	YY_BREAK
 case 45:
@@ -1321,7 +1321,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	TRUE;
+				return	PROTECTED;
 			}
 	YY_BREAK
 case 46:
@@ -1334,7 +1334,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	FALSE;
+				return	TRUE;
 			}
 	YY_BREAK
 case 47:
@@ -1347,20 +1347,20 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return BREAK;
+				return	FALSE;
 			}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 468 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{	
+{
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
 				yylval.r.lineNum = lineNum;				
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return CONTINUE;
+				return BREAK;
 			}
 	YY_BREAK
 case 49:
@@ -1373,20 +1373,20 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return NONE;
+				return CONTINUE;
 			}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 486 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{
+{	
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;			
+				yylval.r.lineNum = lineNum;				
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'[';
+				return NONE;
 			}
 	YY_BREAK
 case 51:
@@ -1399,7 +1399,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	']';
+				return	'[';
 			}
 	YY_BREAK
 case 52:
@@ -1412,7 +1412,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'{';
+				return	']';
 			}
 	YY_BREAK
 case 53:
@@ -1425,7 +1425,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'}';
+				return	'{';
 			}
 	YY_BREAK
 case 54:
@@ -1438,7 +1438,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				//return	RE_COT;
+				return	'}';
 			}
 	YY_BREAK
 case 55:
@@ -1447,11 +1447,11 @@ YY_RULE_SETUP
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;				
+				yylval.r.lineNum = lineNum;			
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	YIELD;
+				//return	RE_COT;
 			}
 	YY_BREAK
 case 56:
@@ -1464,7 +1464,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	PRIMARY;
+				return	YIELD;
 			}
 	YY_BREAK
 case 57:
@@ -1473,11 +1473,11 @@ YY_RULE_SETUP
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;			
+				yylval.r.lineNum = lineNum;				
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	OR_EQUAL;
+				return	PRIMARY;
 			}
 	YY_BREAK
 case 58:
@@ -1490,7 +1490,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	OR;
+				return	OR_EQUAL;
 			}
 	YY_BREAK
 case 59:
@@ -1503,7 +1503,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	AND_EQUAL;
+				return	OR;
 			}
 	YY_BREAK
 case 60:
@@ -1516,7 +1516,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	AND;
+				return	AND_EQUAL;
 			}
 	YY_BREAK
 case 61:
@@ -1525,11 +1525,11 @@ YY_RULE_SETUP
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;				
+				yylval.r.lineNum = lineNum;			
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);
-				//return	NOT;
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	AND;
 			}
 	YY_BREAK
 case 62:
@@ -1542,12 +1542,25 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	PLUS_EQUAL;
+				//return	NOT;
 			}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 604 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 603 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;				
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	PLUS_EQUAL;
+			}
+	YY_BREAK
+case 64:
+YY_RULE_SETUP
+#line 613 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1558,9 +1571,9 @@ YY_RULE_SETUP
 				return	'+';
 			}
 	YY_BREAK
-case 64:
+case 65:
 YY_RULE_SETUP
-#line 613 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 622 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1571,9 +1584,9 @@ YY_RULE_SETUP
 				return	MINUS_EQUAL;
 			}
 	YY_BREAK
-case 65:
+case 66:
 YY_RULE_SETUP
-#line 623 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 632 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1582,19 +1595,6 @@ YY_RULE_SETUP
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	'-';
-			}
-	YY_BREAK
-case 66:
-YY_RULE_SETUP
-#line 632 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{
-				colNum += strlen(yytext);
-				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;				
-				yylval.r.strVal=new char[265];
-				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);
-				return	DIV_2_EQUAL;
 			}
 	YY_BREAK
 case 67:
@@ -1607,7 +1607,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	DIV_2;
+				return	DIV_2_EQUAL;
 			}
 	YY_BREAK
 case 68:
@@ -1620,7 +1620,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	DIV_EQUAL;
+				return	DIV_2;
 			}
 	YY_BREAK
 case 69:
@@ -1633,7 +1633,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	'/';
+				return	DIV_EQUAL;
 			}
 	YY_BREAK
 case 70:
@@ -1642,11 +1642,11 @@ YY_RULE_SETUP
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;			
+				yylval.r.lineNum = lineNum;				
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	MOD_EQUAL;
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	'/';
 			}
 	YY_BREAK
 case 71:
@@ -1659,7 +1659,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'%';
+				return	MOD_EQUAL;
 			}
 	YY_BREAK
 case 72:
@@ -1672,7 +1672,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	SHAPOO_EQUAL;
+				return	'%';
 			}
 	YY_BREAK
 case 73:
@@ -1685,12 +1685,25 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'^';
+				return	SHAPOO_EQUAL;
 			}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
 #line 704 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;			
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	'^';
+			}
+	YY_BREAK
+case 75:
+YY_RULE_SETUP
+#line 713 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1701,9 +1714,9 @@ YY_RULE_SETUP
 				return	NOT_EQUAL;
 			}
 	YY_BREAK
-case 75:
+case 76:
 YY_RULE_SETUP
-#line 713 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 722 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1712,19 +1725,6 @@ YY_RULE_SETUP
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
 				return	ARROW;
-				}
-	YY_BREAK
-case 76:
-YY_RULE_SETUP
-#line 722 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{
-				colNum += strlen(yytext);
-				yylval.r.colNum = colNum;
-				yylval.r.lineNum = lineNum;
-				yylval.r.strVal=new char[265];
-				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	MORE_LESS;
 				}
 	YY_BREAK
 case 77:
@@ -1737,7 +1737,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	LESS_THAN_2_EQUAL;
+				return	MORE_LESS;
 				}
 	YY_BREAK
 case 78:
@@ -1750,8 +1750,8 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	LESS_THAN_2;
-			}
+				return	LESS_THAN_2_EQUAL;
+				}
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
@@ -1763,7 +1763,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	'<';
+				return	LESS_THAN_2;
 			}
 	YY_BREAK
 case 80:
@@ -1776,7 +1776,7 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	LESS_OR_EQUAL;
+				return	'<';
 			}
 	YY_BREAK
 case 81:
@@ -1788,8 +1788,8 @@ YY_RULE_SETUP
 				yylval.r.lineNum = lineNum;
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);
-				return	MORE_THAN_2_EQUAL;
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	LESS_OR_EQUAL;
 			}
 	YY_BREAK
 case 82:
@@ -1801,8 +1801,8 @@ YY_RULE_SETUP
 				yylval.r.lineNum = lineNum;
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);					
-				return	MORE_OR_EQUAL;
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	MORE_THAN_2_EQUAL;
 			}
 	YY_BREAK
 case 83:
@@ -1814,8 +1814,8 @@ YY_RULE_SETUP
 				yylval.r.lineNum = lineNum;
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
-				strcpy_s(yylval.r.strVal,255,yytext);
-				return	MORE_THAN_2;
+				strcpy_s(yylval.r.strVal,255,yytext);					
+				return	MORE_OR_EQUAL;
 			}
 	YY_BREAK
 case 84:
@@ -1828,12 +1828,25 @@ YY_RULE_SETUP
 				yylval.r.strVal=new char[265];
 				yylval.r.strVal[0]='\0';
 				strcpy_s(yylval.r.strVal,255,yytext);
-				return	'>';
+				return	MORE_THAN_2;
 			}
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
 #line 803 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{
+				colNum += strlen(yytext);
+				yylval.r.colNum = colNum;
+				yylval.r.lineNum = lineNum;
+				yylval.r.strVal=new char[265];
+				yylval.r.strVal[0]='\0';
+				strcpy_s(yylval.r.strVal,255,yytext);
+				return	'>';
+			}
+	YY_BREAK
+case 86:
+YY_RULE_SETUP
+#line 812 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				colNum += strlen(yytext);
 				yylval.r.colNum = colNum;
@@ -1844,9 +1857,9 @@ YY_RULE_SETUP
 				return	PASS;
 			}
 	YY_BREAK
-case 86:
+case 87:
 YY_RULE_SETUP
-#line 812 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 821 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1861,9 +1874,9 @@ YY_RULE_SETUP
 					return NUMBER_INT;
 				}
 	YY_BREAK
-case 87:
+case 88:
 YY_RULE_SETUP
-#line 825 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 834 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 					int v = 1;int res=0;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1877,9 +1890,9 @@ YY_RULE_SETUP
 					return NUMBER_INT;
 				}
 	YY_BREAK
-case 88:
+case 89:
 YY_RULE_SETUP
-#line 837 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 846 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 					int v = 1;int res=0;int val;
 					for(int n = (strlen(yytext)-1); n >1; n--)
@@ -1909,9 +1922,9 @@ YY_RULE_SETUP
 					return NUMBER_INT;
 				}
 	YY_BREAK
-case 89:
+case 90:
 YY_RULE_SETUP
-#line 865 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 874 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				//cout<<":Integer value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1926,9 +1939,9 @@ YY_RULE_SETUP
 					return NUMBER_LONG;
 			}
 	YY_BREAK
-case 90:
+case 91:
 YY_RULE_SETUP
-#line 878 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 887 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 				//cout<<":Float value (yytext) ="<<yytext<<"\n";
 				colNum += strlen(yytext);
@@ -1940,47 +1953,47 @@ YY_RULE_SETUP
 				return NUMBER_FLOAT;							
 			}
 	YY_BREAK
-case 91:
+case 92:
 YY_RULE_SETUP
-#line 888 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 897 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 							colNum+=2;
 							return STRING;
 						}
 	YY_BREAK
-case 92:
+case 93:
 YY_RULE_SETUP
-#line 892 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 901 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {							
 							BEGIN (String);
 							str = new char[255];
 							index = 0;
 						}
 	YY_BREAK
-case 93:
+case 94:
 YY_RULE_SETUP
-#line 897 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 906 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {//cout<<"str1="<<yytext<<"\n";
 							colNum+=2;
 						}
 	YY_BREAK
-case 94:
+case 95:
 YY_RULE_SETUP
-#line 900 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 909 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 							//cout<<"str2="<<yytext<<"\n";
 							str[index++] = yytext[0];
 							
 						}
 	YY_BREAK
-case 95:
-YY_RULE_SETUP
-#line 905 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
-	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 906 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 914 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{cout<<"str3="<<yytext<<"\n"; BEGIN INITIAL;}
+	YY_BREAK
+case 97:
+YY_RULE_SETUP
+#line 915 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {
 							//cout<<"str4="<<yytext<<"\n"; 
 							str[index++] = yytext[0];
@@ -1998,49 +2011,49 @@ YY_RULE_SETUP
 							return STRING;
 						}
 	YY_BREAK
-case 97:
-YY_RULE_SETUP
-#line 922 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
-	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 923 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{colNum+=2;		BEGIN(multilinecomment);}
+#line 931 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{cout<<"\t"<<yytext<<':'<<" it is a Single Line Comment \n";}
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 924 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{lineNum+=1;	BEGIN(multilinecomment);}
+#line 932 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{colNum+=2;		BEGIN(multilinecomment);}
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 925 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{colNum+=strlen(yytext);	}
+#line 933 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{lineNum+=1;	BEGIN(multilinecomment);}
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 926 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 934 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {colNum+=strlen(yytext);	}
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 927 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
+#line 935 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{colNum+=strlen(yytext);	}
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 928 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+#line 936 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{colNum+=strlen(yytext);	cout<<"multilinecomment \n"; BEGIN(INITIAL);}
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 929 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 937 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 930 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 938 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{yylval.r.charVal  = yytext[1]; return CHAR_VALUE;}
+	YY_BREAK
+case 106:
+YY_RULE_SETUP
+#line 939 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 {						
 							colNum += strlen(yytext);
 							yylval.r.colNum = colNum;
@@ -2053,17 +2066,17 @@ YY_RULE_SETUP
 							return NAME;												
 						}
 	YY_BREAK
-case 106:
-YY_RULE_SETUP
-#line 941 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
-{colNum+=strlen(yytext);yylval.r.colNum=colNum;}
-	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 942 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 950 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+{colNum+=strlen(yytext);yylval.r.colNum=colNum;}
+	YY_BREAK
+case 108:
+YY_RULE_SETUP
+#line 951 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 ECHO;
 	YY_BREAK
-#line 2066 "lex.yy.cc"
+#line 2079 "lex.yy.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(multilinecomment):
 case YY_STATE_EOF(String):
@@ -2872,5 +2885,5 @@ int main()
 	return 0;
 	}
 #endif
-#line 942 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
+#line 951 "C:\\Users\\AMER-HY\\Source\\Repos\\compiler-project-Copy-Copy\\lex.l"
 

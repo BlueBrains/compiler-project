@@ -667,10 +667,14 @@ public:
 					this->my_type = "bool";
 					if (op == EQUALS)
 					{
-
+						/*MIPS_ASM::printComment("equal op");
+						MIPS_ASM::add_instruction("sub $t2,$t1,$t0\n");
+						//MIPS_ASM::push(t0);*/
+						
 						MIPS_ASM::printComment("equal op");
 						MIPS_ASM::add_instruction("li $t2,0\n");
 						MIPS_ASM::add_instruction(string("bne $t0,$t1,") + "eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $v0,1\n");
 						MIPS_ASM::add_instruction("li $t2,1\n");
 						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
 					}
@@ -678,6 +682,7 @@ public:
 						MIPS_ASM::printComment("not equal op");
 						MIPS_ASM::add_instruction("li $t2,1\n");
 						MIPS_ASM::add_instruction(string("bne $t0,$t1,") + "eqop_temp" + std::to_string(labelCount) + "\n");
+						MIPS_ASM::add_instruction("li $v0,1\n");
 						MIPS_ASM::add_instruction("li $t2,0\n");
 						MIPS_ASM::add_instruction("eqop_temp" + std::to_string(labelCount) + ":\n");
 

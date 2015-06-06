@@ -44,7 +44,7 @@ public:
 	virtual void generateCode()
 	{
 		string arrayName;
-		arrayName=MIPS_ASM::addArrayAdressLabel(element.size() * 4);
+		arrayName=MIPS_ASM::addArrayAdressLabel((element.size()+1) * 4);
 		MIPS_ASM::la("s3", arrayName);
 		for (int i = 0; i < element.size(); i++)
 		{
@@ -53,6 +53,10 @@ public:
 			MIPS_ASM::sw("t1", 0, "s3");
 			MIPS_ASM::add_instruction("addi $s3,$s3,4\n");
 		}
+		//MIPS_ASM::la("t1", "endarray");
+		MIPS_ASM::li("t1", 0);
+		MIPS_ASM::sw("t1", 0, "s3");
+
 		this->my_type = element.at(0)->my_type;
 		MIPS_ASM::la("t0", arrayName);
 		MIPS_ASM::push("t0");

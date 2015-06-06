@@ -1,6 +1,7 @@
 .data
-array_2: .space 20 
-array_1: .space 16 
+array_3: .space 60 
+array_2: .space 24 
+array_1: .space 20 
 o0: .word 4
 y4: .word 4
 v8: .word 4
@@ -9,10 +10,12 @@ string_2: .asciiz "welcome: "
 string_3: .asciiz "j= "
 string_4: .asciiz "  "
 string_5: .asciiz " "
-string_6: .asciiz "in constructor "
-string_7: .asciiz "tot"
-string_8: .asciiz "am,er "
-string_9: .asciiz " alhosary"
+string_6: .asciiz "i="
+string_7: .asciiz "enter"
+string_8: .asciiz "in constructor "
+string_9: .asciiz "tot"
+string_10: .asciiz "am,er "
+string_11: .asciiz " alhosary"
 
 block_head:    .byte   0:8
 
@@ -21,6 +24,8 @@ glob_tmp:    .byte   0:4
 align_to:  .word 4
 
 newline: .asciiz "\n"
+
+endarray: .asciiz "\p"
 
 .text
 .globl main
@@ -217,6 +222,8 @@ lw $t1, 0($sp)
 add $sp,$sp,4
 sw $t1,0($s3)
 addi $s3,$s3,4
+li $t1,0
+sw $t1,0($s3)
 la $t0,array_1
 sub $sp,$sp,4
 sw $t0, 0($sp)
@@ -271,9 +278,23 @@ lw $t1, 0($sp)
 add $sp,$sp,4
 sw $t1,0($s3)
 addi $s3,$s3,4
+li $t1,0
+sw $t1,0($s3)
 la $t0,array_2
 sub $sp,$sp,4
 sw $t0, 0($sp)
+li $t9,3
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+lw $t0, 0($sp)
+add $sp,$sp,4
+sub $sp,$sp,4
+la $a1,array_3
+jal concatenate_array
+la $a0,array_3
+sw $a0,0($sp)
  #LHS:
 lw $t0,8($fp)
 addi $v0,$fp,8
@@ -318,7 +339,7 @@ sw $t0,0($v0)
 add $sp,$sp,4
  #Assign node
  #Assign node RHS:
-li $t9,2
+li $t9,3
 sub $sp,$sp,4
 sw $t9, 0($sp)
  #LHS:
@@ -505,6 +526,81 @@ syscall
 la $a0,newline
 li $v0,4
 syscall
+ #
+ # Print values:
+la $t9,string_6
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+lw $t0,16($fp)
+addi $v0,$fp,16
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,1
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+ #ifNode
+lw $t0,16($fp)
+addi $v0,$fp,16
+sub $sp,$sp,4
+sw $t0, 0($sp)
+li $t9,2
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+lw $t0, 0($sp)
+add $sp,$sp,4
+ #equal op
+li $t2,0
+bne $t0,$t1,eqop_temp3
+li $v0,1
+li $t2,1
+eqop_temp3:
+sub $sp,$sp,4
+sw $t2, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+beq $t0,$0,else_0
+ #
+ # Print values:
+la $t9,string_7
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+j endWhile0
+j endif_0
+else_0:
+ #
+ # Print values:
+la $t9,string_1
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+endif_0:
  #Assign node
  #Assign node RHS:
 lw $t0,16($fp)
@@ -562,12 +658,12 @@ sub $sp,$sp,4
 move $fp,$sp
 sw $a0,0($fp)
 lw $a0,0($fp)
-jal __init__140
+jal __init__155
 li $v0,0
 add $sp,$sp,4
  #
  # Print values:
-la $t9,string_6
+la $t9,string_8
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -589,7 +685,7 @@ li $v0,4
 syscall
  #
  # Print values:
-la $t9,string_7
+la $t9,string_9
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -630,7 +726,7 @@ sw $t0,12($fp)
 sw $a0,0($fp)
  #
  # Print values:
-la $t9,string_8
+la $t9,string_10
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -647,7 +743,7 @@ add $sp,$sp,4
 li $v0,1
 move $a0,$t0
 syscall
-la $t9,string_9
+la $t9,string_11
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -668,7 +764,7 @@ jr $ra
  #end function call
 
  
-__init__140:
+__init__155:
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
@@ -785,6 +881,7 @@ sw $fp, 0($sp)
  #movet1 to t2
 move $t2,$t1
 li $t3,0
+la $t5,endarray
  #movet0 to a2
 move $a2,$t0
 conArray_loop:
@@ -797,13 +894,13 @@ start_conArray:
 lw $t0,0($a0)
 beq $t0,$0,end_arr
 sw $t0,0($a1)
-addi $a0,$a0,1
-addi $a1,$a1,1
+addi $a0,$a0,4
+addi $a1,$a1,4
 b start_conArray
 end_arr:
 j conArray_loop
 end_conArray_loop:
-sw $zero 0($a1) #null terminate string
+sw $t5,0($a1) #null terminate string
 add $sp, $sp, 0
 lw $fp, 0($sp)
 add $sp, $sp, 4

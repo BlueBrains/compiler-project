@@ -75,6 +75,7 @@
 	int colmfunc=0;
 	bool constant =false;
 	Node* lastNode;
+	ArrayNode* arr_node;
 	operand op;
 	operand comp_op;
 	bool v_static,v_final;
@@ -136,7 +137,7 @@
 %token  PLUS_EQUAL MINUS_EQUAL DIV_EQUAL MOD_EQUAL AND_EQUAL OR_EQUAL
 %token  SHAPOO_EQUAL LESS_THAN_2_EQUAL MORE_THAN_2_EQUAL STAR_2_EQUAL DIV_2_EQUAL MORE_LESS
 %token  FALSE TRUE STAR_2 NUMBER_INT NUMBER_LONG NUMBER_FLOAT NAME DOT_3 
-%token	WITH AS ASSERT EQUAL DEL RETURN PRINT INPUT_INT INPUT_FLOAT INPUT_STRING GLOBAL STAR_EQUAL LESS_THAN_2 
+%token	WITH AS ASSERT EQUAL DEL RETURN PRINT INPUT INPUT_INT INPUT_FLOAT INPUT_STRING GLOBAL STAR_EQUAL LESS_THAN_2 
 %token	RAISE PRIVATE PUBLIC PROTECTED YIELD MORE_THAN_2 STRING NONE IS DIV_2 
 %token	LESS_OR_EQUAL MORE_OR_EQUAL EXCEPT PASS CHAR_VALUE BREAK CONTINUE
 
@@ -177,12 +178,12 @@ program : import_stmt ';' temp2 {Streams::verbose() <<"program : import_stmt ';'
 
 temp2:  classdef temp2 {Streams::verbose() <<"temp2: classdef temp2\n";
 							ast->addNext($<tn>1,$<tn>2);
-							cout<<"enter upper"<<endl;
+							//cout<<"enter upper"<<endl;
 							out_of_import=true;
 						}
 		|classdef  {Streams::verbose() <<"temp2: classdef \n";
 							//ast->createClassNode();
-							cout<<"enter classdef"<<endl;
+							//cout<<"enter classdef"<<endl;
 					}
 		;
 
@@ -425,20 +426,20 @@ small_stmt: expr_stmt	{
 							visit_num=0;
 						 }
 			;
-input_stmt: input_choise '(' str_seq ')'
+input_stmt:  INPUT'(' str_seq ',' input_choise ')'
 						 {Streams::verbose() <<"atom: str_seq\n";
 									char* x = new char[100];
 									strcpy(x,$<r.strVal>3);
-									cout<<"x=   "<<x<<endl;
+									//cout<<"x=   "<<x<<endl;
 									string sd(x);
-									cout<<"sd=== "<<sd<<endl;
+									//cout<<"sd=== "<<sd<<endl;
 									constant=true;
 									Node* string_now;
 
 									string_now = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 									$<tn>$=ast->createinputNode(string_now,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 						}
-			|input_choise '(' ')'{
+			|INPUT '(' input_choise ')'{
 									$<tn>$=ast->createinputNode(NULL,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 								}
 								;
@@ -504,8 +505,8 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 													{
 														v1->set_isarray(true);
 														ArrayNode* jo=static_cast<ArrayNode*>($<tn>2);
-														v1->set_arrayNode(jo);
-														cout<<"enter here for array "<<v1->get_name()<<endl;
+														v1->set_arrayNode(arr_node);
+														//cout<<"enter here for array "<<v1->get_name()<<endl;
 													}
 													array_right=false;
 													is_list=false;
@@ -987,7 +988,7 @@ while_stmt: while_header suite {
 			;
 while_header: WHILE test ':' {
 									Streams::verbose() <<"while_header:  WHILE test ':' \n";
-								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
+								$<tn>$=$<tn>2;//cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
 }
@@ -1175,9 +1176,13 @@ comp_op_seq: comp_op expr %prec stmt_7 {
 										}
 			 ;
 				
-comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;cout<<($<tn>1)->getNodeType()<<" Comp"<<endl;}
+comparison: expr %prec stmt_2 {Streams::verbose() <<"comparison: expr\n";$<tn>$=$<tn>1;
+													//cout<<($<tn>1)->getNodeType()<<" Comp"<<endl;
+
+												}
 			|expr comp_op_seq %prec stmt_12 {
 					Streams::verbose() <<"comparison: expr comp_op_seq\n";
+					cout <<"the comp operand is "<<comp_op<<endl;
 						$<tn>$=ast->createExprNode($<tn>1,$<tn>2,NULL,comp_op,yylval.r.lineNum,yylval.r.colNum);
 				}
 			;
@@ -1188,6 +1193,7 @@ comp_op: '<' {
 			}
 		|'>'{Streams::verbose() <<"comp_op: '>' \n";comp_op=GREATHER;}
 		|EQUAL {
+					cout<<"enter to equal "<<endl;
 					Streams::verbose() <<"comp_op: EQUAL \n";
 					comp_op=EQUALS;
 					}
@@ -1245,9 +1251,9 @@ shift_expr: arith_expr {
 
 term_seq : '+' term {Streams::verbose() <<"term_seq : '+' term \n";
 						op=PLUS;
-						cout<<"op1= "<<op<<endl;
+						//cout<<"op1= "<<op<<endl;
 						$<operands>$=op;
-						cout<<"op = "<<$<operands>$<<endl;
+						//cout<<"op = "<<$<operands>$<<endl;
 						$<tn>$=$<tn>2;
 						}
 			|'-' term {Streams::verbose() <<"term_seq : '-' term \n";
@@ -1346,18 +1352,18 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					visit_num++;
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
-					cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
+					//cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
 					if((visit_num==1)&&(!constant))
 					{
 						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
 						v=$<var>$;
 						v1=v;
-						cout<<"exist is "<<exist<<yylval.r.lineNum<<endl;
+						//cout<<"exist is "<<exist<<yylval.r.lineNum<<endl;
 						if((!exist)&&(v!=NULL))
 						{
 							//cout<<"hellow world  "<<v->get_name()<<endl;
 							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
-							cout<<"last node"<<endl;	
+							//cout<<"last node"<<endl;	
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 							
 						}
@@ -1430,7 +1436,7 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 							$<tn>$=$<tn>1;
 							} 
 		|atom trailer_seq %prec stmt_5 {Streams::verbose() <<"power: atom trailer_seq \n";
-											cout<<"the top is "<<temp_id2.back()<<"   "<<temp_id2.size()<<endl;
+											//cout<<"the top is "<<temp_id2.back()<<"   "<<temp_id2.size()<<endl;
 											$<tn>$=ast->addNext($<tn>1,$<tn>2);
 											dotvec.insert(dotvec.begin(),$<tn>1);
 											$<tn>$=ast->createDotNode(dotvec,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
@@ -1454,11 +1460,13 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						array_right=true;
 						//is_list=true;
 						$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
+						arr_node=static_cast<ArrayNode*>($<tn>$);
 				}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
 		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";
 									$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 									array_right=true;
+									arr_node=static_cast<ArrayNode*>($<tn>$);
 									//is_list=true;
 									arrayvec.clear();
 									}
@@ -1470,7 +1478,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									}
 		                            if(!inside_func){
 									temp_id2.push_back($<r.strVal>1);
-									cout <<"hello molham "<<$<r.strVal>1;
+									//cout <<"hello molham "<<$<r.strVal>1;
 									my_node=NULL;
 									}
 									else{
@@ -1493,7 +1501,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									//temp_id2.push_back($<r.strVal>1);
 									visit_num++;
 									parameters.clear();
-									cout<<"enter in name()"<<endl;
+									//cout<<"enter in name()"<<endl;
 									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									} 
 		| NAME '(' exprlist ')' { Streams::verbose() <<"atom: NAME\n";
@@ -1504,12 +1512,12 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 												} 
 		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 											$<var>$=p->checkVariable($<r.strVal>1,t,exist, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
-											cout<<"enter to arrayelem"<<endl;
+											//cout<<"enter to arrayelem"<<endl;
 											is_list=true;
 											if($<var>$)
 											{
 												$<tn>$=ast->createArrayElementNode($<var>$,$<tn>3,NULL,NULL,yylval.r.lineNum,yylval.r.colNum,$<r.strVal>1);
-												cout<<"enter if in arrsay ggyhg\n";
+												//cout<<"enter if in arrsay ggyhg\n";
 											}
 												
 										} 
@@ -1535,9 +1543,9 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 		| str_seq %prec stmt_11 {Streams::verbose() <<"atom: str_seq\n";
 									char* x = new char[100];
 									strcpy(x,$<r.strVal>1);
-									cout<<"x=   "<<x<<endl;
+									//cout<<"x=   "<<x<<endl;
 									string sd(x);
-									cout<<"sd=== "<<sd<<endl;
+									//cout<<"sd=== "<<sd<<endl;
 									constant=true;
 									$<tn>$ = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 								} 
@@ -1624,7 +1632,7 @@ trailer:	'.' NAME  %prec stmt_14
 			|'.' NAME inside_func exprlist ')' {
 									if(a_self)
 									{
-									cout<<"Toslamly khyoo Amooooora"<<endl;
+									//cout<<"Toslamly khyoo Amooooora"<<endl;
 										$<tn>$=ast->createCallFunctionNode($<r.strVal>2,func_call,NULL,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 										a_self=false;
 									}
@@ -1633,7 +1641,7 @@ trailer:	'.' NAME  %prec stmt_14
 										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									dotvec.push_back($<tn>$);
-									cout<<"the size is "<<func_call.size()<<endl;
+									//cout<<"the size is "<<func_call.size()<<endl;
 									temp_id=temp_id2.back();
 									temp_id=temp_id+"."+$<r.strVal>2;
 									temp_id2.pop_back();
@@ -1696,7 +1704,7 @@ comma_expr_star_seq : 	',' expr {Streams::verbose() <<"comma_expr_star_seq : 	',
 						|comma_expr_star_seq ',' expr {Streams::verbose() <<"comma_expr_star_seq : 	comma_expr_star_seq ',' expr \n";
 															
 															if(call_func){
-												cout<<"here1"<<endl;
+												//cout<<"here1"<<endl;
 												func_call.push_back($<tn>3);
 												//expnode=NULL;
 											}
@@ -1716,9 +1724,9 @@ exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 			|expr comma_expr_star_seq {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq \n";
 											$<tn>$=$<tn>1;
 											
-											cout<<"out here1"<<endl;
+											//cout<<"out here1"<<endl;
 											if(call_func){
-												cout<<"here1"<<endl;
+												//cout<<"here1"<<endl;
 												func_call.insert(func_call.begin(),$<tn>1);	
 												//expnode=NULL;
 											}
@@ -1729,18 +1737,18 @@ exprlist: 	expr {Streams::verbose() <<"exprlist: 	expr \n";
 			|expr ',' {Streams::verbose() <<"exprlist: 	expr ',' \n";
 							
 							$<tn>$=$<tn>1;
-							cout<<"out here2"<<endl;
+							//cout<<"out here2"<<endl;
 						if(call_func){
-						cout<<"here2"<<endl;
+						//cout<<"here2"<<endl;
 								func_call.push_back($<tn>1);	
 								//expnode=NULL;
 						}
 						}
 			|expr comma_expr_star_seq ',' {Streams::verbose() <<"exprlist: 	expr comma_expr_star_seq ',' \n";
 												
-												cout<<"out here3"<<endl;
+												//cout<<"out here3"<<endl;
 												if(call_func){
-							cout<<"here3"<<endl;
+							//cout<<"here3"<<endl;
 								func_call.push_back($<tn>1);
 								//expnode=NULL;	
 						}
@@ -2409,7 +2417,7 @@ MIPS_ASM::add_data("\nblock_head:    .byte   0:8\n");
 		//symbolTable->generateCode();
 	ofs<<".data\n";
 	MIPS_ASM::add_data("\nnewline: .asciiz \"\\n\"\n");
-
+	MIPS_ASM::add_data("\nendarray: .asciiz \"\\p\"\n");
 	
 	MIPS_ASM::writeData();
 		ofs<<"\n.text\n";

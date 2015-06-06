@@ -56,7 +56,7 @@ public:
 
 		string ccc2 = "endWhile";
 		ccc2 += cc;
-
+		lastLabel.push_back(make_pair(ccc,ccc2));
 		/*Break::set_label(ccc2);
 
 		strcpy(this->loop_end,ccc2);*/
@@ -86,6 +86,7 @@ public:
 		MIPS_ASM::add_instruction("addi $v0,$sp,0\n");
 		MIPS_ASM::jump(ccc);
 		MIPS_ASM::label(ccc2);
+		lastLabel.pop_back();
 		/*
 		MIPS_ASM::releaseStack(getFrameSize());
 	

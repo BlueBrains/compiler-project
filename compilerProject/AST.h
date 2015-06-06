@@ -443,10 +443,12 @@ public:
 			}
 			else if (n->getNodeType() == "IfNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
 			}
 			else if (n->getNodeType() == "ElseIfNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
 			}
 			else if (n->getNodeType() == "ElseNode")

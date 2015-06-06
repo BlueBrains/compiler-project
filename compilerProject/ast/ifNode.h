@@ -28,7 +28,12 @@ public:
 	{
 		cout << "IF NODE !" << endl;
 		_condtion->print();
-		this->generateCode();
+		//this->generateCode();
+	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		pi = _condtion->check(n);
+		return pi;
 	}
 	virtual string getNodeType()
 	{

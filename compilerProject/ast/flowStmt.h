@@ -14,6 +14,21 @@ public:
 
 
 	}
+	virtual void generateCode()
+	{
+		if (_type == breakNode)
+		{
+			if (lastLabel.size()>0)
+				MIPS_ASM::jump(lastLabel.back().second);
+//			cout << "enter" << endl;
+		}
+		else if (_type == continueNode)
+		{
+			if (lastLabel.size()>0)
+				MIPS_ASM::jump(lastLabel.back().first);
+			//			cout << "enter" << endl;
+		}
+	}
 	char* getFlowType(){
 		if(_type==breakNode)
 			return "break";

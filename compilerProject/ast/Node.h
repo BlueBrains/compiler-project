@@ -10,6 +10,7 @@ using namespace std;
 class Node;
 extern pair<void*, string>pi;
 extern vector<Node*>func_vec;
+extern vector<pair<string,string>>lastLabel;
 class Node
 {
 private:
