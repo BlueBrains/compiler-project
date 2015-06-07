@@ -18,14 +18,20 @@ public:
 	{
 		if (_type == breakNode)
 		{
+			MIPS_ASM::printComment("break statment");
 			if (lastLabel.size()>0)
 				MIPS_ASM::jump(lastLabel.back().second);
 //			cout << "enter" << endl;
 		}
 		else if (_type == continueNode)
 		{
-			if (lastLabel.size()>0)
+			MIPS_ASM::printComment("continue statment");
+			if (lastLabel.size() > 0)
+			{
+				MIPS_ASM::add_instruction("addi $v0,$sp,0\n");
 				MIPS_ASM::jump(lastLabel.back().first);
+			}
+				
 			//			cout << "enter" << endl;
 		}
 	}

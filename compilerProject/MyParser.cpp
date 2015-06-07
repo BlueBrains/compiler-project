@@ -222,11 +222,15 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
+		if ((strcmp(parameter.at(0), "self") != 0) && (!s && !fi) && (strcmp(name, "__init__") != 0))
 		{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
 		
+		else if ((strcmp(parameter.at(0), "self") == 0) && (strcmp(name, "__init__") == 0))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first constructor function parameter shouldn't be self", name);
+		}
 		/*
 		bool selflast = false;
 		for (int i = 0; i < parameter.size(); i++) {
@@ -452,7 +456,7 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
 			
-			if (!f->get_final() && !f->get_static())
+			if (!f->get_final() && !f->get_static() && (strcmp(f->get_name(), "__init__") != 0))
 			{
 
 				char* first = f->getfirstpara();

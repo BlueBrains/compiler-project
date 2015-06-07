@@ -407,19 +407,19 @@ public:
 				}
 				else if (op == 1)
 				{
-					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str' at " <<this->_lineNo<< endl;
 				}
 				else if (op == 2)
 				{
-					cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+					cout << "TypeError: can't multiply sequence by non-int of type 'str'at " << this->_lineNo<< endl;
 				}
 				else if (op == 3)
 				{
-					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'at " << this->_lineNo << endl;
 				}
 				else
 				{
-					cout << "TypeError: not all arguments converted during string formatting" << endl;
+					cout << "TypeError: not all arguments converted during string formattingat " << this->_lineNo << endl;
 				}
 			}
 			else if (((v1->get_types() == 2 && v2->get_types() != 2) || ((v1->get_types() != 2 && v2->get_types() == 2))))
@@ -461,15 +461,15 @@ public:
 				}
 				else if (op == 1)
 				{
-					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+					cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'at " << this->_lineNo << endl;
 				}
 				else if (op == 2)
 				{
-					cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+					cout << "TypeError: can't multiply sequence by non-int of type 'str'at " << this->_lineNo << endl;
 				}
 				else if (op == 3)
 				{
-					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+					cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'at " << this->_lineNo << endl;
 				}
 				else if (op == EQUALS || op == NOTEQUAL)
 				{
@@ -560,7 +560,7 @@ public:
 				}
 				else
 				{
-					cout << "TypeError: not all arguments converted during string formatting" << endl;
+					cout << "TypeError: not all arguments converted during string formattingat " << this->_lineNo << endl;
 				}
 			}
 			else
@@ -890,15 +890,15 @@ public:
 					}
 					else if (op == 1)
 					{
-						cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'" << endl;
+						cout << "TypeError: unsupported operand type(s) for -: 'str' and 'str'at " << this->_lineNo << endl;
 					}
 					else if (op == 2)
 					{
-						cout << "TypeError: can't multiply sequence by non-int of type 'str'" << endl;
+						cout << "TypeError: can't multiply sequence by non-int of type 'str'at " << this->_lineNo << endl;
 					}
 					else if (op == 3)
 					{
-						cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'" << endl;
+						cout << "TypeError: unsupported operand type(s) for /: 'str' and 'str'at " << this->_lineNo << endl;
 					}
 					else if (op == EQUALS || op == NOTEQUAL)
 					{
@@ -989,7 +989,7 @@ public:
 					}
 					else
 					{
-						cout << "TypeError: not all arguments converted during string formatting" << endl;
+						cout << "TypeError: not all arguments converted during string formattingat " << this->_lineNo << endl;
 					}
 				}
 				else
@@ -1018,7 +1018,7 @@ public:
 
 					}
 					else
-						cout << "unsupported operand type(s) for  string" << endl;;
+						cout << "unsupported operand type(s) for  stringat " << this->_lineNo << endl;;
 				}
 				if (((first->getNodeType() == "ArrayNode" && second->my_type == "int")) && (op == 2))
 				{
@@ -1049,7 +1049,7 @@ public:
 				}
 				if (first->my_type == "type" || second->my_type == "type" )
 				{
-					cout << "TypeError: unsupported operand type(s)" << endl;
+					cout << "TypeError: unsupported operand type(s)at " << this->_lineNo << endl;
 				}
 			}
 		

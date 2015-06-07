@@ -49,22 +49,7 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
-inside_func:'(' atom: NAME
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-argument: 	test
-arglist: argument
-inside_func arglist ')'
+parameters:'(' ')'
 funcheader: DEF NAME parameters ':' 
 atom: NAME()
 power:	atom
@@ -812,15 +797,6 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 while_header:  WHILE test ':' 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
 str_seq:	STRING 
 atom: str_seq
 power:	atom
@@ -831,7 +807,6 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comma_expr_star_seq : 	',' expr 
 atom: NAME
 power:	atom
 factor: power
@@ -841,38 +816,13 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-subscript:  test
-subscriptlist:	subscript
-trailer:	'[' subscriptlist ']'
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
+comma_expr_star_seq : 	',' expr 
 exprlist: 	expr comma_expr_star_seq 
 print_stmt: PRINT exprlist 
 small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
 str_seq:	STRING 
 atom: str_seq
 power:	atom
@@ -883,7 +833,6 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comma_expr_star_seq : 	',' expr 
 atom: NAME
 power:	atom
 factor: power
@@ -909,7 +858,7 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
+comma_expr_star_seq : 	',' expr 
 exprlist: 	expr comma_expr_star_seq 
 print_stmt: PRINT exprlist 
 small_stmt: print_stmt 
@@ -935,10 +884,67 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+subscript:  test
+subscriptlist:	subscript
+trailer:	'[' subscriptlist ']'
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
 comma_expr_star_seq : 	',' expr 
 exprlist: 	expr comma_expr_star_seq 
 print_stmt: PRINT exprlist 
 small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+atom: NUMBER_INT 1
+power:	atom
+factor: power
+term: 	factor
+term_seq : '+' term 
+arith_expr: term term_seq
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
@@ -997,8 +1003,8 @@ small_stmt: print_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
-break_stmt: BREAK 
-flow_stmt:	break_stmt 
+continue_stmt:	CONTINUE 
+flow_stmt: continue_stmt
 small_stmt: flow_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
@@ -1024,47 +1030,6 @@ suite:	list_stmt END
 if_stmt:	IF test ':' suite ELSE ':' suite 
 compound_stmt:  if_stmt 
 stmt: compound_stmt
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-atom: NUMBER_INT 1
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
 list_stmt : stmt list_stmt
 suite:	list_stmt END
 while_stmt: WHILE test ':' suite 
@@ -1156,22 +1121,7 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt list_stmt
 access_modef:	PUBLIC
-inside_func:'(' atom: NAME
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-argument: 	test
-arglist: argument
-inside_func arglist ')'
+parameters:'(' ')'
 funcheader: DEF access NAME parameters ':' 
 atom: NAME
 trailer:	'.' NAME

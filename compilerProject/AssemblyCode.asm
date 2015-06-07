@@ -8,9 +8,9 @@ v8: .word 4
 string_1: .asciiz "koko"
 string_2: .asciiz "welcome: "
 string_3: .asciiz "j= "
-string_4: .asciiz "  "
-string_5: .asciiz " "
-string_6: .asciiz "i="
+string_4: .asciiz "i= "
+string_5: .asciiz "t[i]= "
+string_6: .asciiz "w[i]= "
 string_7: .asciiz "enter"
 string_8: .asciiz "in constructor "
 string_9: .asciiz "tot"
@@ -107,7 +107,7 @@ sw $t0,0($v0)
 add $sp,$sp,4
  #moves1 to a0
 move $a0,$s1
-jal __init__19
+jal __init__17
 sub $sp,$sp,4
 sw $s1, 0($sp)
  #LHS:
@@ -156,8 +156,9 @@ lw $t0,0($fp)
 addi $v0,$fp,0
 sub $sp,$sp,4
 sw $t0, 0($sp)
-lw $t0,8($s1)
-addi $v0,$s1,8
+la $t9,y4
+lw $t0,0($t9)
+addi $v0,$t9,0 
 sub $sp,$sp,4
 sw $t0, 0($sp)
 lw $t0, 0($sp)
@@ -183,7 +184,7 @@ sw $t9, 0($sp)
 li $t9,3
 sub $sp,$sp,4
 sw $t9, 0($sp)
-jal kl33
+jal kl31
 lw $t0, 0($sp)
 add $sp,$sp,4
 lw $t0, 0($sp)
@@ -440,6 +441,14 @@ add $sp,$sp,4
 beq $t0,$0,endWhile0
  #
  # Print values:
+la $t9,string_4
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
 lw $t0,16($fp)
 addi $v0,$fp,16
 sub $sp,$sp,4
@@ -449,7 +458,12 @@ add $sp,$sp,4
 li $v0,1
 move $a0,$t0
 syscall
-la $t9,string_4
+la $a0,newline
+li $v0,4
+syscall
+ #
+ # Print values:
+la $t9,string_5
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -484,16 +498,7 @@ li $v0,4
 syscall
  #
  # Print values:
-lw $t0,16($fp)
-addi $v0,$fp,16
-sub $sp,$sp,4
-sw $t0, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,1
-move $a0,$t0
-syscall
-la $t9,string_5
+la $t9,string_6
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -526,81 +531,6 @@ syscall
 la $a0,newline
 li $v0,4
 syscall
- #
- # Print values:
-la $t9,string_6
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-lw $t0,16($fp)
-addi $v0,$fp,16
-sub $sp,$sp,4
-sw $t0, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,1
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
- #ifNode
-lw $t0,16($fp)
-addi $v0,$fp,16
-sub $sp,$sp,4
-sw $t0, 0($sp)
-li $t9,2
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t1, 0($sp)
-add $sp,$sp,4
-lw $t0, 0($sp)
-add $sp,$sp,4
- #equal op
-li $t2,0
-bne $t0,$t1,eqop_temp3
-li $v0,1
-li $t2,1
-eqop_temp3:
-sub $sp,$sp,4
-sw $t2, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-beq $t0,$0,else_0
- #
- # Print values:
-la $t9,string_7
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-j endWhile0
-j endif_0
-else_0:
- #
- # Print values:
-la $t9,string_1
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-endif_0:
  #Assign node
  #Assign node RHS:
 lw $t0,16($fp)
@@ -630,6 +560,61 @@ lw $t0, 0($sp)
  #Assign node storing in position val:
 sw $t0,0($v0)
 add $sp,$sp,4
+ #ifNode
+lw $t0,16($fp)
+addi $v0,$fp,16
+sub $sp,$sp,4
+sw $t0, 0($sp)
+li $t9,2
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+lw $t0, 0($sp)
+add $sp,$sp,4
+ #equal op
+li $t2,0
+bne $t0,$t1,eqop_temp4
+li $v0,1
+li $t2,1
+eqop_temp4:
+sub $sp,$sp,4
+sw $t2, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+beq $t0,$0,else_0
+ #
+ # Print values:
+la $t9,string_7
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+ #continue statment
+addi $v0,$sp,0
+j While0
+j endif_0
+else_0:
+ #
+ # Print values:
+la $t9,string_1
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+endif_0:
 addi $v0,$sp,0
 j While0
 endWhile0:
@@ -646,7 +631,7 @@ li $v0, 10
 syscall 
 
  
-__init__19:
+__init__17:
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
@@ -658,7 +643,7 @@ sub $sp,$sp,4
 move $fp,$sp
 sw $a0,0($fp)
 lw $a0,0($fp)
-jal __init__155
+jal __init__150
 li $v0,0
 add $sp,$sp,4
  #
@@ -707,7 +692,7 @@ jr $ra
  #end function call
 
  
-kl33:
+kl31:
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
@@ -764,7 +749,7 @@ jr $ra
  #end function call
 
  
-__init__155:
+__init__150:
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
