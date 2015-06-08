@@ -178,6 +178,7 @@ public:
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
 		Variable*v;
+
 			string h = this->getID();
 			if (!this->variable_node)
 			{

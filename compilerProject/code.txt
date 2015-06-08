@@ -1,6 +1,17 @@
-class test:
+public class a:
+	def private x;
+	def __init__ (self):  #constructor
+		print "constructor with no parameters";
+	end
+	def __init__ (self,x,y):  #constructor
+		print "constructor with no parameters";
+		self.x=X;
+		self.y=Y;
+	end
+	def private y;
+end
+
+public class test:
 	def public static main():
-		x=input("enter your number ",input_int);
-		print x;
 	end
 end

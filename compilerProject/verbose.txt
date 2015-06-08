@@ -1,10 +1,15 @@
-class_h: CLASS ID 
 access_modef:	PUBLIC
-parameters:'(' ')'
-funcheader: DEF access STATIC NAME parameters ':'  
-atom: NAME
+class_h: access_modef CLASS NAME 
+access_modef: PRIVATE
+atoms: DEF access NAME
+var_declaration: access_modef NAME
+compound_stmt: vardef
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+inside_func:'(' atom: NAME
 power:	atom
-factor: power
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -16,15 +21,12 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-testlist_star_expr: test 
+argument: 	test
+arglist: argument
+inside_func arglist ')'
+funcheader: DEF NAME parameters ':' 
 str_seq:	STRING 
 atom: str_seq
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-atom: NAME
 power:	atom
 factor: power
 term: 	factor
@@ -38,14 +40,181 @@ print_stmt: PRINT exprlist
 small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt list_stmt
+inside_func:'(' atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arg_comma_seq : argument ','
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arg_comma_seq : arg_comma_seq argument ',' 
+atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arglist: arg_comma_seq argument
+inside_func arglist ')'
+funcheader: DEF NAME parameters ':' 
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+power:	atom
+factor: power
+Error: Undeclareted Variable at Line No:8 Column No:11
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NAME
+power:	atom
+factor: power
+Error: Undeclareted Variable at Line No:9 Column No:11
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
 list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
+list_stmt : stmt list_stmt
+access_modef: PRIVATE
+atoms: DEF access NAME
+var_declaration: access_modef NAME
+compound_stmt: vardef
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+suite:	list_stmt END
+classdef: classheader ':' suite
+access_modef:	PUBLIC
+class_h: access_modef CLASS NAME 
+access_modef:	PUBLIC
+parameters:'(' ')'
+funcheader: DEF access STATIC NAME parameters ':'  
+suite:	END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
 list_stmt : stmt
 suite:	list_stmt END
-classdef: classheader suite
+classdef: classheader ':' suite
 temp2: classdef 
+temp2: classdef temp2
 program : temp2 
 file_input: program ENDMARKER
