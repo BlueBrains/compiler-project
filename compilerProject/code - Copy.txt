@@ -1,43 +1,30 @@
 class koko(soso) :
+	def public x=10;
+	def static y=99;
 	def __init__():
 		soso();
 		print "in constructor ",self.l;
 		print "tot";
 	end
-	def public x=10;
-	def static y=99;
 	def public kl(self,xx,y,z):
 		print "am,er ",xx," alhosary";
 	end
-	def public factorial(x):
-		/*if(x==1):
-			return 1;
-		end
-		return x*self.factorial(x-1);*/
-		return self.factorial(3);
-	end
 	def main():
-		amer=input("enter integer number ",input_int);
-		molham=input("enter string value ",input_string);
+
 		k=koko();
 		soso.o=69;
-		k.self.factorial(3);
-		print "z= ",1;
-		print "welcomess: ",k.y;
+		print "welcome: ",k.l;
 		k.self.kl(5,2,3);
-		print "after";
 		t=[1,1+2,3,5];
-		#print "w";
-		w=[1,7,8,0,6];
-
+		w=[1,7,8,0,6]*3;
 		t[2]=9;
 		j=3;
 		print "j= ",j,w[j];
 		i=0;
 		while i<4 :
-			print "i= ",i;
-			print  "t[i]= ",t[i];
-			print "w[i]= ",w[i];
+			print i,"  ",t[i];
+			print i," ",w[i];
+			print "i=",i;
 			i=i+1;
 			if(i==2):
 				print"enter";

@@ -475,6 +475,11 @@ public:
 				n->check(outer_node);
 				outer_node.push_back(n);
 			}
+			else if (n->getNodeType() == "returnNode")
+			{
+				n->check(outer_node,true);
+				//outer_node.push_back(n);
+			}
 			else
 			{
 				n->check(outer_node);
