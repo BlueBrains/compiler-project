@@ -1873,7 +1873,7 @@ dictorsetmaker: test ':' test comp_for  {Streams::verbose() <<"dictorsetmaker: t
 classdef: classheader ':' suite {
 								Streams::verbose() <<"classdef: classheader ':' suite\n";
 								$<type>$=p->finishTypeDeclaration(t);
-								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+								$<tn>$=ast->createClassNode($<type>1,$<tn>3,NULL,yylval.r.lineNum,yylval.r.colNum);
 							}
 		  |classheader error suite {
 								Streams::verbose() <<"classdef: classheader error suite\n";
