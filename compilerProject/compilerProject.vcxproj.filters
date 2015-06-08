@@ -27,6 +27,9 @@
     <None Include="khaled.y" />
     <None Include="..\yaccFinal.y" />
     <None Include="..\yaccTemp.y" />
+    <None Include="AssemblyCode.asm">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lex.yy.cc">
@@ -215,6 +218,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ast\inputNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
