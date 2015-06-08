@@ -33,6 +33,11 @@ public:
 	{
 		return "returnNode";
 	}
+	virtual pair<void*, string> check(vector<Node*>outer_node, bool from_right)
+	{
+		_scoop->check(outer_node, from_right);
+		return pi;
+	}
 	virtual void before_generateCode(){
 		f->has_return = true;
 		if (_scoop)

@@ -429,6 +429,7 @@ small_stmt: expr_stmt	{
 							Streams::verbose() <<"small_stmt: print_stmt \n";
 							$<tn>$=$<tn>1;
 							visit_num=0;
+							constant=false;
 						 }
 			;
 input_stmt:  INPUT'(' str_seq ',' input_choise ')'
@@ -440,12 +441,15 @@ input_stmt:  INPUT'(' str_seq ',' input_choise ')'
 									//cout<<"sd=== "<<sd<<endl;
 									constant=true;
 									Node* string_now;
-
+									visit_num=0;
 									string_now = ast->createTypeNode(reinterpret_cast<void*>(x),0,0,yylval.r.lineNum,yylval.r.colNum,STRINGS);
 									$<tn>$=ast->createinputNode(string_now,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									constant=false;
 						}
 			|INPUT '(' input_choise ')'{
 									$<tn>$=ast->createinputNode(NULL,my_input,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									visit_num=0;
+									constant=false;
 								}
 								;
 input_choise:	INPUT_INT{
@@ -938,7 +942,11 @@ elif_seq :  elif_header suite {
 																			
 										  }
 			;
-elif_header:	ELIF test ':'{
+elif_header_name :	ELIF{
+							visit_num++;
+
+};
+elif_header:	elif_header_name test ':'{
 									p->CloseScope();
 									p->createNewScope();
 									$<tn>$=$<tn>2;
@@ -974,16 +982,19 @@ if_stmt:	 if_header suite {
 														p->CloseScope();
 													   }
 			;
-if_header: IF test ':'  {
+if_header_name : IF {
+						visit_num++;
+					};
+if_header: if_header_name test ':'  {
 							p->createNewScope();
 							$<tn>$=$<tn>2;
 							visit_num=0;
 						}
-		   |IF test error  {
+		   |if_header_name test error  {
 							p->createNewScope();
 							$<tn>$=$<tn>2;
 							visit_num=0;
-						}
+						};
 while_stmt: while_header suite {
 									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
 									$<tn>$ = ast->createWhileNode($<tn>2,NULL,$<tn>1,NULL,yylval.r.lineNum,yylval.r.colNum);
@@ -1440,7 +1451,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					Streams::verbose() <<"factor: power\n";
 					exist=false;
 					//cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
-					if((visit_num==1)&&(!constant))
+					if((visit_num==1)&&(!constant)&&(temp_id2.size()>0))
 					{
 						$<var>$=p->checkVariable(const_cast<char *>(temp_id2.back().c_str()),t,exist, yylval.r.lineNum, yylval.r.colNum,true,false,is_dic);
 						v=$<var>$;
@@ -1530,7 +1541,8 @@ power:	atom %prec stmt_5 {Streams::verbose() <<"power:	atom\n";
 											dotvec.clear();
 											inside_func=false;
 											//cout <<"insite func "<<inside_func<<endl;
-											//temp_id2.pop_back();
+											cout<<"in dot grammer "<<temp_id2.back()<<endl;
+											temp_id2.pop_back();
 										}
 		|atom trailer_seq STAR_2 factor {Streams::verbose() <<"power: atom trailer_seq STAR_2 factor \n";}
 		|atom STAR_2 factor {Streams::verbose() <<"power: atom STAR_2 factor \n";}
