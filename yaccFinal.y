@@ -996,13 +996,16 @@ while_stmt: while_header suite {
 													$<tn>$ = whileNode;
 												 }
 			;
-while_header: WHILE test ':' {
+while_header_name : WHILE {
+								visit_num++;
+							};
+while_header: while_header_name test ':' {
 									Streams::verbose() <<"while_header:  WHILE test ':' \n";
 								$<tn>$=$<tn>2;//cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
 }
-			 |WHILE test error {
+			 |while_header_name test error {
 								Streams::verbose() <<"while_header:  WHILE test error \n";
 								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();

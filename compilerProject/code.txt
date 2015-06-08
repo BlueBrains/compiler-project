@@ -10,6 +10,8 @@ class koko(soso) :
 		print "am,er ",xx," alhosary";
 	end
 	def main():
+		amer=input("enter integer number ",input_int);
+		molham=input("enter string value ",input_string);
 		k=koko();
 		soso.o=69;
 		print "welcome: ",k.y;
