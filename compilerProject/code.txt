@@ -1,50 +1,8 @@
-class koko(soso) :
-	def public x=10;
-	def static y=99;
-	def __init__(self):
-		soso();
-		print "in constructor ",self.l;
-		print "tot";
-	end
-	def public kl(self,xx,y,z):
-		print "am,er ",xx," alhosary";
-	end
-	def main():
-
-		k=koko();
-		soso.o=69;
-		print "welcome: ",k.l;
-		k.self.kl(5,2,3);
-		t=[1,1+2,3,5];
-		w=[1,7,8,0,6]*3;
-		t[2]=9;
-		j=3;
-		print "j= ",j,w[j];
-		i=0;
-		while i<4 :
-			print i,"  ",t[i];
-			print i," ",w[i];
-			print "i=",i;
-			if(i==2):
-				print"enter";
-				break;
-			end
-			else:
-				print"koko";
-			end
-			i=i+1;
+class test:
+	def a;
+	def public static main():
+		while (a>0):
+			print hiii;
 		end
 	end
-	def class amer:
-		def static v=8;
-	end
-
-end
-class soso :
-
-def static o=8;
-def public l=9;
-def public __init__(self):
-	self.l=90;
-end
 end
