@@ -1,8 +1,6 @@
 class test:
-	def a;
 	def public static main():
-		while (a>0):
-			print hiii;
-		end
+		x=input("enter your number ",input_int);
+		print x;
 	end
 end
