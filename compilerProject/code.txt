@@ -1,10 +1,11 @@
 public class test:
 	def public static main():
-		listoflist = [[1,2],[3,4]];
-		for list in listoflist:
+			list = [1,2,3,5,6];
 			for x in list:
-				print x;
+				if(x>3):
+					break;
+				end
+				print x;				
 			end
-		end
 	end
 end
