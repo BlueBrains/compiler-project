@@ -8,6 +8,8 @@
 using namespace std;
 class ArrayNode:public Node
 {
+private:
+	string arrayName;
 public:
 	vector<Node*> element;
 	ArrayNode(vector<Node*> elem, Node* son, Node* next) :element(elem), Node(son,next)
@@ -41,9 +43,11 @@ public:
 			element.at(i)->check(n,true);
 		return pi;
 	}
+	string getArrayName(){
+		return arrayName;
+	}
 	virtual void generateCode()
 	{
-		string arrayName;
 		arrayName=MIPS_ASM::addArrayAdressLabel(element.size() * 4);
 		MIPS_ASM::la("s3", arrayName);
 		for (int i = 0; i < element.size(); i++)

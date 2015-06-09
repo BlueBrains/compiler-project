@@ -401,6 +401,15 @@ void MIPS_ASM::top(string dest)
 	MIPS_ASM::add_instruction(c);
 
 }
+void MIPS_ASM::topf(string dest)
+{
+	string c = "l.s $";
+	c += dest;
+	c += ", 0($sp)\n";
+	MIPS_ASM::add_instruction(c);
+
+}
+
 void MIPS_ASM::pop()
 {
 	MIPS_ASM::add_instruction("add $sp,$sp,4\n");
@@ -598,6 +607,28 @@ void MIPS_ASM::sw(string source_reg, string offset, string mem_adress)
 	c += source_reg;
 	c += ",";
 	c += offset;
+	c += "($";
+	c += mem_adress;
+	c += ")\n";
+	MIPS_ASM::add_instruction(c);
+}
+void MIPS_ASM::swf(string source_reg, int offset, string mem_adress)
+{
+	string c = "s.s $";
+	c += source_reg;
+	c += ",";
+	c += to_string(offset);
+	c += "($";
+	c += mem_adress;
+	c += ")\n";
+	MIPS_ASM::add_instruction(c);
+}
+void MIPS_ASM::lwf(string dest_reg, int offset, string mem_adress)
+{
+	string  c = "l.s $";
+	c += dest_reg;
+	c += ",";
+	c += to_string(offset);
 	c += "($";
 	c += mem_adress;
 	c += ")\n";

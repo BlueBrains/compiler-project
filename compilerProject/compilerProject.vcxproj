@@ -95,6 +95,8 @@
     <None Include="..\yacc.y" />
     <None Include="..\yaccFinal.y" />
     <None Include="..\yaccTemp.y" />
+    <None Include="AssemblyCode.asm" />
+    <None Include="ClassDiagram.cd" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>
@@ -128,31 +130,46 @@
     <ClInclude Include="..\unistd.h" />
     <ClInclude Include="..\yacc.hpp" />
     <ClInclude Include="ArrayNode.h" />
-    <ClInclude Include="AssignmentNode.h" />
     <ClInclude Include="AST.h" />
     <ClInclude Include="ast\ArrayElementNode.h" />
+    <ClInclude Include="ast\AssignmentNode.h" />
     <ClInclude Include="ast\BooleanNode.h" />
+    <ClInclude Include="ast\callFunctionNode.h" />
+    <ClInclude Include="ast\CallTypeNode.h" />
+    <ClInclude Include="ast\CallVariableNode.h" />
+    <ClInclude Include="ast\ClassNode.h" />
+    <ClInclude Include="ast\DelNode.h" />
+    <ClInclude Include="ast\ElseIfNode.h" />
+    <ClInclude Include="ast\ElseNode.h" />
     <ClInclude Include="ast\ErrorNode.h" />
+    <ClInclude Include="ast\ExceptNode.h" />
+    <ClInclude Include="ast\expressionNode.h" />
+    <ClInclude Include="ast\FinallyNode.h" />
+    <ClInclude Include="ast\flowStmt.h" />
+    <ClInclude Include="ast\ForNode.h" />
+    <ClInclude Include="ast\functionNode.h" />
+    <ClInclude Include="ast\GlobalNode.h" />
+    <ClInclude Include="ast\IDNode.h" />
+    <ClInclude Include="ast\ifNode.h" />
     <ClInclude Include="ast\inputNode.h" />
+    <ClInclude Include="ast\Node.h" />
+    <ClInclude Include="ast\PassNode.h" />
+    <ClInclude Include="ast\PrintNode.h" />
     <ClInclude Include="ast\returnNode.h" />
     <ClInclude Include="ast\shortIfNode.h" />
     <ClInclude Include="ast\subscriptNode.h" />
-    <ClInclude Include="callFunctionNode.h" />
-    <ClInclude Include="CallTypeNode.h" />
-    <ClInclude Include="CallVariableNode.h" />
-    <ClInclude Include="ClassNode.h" />
+    <ClInclude Include="ast\TryNode.h" />
+    <ClInclude Include="ast\ValueNode.h" />
+    <ClInclude Include="ast\WhileNode.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="dotNode.h" />
     <ClInclude Include="ErrorRevovery.h" />
-    <ClInclude Include="expressionNode.h" />
     <ClInclude Include="getString.h" />
-    <ClInclude Include="IDNode.h" />
     <ClInclude Include="mips_asm.h" />
     <ClInclude Include="mips_code.h" />
     <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyParser.h" />
     <ClInclude Include="myvector.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="ST\Function.h" />
     <ClInclude Include="ST\MyVector.h" />
     <ClInclude Include="ST\object.h" />
@@ -162,7 +179,6 @@
     <ClInclude Include="ST\Type.h" />
     <ClInclude Include="ST\Variable.h" />
     <ClInclude Include="unkowncallnode.h" />
-    <ClInclude Include="ValueNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="code.txt" />

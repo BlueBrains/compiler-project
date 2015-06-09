@@ -7,12 +7,19 @@ class FlowStmtNode :
 protected:
 	flowType _type;
 	Node* _scoop;
+	Node* _compoundStmtNode;
 public:
 	static	int 	flow_label;
 	FlowStmtNode(Node* son, Node* next, flowType type, Node* scoop) :Node(son,next), _type(type),_scoop(scoop)
 	{
 
 
+	}
+	void setCompoundStmtNode(Node* compoundStmtNode){
+		_compoundStmtNode = compoundStmtNode;
+	}
+	Node* getCompoundStmtNode(){
+		return _compoundStmtNode;
 	}
 	char* getFlowType(){
 		if(_type==breakNode)
@@ -22,5 +29,7 @@ public:
 		else if (_type==ReturnNode)
 			return "return";
 	}
-
+	virtual void generateCode(){
+		
+	}
 };

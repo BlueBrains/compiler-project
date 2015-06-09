@@ -56,13 +56,16 @@ public:
 	{
 		MIPS_ASM::printComment("\n Print values:");
 		string t0 = "t0";
+		string f0 = "f0";
 		Node* temp = this->Son;
 		bool checked = true;// check_type();
 		while ((checked)&&(temp))
 		{
 			temp->generateCode();
-
-			MIPS_ASM::pop(t0);
+			if (temp->my_type == "float")
+				MIPS_ASM::popf(f0);
+			else
+				MIPS_ASM::pop(t0);
 			
 			if (temp->my_type == "string")
 			{
@@ -78,7 +81,7 @@ public:
 			else if (temp->my_type == "float")
 			{
 				MIPS_ASM::li("v0", 2);
-				MIPS_ASM::add_instruction("move $a0,$t0\n");
+				MIPS_ASM::add_instruction("mov.s $f12,$f0\n");
 			}
 			else
 			{

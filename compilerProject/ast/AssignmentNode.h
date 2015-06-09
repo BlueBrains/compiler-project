@@ -96,9 +96,13 @@ public:
 		MIPS_ASM::printComment("Assign node");
 		
 		MIPS_ASM::printComment("Assign node RHS:");
-
-		right_side->generateCode();
-
+		if (right_side->getNodeType() == "CallVariableNode"&&left_side->getNodeType() == "CallVariableNode"){
+			Variable* temp = static_cast<CallVariableNode*>(right_side)->get_variable();
+			if (temp->get_isarray()){
+				static_cast<CallVariableNode*>(left_side)->get_variable()->set_arrayNode(temp->get_arrayNode());
+			}
+		}
+		right_side->generateCode();		
 		MIPS_ASM::printComment("LHS:");
 		left_side->generateCode();
 
@@ -106,8 +110,10 @@ public:
 
 		MIPS_ASM::pop("t1");
 		MIPS_ASM::printComment("Assign node getting RHS val:");
-
-		MIPS_ASM::top(t0);// not poping in order to keep value in stack
+		if (right_side->my_type!="float")
+			MIPS_ASM::top(t0);// not poping in order to keep value in stack
+		else
+			MIPS_ASM::topf("f0");// not poping in order to keep value in stack
 		// todo check if v0 isnot null in run time
 		// todo check if we can assign 
 		MIPS_ASM::printComment("Assign node storing in position val:");
@@ -127,14 +133,16 @@ public:
 		if (left_side->my_type == "float")
 		{
 			//MIPS_ASM::pop(t0);// not poping in order to keep value in stack
-			MIPS_ASM::popf("f0");// not poping in order to keep value in stack
+//			MIPS_ASM::popf("f0");// not poping in order to keep value in stack
 
-			MIPS_ASM::add_instruction("cvt.w.s $f0,$f0\n");
-			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
-			MIPS_ASM::top(t0);
+//			MIPS_ASM::add_instruction("cvt.w.s $f0,$f0\n");
+//			MIPS_ASM::pushf("f0");// not poping in order to keep value in stack
+//			MIPS_ASM::top(t0);
 		}
-	
-		MIPS_ASM::sw(t0, 0, "v0");
+		if (left_side->my_type!="float")
+			MIPS_ASM::sw(t0, 0, "v0");
+		else
+			MIPS_ASM::swf("f0", 0, "v0");
 		MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 	}
 	virtual void print()

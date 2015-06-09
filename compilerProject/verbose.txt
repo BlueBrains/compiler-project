@@ -1,89 +1,7 @@
-class_h: CLASS ID 
-access_modef:	PUBLIC
-atoms: DEF access NAME
-var_declaration: access_modef ID
-atom: NUMBER_INT 10
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-atoms: DEF STATIC NAME
-var_declaration: STATIC ID
-atom: NUMBER_INT 99
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-parameters:'(' ')'
-funcheader: DEF NAME parameters ':' 
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-access_modef:	PUBLIC
+class_h: CLASS NAME 
 inside_func:'(' atom: NAME
 power:	atom
+factor: power
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -96,82 +14,8 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 argument: 	test
-arg_comma_seq : argument ','
-atom: NAME
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-argument: 	test
-arg_comma_seq : arg_comma_seq argument ',' 
-atom: NAME
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-argument: 	test
-arglist: arg_comma_seq argument
+arglist: argument
 inside_func arglist ')'
-funcheader: DEF access NAME parameters ':' 
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-funcdef:	funcheader suite 
-compound_stmt: funcdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-parameters:'(' ')'
 funcheader: DEF NAME parameters ':' 
 atom: NAME
 power:	atom
@@ -188,158 +32,6 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
-atom: NAME()
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT 69
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-inside_func:'(' atom: NUMBER_INT 5
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NUMBER_INT 2
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-atom: NUMBER_INT 3
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
-exprlist: 	expr comma_expr_star_seq 
-trailer_seq: trailer_seq trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-expr_stmt: testlist_star_expr 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
 atom: NUMBER_INT 1
 power:	atom
 factor: power
@@ -354,16 +46,11 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-atom: NUMBER_INT 1
-power:	atom
-factor: power
-term: 	factor
 atom: NUMBER_INT 2
 power:	atom
 factor: power
 term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
+arith_expr: term
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
@@ -374,6 +61,21 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
 atom: NUMBER_INT 3
 power:	atom
 factor: power
@@ -388,7 +90,37 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
+atom: NUMBER_INT 4
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
 atom: NUMBER_INT 5
 power:	atom
 factor: power
@@ -403,103 +135,6 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
-testlist_comp: test   comma_test_star_seq
-atom: '{' '}' 
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT 1
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-atom: NUMBER_INT 7
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: ',' test
-atom: NUMBER_INT 8
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
-atom: NUMBER_INT 0
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-comma_test_star_seq: comma_test_star_seq ',' test
 atom: NUMBER_INT 6
 power:	atom
 factor: power
@@ -514,9 +149,25 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
 comma_test_star_seq: comma_test_star_seq ',' test
 testlist_comp: test   comma_test_star_seq
-atom: '{' '}' 
+atom: '[' testlist_comp ']' 
 power:	atom
 factor: power
 term: 	factor
@@ -534,424 +185,16 @@ testlist_star_expr: test
 right_testlist: '=' testlist_star_expr 
 expr_stmt: testlist_star_expr right_testlist 
 small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NUMBER_INT 2
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-subscript:  test
-subscriptlist:	subscript
-trailer:	'[' subscriptlist ']'
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT 9
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT 2
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-subscript:  test
-subscriptlist:	subscript
-trailer:	'[' subscriptlist ']'
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NUMBER_INT 0
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: '<' 
-atom: NUMBER_INT 4
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-while_header:  WHILE test ':' 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-subscript:  test
-subscriptlist:	subscript
-trailer:	'[' subscriptlist ']'
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-subscript:  test
-subscriptlist:	subscript
-trailer:	'[' subscriptlist ']'
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	comma_expr_star_seq ',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-atom: NUMBER_INT 1
-power:	atom
-factor: power
-term: 	factor
-term_seq : '+' term 
-arith_expr: term term_seq
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-expr_stmt: testlist_star_expr right_testlist 
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt list_stmt
-suite:	list_stmt END
-while_stmt: WHILE test ':' suite 
-compound_stmt: while_stmt
-stmt: compound_stmt
-list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
-list_stmt : stmt list_stmt
-class_h: CLASS ID 
-atoms: DEF STATIC NAME
-var_declaration: STATIC ID
-atom: NUMBER_INT 8
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
 list_stmt : stmt
 suite:	list_stmt END
-classdef: classheader suite
-compound_stmt: DEF classdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
-suite:	list_stmt END
-classdef: classheader suite
-class_h: CLASS ID 
-atoms: DEF STATIC NAME
-var_declaration: STATIC ID
-atom: NUMBER_INT 8
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-classdef: classheader suite
+classdef: classheader ':' suite
 temp2: classdef 
-temp2: classdef temp2
 program : temp2 
 file_input: program ENDMARKER

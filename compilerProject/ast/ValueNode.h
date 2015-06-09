@@ -79,8 +79,10 @@ public:
 		else if (get_types() == 1)
 		{
 			this->my_type = "float";
-			MIPS_ASM::li("t9", *(int*)(void*)&(*(float*)(g)));
-			MIPS_ASM::push("t9");
+			//float x = 1.2;
+			MIPS_ASM::lif("f9", *(float*)(g));
+			//x = *(int*)(void*)&(x);
+			MIPS_ASM::pushf("f9");
 		}
 		else if (get_types() == 2)
 		{

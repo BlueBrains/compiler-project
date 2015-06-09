@@ -2,6 +2,7 @@
 #ifndef __FUNCTIONNODE__
 #define __FUNCTIONNODE__
 #include"..\ST\Function.h"
+#include"..\AST\ForNode.h"
 class FunctionNode :public Node
 {
 private:
@@ -52,6 +53,10 @@ public:
 		if (node->getNodeType() == "IDNode")
 		{
 			static_cast<IDNode*>(node)->get_variable()->setOffset(this->getNextOffset(4));
+		}
+		else if (node->getNodeType() == "ForNode")
+		{
+			researve_var(static_cast<ForNode*>(node)->getExpr());
 		}
 		if (node->Next)
 		{
