@@ -50,6 +50,11 @@ public:
 	{
 
 	}
+	AssignmentNode(AssignmentNode *Obj) : Node(NULL, NULL)
+	{
+		left_side = Obj->get_left();
+		right_side = Obj->get_right();
+	}
 	AssignmentNode( Node* son, Node*next) : Node(son, next)
 	{
 
@@ -184,6 +189,15 @@ public:
 		}
 		return p1;
 	}
+
+	void set_left(Node* c){
+		this->left_side = c;
+	}
+
+	void set_right(Node* c){
+		this->right_side = c;
+	}
+
 	virtual string getNodeType()
 	{
 		return "AssignmentNode";
