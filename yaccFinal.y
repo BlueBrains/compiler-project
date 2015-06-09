@@ -569,7 +569,10 @@ access:		 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="priv
 				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
 				|PROTECTED	{pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				;
-print_stmt: PRINT exprlist {
+print_stmt_header : PRINT {
+								visit_num++;
+							}
+print_stmt: print_stmt_header exprlist {
 							Streams::verbose() <<"print_stmt: PRINT exprlist \n";
 							$<tn>$ = ast->createPrintNode($<tn>2, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 						   }
