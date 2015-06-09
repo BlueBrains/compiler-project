@@ -1,21 +1,12 @@
-class koko:
-	def static toto(x):
-                            self.soso(3);
-		print "x= ",x;
-	end
-	def static soso(x):
-		print "y= ",x;
-	end
-	def static fact(x):
-		self.toto(1);
-		print "after";
-		return 12;
-	end
-	def main():
-		x=88;
-		z=koko.self.fact(3);
-		print "z- ",z;
-		print "x= ",x;
-	end
+public class a:
 
+	def static soso(x): print"soso",x; if(x>0): x=x-1; self.soso(x); end  end
+end
+
+public class test:
+	def public static main():
+		z=5;
+                a.self.soso(4);
+		print "main main",z;
+	end
 end

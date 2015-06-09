@@ -104,6 +104,7 @@ public:
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $ra, 0($sp)\n");*/
 		MIPS_ASM::printComment("begin function call");
+		//MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
 		MIPS_ASM::push("ra");
 		MIPS_ASM::push("fp");
 
@@ -149,6 +150,7 @@ public:
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
+		//MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
 		//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		//MIPS_ASM::push("v0");
 		MIPS_ASM::jr();
