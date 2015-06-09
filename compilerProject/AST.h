@@ -444,10 +444,12 @@ public:
 			}
 			else if (n->getNodeType() == "IfNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
 			}
 			else if (n->getNodeType() == "ElseIfNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
 			}
 			else if (n->getNodeType() == "ElseNode")
@@ -474,6 +476,11 @@ public:
 				n->check(outer_node);
 				outer_node.push_back(n);
 			}
+			else if (n->getNodeType() == "returnNode")
+			{
+				n->check(outer_node,true);
+				//outer_node.push_back(n);
+			}
 			else
 			{
 				n->check(outer_node);
@@ -483,7 +490,7 @@ public:
 			if (!is_dot)
 			{
 				tree(n->Son);
-				if ((n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
+				if ((n->getNodeType() == "ClassNode")||(n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
 					|| (n->getNodeType() == "ElseIfNode") || (n->getNodeType() == "IfNode") || (n->getNodeType() == "ForNode") || (n->getNodeType() == "FunctionNode"))
 				{
 					outer_node.pop_back();

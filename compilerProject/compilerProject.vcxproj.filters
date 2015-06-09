@@ -155,6 +155,33 @@
     <ClInclude Include="unkowncallnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="callFunctionNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="CallTypeNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignmentNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="CallVariableNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="expressionNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="IDNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueNode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
     <ClInclude Include="dotNode.h">
       <Filter>Header Files\AST</Filter>
     </ClInclude>
@@ -196,75 +223,6 @@
     </ClInclude>
     <ClInclude Include="ast\inputNode.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\AssignmentNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\callFunctionNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\CallTypeNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\CallVariableNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ClassNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\DelNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ElseIfNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ElseNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ExceptNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\expressionNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\FinallyNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\flowStmt.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ForNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\functionNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\GlobalNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\IDNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ifNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\Node.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\PassNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\PrintNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\TryNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\ValueNode.h">
-      <Filter>Header Files\AST</Filter>
-    </ClInclude>
-    <ClInclude Include="ast\WhileNode.h">
-      <Filter>Header Files\AST</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

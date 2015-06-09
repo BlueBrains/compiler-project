@@ -28,7 +28,12 @@ public:
 	{
 		cout << "IF NODE !" << endl;
 		_condtion->print();
-		this->generateCode();
+		//this->generateCode();
+	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		pi = _condtion->check(n);
+		return pi;
 	}
 	virtual string getNodeType()
 	{
@@ -48,12 +53,12 @@ public:
 		_condtion->generateCode();
 		MIPS_ASM::pop("t0");
 		
-		if (this->Next->getNodeType() == "ElseNode")
+		if ((this->Next)&&(this->Next->getNodeType() == "ElseNode"))
 		{
 			static_cast<ElseNode*>(this->Next)->else_label = x;
 			MIPS_ASM::beq("t0", "0", endif);
 		}
-		else if (this->Next->getNodeType() == "ElseIfNode")
+		else if ((this->Next) && (this->Next->getNodeType() == "ElseIfNode"))
 		{
 			static_cast<ElseIfNode*>(this->Next)->elseIf_label = x;
 			MIPS_ASM::beq("t0", "0", endif);
@@ -68,7 +73,7 @@ public:
 		}
 		MIPS_ASM::jump(end);
 		MIPS_ASM::label(endif);
-		if ((this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
+		if ((this->Next)&&(this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
 		{
 			MIPS_ASM::label(end);
 		}

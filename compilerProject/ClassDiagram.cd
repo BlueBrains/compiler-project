@@ -1,692 +1,653 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="helper classes">
+    <Position X="66.317" Y="18.552" Height="0.75" Width="1.7" />
+  </Comment>
   <Class Name="ColonStack" Collapsed="true">
-    <Position X="78" Y="0.5" Width="1.5" />
+    <Position X="65" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAgAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Parser" Collapsed="true">
-    <Position X="78" Y="3.5" Width="1.5" />
+    <Position X="65" Y="22.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="y" Collapsed="true">
-    <Position X="79.75" Y="4.5" Width="1.5" />
+    <Position X="66.75" Y="23.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAFAAAAAAAA=</HashCode>
       <FileName>testing.cpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Function" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+  <Class Name="Function">
+    <Position X="44.5" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BABAAAQAAAIABMAIAJAhAApAEAEGIQAAAgAAhACACAA=</HashCode>
       <FileName>ST\Function.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scope" Collapsed="true">
-    <Position X="81.5" Y="3.5" Width="1.5" />
+    <Position X="68.5" Y="22.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACBAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
       <FileName>ST\Scope.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Symbol" Collapsed="true">
-    <Position X="3" Y="3.5" Width="1.5" />
+    <Position X="41.75" Y="18.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACIAACAA=</HashCode>
       <FileName>ST\Symbol.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SymbolTable" Collapsed="true">
-    <Position X="76.25" Y="4.5" Width="1.5" />
+    <Position X="63.25" Y="23.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABgAAAAAAgAAgACAQABAACACAAJCAAACABkQAAAA=</HashCode>
       <FileName>ST\SymbolTable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Type" Collapsed="true">
-    <Position X="0.75" Y="4.75" Width="1.5" />
+  <Class Name="Type">
+    <Position X="39" Y="19.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>BgQBIABAAAAAAEEQAhBgBUAEAABEJPCABwAgBAAAIgQ=</HashCode>
       <FileName>ST\Type.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Variable" Collapsed="true">
-    <Position X="3" Y="4.75" Width="1.5" />
+  <Class Name="Variable">
+    <Position X="41.5" Y="19.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>BAAAIAQACgCAAAgIACBABAJEARABgAIACIUQCgAAYIA=</HashCode>
       <FileName>ST\Variable.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Error" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="Error">
+    <Position X="49.75" Y="19.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQCAAAAABAAAAAAABAAABAAAAAAAACA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\Error.h</FileName>
+      <FileName>D:\Compiler_project\compiler-project\Error.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ErrRecItem" Collapsed="true">
-    <Position X="83.25" Y="0.5" Width="1.5" />
+    <Position X="70.25" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAIAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAIAAAA=</HashCode>
       <FileName>ErrorRevovery.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ErrRecQueue" Collapsed="true">
-    <Position X="76.25" Y="1.5" Width="1.5" />
+    <Position X="63.25" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAQgA=</HashCode>
       <FileName>ErrorRevovery.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ErrorRecovery" Collapsed="true">
-    <Position X="81.5" Y="0.5" Width="1.5" />
+    <Position X="68.5" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAACAAAAGAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>ErrorRevovery.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FlexLexer" Collapsed="true">
-    <Position X="0.5" Y="6.5" Width="1.5" />
+    <Position X="60" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAACAFAAAAAAACAAAEACCAAICAAgAAQgAAAQAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\FlexLexer.h</FileName>
+      <FileName>e:\program files (x86)\microsoft visual studio 12.0\vc\include\flexlexer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="yyFlexLexer" Collapsed="true">
-    <Position X="0.5" Y="7.75" Width="1.5" />
+    <Position X="60" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BQG6AEIgABhIIBMAQASQA0ACCGIgMCIAgAIIAAAADwA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\FlexLexer.h</FileName>
+      <FileName>e:\program files (x86)\microsoft visual studio 12.0\vc\include\flexlexer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Program" Collapsed="true">
-    <Position X="79.75" Y="3.5" Width="1.5" />
+    <Position X="66.75" Y="22.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIACAAAAAAAAAAAIAAAAAAAAAAAAAAgCAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\Program.h</FileName>
+      <FileName>D:\Compiler_project\compiler-project\Program.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Streams" Collapsed="true">
-    <Position X="83.25" Y="3.5" Width="1.5" />
+    <Position X="70.25" Y="22.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABgEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\Streams.h</FileName>
+      <FileName>D:\Compiler_project\compiler-project\Streams.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SyntaxError" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+  <Class Name="SyntaxError">
+    <Position X="49.5" Y="22.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAAAAAAABAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\SyntaxError.h</FileName>
+      <FileName>D:\Compiler_project\compiler-project\SyntaxError.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AST" Collapsed="true">
-    <Position X="76.25" Y="0.5" Width="1.5" />
+    <Position X="63.25" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QEQAAUIERQmAAAUSgQaQTJCgoGgEQAgYABTFAKgADRI=</HashCode>
       <FileName>AST.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArrayElementNode" Collapsed="true">
-    <Position X="43.25" Y="4.25" Width="1.5" />
+  <Class Name="ArrayElementNode">
+    <Position X="73.25" Y="2.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gBQAAAAAAgAIgACAAAAiCAAAAAEAAAAAABAAAAABAAA=</HashCode>
       <FileName>ast\ArrayElementNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BooleanNode" Collapsed="true">
-    <Position X="14" Y="2.5" Width="1.5" />
+  <Class Name="BooleanNode">
+    <Position X="48.5" Y="11.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAIAAAAAgEACAAAAAAAAAAAACgIAAAAAAA=</HashCode>
       <FileName>ast\BooleanNode.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ErrorNode" Collapsed="true">
-    <Position X="13.75" Y="7" Width="1.5" />
+    <Position X="46.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAIAAAAAAEACAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ast\ErrorNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="inputNode" Collapsed="true">
-    <Position X="19.75" Y="4.5" Width="1.5" />
+  <Class Name="inputNode">
+    <Position X="41" Y="2.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAICAAAAAAASAAAAAAAACAAAAgAAAgAAAA=</HashCode>
       <FileName>ast\inputNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="returnNode" Collapsed="true">
-    <Position X="24.5" Y="6.75" Width="1.5" />
+  <Class Name="returnNode">
+    <Position X="46.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAgAAAAAAQEAACAAAAAAAAAAQAAgAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAgAIAAAAQEAACAAAAAAAAAAQAAgAAAAAAAA=</HashCode>
       <FileName>ast\returnNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="shortIfNode" Collapsed="true">
-    <Position X="34" Y="3.75" Width="1.5" />
+  <Class Name="shortIfNode">
+    <Position X="67.25" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAIEAAgAIAAAAAgEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ast\shortIfNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SubscriptNode" Collapsed="true">
-    <Position X="34" Y="5.25" Width="1.5" />
+  <Class Name="SubscriptNode">
+    <Position X="69.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAIAAAAAgEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ast\subscriptNode.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="getString" Collapsed="true">
-    <Position X="79.75" Y="1.5" Width="1.5" />
+    <Position X="66.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAACAAAIAAAAAAAAA=</HashCode>
       <FileName>getString.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MIPS_ASM" Collapsed="true">
-    <Position X="83.25" Y="1.5" Width="1.5" />
+    <Position X="70.25" Y="20.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAmIAyDBCBgChDAYQBAAqkgJALMAAERrAEYIAkJMAQ=</HashCode>
+      <HashCode>AAAmIAyDBCBgCBDAYQBAAqkgJALMAAERrAEYIAkJMAQ=</HashCode>
       <FileName>mips_asm.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="mips_code" Collapsed="true">
-    <Position X="76.25" Y="2.5" Width="1.5" />
+    <Position X="63.25" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>mips_code.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MapElem" Collapsed="true">
-    <Position X="81.5" Y="1.5" Width="1.5" />
+    <Position X="68.5" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAFAAFAYAAGBAIAAAA=</HashCode>
       <FileName>MyMap.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyMap" Collapsed="true">
-    <Position X="78" Y="2.5" Width="1.5" />
+    <Position X="65" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAACAAAAAAAAAAGAAAAYAAAgAAAABAAAAAAAAAAAIA=</HashCode>
       <FileName>MyMap.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="YaccSimpleType" Collapsed="true">
-    <Position X="81.5" Y="4.5" Width="1.5" />
+    <Position X="68.5" Y="23.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="constraction" Collapsed="true">
-    <Position X="79.75" Y="0.5" Width="1.5" />
+    <Position X="66.75" Y="19.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIgAAAAAIAAAgCAAAAASQAAAAABAAAAAAQEAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="unfinished" Collapsed="true">
-    <Position X="78" Y="4.5" Width="1.5" />
+    <Position X="65" Y="23.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAIAAEAAAAAAAQAAAAAABAAAQAAQGAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="functionCaller" Collapsed="true">
-    <Position X="78" Y="1.5" Width="1.5" />
+    <Position X="65" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAIAAAAAAAAAAQBAAAAAFAAAAAAQEAKCAQAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyParser" Collapsed="true">
-    <Position X="79.75" Y="2.5" Width="1.5" />
+    <Position X="66.75" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>uAAYAKEAAGBAYgAAAgcAkQAAAAAAQSAACJBAAAADAEA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="myvector&lt;T&gt;" Collapsed="true">
-    <Position X="81.5" Y="2.5" Width="1.5" />
+    <Position X="68.5" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAABAAAAgACAAAIAAAAAAAAAAiAAAIAIAAAA=</HashCode>
       <FileName>myvector.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyVector&lt;vec&gt;" Collapsed="true">
-    <Position X="83.25" Y="2.5" Width="1.5" />
+    <Position X="70.25" Y="21.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAACAAAAAAAAAIcIIAAQgAEAACAgmAEAAAAAAAA=</HashCode>
       <FileName>ST\MyVector.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="object" Collapsed="true">
-    <Position X="76.25" Y="3.5" Width="1.5" />
+    <Position X="63.25" Y="22.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>ST\object.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="UnkownNode" Collapsed="true">
-    <Position X="19.5" Y="7" Width="1.5" />
+  <Class Name="UnkownNode">
+    <Position X="38.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAiAAAAgGAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>unkowncallnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArrayNode" Collapsed="true">
-    <Position X="31.25" Y="2.5" Width="1.5" />
+  <Class Name="ArrayNode">
+    <Position X="60.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAACgAIAAAAAAAACAAIAAAAAACAAAAAABAQAgA=</HashCode>
+      <HashCode>AAQAAAAAAgAIAAAAAAAACAAIAAAAAAAAAAAAABAQAgA=</HashCode>
       <FileName>ArrayNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DotNode" Collapsed="true">
-    <Position X="31.25" Y="5.25" Width="1.5" />
+  <Class Name="DotNode">
+    <Position X="62.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAACQgAIAAAAAAaACACAAEAgQAAAAAgAIAAAAAA=</HashCode>
       <FileName>dotNode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AssignmentNode" Collapsed="true">
-    <Position X="37.5" Y="2.5" Width="1.5" />
-    <InheritanceLine Type="Node" FixedToPoint="true">
-      <Path>
-        <Point X="28" Y="1.312" />
-        <Point X="28" Y="1.562" />
-        <Point X="37.125" Y="1.562" />
-        <Point X="37.125" Y="3.191" />
-        <Point X="37.167" Y="3.191" Type="JumpStart" />
-        <Point X="37.333" Y="3.191" Type="JumpEnd" />
-        <Point X="37.5" Y="3.191" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="AssignmentNode">
+    <Position X="55.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwAAAAAAgAIAAgQAAAECAAAAAAAAIAAAAgAAAQAAAg=</HashCode>
-      <FileName>ast\AssignmentNode.h</FileName>
+      <FileName>ast\assignmentnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CallFunctionNode" Collapsed="true">
-    <Position X="43" Y="2.5" Width="1.5" />
+  <Class Name="CallFunctionNode">
+    <Position X="68.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAACAgAAkICAAAAgGAAAAAAgABAAAQgAAAAAAAA=</HashCode>
-      <FileName>ast\callFunctionNode.h</FileName>
+      <FileName>ast\callfunctionnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CallTypeNode" Collapsed="true">
-    <Position X="40.25" Y="5.75" Width="1.5" />
-    <InheritanceLine Type="Node" FixedToPoint="true">
-      <Path>
-        <Point X="28" Y="1.312" />
-        <Point X="28" Y="1.562" />
-        <Point X="39.875" Y="1.562" />
-        <Point X="39.875" Y="6.441" />
-        <Point X="40.25" Y="6.441" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="CallTypeNode">
+    <Position X="62" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAQAAAAAQgAIgIGAAAQACAAgQRAgAAAQAAQAAAIAAAA=</HashCode>
-      <FileName>ast\CallTypeNode.h</FileName>
+      <HashCode>gAQAAAAAQgAIgIGAAAQACAAgQRAgAAAQAAwAAAIAAAA=</HashCode>
+      <FileName>ast\calltypenode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CallVariableNode" Collapsed="true">
-    <Position X="46.75" Y="2.5" Width="1.5" />
+  <Class Name="CallVariableNode">
+    <Position X="78" Y="2.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>ABQAAAAAAgAIggCAAAMACAACAAEAAAAAAAgAAAAAAAA=</HashCode>
-      <FileName>ast\CallVariableNode.h</FileName>
+      <FileName>ast\callvariablenode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ClassNode" Collapsed="true">
-    <Position X="11.5" Y="4.5" Width="1.5" />
+  <Class Name="ClassNode">
+    <Position X="41" Y="11.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAAAAAAAAAASAAAAACAAAAIBAgAAAAAAQA=</HashCode>
-      <FileName>ast\ClassNode.h</FileName>
+      <FileName>ast\classnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DelNode" Collapsed="true">
-    <Position X="13.75" Y="4.5" Width="1.5" />
+  <Class Name="DelNode">
+    <Position X="44" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAACAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ast\DelNode.h</FileName>
+      <FileName>ast\delnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ElseIfNode" Collapsed="true">
-    <Position X="19" Y="2.5" Width="1.5" />
+  <Class Name="ElseIfNode">
+    <Position X="36.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAggAAAAAAAEAACAAAAAiAAAAAAAgAAAQAAAA=</HashCode>
-      <FileName>ast\ElseIfNode.h</FileName>
+      <FileName>ast\elseifnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ElseNode" Collapsed="true">
-    <Position X="24.5" Y="2.5" Width="1.5" />
+  <Class Name="ElseNode">
+    <Position X="48.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAAAAAAAEgACAAAAAAAEAAAAAgAAAAAAAA=</HashCode>
-      <FileName>ast\ElseNode.h</FileName>
+      <FileName>ast\elsenode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExceptNode" Collapsed="true">
-    <Position X="34" Y="2.5" Width="1.5" />
+  <Class Name="ExceptNode">
+    <Position X="71.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAgAAAAgAAAAAAAEAACAAAAAAAAAAAAAEAQAAAAAA=</HashCode>
-      <FileName>ast\ExceptNode.h</FileName>
+      <FileName>ast\exceptnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExpressionNode" Collapsed="true">
-    <Position X="37.5" Y="5.75" Width="1.5" />
+  <Class Name="ExpressionNode">
+    <Position X="57.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAQIAAAAAgAIAAAAAgMACAAAAAEAAAAAACgIAAAAAAA=</HashCode>
-      <FileName>ast\expressionNode.h</FileName>
+      <FileName>ast\expressionnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinallyNode" Collapsed="true">
-    <Position X="37.5" Y="4.25" Width="1.5" />
+  <Class Name="FinallyNode">
+    <Position X="59.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAIAAAgAIAAAAAEAACAAAAACAAEAAAAAAAAAAAAA=</HashCode>
-      <FileName>ast\FinallyNode.h</FileName>
+      <FileName>ast\finallynode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FlowStmtNode" Collapsed="true">
-    <Position X="46.75" Y="4.25" Width="1.5" />
+  <Class Name="FlowStmtNode">
+    <Position X="75.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAQABAAAAQAAEAACAAAAEAAAAQAAAAAAQAAAAA=</HashCode>
-      <FileName>ast\flowStmt.h</FileName>
+      <HashCode>AAAAIAAQAAAAAAQAAEAACAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ast\flowstmt.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ForNode" Collapsed="true">
-    <Position X="11.5" Y="7" Width="1.5" />
+  <Class Name="ForNode">
+    <Position X="38.5" Y="11.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACQAAAAAAgAAAACAEEAACBAAAACAAAAAAAgAAAAgAAA=</HashCode>
-      <FileName>ast\ForNode.h</FileName>
+      <HashCode>ACQAAAAAAgAAAACAEEAACBAAAACAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>ast\fornode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FunctionNode" Collapsed="true">
-    <Position X="16.5" Y="4.5" Width="1.5" />
+  <Class Name="FunctionNode">
+    <Position X="34.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAIiAAEIAAIAAACAAAAACAAAIAAgggBAAAAAA=</HashCode>
-      <FileName>ast\functionNode.h</FileName>
+      <FileName>ast\functionnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GlobalNode" Collapsed="true">
-    <Position X="21.5" Y="2.5" Width="1.5" />
-    <InheritanceLine Type="Node" FixedToPoint="true">
-      <Path>
-        <Point X="28" Y="1.312" />
-        <Point X="28" Y="1.562" />
-        <Point X="23.375" Y="1.562" />
-        <Point X="23.375" Y="2.812" />
-        <Point X="23" Y="2.812" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="GlobalNode">
+    <Position X="44" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
-      <FileName>ast\GlobalNode.h</FileName>
+      <FileName>ast\globalnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IDNode" Collapsed="true">
-    <Position X="24.5" Y="4.5" Width="1.5" />
+  <Class Name="IDNode">
+    <Position X="50.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABQAABAAAgAAAAAAAAEIQAAAAAEJAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ast\IDNode.h</FileName>
+      <FileName>ast\idnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IfNode" Collapsed="true">
-    <Position X="31.25" Y="3.75" Width="1.5" />
-    <InheritanceLine Type="Node" FixedToPoint="true">
-      <Path>
-        <Point X="28" Y="1.312" />
-        <Point X="28" Y="4.441" />
-        <Point X="31.25" Y="4.441" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="IfNode">
+    <Position X="65" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAQAAAAIAgAAAAAAAEAACAAAAACAAAAAAAAAAAQAAAA=</HashCode>
-      <FileName>ast\ifNode.h</FileName>
+      <HashCode>QAQAAAAIAgAIAAAAAEAACAAAAACAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>ast\ifnode.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Node" Collapsed="true">
-    <Position X="27.25" Y="0.75" Width="1.5" />
+    <Position X="52.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgYABAQAAkCIAAAAgABACKAAAAAFAQAAAggAAAEABIA=</HashCode>
-      <FileName>ast\Node.h</FileName>
+      <FileName>ast\node.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PassNode" Collapsed="true">
-    <Position X="40.25" Y="2.5" Width="1.5" />
+  <Class Name="PassNode">
+    <Position X="64.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
-      <FileName>ast\PassNode.h</FileName>
+      <FileName>ast\passnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PrintNode" Collapsed="true">
-    <Position X="40.25" Y="4.25" Width="1.5" />
+  <Class Name="PrintNode">
+    <Position X="66.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAggAAAAAAAEAACAABAAAAAAAAAIgAAAAAAAA=</HashCode>
-      <FileName>ast\PrintNode.h</FileName>
+      <FileName>ast\printnode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TryNode" Collapsed="true">
-    <Position X="43.25" Y="5.75" Width="1.5" />
+  <Class Name="TryNode">
+    <Position X="71" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAgAAAAAAAEAACAAABACAAAAAAAgAQAAAAAA=</HashCode>
-      <FileName>ast\TryNode.h</FileName>
+      <FileName>ast\trynode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ValueNode" Collapsed="true">
-    <Position X="16.5" Y="7" Width="1.5" />
+  <Class Name="ValueNode">
+    <Position X="54.25" Y="11.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAQBAAAAAgAIAAAAAAAASAAAAAAAAAAAASgAQAAAAAA=</HashCode>
-      <FileName>ast\ValueNode.h</FileName>
+      <FileName>ast\valuenode.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WhileNode" Collapsed="true">
-    <Position X="16.25" Y="2.5" Width="1.5" />
-    <InheritanceLine Type="Node" FixedToPoint="true">
-      <Path>
-        <Point X="28" Y="1.312" />
-        <Point X="28" Y="1.562" />
-        <Point X="18.125" Y="1.562" />
-        <Point X="18.125" Y="2.875" />
-        <Point X="17.75" Y="2.875" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="WhileNode">
+    <Position X="51.5" Y="11.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAACAAgAIAAAAAEAACAAAAAAAAAMAAAgAAAAACAA=</HashCode>
-      <FileName>ast\WhileNode.h</FileName>
+      <FileName>ast\whilenode.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="yy_buffer_state" Collapsed="true">
-    <Position X="8.5" Y="7.5" Width="1.5" />
+    <Position X="53.75" Y="19.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACEAEAAAAAAAAAAABAAAAAEAAAAAAAAAIBAWAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\lex.yy.cc</FileName>
+      <FileName>D:\Compiler_project\compiler-project\lex.yy.cc</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="yyGLRState" Collapsed="true">
-    <Position X="83.25" Y="5.75" Width="1.5" />
+    <Position X="70.25" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAEBAAAAAgAAAAABAAACABAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="yyGLRStateSet" Collapsed="true">
-    <Position X="76.25" Y="6.75" Width="1.5" />
+    <Position X="63.25" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAI=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="yySemanticOption" Collapsed="true">
-    <Position X="78" Y="6.75" Width="1.5" />
+    <Position X="65" Y="25.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAgAgAAAAAAAAAAgAAAAACAAEAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="yyGLRStack" Collapsed="true">
-    <Position X="81.5" Y="5.75" Width="1.5" />
+    <Position X="68.5" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAEgAAAAQAAAAACAAAAAAAAAAAAAEAAAQAAAAE=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="Comparator_char" Collapsed="true">
-    <Position X="76.25" Y="5.75" Width="1.5" />
+    <Position X="63.25" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAEAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="Comparator_type" Collapsed="true">
-    <Position X="79.75" Y="5.75" Width="1.5" />
+    <Position X="66.75" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEQAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="Comparator_constraction" Collapsed="true">
-    <Position X="78" Y="5.75" Width="1.5" />
+    <Position X="65" Y="24.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MyParser.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Typedef Name="YY_BUFFER_STATE" Collapsed="true">
-    <Position X="8.5" Y="5.5" Width="1.5" />
+    <Position X="53.75" Y="21.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\lex.yy.cc</FileName>
+      <FileName>D:\Compiler_project\compiler-project\lex.yy.cc</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yy_size_t" Collapsed="true">
-    <Position X="79.75" Y="9.75" Width="1.5" />
+    <Position X="66.75" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\lex.yy.cc</FileName>
+      <FileName>D:\Compiler_project\compiler-project\lex.yy.cc</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="YY_CHAR" Collapsed="true">
-    <Position X="78" Y="9.75" Width="1.5" />
+    <Position X="65" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\lex.yy.cc</FileName>
+      <FileName>D:\Compiler_project\compiler-project\lex.yy.cc</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yybool" Collapsed="true">
-    <Position X="83.25" Y="9.75" Width="1.5" />
+    <Position X="70.25" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="YYRESULTTAG" Collapsed="true">
-    <Position X="4.5" Y="9.5" Width="1.5" />
+    <Position X="65" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yyStateNum" Collapsed="true">
-    <Position X="79.75" Y="10.5" Width="1.5" />
+    <Position X="68.5" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yyRuleNum" Collapsed="true">
-    <Position X="78" Y="10.5" Width="1.5" />
+    <Position X="66.75" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yySymbol" Collapsed="true">
-    <Position X="81.5" Y="10.5" Width="1.5" />
+    <Position X="70.25" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yyItemNum" Collapsed="true">
-    <Position X="76.25" Y="10.5" Width="1.5" />
+    <Position X="63.25" Y="29.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
+      <FileName>D:\Compiler_project\compiler-project\yacc.cpp</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="TypesMap" Collapsed="true">
-    <Position X="76.25" Y="9.75" Width="1.5" />
+    <Position X="63.25" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ST\Variable.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="yy_state_type" Collapsed="true">
-    <Position X="81.5" Y="9.75" Width="1.5" />
+    <Position X="68.5" Y="28.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\FlexLexer.h</FileName>
+      <FileName>e:\program files (x86)\microsoft visual studio 12.0\vc\include\flexlexer.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Enum Name="__unnamed_enum_0039_1" Collapsed="true">
-    <Position X="4.5" Y="7.5" Width="1.5" />
+    <Position X="54.25" Y="22.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABAEAAAAAAAAAAAAAgAAAAAAAAAAACA=</HashCode>
       <FileName>C:\Users\Molham\Documents\Visual Studio 2013\Projects\compilerProject\yacc.cpp</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="AccessModifier" Collapsed="true">
-    <Position X="76.25" Y="8" Width="1.5" />
+    <Position X="63.25" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>ST\Type.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="completness" Collapsed="true">
-    <Position X="79.75" Y="8" Width="1.5" />
+    <Position X="66.75" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ST\Type.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="boolean_operand" Collapsed="true">
-    <Position X="78" Y="8" Width="1.5" />
+    <Position X="65" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>ast\BooleanNode.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="input_Types" Collapsed="true">
-    <Position X="83.25" Y="8" Width="1.5" />
+    <Position X="70.25" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAIA=</HashCode>
       <FileName>ast\inputNode.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="operand" Collapsed="true">
-    <Position X="76.25" Y="8.75" Width="1.5" />
+    <Position X="63.25" Y="27.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAQAAAQgIABIABAAAAAAAAEAAAAGAAAAAAAAAAA=</HashCode>
-      <FileName>ast\expressionNode.h</FileName>
+      <FileName>ast\expressionnode.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="flowType" Collapsed="true">
-    <Position X="81.5" Y="8" Width="1.5" />
+    <Position X="68.5" Y="27" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAIA=</HashCode>
-      <FileName>ast\flowStmt.h</FileName>
+      <FileName>ast\flowstmt.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Types" Collapsed="true">
-    <Position X="78" Y="8.75" Width="1.5" />
+    <Position X="65" Y="27.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAACAAAAAAAAgAAAAAAAJAAgAAAgAAAAAAAA=</HashCode>
-      <FileName>ast\ValueNode.h</FileName>
+      <FileName>ast\valuenode.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

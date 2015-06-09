@@ -30,6 +30,19 @@ public:
 		if (Function_call)
 		{
 			func_vec.push_back(this->Function_call->get_FunctionNode());
+			for (int i = 0; i < arguments.size(); i++)
+			{
+				arguments.at(i)->generateCode();
+				Function_call->getparameters().at(i)->strLasttype = arguments.at(i)->my_type;
+				if (arguments.at(i)->my_type == "string")
+				{
+					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->string_val);
+				}
+				else if (arguments.at(i)->my_type == "type")
+				{
+					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->type_val);
+				}
+			}
 			this->Function_call->get_FunctionNode()->before_generateCode();
 			this->my_type = this->Function_call->get_FunctionNode()->my_type;
 			if (this->my_type == "string")
@@ -62,17 +75,41 @@ public:
 					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->type_val);
 				}
 			}
-			MIPS_ASM::jal(this->Function_call->get_label());
-			for (int i = 0; i < arguments.size(); i++)
-			{
-				MIPS_ASM::pop("t0");
-			}
+
+			int def_number = Function_call->getparameters().size()-arguments.size();
 			
+			if (def_number > 0)
+			{
+				for (int i = static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().size() - def_number; i < static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().size(); i++){
+
+					static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->generateCode();
+					Function_call->getparameters().at(arguments.size() + i - 1)->strLasttype = static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type;
+					if (static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type == "string")
+					{
+						Function_call->getparameters().at(arguments.size() + i - 1)->set_lastTypes(static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->string_val);
+					}
+					else if (static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type == "type")
+					{
+						Function_call->getparameters().at(arguments.size() + i - 1)->set_lastTypes(static_cast<FunctionNode*>(Function_call->get_FunctionNode())->get_defualt().at(i)->get_right()->type_val);
+					}
+				}
+			}
+
+			MIPS_ASM::jal(this->Function_call->get_label());
+			for (int i = 0; i < Function_call->getparameters().size(); i++)
+			{
+				//MIPS_ASM::pop("t0");
+				MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			}
+			MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 			func_vec.push_back(this->Function_call->get_FunctionNode());
 			this->Function_call->get_FunctionNode()->before_generateCode();
 			this->my_type = this->Function_call->get_FunctionNode()->my_type;
 			if (this->Function_call->has_return)
+			{
 				MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+				MIPS_ASM::sw("s7", 0, "sp");
+			}
 			else
 				MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			if (this->my_type == "string")

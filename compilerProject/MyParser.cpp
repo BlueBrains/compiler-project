@@ -140,6 +140,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, i
 	char* tokenPtr; 
 	char buffer[15];
 	bool found = false;
+	t = outer_type.back();
 	sprintf(buffer, name);
 	tokenPtr = strtok(buffer, ".");
 	tokenPtr = strtok(NULL, ".");
@@ -185,7 +186,8 @@ Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, i
 }
 
 Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool protect, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
-	Type * type = tname;
+	Type * type = outer_type.back();
+	tname = type;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 	}
@@ -222,11 +224,29 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 	}
 
 	if (parameter.size()>0){
-		if ((strcmp(parameter.at(0), "self") != 0) && ( !s && !fi))
+		if ((strcmp(parameter.at(0), "self") != 0) && (!s && !fi) && (strcmp(name, "__init__") != 0))
 		{
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "first function parameter should be self", name);
 		}
 		
+		else if ((strcmp(parameter.at(0), "self") == 0) && (strcmp(name, "__init__") == 0))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first constructor function parameter shouldn't be self", name);
+		}
+		else if ((strcmp(parameter.at(0), "self") == 0) && fi)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", name);
+		}
+		else if ((strcmp(parameter.at(0), "self") == 0) && s)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
+		}
+
+		if (!fi && !s && (strcmp(name, "__init__") != 0) && (strcmp(parameter.at(0), "self") != 0))
+		{
+				this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self",name);
+		}
+
 		/*
 		bool selflast = false;
 		for (int i = 0; i < parameter.size(); i++) {
@@ -252,7 +272,13 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		*/
 	}
-
+	else if (parameter.size()==0)
+	{
+		if (!fi && !s && (strcmp(name, "__init__") != 0))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", name);
+		}
+	}
 	vector <char *> cleanp = parameter;
 	vector <char *> clean2p = parameter;
 	vector <char *> clean3p = parameter;
@@ -433,7 +459,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 
 Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int colNo){
-	if (f!=NULL)
+/*	if (f!=NULL)
 		{	
 			if (f->get_final())
 			{
@@ -452,7 +478,7 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 						this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", f->get_name());
 			}
 			
-			if (!f->get_final() && !f->get_static())
+			if (!f->get_final() && !f->get_static() && (strcmp(f->get_name(), "__init__") != 0))
 			{
 
 				char* first = f->getfirstpara();
@@ -460,9 +486,9 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
 			
-
 	}
-	else 
+	else */
+	if (f==NULL)
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header", "cant recognize function name");
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later
@@ -522,9 +548,11 @@ Function*MyParser::getMainFunction()
 {
 	return this->st->mainfunc;
 }
-Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
+Type * MyParser::createType(char* name2, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
 {
 	//cout << "enter" << endl;
+	char* name = new char[50];
+	name = strcpy(name, name2);
 	char *tokenPtr;
 	Type* t = (Type*)this->st->currScope->m->get(name, "Class");
 	bool no_error = true;
@@ -866,6 +894,7 @@ void MyParser::check_static(Type* t, int lineno, int colno)
 }
 Type * MyParser::finishTypeDeclaration(Type* t){
 	//cout <<"size "<< constraction_type.size() << endl;
+	t = outer_type.back();
 	if (t == NULL)
 	{
 		this->errRecovery->errQ->enqueue(0, 0, "error in define type header", "cant recognize function name");

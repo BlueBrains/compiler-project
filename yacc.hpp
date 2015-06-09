@@ -96,43 +96,44 @@ extern int yydebug;
      DEL = 305,
      RETURN = 306,
      PRINT = 307,
-     INPUT_INT = 308,
-     INPUT_FLOAT = 309,
-     INPUT_STRING = 310,
-     GLOBAL = 311,
-     STAR_EQUAL = 312,
-     LESS_THAN_2 = 313,
-     RAISE = 314,
-     PRIVATE = 315,
-     PUBLIC = 316,
-     PROTECTED = 317,
-     YIELD = 318,
-     MORE_THAN_2 = 319,
-     STRING = 320,
-     NONE = 321,
-     IS = 322,
-     DIV_2 = 323,
-     LESS_OR_EQUAL = 324,
-     MORE_OR_EQUAL = 325,
-     EXCEPT = 326,
-     PASS = 327,
-     CHAR_VALUE = 328,
-     BREAK = 329,
-     CONTINUE = 330,
-     stmt_14 = 331,
-     stmt_13 = 332,
-     stmt_12 = 333,
-     stmt_11 = 334,
-     stmt_10 = 335,
-     stmt_9 = 336,
-     stmt_8 = 337,
-     stmt_7 = 338,
-     stmt_6 = 339,
-     stmt_5 = 340,
-     stmt_4 = 341,
-     stmt_3 = 342,
-     stmt_2 = 343,
-     stmt_1 = 344
+     INPUT = 308,
+     INPUT_INT = 309,
+     INPUT_FLOAT = 310,
+     INPUT_STRING = 311,
+     GLOBAL = 312,
+     STAR_EQUAL = 313,
+     LESS_THAN_2 = 314,
+     RAISE = 315,
+     PRIVATE = 316,
+     PUBLIC = 317,
+     PROTECTED = 318,
+     YIELD = 319,
+     MORE_THAN_2 = 320,
+     STRING = 321,
+     NONE = 322,
+     IS = 323,
+     DIV_2 = 324,
+     LESS_OR_EQUAL = 325,
+     MORE_OR_EQUAL = 326,
+     EXCEPT = 327,
+     PASS = 328,
+     CHAR_VALUE = 329,
+     BREAK = 330,
+     CONTINUE = 331,
+     stmt_14 = 332,
+     stmt_13 = 333,
+     stmt_12 = 334,
+     stmt_11 = 335,
+     stmt_10 = 336,
+     stmt_9 = 337,
+     stmt_8 = 338,
+     stmt_7 = 339,
+     stmt_6 = 340,
+     stmt_5 = 341,
+     stmt_4 = 342,
+     stmt_3 = 343,
+     stmt_2 = 344,
+     stmt_1 = 345
    };
 #endif
 
@@ -140,7 +141,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2579 of glr.c  */
-#line 113 "C:\\Users\\Molham\\Documents\\Visual Studio 2013\\Projects\\compilerProject\\yaccFinal.y"
+#line 114 "C:\\Users\\Molham\\Documents\\Visual Studio 2013\\Projects\\compilerProject\\yaccFinal.y"
 
 	struct R{
 		int intVal;
@@ -161,7 +162,7 @@ typedef union YYSTYPE
 
 
 /* Line 2579 of glr.c  */
-#line 165 "yacc.hpp"
+#line 166 "yacc.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
