@@ -1,17 +1,9 @@
 public class a:
-	def private x;
-	def __init__ (self):  #constructor
-		print "constructor with no parameters";
-	end
-	def __init__ (self,x,y):  #constructor
-		print "constructor with no parameters";
-		self.x=X;
-		self.y=Y;
-	end
-	def private y;
+	def static func(x,y,z=0,u=7,k=9):end
 end
 
 public class test:
 	def public static main():
+		a.self.func(1,2,3);
 	end
 end
