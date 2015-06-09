@@ -183,6 +183,10 @@ public:
 	}
 	virtual void generateCode()
 	{
+		if ((!this->f)||(!this->t))
+		{
+			return;
+		}
 		if (is_object)
 		{
 			this->my_type = "type";

@@ -56,8 +56,6 @@ public:
 		}
 	}
 	virtual  void  generateCode(){
-		
-		
 		MIPS_ASM::printComment("return node");
 		if (_scoop)
 		{
@@ -78,6 +76,7 @@ public:
 		MIPS_ASM::add_instruction("lw $ra,0($sp)\n");
 		MIPS_ASM::add_instruction("add $sp, $sp, 4\n");
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
+		
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
 		//MIPS_ASM::push("v0");

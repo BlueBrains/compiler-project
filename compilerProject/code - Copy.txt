@@ -65,3 +65,41 @@ def public __init__():
 	self.l=90;
 end
 end
+
+******************************************************
+public class a:
+	def static func(x): 
+               print"af func = ",x; self.yoyo(6); print"kooko"; 
+        end
+        def yoyo(x): print"af yoyo = ",x; u=7; self.soso(17); d=8; end
+
+        def soso(x): print"af soso = ",x; end  
+end
+
+public class test:
+	def public static main():
+		a.self.func(4);
+		print "main main";
+	end
+end
+******************************************************
+public class a:
+	def static func(x): 
+                y=self.yoyo();
+                y=y+6;
+                print"af func = ",y; 
+                y=8+y;
+                return y; 
+        end
+        def yoyo(): y=self.soso(); y=y+9;return y; end
+
+	def soso(): return 10; end
+end
+
+public class test:
+	def public static main():
+		z=a.self.func(4);
+		print "main main",z;
+	end
+end
+******************************************************
