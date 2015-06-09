@@ -1,7 +1,114 @@
-class_h: CLASS NAME 
-atoms: DEF STATIC NAME
-var_declaration: STATIC NAME
+access_modef:	PUBLIC
+class_h: access_modef CLASS NAME 
+access_modef:	PUBLIC
+parameters:'(' ')'
+funcheader: DEF access STATIC NAME parameters ':'  
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_INT 1
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
 atom: NUMBER_INT 2
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 3
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+atom: NUMBER_INT 4
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+comma_test_star_seq: ',' test
+testlist_comp: test   comma_test_star_seq
+atom: '[' testlist_comp ']' 
 power:	atom
 factor: power
 term: 	factor
@@ -17,27 +124,12 @@ or_test:	and_test
 test:	or_test
 testlist_star_expr: test 
 right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
+expr_stmt: testlist_star_expr right_testlist 
 small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
-access_modef:	PUBLIC
-parameters:'(' ')'
-funcheader: DEF access STATIC NAME parameters ':'  
 atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: EQUAL 
-atom: NUMBER_INT 0
 power:	atom
 factor: power
 term: 	factor
@@ -46,15 +138,10 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_comp: test
-atom:	'(' testlist_comp ')' 
+exprlist: 	expr 
+atom: NAME
 power:	atom
+factor: power
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -66,8 +153,8 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-str_seq:	STRING 
-atom: str_seq
+testlist:	test 
+atom: NAME
 power:	atom
 factor: power
 term: 	factor
@@ -77,25 +164,7 @@ and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
 exprlist: 	expr 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
 atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: EQUAL 
-atom: NUMBER_INT 1
 power:	atom
 factor: power
 term: 	factor
@@ -104,59 +173,13 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
+comparison: expr
 not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-exprlist: 	expr 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-elif_seq :  ELIF test ':' suite 
+testlist:	test 
 atom: NAME
-trailer:	'.' NAME
-trailer_seq: trailer 
-power: atom trailer_seq 
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op: EQUAL 
-atom: NUMBER_INT 2
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-str_seq:	STRING 
-atom: str_seq
 power:	atom
 factor: power
 term: 	factor
@@ -172,33 +195,20 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt
 suite:	list_stmt END
-elif_seq : elif_seq ELIF test ':' suite 
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-exprlist: 	expr 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-if_stmt:	IF test ':' suite elif_seq ELSE ':' suite 
-compound_stmt:  if_stmt 
+for_stmt:   FOR exprlist IN testlist ':' suite 
+compound_stmt: for_stmt
 stmt: compound_stmt
 list_stmt : stmt
+suite:	list_stmt END
+for_stmt:   FOR exprlist IN testlist ':' suite 
+compound_stmt: for_stmt
+stmt: compound_stmt
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
 stmt: compound_stmt
-list_stmt : stmt list_stmt
+list_stmt : stmt
 suite:	list_stmt END
 classdef: classheader ':' suite
 temp2: classdef 

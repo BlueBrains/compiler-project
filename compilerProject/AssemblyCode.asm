@@ -1,8 +1,7 @@
 .data
-a0: .word 4
-string_1: .asciiz "if working :D"
-string_2: .asciiz "elif2 working :D"
-string_3: .asciiz "else working :D"
+array_3: .space 8 
+array_2: .space 8 
+array_1: .space 8 
 
 block_head:    .byte   0:8
 
@@ -17,116 +16,220 @@ endarray: .asciiz "\p"
 .text
 .globl main
 main:
-li $t9,2
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-la $t1,a0
-sw $t0,0($t1)
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
 sub $sp,$sp,4
 sw $fp, 0($sp)
  #reserving space in stack for scope variables
-sub $sp,$sp,0
+sub $sp,$sp,12
  #movesp to fp
 move $fp,$sp
- #ifNode
-la $t9,a0
-lw $t0,0($t9)
-addi $v0,$t9,0 
-sub $sp,$sp,4
-sw $t0, 0($sp)
-li $t9,0
+ #Assign node
+ #Assign node RHS:
+la $s3,array_1
+la $s3,array_2
+li $t9,1
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t1, 0($sp)
 add $sp,$sp,4
-lw $t0, 0($sp)
-add $sp,$sp,4
- #equal op
-li $t2,0
-bne $t0,$t1,eqop_temp1
-li $v0,1
-li $t2,1
-eqop_temp1:
-sub $sp,$sp,4
-sw $t2, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-beq $t0,$0,else_0
- #
- # Print values:
-la $t9,string_1
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
-move $a0,$t0
-syscall
-la $a0,newline
-li $v0,4
-syscall
-j endif_0
-else_0:
- #elifNode
-la $t9,a0
-lw $t0,0($t9)
-addi $v0,$t9,0 
-sub $sp,$sp,4
-sw $t0, 0($sp)
+sw $t1,0($s3)
+addi $s3,$s3,4
 li $t9,2
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t1, 0($sp)
 add $sp,$sp,4
+sw $t1,0($s3)
+addi $s3,$s3,4
+li $t1,0
+sw $t1,0($s3)
+la $t0,array_2
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+sw $t1,0($s3)
+addi $s3,$s3,4
+la $s3,array_3
+li $t9,3
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+sw $t1,0($s3)
+addi $s3,$s3,4
+li $t9,4
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+sw $t1,0($s3)
+addi $s3,$s3,4
+li $t1,0
+sw $t1,0($s3)
+la $t0,array_3
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+sw $t1,0($s3)
+addi $s3,$s3,4
+li $t1,0
+sw $t1,0($s3)
+la $t0,array_1
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #LHS:
+lw $t0,0($fp)
+addi $v0,$fp,0
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+For0:
+For1:
+ #Assign node
+ #Assign node RHS:
+li $t9,1
+sub $sp,$sp,4
+sw $t9, 0($sp)
+ #LHS:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+ #
+ # Print values:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
 lw $t0, 0($sp)
 add $sp,$sp,4
- #equal op
-li $t2,0
-bne $t0,$t1,eqop_temp2
 li $v0,1
-li $t2,1
-eqop_temp2:
-sub $sp,$sp,4
-sw $t2, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-beq $t0,$0,else_0_1
- #
- # Print values:
-la $t9,string_2
-sub $sp,$sp,4
-sw $t9, 0($sp)
-lw $t0, 0($sp)
-add $sp,$sp,4
-li $v0,4
 move $a0,$t0
 syscall
 la $a0,newline
 li $v0,4
 syscall
-j endif_0
-else_0_1:
- #
- # Print values:
-la $t9,string_3
+ #Assign node
+ #Assign node RHS:
+li $t9,2
 sub $sp,$sp,4
 sw $t9, 0($sp)
+ #LHS:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+ #
+ # Print values:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
 lw $t0, 0($sp)
 add $sp,$sp,4
-li $v0,4
+li $v0,1
 move $a0,$t0
 syscall
 la $a0,newline
 li $v0,4
 syscall
-endif_0:
+endFor1:
+For2:
+ #Assign node
+ #Assign node RHS:
+li $t9,3
+sub $sp,$sp,4
+sw $t9, 0($sp)
+ #LHS:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+ #
+ # Print values:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,1
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+ #Assign node
+ #Assign node RHS:
+li $t9,4
+sub $sp,$sp,4
+sw $t9, 0($sp)
+ #LHS:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+ #Assign node poping old val:
+lw $t1, 0($sp)
+add $sp,$sp,4
+ #Assign node getting RHS val:
+lw $t0, 0($sp)
+ #Assign node storing in position val:
+sw $t0,0($v0)
+add $sp,$sp,4
+ #
+ # Print values:
+lw $t0,8($fp)
+addi $v0,$fp,8
+sub $sp,$sp,4
+sw $t0, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,1
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+endFor2:
+endFor0:
  #releasing space in stack for scope variables
-add $sp,$sp,0
+add $sp,$sp,12
 lw $fp, 0($sp)
 add $sp,$sp,4
 lw $ra, 0($sp)

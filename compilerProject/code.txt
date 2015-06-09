@@ -1,17 +1,10 @@
-class test:
-	def static a=2;
+public class test:
 	def public static main():
-	if(self.a == 0):
-		print "if working :D";
-	end
-		elif self.a == 1:
-			print "elif amer working :D";
-	end
-		elif self.a == 2:
-			print "elif2 working :D";
-	end
-	else:
-		print "else working :D";
-	end
+		listoflist = [[1,2],[3,4]];
+		for list in listoflist:
+			for x in list:
+				print x;
+			end
+		end
 	end
 end

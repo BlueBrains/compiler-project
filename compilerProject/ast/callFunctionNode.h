@@ -99,7 +99,7 @@ public:
 			for (int i = 0; i < Function_call->getparameters().size(); i++)
 			{
 				//MIPS_ASM::pop("t0");
-				MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+				MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			}
 			MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 			func_vec.push_back(this->Function_call->get_FunctionNode());
