@@ -8,6 +8,7 @@ private:
 	Function* function_node;
 	vector<Node*> df_par;
 	bool has_return=false;
+	bool checked_before = false;
 public:
 	Function* get_function()
 	{
@@ -132,13 +133,18 @@ public:
 	}
 	virtual void before_generateCode(){
 		Node* temp = this->Son;
-		//here generate code
-		while (temp)
+		if (!checked_before)
 		{
-			//temp->setOffset(this->getFrameSize());
-			//cout << temp->getNodeType() << endl;
-			temp->before_generateCode();
-			temp = temp->Next;
+			checked_before = true;
+			//here generate code
+			while (temp)
+			{
+				//temp->setOffset(this->getFrameSize());
+				//cout << temp->getNodeType() << endl;
+
+				temp->before_generateCode();
+				temp = temp->Next;
+			}
 		}
 		//
 	}
