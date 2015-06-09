@@ -1,8 +1,4 @@
-dotted_name: NAME 
-dotted_as_name: dotted_name 
-comma_dotted_as_name_seq: dotted_as_names: dotted_as_name 
-class_h: CLASS NAME OPEN_S unit_list CLOSE_S 
-access_modef:	PUBLIC
+class_h: CLASS NAME 
 inside_func:'(' atom: NAME
 power:	atom
 term: 	factor
@@ -17,9 +13,22 @@ and_test:	not_test
 or_test:	and_test
 test:	or_test
 argument: 	test
-arg_comma_seq : argument ','
+arglist: argument
+inside_func arglist ')'
+funcheader: DEF STATIC NAME parameters ':' 
 atom: NAME
+inside_func:'(' atom: NUMBER_INT 3
 power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
@@ -31,33 +40,9 @@ not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
-argument: 	test
-arglist: arg_comma_seq argument
-inside_func arglist ')'
-funcheader: DEF access STATIC NAME parameters ':'  
-str_seq:	STRING 
-atom: str_seq
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-atom: NAME
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-exprlist: 	expr comma_expr_star_seq 
-print_stmt: PRINT exprlist 
-small_stmt: print_stmt 
+testlist_star_expr: test 
+expr_stmt: testlist_star_expr 
+small_stmt: expr_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
@@ -92,7 +77,6 @@ funcdef:	funcheader suite
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt
-access_modef:	PUBLIC
 inside_func:'(' atom: NAME
 power:	atom
 term: 	factor
@@ -109,7 +93,55 @@ test:	or_test
 argument: 	test
 arglist: argument
 inside_func arglist ')'
-funcheader: DEF access STATIC NAME parameters ':'  
+funcheader: DEF STATIC NAME parameters ':' 
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comma_expr_star_seq : 	',' expr 
+exprlist: 	expr comma_expr_star_seq 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+funcdef:	funcheader suite 
+compound_stmt: funcdef
+stmt: compound_stmt
+list_stmt : stmt list_stmt
+inside_func:'(' atom: NAME
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+argument: 	test
+arglist: argument
+inside_func arglist ')'
+funcheader: DEF STATIC NAME parameters ':' 
 atom: NAME
 inside_func:'(' atom: NUMBER_INT 1
 power:	atom
@@ -119,16 +151,7 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-atom: NUMBER_INT 2
-power:	atom
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comma_expr_star_seq : 	',' expr 
-exprlist: 	expr comma_expr_star_seq 
+exprlist: 	expr 
 trailer_seq: trailer 
 power: atom trailer_seq 
 factor: power
@@ -149,6 +172,22 @@ small_stmt: expr_stmt
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
 list_stmt : stmt
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
 atom: NUMBER_INT 12
 power:	atom
 factor: power
@@ -175,9 +214,8 @@ funcdef:	funcheader suite
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt list_stmt
-access_modef:	PUBLIC
 parameters:'(' ')'
-funcheader: DEF access NAME parameters ':' 
+funcheader: DEF NAME parameters ':' 
 atom: NAME
 power:	atom
 factor: power
@@ -319,36 +357,8 @@ funcdef:	funcheader suite
 compound_stmt: funcdef
 stmt: compound_stmt
 list_stmt : stmt list_stmt
-class_h: CLASS NAME 
-atoms: DEF STATIC NAME
-var_declaration: STATIC NAME
-atom: NUMBER_INT 8
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comparison: expr
-not_test:	comparison
-and_test:	not_test
-or_test:	and_test
-test:	or_test
-testlist_star_expr: test 
-right_testlist: '=' testlist_star_expr 
-compound_stmt: vardef
-small_stmt: expr_stmt 
-simple_stmt: small_stmt ';' 
-stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-classdef: classheader ':' suite
-compound_stmt: DEF classdef
-stmt: compound_stmt
-list_stmt : stmt list_stmt
 suite:	list_stmt END
 classdef: classheader ':' suite
 temp2: classdef 
 program : temp2 
+file_input: program ENDMARKER

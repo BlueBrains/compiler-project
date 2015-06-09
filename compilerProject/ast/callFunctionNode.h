@@ -75,13 +75,15 @@ public:
 					Function_call->getparameters().at(i)->set_lastTypes(arguments.at(i)->type_val);
 				}
 			}
+			MIPS_ASM::add_instruction("li $v0,1\n move $a0, $sp \n syscall \n la $a0, newline \n li $v0, 4 \n syscall");
 			MIPS_ASM::jal(this->Function_call->get_label());
-			for (int i = 0; i < arguments.size()-1; i++)
+			for (int i = 0; i < arguments.size(); i++)
 			{
 				//MIPS_ASM::pop("t0");
-				MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+				//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			}
 			MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
+			MIPS_ASM::add_instruction("li $v0,1\n move $a0, $sp \n syscall \n la $a0, newline \n li $v0, 4 \n syscall");
 			func_vec.push_back(this->Function_call->get_FunctionNode());
 			this->Function_call->get_FunctionNode()->before_generateCode();
 			this->my_type = this->Function_call->get_FunctionNode()->my_type;
