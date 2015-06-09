@@ -96,6 +96,7 @@
     <None Include="..\yaccFinal.y" />
     <None Include="..\yaccTemp.y" />
     <None Include="AssemblyCode.asm" />
+    <None Include="ClassDiagram.cd" />
     <None Include="khaled.y" />
   </ItemGroup>
   <ItemGroup>

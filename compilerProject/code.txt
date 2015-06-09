@@ -1,17 +1,8 @@
-public class a:
-	def private x;
-	def __init__ (self):  #constructor
-		print "constructor with no parameters";
-	end
-	def __init__ (self,x,y):  #constructor
-		print "constructor with no parameters";
-		self.x=X;
-		self.y=Y;
-	end
-	def private y;
-end
-
-public class test:
+class test:
+	def static a=1;
 	def public static main():
+	if self.a>0 :
+		print "working :D";
+	end
 	end
 end

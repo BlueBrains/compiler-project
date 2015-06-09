@@ -1,4 +1,6 @@
 .data
+a0: .word 4
+string_1: .asciiz "working :D"
 
 block_head:    .byte   0:8
 
@@ -13,6 +15,13 @@ endarray: .asciiz "\p"
 .text
 .globl main
 main:
+li $t9,1
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+la $t1,a0
+sw $t0,0($t1)
  #begin function call
 sub $sp,$sp,4
 sw $ra, 0($sp)
@@ -22,6 +31,40 @@ sw $fp, 0($sp)
 sub $sp,$sp,0
  #movesp to fp
 move $fp,$sp
+ #ifNode
+la $t9,a0
+lw $t0,0($t9)
+addi $v0,$t9,0 
+sub $sp,$sp,4
+sw $t0, 0($sp)
+li $t9,0
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+lw $t0, 0($sp)
+add $sp,$sp,4
+slt $t2,$t1,$t0
+sub $sp,$sp,4
+sw $t2, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+beq $t0,$0,endif_0
+ #
+ # Print values:
+la $t9,string_1
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+j endif_0
+else_0:
  #releasing space in stack for scope variables
 add $sp,$sp,0
 lw $fp, 0($sp)
