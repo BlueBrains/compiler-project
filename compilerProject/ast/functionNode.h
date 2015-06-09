@@ -2,11 +2,14 @@
 #ifndef __FUNCTIONNODE__
 #define __FUNCTIONNODE__
 #include"..\ST\Function.h"
+#include"..\AST\ForNode.h"
+#include"AssignmentNode.h"
 class FunctionNode :public Node
 {
 private:
 	Function* function_node;
 	vector<Node*> df_par;
+	vector<AssignmentNode *> Just_defualt;
 	bool has_return=false;
 	bool checked_before = false;
 public:
@@ -21,6 +24,9 @@ public:
 	void set_hasReturn(bool r)
 	{
 		this->has_return = true;
+	}
+	vector<AssignmentNode *> get_defualt(){
+		return this->Just_defualt;
 	}
 	bool get_hasReturn()
 	{
@@ -38,6 +44,7 @@ public:
 	{
 		this->function_node = f;
 		this->df_par = dfpar;
+		shallow_cpy();
 	}
 	virtual void print()
 	{
@@ -47,12 +54,29 @@ public:
 	{
 		return "FunctionNode";
 	}
+	void shallow_cpy(){
+		if (df_par.size() > 0){
+			Node *temp = this->df_par.at(0);
+			while (temp->Next != NULL){
+				if (temp->Next->getNodeType() == "AssignmentNode")
+				{
+					AssignmentNode *tempA = new AssignmentNode(static_cast<AssignmentNode*>(temp->Next));
+					this->Just_defualt.push_back(tempA);
+				}
+				temp = temp->Next;
+			}
+		}
+	}
 	void researve_var(Node* node)
 	{
 		
 		if (node->getNodeType() == "IDNode")
 		{
 			static_cast<IDNode*>(node)->get_variable()->setOffset(this->getNextOffset(4));
+		}
+		else if (node->getNodeType() == "ForNode")
+		{
+			researve_var(static_cast<ForNode*>(node)->getExpr());
 		}
 		if (node->Next)
 		{
@@ -136,15 +160,15 @@ public:
 		if (!checked_before)
 		{
 			checked_before = true;
-			//here generate code
-			while (temp)
-			{
-				//temp->setOffset(this->getFrameSize());
-				//cout << temp->getNodeType() << endl;
+		//here generate code
+		while (temp)
+		{
+			//temp->setOffset(this->getFrameSize());
+			//cout << temp->getNodeType() << endl;
 
-				temp->before_generateCode();
-				temp = temp->Next;
-			}
+			temp->before_generateCode();
+			temp = temp->Next;
+		}
 		}
 		//
 	}

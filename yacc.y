@@ -1669,8 +1669,7 @@ op: PLUS				{Streams::verbose()<<"op :PLUS\n";}
 %%
 void yyerror(const char *s) 
 {
-	Program::addError(new SyntaxError(s));
-	//cout<<s;
+	Program::addError(new SyntaxError(s));	
 }
 
 int strlength(char * str)

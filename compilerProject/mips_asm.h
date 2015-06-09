@@ -70,6 +70,7 @@ public:
 
 	static void pop(string dest);
 	static void top(string dest);
+	static void topf(string dest);
 	static void pop();
 	static void popf(string dest);
 
@@ -96,6 +97,9 @@ public:
 	static void lw(string dest_reg, string offset, string mem_adress);
 	static void sw(string source_reg, int offset, string mem_adress);
 	static void sw(string source_reg, string offset, string mem_adress);
+
+	static void lwf(string dest_reg, int offset, string mem_adress);
+	static void swf(string source_reg, int offset, string mem_adress);
 
 	static void move(string dest_reg, string from_reg);
 

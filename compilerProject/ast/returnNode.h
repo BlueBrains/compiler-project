@@ -35,6 +35,10 @@ public:
 	}
 	virtual pair<void*, string> check(vector<Node*>outer_node, bool from_right)
 	{
+		if (strcmp(f->get_name(), "__init__") == 0)
+		{
+			cout << "error Constructor cannot return a value at line: " << this->_lineNo << endl;
+		}
 		_scoop->check(outer_node, from_right);
 		return pi;
 	}

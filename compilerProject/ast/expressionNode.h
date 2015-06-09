@@ -275,25 +275,25 @@ public:
 			int y = *(float*)v2->get_value();
 			if (op == 0)
 			{
-				MIPS_ASM::lif("t0", (x + y));
-				MIPS_ASM::push("t0");
+				MIPS_ASM::lif("f0", (x + y));
+				MIPS_ASM::pushf("f0");
 			}
 			else if (op == 1)
 			{
-				MIPS_ASM::lif("t0", (x - y));
-				MIPS_ASM::push("t0");
+				MIPS_ASM::lif("f0", (x - y));
+				MIPS_ASM::pushf("f0");
 			}
 			else if (op == 2)
 			{
-				MIPS_ASM::lif("t0", (x * y));
-				MIPS_ASM::push("t0");
+				MIPS_ASM::lif("f0", (x * y));
+				MIPS_ASM::pushf("f0");
 			}
 			else if (op == 3)
 			{
 				if (y != 0)
 				{
-					MIPS_ASM::lif("t0", (x / y));
-					MIPS_ASM::push("t0");
+					MIPS_ASM::lif("f0", (x / y));
+					MIPS_ASM::push("f0");
 				}
 				else
 				{
@@ -692,16 +692,19 @@ public:
 				}
 				else if (op == LESS)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::slt("t2", "t0", "t1");
 					MIPS_ASM::push("t2");
 				}
 				else if (op == GREATHER)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::slt("t2", "t1", "t0");
 					MIPS_ASM::push("t2");
 				}
 				else if (op == EQUALLESS)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::operation("t2", "t1", "t0", 2);
 					MIPS_ASM::beq("t2", "0", "equalLabel");
 					MIPS_ASM::slt("t2", "t2", "0");
@@ -716,6 +719,7 @@ public:
 				}
 				else if (op == EQUALGREATHER)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::operation("t2", "t0", "t1", 2);
 					MIPS_ASM::beq("t2", "0", "equalLabel");
 					MIPS_ASM::slt("t2", "t2", "0");
@@ -735,17 +739,17 @@ public:
 			{
 				string f0 = "f0";
 				string f1 = "f1";
-				MIPS_ASM::popf(f1);
+				MIPS_ASM::popf(f1);				
 				MIPS_ASM::popf(f0);
 				this->my_type = "float";
 				if (first->my_type == "int" || first->my_type == "bool")
 				{
-					MIPS_ASM::add_instruction("cvt.s.w $f1,$f1\n");
+					MIPS_ASM::add_instruction("cvt.s.w $f0,$f0\n");
 
 				}
 				if (second->my_type == "int"||second->my_type=="bool")
 				{
-					MIPS_ASM::add_instruction("cvt.s.w $f0,$f0\n");
+					MIPS_ASM::add_instruction("cvt.s.w $f1,$f1\n");
 
 				}
 				if (op == 0)
