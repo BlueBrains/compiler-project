@@ -140,6 +140,7 @@ Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, i
 	char* tokenPtr; 
 	char buffer[15];
 	bool found = false;
+	t = outer_type.back();
 	sprintf(buffer, name);
 	tokenPtr = strtok(buffer, ".");
 	tokenPtr = strtok(NULL, ".");
@@ -185,7 +186,8 @@ Variable* MyParser::checkVariable(char* name, Type* t, bool&exist, int lineNo, i
 }
 
 Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool protect, bool fi, char* name, vector <char*> parameter, int lineNo, int colNo){
-	Type * type = tname;
+	Type * type = outer_type.back();
+	tname = type;
 	if (!type){
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "Try to add function to not existing type", name);
 	}
@@ -546,9 +548,11 @@ Function*MyParser::getMainFunction()
 {
 	return this->st->mainfunc;
 }
-Type * MyParser::createType(char* name, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
+Type * MyParser::createType(char* name2, vector<char*>inherted_list, char* acc_mod, bool is_static, bool is_final, int lineno, int colno, bool is_final_t)
 {
 	//cout << "enter" << endl;
+	char* name = new char[50];
+	name = strcpy(name, name2);
 	char *tokenPtr;
 	Type* t = (Type*)this->st->currScope->m->get(name, "Class");
 	bool no_error = true;
@@ -890,6 +894,7 @@ void MyParser::check_static(Type* t, int lineno, int colno)
 }
 Type * MyParser::finishTypeDeclaration(Type* t){
 	//cout <<"size "<< constraction_type.size() << endl;
+	t = outer_type.back();
 	if (t == NULL)
 	{
 		this->errRecovery->errQ->enqueue(0, 0, "error in define type header", "cant recognize function name");

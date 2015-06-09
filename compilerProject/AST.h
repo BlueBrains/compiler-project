@@ -489,7 +489,7 @@ public:
 			if (!is_dot)
 			{
 				tree(n->Son);
-				if ((n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
+				if ((n->getNodeType() == "ClassNode")||(n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
 					|| (n->getNodeType() == "ElseIfNode") || (n->getNodeType() == "IfNode") || (n->getNodeType() == "ForNode") || (n->getNodeType() == "FunctionNode"))
 				{
 					outer_node.pop_back();
