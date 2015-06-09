@@ -233,6 +233,20 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		{
 			this->errRecovery->errQ->enqueue(lineNo, colNo, "first constructor function parameter shouldn't be self", name);
 		}
+		else if ((strcmp(parameter.at(0), "self") == 0) && fi)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first final function parameter can't be self", name);
+		}
+		else if ((strcmp(parameter.at(0), "self") == 0) && s)
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first static function parameter can't be self", name);
+		}
+
+		if (!fi && !s && (strcmp(name, "__init__") != 0) && (strcmp(parameter.at(0), "self") != 0))
+		{
+				this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self",name);
+		}
+
 		/*
 		bool selflast = false;
 		for (int i = 0; i < parameter.size(); i++) {
@@ -258,7 +272,13 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 		}
 		*/
 	}
-
+	else if (parameter.size()==0)
+	{
+		if (!fi && !s && (strcmp(name, "__init__") != 0))
+		{
+			this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", name);
+		}
+	}
 	vector <char *> cleanp = parameter;
 	vector <char *> clean2p = parameter;
 	vector <char *> clean3p = parameter;
@@ -439,7 +459,7 @@ Function * MyParser::createTypeFunctionHeader(Type* tname, bool s, bool p, bool 
 
 
 Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int colNo){
-	if (f!=NULL)
+/*	if (f!=NULL)
 		{	
 			if (f->get_final())
 			{
@@ -466,9 +486,9 @@ Function * MyParser::finishFunctionDeclaration(Function * f, int lineNo, int col
 					this->errRecovery->errQ->enqueue(lineNo, colNo, "first non static/final function parameter should be self", f->get_name());
 			}
 			
-
 	}
-	else 
+	else */
+	if (f==NULL)
 		this->errRecovery->errQ->enqueue(lineNo, colNo, "error in define function header", "cant recognize function name");
 	this->st->currScope = this->st->currScope->parent;
 	return f;//useless now, but maybe we need it later

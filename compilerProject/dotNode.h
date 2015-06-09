@@ -18,7 +18,7 @@ using namespace std;
 class DotNode :public Node
 {
 private:
-	Variable* checkVariableFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num)
+	Variable* checkVariableFromInhertanceLoop(Type* t, char* name, string& toto, int& t_num,int lineNo)
 	{
 		Variable* v = NULL;
 		int j = 0;
@@ -34,9 +34,13 @@ private:
 			}
 			else
 			{
-				checkVariableFromInhertanceLoop(i_t.at(i), name, toto, t_num);
+				checkVariableFromInhertanceLoop(i_t.at(i), name, toto, t_num,lineNo);
 			}
 
+		}
+		if (v->getAccessModifier() == "private")
+		{
+			cout << "Error: cannot access to parent private data member " << name <<"at line "<<lineNo << endl;
 		}
 		return v;
 	}
@@ -46,13 +50,14 @@ private:
 		if (!v){
 			int j = 0;
 			string s;
-			v = checkVariableFromInhertanceLoop(t, name, s, j);
+			v = checkVariableFromInhertanceLoop(t, name, s, j,lineNo);
 			if (v)
 			{
 				if (j > 1)
 					cout << "ambigious variable in parents types " << s << endl;
 			}
 		}
+		
 		return v;
 	}
 
@@ -209,6 +214,7 @@ public:
 	{
 		this->my_outer = outer_node;
 		this->myfrom_right = from_right;
+		this->check2(my_outer, from_right);
 		return pi;
 	}
 	 pair<void*,string> check2(vector<Node*>outer_node,bool from_right)
