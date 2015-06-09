@@ -52,7 +52,7 @@ public:
 
 		string ccc2 = "endFor";
 		ccc2 += cc;
-
+		lastLabel.push_back(make_pair(ccc, ccc2));
 		MIPS_ASM::label(ccc);
 		int loopCount;
 		ArrayNode* currentArray = NULL;
