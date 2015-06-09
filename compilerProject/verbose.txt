@@ -5,35 +5,86 @@ funcheader: DEF access STATIC NAME parameters ':'
 atom: NAME
 power:	atom
 factor: power
-Error: Undeclareted Variable at Line No:3 Column No:10
 term: 	factor
 arith_expr: term
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comp_op: '>' 
-atom: NUMBER_INT 0
-power:	atom
-factor: power
-term: 	factor
-arith_expr: term
-shift_expr: arith_expr
-and_expr: shift_expr
-xor_expr: and_expr
-expr: xor_expr
-comp_op_seq: comp_op expr 
-comparison: expr comp_op_seq
+comparison: expr
 not_test:	comparison
 and_test:	not_test
 or_test:	and_test
 test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_FLOAT
+2.2
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
 atom: NAME
 power:	atom
 factor: power
-Error: Undeclareted Variable at Line No:4 Column No:14
 term: 	factor
 arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+atom: NUMBER_INT 1
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_star_expr: test 
+right_testlist: '=' testlist_star_expr 
+expr_stmt: testlist_star_expr right_testlist 
+small_stmt: expr_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt list_stmt
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+atom: NAME
+power:	atom
+factor: power
+term: 	factor
+term_seq : '+' term 
+arith_expr: term term_seq
 shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
@@ -43,12 +94,7 @@ print_stmt: PRINT exprlist
 small_stmt: print_stmt 
 simple_stmt: small_stmt ';' 
 stmt:	simple_stmt 
-list_stmt : stmt
-suite:	list_stmt END
-if_stmt:	IF test ':' suite 
-compound_stmt:  if_stmt 
-stmt: compound_stmt
-list_stmt : stmt
+list_stmt : stmt list_stmt
 suite:	list_stmt END
 funcdef:	funcheader suite 
 compound_stmt: funcdef
