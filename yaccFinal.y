@@ -56,6 +56,7 @@
 	bool call_func=false;
 	Node* k;
 	Node* root;
+	FlowStmtNode* flowStmt = NULL;
 	char* t_id=new char[10];
 	char* acc_mod=new char[8];
 	vector<char*> sto_mod;
@@ -159,6 +160,7 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						if(!p->errRecovery->errQ->isEmpty())
 								p->errRecovery->printErrQueue();
 						root = $<tn>1;		
+						try{
 						if(fileStack.size()==1){
 							//ast->print(root, 0);
 						p->print_symbol();
@@ -166,6 +168,9 @@ file_input: program  {Streams::verbose() <<"file_input: program ENDMARKER\n";
 						ast->print($<tn>1, 0);
 						ast->generate_static($<tn>1);
 						ast->generate_main(p->getMainFunction());
+						}
+						}catch(int e){
+							cout << "An exception occurred. Exception Nr. " << e << '\n';
 						}
 						Streams::verbose().flush();	
 								}
@@ -209,6 +214,7 @@ funcdef: funcheader suite {
 							
 							Streams::verbose() <<"funcdef:	funcheader suite \n";
 						  }
+						  ;
 	
 funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:	DEF  NAME parameters ARROW test ':'  \n";}
 			|DEF access NAME parameters ARROW test ':'  {Streams::verbose() <<"funcheader:  DEF access NAME parameters ARROW test ':'  \n";}
@@ -378,7 +384,10 @@ funcheader:	DEF  NAME parameters ARROW test ':'  {Streams::verbose() <<"funchead
 														  }
 			;
 
-inside_func: '(' { inside_func=true;call_func=true; Streams::verbose() <<"inside_func:'(' ";}
+inside_func: '(' {
+					 inside_func=true;call_func=true; Streams::verbose() <<"inside_func:'(' ";
+				 }
+				 ;
 
 
 parameters: inside_func arglist ')' {Streams::verbose() <<"inside_func arglist ')'\n";}
@@ -392,7 +401,8 @@ stmt:	simple_stmt {	$<tn>$=$<tn>1;	Streams::verbose() <<"stmt:	simple_stmt \n";
 							visit_num=0;
 						}
 		;
-simple_stmt: small_stmt ';' {Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
+simple_stmt: small_stmt ';' {
+								Streams::verbose() <<"simple_stmt: small_stmt ';' \n";
 								$<tn>$=$<tn>1;
 							}
 			|small_stmt error {
@@ -414,6 +424,8 @@ small_stmt: expr_stmt	{
 					   }
 			|flow_stmt {
 							Streams::verbose() <<"small_stmt: flow_stmt \n";
+							flowStmt = dynamic_cast<FlowStmtNode*>($<tn>1);
+
 							$<tn>$=$<tn>1;
 					   }
 			|import_stmt {
@@ -783,10 +795,22 @@ compound_stmt:  if_stmt {
 							Streams::verbose() <<"compound_stmt:  if_stmt \n";
 							$<tn>$=$<tn>1;
 						}
-				| while_stmt {Streams::verbose() <<"compound_stmt: while_stmt\n";}
+				| while_stmt {
+								Streams::verbose() <<"compound_stmt: while_stmt\n";
+								if(flowStmt!=NULL){
+									flowStmt->setCompoundStmtNode($<tn>1);
+									flowStmt == NULL;
+								}
+								$<tn>$=$<tn>1;									
+							}
 				| for_stmt {
 								Streams::verbose() <<"compound_stmt: for_stmt\n";
+								if(flowStmt!=NULL){
+									flowStmt->setCompoundStmtNode($<tn>1);
+									flowStmt == NULL;
+								}
 								$<tn>$=$<tn>1;
+									
 						   }
 				| try_stmt {
 								Streams::verbose() <<"compound_stmt: try_stmt\n";
@@ -955,12 +979,14 @@ elif_header:	elif_header_name test ':'{
 									p->createNewScope();
 									$<tn>$=$<tn>2;
 									visit_num=0;
-							};
+							}
+							;
 else_stmt:		ELSE ':'{
 							p->CloseScope();
 							p->createNewScope();
 							visit_num=0;
 						}
+						;
 if_stmt:	 if_header suite {
 								Streams::verbose() <<"if_stmt:	IF test ':' suite \n";
 								$<tn>$ = ast->createIfNode($<tn>2,NULL,$<tn>1,NULL,yylval.r.lineNum,yylval.r.colNum);
@@ -998,7 +1024,8 @@ if_header: if_header_name test ':'  {
 							p->createNewScope();
 							$<tn>$=$<tn>2;
 							visit_num=0;
-						};
+						}
+						;
 while_stmt: while_header suite {
 									Streams::verbose() <<"while_stmt: WHILE test ':' suite \n";
 									$<tn>$ = ast->createWhileNode($<tn>2,NULL,$<tn>1,NULL,yylval.r.lineNum,yylval.r.colNum);
@@ -1015,64 +1042,70 @@ while_header_name : WHILE {
 								visit_num++;
 							};
 while_header: while_header_name test ':' {
-									Streams::verbose() <<"while_header:  WHILE test ':' \n";
+								Streams::verbose() <<"while_header:  WHILE test ':' \n";
 								$<tn>$=$<tn>2;//cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
-}
+							 }
 			 |while_header_name test error {
 								Streams::verbose() <<"while_header:  WHILE test error \n";
 								$<tn>$=$<tn>2;cout<<"in while"<<($<tn>2)->getNodeType()<<endl;
 								p->createNewScope();
 								visit_num=0;
 							 }
-for_stmt:   for_header IN testlist ':' suite {
+							 ;
+for_stmt:   for_header ':' suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist ':' suite \n";
-												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+												//$<tn>$ = ast->createForNode($<tn>6, NULL, lastNode, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+												//Node* temp=ast->addNext(lastNode,$<tn>6);												
+												Node* forNode = $<tn>1;
+												forNode->Son = $<tn>3;
+												$<tn>$ = forNode;
 												p->CloseScope();
 											   }
-			|for_header IN testlist error suite {
+			|for_header error suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist error suite \n";
-												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
+												Node* forNode = $<tn>1;
+												forNode->Son = $<tn>3;
+												$<tn>$ = forNode;
 												p->CloseScope();
 											   }
-			|for_header error testlist ':' suite {
-												Streams::verbose() <<"for_stmt:   FOR exprlist error testlist ':' suite \n";
-												$<tn>$ = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
-												p->CloseScope();
-											   }
-			|for_header IN testlist ':' suite ELSE ':' suite {
+			|for_header ':' suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";
-																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
-																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+													Node* forNode = $<tn>1;
+													forNode->Son = $<tn>3;													
+													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
-			|for_header IN testlist error suite ELSE ':' suite {
+			|for_header error suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist error suite ELSE ':' suite\n";
-																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
-																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+													Node* forNode = $<tn>1;
+													forNode->Son = $<tn>3;
+													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
-			|for_header IN testlist ':' suite ELSE error suite {
+			|for_header ':' suite ELSE error suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE error suite\n";
-																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
-																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
-																$<tn>$ = forNode;															
-															   }
-			|for_header error testlist ':' suite ELSE ':' suite {
-																Streams::verbose() <<"for_stmt:  FOR exprlist error testlist ':' suite ELSE ':' suite\n";
-																Node* forNode = ast->createForNode($<tn>5, NULL, $<tn>1, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
-																forNode->Next = ast->createElseNode($<tn>8, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+													Node* forNode = $<tn>1;
+													forNode->Son = $<tn>3;
+													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
 			;
-for_header: FOR exprlist {
+for_header: FOR exprlist IN testlist {
+					$<tn>$ = ast->createForNode(NULL, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+					visit_num=0;
+					p->createNewScope();
+			}
+			|FOR exprlist error testlist {
+					$<tn>$ = ast->createForNode(NULL, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+					visit_num=0;
 													p->createNewScope();
-													$<tn>$= $<tn>2;
-											};
+			}
+			;
 try_header:	TRY ':'  {
 										p->createNewScope();
-}
+					 }
 			|TRY error  {
 										p->createNewScope();
 					 }
@@ -1439,9 +1472,9 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						}
 		|'~' factor {Streams::verbose() <<"factor: '~' factor \n";}
 		| power {
+				 Streams::verbose() <<"factor: power\n";
 		         if(!inside_func&&!inside_while_cond){
 					visit_num++;
-					Streams::verbose() <<"factor: power\n";
 					exist=false;
 					//cout<<"visit num= "<<visit_num<<"  "<<yylval.r.lineNum<<"  size = "<<temp_id2.size()<<endl;
 					if((visit_num==1)&&(!constant)&&(temp_id2.size()>0))
@@ -1452,15 +1485,16 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						//cout<<"exist is "<<exist<<yylval.r.lineNum<<endl;
 						if((!exist)&&(v!=NULL))
 						{
-							//cout<<"hellow world  "<<v->get_name()<<endl;
+							//cout<<"hello world  "<<v->get_name()<<endl;
 							lastNode=ast->createIDNode(v,0,0,yylval.r.lineNum,yylval.r.colNum);
 							//cout<<"last node"<<endl;	
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
-							
 						}
 						else
 						{
-							$<tn>$=$<tn>1;
+							CallVariableNode* temp = dynamic_cast<CallVariableNode*>($<tn>1);
+							temp->set_variable(v);
+							$<tn>$=temp;
 						} 
 						temp_id2.pop_back();	
 					}
@@ -1484,6 +1518,7 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 						is_list=false;
 						if(v!=NULL)
 						{
+							
 							$<tn>$=ast->createCallVarNode(temp_id2.back(),v,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);	
 							//temp_id2.pop_back();		
 						}
@@ -1555,7 +1590,7 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 						arr_node=static_cast<ArrayNode*>($<tn>$);
 				}
 		|'{' '}' {Streams::verbose() <<"atom: '{' '}' \n";}
-		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '{' '}' \n";
+		|'[' testlist_comp ']' {Streams::verbose() <<"atom: '[' testlist_comp ']' \n";
 									$<tn>$=ast->createArrayNode(arrayvec,0,0,yylval.r.lineNum,yylval.r.colNum);
 									array_right=true;
 									arr_node=static_cast<ArrayNode*>($<tn>$);
@@ -1886,9 +1921,9 @@ classdef: classheader ':' suite {
 		  |classheader error suite {
 								Streams::verbose() <<"classdef: classheader error suite\n";
 								$<type>$=p->finishTypeDeclaration(t);
-								$<tn>$=ast->createClassNode($<type>1,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+								$<tn>$=ast->createClassNode($<type>1,$<tn>3,NULL,yylval.r.lineNum,yylval.r.colNum);
 							}
-
+							;
 classheader: CLASS NAME   {
 								Streams::verbose() << "class_h: CLASS NAME \n";
 								colonStack.push(new ColonStack($<r.lineNum>1,$<r.colNum>2+1));
@@ -2406,15 +2441,6 @@ arglist: argument {Streams::verbose() <<"arglist: argument\n";
 		 |default_arg_comma_seq default_arg {Streams::verbose() <<"arglist: default_arg_comma_seq default_arg\n";}
 		
 		 ;
-		/*
-one_star: '*' test {
-							std::string tempstr($<r.strVal>2);
-							std::string erro("*" + tempstr);
-							char *cstr = new char[erro.length() + 1];
-							strcpy(cstr, erro.c_str()); parameters.push_back(cstr);
-								amer_par.push_back(my_node);
-					}
-*/
 
 comma_default_arg_seq: ',' default_arg {Streams::verbose() <<"comma_default_arg_seq: ',' default_arg\n";}
 					   |comma_default_arg_seq ',' default_arg {Streams::verbose() <<"comma_default_arg_seq: comma_default_arg_seq ',' default_arg\n";}
@@ -2425,9 +2451,10 @@ default_arg_comma_seq: default_arg ',' {Streams::verbose() <<"default_arg_comma_
 					   ;
 in_default: test '=' {
 					Streams::verbose() <<"in_default: '='\n";
-					//in_def=true;
+					in_def=true;
 					$<tn>$ = $<tn>1;
 				}
+					;
 default_arg: in_default test {parameters.push_back($<r.strVal>1);Streams::verbose() <<"default_arg: test in_default test\n";
 							Node* o=ast->createAssignNode($<tn>1,$<tn>2,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 							$<tn>$=ast->addNext(my_node,o);
@@ -2547,7 +2574,6 @@ std::string str_common((std::istreambuf_iterator<char>(t_common)),
 	ofs<<".kdata\n";
 	MIPS_ASM::writeData();
 	Program::printErrors();
-	//err->printErrQueue();
 	system("pause");
 
 }

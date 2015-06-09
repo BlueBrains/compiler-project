@@ -439,6 +439,7 @@ public:
 			
 			else if (n->getNodeType() == "ForNode")
 			{
+				n->check(outer_node);
 				outer_node.push_back(n);
 			}
 			else if (n->getNodeType() == "IfNode")

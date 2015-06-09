@@ -133,7 +133,7 @@ public:
 			{
 				this->_offsetReg = "gp";
 			}
-			if (this->my_type == "NULL")
+			if (this->my_type == "NULL"|this->my_type!=this->get_variable()->strLasttype)
 			{
 				this->my_type = variable_node->strLasttype;
 			}
@@ -166,7 +166,7 @@ public:
 			else
 			{
 				MIPS_ASM::lw("t0", variable_node->getOffset(), this->getOffsetRegister());
-				//v0 contains the address in memorry to be used later in assignment
+				//v0 contains the address in memory to be used later in assignment
 				MIPS_ASM::add_instruction(string("addi $v0,$") + this->getOffsetRegister()
 					+ "," + std::to_string(variable_node->getOffset()) + "\n");
 				MIPS_ASM::push("t0");

@@ -2,6 +2,7 @@
 #ifndef __FUNCTIONNODE__
 #define __FUNCTIONNODE__
 #include"..\ST\Function.h"
+#include"..\AST\ForNode.h"
 #include"AssignmentNode.h"
 class FunctionNode :public Node
 {
@@ -73,6 +74,10 @@ public:
 		{
 			static_cast<IDNode*>(node)->get_variable()->setOffset(this->getNextOffset(4));
 		}
+		else if (node->getNodeType() == "ForNode")
+		{
+			researve_var(static_cast<ForNode*>(node)->getExpr());
+		}
 		if (node->Next)
 		{
 			researve_var(node->Next);
@@ -99,6 +104,7 @@ public:
 		MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		MIPS_ASM::add_instruction("sw $ra, 0($sp)\n");*/
 		MIPS_ASM::printComment("begin function call");
+		//MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
 		MIPS_ASM::push("ra");
 		MIPS_ASM::push("fp");
 
@@ -144,6 +150,7 @@ public:
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
+		//MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
 		//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		//MIPS_ASM::push("v0");
 		MIPS_ASM::jr();
@@ -155,15 +162,15 @@ public:
 		if (!checked_before)
 		{
 			checked_before = true;
-			//here generate code
-			while (temp)
-			{
-				//temp->setOffset(this->getFrameSize());
-				//cout << temp->getNodeType() << endl;
+		//here generate code
+		while (temp)
+		{
+			//temp->setOffset(this->getFrameSize());
+			//cout << temp->getNodeType() << endl;
 
-				temp->before_generateCode();
-				temp = temp->Next;
-			}
+			temp->before_generateCode();
+			temp = temp->Next;
+		}
 		}
 		//
 	}
