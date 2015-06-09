@@ -1,7 +1,10 @@
-class test:
+public class test:
 	def public static main():
-		x = 2.2 ;
-		y = 1;
-		print x+y;
+		listoflist = [[1,"hello"],[2,"python",3,5]];	
+			for list in listoflist:
+			for x in list:
+				print x;
+			end
+		end
 	end
 end
