@@ -23,6 +23,11 @@ public:
 
 
 	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		pi = _condtion->check(n);
+		return pi;
+	}
 		virtual void generateCode()
 	{
 			MIPS_ASM::printComment("elifNode");

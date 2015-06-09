@@ -1,7 +1,7 @@
 class_h: CLASS NAME 
 atoms: DEF STATIC NAME
 var_declaration: STATIC NAME
-atom: NUMBER_INT 1
+atom: NUMBER_INT 2
 power:	atom
 factor: power
 term: 	factor
@@ -36,8 +36,66 @@ shift_expr: arith_expr
 and_expr: shift_expr
 xor_expr: and_expr
 expr: xor_expr
-comp_op: '>' 
+comp_op: EQUAL 
 atom: NUMBER_INT 0
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comp_op_seq: comp_op expr 
+comparison: expr comp_op_seq
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+testlist_comp: test
+atom:	'(' testlist_comp ')' 
+power:	atom
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comparison: expr
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comp_op: EQUAL 
+atom: NUMBER_INT 1
 power:	atom
 factor: power
 term: 	factor
@@ -69,7 +127,70 @@ simple_stmt: small_stmt ';'
 stmt:	simple_stmt 
 list_stmt : stmt
 suite:	list_stmt END
-if_stmt:	IF test ':' suite 
+elif_seq :  ELIF test ':' suite 
+atom: NAME
+trailer:	'.' NAME
+trailer_seq: trailer 
+power: atom trailer_seq 
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comp_op: EQUAL 
+atom: NUMBER_INT 2
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+comp_op_seq: comp_op expr 
+comparison: expr comp_op_seq
+not_test:	comparison
+and_test:	not_test
+or_test:	and_test
+test:	or_test
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+elif_seq : elif_seq ELIF test ':' suite 
+str_seq:	STRING 
+atom: str_seq
+power:	atom
+factor: power
+term: 	factor
+arith_expr: term
+shift_expr: arith_expr
+and_expr: shift_expr
+xor_expr: and_expr
+expr: xor_expr
+exprlist: 	expr 
+print_stmt: PRINT exprlist 
+small_stmt: print_stmt 
+simple_stmt: small_stmt ';' 
+stmt:	simple_stmt 
+list_stmt : stmt
+suite:	list_stmt END
+if_stmt:	IF test ':' suite elif_seq ELSE ':' suite 
 compound_stmt:  if_stmt 
 stmt: compound_stmt
 list_stmt : stmt
