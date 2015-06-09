@@ -73,7 +73,7 @@ public:
 		}
 		MIPS_ASM::jump(end);
 		MIPS_ASM::label(endif);
-		if ((this->Next)&&(this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
+		if ((!this->Next)||(this->Next) && (this->Next->getNodeType() != "ElseNode") && (this->Next->getNodeType() != "ElseIfNode"))
 		{
 			MIPS_ASM::label(end);
 		}

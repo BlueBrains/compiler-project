@@ -1,6 +1,8 @@
 .data
 a0: .word 4
-string_1: .asciiz "working :D"
+string_1: .asciiz "if working :D"
+string_2: .asciiz "elif2 working :D"
+string_3: .asciiz "else working :D"
 
 block_head:    .byte   0:8
 
@@ -15,7 +17,7 @@ endarray: .asciiz "\p"
 .text
 .globl main
 main:
-li $t9,1
+li $t9,2
 sub $sp,$sp,4
 sw $t9, 0($sp)
 lw $t0, 0($sp)
@@ -44,12 +46,17 @@ lw $t1, 0($sp)
 add $sp,$sp,4
 lw $t0, 0($sp)
 add $sp,$sp,4
-slt $t2,$t1,$t0
+ #equal op
+li $t2,0
+bne $t0,$t1,eqop_temp1
+li $v0,1
+li $t2,1
+eqop_temp1:
 sub $sp,$sp,4
 sw $t2, 0($sp)
 lw $t0, 0($sp)
 add $sp,$sp,4
-beq $t0,$0,endif_0
+beq $t0,$0,else_0
  #
  # Print values:
 la $t9,string_1
@@ -65,6 +72,59 @@ li $v0,4
 syscall
 j endif_0
 else_0:
+ #elifNode
+la $t9,a0
+lw $t0,0($t9)
+addi $v0,$t9,0 
+sub $sp,$sp,4
+sw $t0, 0($sp)
+li $t9,2
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t1, 0($sp)
+add $sp,$sp,4
+lw $t0, 0($sp)
+add $sp,$sp,4
+ #equal op
+li $t2,0
+bne $t0,$t1,eqop_temp2
+li $v0,1
+li $t2,1
+eqop_temp2:
+sub $sp,$sp,4
+sw $t2, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+beq $t0,$0,else_0_1
+ #
+ # Print values:
+la $t9,string_2
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+j endif_0
+else_0_1:
+ #
+ # Print values:
+la $t9,string_3
+sub $sp,$sp,4
+sw $t9, 0($sp)
+lw $t0, 0($sp)
+add $sp,$sp,4
+li $v0,4
+move $a0,$t0
+syscall
+la $a0,newline
+li $v0,4
+syscall
+endif_0:
  #releasing space in stack for scope variables
 add $sp,$sp,0
 lw $fp, 0($sp)

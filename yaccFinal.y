@@ -961,7 +961,8 @@ elif_seq :  elif_header suite {
 			|elif_seq elif_header suite {
 											Streams::verbose() <<"elif_seq : elif_seq ELIF test ':' suite \n";
 											Node* elseIfNode = $<tn>1;
-											elseIfNode->Next = ast->createElseIfNode($<tn>3,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+											Node* temp = ast->createElseIfNode($<tn>3,NULL,$<tn>2,NULL,yylval.r.lineNum,yylval.r.colNum);
+											elseIfNode = ast->addNext(elseIfNode,temp);
 											$<tn>$ = elseIfNode;		
 																			
 										  }
@@ -1003,7 +1004,7 @@ if_stmt:	 if_header suite {
 														Streams::verbose() <<"if_stmt:	IF test ':' suite elif_seq ELSE ':' suite \n";
 														Node* elseIfNode = $<tn>3;
 														Node* elseNode = ast->createElseNode($<tn>5,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
-														elseIfNode->Next = elseNode;
+														elseIfNode=ast->addNext(elseIfNode,elseNode);
 														$<tn>$ = ast->createIfNode($<tn>2,elseIfNode,$<tn>1,NULL,yylval.r.lineNum,yylval.r.colNum);
 														p->CloseScope();
 													   }
@@ -1114,18 +1115,17 @@ try_stmt:   try_header suite try_except_cla_seq {
 			|try_header suite try_except_cla_seq ELSE ':' suite {
 																p->CloseScope();
 																Streams::verbose() <<" try_stmt: TRY ':' suite try_except_cla_seq ELSE ':' suite\n";
-																Node* except = $<tn>4;
-																while(except->Next!=NULL)
-																	except = except->Next;
-																except->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																Node* except = $<tn>3;
+																Node* temp = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																except = ast->addNext(except,temp);
 																$<tn>$ = ast->createTryNode($<tn>2, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
 															 }
 			|try_header suite try_except_cla_seq finally_stmt suite {
 																	Streams::verbose() <<"try_stmt:  TRY ':' suite try_except_cla_seq FINALLY ':' suite\n";
-																Node* except = $<tn>4;
+																Node* except = $<tn>3;
 																p->CloseScope();
-																while(except->Next!=NULL)
-																	except = except->Next;
+																Node* temp = ast->createElseNode($<tn>5, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
+																except = ast->addNext(except,temp);
 																except->Next = ast->createFinallyNode($<tn>5, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = ast->createTryNode($<tn>2, $<tn>3, NULL,yylval.r.lineNum,yylval.r.colNum);
 																}
@@ -1175,9 +1175,7 @@ try_except_cla_seq: except_clause ':' suite	{
 																	Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause ':' suite\n";
 																	Node* except_a = $<tn>1;
 																	Node* except_b = $<tn>2;
-																	while(except_a->Next!=NULL)
-																		except_a = except_a->Next;
-																	except_a->Next = except_b;
+																	except_a = ast->addNext(except_a,except_b);
 																	p->CloseScope();
 																	p->createNewScope();
 																	except_b->Son = $<tn>4;
@@ -1188,9 +1186,7 @@ try_except_cla_seq: except_clause ':' suite	{
 																	Streams::verbose() <<"try_except_cla_seq: try_except_cla_seq except_clause error suite\n";
 																	Node* except_a = $<tn>1;
 																	Node* except_b = $<tn>2;
-																	while(except_a->Next!=NULL)
-																		except_a = except_a->Next;
-																	except_a->Next = except_b;
+																	except_a = ast->addNext(except_a,except_b);																	
 																	p->CloseScope();
 																	p->createNewScope();
 																	except_b->Son = $<tn>4;
@@ -1238,13 +1234,7 @@ list_stmt: stmt {
 				}
 			|list_stmt stmt {
 								Streams:: verbose() <<"list_stmt : stmt list_stmt\n";
-								Node* node = $<tn>1;
-								if(node->Next!=NULL){
-									while(node->Next != NULL)
-										node = node->Next;
-									ast->addNext(node,$<tn>2);
-								}else
-									ast->addNext($<tn>1,$<tn>2);
+								ast->addNext($<tn>1,$<tn>2);
 								$<tn>$=$<tn>1;	
 							}
 			;
