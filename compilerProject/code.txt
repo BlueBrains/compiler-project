@@ -1,9 +1,8 @@
-public class a:
-	def static func(x,y,z=0,u=7,k=9):end
-end
-
-public class test:
+class test:
+	def static a=1;
 	def public static main():
-		a.self.func(1,2,3);
+	if self.a>0 :
+		print "working :D";
+	end
 	end
 end

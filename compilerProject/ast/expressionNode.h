@@ -692,16 +692,19 @@ public:
 				}
 				else if (op == LESS)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::slt("t2", "t0", "t1");
 					MIPS_ASM::push("t2");
 				}
 				else if (op == GREATHER)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::slt("t2", "t1", "t0");
 					MIPS_ASM::push("t2");
 				}
 				else if (op == EQUALLESS)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::operation("t2", "t1", "t0", 2);
 					MIPS_ASM::beq("t2", "0", "equalLabel");
 					MIPS_ASM::slt("t2", "t2", "0");
@@ -716,6 +719,7 @@ public:
 				}
 				else if (op == EQUALGREATHER)
 				{
+					this->my_type = "bool";
 					MIPS_ASM::operation("t2", "t0", "t1", 2);
 					MIPS_ASM::beq("t2", "0", "equalLabel");
 					MIPS_ASM::slt("t2", "t2", "0");
