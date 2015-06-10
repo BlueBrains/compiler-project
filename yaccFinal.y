@@ -488,7 +488,7 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 								Node *il=new Node();
 								if(v1)
 								{
-									v1->init=true;
+									v1->set_init(true);
 									il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);			
 								}
 								else
@@ -581,7 +581,10 @@ access:		 	PRIVATE 	{Streams::verbose()<<"access_modef: PRIVATE\n";acc_mod="priv
 				|PUBLIC		{pp=false;Streams::verbose()<<"access_modef:	PUBLIC\n";acc_mod="public";pp=false;}
 				|PROTECTED	{pro=true;Streams::verbose()<<"access_modef:	PROTECTED\n";acc_mod="protected";}
 				;
-print_stmt: PRINT exprlist {
+print_stmt_header : PRINT {
+								visit_num++;
+							}
+print_stmt: print_stmt_header exprlist {
 							Streams::verbose() <<"print_stmt: PRINT exprlist \n";
 							$<tn>$ = ast->createPrintNode($<tn>2, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 						   }
@@ -1056,48 +1059,48 @@ for_stmt:   for_header ':' suite {
 												//$<tn>$ = ast->createForNode($<tn>6, NULL, lastNode, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 												//Node* temp=ast->addNext(lastNode,$<tn>6);												
 												Node* forNode = $<tn>1;
-												forNode->Son = $<tn>3;
+												forNode->Son->Next = $<tn>3;
 												$<tn>$ = forNode;
 												p->CloseScope();
 											   }
 			|for_header error suite {
 												Streams::verbose() <<"for_stmt:   FOR exprlist IN testlist error suite \n";
 												Node* forNode = $<tn>1;
-												forNode->Son = $<tn>3;
+												forNode->Son->Next = $<tn>3;
 												$<tn>$ = forNode;
 												p->CloseScope();
 											   }
 			|for_header ':' suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE ':' suite\n";
 													Node* forNode = $<tn>1;
-													forNode->Son = $<tn>3;													
+													forNode->Son->Next = $<tn>3;													
 													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
 			|for_header error suite ELSE ':' suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist error suite ELSE ':' suite\n";
 													Node* forNode = $<tn>1;
-													forNode->Son = $<tn>3;
+													forNode->Son->Next = $<tn>3;
 													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
 			|for_header ':' suite ELSE error suite {
 																Streams::verbose() <<"for_stmt:  FOR exprlist IN testlist ':' suite ELSE error suite\n";
 													Node* forNode = $<tn>1;
-													forNode->Son = $<tn>3;
+													forNode->Son->Next = $<tn>3;
 													forNode->Next = ast->createElseNode($<tn>6, NULL, NULL,yylval.r.lineNum,yylval.r.colNum);
 																$<tn>$ = forNode;															
 															   }
 			;
 for_header: FOR exprlist IN testlist {
-					$<tn>$ = ast->createForNode(NULL, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+					$<tn>$ = ast->createForNode(lastNode, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 					visit_num=0;
 					p->createNewScope();
 			}
 			|FOR exprlist error testlist {
-					$<tn>$ = ast->createForNode(NULL, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
+					$<tn>$ = ast->createForNode(lastNode, NULL, $<tn>2, $<tn>4, NULL,yylval.r.lineNum,yylval.r.colNum);
 					visit_num=0;
-													p->createNewScope();
+					p->createNewScope();
 			}
 			;
 try_header:	TRY ':'  {
@@ -1498,10 +1501,6 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					else if((!constant)&&(!is_list))
 					{
 						v=NULL;
-						if(v1)
-						{
-							v1->init=true;
-						}
 						if(!temp_id2.empty())
 						{
 						//cout<<"enter amora alhosary"<<endl;
@@ -1530,10 +1529,6 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					}
 					else
 					{
-						if(v1)
-						{
-							v1->init=true;
-						}
 						$<tn>$=$<tn>1;
 					}
 					constant=false;
