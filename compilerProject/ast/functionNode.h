@@ -56,15 +56,18 @@ public:
 	}
 	void shallow_cpy(){
 		if (df_par.size() > 0){
-			Node *temp = this->df_par.at(0);
-			while (temp->Next != NULL){
-				if (temp->Next->getNodeType() == "AssignmentNode")
+			
+			for (int i = 0; i < df_par.size();i++){
+				Node *temp = this->df_par.at(i);
+				if ((temp->Next!=NULL) && (temp->Next->getNodeType() == "AssignmentNode"))
 				{
 					AssignmentNode *tempA = new AssignmentNode(static_cast<AssignmentNode*>(temp->Next));
 					this->Just_defualt.push_back(tempA);
 				}
-				temp = temp->Next;
-			}
+			}/*
+			for (int i = 0; i < df_par.size(); i++){
+				this->df_par.at(i)->Next=NULL;
+			}*/
 		}
 	}
 	void researve_var(Node* node)
@@ -129,7 +132,15 @@ public:
 			//for self 
 			MIPS_ASM::sw("a0", 0, "fp");
 		}
-		temp = this->Son;
+		
+		if (this->df_par.size() > 0){
+			if ((this->df_par.at(this->df_par.size() - 1)->Next == NULL) || (this->df_par.at(this->df_par.size() - 1)->Next->getNodeType() != "AssignmentNode"))
+				temp = this->df_par.at(this->df_par.size() - 1)->Next;
+			else if (this->df_par.at(this->df_par.size() - 1)->Next->getNodeType() == "AssignmentNode")
+				temp = this->df_par.at(this->df_par.size() - 1)->Next->Next;
+		}
+		else
+			temp = this->Son;
 		//here generate code
 		while (temp)
 		{
@@ -150,7 +161,7 @@ public:
 		MIPS_ASM::add_instruction("lw $fp 0($sp)\n");*/
 		MIPS_ASM::pop("fp");
 		MIPS_ASM::pop("ra");
-		//MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
+	    //MIPS_ASM::add_instruction("li $v0,1 \n move $a0, $ra \n syscall \n la $a0, newline \n li $v0, 4 \n syscall \n");
 		//MIPS_ASM::add_instruction("sub $sp,$sp,4\n");
 		//MIPS_ASM::push("v0");
 		MIPS_ASM::jr();

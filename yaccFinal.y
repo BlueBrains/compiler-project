@@ -1626,13 +1626,14 @@ atom:	'(' ')' {Streams::verbose() <<"atom:	'(' ')' \n";}
 									visit_num++;
 									parameters.clear();
 									//cout<<"enter in name()"<<endl;
-									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									$<tn>$=ast->createCallTypeNode($<r.strVal>1,func_call,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									} 
-		| NAME '(' exprlist ')' { Streams::verbose() <<"atom: NAME\n";
+		| NAME inside_func exprlist ')' { Streams::verbose() <<"atom: NAME\n";
 									//temp_id2.push_back($<r.strVal>1);
 									visit_num++;
-									$<tn>$=ast->createCallTypeNode($<r.strVal>1,parameters/*$<tn>3*/,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
-									parameters.clear();
+									$<tn>$=ast->createCallTypeNode($<r.strVal>1,func_call/*$<tn>3*/,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+									func_call.clear();
+									call_func=false;inside_func=false;
 												} 
 		| NAME '[' subscriptlist ']' {Streams::verbose() <<"trailer:	'[' subscriptlist ']'\n";
 											$<var>$=p->checkVariable($<r.strVal>1,t,exist, yylval.r.lineNum, yylval.r.colNum,false,true,is_dic);
@@ -1743,7 +1744,7 @@ trailer:	'.' NAME  %prec stmt_14
 									}
 									else
 									{
-										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,func_call,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									Streams::verbose() <<"trailer:	'.' NAME()\n";
 									temp_id=temp_id2.back();
@@ -1751,7 +1752,8 @@ trailer:	'.' NAME  %prec stmt_14
 								temp_id2.pop_back();
 								temp_id2.push_back(temp_id);
 									dotvec.push_back($<tn>$);
-									call_func=false;
+									call_func=false;inside_func=false;
+									amer_par.clear();
 								}
 			|'.' NAME inside_func exprlist ')' {
 									if(a_self)
@@ -1762,7 +1764,7 @@ trailer:	'.' NAME  %prec stmt_14
 									}
 									else
 									{
-										$<tn>$=ast->createCallTypeNode($<r.strVal>2,parameters,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
+										$<tn>$=ast->createCallTypeNode($<r.strVal>2,func_call,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);
 									}
 									dotvec.push_back($<tn>$);
 									//cout<<"the size is "<<func_call.size()<<endl;
@@ -1770,7 +1772,7 @@ trailer:	'.' NAME  %prec stmt_14
 									temp_id=temp_id+"."+$<r.strVal>2;
 									temp_id2.pop_back();
 									temp_id2.push_back(temp_id);
-									call_func=false;
+									call_func=false;inside_func=false;
 									func_call.clear();
 								}
 			|'.' NAME '[' subscriptlist ']' {

@@ -11,7 +11,8 @@ class CallTypeNode :public Node
 {
 private:
 	string ID;
-	vector<char*>argument;
+	vector<Node*>argument;
+	//vector<char*>argument;
 	Type* t;
 	Function* f;
 	bool is_object = false;
@@ -147,11 +148,11 @@ public:
 	{
 		return ID;
 	}
-	CallTypeNode(string id, vector<char*>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next)
+	CallTypeNode(string id, vector<Node*>arg, Node* son, Node*next) :ID(id), argument(arg), Node(son, next)
 	{
 
 	}
-	CallTypeNode(string id, vector<char*>arg, Node* son, Node*next,int l_no,int c) :ID(id), argument(arg), Node(son, next,l_no,c)
+	CallTypeNode(string id, vector<Node*>arg, Node* son, Node*next,int l_no,int c) :ID(id), argument(arg), Node(son, next,l_no,c)
 	{
 
 	}
@@ -213,10 +214,53 @@ public:
 				temp = temp->Next;
 			}
 			this->init_inhertance(t);
+			
+			
+			for (int i = 0; i < argument.size(); i++)
+			{
+				argument.at(i)->generateCode();
+				if (i == 0)
+				{
+					MIPS_ASM::move("s5", "sp");
+				}
+				f->getparameters().at(i)->strLasttype = argument.at(i)->my_type;
+				if (argument.at(i)->my_type == "string")
+				{
+					f->getparameters().at(i)->set_lastTypes(argument.at(i)->string_val);
+				}
+				else if (argument.at(i)->my_type == "type")
+				{
+					f->getparameters().at(i)->set_lastTypes(argument.at(i)->type_val);
+				}
+			}
+
+			int def_number = f->getparameters().size() - argument.size();
+
+			if (def_number > 0)
+			{
+				for (int i = static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().size() - def_number; i < static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().size(); i++){
+
+					static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->generateCode();
+					f->getparameters().at(argument.size() + i - 1)->strLasttype = static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type;
+					if (static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type == "string")
+					{
+						f->getparameters().at(argument.size() + i - 1)->set_lastTypes(static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->string_val);
+					}
+					else if (static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->my_type == "type")
+					{
+						f->getparameters().at(argument.size() + i - 1)->set_lastTypes(static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().at(i)->get_right()->type_val);
+					}
+				}
+			}
 			MIPS_ASM::move("a0", "s1");
 			MIPS_ASM::jal(f->get_label());
 			func_vec.push_back(this->f->get_FunctionNode());
 			this->f->get_FunctionNode()->before_generateCode();
+			for (int i = 0; i < f->getparameters().size(); i++)
+			{
+				//MIPS_ASM::pop("t0");
+				MIPS_ASM::add_instruction("add $sp,$sp,4\n");
+			}
 			//MIPS_ASM::add_instruction("add $sp,$sp,4\n");
 			MIPS_ASM::push("s1");
 		}
@@ -289,8 +333,9 @@ public:
 			}
 		}
 
-		pi = make_pair(t1,"type");
 
+		pi = make_pair(t1,"type");
+		check_constructor();
 		return pi;
 	}
 	bool checkSuper(Node* t)
@@ -304,5 +349,19 @@ public:
 			found = true;
 		return found;
 	}
+	
+	bool check_constructor()
+	{
+		if (f != NULL){
+			int def_number = f->getparameters().size() - argument.size();
+			if ((def_number > static_cast<FunctionNode*>(f->get_FunctionNode())->get_defualt().size()) || (def_number < 0))
+			{
+				cout << "ERROR : parameters not matched with constructor :" << _lineNo << endl;
+				return false;
+			}
+		}
+		return true;
+	}
+	
 };
 #endif

@@ -1,12 +1,18 @@
 public class a:
-
-	def static soso(x): print"soso",x; if(x>0): x=x-1; self.soso(x); end  end
+        def public p=0;
+        def __init__(x,y,z=88):
+            self.p=x;
+            print"soso",x;
+            print"soso",self.p;
+	     print"soso",z;
+        end
 end
 
 public class test:
 	def public static main():
-		z=5;
-                a.self.soso(4);
-		print "main main",z;
+	print"so ",700;
+	    sos=a(1,2,5);
+            print"so ",sos.p;
+            
 	end
 end

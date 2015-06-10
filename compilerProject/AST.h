@@ -143,15 +143,12 @@ public:
 	}
 	FunctionNode * createFunctionNode(Function* f, Node * son, Node* next, int line_no, int col_no, vector<Node*> dp)
 	{
-		
+		vector<Node*>dp2;
 		if (f->getparameters().size() > 0){
 			for (int i = 0; i < f->getparameters().size(); i++)
 			{
 				static_cast<IDNode*>(dp.at(i))->set_variable(f->getparameters().at(i));
-				if (dp.at(i)->Next != NULL)
-				{
-					static_cast<CallVariableNode*>(dp.at(i)->Next)->set_variable(f->getparameters().at(i));
-				}
+
 			}
 			Node* temp_par = dp.at(0);
 			for (int i = 1; i < dp.size(); i++)
@@ -319,7 +316,7 @@ public:
 		CallVariableNode *temp = new CallVariableNode(id, v, son, next,line_no,col_no);
 		return temp;
 	}
-	CallTypeNode * createCallTypeNode(string id, vector<char*>args, Node * son, Node* next,  int line_no, int col_no)
+	CallTypeNode * createCallTypeNode(string id, vector<Node*>args, Node * son, Node* next,  int line_no, int col_no)
 	{
 		CallTypeNode *temp = new CallTypeNode(id, args, son, next,line_no,col_no);
 		return temp;
