@@ -52,6 +52,17 @@ public:
 			temp = temp->Next;
 		}
 	}
+	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
+	{
+		Node* temp = this->Son;
+		while (temp)
+		{
+			temp->check(n, true);
+			temp = temp->Next;
+		}
+		//pi here is the output of symbol table for types
+		return pi;
+	}
 	virtual void generateCode()
 	{
 		MIPS_ASM::printComment("\n Print values:");

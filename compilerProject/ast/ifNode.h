@@ -32,7 +32,7 @@ public:
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
-		pi = _condtion->check(n);
+		pi = _condtion->check(n,true);
 		return pi;
 	}
 	virtual string getNodeType()

@@ -1,11 +1,18 @@
+public class a:
+        def public p=0;
+        def __init__(x,y,z=88):
+            self.p=x;
+            print"soso",x;
+            print"soso",y;
+	     print"soso",z;
+        end
+end
+
 public class test:
 	def public static main():
-			list = [1,2,3,5,6];
-			for x in list:
-				if(x>3):
-					break;
-				end
-				print x;				
-			end
+	print"so ",700;
+	    x=a(1,2,5);
+            print"so ",x.p;
+            
 	end
 end

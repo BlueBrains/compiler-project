@@ -21,9 +21,17 @@ private:
 	bool is_dic;
 	bool is_static;
 	ArrayNode* array_node=NULL;
+	bool init = false;
 	int _varoffset=0;// offset of the function frame for code generation
 public:
-	bool init = false;
+	void set_init(bool val)
+	{
+		this->init = true;
+	}
+	bool get_init()
+	{
+		return this->init;
+	}
 	string strLasttype;
 	bool by_self;
 	Variable(char* name, bool is_array = false, bool is_dic = false, char* = "private");

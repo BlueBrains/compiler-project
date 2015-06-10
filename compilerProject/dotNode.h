@@ -259,7 +259,10 @@ public:
 				if (x == "self")
 				{
 					by_self = true;
-
+					if (j == 0)
+					{
+						cout << "Error : self cannot be found in main at line: " << this->_lineNo << endl;
+					}
 				}
 				else
 				{
@@ -292,7 +295,7 @@ public:
 								pi = make_pair(v, "Variable");
 								if (from_right)
 								{
-									if (!v->init)
+									if (!v->get_init())
 										cout << "Error: non-initialized variable " << x << "  at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
 								}
 							}

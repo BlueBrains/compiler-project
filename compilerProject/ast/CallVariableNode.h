@@ -177,8 +177,8 @@ public:
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
+		
 		Variable*v;
-
 			string h = this->getID();
 			if (!this->variable_node)
 			{
@@ -186,10 +186,20 @@ public:
 				if (!v)
 					cout << "Error :variable Not found " << h << " at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
 				else
+				{
 					this->variable_node = v;
+					if (!v->get_init())
+						cout << "Error: non-initialized variable " << h << "  at Line No:" << this->_lineNo << " Column No:" << this->_colNo << endl;
+				}
+					
 			}
 			else
+			{
+
 				v = this->variable_node;
+
+			}
+				
 			pi = make_pair(v, "Variable");
 
 		return pi;

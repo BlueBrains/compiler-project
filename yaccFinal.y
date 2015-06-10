@@ -488,7 +488,7 @@ expr_stmt:	testlist_star_expr augassign testlist {Streams::verbose() <<"expr_stm
 								Node *il=new Node();
 								if(v1)
 								{
-									v1->init=true;
+									v1->set_init(true);
 									il=ast->createCallVarNode(v1->get_name(),v1,NULL,NULL,yylval.r.lineNum,yylval.r.colNum);			
 								}
 								else
@@ -1501,10 +1501,6 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					else if((!constant)&&(!is_list))
 					{
 						v=NULL;
-						if(v1)
-						{
-							v1->init=true;
-						}
 						if(!temp_id2.empty())
 						{
 						//cout<<"enter amora alhosary"<<endl;
@@ -1533,10 +1529,6 @@ factor: '+' factor {Streams::verbose() <<"factor: '+' factor \n";
 					}
 					else
 					{
-						if(v1)
-						{
-							v1->init=true;
-						}
 						$<tn>$=$<tn>1;
 					}
 					constant=false;
