@@ -115,7 +115,7 @@ public:
 	}
 	virtual pair<void*, string> check(vector<Node*>n, bool from_right = false)
 	{
-		pi = conditionNode->check(n);
+		pi = conditionNode->check(n,true);
 		return pi;
 	}
 };

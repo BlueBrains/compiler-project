@@ -1,10 +1,18 @@
+public class a:
+        def public p=0;
+        def __init__(x,y,z=88):
+            self.p=x;
+            print"soso",x;
+            print"soso",y;
+	     print"soso",z;
+        end
+end
+
 public class test:
 	def public static main():
-		listoflist = [[1,"hello"],[2,"python",3,5]];	
-			for list in listoflist:
-			for x in list:
-				print x;
-			end
-		end
+	print"so ",700;
+	    x=a(1,2,5);
+            print"so ",x.p;
+            
 	end
 end

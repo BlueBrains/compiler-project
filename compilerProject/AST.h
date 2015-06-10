@@ -487,7 +487,7 @@ public:
 				//n->generateCode();
 			}
 			
-			if (!is_dot)
+			if (!is_dot && (n->getNodeType() != "PrintNode"))
 			{
 				tree(n->Son);
 				if ((n->getNodeType() == "ClassNode")||(n->getNodeType() == "WhileNode") || (n->getNodeType() == "ExceptNode") || (n->getNodeType() == "TryNode") || (n->getNodeType() == "ElseNode")
@@ -581,8 +581,7 @@ public:
 							if (v)
 							{
 								Function* fo;
-								if (right_assign)
-									v->init = true;
+								
 								int i = outer_node.size()-1;
 								if (outer_node.at(i)->getNodeType() != "ClassNode")
 								{
@@ -597,7 +596,7 @@ public:
 									{
 										cout << "Error: non-static variable " << x << " cannot be referenced from a static context at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
 									}
-									else if (!v->init)
+									else if (!v->get_init())
 									{
 										cout << "Error: non-initialized variable " << x << " at Line No:" << n->_lineNo << " Column No:" << n->_colNo << endl;
 									}

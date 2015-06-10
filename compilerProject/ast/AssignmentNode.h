@@ -169,7 +169,7 @@ public:
 		{
 			if ((Variable*)p1.first)
 			{
-				((Variable*)p1.first)->init = true;
+				((Variable*)p1.first)->set_init (true);
 				/*
 				if (left_side->getNodeType() != "ArrayElementNode")
 				{
