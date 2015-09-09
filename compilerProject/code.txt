@@ -1,18 +1,20 @@
-public class a:
-        def public p=0;
-        def __init__(x,y,z=88):
-            self.p=x;
-            print"soso",x;
-            print"soso",y;
-	     print"soso",z;
-        end
+class t:
+def x=10;
+def class c:
+def class cc:
+def f(self):
+print "ffd";
+
+end
 end
 
-public class test:
-	def public static main():
-	print"so ",700;
-	    x=a(1,2,5);
-            print"so ",x.p;
-            
-	end
+end
+def public static main():
+tt=t();
+cc=tt.c();
+e=cc.cc();
+e.self.f();
+end
+
+
 end
