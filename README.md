@@ -32,12 +32,11 @@ This project contains a compiler for an innovated language mixed between python 
   <img src="https://github.com/BlueBrains/compiler-project/blob/stable/examples/3532878086.JPG"/>
 </p>
 
-### While Statement & Break Statement.
+### While Statement, Break Statement and Continue Statement.
 <p align="center">
   <img src="https://github.com/BlueBrains/compiler-project/blob/stable/examples/3533183804.JPG"/>
 </p>
 
-### While Statement, Break Statement and Continue Statement.
 <p align="center">
   <img src="https://github.com/BlueBrains/compiler-project/blob/stable/examples/3533183909.JPG"/>
 </p>
